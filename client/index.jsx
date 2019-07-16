@@ -1,5 +1,4 @@
-const React = require('react');
-const { Component } = React;
+import React ,{ Component } from 'react';
 
 class Index extends Component {
   state = {
@@ -11,4 +10,4 @@ class Index extends Component {
   }
 }
 
-module.exports = Index;
+export default Index;
