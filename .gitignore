@@ -1,0 +1,10 @@
+# ide
+.idea/
+
+# client
+client/node_modules/
+client/package-lock.json
+
+# server
+server/node_modules/
+server/package-lock.json
