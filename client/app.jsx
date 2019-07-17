@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import Index from './index';
 
-const Index = require('./index');
 
-ReactDom.render(<Index/>, document.querySelector('#root'));
+ReactDom.render(<Index />, document.querySelector('#root'));
+
