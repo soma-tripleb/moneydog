@@ -14,7 +14,7 @@ class Index extends Component {
         <h1>{this.state.text}</h1>
         <Info />
       </>
-    );
+    )
   }
 }
 export default Index;
