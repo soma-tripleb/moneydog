@@ -4,7 +4,7 @@ import 'antd/dist/antd.less';
 
 class Index extends Component {
   state = {
-    text: "hello,!",
+    text: 'hello,!',
   };
 
   render() {

@@ -22,7 +22,7 @@ module.exports = {
           presets: [
             ['@babel/preset-env', {
               targets: {
-                browsers: ['> 5% in KR', 'last 2 chrome versions'], // 원하는 브라우저만 선정하겠다. https://github.com/browserslist/browserslist
+                browsers: ['> 5% in KR', 'last 2 chrome versions'],
               },
               debug: true,
             }],
@@ -38,13 +38,13 @@ module.exports = {
         test: /\.less?$/,
         use: [
           {
-            loader: 'style-loader', // creates style nodes from JS strings
+            loader: 'style-loader',
           },
           {
-            loader: 'css-loader', // translates CSS into CommonJS
+            loader: 'css-loader',
           },
           {
-            loader: 'less-loader', // compiles Less to CSS
+            loader: 'less-loader',
             options: {
               javascriptEnabled: true
             },
