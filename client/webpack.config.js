@@ -22,7 +22,7 @@ module.exports = {
           presets: [
             ['@babel/preset-env', {
               targets: {
-                browsers: ['> 5% in KR', 'last 2 chrome versions'], // 원하는 브라우저만 선정하겠다. https://github.com/browserslist/browserslist
+                browsers: ['> 5% in KR', 'last 2 chrome versions'],
               },
               debug: true,
             }],
@@ -31,11 +31,10 @@ module.exports = {
           plugins: [
             '@babel/plugin-proposal-class-properties',
             'react-hot-loader/babel',
-            ["import", {"libraryName": "antd", "libraryDirectory": "es", "style": true}] // `style: true` for less
+            ["import", { "libraryName": "antd", "style": true }],
           ],
         }
-      },
-      {
+      },{
         test: /\.less?$/,
         use: [
           {
@@ -59,4 +58,4 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: 'app.jsx'
   }
-};
+}
