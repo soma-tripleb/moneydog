@@ -14,9 +14,9 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "less": "^3.9.0",
-    "less-loader": "^5.0.0"
+    "less-loader": "^5.0.0",
     "css-loader": "^3.0.0",
-    "style-loader": "^0.23.1",
+    "style-loader": "^0.23.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
