@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {Row, Col, Input, Layout, Form, DatePicker, TimePicker, Select, Button, Avatar} from'antd';
-const {Header, Footer, Content} = Layout;
-const {Option} = Select;
+import React, { Component } from 'react';
+import { Row, Col, Input, Layout, Form, DatePicker, TimePicker, Select, Button, Avatar } from'antd';
+const { Header, Footer, Content } = Layout;
+const { Option } = Select;
 
 const formItemLayout = {
   labelCol: {

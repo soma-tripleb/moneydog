@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Row, Col} from 'antd';
+import React, { Component } from 'react';
+import { Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 
 import 'antd/dist/antd.less';
