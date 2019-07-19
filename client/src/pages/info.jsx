@@ -18,73 +18,16 @@ import 'antd/dist/antd.less';
 
 class Info extends Component {
   state = {
-    service: [
-      {
-        name: 'Netflix',
-        category : 'entertainment',
-        plans: [
-          {
-            name: 'basic',
-            quality: '480p',
-            hdr: false,
-            screens: 1,
-            period: 1,
-          },
-          {
-            name: 'standard',
-            quality: 'HD',
-            hdr: false,
-            screens: 2,
-            period: 1,
-          },
-          {
-            name: 'premium',
-            quality: '4K',
-            hdr: true,
-            screens: 4,
-            period: 1,
-          },
-        ]
-      },
-      {
-        name: 'Watcha play',
-        category: 'entertainment',
-        plans: [
-          {
-            name: '이용권 (1개월)',
-            price: 7900,
-            period: 1,
-            quality: 'HD',
-          },
-          {
-            name: '이용권 (3개월)',
-            price: 21000,
-            period: 3,
-            quality: 'HD',
-          },
-          {
-            name: '이용권 (6개월)',
-            price: 40000,
-            period: 6,
-            quality: 'HD',
-          },
-          {
-            name: '이용권 (1년)',
-            price: 74000,
-            period: 12,
-            quality: 'HD',
-          },
-        ]
-
-      }
-    ]
+    text: 'Info Page',
   }
 
   render() {
     return (
-      <Row>
-        <Col span={6}></Col>
-        <Col span={12}>
+      <>
+        <div>
+          <h1>{this.state.text}</h1>
+        </div>
+        <Row>
           <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             <Layout>
               <Header>
@@ -92,40 +35,38 @@ class Info extends Component {
               </Header>
 
               <Content style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                  <Avatar icon='user' shape='square' style={{width: 100, height: 100, display: 'flex', flexDirection: 'column', justifyContent: 'center'}} />
-                  <Input size='large' placeholder='Enter Price' style={{width: '33%', margin: 'auto', marginTop: '1rem' }}/>
-              <Form {...formItemLayout}>
-                <div className='form-flex-container' style={{padding: '1rem', margin: '1rem', display: 'flex', flexDirection: 'row', alignItems:'center'}}>
-                  <Col span={12}>
-                    <Form.Item label='Name' />
-                    <Form.Item label='Description' />
-                    <Form.Item label='First bill' />
-                    <Form.Item label='Remind me' />
-                    <Form.Item label='Currency' />
-                  </Col>
-                  <Col span={12}>
-                    <Input placeholder="Enter name" id="name" />
-                    <Input placeholder="Enter description" id="warning" />
-                    <DatePicker style={{ width: '100%' }} />
-                    <Input placeholder="I'm the content" id="success" />
-                    <TimePicker style={{ width: '100%' }} />
-                    <Select defaultValue="1">
-                      <Option value="1">￦</Option>
-                      <Option value="2">$</Option>
-                    </Select>
-                  </Col>
-                </div>
-              </Form>
+                <Avatar icon='user' shape='square' style={{width: 100, height: 100, display: 'flex', flexDirection: 'column', justifyContent: 'center'}} />
+                <Input size='large' placeholder='Enter Price' style={{width: '33%', margin: 'auto', marginTop: '1rem' }}/>
+                <Form {...formItemLayout}>
+                  <div className='form-flex-container' style={{padding: '1rem', margin: '1rem', display: 'flex', flexDirection: 'row', alignItems:'center'}}>
+                    <Col span={12}>
+                      <Form.Item label='Name' />
+                      <Form.Item label='Description' />
+                      <Form.Item label='First bill' />
+                      <Form.Item label='Remind me' />
+                      <Form.Item label='Currency' />
+                    </Col>
+                    <Col span={12}>
+                      <Input placeholder="Enter name" id="name" />
+                      <Input placeholder="Enter description" id="warning" />
+                      <DatePicker style={{ width: '100%' }} />
+                      <Input placeholder="I'm the content" id="success" />
+                      <TimePicker style={{ width: '100%' }} />
+                      <Select defaultValue="1">
+                        <Option value="1">￦</Option>
+                        <Option value="2">$</Option>
+                      </Select>
+                    </Col>
+                  </div>
+                </Form>
               </Content>
               <Footer>
                 <Button type="primary" icon="plus" size='large'>Add</Button>
               </Footer>
             </Layout>
           </div>
-        </Col>
-
-        <Col span={6}></Col>
-      </Row>
+        </Row>
+      </>
     )
   }
 }
