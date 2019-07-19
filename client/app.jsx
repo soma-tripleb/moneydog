@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import Index from './index';
 import Report from './report/report';
-import Info from './info/info';
+import Info from './src/pages/info';
 
 ReactDom.render(
     <Router>

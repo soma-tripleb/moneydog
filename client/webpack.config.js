@@ -9,8 +9,12 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
 
+  devServer: {
+    historyApiFallback: true
+  },
+
   entry: {
-    app: ['./app'],
+    app: ['./src/index'],
   },
 
   module: {
@@ -35,7 +39,7 @@ module.exports = {
           ],
         }
       },{
-        test: /\.less?$/,
+        test: [/\.css?$/, /\.less?$/],
         use: [
           {
             loader: 'style-loader',
