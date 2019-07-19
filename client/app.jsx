@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import Index from './index';
 import Report from './report/report';
-import DashBoard from './dashBoard/dashboard';
+import DashBoard from './dashBoard/Dashboard';
 
 ReactDom.render(
     <Router>

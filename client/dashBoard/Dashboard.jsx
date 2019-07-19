@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Menu, Input, Button, Row, Col, Card, Avatar, PageHeader, Layout, Breadcrumb,Icon} from 'antd';
 
-import Calendar from './calendar';
-import Cate from './categorie';
+import Calendar from './Calendar';
+import Cate from './Categorie';
 
 const {Header, Footer, Sider, Content} = Layout;
 
