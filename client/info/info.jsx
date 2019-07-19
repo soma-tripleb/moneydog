@@ -1,102 +1,130 @@
 import React, {Component} from 'react';
-import {Row, Statistic, Card, Col, Icon, Progress, Layout, Button} from'antd';
-const {Header, Footer, Sider, Content} = Layout;
+import {Row, Col, Input, Layout, Form, DatePicker, TimePicker, Select, Button, Avatar} from'antd';
+const {Header, Footer, Content} = Layout;
+const {Option} = Select;
+
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 12 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 12 },
+  },
+}
 
 import 'antd/dist/antd.less';
 
 class Info extends Component {
   state = {
-    name: 'Netflix',
-    category : 'entertainment',
-    plans: [
+    service: [
       {
-        name: 'basic',
-        quality: '480p',
-        hdr: false,
-        screens: 1,
+        name: 'Netflix',
+        category : 'entertainment',
+        plans: [
+          {
+            name: 'basic',
+            quality: '480p',
+            hdr: false,
+            screens: 1,
+            period: 1,
+          },
+          {
+            name: 'standard',
+            quality: 'HD',
+            hdr: false,
+            screens: 2,
+            period: 1,
+          },
+          {
+            name: 'premium',
+            quality: '4K',
+            hdr: true,
+            screens: 4,
+            period: 1,
+          },
+        ]
       },
       {
-        name: 'standard',
-        quality: 'HD',
-        hdr: false,
-        screens: 2,
-      },
-      {
-        name: 'premium',
-        quality: '4K',
-        hdr: true,
-        screens: 4,
-      },
+        name: 'Watcha play',
+        category: 'entertainment',
+        plans: [
+          {
+            name: '이용권 (1개월)',
+            price: 7900,
+            period: 1,
+            quality: 'HD',
+          },
+          {
+            name: '이용권 (3개월)',
+            price: 21000,
+            period: 3,
+            quality: 'HD',
+          },
+          {
+            name: '이용권 (6개월)',
+            price: 40000,
+            period: 6,
+            quality: 'HD',
+          },
+          {
+            name: '이용권 (1년)',
+            price: 74000,
+            period: 12,
+            quality: 'HD',
+          },
+        ]
+
+      }
     ]
   }
 
   render() {
     return (
       <Row>
-        <Col span={6}><h3>Empty Area</h3></Col>
+        <Col span={6}></Col>
         <Col span={12}>
           <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             <Layout>
               <Header>
                 <h1 style={{lineHeight: '64px', color: '#fff'}}></h1>
               </Header>
+
+              <Content style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                  <Avatar icon='user' shape='square' style={{width: 100, height: 100, display: 'flex', flexDirection: 'column', justifyContent: 'center'}} />
+                  <Input size='large' placeholder='Enter Price' style={{width: '33%', margin: 'auto', marginTop: '1rem' }}/>
+              <Form {...formItemLayout}>
+                <div className='form-flex-container' style={{padding: '1rem', margin: '1rem', display: 'flex', flexDirection: 'row', alignItems:'center'}}>
+                  <Col span={12}>
+                    <Form.Item label='Name' />
+                    <Form.Item label='Description' />
+                    <Form.Item label='First bill' />
+                    <Form.Item label='Remind me' />
+                    <Form.Item label='Currency' />
+                  </Col>
+                  <Col span={12}>
+                    <Input placeholder="Enter name" id="name" />
+                    <Input placeholder="Enter description" id="warning" />
+                    <DatePicker style={{ width: '100%' }} />
+                    <Input placeholder="I'm the content" id="success" />
+                    <TimePicker style={{ width: '100%' }} />
+                    <Select defaultValue="1">
+                      <Option value="1">￦</Option>
+                      <Option value="2">$</Option>
+                    </Select>
+                  </Col>
+                </div>
+              </Form>
+              </Content>
+              <Footer>
+                <Button type="primary" icon="plus" size='large'>Add</Button>
+              </Footer>
             </Layout>
-            <div style={{ background: '#ECECEC', padding: '30px' }}>
-              <div>
-                <h5>지난달의 사용량</h5><Progress percent={30} />
-                <Progress percent={70} status="exception" />
-                <Progress percent={100} />
-              </div>
-              <h4>Usage</h4>
-              <div>
-                <Progress type="circle" percent={75} />
-                <Progress type="circle" percent={70} status="exception" />
-                <Progress type="circle" percent={100} />
-              </div>
-              <Row gutter={12}>
-                <Col span={12}>
-                  <Card>
-                    <Statistic
-                      title="Active"
-                      value={11.28}
-                      precision={2}
-                      valueStyle={{ color: '#3f8600' }}
-                      prefix={<Icon type="arrow-up" />}
-                      suffix="%"
-                    />
-                  </Card>
-                </Col>
-                <Col span={12}>
-                  <Card>
-                    <Statistic
-                      title="Idle"
-                      value={9.3}
-                      precision={2}
-                      valueStyle={{ color: '#cf1322' }}
-                      prefix={<Icon type="arrow-down" />}
-                      suffix="%"
-                    />
-                  </Card>
-                </Col>
-                <h4>content part</h4>
-                <Row gutter={16}>
-                  <Col span={12}>
-                    <Statistic title="Active Users" value={112893} />
-                  </Col>
-                  <Col span={12}>
-                    <Statistic title="Account Balance (CNY)" value={112893} precision={2} />
-                    <Button style={{ marginTop: 16 }} type="primary">
-                      Recharge
-                    </Button>
-                  </Col>
-                </Row>
-              </Row>
-            </div>
           </div>
         </Col>
 
-        /* right empty area */
-        <Col span={6}><h3>Empty Area</h3></Col>
+        <Col span={6}></Col>
       </Row>
     )
   }
