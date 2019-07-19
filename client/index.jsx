@@ -1,18 +1,22 @@
 import React, {Component} from 'react';
-import Categorie from './categories/sample';
+import Categorie from './dashBoard/dashboard';
 import 'antd/dist/antd.less';
+import {Col, Layout, Menu, Row} from "antd";
 
 class Index extends Component {
   state = {
-    text: 'hello,!',
+    text: 'index.',
   };
 
   render() {
     return (
-        <>
-          <h1>{this.state.text}</h1>
-          <Categorie />
-        </>
+        <Row>
+          <Col span={6}></Col>
+          <Col span={12}>
+            <Categorie />
+          </Col>
+          <Col span={6}></Col>
+        </Row>
     );
   }
 }
