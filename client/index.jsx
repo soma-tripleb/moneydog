@@ -25,7 +25,7 @@ class Index extends Component {
                 <div>
                   <ul>
                     <li><Link to="report">categories</Link></li>
-                    <li><Link to="report">info</Link></li>
+                    <li><Link to="info">info</Link></li>
                     <li><Link to="report">report</Link></li>
                   </ul>
                 </div>
