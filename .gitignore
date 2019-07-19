@@ -1,5 +1,6 @@
 # ide
 .idea/
+.vscode/
 
 # client
 client/node_modules/
