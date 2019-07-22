@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Carousel } from 'antd';
 
-// import 'about.css';
+import '../../static/style/component/index/about.css';
 
 class About extends Component {
 
