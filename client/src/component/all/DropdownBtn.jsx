@@ -39,7 +39,6 @@ class DropdownBtn extends Component {
         </>
     );
   }
-
 }
 
 export default DropdownBtn;

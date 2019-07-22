@@ -1,0 +1,25 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+#root>div {
+  height: 100%;
+}
+
+#root .ant-row {
+  height: 100%;
+}
+
+.ant-row .ant-col {
+  height: 100%;
+}
+
+.ant-col-12 {
+  background-color: azure;
+}
