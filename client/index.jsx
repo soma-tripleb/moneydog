@@ -3,6 +3,8 @@ import {Row, Col} from 'antd';
 import { Link } from 'react-router-dom';
 
 import 'antd/dist/antd.less';
+import Head from './index/Head';
+import About from "./index/About";
 
 class Index extends Component {
   state = {
@@ -15,8 +17,13 @@ class Index extends Component {
           <div>
             <Row>
               <Col span={6}></Col>
-
               <Col span={12}>
+
+                <Head />
+
+                <About />
+
+
 
                 <div>
                   <h1>{this.state.text}</h1>
@@ -31,7 +38,6 @@ class Index extends Component {
                 </div>
 
               </Col>
-
               <Col span={6}></Col>
             </Row>
           </div>

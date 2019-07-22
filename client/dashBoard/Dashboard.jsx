@@ -4,7 +4,7 @@ import {Menu, Input, Button, Row, Col, Card, Avatar, PageHeader, Layout, Breadcr
 import Calendar from './Calendar';
 import Cate from './Categorie';
 
-const {Header, Footer, Sider, Content} = Layout;
+const {Header, Footer, Content} = Layout;
 
 class Categorie extends Component {
 
@@ -13,14 +13,14 @@ class Categorie extends Component {
         <>
           <Layout className="layout">
             <Header>
-              <div className="logo"/>
-              <h1
-                  style={{lineHeight: '64px', color: '#fff'}}
-              >
-                MONEY DOG
-              </h1>
+            <div className="logo"/>
+            <h1
+                style={{lineHeight: '64px', color: '#fff'}}
+            >
+              MONEY DOG
+            </h1>
 
-            </Header>
+          </Header>
 
             <Content style={{padding: '0 50px'}}>
               <Breadcrumb style={{margin: '16px 0'}}>
