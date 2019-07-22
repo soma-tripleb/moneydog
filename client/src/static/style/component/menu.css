@@ -8,6 +8,7 @@
 
 .navbar-menu li {
   float: left;
+  display: inline-flex;
 }
 
 .navbar-menu li a {
