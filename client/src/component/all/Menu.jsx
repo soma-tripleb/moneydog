@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// hooks
+import '../../static/style/component/menu.css'
+
 const Menu = () => {
   return (
-    <div>
+    <div className="navbar-menu">
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/report">report</Link></li>
+        <li><Link to="/dashboard">dashboard</Link></li>
         <li><Link to="/info">info</Link></li>
       </ul>
     </div>
