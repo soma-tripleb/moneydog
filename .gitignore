@@ -21,3 +21,7 @@ lerna-debug.log*
 # Envfile
 
 .env
+credentials.json
+token.json
+
+env/
