@@ -1,17 +1,19 @@
 const router = require('express').Router();
-const realine = require('readline');
-const {google} = require('googleapis');
-const fs = require('fs');
 const ApiService = require('../components/api/apiService');
-
-const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
-const TOKEN_PATH = '../env/token.json';
 
 router.get('/list', (req, res) =>  {
   console.log('GET /apis/token');
-  // ApiService.authorize(ApiService.getCredentials(), auth => ApiService.getList(auth).then(messages=>res.end(JSON.stringify(messages))));
+  // ApiService.authorize(ApiService.getCredentials(), ApiService.getList.then(messages=>res.end(JSON.stringify(messages))));
   ApiService.authorize(ApiService.getCredentials(), auth => ApiService.getList(auth).then(messages=>res.end(JSON.stringify(messages))));
+});
 
+router.get('/:id', (req, res) => {
+  const id = req.params.id;
+  ApiService.authorize(ApiService.getCredentials(), auth => ApiService.getMessage(auth, id).then(message => {
+    console.log(message);
+    res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
+    res.end(message)
+  }));
 });
 
 module.exports = router;

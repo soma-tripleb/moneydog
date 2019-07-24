@@ -55,31 +55,30 @@ function getList(auth) {
   console.log('getList 호출');
   const gmail = google.gmail({version: 'v1', auth});
   return new Promise((resolve, reject) => {
-    gmail.users.messages.list({
-      userId: 'jimmyjaeyeon@gmail.com',
-    }, (err, res) => {
+    gmail.users.messages.list({userId: 'jimmyjaeyeon@gmail.com'}, (err, res) => {
       err ? reject(err) : resolve(res.data.messages);
     });
   });
 }
 
-function printMessage(auth) {
+function getMessage(auth, id) {
   console.log('called printMessage method');
   const gmail = google.gmail({version: 'v1', auth});
-  gmail.users.messages.get({
-    auth: auth,
-    userId: 'jimmyjaeyeon@gmail.com',
-    id: '16bc851654817e8a',
-  }, (err, res) => {
-    if (err) return console.log('The API returned an error: ' + err);
-    const messages = res;
-    console.log(messages);
-  })
+  return new Promise((resolve, reject) => {
+    gmail.users.messages.get({auth: auth, userId: 'jimmyjaeyeon@gmail.com', id: id,}, (err, res) => {
+      console.log('base64', res.data.payload.parts[0].body.data);
+      err ? reject(err) : resolve(base64ToUtf8(res.data.payload.parts[0].body.data));
+    });
+  });
 }
 
-// module.exports = 'ApiService';
+function base64ToUtf8(base64encoded) {
+  return Buffer.from(base64encoded, 'base64').toString('utf8');
+}
+
 module.exports = {
   getCredentials: getCredentials,
   authorize: authorize,
   getList: getList,
+  getMessage: getMessage,
 }
