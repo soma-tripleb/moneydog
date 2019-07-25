@@ -10,6 +10,11 @@ client/package-lock.json
 server/node_modules/
 server/package-lock.json
 
+# api
+api/node_modules/
+api/package-lock.json
+api/env/
+
 # Logs
 logs
 *.log
@@ -21,3 +26,5 @@ lerna-debug.log*
 # Envfile
 
 .env
+credentials.json
+token.json
