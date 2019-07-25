@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import { Home, Report, Dashboard } from '../pages/index';  // page
 
-import Menu from '../component/all/Menu';   // component
+import { Menu } from '../component/all/index';
 
 class App extends Component {
     render() {
