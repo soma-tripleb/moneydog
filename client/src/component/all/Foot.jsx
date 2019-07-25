@@ -3,12 +3,14 @@ import {Button, Icon, Layout} from "antd";
 
 const {Footer} = Layout;
 
+import '../../static/style/footer.css';
+
 class Foot extends Component {
 
   render() {
     return (
         <>
-          <Footer id="footer" style={{textAlign: 'center'}}>
+          <Footer id="footer" >
             <Button type="link" size="large" ghost>
               <Icon type="home" theme="twoTone" />
             </Button>

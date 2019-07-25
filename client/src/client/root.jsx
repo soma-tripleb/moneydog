@@ -8,7 +8,6 @@ import { Head, Foot } from '../component/all/index';
 
 import 'antd/dist/antd.less';
 import '../static/style/total.css';
-import '../static/style/footer.css';
 
 const Root = () => (
     <BrowserRouter>
