@@ -20,6 +20,7 @@ const Root = () => (
                 <Head/>
 
                 <App />
+                <button type="button" className="btn btn-primary">Primary</button>
 
                 <Foot/>
 

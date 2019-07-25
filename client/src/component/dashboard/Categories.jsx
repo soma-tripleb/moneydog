@@ -3,7 +3,7 @@ import { PageHeader, Tag, Tabs, Button, Statistic, Row, Col ,Card } from 'antd';
 
 const { TabPane } = Tabs;
 
-class Cate extends Component {
+class Categories extends Component {
 
 
   render() {
@@ -66,4 +66,4 @@ class Cate extends Component {
   }
 }
 
-export default Cate;
+export default Categories;
