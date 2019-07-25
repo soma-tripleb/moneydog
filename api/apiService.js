@@ -4,8 +4,8 @@ const {google} = require('googleapis');
 const path = require('path');
 
 const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
-const TOKEN_PATH = path.resolve(__dirname, '../env/token.json');
-const CREDENTIALS_PATH = path.resolve(__dirname, '../env/credentials.json');
+const TOKEN_PATH = path.resolve(__dirname, './env/token.json');
+const CREDENTIALS_PATH = path.resolve(__dirname, './env/credentials.json');
 const TEST_USERID='jimmyjaeyeon@gmail.com';
 
 fs.readFile(CREDENTIALS_PATH, (err, content) => {
