@@ -1,0 +1,15 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "apiRouter.js",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "express": "~4.16.1",
+    "googleapis": "^39.2.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
