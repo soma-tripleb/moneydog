@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const ApiService = require('../components/api/apiService');
+const ApiService = require('./apiService');
 
 router.get('/list', (req, res) =>  {
   console.log('GET /apis/token');

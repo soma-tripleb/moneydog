@@ -4,8 +4,9 @@ const {google} = require('googleapis');
 const path = require('path');
 
 const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
-const TOKEN_PATH = path.resolve(__dirname, '../../env/token.json');
-const CREDENTIALS_PATH = path.resolve(__dirname, '../../env/credentials.json');
+const TOKEN_PATH = path.resolve(__dirname, '../env/token.json');
+const CREDENTIALS_PATH = path.resolve(__dirname, '../env/credentials.json');
+const TEST_USERID='jimmyjaeyeon@gmail.com';
 
 fs.readFile(CREDENTIALS_PATH, (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
@@ -28,7 +29,6 @@ function authorize(credentials, callback) {
 }
 
 function getNewToken(oAuth2Client, callback) {
-  console.log('토큰 재발급 필요함');
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: SCOPES,
@@ -52,10 +52,9 @@ function getNewToken(oAuth2Client, callback) {
 }
 
 function getList(auth) {
-  console.log('getList 호출');
   const gmail = google.gmail({version: 'v1', auth});
   return new Promise((resolve, reject) => {
-    gmail.users.messages.list({userId: 'jimmyjaeyeon@gmail.com'}, (err, res) => {
+    gmail.users.messages.list({userId: TEST_USERID}, (err, res) => {
       err ? reject(err) : resolve(res.data.messages);
     });
   });
@@ -65,8 +64,7 @@ function getMessage(auth, id) {
   console.log('called printMessage method');
   const gmail = google.gmail({version: 'v1', auth});
   return new Promise((resolve, reject) => {
-    gmail.users.messages.get({auth: auth, userId: 'jimmyjaeyeon@gmail.com', id: id,}, (err, res) => {
-      console.log('base64', res.data.payload.parts[0].body.data);
+    gmail.users.messages.get({auth: auth, userId: TEST_USERID, id: id,}, (err, res) => {
       err ? reject(err) : resolve(base64ToUtf8(res.data.payload.parts[0].body.data));
     });
   });
