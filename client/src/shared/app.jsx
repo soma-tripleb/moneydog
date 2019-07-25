@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import { Home, Report, Dashboard, Info } from '../pages/index';  // page
 
-import { Menu, Footer } from '../component/index';   // component
+import { Footer } from '../component/index';   // component
 
 class App extends Component {
     render() {
@@ -19,7 +19,6 @@ class App extends Component {
                     </Switch>
 
                 </div>
-                {/* <Menu /> */}
                 <Footer />
             </>
         );
