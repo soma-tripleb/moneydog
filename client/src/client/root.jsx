@@ -1,11 +1,10 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import {Row, Col, Layout, Button, Icon} from 'antd';
-const { Footer } = Layout;
+import { Row, Col, Layout } from 'antd';
 
 import App from '../shared/app';
-import Head from '../component/all/Head';
-import Foot from '../component/all/Foot';
+
+import { Head, Foot } from '../component/all/index';
 
 import 'antd/dist/antd.less';
 import '../static/style/total.css';
