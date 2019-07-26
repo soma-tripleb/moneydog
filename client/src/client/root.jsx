@@ -8,6 +8,7 @@ import { Head, Foot } from '../component/all/index';
 
 import 'antd/dist/antd.less';
 import '../static/style/total.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const Root = () => (
     <BrowserRouter>
@@ -20,7 +21,8 @@ const Root = () => (
                 <Head/>
 
                 <App />
-                <button type="button" className="btn btn-primary">Primary</button>
+
+                <button className="btn btn-primary">Primary</button>
 
                 <Foot/>
 
