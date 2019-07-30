@@ -16,8 +16,8 @@ _'client_id'_ 와 _'client_secret'_ 정보를 가지고 있으므로, 개발 단
 ## API Endpoint
 인증이 끝난 후, Google 에서 사용자의 특정 서비스 (예를들어, Gmail / Google Drive / Calander) 를 받아 볼 수 있는 API 게이트(?).
 
-* Gmail Message list - https://www.googleapis.com/gmail/v1/users/userId/messages
-* Gmail Message get - https://www.googleapis.com/gmail/v1/users/userId/messages/id
+* Gmail Message list - https://www.googleapis.com/gmail/v1/users/[userId]/messages?access_token=
+* Gmail Message get - https://www.googleapis.com/gmail/v1/users/[userId]/messages/id?access_token=
 
 
 
