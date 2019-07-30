@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Calendar, Badge } from 'antd';
+import {Calendar} from 'antd';
 
 class CalendarClass extends Component {
 
@@ -10,7 +10,7 @@ class CalendarClass extends Component {
   render() {
     return (
         <div>
-          <Calendar fullscreen={false} onPanelChange={this.onPanelChange} />
+          <Calendar fullscreen={false} onPanelChange={this.onPanelChange}/>
         </div>
     );
   }

@@ -1,33 +1,34 @@
 html, body {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 #root {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
-#root>div {
-  height: 100%;
+#root > div {
+    height: 100%;
 }
 
 #root .ant-row {
-  height: 100%;
+    height: 100%;
 }
 
 .ant-row .ant-col {
-  height: 100%;
+    height: 100%;
 }
 
 .ant-col-12 {
-  background-color: azure;
+    background-color: azure;
 }
 
+/*head,app 에 margin 을 주어 겹치지 않게 하려고 설정*/
 .head {
-  height: 50px;
+    height: 50px;
 }
 
 .app {
-  margin-top: 50px;
+    margin-top: 50px;
 }
