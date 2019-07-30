@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { PageHeader, Tag, Tabs, Button, Statistic, Row, Col ,Card } from 'antd';
+import {PageHeader, Tag, Tabs, Button, Statistic, Row, Col, Card} from 'antd';
 
-const { TabPane } = Tabs;
+const {TabPane} = Tabs;
 
 class Categories extends Component {
 
@@ -30,16 +30,16 @@ class Categories extends Component {
               <div className="extraContent">
                 <Row>
                   <Col span={12}>
-                    <Statistic title="D-Day" value="D-17" />
+                    <Statistic title="D-Day" value="D-17"/>
                   </Col>
                   <Col span={12}>
-                    <Statistic title="Price" prefix="₩" value={6500} />
+                    <Statistic title="Price" prefix="₩" value={6500}/>
                   </Col>
                 </Row>
               </div>
             </Card>
             <Card
-                style={{ marginTop: 16 }}
+                style={{marginTop: 16}}
                 type="inner"
                 title="NetFlix"
                 extra={<a href="#">More</a>}
@@ -47,10 +47,10 @@ class Categories extends Component {
               <div className="extraContent">
                 <Row>
                   <Col span={12}>
-                    <Statistic title="D-Day" value="D-3" />
+                    <Statistic title="D-Day" value="D-3"/>
                   </Col>
                   <Col span={12}>
-                    <Statistic title="Price" prefix="₩" value={9500} />
+                    <Statistic title="Price" prefix="₩" value={9500}/>
                   </Col>
                 </Row>
               </div>

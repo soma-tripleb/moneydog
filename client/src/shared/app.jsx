@@ -3,8 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 
 import { Home, Report, Dashboard } from '../pages/index';  // page
 
-import { Menu } from '../component/all/index';
-
 class App extends Component {
     render() {
         return (
@@ -14,7 +12,6 @@ class App extends Component {
                     <Route path="/report" component={Report} />
                     <Route path="/dashboard" component={Dashboard} />
                 </Switch>
-                <Menu />
             </div>
         );
     }
