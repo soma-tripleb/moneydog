@@ -12,6 +12,7 @@
   "dependencies": {
     "antd": "^3.20.3",
     "css-loader": "^3.0.0",
+    "file-loader": "^4.1.0",
     "jquery": "^3.4.1",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",

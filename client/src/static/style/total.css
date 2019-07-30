@@ -23,3 +23,11 @@ html, body {
 .ant-col-12 {
   background-color: azure;
 }
+
+.head {
+  height: 50px;
+}
+
+.app {
+  margin-top: 50px;
+}

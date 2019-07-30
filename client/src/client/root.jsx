@@ -18,11 +18,13 @@ const Root = () => (
         <Row>
               <Layout className="layout">
 
+                <div className="head">
                 <Head/>
+                </div>
 
-                <App />
-
-                <button className="btn btn-primary">Primary</button>
+                <div className="app">
+                  <App />
+                </div>
 
                 <Foot/>
 

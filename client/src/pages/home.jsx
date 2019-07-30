@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Carousel from '../component/index/Carousel';
+
 class Home extends Component {
   state = {
     text: 'Home Page',
@@ -9,7 +11,7 @@ class Home extends Component {
     return (
       <>
         <div>
-          <h1>{this.state.text}</h1>
+          <Carousel/>
         </div>
       </>
     );
