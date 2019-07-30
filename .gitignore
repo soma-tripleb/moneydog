@@ -9,3 +9,6 @@ client/package-lock.json
 # server
 server/node_modules/
 server/package-lock.json
+
+# google-api
+google-api/client_secret.json
