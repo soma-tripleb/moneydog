@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {Route, Switch} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import {Home, Report, Dashboard, Info} from '../pages/index';  // page
+import { Home, Report, Dashboard, Info, SignUp } from '../pages/index';  // page
 
 class App extends Component {
   render() {
@@ -13,6 +13,7 @@ class App extends Component {
               <Route path="/report" component={Report}/>
               <Route path="/dashboard" component={Dashboard}/>
               <Route path="/info" component={Info}/>
+              <Route path="/signup" component={SignUp}/>
             </Switch>
           </div>
         </>
