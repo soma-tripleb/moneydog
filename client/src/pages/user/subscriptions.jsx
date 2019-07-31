@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { Component } from 'react';
 import update from 'react-addons-update';
 
@@ -82,20 +81,9 @@ class Subscriptions extends Component {
                 }/>
               )
             })}
-            
           </div>
-
         </div>
-=======
-import React, { Component } from 'react'
-
-class Subscriptions extends Component {
-  render() {
-    return (
-      <>
-        <h1>Subscriptions</h1>
->>>>>>> #52 App(Content) 부분 height 100% 적용
-      </>
+        </>
     );
   }
 }
