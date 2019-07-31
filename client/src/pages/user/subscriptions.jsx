@@ -5,37 +5,6 @@ class Subscriptions extends Component {
     return (
       <>
         <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
-        <h1>Subscriptions</h1>
       </>
     );
   }

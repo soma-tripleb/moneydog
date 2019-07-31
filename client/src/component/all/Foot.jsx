@@ -7,9 +7,7 @@ class Foot extends Component {
   render() {
     return (
         <>
-
           <div className="m-t-3"></div>
-
           <footer className="mainfooter" role="contentinfo">
 
             <div className="footer-middle">
