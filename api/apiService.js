@@ -6,7 +6,7 @@ const path = require('path');
 const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
 const TOKEN_PATH = path.resolve(__dirname, './env/token.json');
 const CREDENTIALS_PATH = path.resolve(__dirname, './env/credentials.json');
-const TEST_USERID='jimmyjaeyeon@gmail.com';
+const TEST_USERID = 'jimmyjaeyeon@gmail.com';
 
 fs.readFile(CREDENTIALS_PATH, (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);

@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const ApiService = require('./apiService');
 
-router.get('/list', (req, res) =>  {
+router.get('/list', (req, res) => {
   console.log('GET /apis/token');
   // ApiService.authorize(ApiService.getCredentials(), ApiService.getList.then(messages=>res.end(JSON.stringify(messages))));
-  ApiService.authorize(ApiService.getCredentials(), auth => ApiService.getList(auth).then(messages=>res.end(JSON.stringify(messages))));
+  ApiService.authorize(ApiService.getCredentials(), auth => ApiService.getList(auth).then(messages => res.end(JSON.stringify(messages))));
 });
 
 router.get('/:id', (req, res) => {
