@@ -29,6 +29,7 @@ class SignUp extends Component {
     return (
       <>
         <h1>Sign-Up</h1>
+<<<<<<< HEAD
           <div>
             <div>
               <GoogleLogin 
@@ -39,6 +40,8 @@ class SignUp extends Component {
               />
             </div>
           </div>
+=======
+>>>>>>> #52 App(Content) 부분 height 100% 적용
       </>
     );
   }
