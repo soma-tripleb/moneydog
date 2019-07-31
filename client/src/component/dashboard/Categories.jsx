@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {PageHeader, Tag, Tabs, Button, Statistic, Row, Col, Card} from 'antd';
+import {PageHeader, Button, Statistic, Row, Col, Card} from 'antd';
 
-const {TabPane} = Tabs;
 
 class Categories extends Component {
 
@@ -9,9 +8,7 @@ class Categories extends Component {
   render() {
     return (
         <div>
-          {/*<Button type="primary" block>*/}
           {/*  구독 중인 서바스*/}
-          {/*</Button>*/}
           <hr/>
           <PageHeader title="구독 중인 서비스"
                       extra={[

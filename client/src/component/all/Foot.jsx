@@ -7,11 +7,9 @@ class Foot extends Component {
   render() {
     return (
         <>
-
           <div className="m-t-3"></div>
 
           <footer className="mainfooter" role="contentinfo">
-
             <div className="footer-middle">
               <div className="container">
                 <div className="row">
@@ -51,8 +49,8 @@ class Foot extends Component {
                       개인 정보 취급 방침
                     </div>
                   </div>
+                  
                 </div>
-
               </div>
             </div>
             <div className="footer-bottom">

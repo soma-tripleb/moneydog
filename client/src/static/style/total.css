@@ -1,6 +1,12 @@
 html, body {
     height: 100%;
     width: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 #root {
@@ -21,7 +27,7 @@ html, body {
 }
 
 .ant-col-12 {
-    background-color: azure;
+    background-color: burlywood;
 }
 
 /*head,app 에 margin 을 주어 겹치지 않게 하려고 설정*/
