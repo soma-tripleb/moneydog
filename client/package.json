@@ -12,8 +12,11 @@
   "dependencies": {
     "antd": "^3.20.3",
     "css-loader": "^3.0.0",
+    "file-loader": "^4.1.0",
+    "jquery": "^3.4.1",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
+    "popper.js": "^1.15.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
@@ -29,6 +32,8 @@
     "react-hot-loader": "^4.12.6",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6",
-    "webpack-dev-server": "^3.7.2"
+    "webpack-dev-server": "^3.7.2",
+    "bootstrap": "^4.3.1",
+    "react-bootstrap": "^0.22.6"
   }
 }

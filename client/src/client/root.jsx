@@ -1,33 +1,34 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { Row, Col, Layout } from 'antd';
+import {BrowserRouter} from 'react-router-dom';
+import {Row, Layout} from 'antd';
 
 import App from '../shared/app';
 
-import { Head, Foot } from '../component/all/index';
+import {Head, Foot} from '../component/all/index';
 
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import 'antd/dist/antd.less';
+
 import '../static/style/total.css';
 
 const Root = () => (
     <BrowserRouter>
-        <Row>
-            <Col span={6}></Col>
+      <Row>
+        <Layout className="layout">
 
-            <Col span={12}>
-              <Layout className="layout">
+          <div className="head">
+            <Head/>
+          </div>
 
-                <Head/>
+          <div className="app">
+            <App/>
+          </div>
 
-                <App />
+          <Foot/>
 
-                <Foot/>
-
-              </Layout>
-            </Col>
-
-            <Col span={6}></Col>
-        </Row>
+        </Layout>
+      </Row>
     </BrowserRouter>
 );
 

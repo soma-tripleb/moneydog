@@ -35,24 +35,32 @@ module.exports = {
           plugins: [
             '@babel/plugin-proposal-class-properties',
             'react-hot-loader/babel',
-            ["import", { "libraryName": "antd", "style": true }],
+            ["import", {"libraryName": "antd", "style": true}],
           ],
         }
-      },{
-        test: [/\.css?$/, /\.less?$/],
+      },
+      {
+        test: [/\.css?$/],
         use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-          },
+          'style-loader', 'css-loader',
+        ],
+      },
+      {
+        test: [ /\.less?$/],
+        use: [
+          'style-loader', 'css-loader',
           {
             loader: 'less-loader',
             options: {
               javascriptEnabled: true
             },
           },
+        ],
+      },
+      {
+        test: [/\.(png|jpg|jpeg)?$/],
+        use: [
+          'file-loader'
         ],
       },
     ],
