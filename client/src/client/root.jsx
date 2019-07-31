@@ -29,7 +29,6 @@ const Root = () => (
 
         </Layout>
       </Row>
-      {/* <Foot/> */}
     </BrowserRouter>
 );
 
