@@ -35,15 +35,10 @@ body {
 }
 
 .ant-col-12 {
-<<<<<<< HEAD
-  background-color: burlywood;
-=======
     background-color: burlywood;
 }
 
 /*head,app 에 margin 을 주어 겹치지 않게 하려고 설정*/
 .app {
-    height: 100%;
     margin-top: 100px;
->>>>>>> #52 App(Content) 부분 height 100% 적용
 }
