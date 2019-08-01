@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import update from 'react-addons-update';
 
 import SubsApp from './subsApp';
-
 import '../../static/style/page/subscriptions.css';
 
 class Subscriptions extends Component {
@@ -33,7 +32,6 @@ class Subscriptions extends Component {
       <>
         <h1>Subscriptions</h1>
         <div className="subs-container">
-
           {/* 왼쪽 박스 */}
           <div className="subs-inner-left-container mh-100 d-inline-block">
             우리가 DB 에 저장해 놓은 구독 서비스 앱들
@@ -82,6 +80,7 @@ class Subscriptions extends Component {
               )
             })}
           </div>
+
         </div>
         </>
     );
