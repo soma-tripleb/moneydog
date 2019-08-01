@@ -1,59 +1,81 @@
 import React, { Component } from 'react'
 
-// import '../../static/style/page/subscriptions.css';
+import '../../static/style/page/subscriptions.css';
 
 class Subscriptions extends Component {
+
+  createComponent = (e) => {
+
+    // newElement.innerHTML = document.getElementById('my-subs-container').innerHTML;   // 이것도 해당 태그를 가져옴
+
+    let newElement = document.createElement('div');
+    newElement.innerHtml = e.target;
+    document.getElementById('my-subs-container').appendChild(e);
+
+    var newDivHtml = "<span>추가할 내용</span>";
+
+    var div = document.createElement("div");
+    div.id = "aaa";
+    div.innerHTML = newDivHtml;
+
+    document.appendChild(div);
+
+    console.log("success");
+  }
+
   render() {
     return (
       <>
         <h1>Subscriptions</h1>
-        <div style={
-            {
-              height: 500, 
-              backgroundColor: 'rgba(255,0,0,0.1)',
-              padding: 100,
-            }
-          }>
-          <div class="mh-100 d-inline-block" style={
-            {
-              height: '100%',
-              width: '45%', 
-              backgroundColor: 'rgba(0,0,255,.1)',
-              border: '1px black solid',
-              borderRadius: '5px',
-              overflowX: 'auto',
-            }
-          }>
+        <div className="subs-container">
+
+          <div className="subs-inner-left-container mh-100 d-inline-block">
             Height 25%
-            <div class="w-25 p-3" style={{backgroundColor: '#eee'}}>Width 25%</div>
-            <div class="w-50 p-3" style={{backgroundColor: '#eee'}}>Width 25%</div>
-            <div class="w-75 p-3" style={{backgroundColor: '#eee'}}>Width 25%</div>
-            <div class="w-100 p-3" style={{backgroundColor: '#eee'}}>Width 25%</div>
-            <div class="w-25 p-3" style={{backgroundColor: '#eee'}}>Width 25%</div>
-            <div class="w-50 p-3" style={{backgroundColor: '#eee'}}>Width 25%</div>
-            <div class="w-75 p-3" style={{backgroundColor: '#eee'}}>Width 25%</div>
-            <div class="w-100 p-3" style={{backgroundColor: '#eee'}}>Width 25%</div>
+
+            <div className="w-100 p-3" id="subs-inner-left-element" onClick={this.createComponent}>
+              <p>Width 25%</p>
+            </div>
+            <div className="w-100 p-3" id="subs-inner-left-element" onClick={this.createComponent}>
+              <p>Width 25%</p>
+            </div>
+            <div className="w-100 p-3" id="subs-inner-left-element" onClick={this.createComponent}>
+              <p>Width 25%</p>
+            </div>
+            <div className="w-100 p-3" id="subs-inner-left-element" onClick={this.createComponent}>
+              <p>Width 25%</p>
+            </div>
+            <div className="w-100 p-3" id="subs-inner-left-element" onClick={this.createComponent}>
+              <p>Width 25%</p>
+            </div>
+            <div className="w-100 p-3" id="subs-inner-left-element" onClick={this.createComponent}>
+              <p>Width 25%</p>
+            </div>
+            <div className="w-100 p-3" id="subs-inner-left-element" onClick={this.createComponent}>
+              <p>Width 25%</p>
+            </div>
+            
+
           </div>
 
-          <div class="mh-100 d-inline-block" style={{width: '10%', backgroundColor: 'rgba(0,255,1,.1)' }} >
+          <div className="subs-inner-center-container mh-100 d-inline-block">
             Height 25%
           </div>
 
-          <div class="mh-100 d-inline-block" style={
-            {
-              height: '100%',
-              width: '45%', 
-              backgroundColor: 'rgba(0,0,1,.255)',
-              border: '1px black solid',
-              borderRadius: '5px',
-              overflowX: 'auto',
-            }
-          }>
+          <div className="subs-inner-right-container mh-100 d-inline-block">
             Height 25%
-            <div class="w-25 p-3" style={{backgroundColor: '#eee'}}>Width 25%</div>
-            <div class="w-50 p-3" style={{backgroundColor: '#eee'}}>Width 25%</div>
-            <div class="w-75 p-3" style={{backgroundColor: '#eee'}}>Width 25%</div>
+
+            <div className="w-100 p-3" id="subs-inner-right-element">
+              <p>Width 25%</p>
+            </div>
+            <div className="w-100 p-3" id="subs-inner-right-element">
+              <p>Width 25%</p>
+            </div>
+            <div className="w-100 p-3" id="subs-inner-right-element">
+              <p>Width 25%</p>
+            </div>
+
           </div>
+
         </div>
       </>
     );
