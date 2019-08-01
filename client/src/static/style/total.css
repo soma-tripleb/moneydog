@@ -25,11 +25,6 @@ body {
     flex-direction: column;
 }
 
-/* ant */
-.layout {
-    height: 100%;
-}
-
 .ant-row .ant-col {
     height: 100%;
 }
