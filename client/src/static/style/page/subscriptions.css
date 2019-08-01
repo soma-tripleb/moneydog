@@ -1,0 +1,25 @@
+.sub-container {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.sub-content1 {
+  border: 1px black solid;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.sub-content2 {
+  border: 1px black solid;
+  border-radius: 5px;
+}
+
+.element {
+  height: 70px;
+  border: 1px black solid;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
