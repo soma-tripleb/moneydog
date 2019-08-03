@@ -1,79 +1,87 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import update from 'react-addons-update';
+
+import SubsApp from './subsApp';
 
 import '../../static/style/page/subscriptions.css';
 
 class Subscriptions extends Component {
 
-  createComponent = (e) => {
+  state = {
+    logo: 'parent-logo',
+    title: 'parent-title',
+    arr: [0,1,2,3,4,5,6,7,8,9],
+    arr2: [],
+  }
 
-    // newElement.innerHTML = document.getElementById('my-subs-container').innerHTML;   // 이것도 해당 태그를 가져옴
+  insertContact = () => {
+    const newState = update(this.state, {
+        arr2: {
+            $push: [
+              0
+            ]
+        }
+    });
 
-    let newElement = document.createElement('div');
-    newElement.innerHtml = e.target;
-    document.getElementById('my-subs-container').appendChild(e);
-
-    var newDivHtml = "<span>추가할 내용</span>";
-
-    var div = document.createElement("div");
-    div.id = "aaa";
-    div.innerHTML = newDivHtml;
-
-    document.appendChild(div);
-
-    console.log("success");
+    this.setState(newState);
   }
 
   render() {
+    const { logo, title, count } = this.state;
+
     return (
       <>
         <h1>Subscriptions</h1>
         <div className="subs-container">
 
+          {/* 왼쪽 박스 */}
           <div className="subs-inner-left-container mh-100 d-inline-block">
-            Height 25%
+            우리가 DB 에 저장해 놓은 구독 서비스 앱들
 
-            <div className="w-100 p-3" id="subs-inner-left-element" onClick={this.createComponent}>
-              <p>Width 25%</p>
+            <div className="w-100 p-3" id="subs-inner-left-element">
+              <p>Selecting App</p>
             </div>
-            <div className="w-100 p-3" id="subs-inner-left-element" onClick={this.createComponent}>
-              <p>Width 25%</p>
-            </div>
-            <div className="w-100 p-3" id="subs-inner-left-element" onClick={this.createComponent}>
-              <p>Width 25%</p>
-            </div>
-            <div className="w-100 p-3" id="subs-inner-left-element" onClick={this.createComponent}>
-              <p>Width 25%</p>
-            </div>
-            <div className="w-100 p-3" id="subs-inner-left-element" onClick={this.createComponent}>
-              <p>Width 25%</p>
-            </div>
-            <div className="w-100 p-3" id="subs-inner-left-element" onClick={this.createComponent}>
-              <p>Width 25%</p>
-            </div>
-            <div className="w-100 p-3" id="subs-inner-left-element" onClick={this.createComponent}>
-              <p>Width 25%</p>
-            </div>
+
+            {this.state.arr.map(
+              (content, i) => {
+              return (
+                <SubsApp key={i} onInsert={this.insertContact.bind(this)} subsAppInfo={
+                  {
+                    logo: logo,
+                    title: title,
+                    number: content,
+                  }
+                }/>
+              )
+            })}
             
-
           </div>
 
+          {/* 가운데 공간 */}
           <div className="subs-inner-center-container mh-100 d-inline-block">
-            Height 25%
+
           </div>
 
+          {/* 오른쪽 박스 */}
           <div className="subs-inner-right-container mh-100 d-inline-block">
-            Height 25%
+            이메일 파싱을 통해 얻어낸 구독 정보와 사용자가 선택한 구독 정보
 
             <div className="w-100 p-3" id="subs-inner-right-element">
-              <p>Width 25%</p>
-            </div>
-            <div className="w-100 p-3" id="subs-inner-right-element">
-              <p>Width 25%</p>
-            </div>
-            <div className="w-100 p-3" id="subs-inner-right-element">
-              <p>Width 25%</p>
+              <p>Seleted App</p>
             </div>
 
+            {this.state.arr2.map((content, i) => {
+              return (
+                <SubsApp key={i} subsAppInfo={
+                  {
+                    logo: logo,
+                    title: title,
+                    number: content,
+                  }
+                }/>
+              )
+            })}
+            
           </div>
 
         </div>
