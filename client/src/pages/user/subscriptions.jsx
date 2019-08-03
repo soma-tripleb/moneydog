@@ -80,7 +80,6 @@ class Subscriptions extends Component {
               )
             })}
           </div>
-
         </div>
         </>
     );
