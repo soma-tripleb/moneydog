@@ -30,6 +30,7 @@ body {
 }
 
 .ant-col-12 {
+<<<<<<< HEAD
     background-color: burlywood;
 }
 
@@ -37,3 +38,7 @@ body {
 .app {
     margin-top: 100px;
 }
+=======
+  background-color: burlywood;
+}
+>>>>>>> #47 update
