@@ -5,15 +5,20 @@ import Categories from '../component/dashboard/Categories';
 
 import * as service from '../services/posts';
 
+import 'babel-polyfill';
 
 class DashBoard extends Component {
+
+  onTest = (value) =>{
+    this.fetchPostInfo(1);
+  }
 
   fetchPostInfo = async (postId) => {
     const post = await service.getPost(postId);
     console.log(post);
     const comments = await service.getComments(postId);
     console.log(comments);
-  }
+  };
 
   render() {
     return (
@@ -30,6 +35,7 @@ class DashBoard extends Component {
 
               </div>
             </div>
+            <button onClick={this.onTest(1)}>test ajax</button>
 
             <hr/>
 
