@@ -1,31 +1,39 @@
 html, body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
+    height: 100%;
+    width: 100%;
+    margin: 0;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 #root {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
-#root>div {
-  height: 100%;
+#root > div {
+    height: 100%;
 }
 
-#root .ant-row {
-  height: 100%;
+/* ant */
+.layout {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .ant-row .ant-col {
-  height: 100%;
+    height: 100%;
 }
 
 .ant-col-12 {
-  background-color: burlywood;
+    background-color: burlywood;
+}
+
+/*head,app 에 margin 을 주어 겹치지 않게 하려고 설정*/
+.app {
+    margin-top: 100px;
 }
