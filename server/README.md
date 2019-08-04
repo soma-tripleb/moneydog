@@ -1,4 +1,4 @@
-# moneydog
+# moneydog - node server
 
 * 실행 파일  
     > app.js
