@@ -24,7 +24,9 @@ yarn-error.log*
 lerna-debug.log*
 
 # Envfile
-
 .env
 credentials.json
 token.json
+
+# google-api
+google-api/client_secret.json
