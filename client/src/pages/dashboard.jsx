@@ -18,6 +18,8 @@ class DashBoard extends Component {
     console.log(post);
     const comments = await service.getComments(postId);
     console.log(comments);
+    const hello = await service.getServerHelloWorld();
+    console.log(hello);
   };
 
   render() {
