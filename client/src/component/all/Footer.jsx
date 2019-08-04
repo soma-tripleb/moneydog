@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Menu } from './index';
+import Menu from './Menu';
 
-import '../static/style/component/footer.css';
+import '../../static/style/component/footer.css';
 
 const Footer = () => {
   return (
