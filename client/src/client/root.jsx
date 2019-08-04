@@ -9,7 +9,6 @@ import {Head, Foot} from '../component/all/index';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'antd/dist/antd.less';
-
 import '../static/style/total.css';
 
 const Root = () => (
