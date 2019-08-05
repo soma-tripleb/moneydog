@@ -18,16 +18,16 @@ class Head extends Component {
               <ul className="navbar-nav mr-auto">
 
                 <li className="nav-item active">
-                  <a className="nav-link" href="#"><Link to="/">Home</Link> <span
-                      className="sr-only">(current)</span></a>
+                  <Link to="/" className="nav-link"><span
+                      className="sr-only">(current)</span>Home</Link>
                 </li>
 
                 <li className="nav-item">
-                  <a className="nav-link" href="#"><Link to="/report">Report</Link></a>
+                  <Link to="/report" className="nav-link">Report</Link>
                 </li>
 
                 <li className="nav-item">
-                  <a className="nav-link" href="#"><Link to="/dashboard">Dashboard</Link></a>
+                  <Link to="/dashboard" className="nav-link">Dashboard</Link>
                 </li>
 
               </ul>

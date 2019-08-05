@@ -4,6 +4,15 @@ import {PageHeader, Button, Statistic, Row, Col, Card} from 'antd';
 
 class Categories extends Component {
 
+  state = {
+    userSubscribeeData : [
+      {name: 'melon', price:'6500', Dday:"17"},
+      {name: 'netflex', price:'9800', Dday:"28"},
+      {name: 'watch', price:'5600', Dday:"5"},
+    ]
+  };
+
+
 
   render() {
     return (
@@ -23,35 +32,25 @@ class Categories extends Component {
           <br/>
 
           <div>
-            <Card type="inner" title="Melon" extra={<a href="#">More</a>}>
-              <div className="extraContent">
-                <Row>
-                  <Col span={12}>
-                    <Statistic title="D-Day" value="D-17"/>
-                  </Col>
-                  <Col span={12}>
-                    <Statistic title="Price" prefix="₩" value={6500}/>
-                  </Col>
-                </Row>
-              </div>
-            </Card>
-            <Card
-                style={{marginTop: 16}}
-                type="inner"
-                title="NetFlix"
-                extra={<a href="#">More</a>}
-            >
-              <div className="extraContent">
-                <Row>
-                  <Col span={12}>
-                    <Statistic title="D-Day" value="D-3"/>
-                  </Col>
-                  <Col span={12}>
-                    <Statistic title="Price" prefix="₩" value={9500}/>
-                  </Col>
-                </Row>
-              </div>
-            </Card>
+
+            {this.state.userSubscribeeData.map((ssData,index)=>{
+              return (
+                  <Card key={index} type="inner" title={ssData.name} extra={<a href="#">More</a>}>
+                    <div className="extraContent">
+                      <Row>
+                        <Col span={12}>
+                          <Statistic title="D-Day" value={ssData.Dday}/>
+                        </Col>
+                        <Col span={12}>
+                          <Statistic title="Price" prefix="₩" value={ssData.price}/>
+                        </Col>
+                      </Row>
+                    </div>
+                  </Card>
+              )
+            })}
+
+
           </div>
           <br/>
 
