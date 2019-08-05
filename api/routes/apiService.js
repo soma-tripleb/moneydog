@@ -75,6 +75,10 @@ function base64ToUtf8(base64encoded) {
   return Buffer.from(base64encoded, 'base64').toString('utf8');
 }
 
+function convertHtml() {
+
+}
+
 module.exports = {
   getCredentials: getCredentials,
   authorize: authorize,
