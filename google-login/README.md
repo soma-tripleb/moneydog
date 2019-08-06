@@ -6,7 +6,9 @@
 * [google gmail api scope - Google API Scope 확인하기](https://www.google.com/search?q=google+gmail+api+scope&oq=google+gmail+api+scope&aqs=chrome..69i57j0j69i64l3j69i60.10319j0j1&sourceid=chrome&ie=UTF-8)
 * [Using OAuth 2.0 to Access Google APIs - OAuth2.0 프로토콜](https://developers.google.com/identity/protocols/OAuth2)
 * [OAuth 2.0 for Client-side Web Applications](https://developers.google.com/identity/protocols/OAuth2UserAgent)
-* [Google Account Access](https://myaccount.google.com/permissions)  
+* [Google Account Access](https://myaccount.google.com/permissions) 
+* [Gmail API Client Library for JAVA](https://developers.google.com/api-client-library/java/apis/gmail/v1)
+* [Using OAuth 2.0 with the Google API Client Library for Java](https://developers.google.com/api-client-library/java/google-api-java-client/oauth2)
 
 
 

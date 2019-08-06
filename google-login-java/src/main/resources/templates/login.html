@@ -1,20 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="http://schema.org/Article">
 <head>
     <meta charset="UTF-8">
-    <title>Google Login</title>
+    <title>Google Login2</title>
 
-    <meta name="google-signin-client_id" content="351412840107-snlb406p1o1ud17vld4enunetm4g3fmu.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
 </head>
 <body>
-<h1>Google Login</h1>
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
 
-<div>
-    <a href="#" onclick="signOut();">Sign out</a>
-</div>
+<button id="signinButton">Sign in with Google</button>
 
-<script src="/static/javascript/login.js"></script>
+<script src="../static/js/google-oauth.js"></script>
 </body>
 </html>
