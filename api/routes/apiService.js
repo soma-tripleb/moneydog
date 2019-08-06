@@ -2,16 +2,71 @@ const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
 const path = require('path');
+const cheerio = require('cheerio');
+const DomParser = require('dom-parser');
 
 const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
 const TOKEN_PATH = path.resolve(__dirname, '../env/token.json');
 const CREDENTIALS_PATH = path.resolve(__dirname, '../env/credentials.json');
 const TEST_USERID = 'jimmyjaeyeon@gmail.com';
+const APPLE_EMAIL = 'no_reply@email.apple.com';
 
 fs.readFile(CREDENTIALS_PATH, (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
   authorize(JSON.parse(content), getList);
 });
+
+function getList(auth) {
+  const gmail = google.gmail({version: 'v1', auth});
+  return new Promise((resolve, reject) => {
+    gmail.users.messages.list({userId: TEST_USERID, q: APPLE_EMAIL}, (err, res) => {
+      err ? reject(err) : resolve(res.data.messages);
+    });
+  });
+}
+
+function getMessage(auth, id) {
+  // id = 16c3b300da121d9c
+  console.log('called printMessage method');
+  const gmail = google.gmail({version: 'v1', auth});
+  return new Promise((resolve, reject) => {
+    gmail.users.messages.get({auth: auth, userId: TEST_USERID, id: id,}, (err, res) => {
+      err ? reject(err) : resolve(base64ToUtf8(res.data.payload.parts[1].body.data));
+    });
+  });
+}
+
+function getReceipt(auth, id) {
+  // id = 16c3b300da121d9c
+  console.log('called printMessage method');
+  const gmail = google.gmail({version: 'v1', auth});
+  return new Promise((resolve, reject) => {
+    gmail.users.messages.get({auth: auth, userId: TEST_USERID, id: id,}, (err, res) => {
+      err ? reject(err) : resolve(getInfo(base64ToUtf8(res.data.payload.parts[1].body.data)));
+    });
+  });
+}
+
+function getInfo(rawHtml) {
+  const $ = cheerio.load(convertHtml(rawHtml));
+  service = {};
+  service.id = $('body > table:nth-child(4) > tbody > tr > td > div.aapl-desktop-div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td:nth-child(1)').text().split('ID')[1];
+  service.name = $('span[class=title]').contents().get('0').data;
+  service.date = $('body > table:nth-child(4) > tbody > tr > td > div.aapl-desktop-div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(2) > td').text().split('날짜')[1];
+  service.duration = $('span[class=duration]').contents().get('0').data;
+  service.renewal = $('span[class=renewal]').contents().get('0').data.trim();
+  return service;
+}
+
+function base64ToUtf8(base64encoded) {
+  return Buffer.from(base64encoded, 'base64').toString('utf8');
+}
+
+function convertHtml(rawHtml) {
+  const parser = new DomParser();
+  const wrapper = parser.parseFromString(rawHtml, 'text/html');
+  return wrapper.rawHTML;
+}
 
 function getCredentials() {
   return JSON.parse(fs.readFileSync(CREDENTIALS_PATH));
@@ -51,37 +106,10 @@ function getNewToken(oAuth2Client, callback) {
   });
 }
 
-function getList(auth) {
-  const gmail = google.gmail({version: 'v1', auth});
-  return new Promise((resolve, reject) => {
-    gmail.users.messages.list({userId: TEST_USERID}, (err, res) => {
-      err ? reject(err) : resolve(res.data.messages);
-    });
-  });
-}
-
-function getMessage(auth, id) {
-  // id = 16c3b300da121d9c
-  console.log('called printMessage method');
-  const gmail = google.gmail({version: 'v1', auth});
-  return new Promise((resolve, reject) => {
-    gmail.users.messages.get({auth: auth, userId: TEST_USERID, id: id,}, (err, res) => {
-      err ? reject(err) : resolve(base64ToUtf8(res.data.payload.parts[1].body.data));
-    });
-  });
-}
-
-function base64ToUtf8(base64encoded) {
-  return Buffer.from(base64encoded, 'base64').toString('utf8');
-}
-
-function convertHtml() {
-
-}
-
 module.exports = {
   getCredentials: getCredentials,
   authorize: authorize,
   getList: getList,
   getMessage: getMessage,
+  getReceipt: getReceipt,
 }
