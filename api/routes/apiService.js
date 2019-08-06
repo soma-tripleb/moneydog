@@ -19,7 +19,7 @@ fs.readFile(CREDENTIALS_PATH, (err, content) => {
 function getList(auth) {
   const gmail = google.gmail({version: 'v1', auth});
   return new Promise((resolve, reject) => {
-    gmail.users.messages.list({userId: TEST_USERID, q: APPLE_EMAIL}, (err, res) => {
+    gmail.users.messages.list({userId: TEST_USERID, q: `from:Apple subject:영수증 -(구독 만료) -(구독 확인) "갱신 예정"`}, (err, res) => {
       err ? reject(err) : resolve(res.data.messages);
     });
   });
@@ -47,6 +47,15 @@ function getReceipt(auth, id) {
   });
 }
 
+function checkSubject(auth, id) {
+  const gmail = google.gmail({version: 'v1', auth});
+  return new Promise((resolve, reject) => {
+    gmail.users.messages.get({auth: auth, userId: TEST_USERID, id: id,}, (err, res) => {
+      err ? reject(err) : resolve(res.data.payload.headers[16].value);
+    });
+  });
+}
+
 function getInfo(rawHtml) {
   const $ = cheerio.load(convertHtml(rawHtml));
   service = {};
@@ -57,6 +66,8 @@ function getInfo(rawHtml) {
   service.renewal = $('span[class=renewal]').contents().get('0').data.trim();
   return service;
 }
+
+
 
 function base64ToUtf8(base64encoded) {
   return Buffer.from(base64encoded, 'base64').toString('utf8');
@@ -112,4 +123,5 @@ module.exports = {
   getList: getList,
   getMessage: getMessage,
   getReceipt: getReceipt,
+  checkSubject: checkSubject,
 }
