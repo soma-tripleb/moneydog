@@ -1,6 +1,7 @@
 require('dotenv').config();
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
 const MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}`;
 
 const conn = mongoose.createConnection(MONGO_URI);

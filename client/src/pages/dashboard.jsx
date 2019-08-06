@@ -11,7 +11,7 @@ class DashBoard extends Component {
 
   onTest = (value) =>{
     this.fetchPostInfo(1);
-  }
+  };
 
   fetchPostInfo = async (postId) => {
     const post = await service.getPost(postId);
@@ -37,7 +37,7 @@ class DashBoard extends Component {
 
               </div>
             </div>
-            <button onClick={this.onTest(1)}>test ajax</button>
+            <button onClick={ this.onTest(1) }>test ajax</button>
 
             <hr/>
 

@@ -11,3 +11,9 @@ export function getComments(postId) {
 export function getServerHelloWorld() {
   return axios.get(`http://localhost:5000`);
 }
+
+export function getUserServiceInfo(userID) {
+  return axios.get(`http://localhost:5000/subscribeInfo/${userID}`);
+}
+
+
