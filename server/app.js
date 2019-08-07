@@ -4,6 +4,7 @@ const app = express();
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cors = require('cors');
 
 //Databases
 const db = require('./db/mongoDB');
@@ -15,6 +16,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// HTTP 접근 제어 혹은 CORS(Cross-origin resource sharing, 출처가 다른 곳끼리 자원 공유
+app.use(cors());
+
 //Api
 const indexRouter = require('./api/index');
 const usersRouter = require('./api/users');
@@ -24,13 +28,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/subscribeInfo', subscribeInfo);
 
-// HTTP 접근 제어 혹은 CORS(Cross-origin resource sharing, 출처가 다른 곳끼리 자원 공유
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'content-type');
-  next();
-});
 
 // error handler
 app.use(function(err, req, res, next) {
