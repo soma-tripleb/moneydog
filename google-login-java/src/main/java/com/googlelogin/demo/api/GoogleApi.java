@@ -12,7 +12,7 @@ import java.io.IOException;
 @Component
 public class GoogleApi {
 
-  private static final String GOOGLE_API_SERVER_URL = "https://www.googleapis.com/oauth2/v4/token";
+  private static final String GOOGLE_API_SERVER_URL = "https://www.googleapis.com/oauth2/v4/UserAccessToken";
 
   @Value("${google.api.console.application.name}")
   private String GOOGLE_API_CONSOLE_APPLICATION_NAME;

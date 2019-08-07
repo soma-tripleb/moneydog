@@ -14,10 +14,8 @@ import com.google.api.services.gmail.model.MessagePartBody;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Element;
 
 import java.io.IOException;
 import java.util.ArrayList;
