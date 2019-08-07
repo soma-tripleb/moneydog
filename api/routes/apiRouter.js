@@ -1,13 +1,18 @@
 const router = require('express').Router();
 const ApiService = require('./apiService');
 
-router.get('/list', (req, res) => {
-  console.log('GET /apis/token');
+router.get('/mails', (req, res) => {
   ApiService.authorize(ApiService.getCredentials(), auth => ApiService.getList(auth).then(messages => res.end(JSON.stringify(messages))));
 });
 
+router.get('/list', (req, res) => {
+  console.log('GET /api/test');
+  ApiService.authorize(ApiService.getCredentials(), (auth) => {
+    ApiService.infos(auth).then((messages) => res.json(messages));
+  });
+});
+
 router.get('/subject/:id', (req, res) => {
-  console.log('GET /apis/token');
   ApiService.authorize(ApiService.getCredentials(), auth => ApiService.checkSubject(auth, req.params.id).then(messages => {
     res.writeHead(200, {'Content-Type':'text/plain; charset=utf-8'});
     console.log('subject : ', messages);

@@ -27,7 +27,6 @@ function getList(auth) {
 
 function getMessage(auth, id) {
   // id = 16c3b300da121d9c
-  console.log('called printMessage method');
   const gmail = google.gmail({version: 'v1', auth});
   return new Promise((resolve, reject) => {
     gmail.users.messages.get({auth: auth, userId: TEST_USERID, id: id,}, (err, res) => {
@@ -38,7 +37,6 @@ function getMessage(auth, id) {
 
 function getReceipt(auth, id) {
   // id = 16c3b300da121d9c
-  console.log('called printMessage method');
   const gmail = google.gmail({version: 'v1', auth});
   return new Promise((resolve, reject) => {
     gmail.users.messages.get({auth: auth, userId: TEST_USERID, id: id,}, (err, res) => {
@@ -47,13 +45,9 @@ function getReceipt(auth, id) {
   });
 }
 
-function checkSubject(auth, id) {
-  const gmail = google.gmail({version: 'v1', auth});
-  return new Promise((resolve, reject) => {
-    gmail.users.messages.get({auth: auth, userId: TEST_USERID, id: id,}, (err, res) => {
-      err ? reject(err) : resolve(res.data.payload.headers[16].value);
-    });
-  });
+async function infos(auth) {
+  const messages = await getList(auth);
+  return await Promise.all(messages.map(message => getReceipt(auth, message.id)))
 }
 
 function getInfo(rawHtml) {
@@ -67,7 +61,14 @@ function getInfo(rawHtml) {
   return service;
 }
 
-
+function checkSubject(auth, id) {
+  const gmail = google.gmail({version: 'v1', auth});
+  return new Promise((resolve, reject) => {
+    gmail.users.messages.get({auth: auth, userId: TEST_USERID, id: id,}, (err, res) => {
+      err ? reject(err) : resolve(res.data.payload.headers[16].value);
+    });
+  });
+}
 
 function base64ToUtf8(base64encoded) {
   return Buffer.from(base64encoded, 'base64').toString('utf8');
@@ -124,4 +125,5 @@ module.exports = {
   getMessage: getMessage,
   getReceipt: getReceipt,
   checkSubject: checkSubject,
+  infos: infos,
 }
