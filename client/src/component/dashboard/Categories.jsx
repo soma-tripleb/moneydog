@@ -13,8 +13,13 @@ class Categories extends Component {
   };
 
 
-
   render() {
+
+    //TODO :: ajax 로 data를 받아와서 처음에 null 값 error 가뜸 이곳에 스피너 같은거 넢어 주어야함
+    if(this.props.data == null ){
+      return <></>
+    }
+
     return (
         <div>
           {/*  구독 중인 서바스*/}
@@ -33,16 +38,16 @@ class Categories extends Component {
 
           <div>
 
-            {this.state.userSubscribeeData.map((ssData,index)=>{
+            {this.props.data.map((data,index)=>{
               return (
-                  <Card key={index} type="inner" title={ssData.name} extra={<a href="#">More</a>}>
+                  <Card key={index} type="inner" title={data.serviceName} extra={<a href="#">More</a>}>
                     <div className="extraContent">
                       <Row>
                         <Col span={12}>
-                          <Statistic title="D-Day" value={ssData.Dday}/>
+                          <Statistic title="D-Day" value={data.paymentDay}/>
                         </Col>
                         <Col span={12}>
-                          <Statistic title="Price" prefix="₩" value={ssData.price}/>
+                          <Statistic title="Price" prefix="₩" value={data.price}/>
                         </Col>
                       </Row>
                     </div>

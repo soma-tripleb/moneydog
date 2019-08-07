@@ -3,26 +3,29 @@ import React, {Component} from 'react';
 import Calendar from '../component/dashboard/Calendar';
 import Categories from '../component/dashboard/Categories';
 
-import * as service from '../services/posts';
+import * as service from '../services/subscribeInfo';
 
 import 'babel-polyfill';
 
 class DashBoard extends Component {
 
-  onTest = (value) =>{
+  state ={
+    data:null,
+  };
+
+  componentDidMount() {
     this.fetchPostInfo(1);
   }
 
   fetchPostInfo = async (postId) => {
-    const post = await service.getPost(postId);
-    console.log(post);
-    const comments = await service.getComments(postId);
-    console.log(comments);
-    const hello = await service.getServerHelloWorld();
-    console.log(hello);
+    const response = await service.getUserServiceInfo(postId);
+    this.setState({
+      data: response.data,
+    });
   };
 
   render() {
+    console.log(this.state.data);
     return (
         <>
           <div className="container">
@@ -33,11 +36,10 @@ class DashBoard extends Component {
               </div>
               <div className="col-md-6">
 
-                <Categories name="Melon" Dday="17" price="6,500"/>
+                <Categories data={this.state.data}/>
 
               </div>
             </div>
-            <button onClick={this.onTest(1)}>test ajax</button>
 
             <hr/>
 
