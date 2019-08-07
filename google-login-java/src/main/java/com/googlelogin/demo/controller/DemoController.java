@@ -1,43 +1,37 @@
 package com.googlelogin.demo.controller;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.Message;
 import com.googlelogin.demo.api.GoogleApi;
 import com.googlelogin.demo.service.GmailListener;
 
+import com.googlelogin.demo.util.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-@Controller
+@RestController
 public class DemoController{
 
   @Value("${gmail.message.list.search.query}")
   private String GMAIL_MESSAGE_LIST_SEARCH_QUERY;
 
-  @Autowired
-  public GmailListener gmailListener;
+  @Autowired public GmailListener gmailListener;
+  @Autowired public GoogleApi googleApi;
+  @Autowired public JsonParser jsonParser;
 
-  @Autowired
-  public GoogleApi googleApi;
-
-  @GetMapping("/")
-  public String index() {
-    return "login";
-  }
-
+  @CrossOrigin("*")
   @PostMapping("tokensignin")
-  public String getClientTonken(@RequestParam(value = "idtoken") String idToken) {
+  public String getClientTonken(@RequestBody String jsonData) {
 
-    GoogleTokenResponse tokenResponse = googleApi.googleTokenResponse(idToken);
 
-    String accessToken = tokenResponse.getAccessToken();
+    Map<String, String> userInfoMap = jsonParser.getUserInfo(jsonData);
 
-    String userGmailId = gmailListener.getGmailId(tokenResponse);
+    String accessToken = userInfoMap.get("accessToken");
+
+    String userGmailId = userInfoMap.get("gmail");
 
     Gmail service = gmailListener.getGmailService(accessToken);
 
@@ -51,7 +45,7 @@ public class DemoController{
         index++;
         continue;
       }
-      /* snipat output */
+
       String messageId = message.getId();
 
       String snippet = gmailListener.getSnippet(service, userGmailId, messageId);
@@ -66,12 +60,6 @@ public class DemoController{
 
     System.out.println("----end----");
 
-    return "redirect:/";
-  }
-
-
-  @GetMapping("user")
-  public String user() {
-    return "user";
+    return "/user/subscriptions";
   }
 }

@@ -30,11 +30,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
         <!-- GMail API-->
         <dependency>
             <groupId>com.google.apis</groupId>
@@ -55,9 +50,11 @@
             <version>1.12.1</version>
         </dependency>
 
+        <!-- Google Json Simple -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1</version>
         </dependency>
 
     </dependencies>
