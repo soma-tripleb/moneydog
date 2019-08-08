@@ -6,7 +6,8 @@ const logger = require('morgan');
 const db = require('./db/mongoDB');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+// const usersRouter = require('./routes/users');
+const usersRouter = require('./components/user/userController');
 
 const app = express();
 
