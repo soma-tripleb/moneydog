@@ -6,29 +6,35 @@ import SubsApp from './subsApp';
 import '../../static/style/page/subscriptions.css';
 
 class Subscriptions extends Component {
-
   state = {
-    logo: 'parent-logo',
-    title: 'parent-title',
-    arr: [0,1,2,3,4,5,6,7,8,9],
+    arr: [
+      { logo: 'logo1', name: 'name1', label: '+' },
+      { logo: 'logo2', name: 'name2', label: '+' },
+      { logo: 'logo3', name: 'name3', label: '+' },
+      { logo: 'logo4', name: 'name4', label: '+' },
+      { logo: 'logo5', name: 'name5', label: '+' },
+      { logo: 'logo6', name: 'name6', label: '+' },
+      { logo: 'logo7', name: 'name7', label: '+' },
+      { logo: 'logo8', name: 'name8', label: '+' },
+      { logo: 'logo9', name: 'name9', label: '+' },
+      { logo: 'logo10', name: 'name10', label: '+' },
+    ],
     arr2: [],
   }
 
-  insertContact = () => {
+  insertContact = (number, logo, name) => {
     const newState = update(this.state, {
         arr2: {
             $push: [
-              0
+              { 'logo': logo, 'name': name, 'label': '-' }
             ]
-        }
+        },
     });
 
     this.setState(newState);
   }
 
   render() {
-    const { logo, title, count } = this.state;
-
     return (
       <>
         <h1>Subscriptions</h1>
@@ -47,9 +53,10 @@ class Subscriptions extends Component {
               return (
                 <SubsApp key={i} onInsert={this.insertContact.bind(this)} subsAppInfo={
                   {
-                    logo: logo,
-                    title: title,
-                    number: content,
+                    logo: content.logo,
+                    name: content.name,
+                    label: content.label,
+                    number: i,
                   }
                 }/>
               )
@@ -74,9 +81,10 @@ class Subscriptions extends Component {
               return (
                 <SubsApp key={i} subsAppInfo={
                   {
-                    logo: logo,
-                    title: title,
-                    number: content,
+                    logo: content.logo,
+                    name: content.name,
+                    label: content.label,
+                    number: i,
                   }
                 }/>
               )
