@@ -11,9 +11,14 @@ class SubsApp extends Component {
   };
 
   handleClick = () => {
-    const {subsAppInfo} = this.props;
-  
-    this.props.onInsert(subsAppInfo.number, subsAppInfo.logo, subsAppInfo.name);
+    const { subsAppInfo } = this.props;
+
+    if (subsAppInfo.label === '-') {
+      this.props.onDelete(subsAppInfo.number, subsAppInfo.logo, subsAppInfo.name);
+    } else {
+      this.props.onInsert(subsAppInfo.number, subsAppInfo.logo, subsAppInfo.name);
+    }
+
   }
 
   render() {

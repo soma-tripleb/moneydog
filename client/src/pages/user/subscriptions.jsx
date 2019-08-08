@@ -8,16 +8,16 @@ import '../../static/style/page/subscriptions.css';
 class Subscriptions extends Component {
   state = {
     arr: [
-      { logo: 'logo1', name: 'name1', label: '+' },
-      { logo: 'logo2', name: 'name2', label: '+' },
-      { logo: 'logo3', name: 'name3', label: '+' },
-      { logo: 'logo4', name: 'name4', label: '+' },
-      { logo: 'logo5', name: 'name5', label: '+' },
-      { logo: 'logo6', name: 'name6', label: '+' },
-      { logo: 'logo7', name: 'name7', label: '+' },
-      { logo: 'logo8', name: 'name8', label: '+' },
-      { logo: 'logo9', name: 'name9', label: '+' },
-      { logo: 'logo10', name: 'name10', label: '+' },
+      { number: '', logo: 'logo1', name: 'name1', label: '+' },
+      { number: '', logo: 'logo2', name: 'name2', label: '+' },
+      { number: '', logo: 'logo3', name: 'name3', label: '+' },
+      { number: '', logo: 'logo4', name: 'name4', label: '+' },
+      { number: '', logo: 'logo5', name: 'name5', label: '+' },
+      { number: '', logo: 'logo6', name: 'name6', label: '+' },
+      { number: '', logo: 'logo7', name: 'name7', label: '+' },
+      { number: '', logo: 'logo8', name: 'name8', label: '+' },
+      { number: '', logo: 'logo9', name: 'name9', label: '+' },
+      { number: '', logo: 'logo10', name: 'name10', label: '+' },
     ],
     arr2: [],
   }
@@ -26,13 +26,29 @@ class Subscriptions extends Component {
     const newState = update(this.state, {
         arr2: {
             $push: [
-              { 'logo': logo, 'name': name, 'label': '-' }
+              { 'number': number, 'logo': logo, 'name': name, 'label': '-' }
             ]
         },
     });
 
     this.setState(newState);
   }
+
+  deleteContant = (number) => {
+    const { arr2 } = this.state;
+    this.setState({
+      arr2: arr2.filter(info => info.number != number)
+    })
+  }
+
+  /*
+  handleRemove = (id) => {
+    const { information } = this.state;
+    this.setState({
+      information: information.filter(info => info.id !== id)
+    })
+  }
+  */
 
   render() {
     return (
@@ -53,10 +69,10 @@ class Subscriptions extends Component {
               return (
                 <SubsApp key={i} onInsert={this.insertContact.bind(this)} subsAppInfo={
                   {
+                    number: i,
                     logo: content.logo,
                     name: content.name,
                     label: content.label,
-                    number: i,
                   }
                 }/>
               )
@@ -79,12 +95,12 @@ class Subscriptions extends Component {
 
             {this.state.arr2.map((content, i) => {
               return (
-                <SubsApp key={i} subsAppInfo={
+                <SubsApp key={i} onDelete={this.deleteContant.bind(this)} subsAppInfo={
                   {
+                    number: content.number,
                     logo: content.logo,
                     name: content.name,
-                    label: content.label,
-                    number: i,
+                    label: '-',
                   }
                 }/>
               )
