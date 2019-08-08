@@ -40,15 +40,6 @@ class Subscriptions extends Component {
     })
   }
 
-  /*
-  handleRemove = (id) => {
-    const { information } = this.state;
-    this.setState({
-      information: information.filter(info => info.id !== id)
-    })
-  }
-  */
-
   render() {
     return (
       <>
