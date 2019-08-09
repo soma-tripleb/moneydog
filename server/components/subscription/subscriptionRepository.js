@@ -8,7 +8,7 @@ const getSubscriptionList = () => {
 };
 
 const getSubscriptionByName = (name) => {
-  return Subscription.find({ username: {$regex : "^" + name}}, (err, subscriptions) => {
+  return Subscription.find({ name: {$regex : "^" + name}}, (err, subscriptions) => {
     if (err) throw err;
     console.log('result : ',subscriptions);
   })
