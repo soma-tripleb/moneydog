@@ -1,11 +1,26 @@
 import React, {Component} from 'react';
-import {PageHeader, Button, Statistic, Row, Col, Card} from 'antd';
+import {PageHeader, Tag, Tabs, Button, Statistic, Row, Col, Card} from 'antd';
 
+const {TabPane} = Tabs;
 
 class Categories extends Component {
 
+  state = {
+    userSubscribeeData : [
+      {name: 'melon', price:'6500', Dday:"17"},
+      {name: 'netflex', price:'9800', Dday:"28"},
+      {name: 'watch', price:'5600', Dday:"5"},
+    ]
+  };
+
 
   render() {
+
+    //TODO :: ajax 로 data를 받아와서 처음에 null 값 error 가뜸 이곳에 스피너 같은거 넢어 주어야함
+    if(this.props.data == null ){
+      return <></>
+    }
+
     return (
         <div>
           {/*  구독 중인 서바스*/}
@@ -23,35 +38,25 @@ class Categories extends Component {
           <br/>
 
           <div>
-            <Card type="inner" title="Melon" extra={<a href="#">More</a>}>
-              <div className="extraContent">
-                <Row>
-                  <Col span={12}>
-                    <Statistic title="D-Day" value="D-17"/>
-                  </Col>
-                  <Col span={12}>
-                    <Statistic title="Price" prefix="₩" value={6500}/>
-                  </Col>
-                </Row>
-              </div>
-            </Card>
-            <Card
-                style={{marginTop: 16}}
-                type="inner"
-                title="NetFlix"
-                extra={<a href="#">More</a>}
-            >
-              <div className="extraContent">
-                <Row>
-                  <Col span={12}>
-                    <Statistic title="D-Day" value="D-3"/>
-                  </Col>
-                  <Col span={12}>
-                    <Statistic title="Price" prefix="₩" value={9500}/>
-                  </Col>
-                </Row>
-              </div>
-            </Card>
+
+            {this.props.data.map((data,index)=>{
+              return (
+                  <Card key={index} type="inner" title={data.serviceName} extra={<a href="#">More</a>}>
+                    <div className="extraContent">
+                      <Row>
+                        <Col span={12}>
+                          <Statistic title="D-Day" value={data.paymentDay}/>
+                        </Col>
+                        <Col span={12}>
+                          <Statistic title="Price" prefix="₩" value={data.price}/>
+                        </Col>
+                      </Row>
+                    </div>
+                  </Card>
+              )
+            })}
+
+
           </div>
           <br/>
 

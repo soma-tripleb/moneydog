@@ -1,0 +1,18 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+src/main/.DS_Store
+src/main/resources/application.properties
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+bin
+.classpath
+.project
+.settings
