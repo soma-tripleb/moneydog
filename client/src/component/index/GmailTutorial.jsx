@@ -15,12 +15,10 @@ class GmailTutorial extends Component {
                   자신의 Mail을 이용해 구독 정보를 조회 해보세요.
                 </h2>
 
-                <p className="lead">
-                  <form className="form-inline" role="form">
-                    <input type="text" className="form-control" placeholder="Mail ID input"/>
-                    <button type="submit">검색하기</button>
-                  </form>
-                </p>
+                <form className="form-inline" role="form">
+                  <input type="text" className="form-control" placeholder="Mail ID input"/>
+                  <button type="submit">검색하기</button>
+                </form>
 
               </div>
               <div className="col-md-5">

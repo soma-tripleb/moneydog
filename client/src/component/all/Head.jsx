@@ -17,16 +17,15 @@ class Head extends Component {
             <ul className="navbar-nav mr-auto">
 
               <li className="nav-item active">
-                <a className="nav-link" href="#"><Link to="/">Home</Link> <span
-                  className="sr-only">(current)</span></a>
+                <Link to="/" className="nav-link">Home</Link>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href="#"><Link to="/report">Report</Link></a>
+               <Link to="/report" className="nav-link">Report</Link>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href="#"><Link to="/dashboard">Dashboard</Link></a>
+                <Link to="/dashboard" className="nav-link">Dashboard</Link>
               </li>
 
             </ul>
@@ -39,9 +38,9 @@ class Head extends Component {
                 </a>
 
                 <div className="dropdown-menu" aria-labelledby="dropdown01">
-                  <a className="dropdown-item" href="#"><Link to="/user/subscriptions">subscriptions</Link></a>
-                  <a className="dropdown-item" href="#">sign-in</a>
-                  <a className="dropdown-item" href="#"><Link to="/signup">sign-up</Link></a>
+                  <Link to="/user/subscriptions" className="dropdown-item">subscriptions</Link>
+                  <Link to="" className="dropdown-item">sign-in</Link>
+                  <Link to="/signup" className="dropdown-item">sign-up</Link>
                 </div>
               </li>
             </ul>
