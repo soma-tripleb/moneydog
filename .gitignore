@@ -24,7 +24,6 @@ yarn-error.log*
 lerna-debug.log*
 
 # Envfile
-
 .env
 credentials.json
 token.json

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import Calendar from '../component/dashboard/Calendar';
 import Categories from '../component/dashboard/Categories';
@@ -27,29 +27,14 @@ class DashBoard extends Component {
   render() {
     console.log(this.state.data);
     return (
-        <>
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6">
-                <h2>Calendar</h2>
-                <Calendar/>
-              </div>
-              <div className="col-md-6">
-
-                <Categories data={this.state.data}/>
-
-              </div>
-            </div>
-
-            <hr/>
-
-              <footer>
-                <p>DashBoard</p>
-              </footer>
-          </div>
-        </>
+      <>
+        <Content>
+          <Calendar />
+          <Categories />
+        </Content>
+      </>
     );
   }
 }
 
-export default DashBoard;
+export default Dashboard;

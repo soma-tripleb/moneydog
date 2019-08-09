@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {PageHeader, Button, Statistic, Row, Col, Card} from 'antd';
+import {PageHeader, Tag, Tabs, Button, Statistic, Row, Col, Card} from 'antd';
 
+const {TabPane} = Tabs;
 
 class Categories extends Component {
 
