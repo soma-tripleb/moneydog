@@ -1,10 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const router = require('express').Router();
 
 /* GET home page. */
-router.get('/', (req, res, next) => {
-  // res.render('index', { title: 'Expresszz' });
-  res.json({name:"melon"});
+router.get('/', (req, res) => {
+  res.json({name: 'melon'});
 });
 
 module.exports = router;

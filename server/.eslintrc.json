@@ -1,0 +1,25 @@
+{
+    "extends": "eslint-config-google",
+    "parser": "babel-eslint",
+    "rules": {
+        "indent": [
+            "error",
+            2
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "new-cap": "off",
+        "max-len": "off"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true,
+        "mocha": true
+    }
+}

@@ -5,7 +5,7 @@ const SubscriptionSchema = mongoose.Schema({
   name: String,
   date: String,
   duration: String,
-  renewal: String
+  renewal: String,
 });
 
 SubscriptionSchema.method({});
