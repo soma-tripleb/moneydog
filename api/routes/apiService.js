@@ -4,8 +4,8 @@ const {google} = require('googleapis');
 const path = require('path');
 
 const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
-const TOKEN_PATH = path.resolve(__dirname, './env/token.json');
-const CREDENTIALS_PATH = path.resolve(__dirname, './env/credentials.json');
+const TOKEN_PATH = path.resolve(__dirname, '../env/token.json');
+const CREDENTIALS_PATH = path.resolve(__dirname, '../env/credentials.json');
 const TEST_USERID = 'jimmyjaeyeon@gmail.com';
 
 fs.readFile(CREDENTIALS_PATH, (err, content) => {
@@ -61,11 +61,12 @@ function getList(auth) {
 }
 
 function getMessage(auth, id) {
+  // id = 16c3b300da121d9c
   console.log('called printMessage method');
   const gmail = google.gmail({version: 'v1', auth});
   return new Promise((resolve, reject) => {
     gmail.users.messages.get({auth: auth, userId: TEST_USERID, id: id,}, (err, res) => {
-      err ? reject(err) : resolve(base64ToUtf8(res.data.payload.parts[0].body.data));
+      err ? reject(err) : resolve(base64ToUtf8(res.data.payload.parts[1].body.data));
     });
   });
 }
