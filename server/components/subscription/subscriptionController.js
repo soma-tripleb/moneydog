@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     .catch((err) => {
       console.log('error 발생');
       res.send(err);
-  })
+    });
 });
 
 router.get('/:name', (req, res) => {
@@ -22,6 +22,6 @@ router.get('/:name', (req, res) => {
     })
     .catch((err) => {
       res.send(err);
-    })
+    });
 });
 module.exports = router;

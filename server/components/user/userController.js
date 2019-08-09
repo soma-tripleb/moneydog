@@ -14,16 +14,15 @@ router.get('/create', (req, res) => {
     .catch((e) => {
       console.log('에러발생');
       res.send(e);
-    })
+    });
 });
 
 router.get('/', (req, res) => {
   console.log('get list호출');
   UserService.getUserList()
     .then((users) => {
-    console.log('controller users : ', users);
-    res.send(users);
-  })
+      res.send(users);
+    })
     .catch((e) => {
       res.send(e);
     });
@@ -32,7 +31,5 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   res.send(UserService.getUserById(req.params.id));
 });
-
-
 
 module.exports = router;

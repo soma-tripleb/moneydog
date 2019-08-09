@@ -14,8 +14,7 @@ const getUserById = (params) => {
 }
 
 const createUser = () => {
-  let user = {username : 'jimmy', password: '1234', content: 'helloworld'};
-  return User.create(user);
+  return User.create({username: 'jimmy', password: '1234', content: 'helloworld'});
 }
 
 module.exports = {
