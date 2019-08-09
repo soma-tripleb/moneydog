@@ -8,7 +8,12 @@ const getUserList = () => {
   return UserRepository.getUserList();
 }
 
+const createUser = () => {
+  return UserRepository.createUser();
+}
+
 module.exports = {
   getUserById: getUserById,
   getUserList: getUserList,
+  createUser: createUser,
 }
