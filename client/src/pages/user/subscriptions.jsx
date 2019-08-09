@@ -23,11 +23,11 @@ class Subscriptions extends Component {
 
   insertContact = (number, logo, name) => {
     const newState = update(this.state, {
-        arr2: {
-            $push: [
-              { 'number': number, 'logo': logo, 'name': name, 'label': '-' }
-            ]
-        },
+      arr2: {
+        $push: [
+          { 'number': number, 'logo': logo, 'name': name, 'label': '-' }
+        ]
+      },
     });
 
     this.setState(newState);
@@ -55,18 +55,18 @@ class Subscriptions extends Component {
 
             {this.state.arr.map(
               (content, i) => {
-              return (
-                <SubsApp key={i} onInsert={this.insertContact.bind(this)} subsAppInfo={
-                  {
-                    number: i,
-                    logo: content.logo,
-                    name: content.name,
-                    label: content.label,
-                  }
-                }/>
-              )
-            })}
-            
+                return (
+                  <SubsApp key={i} onInsert={this.insertContact.bind(this)} subsAppInfo={
+                    {
+                      number: i,
+                      logo: content.logo,
+                      name: content.name,
+                      label: content.label,
+                    }
+                  } />
+                )
+              })}
+
           </div>
 
           {/* 가운데 공간 */}
@@ -91,12 +91,12 @@ class Subscriptions extends Component {
                     name: content.name,
                     label: '-',
                   }
-                }/>
+                } />
               )
             })}
           </div>
         </div>
-        </>
+      </>
     );
   }
 }

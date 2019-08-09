@@ -9,7 +9,6 @@ class Foot extends Component {
         <>
           <div className="m-t-3"></div>
           <footer className="mainfooter" role="contentinfo">
-
             <div className="footer-middle">
               <div className="container">
                 <div className="row">
@@ -50,7 +49,6 @@ class Foot extends Component {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
             <div className="footer-bottom">

@@ -1,21 +1,21 @@
-import React, {Component} from 'react';
-import { Layout, Breadcrumb } from 'antd';
+import React, { Component } from 'react';
+import { Layout } from 'antd';
 
 import Calendar from '../component/dashboard/Calendar';
 import Categories from '../component/dashboard/Categories';
 
 const { Content } = Layout;
 
-class Dashboard extends Component {
+class DashBoard extends Component {
 
   render() {
     return (
-        <>
-            <Content>
-              <Calendar/>
-              <Categories/>
-            </Content>
-        </>
+      <>
+        <Content>
+          <Calendar />
+          <Categories />
+        </Content>
+      </>
     );
   }
 }

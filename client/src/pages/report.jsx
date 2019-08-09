@@ -14,7 +14,7 @@ class Report extends Component {
         <h1>{this.state.title}</h1>
         <div className="report-content">
           <h2>Report Content</h2>
-          <ReportProgress/>
+          <ReportProgress />
         </div>
       </>
     );

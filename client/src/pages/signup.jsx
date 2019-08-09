@@ -29,19 +29,16 @@ class SignUp extends Component {
     return (
       <>
         <h1>Sign-Up</h1>
-<<<<<<< HEAD
+        <div>
           <div>
-            <div>
-              <GoogleLogin 
+            <GoogleLogin
               clientId="532345922072-50gar7lh5ca5rvepjs7iisa6lu28d741.apps.googleusercontent.com"
               scope="https://mail.google.com/ https://www.googleapis.com/auth/gmail.readonly"
               onSuccess={this.responseGoogle}
               buttonText="Login with Google"
-              />
-            </div>
+            />
           </div>
-=======
->>>>>>> #52 App(Content) 부분 height 100% 적용
+        </div>
       </>
     );
   }

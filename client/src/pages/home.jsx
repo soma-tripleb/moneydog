@@ -9,9 +9,25 @@ class Home extends Component {
 
   render() {
     return (
-      <>
-        <h1>{this.state.text}</h1>
-      </>
+        <>
+          <div>
+
+            <Carousel/>
+
+            <hr className="featurette-divider"/>
+
+            <IndexInfo/>
+
+            <hr className="featurette-divider"/>
+
+            <GmailTutorial/>
+
+            <hr className="featurette-divider"/>
+
+            <IndexSignUp/>
+
+          </div>
+        </>
     );
   }
 }
