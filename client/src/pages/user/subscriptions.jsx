@@ -6,29 +6,42 @@ import SubsApp from './subsApp';
 import '../../static/style/page/subscriptions.css';
 
 class Subscriptions extends Component {
-
   state = {
-    logo: 'parent-logo',
-    title: 'parent-title',
-    arr: [0,1,2,3,4,5,6,7,8,9],
+    arr: [
+      { number: '', logo: 'logo1', name: 'name1', label: '+' },
+      { number: '', logo: 'logo2', name: 'name2', label: '+' },
+      { number: '', logo: 'logo3', name: 'name3', label: '+' },
+      { number: '', logo: 'logo4', name: 'name4', label: '+' },
+      { number: '', logo: 'logo5', name: 'name5', label: '+' },
+      { number: '', logo: 'logo6', name: 'name6', label: '+' },
+      { number: '', logo: 'logo7', name: 'name7', label: '+' },
+      { number: '', logo: 'logo8', name: 'name8', label: '+' },
+      { number: '', logo: 'logo9', name: 'name9', label: '+' },
+      { number: '', logo: 'logo10', name: 'name10', label: '+' },
+    ],
     arr2: [],
   }
 
-  insertContact = () => {
+  insertContact = (number, logo, name) => {
     const newState = update(this.state, {
         arr2: {
             $push: [
-              0
+              { 'number': number, 'logo': logo, 'name': name, 'label': '-' }
             ]
-        }
+        },
     });
 
     this.setState(newState);
   }
 
-  render() {
-    const { logo, title, count } = this.state;
+  deleteContant = (number) => {
+    const { arr2 } = this.state;
+    this.setState({
+      arr2: arr2.filter(info => info.number != number)
+    })
+  }
 
+  render() {
     return (
       <>
         <h1>Subscriptions</h1>
@@ -47,9 +60,10 @@ class Subscriptions extends Component {
               return (
                 <SubsApp key={i} onInsert={this.insertContact.bind(this)} subsAppInfo={
                   {
-                    logo: logo,
-                    title: title,
-                    number: content,
+                    number: i,
+                    logo: content.logo,
+                    name: content.name,
+                    label: content.label,
                   }
                 }/>
               )
@@ -72,11 +86,12 @@ class Subscriptions extends Component {
 
             {this.state.arr2.map((content, i) => {
               return (
-                <SubsApp key={i} subsAppInfo={
+                <SubsApp key={i} onDelete={this.deleteContant.bind(this)} subsAppInfo={
                   {
-                    logo: logo,
-                    title: title,
-                    number: content,
+                    number: content.number,
+                    logo: content.logo,
+                    name: content.name,
+                    label: '-',
                   }
                 }/>
               )
