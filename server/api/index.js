@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', (req, res, next) => {
   // res.render('index', { title: 'Expresszz' });
-  res.send('Hello World!\n');
+  res.json({name:"melon"});
 });
 
 module.exports = router;
