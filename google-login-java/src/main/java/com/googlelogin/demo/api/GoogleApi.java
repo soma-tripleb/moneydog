@@ -1,13 +1,26 @@
 package com.googlelogin.demo.api;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.repackaged.org.apache.commons.codec.binary.Base64;
+import com.google.api.services.gmail.Gmail;
+import com.google.api.services.gmail.model.ListMessagesResponse;
+import com.google.api.services.gmail.model.Message;
+import com.google.api.services.gmail.model.MessagePart;
+import com.google.api.services.gmail.model.MessagePartBody;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class GoogleApi {
@@ -49,5 +62,97 @@ public class GoogleApi {
     }
 
     return null;
+  }
+
+  public Gmail getGmailService(String accessToken) {
+    GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
+
+    Gmail service = new Gmail.Builder(new NetHttpTransport(),
+            JacksonFactory.getDefaultInstance(),credential)
+            .setApplicationName(GOOGLE_API_CONSOLE_APPLICATION_NAME)
+            .build();
+
+    return service;
+  }
+
+  public List<Message> listMessagesMatchingQuery(Gmail service, String userId, String query) {
+
+    List<Message> messages = new ArrayList<>();
+
+    try {
+      ListMessagesResponse response = service.users().messages().list(userId).setQ(query).execute();
+
+      while (response.getMessages() != null) {
+        messages.addAll(response.getMessages());
+
+        if (response.getNextPageToken() != null) {
+          String pageToken = response.getNextPageToken();
+          response = service.users().messages().list(userId).setQ(query).setPageToken(pageToken).execute();
+        } else {
+          break;
+        }
+      }
+
+    } catch (IOException e) {
+      //TODO, listMessagesMatchingQuery() - IOException
+      e.printStackTrace();
+    }
+
+    return messages;
+  }
+
+  public String getSnippet(Gmail service, String userId, String messageId) {
+
+    String snippet = null;
+
+    try {
+      Message message = service.users().messages().get(userId, messageId).execute();
+
+      snippet = message.getSnippet();
+
+    } catch(IOException e) {
+      //TODO, getSnippet - IOException
+      e.printStackTrace();
+    }
+
+    return snippet;
+  }
+
+  public String getMessageHtml(Gmail service, String userId, String messageId) {
+
+    Map<String, String> mailBodyContents = new HashMap<>();
+
+//    String textBody = null;
+    String htmlBody = null;
+
+    try {
+      Message message = service.users().messages().get(userId, messageId).execute();
+
+//      MessagePart messagePart1 = message.getPayload().getParts().get(0);
+      MessagePart messagePart2 = message.getPayload().getParts().get(1);
+
+//      MessagePartBody messagePartBody1 = messagePart1.getBody();
+      MessagePartBody messagePartBody2 = messagePart2.getBody();
+
+//      textBody = messagePartBody1.getData();
+      htmlBody = messagePartBody2.getData();
+
+    } catch (IOException e) {
+      //TODO, getMessage() - IOException
+      e.printStackTrace();
+    }
+
+    /* decoding */
+    Base64 base64Url = new Base64(true);
+//    byte[] decodedText = base64Url.decodeBase64(textBody);
+    byte[] decodedHtml = base64Url.decodeBase64(htmlBody);
+
+    /* byte to String */
+//    mailBodyContents.put("textBody", new String(decodedText));
+    mailBodyContents.put("htmlBody", new String(decodedHtml));
+
+    String html = new String(decodedHtml);
+
+    return html;
   }
 }
