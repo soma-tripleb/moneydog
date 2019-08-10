@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  name: 'moneydog-client',
+  name: 'moneydog-root',
   mode: 'development',
   devtool: 'eval',
   resolve: {
@@ -14,7 +14,7 @@ module.exports = {
   },
 
   entry: {
-    app: ['./src/index'],
+    app: ['./src/home'],
   },
 
   module: {
@@ -68,6 +68,6 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'app.jsx'
+    filename: 'router.jsx.jsx'
   }
 };

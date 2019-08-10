@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { Home, Report, Dashboard, Info, SignUp } from '../pages/index';  // page
-import { Subscriptions } from '../pages/user/index';  // user page
+import { Home, Report, Dashboard, Info, SignUp } from '../pages';  // page
+import { Subscriptions } from '../pages/user';  // user page
 
-class App extends Component {
+class Router extends Component {
   render() {
     return (
         <>
@@ -24,4 +24,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Router;
