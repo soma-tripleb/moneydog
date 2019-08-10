@@ -1,23 +1,17 @@
 package com.googlelogin.demo.controller;
 
-import com.google.api.services.gmail.Gmail;
-import com.google.api.services.gmail.model.Message;
 import com.googlelogin.demo.api.GoogleApi;
 import com.googlelogin.demo.dao.GoogleUserInfo;
 import com.googlelogin.demo.service.GmailListener;
 
 import com.googlelogin.demo.util.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.Map;
 
 @RestController
 public class DemoController{
-
-  @Value("${gmail.message.list.search.query}")
-  private String GMAIL_MESSAGE_LIST_SEARCH_QUERY;
 
   @Autowired public GmailListener gmailListener;
   @Autowired public GoogleApi googleApi;
@@ -30,12 +24,9 @@ public class DemoController{
 
   @CrossOrigin("*")
   @PostMapping("/tokensignin")
-  @ResponseBody
-  public Map<String, String> getClientTonken(@RequestBody String jsonData) {
+  public Map<String, String> getClientTonken(@RequestBody String data) {
 
-    GoogleUserInfo googleUserInfo = jsonParser.getUserInfo(jsonData);
-
-    System.out.println(googleUserInfo.toString());
+    GoogleUserInfo googleUserInfo = jsonParser.getUserInfo(data);
 
     return gmailListener.gMailBodyContents(googleUserInfo);
   }
