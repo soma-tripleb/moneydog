@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --exec babel-node ./bin/www"
+    "start": "nodemon --exec babel-node ./bin/www",
+    "test": "mocha"
   },
   "dependencies": {
     "chai": "^4.2.0",
@@ -17,7 +18,9 @@
     "mongoose-auto-increment": "^5.0.1",
     "morgan": "~1.9.1",
     "pug": "^2.0.0-beta11",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
