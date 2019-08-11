@@ -2,6 +2,7 @@ package com.googlelogin.demo.api;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+import com.google.api.client.googleapis.auth.oauth2.GoogleRefreshTokenRequest;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -31,28 +32,58 @@ public class GoogleApi {
   private String GOOGLE_API_CONSOLE_APPLICATION_NAME;
 
   @Value("${google.api.console.client.id}")
-  private String GOOGLE_API_CONSOLE_CLIENT_ID;
+  private String CLIENT_ID;
 
   @Value("${google.api.console.client.password}")
-  private String GOOGLE_API_CONSOLE_CLIENT_PASSWORD;
+  private String CLIENT_PASSWORD;
 
   @Value("${google.api.console.redirect.url}")
   private String GOOGLE_API_CONSOLE_REDIRECT_URL;
+
+  @Value("${google.api.console.refresh.token}")
+  private String REFRESH_TOKEN;
 
   /**
    * Client Id Token 을 이용해서 사용자의 Google 서버에 접속할 수 있는 Access Token 발행.
    * @return
    */
-  public GoogleTokenResponse googleTokenResponse (String token) {
+  public GoogleTokenResponse tokenResponseWithTokenId (String tokenId) {
 
     try {
-      GoogleTokenResponse tokenResponse = new GoogleAuthorizationCodeTokenRequest(new NetHttpTransport(), JacksonFactory.getDefaultInstance(),
+      GoogleTokenResponse tokenResponse = new GoogleAuthorizationCodeTokenRequest(
+              new NetHttpTransport(),
+              JacksonFactory.getDefaultInstance(),
               GOOGLE_API_SERVER_URL,
-              GOOGLE_API_CONSOLE_CLIENT_ID,
-              GOOGLE_API_CONSOLE_CLIENT_PASSWORD,
-              token,
+              CLIENT_ID,
+              CLIENT_PASSWORD,
+              tokenId,
               GOOGLE_API_CONSOLE_REDIRECT_URL
               ).execute();
+
+      return tokenResponse;
+
+    } catch (IOException e) {
+      //TODO, exception
+      e.printStackTrace();
+    }
+
+    return null;
+  }
+
+  /**
+   * 'Refresh Token' 을 이용한 인증
+   * @return
+   */
+  public GoogleTokenResponse tokenResponseWithRefreshToken() {
+
+    try {
+      GoogleTokenResponse tokenResponse = new GoogleRefreshTokenRequest(
+              new NetHttpTransport(),
+              JacksonFactory.getDefaultInstance(),
+              REFRESH_TOKEN,
+              CLIENT_ID,
+              CLIENT_PASSWORD
+      ).execute();
 
       return tokenResponse;
 
