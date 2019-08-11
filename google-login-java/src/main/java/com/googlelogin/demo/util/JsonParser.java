@@ -1,5 +1,6 @@
 package com.googlelogin.demo.util;
 
+import com.googlelogin.demo.dao.GoogleUserInfo;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -11,24 +12,24 @@ import java.util.Map;
 @Component
 public class JsonParser {
 
-  public Map<String, String> getUserInfo(String jsonData) {
-    Map<String, String> userInfoMap = new HashMap<>();
+  public GoogleUserInfo getUserInfo(String jsonData) {
+
+    GoogleUserInfo googleUserInfo = new GoogleUserInfo();
 
     JSONParser jsonParser = new JSONParser();
 
     try {
       JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonData);
-      JSONObject dataObjetc = (JSONObject) jsonObject.get("data");
+      JSONObject dataObject = (JSONObject) jsonObject.get("data");
 
-      userInfoMap.put("accessToken", dataObjetc.get("accessToken").toString());
-      userInfoMap.put("tokenId", dataObjetc.get("tokenId").toString());
-      userInfoMap.put("gmail", dataObjetc.get("gmail").toString());
-
+      googleUserInfo.setAccessToken(dataObject.get("accessToken").toString());
+      googleUserInfo.setTokenId(dataObject.get("tokenId").toString());
+      googleUserInfo.setGmail(dataObject.get("gmail").toString());
     } catch (ParseException e) {
       //TODO
       e.printStackTrace();
     }
 
-    return userInfoMap;
+    return googleUserInfo;
   }
 }
