@@ -8,12 +8,10 @@ const getGoolgeInfo = (response) => {
   const $ = cheerio.load(dom);
   service = {};
   service.email = getEmailId(response);
-  // service.name = $('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(1) > span > span').text().trim();
-  // service.date = $('#gamma > div > div:nth-child(2) > div > div:nth-child(5)').text().split('주문 날짜:')[1].trim();
-  // service.renewal = $('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(3) > td:nth-child(1)').text().split(':')[1].trim();
   service.name = nameReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(1) > span > span').text().trim());
   service.date = dateReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(5)').text());
   service.renewal = durationReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(3) > td:nth-child(1)').text());
+  service.periodMonth = calPeriod(service.renewal, service.date);
   console.log(service);
   return service;
 }
@@ -50,6 +48,11 @@ const durationReg = (duration) => {
   const durationReg = /\d{4}\.\s\d{1,2}\.\s\d{1,2}/g;
   return durationReg.exec(duration)[0];
 }
+
+const calPeriod = (date, renewal) => {
+  return Math.floor(Math.abs(new Date(renewal) - new Date(date)) / (1000*60*60*24*30));
+}
+
 
 module.exports = {
   getGoolgeInfo: getGoolgeInfo,
