@@ -1,15 +1,18 @@
 package com.googlelogin.demo.service;
 
+import com.googlelogin.demo.dao.JsonData;
 import com.googlelogin.demo.dao.GoogleUserInfo;
+import com.googlelogin.demo.dao.Content;
 
-import java.util.List;
 import java.util.Map;
 
 public interface GmailListener {
 
   Map<String, String> gMailBodyContents (GoogleUserInfo googleUserInfo);
 
-  List<String> getMessagesId (String query);
+  JsonData<Content> getMessagesId(String query);
 
-  List<String> getMessagesSnippet(String query);
+  JsonData<Content> getMessagesSnippet(String query);
+
+  JsonData<Content> getMessagesBody(String query);
 }

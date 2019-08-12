@@ -1,16 +1,10 @@
 package com.googlelogin.demo.controller;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
-import com.google.api.client.googleapis.auth.oauth2.GoogleRefreshTokenRequest;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
-import com.google.api.client.http.HttpHeaders;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.gmail.Gmail;
-import com.google.api.services.gmail.model.Message;
 import com.googlelogin.demo.api.GoogleApi;
+import com.googlelogin.demo.dao.JsonData;
 import com.googlelogin.demo.dao.GoogleUserInfo;
+import com.googlelogin.demo.dao.Content;
 import com.googlelogin.demo.service.GmailListener;
 
 import com.googlelogin.demo.util.JsonParser;
@@ -22,10 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import java.math.BigInteger;
-import java.security.SecureRandom;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RestController
 public class DemoController{
@@ -111,27 +102,27 @@ public class DemoController{
     return tokenResponse.getAccessToken();
   }
 
-  /**
-   * dev - '사용자를 특정해서 탐색'
-   * service - '/messages/[user-id]/[query]
-   * @param query
-   * @return
-   */
-  @GetMapping("/messages/{query}")
-  public List<String> getMessagesId(@PathVariable String query) {
-    return gmailListener.getMessagesId(query);
-  }
-
-  @GetMapping("/messages/snippet/{query}")
-  public List<String> getMessagesSnippet(@PathVariable String query) {
-    return gmailListener.getMessagesSnippet(query);
-  }
-
   @CrossOrigin("*")
   @PostMapping("tokensignin")
   public Map<String, String> getClientTonken(@RequestBody String jsonData) {
     GoogleUserInfo googleUserInfo = jsonParser.getUserInfo(jsonData);
 
     return gmailListener.gMailBodyContents(googleUserInfo);
+  }
+
+  /* 사용자 인증 처리 되면 uri 에 사용자 아이디 추가 */
+  @GetMapping("/messages/id/{query}")
+  public JsonData<Content> getMessagesId(@PathVariable String query) {
+    return gmailListener.getMessagesId(query);
+  }
+
+  @GetMapping("/messages/snippet/{query}")
+  public JsonData<Content> getMessagesSnippet(@PathVariable String query) {
+    return gmailListener.getMessagesSnippet(query);
+  }
+
+  @GetMapping("/messages/content/{query}")
+  public JsonData<Content> getMessagesBody(@PathVariable String query) {
+    return gmailListener.getMessagesBody(query);
   }
 }

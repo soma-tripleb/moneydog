@@ -8,7 +8,9 @@ import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.Message;
 
 import com.googlelogin.demo.api.GoogleApi;
+import com.googlelogin.demo.dao.JsonData;
 import com.googlelogin.demo.dao.GoogleUserInfo;
+import com.googlelogin.demo.dao.Content;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service("gmailListener")
 public class GmailListenerImpl implements GmailListener {
@@ -56,7 +57,7 @@ public class GmailListenerImpl implements GmailListener {
   }
 
   @Override
-  public List<String> getMessagesId(String query) {
+  public JsonData<Content> getMessagesId(String query) {
 
     GoogleTokenResponse tokenResponse = googleApi.tokenResponseWithRefreshToken();
 
@@ -72,12 +73,22 @@ public class GmailListenerImpl implements GmailListener {
             .build();
 
     List<Message> messageIds = googleApi.listMessagesMatchingQuery(service, USER_GMAIL, query);
+    int size = messageIds.size();
 
-    return messageIds.stream().map(Message::getId).collect(Collectors.toList());
+//    messageIds.stream().map(Message::getId).collect(Collectors.toList());
+    List<Content> ids = new LinkedList<>();
+
+    for(int i = 0; i < size; i++) {
+      Message m = messageIds.get(i);
+
+      ids.add(new Content(i, m.getId()));
+    }
+
+    return new JsonData<Content>("messageId", size, ids);
   }
 
   @Override
-  public List<String> getMessagesSnippet(String query) {
+  public JsonData<Content> getMessagesSnippet(String query) {
 
     GoogleTokenResponse tokenResponse = googleApi.tokenResponseWithRefreshToken();
 
@@ -93,17 +104,53 @@ public class GmailListenerImpl implements GmailListener {
             .build();
 
     List<Message> messageIds = googleApi.listMessagesMatchingQuery(service, USER_GMAIL, query);
+    int size = messageIds.size();
 
-    List<String> result = new LinkedList<>();
+    List<Content> snippets = new LinkedList<>();
 
-    for(Message m : messageIds) {
+
+    for(int i = 0; i < size; i++) {
+      Message m = messageIds.get(i);
+
       try {
-        result.add(service.users().messages().get(USER_GMAIL, m.getId()).execute().getSnippet());
+        snippets.add(new Content(i, service.users().messages().get(USER_GMAIL, m.getId()).execute().getSnippet()));
       } catch(IOException e) {
         e.printStackTrace();
       }
     }
 
+    JsonData result = new JsonData("snippet", size, snippets);
+
     return result;
+  }
+
+  @Override
+  public JsonData<Content> getMessagesBody(String query) {
+
+    GoogleTokenResponse tokenResponse = googleApi.tokenResponseWithRefreshToken();
+
+    String accessToken = tokenResponse.getAccessToken();
+
+    GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
+
+    Gmail service = new Gmail.Builder(
+            new NetHttpTransport(),
+            JacksonFactory.getDefaultInstance(),
+            credential
+    ).setApplicationName(APPLICATION_NAME)
+            .build();
+
+    List<Message> messageIds = googleApi.listMessagesMatchingQuery(service, USER_GMAIL, query);
+    int size = messageIds.size();
+
+    List<Content> bodies = new LinkedList<>();
+
+    for(int i = 0; i < size; i++) {
+      Message m = messageIds.get(i);
+
+      bodies.add(new Content(i, googleApi.getMessageHtml(service, USER_GMAIL, m.getId())));
+    }
+
+    return new JsonData<Content>("body", size, bodies);
   }
 }
