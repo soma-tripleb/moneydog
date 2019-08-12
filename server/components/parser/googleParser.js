@@ -10,9 +10,8 @@ const getGoolgeInfo = (response) => {
   service.email = getEmailId(response);
   service.name = nameReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(1) > span > span').text().trim());
   service.date = dateReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(5)').text());
-  service.renewal = durationReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(3) > td:nth-child(1)').text());
+  service.renewal = renealReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(3) > td:nth-child(1)').text());
   service.periodMonth = calPeriod(service.renewal, service.date);
-  console.log(service);
   return service;
 }
 
@@ -44,9 +43,9 @@ const nameReg = (name) => {
   return nameReg.exec(name)[1];
 }
 
-const durationReg = (duration) => {
-  const durationReg = /\d{4}\.\s\d{1,2}\.\s\d{1,2}/g;
-  return durationReg.exec(duration)[0];
+const renealReg = (renewal) => {
+  const renewalReg = /\d{4}\.\s\d{1,2}\.\s\d{1,2}/g;
+  return renewalReg.exec(renewal)[0];
 }
 
 const calPeriod = (date, renewal) => {
