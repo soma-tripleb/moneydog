@@ -1,9 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   name: 'moneydog-root',
   mode: 'development',
+  node: {fs:'empty'},
   devtool: 'eval',
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -16,6 +18,10 @@ module.exports = {
   entry: {
     app: ['./src/index'],
   },
+
+  plugins: [
+    new Dotenv()
+  ],
 
   module: {
     rules: [

@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import Calendar from './Calendar';
 import Categories from './Categories';
 
-import * as service from '../../services/subscribeInfo';
+import * as service from './subscribeInfo';
 
 import 'babel-polyfill';
 
