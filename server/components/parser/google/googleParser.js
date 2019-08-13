@@ -1,12 +1,12 @@
 const DomParser = require('dom-parser');
 const cheerio = require('cheerio');
-const fs = require('fs');
 
 const getGoolgeInfo = (response) => {
   const jsonObject = stringToJsonObject(base64ToUtf8(response));
   const dom = convertHtml(base64ToUtf8(jsonObject.payload.parts[1].body.data));
   const $ = cheerio.load(dom);
   service = {};
+  service.fromEmail = fromEmailReg(getFromEmail(response));
   service.email = getEmailId(response);
   service.name = nameReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(1) > span > span').text().trim());
   service.date = dateReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(5)').text());
@@ -33,6 +33,10 @@ const getEmailId = (jsonObject) => {
   return stringToJsonObject(base64ToUtf8(jsonObject)).payload.headers[0].value;
 }
 
+const getFromEmail = (response) => {
+  return stringToJsonObject(base64ToUtf8(response)).payload.headers[23].value;
+}
+
 const dateReg = (date) => {
   const dateReg = /\d{4}\.\s\d{1,2}\.\s\d{1,2}/g;
   return dateReg.exec(date)[0];
@@ -48,6 +52,11 @@ const renealReg = (renewal) => {
   return renewalReg.exec(renewal)[0];
 }
 
+const fromEmailReg = (fromEmail) => {
+  const emailReg = /<(.*?)>/;
+  return emailReg.exec(fromEmail)[1];
+}
+
 const calPeriod = (date, renewal) => {
   return Math.floor(Math.abs(new Date(renewal) - new Date(date)) / (1000*60*60*24*30));
 }
@@ -56,6 +65,3 @@ const calPeriod = (date, renewal) => {
 module.exports = {
   getGoolgeInfo: getGoolgeInfo,
 }
-
-const response = fs.readFileSync('./gmail_response.json');
-getGoolgeInfo(response);
