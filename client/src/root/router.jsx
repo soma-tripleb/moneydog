@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { Home, Report, Dashboard, Info, SignUp } from '../pages';  // page
+import { Home, Report, Dashboard, Info, SignUp, SignIn } from '../pages';  // page
 import { Subscriptions } from '../pages/user';  // user page
 
 class Router extends Component {
@@ -16,6 +16,7 @@ class Router extends Component {
               <Route path="/info" component={Info}/>
               {/* user */}
               <Route path="/signup" component={SignUp}/>
+              <Route path="/signin" component={SignIn}/>
               <Route path="/user/subscriptions" component={Subscriptions}/>
             </Switch>
           </div>

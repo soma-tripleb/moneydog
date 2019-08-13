@@ -8,12 +8,18 @@ const getUserList = () => {
   return UserRepository.getUserList();
 };
 
-const createUser = () => {
-  return UserRepository.createUser();
+const createUser = (userInfo) => {
+  return UserRepository.createUser(userInfo);
+};
+
+const getUserByEmail = (email) => {
+  // return UserRepository.getUserByEmail(email);
+  UserRepository.getUserByEmail(email);
 };
 
 module.exports = {
   getUserById: getUserById,
   getUserList: getUserList,
   createUser: createUser,
+  getUserByEmail: getUserByEmail,
 };

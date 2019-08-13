@@ -14,7 +14,7 @@ module.exports = {
   },
 
   entry: {
-    app: ['./src/home'],
+    app: ['./src/index'],
   },
 
   module: {
@@ -68,6 +68,6 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'router.jsx.jsx'
+    filename: 'app.jsx'
   }
 };
