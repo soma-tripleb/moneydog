@@ -1,16 +1,16 @@
 const DomParser = require('dom-parser');
 const cheerio = require('cheerio');
-const fs = require('fs');
 
 const getGoolgeInfo = (response) => {
   const jsonObject = stringToJsonObject(base64ToUtf8(response));
   const dom = convertHtml(base64ToUtf8(jsonObject.payload.parts[1].body.data));
   const $ = cheerio.load(dom);
   service = {};
+  service.fromEmail = fromEmailReg(getFromEmail(response));
   service.email = getEmailId(response);
-  service.name = nameReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(1) > span > span').text().trim());
-  service.date = dateReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(5)').text());
-  service.renewal = renealReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(3) > td:nth-child(1)').text());
+  service.name = convertNameReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(1) > span > span').text().trim());
+  service.date = convertDateReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(5)').text());
+  service.renewal = convertRenewalReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(3) > td:nth-child(1)').text());
   service.periodMonth = calPeriod(service.renewal, service.date);
   return service;
 }
@@ -33,19 +33,28 @@ const getEmailId = (jsonObject) => {
   return stringToJsonObject(base64ToUtf8(jsonObject)).payload.headers[0].value;
 }
 
-const dateReg = (date) => {
+const getFromEmail = (response) => {
+  return stringToJsonObject(base64ToUtf8(response)).payload.headers[23].value;
+}
+
+const convertDateReg = (date) => {
   const dateReg = /\d{4}\.\s\d{1,2}\.\s\d{1,2}/g;
   return dateReg.exec(date)[0];
 }
 
-const nameReg = (name) => {
+const convertNameReg = (name) => {
   const nameReg = /\(([^)]+)\)/;
   return nameReg.exec(name)[1];
 }
 
-const renealReg = (renewal) => {
+const convertRenewalReg = (renewal) => {
   const renewalReg = /\d{4}\.\s\d{1,2}\.\s\d{1,2}/g;
   return renewalReg.exec(renewal)[0];
+}
+
+const fromEmailReg = (fromEmail) => {
+  const emailReg = /<(.*?)>/;
+  return emailReg.exec(fromEmail)[1];
 }
 
 const calPeriod = (date, renewal) => {
@@ -56,6 +65,3 @@ const calPeriod = (date, renewal) => {
 module.exports = {
   getGoolgeInfo: getGoolgeInfo,
 }
-
-const response = fs.readFileSync('./gmail_response.json');
-getGoolgeInfo(response);
