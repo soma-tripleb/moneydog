@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import face1 from '../../static/img/pangju.jpeg';
 
-import '../../static/style/component/index/carosel.css';
+import './carosel.css';
 
 class Carousel extends Component {
 

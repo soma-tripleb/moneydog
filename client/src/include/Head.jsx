@@ -39,7 +39,7 @@ class Head extends Component {
 
                 <div className="dropdown-menu" aria-labelledby="dropdown01">
                   <Link to="/user/subscriptions" className="dropdown-item">subscriptions</Link>
-                  <Link to="" className="dropdown-item">sign-in</Link>
+                  <Link to="/signin" className="dropdown-item">sign-in</Link>
                   <Link to="/signup" className="dropdown-item">sign-up</Link>
                 </div>
               </li>
