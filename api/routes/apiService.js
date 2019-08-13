@@ -12,7 +12,7 @@ const TEST_USERID = 'jimmyjaeyeon@gmail.com';
 const APPLE_EMAIL = 'no_reply@email.apple.com';
 
 fs.readFile(CREDENTIALS_PATH, (err, content) => {
-  if (err) return console.log('Error loading client secret file:', err);
+  if (err) return console.log('Error loading root secret file:', err);
   authorize(JSON.parse(content), getList);
 });
 

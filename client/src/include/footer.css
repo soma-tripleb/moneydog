@@ -1,6 +1,8 @@
 footer {
     color: white;
     margin-top: auto;
+    flex-shrink: 0;
+    bottom: 0px;
 }
 
 footer a {
@@ -64,3 +66,4 @@ footer a:hover {
 .container > .row > .col-xs-12 {
     margin: auto;
 }
+

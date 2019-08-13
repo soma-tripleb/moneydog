@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { ReportProgress } from '../component/report/index';
-import '../static/style/page/report.css';
+import { ReportProgress } from './index';
+import './report.css';
 
 class Report extends Component {
 

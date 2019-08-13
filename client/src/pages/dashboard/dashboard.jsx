@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-import Calendar from '../component/dashboard/Calendar';
-import Categories from '../component/dashboard/Categories';
+import Calendar from './Calendar';
+import Categories from './Categories';
 
-import * as service from '../services/subscribeInfo';
+import * as service from '../../services/subscribeInfo';
 
 import 'babel-polyfill';
 

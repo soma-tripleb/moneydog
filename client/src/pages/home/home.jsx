@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import { Carousel, IndexInfo, GmailTutorial, IndexSignUp} from '../component/index/index';
+import { Carousel, IndexInfo, GmailTutorial, IndexSignUp} from './index';
 
 class Home extends Component {
   state = {

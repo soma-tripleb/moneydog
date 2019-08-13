@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  name: 'moneydog-client',
+  name: 'moneydog-root',
   mode: 'development',
   devtool: 'eval',
   resolve: {

@@ -1,6 +1,6 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 
-import '../../static/style/component/user/subs-app.css';
+import './subs-app.css';
 
 class SubsApp extends Component {
   state = {
