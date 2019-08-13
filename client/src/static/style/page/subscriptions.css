@@ -1,6 +1,6 @@
 /* 공통 */
 .subs-inner-left-container, .subs-inner-right-container {
-  border: 1px black solid;
+  box-shadow: 10px 10px 10px 10px lightgray;
   border-radius: 5px;
 }
 
@@ -10,33 +10,27 @@
 }
 
 #subs-inner-left-element, #subs-inner-right-element {
-  border: 1px black solid;
   border-radius: 5px;
   width: 100%;
-  background-color: #eee;
 }
 
 /* 개별 */
 
 .subs-container {
-  height: 500px;
-  background-color: rgba(255,0,0,0.1);
+  height: 70vh;
   padding: 100px;
 }
 
 .subs-inner-left-container {
   width: 45%;
-  background-color: rgba(0,0,255,0.1);
 }
 
 .subs-inner-center-container {
   width: 10%;
-  background-color: rgba(0,255,1,.1);
 }
 
 .subs-inner-right-container {
   width: 45%;
-  background-color: rgba(0,0,1,.255);
 }
 
 #subs-inner-left-element {

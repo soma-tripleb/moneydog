@@ -45,12 +45,19 @@ class Subscriptions extends Component {
       <>
         <h1>Subscriptions</h1>
         <div className="subs-container">
-          {/* 왼쪽 박스 */}
-          <div className="subs-inner-left-container mh-100 d-inline-block">
-            우리가 DB 에 저장해 놓은 구독 서비스 앱들
 
-            <div className="w-100 p-3" id="subs-inner-left-element">
-              <p>Selecting App</p>
+          <div className="h-20 d-inline-block" style={{width: '45%', textAlign: 'center'}}>
+            <p style={{fontSize: '2rem', fontWeight: 'lighter', marginBottom: '3vh'}}>&lt; 구독 서비스 앱들 &gt;</p>
+          </div>
+          <div className="h-20 d-inline-block" style={{width: '10%'}}></div>
+          <div className="h-20 d-inline-block" style={{width: '45%', textAlign: 'center'}}>
+            <p>&lt; 구독 중인 앱들 &gt;</p>
+          </div>
+          
+          {/* 왼쪽 박스 */}
+          <div className="subs-inner-left-container mh-100 d-inline-block" style={{padding: '0 5px 5px 5px'}}>
+            <div className="w-100 p-3" id="subs-inner-left-element" style={{borderRadius: 0, border: 0}}>
+              <p style={{margin: 0}}><u>Selecting App</u></p>
             </div>
 
             {this.state.arr.map(
@@ -76,7 +83,6 @@ class Subscriptions extends Component {
 
           {/* 오른쪽 박스 */}
           <div className="subs-inner-right-container mh-100 d-inline-block">
-            이메일 파싱을 통해 얻어낸 구독 정보와 사용자가 선택한 구독 정보
 
             <div className="w-100 p-3" id="subs-inner-right-element">
               <p>Seleted App</p>
