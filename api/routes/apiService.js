@@ -51,6 +51,7 @@ async function infos(auth) {
 }
 
 function getInfo(rawHtml) {
+  console.log(convertHtml(rawHtml));
   const $ = cheerio.load(convertHtml(rawHtml));
   service = {};
   service.email = $('body > table:nth-child(4) > tbody > tr > td > div.aapl-desktop-div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td:nth-child(1)').text().split('ID')[1];
