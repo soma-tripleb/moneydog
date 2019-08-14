@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import update from 'react-addons-update';
 
 import SubsApp from './subsApp';
-import './subscriptions.css';
+import '../../static/style/page/subscriptions.css';
 
 class Subscriptions extends Component {
   state = {
