@@ -1,12 +1,17 @@
-/* 공통 */
-.subs-inner-left-container, .subs-inner-right-container {
+/* container */
+#inner-container {
   box-shadow: 10px 10px 10px 10px lightgray;
-  border-radius: 5px;
+  height: 60vh;
+  overflow: auto;
+  width: 100%;
+  font-weight: lighter;
+  font-size: 1vw;
 }
 
-.subs-inner-left-container, .subs-inner-center-container, .subs-inner-right-container {
-  height: 100%;
-  overflow-x: auto;
+#inner-container-title {
+  font-size: 2vw;
+  font-weight: lighter;
+  padding-left: 20px;
 }
 
 #subs-inner-left-element, #subs-inner-right-element {
@@ -14,29 +19,16 @@
   width: 100%;
 }
 
-/* 개별 */
-
-.subs-container {
-  height: 70vh;
-  padding: 100px;
+/* element */
+#inner-element {
+  margin-bottom: 12px;
+  background-color: whitesmoke;
+  box-shadow: 3px 3px 3px 3px lightgray; 
+  text-align: center;
+  border-radius: 3%;
 }
 
-.subs-inner-left-container {
-  width: 45%;
-}
-
-.subs-inner-center-container {
-  width: 10%;
-}
-
-.subs-inner-right-container {
-  width: 45%;
-}
-
-#subs-inner-left-element {
-
-}
-
-#subs-inner-right-element {
-
+#inner-element button {
+  background-color: whitesmoke;
+  border: none;
 }
