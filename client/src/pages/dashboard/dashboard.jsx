@@ -6,11 +6,12 @@ import Categories from './Categories';
 import * as service from './subscribeInfo';
 
 import 'babel-polyfill';
+import './dashboard.css';
 
 class DashBoard extends Component {
 
-  state ={
-    data:null,
+  state = {
+    data: null,
   };
 
   componentDidMount() {
@@ -30,15 +31,20 @@ class DashBoard extends Component {
         <>
           <div className="container">
             <div className="row">
-              <div className="col-md-6">
-                <h2>Calendar</h2>
-                <Calendar/>
+              <div className="col">
+                {/*달력*/}
+                <div className="calendar">
+                  <Calendar/>
+                </div>
+                <hr/>
               </div>
+              {/*구독중인 서비스 list */}
               <div className="col-md-6">
-
-                <Categories data={this.state.data}/>
-
+                <div className='categories'>
+                  <Categories data={this.state.data}/>
+                </div>
               </div>
+
             </div>
 
             <hr/>

@@ -5,11 +5,7 @@ import {PageHeader, Button, Statistic, Row, Col, Card} from 'antd';
 class Categories extends Component {
 
   state = {
-    userSubscribeeData : [
-      {name: 'melon', price:'6500', Dday:"17"},
-      {name: 'netflex', price:'9800', Dday:"28"},
-      {name: 'watch', price:'5600', Dday:"5"},
-    ]
+
   };
 
 
@@ -23,7 +19,6 @@ class Categories extends Component {
     return (
         <div>
           {/*  구독 중인 서바스*/}
-          <hr/>
           <PageHeader title="구독 중인 서비스"
                       extra={[
                         <Button key="2">
