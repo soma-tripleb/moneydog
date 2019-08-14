@@ -6,14 +6,16 @@ class Head extends Component {
   render() {
     return (
       <>
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+        <nav className="navbar navbar-expand-sm">
 
-          <a className="navbar-brand" href="#">Money Dog</a>
+          <a className="navbar-brand" href="#" style={{fontFamily :'GOTHAN-ULTRAITALIC'}}>MONEYDOG</a>
+          <a className="navbar-brand" href="#" style={{fontFamily :'GOTHAN-XLIGHT'}}>MONEYDOG</a>
+          <a className="navbar-brand" href="#" style={{fontFamily :'GOTHAN-ULTRA'}}>MONEYDOG</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse" id="navbarsExample02">≤
+          <div className="collapse navbar-collapse" id="navbarsExample02">
             <ul className="navbar-nav mr-auto">
 
               <li className="nav-item active">
@@ -31,7 +33,7 @@ class Head extends Component {
             </ul>
 
             {/* User Info */}
-            <ul className="navbar-nav navbar-right">
+            <ul className="navbar-nav navbar-dark">
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   User Info

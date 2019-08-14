@@ -1,3 +1,18 @@
+@font-face {
+    font-family: 'GOTHAN-ULTRAITALIC';
+    src: url(../static/font/gotham-ultraitalic-webfont.woff) format('truetype');
+}
+
+@font-face{
+    font-family: 'GOTHAN-XLIGHT';
+    src: url(../static/font/gotham-xlight-webfont.woff) format('truetype');
+}
+
+@font-face{
+    font-family: 'GOTHAN-ULTRA';
+    src: url(../static/font/gotham-ultra-webfont.woff) format('truetype');
+}
+
 html, body {
     height: 100%;
     width: 100%;
@@ -31,5 +46,5 @@ body {
 
 /*head,app 에 margin 을 주어 겹치지 않게 하려고 설정*/
 .app {
-    margin-top: 100px;
+    margin: 5vh;
 }
