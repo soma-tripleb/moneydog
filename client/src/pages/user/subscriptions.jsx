@@ -43,57 +43,54 @@ class Subscriptions extends Component {
   render() {
     return (
       <>
-        <h1>Subscriptions</h1>
-        <div className="subs-container">
-          {/* 왼쪽 박스 */}
-          <div className="subs-inner-left-container mh-100 d-inline-block">
-            우리가 DB 에 저장해 놓은 구독 서비스 앱들
+        <div className="container">
+          <div className="row">
 
-            <div className="w-100 p-3" id="subs-inner-left-element">
-              <p>Selecting App</p>
+            <div className="col-sm">
+              <p id="inner-container-title">&lt;  구독 서비스 앱들  &gt;</p>
+
+              <div className="w-100 p-3" id="inner-container">
+                <p><u>Selecting App</u></p>
+
+                {this.state.arr.map(
+                  (content, i) => {
+                    return (
+                      <SubsApp key={i} onInsert={this.insertContact.bind(this)} subsAppInfo={
+                        {
+                          number: i,
+                          logo: content.logo,
+                          name: content.name,
+                          label: content.label,
+                        }
+                      } />
+                    )
+                  })}
+
+              </div>
             </div>
 
-            {this.state.arr.map(
-              (content, i) => {
-                return (
-                  <SubsApp key={i} onInsert={this.insertContact.bind(this)} subsAppInfo={
-                    {
-                      number: i,
-                      logo: content.logo,
-                      name: content.name,
-                      label: content.label,
-                    }
-                  } />
-                )
-              })}
+            <div className="col-sm">
+              <p id="inner-container-title">&lt;  구독 중인 앱들  &gt;</p>
 
-          </div>
+              <div className="w-100 p-3" id="inner-container">
+                <p><u>Selected App</u></p>
 
-          {/* 가운데 공간 */}
-          <div className="subs-inner-center-container mh-100 d-inline-block">
-
-          </div>
-
-          {/* 오른쪽 박스 */}
-          <div className="subs-inner-right-container mh-100 d-inline-block">
-            이메일 파싱을 통해 얻어낸 구독 정보와 사용자가 선택한 구독 정보
-
-            <div className="w-100 p-3" id="subs-inner-right-element">
-              <p>Seleted App</p>
+                {this.state.arr2.map(
+                  (content, i) => {
+                    return (
+                      <SubsApp key={i} onDelete={this.deleteContant.bind(this)} subsAppInfo={
+                        {
+                          number: content.number,
+                          logo: content.logo,
+                          name: content.name,
+                          label: '-',
+                        }
+                      } />
+                    )
+                  })}
+              </div>
             </div>
 
-            {this.state.arr2.map((content, i) => {
-              return (
-                <SubsApp key={i} onDelete={this.deleteContant.bind(this)} subsAppInfo={
-                  {
-                    number: content.number,
-                    logo: content.logo,
-                    name: content.name,
-                    label: '-',
-                  }
-                } />
-              )
-            })}
           </div>
         </div>
       </>
