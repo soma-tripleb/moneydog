@@ -8,25 +8,25 @@ class Head extends Component {
       <>
         <ul className="nav justify-content-center">
           <li className="nav-item">
-            <a className="navbar-brand" href="#" style={{fontFamily :'GOTHAN-ULTRA'}}><Link to="/" className="nav-link">MONEYDOG</Link></a>
-          </li>
+            <Link to="/" className="navbar-brand nav-link" style={{fontFamily :'GOTHAN-ULTRA'}}>MONEYDOG</Link>
+          </li>          
         </ul>
 
         <ul className="nav justify-content-center" style={{fontFamily :'GOTHAN-XLIGHT'}}>
           <li className="nav-item">
-            <a className="nav-link" href="#"><Link to="/signup">Sign-up</Link></a>
+            <Link to="/signup" className="nav-link">Sign-up</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#"><Link to="/signin">Sign-in</Link></a>
+            <Link to="/signin" className="nav-link">Sign-in</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#"><Link to="/user/subscribing">Subscribing</Link></a>
+            <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#"><Link to="/dashboard">Dashboard</Link></a>
+            <Link to="/dashboard" className="nav-link">Dashboard</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#"><Link to="/report">Report</Link></a>
+            <Link to="/report" className="nav-link">Report</Link>
           </li>
         </ul>
       </>
