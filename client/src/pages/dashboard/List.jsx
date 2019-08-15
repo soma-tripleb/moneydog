@@ -8,13 +8,14 @@ class List extends Component {
     super(props);
   }
   render() {
+      console.log(youtube);
     return(
      <div>
-       <div className='row'>
+       <div className='row img-back'>
          <div className='col-2'>
            <h2>8일</h2>
          </div>
-         <div className='col-10'>
+         <div className='img-border'>
            <img className="line-Img" src={youtube}
                 alt="First slide"/>
          </div>
