@@ -16,11 +16,8 @@ class Signin extends Component {
     const response = await service.login(this.state);
 
     if(response.status === 200 ){
-      this.props.history.push('/dashboard');
+      this.props.history.push('/user/subscriptions');
     }
-
-
-
   };
 
   onChangeEmail = (e) => {

@@ -69,6 +69,14 @@ module.exports = {
           'file-loader'
         ],
       },
+      {
+        test: [/\.(ico|gif|svg|woff|woff2|ttf|eot)?$/],
+        loader: 'url-loader',
+        options: {
+          name: '[hash].[ext]',
+          limit: 10000,
+        },
+      },
     ],
   },
 
