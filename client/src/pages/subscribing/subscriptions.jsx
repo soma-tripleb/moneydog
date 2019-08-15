@@ -135,6 +135,16 @@ class Subscriptions extends Component {
             </div>
           </div>
         </div>
+
+        <div className="container" style={{textAlign: 'center'}}>
+          <div className="row">
+            <div className="col-sm"></div>
+            <div className="col-sm">
+              <div className="circle"><a href="#" role="button">Link</a></div>
+            </div>
+            <div className="col-sm"></div>
+          </div>
+        </div>
       </>
     );
   }
