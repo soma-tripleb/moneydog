@@ -2,15 +2,19 @@ import React, {Component} from 'react';
 
 import Calendar from './Calendar';
 import Categories from './Categories';
+import Charts from './Charts';
+import List from './List';
+
 
 import * as service from './subscribeInfo';
 
 import 'babel-polyfill';
+import './dashboard.css';
 
 class DashBoard extends Component {
 
-  state ={
-    data:null,
+  state = {
+    data: null,
   };
 
   componentDidMount() {
@@ -31,14 +35,25 @@ class DashBoard extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-6">
-                <h2>Calendar</h2>
-                <Calendar/>
+                {/*달력*/}
+                <div className="calendar">
+                  <Calendar/>
+                </div>
+                <hr/>
+                <div className="list">
+                  <List/>
+                </div>
               </div>
+              {/*구독중인 서비스 list */}
               <div className="col-md-6">
-
-                <Categories data={this.state.data}/>
-
+                <div className='charts'>
+                  <Charts/>
+                </div>
+                <div className='categories'>
+                  <Categories data={this.state.data}/>
+                </div>
               </div>
+
             </div>
 
             <hr/>
