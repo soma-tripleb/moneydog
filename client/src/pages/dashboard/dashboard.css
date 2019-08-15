@@ -1,0 +1,35 @@
+.calendar {
+    box-shadow: 10px 10px 10px 10px lightgray;
+    overflow: auto;
+    width: 100%;
+    font-weight: lighter;
+    font-size: 1vw;
+    padding: 20px;
+}
+
+.categories{
+    box-shadow: 10px 10px 10px 10px lightgray;
+    overflow: auto;
+    width: 100%;
+    font-weight: lighter;
+    font-size: 1vw;
+    padding: 20px;
+}
+
+.charts {
+    box-shadow: 10px 10px 10px 10px lightgray;
+    overflow: auto;
+    width: 100%;
+    font-weight: lighter;
+    font-size: 1vw;
+    padding: 20px;
+}
+
+.list {
+    box-shadow: 10px 10px 10px 10px lightgray;
+    overflow: auto;
+    width: 100%;
+    font-weight: lighter;
+    font-size: 1vw;
+    padding: 20px;
+}

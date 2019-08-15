@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+
 import update from 'react-addons-update';
 
 import SubsApp from './subsApp';
@@ -35,14 +36,14 @@ class Subscriptions extends Component {
     });
 
     this.setState(newState);
-  }
+  };
 
   deleteContant = (number) => {
     const { arr2 } = this.state;
     this.setState({
       arr2: arr2.filter(info => info.number != number)
     })
-  }
+  };
 
   handleClose = () => {
     this.setState({
@@ -97,7 +98,6 @@ class Subscriptions extends Component {
 
               <div className="w-100 p-3" id="inner-container">
                 <p><u>Selected App</u></p>
-
                 {this.state.arr2.map(
                   (content, i) => {
                     return (
@@ -131,8 +131,8 @@ class Subscriptions extends Component {
                     )
                   })}
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
       </>

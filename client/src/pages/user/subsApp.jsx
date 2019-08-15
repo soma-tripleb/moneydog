@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import './subs-app.css';
 
@@ -11,7 +11,7 @@ class SubsApp extends Component {
   };
 
   handleClick = () => {
-    const { subsAppInfo } = this.props;
+    const {subsAppInfo} = this.props;
 
     if (subsAppInfo.label === '-') {
       this.props.onDelete(subsAppInfo.number, subsAppInfo.logo, subsAppInfo.name);
@@ -19,25 +19,18 @@ class SubsApp extends Component {
       this.props.onInsert(subsAppInfo.number, subsAppInfo.logo, subsAppInfo.name);
     }
 
-  }
+  };
 
   handlePopup = () => {
     this.props.onPopup(this.props.subsAppInfo);
   }
 
   render() {
-    const { subsAppInfo } = this.props;
+    const {subsAppInfo} = this.props;
 
     return (
       <>
-        <div className="container w-100 p-3" id="inner-element" onClick={
-          () => {
-            if(subsAppInfo.label === '-') {
-              this.handlePopup.bind(this)
-            }
-          }
-        }
-        >
+        <div className="container w-100 p-3" id="inner-element">
           <div className="row">
             <div className="col">
               <button onClick={this.handleClick.bind(this)}>

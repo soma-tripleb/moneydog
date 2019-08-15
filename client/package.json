@@ -30,7 +30,8 @@
     "react-helmet": "^5.2.1",
     "react-router-dom": "^5.0.1",
     "style-loader": "^0.23.1",
-    "url-loader": "^2.1.0"
+    "url-loader": "^2.1.0",
+    "recharts": "^1.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
