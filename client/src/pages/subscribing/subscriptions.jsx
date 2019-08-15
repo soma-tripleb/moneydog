@@ -10,7 +10,7 @@ import './subscriptions.css';
 class Subscriptions extends Component {
   state = {
     arr: [
-      { number: '', logo: 'https://s20352.pcdn.co/wp-content/uploads/2018/03/2000px-YouTube_social_white_square_2017.svg_-1-1024x778.png', name: 'YouTube', label: '+' },
+      { number: '', logo: 'https://www.tubefilter.com/wp-content/uploads/2018/03/youtube-picture-in-picture.jpg', name: 'YouTube', label: '+' },
       { number: '', logo: 'https://yt3.ggpht.com/a/AGF-l7--j4Ugc8V4M2wuVIak47WyqND4toWQepXr_Q=s900-c-k-c0xffffffff-no-rj-mo', name: 'Netflix', label: '+' },
       { number: '', logo: 'https://cdnimg.melon.co.kr/resource/mobile40/cds/common/image/mobile_apple_180x180.png', name: 'Melon', label: '+' },
       { number: '', logo: 'https://static.wanted.co.kr/images/wdes/0_4.ea590aaf.png', name: 'Watchar', label: '+' },
