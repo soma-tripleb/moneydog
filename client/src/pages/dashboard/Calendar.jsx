@@ -47,7 +47,7 @@ class CalendarClass extends Component {
     return (
         <ul className="events">
           {listData.map(item => (
-              <li key={item.content}>
+              <li key={item.type}>
                 <img className="subscribeImg" src={youtube}
                      alt="First slide"/>
               </li>
@@ -75,6 +75,7 @@ class CalendarClass extends Component {
   render() {
     return (
         <div>
+          <p><u> 월별 결제일 정보 </u></p>
           <Calendar fullscreen={false} onPanelChange={this.onPanelChange}
                     dateCellRender={this.dateCellRender} monthCellRender={this.monthCellRender}/>
         </div>

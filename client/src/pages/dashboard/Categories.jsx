@@ -18,7 +18,8 @@ class Categories extends Component {
 
     return (
         <div>
-          {/*  구독 중인 서바스*/}
+          {/*  구독 중인 서비스*/}
+          <p><u> 구독 중인 서비스 </u></p>
           <PageHeader title="구독 중인 서비스"
                       extra={[
                         <Button key="2">

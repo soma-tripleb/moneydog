@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 
 import Calendar from './Calendar';
 import Categories from './Categories';
+import Charts from './Charts';
+import List from './List';
+
 
 import * as service from './subscribeInfo';
 
@@ -31,15 +34,21 @@ class DashBoard extends Component {
         <>
           <div className="container">
             <div className="row">
-              <div className="col">
+              <div className="col-md-6">
                 {/*달력*/}
                 <div className="calendar">
                   <Calendar/>
                 </div>
                 <hr/>
+                <div className="list">
+                  <List/>
+                </div>
               </div>
               {/*구독중인 서비스 list */}
               <div className="col-md-6">
+                <div className='charts'>
+                  <Charts/>
+                </div>
                 <div className='categories'>
                   <Categories data={this.state.data}/>
                 </div>
