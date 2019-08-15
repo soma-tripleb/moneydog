@@ -70,7 +70,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(ico|svg|woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: [/\.(ico|gif|svg|woff|woff2|ttf|eot)?$/],
         loader: 'url-loader',
         options: {
           name: '[hash].[ext]',
