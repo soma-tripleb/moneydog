@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import Calendar from './Calendar';
 import Categories from './Categories';
-import Charts from './Charts';
+import TotalAmount from './TotalAmount';
 import List from './List';
 
 
@@ -46,17 +46,16 @@ class DashBoard extends Component {
               </div>
               {/*구독중인 서비스 list */}
               <div className="col-md-6">
-                <div className='charts'>
-                  <Charts/>
+                <div className='TotalAmount'>
+                  <TotalAmount/>
                 </div>
+                <hr/>
                 <div className='categories'>
                   <Categories data={this.state.data}/>
                 </div>
               </div>
 
             </div>
-
-            <hr/>
 
             <footer>
               <p>DashBoard</p>
