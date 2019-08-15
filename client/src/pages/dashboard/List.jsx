@@ -14,9 +14,8 @@ class List extends Component {
          <div className='col-2'>
            <h2>8일</h2>
          </div>
-         <hr className='vert'/>
-         <div className='col-2'>
-           <img className="subscribeImg" src={youtube}
+         <div className='col-10'>
+           <img className="line-Img" src={youtube}
                 alt="First slide"/>
          </div>
        </div>

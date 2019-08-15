@@ -5,3 +5,13 @@
     border-left: 1px solid black;
     margin: 0;
 }
+
+.line-Img {
+    display: block;
+    width: 50%;
+    margin: auto;
+}
+
+.col-2 {
+    border: 1px solid black;
+}
