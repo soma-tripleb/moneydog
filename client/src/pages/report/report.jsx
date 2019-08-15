@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { ReportProgress } from './index';
 import {Container, Row, Col} from 'react-bootstrap';
-import {Table} from 'antd';
+import {Table, Card} from 'antd';
 
 import './report.css';
 
@@ -55,52 +54,52 @@ class Report extends Component {
         <div className="report-content">
           <h2>Report Content</h2>
           <Container>
-            <Row>
-              <Col sm={3}></Col>
-              <Col sm={6}>
-                <Card>
-                  <Card.Header>
-                    이번달 리포트
-                  </Card.Header>
-                  <Card>
-                    <Card.Body>
-                      <Card.Title>
-                        {this.state.month}월 결제 총액
-                      </Card.Title>
-                      <Card.Text>
-                        {this.state.currency}{this.state.total_pay}
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
+            {/*<Row>*/}
+            {/*  <Col sm={3}></Col>*/}
+            {/*  <Col sm={6}>*/}
+            {/*    <Card>*/}
+            {/*      <Card.Header>*/}
+            {/*        이번달 리포트*/}
+            {/*      </Card.Header>*/}
+            {/*      <Card>*/}
+            {/*        <Card.Body>*/}
+            {/*          <Card.Title>*/}
+            {/*            {this.state.month}월 결제 총액*/}
+            {/*          </Card.Title>*/}
+            {/*          <Card.Text>*/}
+            {/*            {this.state.currency}{this.state.total_pay}*/}
+            {/*          </Card.Text>*/}
+            {/*        </Card.Body>*/}
+            {/*      </Card>*/}
 
-                  <Card>
-                    <Card.Body>
-                      <Card.Title>
-                        Most used Service
-                      </Card.Title>
-                      <Card.Text>
-                        {this.state.most_used}
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
+            {/*      <Card>*/}
+            {/*        <Card.Body>*/}
+            {/*          <Card.Title>*/}
+            {/*            Most used Service*/}
+            {/*          </Card.Title>*/}
+            {/*          <Card.Text>*/}
+            {/*            {this.state.most_used}*/}
+            {/*          </Card.Text>*/}
+            {/*        </Card.Body>*/}
+            {/*      </Card>*/}
 
-                  <Card>
-                    <Card.Body>
-                      <Card.Title>
-                        Most unsed Service
-                      </Card.Title>
-                      <Card.Text>
-                        {this.state.most_unused}
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                  <Card>
-                    <Table columns={this.state.columns} dataSource={this.state.subscriptions} bordered />
-                  </Card>
-                </Card>
-              </Col>
-              <Col sm={3}></Col>
-            </Row>
+            {/*      <Card>*/}
+            {/*        <Card.Body>*/}
+            {/*          <Card.Title>*/}
+            {/*            Most unsed Service*/}
+            {/*          </Card.Title>*/}
+            {/*          <Card.Text>*/}
+            {/*            {this.state.most_unused}*/}
+            {/*          </Card.Text>*/}
+            {/*        </Card.Body>*/}
+            {/*      </Card>*/}
+            {/*      <Card>*/}
+            {/*        <Table columns={this.state.columns} dataSource={this.state.subscriptions} bordered />*/}
+            {/*      </Card>*/}
+            {/*    </Card>*/}
+            {/*  </Col>*/}
+            {/*  <Col sm={3}></Col>*/}
+            {/*</Row>*/}
           </Container>
         </div>
       </>
