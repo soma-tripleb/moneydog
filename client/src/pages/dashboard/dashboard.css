@@ -5,6 +5,7 @@
     font-weight: lighter;
     font-size: 1vw;
     padding: 20px;
+    height: 80%;
 }
 
 .categories{
@@ -14,15 +15,17 @@
     font-weight: lighter;
     font-size: 1vw;
     padding: 20px;
+    height: 70%;
 }
 
-.charts {
+.TotalAmount {
     box-shadow: 10px 10px 10px 10px lightgray;
     overflow: auto;
     width: 100%;
     font-weight: lighter;
     font-size: 1vw;
     padding: 20px;
+    height: 30%;
 }
 
 .list {
@@ -32,4 +35,5 @@
     font-weight: lighter;
     font-size: 1vw;
     padding: 20px;
+    height: 20%;
 }
