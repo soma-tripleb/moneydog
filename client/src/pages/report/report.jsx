@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Container, Row, Col} from 'react-bootstrap';
-import {Table, Card} from 'antd';
+import {Container, Row, Col, Card} from 'react-bootstrap';
+import {Table} from 'antd';
 
 import './report.css';
 
@@ -14,7 +14,7 @@ class Report extends Component {
     most_unused: 'Watcha Play',
     subscriptions: [
       {
-        name: 'netflix',
+        name: 'Netflix',
         usage: 60,
         price: 12000
       },
@@ -24,12 +24,12 @@ class Report extends Component {
         price: 6900
       },
       {
-        name: 'tving',
+        name: 'TVING',
         usage: 20,
         price: 5900
       },
       {
-        name: 'melon',
+        name: 'Melon',
         usage: 100,
         price: 12000
       }
@@ -50,56 +50,54 @@ class Report extends Component {
   render() {
     return (
       <>
-        <h1>{this.state.title}</h1>
         <div className="report-content">
-          <h2>Report Content</h2>
-          <Container>
-            {/*<Row>*/}
-            {/*  <Col sm={3}></Col>*/}
-            {/*  <Col sm={6}>*/}
-            {/*    <Card>*/}
-            {/*      <Card.Header>*/}
-            {/*        이번달 리포트*/}
-            {/*      </Card.Header>*/}
-            {/*      <Card>*/}
-            {/*        <Card.Body>*/}
-            {/*          <Card.Title>*/}
-            {/*            {this.state.month}월 결제 총액*/}
-            {/*          </Card.Title>*/}
-            {/*          <Card.Text>*/}
-            {/*            {this.state.currency}{this.state.total_pay}*/}
-            {/*          </Card.Text>*/}
-            {/*        </Card.Body>*/}
-            {/*      </Card>*/}
+          <Container className='report-container'>
+            <Row>
+              <Col sm={3}></Col>
+              <Col sm={6}>
+                <Card>
+                  <Card.Header>
+                    이번달 리포트
+                  </Card.Header>
+                  <Card>
+                    <Card.Body>
+                      <Card.Title>
+                        {this.state.month}월 결제 총액
+                      </Card.Title>
+                      <Card.Text>
+                        {this.state.currency}{this.state.total_pay}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
 
-            {/*      <Card>*/}
-            {/*        <Card.Body>*/}
-            {/*          <Card.Title>*/}
-            {/*            Most used Service*/}
-            {/*          </Card.Title>*/}
-            {/*          <Card.Text>*/}
-            {/*            {this.state.most_used}*/}
-            {/*          </Card.Text>*/}
-            {/*        </Card.Body>*/}
-            {/*      </Card>*/}
+                  <Card>
+                    <Card.Body>
+                      <Card.Title>
+                        Most used Service
+                      </Card.Title>
+                      <Card.Text>
+                        {this.state.most_used}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
 
-            {/*      <Card>*/}
-            {/*        <Card.Body>*/}
-            {/*          <Card.Title>*/}
-            {/*            Most unsed Service*/}
-            {/*          </Card.Title>*/}
-            {/*          <Card.Text>*/}
-            {/*            {this.state.most_unused}*/}
-            {/*          </Card.Text>*/}
-            {/*        </Card.Body>*/}
-            {/*      </Card>*/}
-            {/*      <Card>*/}
-            {/*        <Table columns={this.state.columns} dataSource={this.state.subscriptions} bordered />*/}
-            {/*      </Card>*/}
-            {/*    </Card>*/}
-            {/*  </Col>*/}
-            {/*  <Col sm={3}></Col>*/}
-            {/*</Row>*/}
+                  <Card>
+                    <Card.Body>
+                      <Card.Title>
+                        Most unsed Service
+                      </Card.Title>
+                      <Card.Text>
+                        {this.state.most_unused}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                  <Card>
+                    <Table columns={this.state.columns} dataSource={this.state.subscriptions} bordered />
+                  </Card>
+                </Card>
+              </Col>
+              <Col sm={3}></Col>
+            </Row>
           </Container>
         </div>
       </>
