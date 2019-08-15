@@ -6,27 +6,27 @@ class Head extends Component {
   render() {
     return (
       <>
-        <ul class="nav justify-content-center">
-          <li class="nav-item">
-            <a className="navbar-brand" href="#" style={{fontFamily :'GOTHAN-ULTRA'}}><Link to="/" className="nav-link">MONEYDOG</Link></a>
+        <ul className="nav justify-content-center">
+          <li className="nav-item">
+            <Link to="/" className="navbar-brand nav-link" style={{fontFamily :'GOTHAN-ULTRA'}}>MONEYDOG</Link>
           </li>          
         </ul>
 
-        <ul class="nav justify-content-center" style={{fontFamily :'GOTHAN-XLIGHT'}}>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><Link to="/signup">Sign-up</Link></a>
+        <ul className="nav justify-content-center" style={{fontFamily :'GOTHAN-XLIGHT'}}>
+          <li className="nav-item">
+            <Link to="/signup" className="nav-link">Sign-up</Link>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><Link to="/signin">Sign-in</Link></a>
+          <li className="nav-item">
+            <Link to="/signin" className="nav-link">Sign-in</Link>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><Link to="/user/subscribing">Subscribing</Link></a>
+          <li className="nav-item">
+            <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><Link to="/dashboard">Dashboard</Link></a>
+          <li className="nav-item">
+            <Link to="/dashboard" className="nav-link">Dashboard</Link>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><Link to="/report">Report</Link></a>
+          <li className="nav-item">
+            <Link to="/report" className="nav-link">Report</Link>
           </li>
         </ul>
       </>
