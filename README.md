@@ -3,13 +3,13 @@
 
 > MoneyDog의 유래는 가짜뉴스를 잡는 NewsDog의 유래에서 사용자의 돈을 지켜준다는 의미입니다.
 
-## 프로젝트 구조
+## 1. 프로젝트 구조
 * **[./api](https://git.swmgit.org/root/p1022_moneydog/tree/master/api)** - HTML parser, 파싱 한 메일에서 구독 정보를 뽑아 DB 에 저장하는 API
 * **[./client](https://git.swmgit.org/root/p1022_moneydog/tree/master/client)** - Front-End Server
 * **[./google-login-java](https://git.swmgit.org/root/p1022_moneydog/tree/master/google-login-java)** - Google OAuth 인증, Gmail API
 * **[./server](https://git.swmgit.org/root/p1022_moneydog/tree/master/server)** - Back-End Server  
 
-## 사용 기술
+## 2. 사용 기술
 
 ### Language
 * JavaScript
@@ -43,7 +43,7 @@
 
 <br/>
 
-## 실행 방법
+## 3. 실행 방법
 [./api](https://git.swmgit.org/root/p1022_moneydog/tree/master/api)
 ===
 
@@ -89,7 +89,7 @@ $ npm start
 
 <br/>
 
-## 주요 기능  
+## 4. 주요 기능  
 
 - 사용하는 구독서비스를 한눈에 조회하고 표시
 - Gmail API를 활용해서 Google Play, Appstore 를 통해 가입한 구독서비스 조회
@@ -98,7 +98,7 @@ $ npm start
 
 <br/>
 
-## 시스템 설계도  
+## 5. 시스템 설계도  
 사용자 구독 관리
 ===
 ![user-subscribing](https://user-images.githubusercontent.com/20623970/63229197-ed7f2280-c238-11e9-963b-eff2092a5b52.png)
@@ -112,7 +112,7 @@ $ npm start
 
 <br/>
 
-## Contibutor  
+## 6. Contibutor  
 ### 김재연 (JaeyeonKIM)
 
 - Gmail api를 활용해서 Apple, Google로부터 오고, 구독 서비스의 영수증 조회 개발
