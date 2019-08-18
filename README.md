@@ -39,8 +39,8 @@
 * [cheerio](https://github.com/cheeriojs/cheerio)
 
 ### 사용 기술 도식
-## ![moneyDog_system](https://user-images.githubusercontent.com/9483824/63221294-dc4efb00-c1d1-11e9-806f-61ef50099e1a.png){:height="700px" width="400px"}
-
+<!--## ![moneyDog_system](https://user-images.githubusercontent.com/9483824/63221294-dc4efb00-c1d1-11e9-806f-61ef50099e1a.png){:height="700px" width="400px"}-->
+## <img src="https://user-images.githubusercontent.com/9483824/63221294-dc4efb00-c1d1-11e9-806f-61ef50099e1a.png" width="500" height="500">
 
 ## 실행 방법
 [./api](https://git.swmgit.org/root/p1022_moneydog/tree/master/api)
