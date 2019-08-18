@@ -24,33 +24,44 @@
 * BootStrap
 * [antd](https://ant.design) (Ant Design, Design Library)
 * mongoose
+* webpack
+* babel
 
 ### Database
 * MongoDB
 
 ### DevOps
 * AWS EC2
-* ESLint
+* ESLint (Google JavaScript style guide - 'ES2015+ version')
 * ~~Circle CI~~
 
 ### Parsing Library
 * [cheerio](https://github.com/cheeriojs/cheerio)
 
+### 사용 기술 도식
+## ![moneyDog_system](https://user-images.githubusercontent.com/9483824/63221294-dc4efb00-c1d1-11e9-806f-61ef50099e1a.png)
+
 
 ## 실행 방법
-### [./api](https://git.swmgit.org/root/p1022_moneydog/tree/master/api)
+[./api](https://git.swmgit.org/root/p1022_moneydog/tree/master/api)
+===
+
+
 ```
 $ npm install / sudo npm install
 $ npm start
 ```
 
-### [./client](https://git.swmgit.org/root/p1022_moneydog/tree/master/client)
+[./client](https://git.swmgit.org/root/p1022_moneydog/tree/master/client)
+===
 ```
 $ npm install / sudo npm install
 $ npm run dev
 ```
 
-### [./google-login-java](https://git.swmgit.org/root/p1022_moneydog/tree/master/google-login-java)
+[./google-login-java](https://git.swmgit.org/root/p1022_moneydog/tree/master/google-login-java)
+===
+
 intelliJ 기준  
 
 * 해당 디렉터리 'clone' 또는 다운로드 후, 'import project' 로 프로젝트 open. 
@@ -59,7 +70,9 @@ Run Maven > install
 Main Class : com.googlelogin.demo.DemoApplication > Run 'DemoApplication'
 ```
 
-### [./server](https://git.swmgit.org/root/p1022_moneydog/tree/master/server)
+[./server](https://git.swmgit.org/root/p1022_moneydog/tree/master/server)
+===
+
 * mongoDB 설정을 위한 '.env' 파일 ignore 되어 있음.
 * '.env'
     > DB_SCHEMA=mongodb://   
@@ -73,20 +86,24 @@ $ npm install / sudo npm install
 $ npm start
 ```
 
-## Features  
+## 주요 기능  
 
 - 사용하는 구독서비스를 한눈에 조회하고 표시
 - Gmail API를 활용해서 Google Play, Appstore 를 통해 가입한 구독서비스 조회
 - ~~사용하고 있는 구독 서비스에 대해 더 싸게 이용할 수 있는 방법 제안(향후예정)~~
 - ~~최근에 뜨고 있는, 구독 서비스 Top10 등 다양한 구독 정보 조회(향후예정)~~
 
-## System Design  
-
-## ![moneyDog_system](https://user-images.githubusercontent.com/9483824/63221294-dc4efb00-c1d1-11e9-806f-61ef50099e1a.png)
+## 시스템 설계도  
+사용자 구독 관리
+===
+![user-subscribing](https://user-images.githubusercontent.com/20623970/63229197-ed7f2280-c238-11e9-963b-eff2092a5b52.png)
   
-- 현재까지 gmail 유저만 사용이 가능
-- 구독 서비스 조회 버튼 => gmail api 권한 요청 => google, apple 등에서 날라온 영수증 조회 => 파싱 => dashboard페이지에 목록 조회 기능으로 구성(현재)
-- Goolge Style ESLint 기준으로 개발
+* Gmail 인증 사용자 구독 정보 수집 자동화
+    * 'Google Login' 버튼
+    * gmail api 권한 요청
+    * google, apple 등에서 날라온 영수증(메일) 조회
+    * HTML 파싱
+    * 'dashboard' 페이지에 목록 조회 기능으로 구성
 
 ## Contibutor  
 ### 김재연 (JaeyeonKIM)
