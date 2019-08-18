@@ -41,6 +41,8 @@
 ### 사용 기술 도식
 ## <img src="https://user-images.githubusercontent.com/9483824/63221294-dc4efb00-c1d1-11e9-806f-61ef50099e1a.png" width="60%" height="40%">
 
+<br/>
+
 ## 실행 방법
 [./api](https://git.swmgit.org/root/p1022_moneydog/tree/master/api)
 ===
@@ -85,12 +87,16 @@ $ npm install / sudo npm install
 $ npm start
 ```
 
+<br/>
+
 ## 주요 기능  
 
 - 사용하는 구독서비스를 한눈에 조회하고 표시
 - Gmail API를 활용해서 Google Play, Appstore 를 통해 가입한 구독서비스 조회
 - ~~사용하고 있는 구독 서비스에 대해 더 싸게 이용할 수 있는 방법 제안(향후예정)~~
 - ~~최근에 뜨고 있는, 구독 서비스 Top10 등 다양한 구독 정보 조회(향후예정)~~
+
+<br/>
 
 ## 시스템 설계도  
 사용자 구독 관리
@@ -103,6 +109,8 @@ $ npm start
     * google, apple 등에서 날라온 영수증(메일) 조회
     * HTML 파싱
     * 'dashboard' 페이지에 목록 조회 기능으로 구성
+
+<br/>
 
 ## Contibutor  
 ### 김재연 (JaeyeonKIM)
