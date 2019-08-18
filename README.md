@@ -1,4 +1,4 @@
-<h1 align="center">MoneyDog</h1>
+<h1 align="center"><center>MoneyDog</center></h1>
 본 프로젝트는 구독 서비스 시대에 구독 서비스를 한눈에 보여주고, 저렴하게 이용하는 방법 제안을 통해 경제적인 구독 서비스를 제안하는 서비스입니다.
 
 > MoneyDog의 유래는 가짜뉴스를 잡는 NewsDog의 유래에서 사용자의 돈을 지켜준다는 의미입니다.
