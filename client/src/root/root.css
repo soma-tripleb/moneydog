@@ -33,7 +33,6 @@ body {
     height: 100%;
 }
 
-/* ant */
 .layout {
     min-height: 100%;
     display: flex;
@@ -44,7 +43,6 @@ body {
     height: 100%;
 }
 
-/*head,app 에 margin 을 주어 겹치지 않게 하려고 설정*/
 .app {
     margin: 5vh;
 }
