@@ -14,9 +14,9 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:name', (req, res) => {
-  console.log('GET /subscriptions/:name name : ', req.params.name);
-  subscriptionService.getSubscriptionByName(req.params.name)
+router.get('/:response', (req, res) => {
+  console.log('response : ', req.params.response);
+  subscriptionService.getSubscription(req.params.response)
     .then((subscription) => {
       res.send(subscription);
     })
