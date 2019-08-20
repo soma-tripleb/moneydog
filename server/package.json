@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
-    "chai": "^4.2.0",
     "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
@@ -27,10 +26,12 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "nodemon": "^1.19.1",
     "babel-eslint": "^10.0.2",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.2.0",
     "eslint": "^6.1.0",
-    "eslint-config-google": "^0.13.0"
+    "eslint-config-google": "^0.13.0",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.1"
   }
 }
