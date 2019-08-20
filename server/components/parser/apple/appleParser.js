@@ -9,6 +9,7 @@ const getAppleInfo = (response) => {
   service.fromEmail = getFromEmail(response);
   service.email = commonParser.getEmailId(response);
   service.name = $('span[class=title]').contents().get('0').data;
+  service.price = convertPrice($('body > table > tbody > tr > td > div.aapl-desktop-div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(3) > td > table > tbody > tr:nth-child(3) > td.price-cell > span').text());
   service.date = convertDateReg($('body > table:nth-child(4) > tbody > tr > td > div.aapl-desktop-div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(2) > td').text())
   service.renewal = convertRenewalReg($('span[class=renewal]').contents().get('0').data.trim());
   service.periodMonth = calPeriod(service.renewal, service.date);
@@ -17,6 +18,10 @@ const getAppleInfo = (response) => {
 
 const getFromEmail = (response) => {
   return fromEmailReg(commonParser.stringToJsonObject(commonParser.base64ToUtf8(response)).payload.headers[13].value);
+}
+
+const convertPrice = (price) => {
+  return parseInt(price.replace('￦', '').replace(',', ''));
 }
 
 const convertRenewalReg = (renewal) => {

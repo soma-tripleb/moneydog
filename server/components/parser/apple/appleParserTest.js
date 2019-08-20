@@ -21,5 +21,9 @@ describe('AppleParser 테스트', () => {
     it('Renewal date', () => {
       assert.strictEqual(appleMusic.renewal, '2019.08.28');
     });
+    it('price test', () => {
+      assert.isNumber(appleMusic.price);
+      assert.strictEqual(appleMusic.price, 8900);
+    });
   });
 })
