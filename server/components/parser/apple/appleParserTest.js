@@ -1,4 +1,4 @@
-const { assert } = require('chai');
+const {assert} = require('chai');
 const fs = require('fs');
 const appleParser = require('../apple/appleParser');
 
