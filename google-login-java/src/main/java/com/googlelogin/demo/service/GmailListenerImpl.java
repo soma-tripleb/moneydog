@@ -153,4 +153,9 @@ public class GmailListenerImpl implements GmailListener {
 
     return new JsonData<Content>("body", size, bodies);
   }
+
+  @Override
+  public JsonData<Content> getMessageTotal(String query) {
+    return null;
+  }
 }
