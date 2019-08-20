@@ -18,14 +18,9 @@ const getEmailId = (jsonObject) => {
   return stringToJsonObject(base64ToUtf8(jsonObject)).payload.headers[0].value;
 }
 
-const getFromEmail = (response) => {
-  return stringToJsonObject(base64ToUtf8(response)).payload.headers[23].value;
-}
-
 module.exports = {
   base64ToUtf8: base64ToUtf8,
   stringToJsonObject: stringToJsonObject,
   convertHtml: convertHtml,
   getEmailId: getEmailId,
-  getFromEmail: getFromEmail,
 }

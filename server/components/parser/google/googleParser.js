@@ -1,4 +1,3 @@
-// const DomParser = require('dom-parser');
 const cheerio = require('cheerio');
 const commonParser = require('../commonParser');
 
@@ -7,13 +6,17 @@ const getGoolgeInfo = (response) => {
   const dom = commonParser.convertHtml(commonParser.base64ToUtf8(jsonObject.payload.parts[1].body.data));
   const $ = cheerio.load(dom);
   service = {};
-  service.fromEmail = fromEmailReg(commonParser.getFromEmail(response));
+  service.fromEmail = fromEmailReg(getFromEmail(response));
   service.email = commonParser.getEmailId(response);
   service.name = convertNameReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(1) > span > span').text().trim());
   service.date = convertDateReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(5)').text());
   service.renewal = convertRenewalReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(3) > td:nth-child(1)').text());
   service.periodMonth = calPeriod(service.renewal, service.date);
   return service;
+}
+
+const getFromEmail = (response) => {
+  return commonParser.stringToJsonObject(commonParser.base64ToUtf8(response)).payload.headers[23].value;
 }
 
 const convertDateReg = (date) => {
