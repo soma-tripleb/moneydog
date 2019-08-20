@@ -5,7 +5,6 @@ const googleParser = require('./googleParser');
 describe('GoogleParser 테스트', () => {
   const response = fs.readFileSync('./gmail_response.json');
   const watcha = googleParser.getGoolgeInfo(response);
-  console.log(watcha);
   describe('FromMail 테스트', () => {
     it('check from email ', () => {
       assert.strictEqual(googleParser.getFromEmail(response), 'googleplay-noreply@google.com');
@@ -20,6 +19,10 @@ describe('GoogleParser 테스트', () => {
     });
     it('check service date', () => {
       assert.strictEqual(watcha.date, '2019. 8. 9');
+    });
+    it('check service price', () => {
+      assert.isNumber(watcha.price);
+      assert.strictEqual(watcha.price, 7900);
     });
   });
 })

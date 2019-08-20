@@ -9,6 +9,7 @@ const getGoolgeInfo = (response) => {
   service.fromEmail = getFromEmail(response);
   service.email = commonParser.getEmailId(response);
   service.name = convertNameReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(1) > span > span').text().trim());
+  service.price = convertPriceReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(2) > span').text());
   service.date = convertDateReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(5)').text());
   service.renewal = convertRenewalReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(3) > td:nth-child(1)').text());
   service.periodMonth = calPeriod(service.renewal, service.date);
@@ -17,6 +18,11 @@ const getGoolgeInfo = (response) => {
 
 const getFromEmail = (response) => {
   return fromEmailReg(commonParser.stringToJsonObject(commonParser.base64ToUtf8(response)).payload.headers[23].value);
+}
+
+const convertPriceReg = (price) => {
+  const priceReg = /\₩(.*?)\n/;
+  return parseInt(priceReg.exec(price)[1].replace(',', ''));
 }
 
 const convertDateReg = (date) => {
@@ -35,7 +41,6 @@ const convertRenewalReg = (renewal) => {
 }
 
 const fromEmailReg = (fromEmail) => {
-  console.log('전달받은 이메일 ', fromEmail)
   const emailReg = /<(.*?)>/;
   return emailReg.exec(fromEmail)[1];
 }
