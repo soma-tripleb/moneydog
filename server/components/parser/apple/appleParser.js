@@ -40,4 +40,5 @@ const fromEmailReg = (fromEmail) => {
 
 module.exports = {
   getAppleInfo: getAppleInfo,
+  getFromEmail: getFromEmail,
 }
