@@ -95,8 +95,12 @@ public class DemoController{
     return result;
   }
 
+  /**
+   * 사용자 ID 파라미터로 받아서 Google 로그인 및 scope 처리
+   * @return
+   */
   @GetMapping("/refreshtoken")
-  public String getGoogleTokenResponse() throws Exception {
+  public String getGoogleTokenResponse() {
     GoogleTokenResponse tokenResponse = googleApi.tokenResponseWithRefreshToken();
 
     return tokenResponse.getAccessToken();
@@ -126,8 +130,9 @@ public class DemoController{
     return gmailListener.getMessagesBody(query);
   }
 
-  @GetMapping("/messages/totla/{query}")
+  @GetMapping("/messages/total/{query}")
   public JsonData<Content> getMessagesTotal(@PathVariable String query) {
+    gmailListener.getMessagesTotal(query);
     return null;
   }
 }
