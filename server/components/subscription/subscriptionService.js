@@ -1,4 +1,6 @@
 const subscriptionRepository = require('./subscriptionRepository');
+const appleParser = require('../parser/apple/appleParser');
+const googleParser = require('../parser/google/googleParser');
 
 const getSubscriptionList = () => {
   return subscriptionRepository.getSubscriptionList();
