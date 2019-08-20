@@ -1,0 +1,3 @@
+#inner-element>div .col:nth-child(odd) {
+  margin: auto;
+}

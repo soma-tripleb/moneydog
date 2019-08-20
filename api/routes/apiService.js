@@ -12,7 +12,7 @@ const TEST_USERID = 'jimmyjaeyeon@gmail.com';
 const APPLE_EMAIL = 'no_reply@email.apple.com';
 
 fs.readFile(CREDENTIALS_PATH, (err, content) => {
-  if (err) return console.log('Error loading client secret file:', err);
+  if (err) return console.log('Error loading root secret file:', err);
   authorize(JSON.parse(content), getList);
 });
 
@@ -51,9 +51,10 @@ async function infos(auth) {
 }
 
 function getInfo(rawHtml) {
+  console.log(convertHtml(rawHtml));
   const $ = cheerio.load(convertHtml(rawHtml));
   service = {};
-  service.id = $('body > table:nth-child(4) > tbody > tr > td > div.aapl-desktop-div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td:nth-child(1)').text().split('ID')[1];
+  service.email = $('body > table:nth-child(4) > tbody > tr > td > div.aapl-desktop-div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td:nth-child(1)').text().split('ID')[1];
   service.name = $('span[class=title]').contents().get('0').data;
   service.date = $('body > table:nth-child(4) > tbody > tr > td > div.aapl-desktop-div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(2) > td').text().split('날짜')[1];
   service.duration = $('span[class=duration]').contents().get('0').data;

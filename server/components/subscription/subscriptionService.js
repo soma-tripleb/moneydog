@@ -12,3 +12,4 @@ module.exports = {
   getSubscriptionList: getSubscriptionList,
   getSubscriptionByName: getSubscriptionByName,
 }
+

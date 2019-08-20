@@ -1,9 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  name: 'moneydog-client',
+  name: 'moneydog-root',
   mode: 'development',
+  node: {fs:'empty'},
   devtool: 'eval',
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -16,6 +18,10 @@ module.exports = {
   entry: {
     app: ['./src/index'],
   },
+
+  plugins: [
+    new Dotenv()
+  ],
 
   module: {
     rules: [
@@ -62,6 +68,14 @@ module.exports = {
         use: [
           'file-loader'
         ],
+      },
+      {
+        test: [/\.(ico|gif|svg|woff|woff2|ttf|eot)?$/],
+        loader: 'url-loader',
+        options: {
+          name: '[hash].[ext]',
+          limit: 10000,
+        },
       },
     ],
   },
