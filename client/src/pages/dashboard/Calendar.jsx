@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Calendar,Badge} from 'antd';
+import React, { Component } from 'react';
+import { Calendar } from 'antd';
 
 import './Calendar.css';
 import youtube from '../../static/img/youtube.png';
@@ -16,7 +16,7 @@ class CalendarClass extends Component {
       case 8:
         listData = [
           // { type: 'warning', content: 'This is warning event.' },
-          { type: 'warning'}
+          { type: 'warning' }
           // { type: 'success', content: 'This is usual event.' },
         ];
         break;
@@ -45,40 +45,40 @@ class CalendarClass extends Component {
   dateCellRender = (value) => {
     const listData = this.getListData(value);
     return (
-        <ul className="events">
-          {listData.map(item => (
-              <li key={item.type}>
-                <img className="subscribeImg" src={youtube}
-                     alt="First slide"/>
-              </li>
-          ))}
-        </ul>
+      <ul className="events">
+        {listData.map(item => (
+          <li key={item.type}>
+            <img className="subscribeImg" src={youtube}
+              alt="First slide" />
+          </li>
+        ))}
+      </ul>
     );
   }
 
-   getMonthData = (value) => {
+  getMonthData = (value) => {
     if (value.month() === 8) {
       return 1394;
     }
   }
 
-   monthCellRender = (value) => {
+  monthCellRender = (value) => {
     const num = this.getMonthData(value);
     return num ? (
-        <div className="notes-month">
-          <section>{num}</section>
-          <span>Backlog number</span>
-        </div>
+      <div className="notes-month">
+        <section>{num}</section>
+        <span>Backlog number</span>
+      </div>
     ) : null;
   }
 
   render() {
     return (
-        <div>
-          <p><u> 월별 결제일 정보 </u></p>
-          <Calendar fullscreen={false} onPanelChange={this.onPanelChange}
-                    dateCellRender={this.dateCellRender} monthCellRender={this.monthCellRender}/>
-        </div>
+      <div>
+        <p><u> 월별 결제일 정보 </u></p>
+        <Calendar fullscreen={false} onPanelChange={this.onPanelChange}
+          dateCellRender={this.dateCellRender} monthCellRender={this.monthCellRender} />
+      </div>
     );
   }
 }

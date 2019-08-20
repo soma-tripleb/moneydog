@@ -125,4 +125,9 @@ public class DemoController{
   public JsonData<Content> getMessagesBody(@PathVariable String query) {
     return gmailListener.getMessagesBody(query);
   }
+
+  @GetMapping("/messages/totla/{query}")
+  public JsonData<Content> getMessagesTotal(@PathVariable String query) {
+    return null;
+  }
 }
