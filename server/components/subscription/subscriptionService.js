@@ -10,6 +10,11 @@ const getSubscriptionByName = (name) => {
   return subscriptionRepository.getSubscriptionByName(name);
 }
 
+const checkDomain = (response) => {
+
+}
+
+
 module.exports = {
   getSubscriptionList: getSubscriptionList,
   getSubscriptionByName: getSubscriptionByName,
