@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import './subs-app.css';
+import './subsApp.css';
 
 class SubsApp extends Component {
   state = {
@@ -38,7 +38,7 @@ class SubsApp extends Component {
               </button>
             </div>
             <div className="col">
-              <img src={subsAppInfo.logo} alt="x" style={{ height: '2vh', borderRadius: '5px' }} />
+              <img src={subsAppInfo.logo} alt="x" style={{ height: '5vh', borderRadius: '5px' }} />
             </div>
             <div className="col">
               {subsAppInfo.name}
