@@ -9,14 +9,18 @@ import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.ListMessagesResponse;
 import com.google.api.services.gmail.model.Message;
 import com.googlelogin.demo.api.GoogleApi;
+import org.assertj.core.api.Assertions;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +30,17 @@ public class MessageTotalTest {
 
   @Autowired
   public GoogleApi googleApi;
+
+  @Test
+  public void ACCESS_TOKEN_받기() {
+    Optional<GoogleTokenResponse> maybeTokenResponse = Optional.ofNullable(googleApi.tokenResponseWithRefreshToken());
+    GoogleTokenResponse tokenResponse = maybeTokenResponse.get();
+
+    Optional<String> maybeAccessToken = Optional.ofNullable(tokenResponse.getAccessToken());
+    String accessToken = maybeAccessToken.get();
+
+    Assert.assertNotNull(accessToken);
+  }
 
   @Test
   public void 사용자_ACCESS_TOKEN_유무확인() {
