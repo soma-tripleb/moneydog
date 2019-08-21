@@ -12,7 +12,7 @@ class TotalAmount extends Component {
          <div className="row">
            <div className="col">
              <button>
-             8월 의 총 이용 금액은 16000 원 입니다 !
+             8월 의 총 이용 금액은 36800 원 입니다 !
              </button>
            </div>
          </div>
@@ -21,7 +21,7 @@ class TotalAmount extends Component {
          <div className="row">
            <div className="col">
              <button>
-               7월 의 총 이용 금액은 14500 원 입니다 !
+               7월 의 총 이용 금액은 29600 원 입니다 !
              </button>
            </div>
          </div>

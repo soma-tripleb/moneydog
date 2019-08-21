@@ -18,9 +18,9 @@ class Home extends Component {
 
             <IndexInfo/>
 
-            <hr className="featurette-divider"/>
+            {/*<hr className="featurette-divider"/>*/}
 
-            <GmailTutorial/>
+            {/*<GmailTutorial/>*/}
 
             <hr className="featurette-divider"/>
 

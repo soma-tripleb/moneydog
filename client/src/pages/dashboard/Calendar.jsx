@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { Calendar } from 'antd';
 
 import './Calendar.css';
-import youtube from '../../static/img/youtube.png';
+
+import Netflix from '../../static/img/templogo/netflix.png';
+import Melon from '../../static/img/templogo/melon.png';
+import Tving from '../../static/img/templogo/tving.png';
+import Watcha from '../../static/img/templogo/watcha.png';
 
 class CalendarClass extends Component {
 
@@ -10,13 +14,41 @@ class CalendarClass extends Component {
     console.log(value, mode);
   };
 
+  arr = {
+    Netflix: Netflix,
+    Melon: Melon,
+    "Watcha Play": Watcha,
+    TVING: Tving,
+  };
+
   getListData = (value) => {
     let listData;
     switch (value.date()) {
-      case 8:
+      case 5:
         listData = [
           // { type: 'warning', content: 'This is warning event.' },
-          { type: 'warning' }
+          { type: 'Netflix'}
+          // { type: 'success', content: 'This is usual event.' },
+        ];
+        break;
+      case 12:
+        listData = [
+          // { type: 'warning', content: 'This is warning event.' },
+          { type: 'Watcha Play'}
+          // { type: 'success', content: 'This is usual event.' },
+        ];
+        break;
+      case 15:
+        listData = [
+          // { type: 'warning', content: 'This is warning event.' },
+          { type: 'TVING'}
+          // { type: 'success', content: 'This is usual event.' },
+        ];
+        break;
+      case 22:
+        listData = [
+          // { type: 'warning', content: 'This is warning event.' },
+          { type: 'warning'}
           // { type: 'success', content: 'This is usual event.' },
         ];
         break;
@@ -45,14 +77,14 @@ class CalendarClass extends Component {
   dateCellRender = (value) => {
     const listData = this.getListData(value);
     return (
-      <ul className="events">
-        {listData.map(item => (
-          <li key={item.type}>
-            <img className="subscribeImg" src={youtube}
-              alt="First slide" />
-          </li>
-        ))}
-      </ul>
+        <ul className="events">
+          {listData.map(item => (
+              <li key={item.type}>
+                <img className="subscribeImg" src={this.arr[item.type]}
+                     alt={item.type}/>
+              </li>
+          ))}
+        </ul>
     );
   }
 
