@@ -48,7 +48,7 @@ class CalendarClass extends Component {
       case 22:
         listData = [
           // { type: 'warning', content: 'This is warning event.' },
-          { type: 'warning'}
+          { type: 'Melon'}
           // { type: 'success', content: 'This is usual event.' },
         ];
         break;
