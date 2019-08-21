@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 
-import face1 from '../../static/img/pangju.jpeg';
+import dashboard from '../../static/img/templogo/dashboard.png';
+import report from '../../static/img/templogo/report.png';
+import subscribe from '../../static/img/templogo/subscribe.png';
 
 import './carosel.css';
 
@@ -17,17 +19,16 @@ class Carousel extends Component {
             </ol>
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img className="d-block w-50" src={face1}
+                <img className="d-block w-50" src={dashboard}
                      alt="First slide"/>
               </div>
               <div className="carousel-item">
-                <img className="d-block w-50 img-responsive"
-                     src="https://c1.staticflickr.com/5/4304/35907213446_c81f70eb39_c.jpg"
-                     alt="Second slide"/>
+                <img className="d-block w-50" src={report}
+                     alt="First slide"/>
               </div>
               <div className="carousel-item">
-                <img className="d-block w-50" src="https://c1.staticflickr.com/5/4330/35861245381_a81bf54a45_c.jpg"
-                     alt="Third slide"/>
+                <img className="d-block w-50" src={subscribe}
+                     alt="First slide"/>
               </div>
             </div>
             <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

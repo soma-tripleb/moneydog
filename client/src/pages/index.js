@@ -5,3 +5,4 @@ export {default as Info} from './info/info';
 export {default as SignUp} from './signup/signup';
 export {default as SignIn} from './signin/signin';
 export {default as Subscribing} from './subscribing/subscriptions';
+export {default as Recommend} from './recommend/recommend';
