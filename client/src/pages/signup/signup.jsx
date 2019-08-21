@@ -70,24 +70,12 @@ class SignUp extends Component {
 
             <div className="card bg-light">
               <article className="card-body mx-auto">
-                <h4 className="card-title mt-3 text-center">Create Account</h4>
+                <h4 className="card-title mt-3 text-center">Sign Up</h4>
                 <p className="text-center">Get started with your free account</p>
                 <p>
-                  <a href="" className="btn btn-block btn-twitter"> <i className="fab fa-twitter"/> Login via
-                    Twitter</a>
-                  <a href="" className="btn btn-block btn-facebook"> <i className="fab fa-facebook-f"/> Login via
-                    facebook</a>
-                  <button onClick={service.responseGoogle} className="btn btn-block btn-google"><i
-                      className="fab fa-google"/> Login via
-                    google
+                  <button onClick={service.responseGoogle} className="btn btn-block btn-google" style={{backgroundColor: 'lightgray'}}>
+                    <i className="fab fa-google"/> Login via google
                   </button>
-                  {/*<hr/>*/}
-                  {/*<GoogleLogin*/}
-                  {/*    clientId="532345922072-50gar7lh5ca5rvepjs7iisa6lu28d741.apps.googleusercontent.com"*/}
-                  {/*    scope="https://mail.google.com/ https://www.googleapis.com/auth/gmail.readonly"*/}
-                  {/*    onSuccess={service.responseGoogle}*/}
-                  {/*    buttonText="Login with Google"*/}
-                  {/*/>*/}
                 </p>
                 <p className="divider-text">
                   <span className="bg-light">OR</span>

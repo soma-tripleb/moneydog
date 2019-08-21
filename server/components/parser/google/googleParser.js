@@ -1,40 +1,28 @@
-const DomParser = require('dom-parser');
 const cheerio = require('cheerio');
+const commonParser = require('../commonParser');
 
 const getGoolgeInfo = (response) => {
-  const jsonObject = stringToJsonObject(base64ToUtf8(response));
-  const dom = convertHtml(base64ToUtf8(jsonObject.payload.parts[1].body.data));
+  const jsonObject = commonParser.stringToJsonObject(commonParser.base64ToUtf8(response));
+  const dom = commonParser.convertHtml(commonParser.base64ToUtf8(jsonObject.payload.parts[1].body.data));
   const $ = cheerio.load(dom);
   service = {};
-  service.fromEmail = fromEmailReg(getFromEmail(response));
-  service.email = getEmailId(response);
+  service.fromEmail = getFromEmail(response);
+  service.email = commonParser.getEmailId(response);
   service.name = convertNameReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(1) > span > span').text().trim());
+  service.price = convertPriceReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(2) > span').text());
   service.date = convertDateReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(5)').text());
   service.renewal = convertRenewalReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(3) > td:nth-child(1)').text());
   service.periodMonth = calPeriod(service.renewal, service.date);
   return service;
 }
 
-const base64ToUtf8 = (base64encoded) => {
-  return Buffer.from(base64encoded, 'base64').toString('utf8');
-}
-
-const stringToJsonObject = (decodedResponse) => {
-  return JSON.parse(decodedResponse);
-}
-
-const convertHtml = (rawHtml) => {
-  const parser = new DomParser();
-  const wrapper = parser.parseFromString(rawHtml, 'text/html');
-  return wrapper.rawHTML;
-}
-
-const getEmailId = (jsonObject) => {
-  return stringToJsonObject(base64ToUtf8(jsonObject)).payload.headers[0].value;
-}
-
 const getFromEmail = (response) => {
-  return stringToJsonObject(base64ToUtf8(response)).payload.headers[23].value;
+  return fromEmailReg(commonParser.stringToJsonObject(commonParser.base64ToUtf8(response)).payload.headers[23].value);
+}
+
+const convertPriceReg = (price) => {
+  const priceReg = /\₩(.*?)\n/;
+  return parseInt(priceReg.exec(price)[1].replace(',', ''));
 }
 
 const convertDateReg = (date) => {
@@ -64,4 +52,5 @@ const calPeriod = (date, renewal) => {
 
 module.exports = {
   getGoolgeInfo: getGoolgeInfo,
+  getFromEmail: getFromEmail,
 }
