@@ -96,6 +96,16 @@ public class GoogleApi {
     return null;
   }
 
+  public String getAccessTokenOfRefreshToken(String refreshToken) {
+    Optional<GoogleTokenResponse> maybeTokenResponse = Optional.ofNullable(this.tokenResponseWithRefreshToken());
+    GoogleTokenResponse tokenResponse = maybeTokenResponse.get();
+
+    Optional<String> maybeAccessToken = Optional.ofNullable(tokenResponse.getAccessToken());
+    String accessToken = maybeAccessToken.get();
+
+    return accessToken;
+  }
+
   public Gmail getGmailService(String accessToken) {
     GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
 

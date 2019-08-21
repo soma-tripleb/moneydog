@@ -24,6 +24,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class MessageTotalTest {
@@ -39,15 +43,11 @@ public class MessageTotalTest {
     Optional<String> maybeAccessToken = Optional.ofNullable(tokenResponse.getAccessToken());
     String accessToken = maybeAccessToken.get();
 
-    Assert.assertNotNull(accessToken);
+    assertThat(accessToken, is(notNullValue()));
   }
 
   @Test
   public void 사용자_ACCESS_TOKEN_유무확인() {
-//    GoogleTokenResponse tokenResponse = googleApi.tokenResponseWithRefreshToken();
-    //Access Token 여부
-
-    // Optional, https://www.daleseo.com/java8-optional-after/
     Optional<GoogleTokenResponse> maybeTokenResponse = Optional.ofNullable(googleApi.tokenResponseWithRefreshToken());
     GoogleTokenResponse tokenResponse = maybeTokenResponse.get();
 
