@@ -4,3 +4,9 @@ require('dotenv').config();
 export function getUserServiceInfo(userID) {
   return axios.get(`${process.env.REACT_APP_NODE_API_URL}/subscribeInfo/${userID}`);
 }
+
+export function getUserByEmail(email) {
+  console.log('axios요청보내기');
+  console.log(`request : ${process.env.REACT_APP_NODE_API_URL}/users/${email}`)
+  return axios.get(`${process.env.REACT_APP_NODE_API_URL}/users/${email}`);
+}
