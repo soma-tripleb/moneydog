@@ -10,15 +10,16 @@ describe('GET /', () => {
       .expect(200);
   });
 
-  it('GET /users/jimmyjaeyeon@gmail.com', (done) => {
+  it('GET /users/jimmyjaeyeon@gmail.com', () => {
     request(app)
+      .get('/users/jimmyjaeyeon@gmail.com')
       .expect(200)
       .end((err, res) => {
         if (err) {
-          done(err);
           return;
         }
-        console.log(res);
+        const result = res.body[0];
+        console.log(result);
       });
   });
 });
