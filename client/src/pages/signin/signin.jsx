@@ -17,6 +17,10 @@ class Signin extends Component {
 
     if(response.status === 200 ){
       this.props.history.push('/user/subscriptions');
+    }else if (response.status === 409 ){
+      alert("비밀번호를 분");
+    }else if (response.status === 400 ){
+      alert("아이디가 없습니다.");
     }
   };
 

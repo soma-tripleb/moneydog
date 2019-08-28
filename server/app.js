@@ -16,14 +16,10 @@ app.use(cookieParser());
 app.use(cors());
 
 // Api
-const indexRouter = require('./api/index');
 const usersRouter = require('./components/user/userController');
-const subscribeInfo = require('./api/subscribeInfo');
 const subscriptionRouter = require('./components/subscription/subscriptionController');
 
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/subscribeInfo', subscribeInfo);
 app.use('/subscriptions', subscriptionRouter);
 
 // error handler
