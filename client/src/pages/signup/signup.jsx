@@ -11,51 +11,84 @@ class SignUp extends Component {
     email: '',
     password: '',
     passwordCheck: '',
-    passwordError: '',
+    errorMessage: '',
   };
 
   //회원 가입 버튼 클릭시
-  signupBtnClicked = (e) => {
-    console.log(e);
-    if(this.state.nickName === '' || this.state.email === '' || this.state.passwordCheck === '' || this.state.password === '' ){
+  signUpBtnClicked = (e) => {
+    e.preventDefault();
+
+    //공백 확인
+    if (!this.checkBlank()) {
       this.setState({
-        passwordError : '빈칸을 채워주세요',
+        errorMessage: '빈칸을 채워주세요',
       });
-      return
+      return false;
     }
 
-    //비민번호 같은지 확인
-    if (this.state.passwordCheck !== this.state.password) {
+    // 이메일 형식 확인
+    if (!this.checkEmailForm()) {
       this.setState({
-        passwordError : '비밀번호가 일치하지 않습니다.',
+        errorMessage: '이메일 형식이 올바르지 않습니다.',
       });
-      return
-    }else{
-      this.setState({
-        passwordError : '',
-      });
-      //모두 통과시 createUser
-      service.createUser(this.state);
+      return false;
     }
+
+    // 패스워드 같은지 확인
+    if (!this.checkEqualPassword()) {
+      this.setState({
+        errorMessage: '비밀번호가 일치하지 않습니다.',
+      });
+      return false;
+    }
+
+    //모두 통과시 createUser
+    service.createUser(this.state);
   };
 
+  checkEmailForm = () => {
+    const exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    if (!exptext.test(this.state.email)) {
+      return false;
+    }
+    return true;
+  };
+
+  checkBlank = () => {
+    if (this.state.nickName === '' || this.state.email === '' || this.state.passwordCheck === '' || this.state.password === '') {
+      return false;
+    }
+    return true;
+  };
+
+  checkEqualPassword = () => {
+    if (this.state.passwordCheck !== this.state.password) {
+      return false;
+    }
+    return true;
+  };
+
+
+
+  //textbox 채워 넣을때 이벤트
   onChangeNickName = (e) => {
     this.setState({
       nickName: e.target.value
     });
   };
+  //textbox 채워 넣을때 이벤트
   onChangePasswordCheck = (e) => {
     this.setState({
       passwordCheck: e.target.value
     });
   };
-
+  //textbox 채워 넣을때 이벤트
   onChangeEmail = (e) => {
     this.setState({
       email: e.target.value
     });
   };
-
+  //textbox 채워 넣을때 이벤트
   onChangePassword = (e) => {
     this.setState({
       password: e.target.value
@@ -73,7 +106,8 @@ class SignUp extends Component {
                 <h4 className="card-title mt-3 text-center">Sign Up</h4>
                 <p className="text-center">Get started with your free account</p>
                 <p>
-                  <button onClick={service.responseGoogle} className="btn btn-block btn-google" style={{backgroundColor: 'lightgray'}}>
+                  <button onClick={service.responseGoogle} className="btn btn-block btn-google"
+                          style={{backgroundColor: 'lightgray'}}>
                     <i className="fab fa-google"/> Login via google
                   </button>
                 </p>
@@ -114,12 +148,12 @@ class SignUp extends Component {
                            value={this.state.passwordCheck} onChange={this.onChangePasswordCheck}/>
                   </div>
                   <div>
-                    <label className="passwordErrorLabel">{this.state.passwordError}</label>
+                    <label className="passwordErrorLabel">{this.state.errorMessage}</label>
                   </div>
                   {/*회원가입 버튼*/}
                   <div className="form-group">
-                    <button type="submit" className="btn btn-primary btn-block" onClick={this.signupBtnClicked}> Create
-                      Account
+                    <button className="btn btn-primary btn-block"
+                            onClick={this.signUpBtnClicked}> Create Account
                     </button>
                   </div>
                   <p className="text-center">Have an account? <a href="/signin">Log In</a></p>
