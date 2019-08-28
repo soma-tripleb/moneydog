@@ -27,5 +27,7 @@ export function createUser(userInfo) {
       password: userInfo.password,
       content: "content",
     }
+  }).catch(err => {
+    return err.response;
   });
 }

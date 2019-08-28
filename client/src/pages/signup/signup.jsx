@@ -50,7 +50,13 @@ class SignUp extends Component {
     //모두 통과시 createUser
     const response = await service.createUser(this.state);
 
-    console.log(response.toString());
+    if(response.status === 409){
+      this.setState({
+        errorMessage: '이미 있는 아이디 입니다.',
+      });
+    }else if(response.status === 201){
+      alert("회원 가입 성공!");
+    }
   };
 
   checkEmailForm = () => {
