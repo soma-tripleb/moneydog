@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const UserService = require('./userService');
-const UserTest = require('./userTest');
 
 router.get('/', (req, res) => {
   console.log('get list호출');
@@ -35,8 +34,8 @@ router.get('/:id', (req, res) => {
 //     });
 // });
 
-router.post('/create', UserService.createUser);
+router.post('/signUp', UserService.register);
 
-router.post('/login', UserTest.findUserByEmail);
+router.post('/signIn', UserService.login);
 
 module.exports = router;

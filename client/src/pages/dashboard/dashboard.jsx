@@ -6,7 +6,7 @@ import TotalAmount from './TotalAmount';
 import List from './List';
 
 
-import * as service from './subscribeInfo';
+import * as service from './dashboard.ajax';
 
 import 'babel-polyfill';
 import './dashboard.css';
