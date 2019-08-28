@@ -17,8 +17,13 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
-  res.send(UserService.getUserById(req.params.id));
+router.get('/:email', (req, res) => {
+  const result = UserService.getUserByEmail(req.params.email);
+  result
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => res.end(err));
 });
 
 // post 로 들어온 json 형식 userInfo 로 유저 등록,

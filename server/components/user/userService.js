@@ -12,10 +12,10 @@ const createUser = (userInfo) => {
   return UserRepository.createUser(userInfo);
 };
 
-const getUserByEmail = (email) => {
-  // return UserRepository.getUserByEmail(email);
-  UserRepository.getUserByEmail(email);
-};
+async function getUserByEmail(email) {
+  const user = await UserRepository.getUserByEmail(email);
+  return user;
+}
 
 module.exports = {
   getUserById: getUserById,

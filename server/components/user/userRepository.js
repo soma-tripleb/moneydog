@@ -13,11 +13,10 @@ const getUserById = (params) => {
   return User.find(modelParams);
 };
 
-const getUserByEmail = (email) => {
-  User.find({email: email})
-    .then((user) => user[0])
-    .catch((err) => console.log(err));
-};
+async function getUserByEmail(email) {
+  const user = User.find({email});
+  return user;
+}
 
 const createUser = (userInfo) => {
   return User.create(userInfo);
