@@ -2,7 +2,6 @@ const User = require('../../models/user');
 
 const UserService = {};
 
-
 UserService.findUserByEmail = (req, res) => {
   const userInfo = req.body.userInfo;
   User.find({email: userInfo.email}).exec((err, user) =>{

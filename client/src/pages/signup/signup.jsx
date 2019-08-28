@@ -15,7 +15,7 @@ class SignUp extends Component {
   };
 
   //회원 가입 버튼 클릭시
-  signUpBtnClicked = (e) => {
+  signUpBtnClicked =  async (e) => {
     e.preventDefault();
 
     //공백 확인
@@ -48,7 +48,9 @@ class SignUp extends Component {
     }
 
     //모두 통과시 createUser
-    service.createUser(this.state);
+    const response = await service.createUser(this.state);
+
+    console.log(response.toString());
   };
 
   checkEmailForm = () => {

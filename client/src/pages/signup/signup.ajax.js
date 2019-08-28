@@ -20,12 +20,12 @@ export function responseGoogle(response) {
 }
 
 export function createUser(userInfo) {
-  return axios.post(`http://localhost:5000/users/create`, {
-        userInfo:{
-          email: userInfo.email,
-          username: userInfo.nickName,
-          password: userInfo.password,
-          content: "content",
-        }
-      });
+  return axios.post(`${process.env.REACT_APP_NODE_API_URL}/users/create`, {
+    userInfo: {
+      email: userInfo.email,
+      username: userInfo.nickName,
+      password: userInfo.password,
+      content: "content",
+    }
+  });
 }

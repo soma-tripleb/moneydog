@@ -1,10 +1,8 @@
 const express = require('express');
+const router = express.Router();
 
 const UserService = require('./userService');
 const UserTest = require('./userTest');
-
-const router = express.Router();
-
 
 router.get('/', (req, res) => {
   console.log('get list호출');
@@ -22,21 +20,22 @@ router.get('/:id', (req, res) => {
 });
 
 // post 로 들어온 json 형식 userInfo 로 유저 등록,
-// TODO: 아이디 중복 확인 필요
-router.post('/create', (req, res)=>{
-  const userInfo = req.body.userInfo;
+// router.post('/create', (req, res)=>{
+//   const userInfo = req.body.userInfo;
+//
+//   console.log('create controller called');
+//   UserService.createUser(userInfo)
+//     .then((user) => {
+//       console.log('user 생성');
+//       res.send(user);
+//     })
+//     .catch((e) => {
+//       console.log('에러 발생');
+//       res.send(e);
+//     });
+// });
 
-  console.log('create controller called');
-  UserService.createUser(userInfo)
-    .then((user) => {
-      console.log('user생성');
-      res.send(user);
-    })
-    .catch((e) => {
-      console.log('에러발생');
-      res.send(e);
-    });
-});
+router.post('/create', UserService.createUser);
 
 router.post('/login', UserTest.findUserByEmail);
 

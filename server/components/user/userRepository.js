@@ -13,9 +13,11 @@ const getUserById = (params) => {
   return User.find(modelParams);
 };
 
-const getUserByEmail = (email) => {
-  User.find({email: email})
-    .then((user) => user[0])
+const getUserByEmail = async (email) => {
+  return await User.find({email: email})
+    .then((user) => {
+      return user;
+    })
     .catch((err) => console.log(err));
 };
 
