@@ -11,6 +11,7 @@ mongoose.connect(MONGO_URI, {
   'useNewUrlParser': true})
   .then(() => console.log('Connected to mongod server'))
   .catch((e) => {
+    console.log('mongodb 연결에 문제가 있습니다.');
     console.error(e);
   });
 

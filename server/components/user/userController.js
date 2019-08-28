@@ -1,7 +1,6 @@
 const express = require('express');
 
 const UserService = require('./userService');
-const UserTest = require('./userTest');
 
 const router = express.Router();
 
@@ -42,7 +41,5 @@ router.post('/create', (req, res)=>{
       res.send(e);
     });
 });
-
-router.post('/login', UserTest.findUserByEmail);
 
 module.exports = router;
