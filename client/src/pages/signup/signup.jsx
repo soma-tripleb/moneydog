@@ -42,6 +42,11 @@ class SignUp extends Component {
       return false;
     }
 
+    // 비밀번호 형식 확인.
+    if (!this.checkedPasswordForm()) {
+      return false;
+    }
+
     //모두 통과시 createUser
     service.createUser(this.state);
   };
@@ -68,7 +73,33 @@ class SignUp extends Component {
     return true;
   };
 
+  checkedPasswordForm = () => {
+    const pw = this.state.password;
+    const num = pw.search(/[0-9]/g);
+    const eng = pw.search(/[a-z]/ig);
+    const spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
+    if(pw.length < 8 || pw.length > 20){
+      this.setState({
+        errorMessage: '8자리 ~ 20자리 이내로 입력해주세요.',
+      });
+      return false;
+    }
+
+    if(pw.search(/₩s/) !== -1){
+      this.setState({
+        errorMessage: '비밀번호는 공백업이 입력해주세요.',
+      });
+      return false;
+    } if(num < 0 || eng < 0 || spe < 0 ){
+      this.setState({
+        errorMessage: '영문,숫자, 특수문자를 혼합하여 입력해주세요.',
+      });
+      return false;
+    }
+
+    return true;
+  };
 
   //textbox 채워 넣을때 이벤트
   onChangeNickName = (e) => {
