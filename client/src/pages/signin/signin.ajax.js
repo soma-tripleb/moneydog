@@ -7,6 +7,8 @@ export async function login(userInfo) {
       email: userInfo.email,
       password: userInfo.password,
     }
+  }).catch( err =>{
+    return err.response;
   });
 }
 

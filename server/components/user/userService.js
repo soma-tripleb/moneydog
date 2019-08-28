@@ -19,9 +19,11 @@ UserService.login = async (req, res) => {
   const result = await UserRepository.getUserByEmail(userInfo.email);
 
   if (Object.keys(result).length === 0) {
-    return res.status(400).json({status: 409, message: '아이디가 없다.'});
+    return res.status(400).json({status: 400, message: '아이디가 없다.'});
   } else if (result[0].password === userInfo.password) {
     return res.status(200).json({status: 200, message: 'error'});
+  }else if (result[0].password !== userInfo.password) {
+    return res.status(409).json({status: 409, message: 'error'});
   }
 };
 
