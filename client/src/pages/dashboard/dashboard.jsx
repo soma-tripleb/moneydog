@@ -37,7 +37,7 @@ class DashBoard extends Component {
   fetchUserInfo = async (email) => {
     const response = await service.getUserByEmail(email);
     this.setState({
-      user: response.data[0],
+      user: response.data,
     });
   };
 

@@ -14,7 +14,7 @@ const getUserById = (params) => {
 };
 
 async function getUserByEmail(email) {
-  const user = User.find({email: email});
+  const user = User.findOne({email});
   console.log(user);
   return user;
 }
