@@ -12,9 +12,9 @@ class Categories extends Component {
   };
 
   arr = {
-    Netflix: Netflix,
+    netflix: Netflix,
     Melon: Melon,
-    "Watcha Play": Watcha,
+    "watcha": Watcha,
     TVING: Tving,
   };
 
@@ -43,17 +43,20 @@ class Categories extends Component {
           </PageHeader>
           <br/>
           <div>
-            {this.props.data.map((data, index) => {
+            {this.props.data.subscriptions.map((data, index) => {
               return (
                   <div key={index} className="container w-100 p-3" id="inner-element">
                     <div className="row">
                       <div className="col">
                         {/*<img src={data.serviceName} alt={data.serviceName} style={{height: '5vh', borderRadius: '5px'}}/>*/}
-                        <img src={this.arr[data.serviceName]} alt={data.serviceName} style={{height: '5vh', borderRadius: '5px'}}/>
+                        <img src={this.arr[data.name]} alt={data.name} style={{height: '5vh', borderRadius: '5px'}}/>
+                      </div>
+                      <div className="col">
+                          {data.name}
                       </div>
                       <div className="col">
                         <button>
-                          8월 {data.paymentDay}일
+                          {data.date}
                         </button>
                       </div>
 
