@@ -1,0 +1,23 @@
+{
+  "email": "jimmyjaeyeon@gmail.com",
+  "subscriptions": [
+    {
+      "fromEmail": "noreply@apple.com",
+      "email": "jimmyjaeyeon@gmail.com",
+      "name": "netflix",
+      "price": 14500,
+      "date": "2019-08-28",
+      "renewal": "2019-09-28",
+      "periodMonth": 1
+    },
+    {
+      "fromEmail": "noreply@apple.com",
+      "email": "jimmyjaeyeon@gmail.com",
+      "name": "watcha",
+      "price": 7900,
+      "date": "2019-08-28",
+      "renewal": "2019-11-28",
+      "periodMonth": 1
+    }
+  ]
+}

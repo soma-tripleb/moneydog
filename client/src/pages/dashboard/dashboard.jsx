@@ -15,10 +15,13 @@ class DashBoard extends Component {
 
   state = {
     data: null,
+    user: null,
   };
 
+  // Component Life Cycle
   componentDidMount() {
     this.fetchPostInfo(1);
+    this.fetchUserInfo('jimmyjaeyeon@gmail.com');
   }
 
   fetchPostInfo = async (postId) => {
@@ -28,8 +31,15 @@ class DashBoard extends Component {
     });
   };
 
+  fetchUserInfo = async (email) => {
+    const response = await service.getUserByEmail(email);
+    this.setState({
+      user: response.data,
+    });
+  };
+
   render() {
-    console.log(this.state.data);
+    console.log('user : ', this.state.user);
     return (
         <>
           <div className="container">
@@ -47,7 +57,7 @@ class DashBoard extends Component {
               {/*구독중인 서비스 list */}
               <div className="col-md-6">
                 <div className='TotalAmount'>
-                  <TotalAmount/>
+                  <TotalAmount data={this.state.user}/>
                 </div>
                 <hr/>
                 <div className='categories'>

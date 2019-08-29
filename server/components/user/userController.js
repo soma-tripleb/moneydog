@@ -1,7 +1,8 @@
 const express = require('express');
-const router = express.Router();
 
 const UserService = require('./userService');
+
+const router = express.Router();
 
 router.get('/', (req, res) => {
   console.log('get list호출');
@@ -14,28 +15,31 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
-  res.send(UserService.getUserById(req.params.id));
+router.get('/:email', (req, res) => {
+  const result = UserService.getUserByEmail(req.params.email);
+  result
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => res.end(err));
 });
 
-// post 로 들어온 json 형식 userInfo 로 유저 등록,
-// router.post('/create', (req, res)=>{
-//   const userInfo = req.body.userInfo;
-//
-//   console.log('create controller called');
-//   UserService.createUser(userInfo)
-//     .then((user) => {
-//       console.log('user 생성');
-//       res.send(user);
-//     })
-//     .catch((e) => {
-//       console.log('에러 발생');
-//       res.send(e);
-//     });
-// });
-
-router.post('/signUp', UserService.register);
-
-router.post('/signIn', UserService.login);
+router.post('/signUp', (req, res) => {
+  if (UserService.register(req.body.userInfo)) {
+    res.status(201).json({status: 201, message: 'Successfully User Register'});
+  } else {
+    res.status(409).json({status: 409, message: 'error'});
+  }
+});
+router.post('/signIn', async (req, res) => {
+  const loginResponse = await UserService.login(req.body.userInfo);
+  if (loginResponse === 200) {
+    res.status(200).json({status: 200, message: '로그인 성공'});
+  } else if (loginResponse === 400) {
+    res.status(400).json({status: 400, message: '아이디가 없다.'});
+  } else {
+    res.status(409).json({status: 409, message: '비밀번호가 틀렸습니다.'});
+  }
+});
 
 module.exports = router;

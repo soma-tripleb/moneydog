@@ -14,7 +14,7 @@ const getUserById = (params) => {
 };
 
 const getUserByEmail = async (email) => {
-  return await User.find({email: email})
+  return await User.findOne({email})
     .then((user) => {
       return user;
     })

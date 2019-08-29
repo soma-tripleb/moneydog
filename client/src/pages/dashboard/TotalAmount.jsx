@@ -4,7 +4,20 @@ class TotalAmount extends Component {
     constructor(props) {
     super(props);
   }
+
+  getTotalAmount = (subscriptions) => {
+    let sum = 0;
+    subscriptions.map((subscription) => sum += subscription.price);
+    return sum;
+  };
+
   render() {
+    if (this.props.data === null) {
+        return (
+            <>
+            </>
+        )
+    }
     return(
      <div>
       TotalAmount
@@ -12,16 +25,7 @@ class TotalAmount extends Component {
          <div className="row">
            <div className="col">
              <button>
-             8월 의 총 이용 금액은 36800 원 입니다 !
-             </button>
-           </div>
-         </div>
-       </div>
-       <div className="container w-100 p-3" id="inner-element">
-         <div className="row">
-           <div className="col">
-             <button>
-               7월 의 총 이용 금액은 29600 원 입니다 !
+             이번달 총 이용 금액은 {this.getTotalAmount(this.props.data.subscriptions)}입니다.
              </button>
            </div>
          </div>

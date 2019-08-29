@@ -11,7 +11,8 @@
             "always"
         ],
         "new-cap": "off",
-        "max-len": "off"
+        "max-len": "off",
+        "require-jsdoc": "off"
     },
     "parserOptions": {
         "ecmaVersion": 2018

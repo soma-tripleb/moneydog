@@ -1,43 +1,34 @@
 const UserRepository = require('./userRepository');
 
-const UserService = {};
-
-UserService.register = async (req, res) => {
-  const userInfo = req.body.userInfo;
-  const result = await UserRepository.getUserByEmail(userInfo.email);
-
-  if (Object.keys(result).length === 0) {
+const register = async (userInfo) => {
+  const user = await UserRepository.getUserByEmail(userInfo.email);
+  if (user === null) {
     UserRepository.createUser(userInfo);
-    return res.status(201).json({status: 201, message: 'Successfully User Register'});
+    return true;
   } else {
-    return res.status(409).json({status: 409, message: 'error'});
+    return false;
   }
 };
 
-UserService.login = async (req, res) => {
-  const userInfo = req.body.userInfo;
-  const result = await UserRepository.getUserByEmail(userInfo.email);
-
-  if (Object.keys(result).length === 0) {
-    return res.status(400).json({status: 400, message: '아이디가 없다.'});
-  } else if (result[0].password === userInfo.password) {
-    return res.status(200).json({status: 200, message: 'error'});
-  }else if (result[0].password !== userInfo.password) {
-    return res.status(409).json({status: 409, message: 'error'});
-  }
+const login = async (userInfo) => {
+  const user = await UserRepository.getUserByEmail(userInfo.email);
+  if (user === null) {
+    return 400;
+  } else if (user.password === userInfo.password) {
+    return 200;
+  } else if (user.password !== userInfo.password) {
+    return 409;
+  };
 };
 
-// const getUserById = (params) => {
-//   return UserRepository.getUserById(params);
-// };
-//
-// const getUserList = () => {
-//   return UserRepository.getUserList();
-// };
 
-// const getUserByEmail = (email) => {
-//   // return UserRepository.getUserByEmail(email);
-//   UserRepository.getUserByEmail(email);
-// };
+const getUserByEmail = (email) => {
+  // return UserRepository.getUserByEmail(email);
+  UserRepository.getUserByEmail(email);
+};
 
-module.exports = UserService;
+module.exports = {
+  register: register,
+  login: login,
+  getUserByEmail: getUserByEmail,
+}
