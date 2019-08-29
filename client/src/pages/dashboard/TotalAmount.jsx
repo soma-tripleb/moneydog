@@ -5,8 +5,13 @@ class TotalAmount extends Component {
     super(props);
   }
 
+  getTotalAmount = (subscriptions) => {
+    let sum = 0;
+    subscriptions.map((subscription) => sum += subscription.price);
+    return sum;
+  };
+
   render() {
-    console.log('this.props.data is null : ', this.props.data);
     if (this.props.data === null) {
         return (
             <>
@@ -20,8 +25,7 @@ class TotalAmount extends Component {
          <div className="row">
            <div className="col">
              <button>
-             8월 의 총 이용 금액은 36800 원 입니다 !
-                 {this.props.data.email}
+             이번달 총 이용 금액은 {this.getTotalAmount(this.props.data.subscriptions)}입니다.
              </button>
            </div>
          </div>
