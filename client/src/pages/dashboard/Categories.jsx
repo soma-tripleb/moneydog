@@ -5,6 +5,7 @@ import Netflix from '../../static/img/templogo/netflix.png';
 import Melon from '../../static/img/templogo/melon.png';
 import Tving from '../../static/img/templogo/tving.png';
 import Watcha from '../../static/img/templogo/watcha.png';
+import './Categories.css';
 
 class Categories extends Component {
   state = {
@@ -53,20 +54,16 @@ class Categories extends Component {
                   <div key={index} className="container w-100 p-3" id="inner-element">
                     <div className="row">
                       <div className="col">
-                        {/*<img src={data.serviceName} alt={data.serviceName} style={{height: '5vh', borderRadius: '5px'}}/>*/}
-                        <img src={this.arr[data.name]} alt={data.name} style={{height: '5vh', borderRadius: '5px'}}/>
+                        <img src={this.arr[data.name]} alt={data.name} style={{height: '5vh', borderRadius: '5px', paddingLeft: '0px'}}/>
                       </div>
                       <div className="col">
                           {data.name}
                       </div>
                       <div className="col">
-                        <button>
-                          {this.calLeftDay(data.renewal)}일 남음
-                        </button>
+                        ₩{data.price}
                       </div>
-
                       <div className="col">
-                        ₩ {data.price}
+                          {this.calLeftDay(data.renewal)}일 남음
                       </div>
                     </div>
                   </div>
