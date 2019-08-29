@@ -14,22 +14,13 @@ import './dashboard.css';
 class DashBoard extends Component {
 
   state = {
-    data: null,
     user: null,
   };
 
   // Component Life Cycle
   componentDidMount() {
-    // this.fetchPostInfo(1);
     this.fetchUserInfo('jimmyjaeyeon@gmail.com');
   }
-
-  // fetchPostInfo = async (postId) => {
-  //   const response = await service.getUserServiceInfo(postId);
-  //   this.setState({
-  //     data: response.data,
-  //   });
-  // };
 
   fetchUserInfo = async (email) => {
     const response = await service.getUserByEmail(email);

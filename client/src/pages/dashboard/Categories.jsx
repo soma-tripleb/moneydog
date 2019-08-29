@@ -14,8 +14,13 @@ class Categories extends Component {
   arr = {
     netflix: Netflix,
     Melon: Melon,
-    "watcha": Watcha,
+    watcha: Watcha,
     TVING: Tving,
+  };
+
+  calLeftDay = (renewal) => {
+    const leftTime = new Date(renewal) - new Date(new Date().toISOString().slice(0, 10));
+    return (leftTime / (1000 * 3600 * 24));
   };
 
   render() {
@@ -56,7 +61,7 @@ class Categories extends Component {
                       </div>
                       <div className="col">
                         <button>
-                          {data.date}
+                          {this.calLeftDay(data.renewal)}일 남음
                         </button>
                       </div>
 
