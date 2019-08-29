@@ -154,8 +154,38 @@ public class GmailListenerImpl implements GmailListener {
     return new JsonData<Content>("body", size, bodies);
   }
 
+  /**
+   * 'refresh token' 사용
+   * @param query
+   * @return
+   */
   @Override
-  public JsonData<Content> getMessageTotal(String query) {
+  public JsonData<Content> getMessagesTotal(String query) {
+    GoogleTokenResponse tokenResponse = googleApi.tokenResponseWithRefreshToken();
+
+    String accessToken = tokenResponse.getAccessToken();
+
+    GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
+
+    Gmail service = new Gmail.Builder(
+            new NetHttpTransport(),
+            JacksonFactory.getDefaultInstance(),
+            credential
+    ).setApplicationName(APPLICATION_NAME)
+            .build();
+
+    List<Message> messageIds = googleApi.listMessagesMatchingQuery(service, USER_GMAIL, query);
+
+    for (Message m : messageIds) {
+      if(!m.getId().equals(null)) {
+        System.out.println(m.getId());
+
+        googleApi.getMessageTotal(service, "dudrnxps1@gmail.com", m.getId());
+      } else {
+        System.out.println("m get id null");
+      }
+    }
+
     return null;
   }
 }

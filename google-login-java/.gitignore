@@ -16,3 +16,8 @@ bin
 .classpath
 .project
 .settings
+
+### HTTPS ###
+src/main/resources/https/moneydog.jks
+src/main/resources/https/moneydog.cer
+src/main/resources/https/moneydog.ts

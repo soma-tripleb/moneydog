@@ -16,5 +16,5 @@ public interface GmailListener {
 
   JsonData<Content> getMessagesBody(String query);
 
-  JsonData<Content> getMessageTotal(String query);
+  JsonData<Content> getMessagesTotal(String query);
 }

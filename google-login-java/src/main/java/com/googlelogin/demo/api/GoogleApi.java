@@ -17,11 +17,12 @@ import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class GoogleApi {
@@ -93,6 +94,16 @@ public class GoogleApi {
     }
 
     return null;
+  }
+
+  public String getAccessTokenOfRefreshToken(String refreshToken) {
+    Optional<GoogleTokenResponse> maybeTokenResponse = Optional.ofNullable(this.tokenResponseWithRefreshToken());
+    GoogleTokenResponse tokenResponse = maybeTokenResponse.get();
+
+    Optional<String> maybeAccessToken = Optional.ofNullable(tokenResponse.getAccessToken());
+    String accessToken = maybeAccessToken.get();
+
+    return accessToken;
   }
 
   public Gmail getGmailService(String accessToken) {
@@ -185,5 +196,22 @@ public class GoogleApi {
     String html = new String(decodedHtml);
 
     return html;
+  }
+
+
+  public String getMessageTotal(Gmail service, String userId, String messageId) {
+
+    try {
+      Message message = service.users().messages().get(userId, messageId).execute();
+
+      Base64 base64Url = new Base64(true);
+      byte[] emailBytes = base64Url.decodeBase64(message.getRaw());
+
+      System.out.println(new String(emailBytes));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return "success";
   }
 }

@@ -41,7 +41,7 @@ class SubsModal extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <div className="container">
-                            <p style={{ marginBottom: '5px' }}>이용권</p>
+                            {/* <p style={{ marginBottom: '5px' }}>이용권</p>
                             <div className="row" style={{ margin: 'auto', textAlign: 'center', border: '1px solid black', borderRadius: '5px', padding: '10px' }}>
 
                                 <div className="input-group">
@@ -66,7 +66,7 @@ class SubsModal extends Component {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
 
                             <hr />
 

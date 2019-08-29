@@ -26,7 +26,7 @@ class Subscriptions extends Component {
       { number: '', logo: 'https://www.apple.com/v/apple-music/j/images/shared/og_image.png', name: 'Apple Music', label: '+' },
       { number: '', logo: 'https://sites.google.com/a/bhuhsd.net/jessica-rapetti-u-s-government-economics-eportfolio-bhhs2014/_/rsrc/1421979558598/s6-unit-2-the-goals-and-the-origins-of-our-government-1/home/google%20drive.png?height=200&width=200', name: 'Google Drive', label: '+' },
       { number: '', logo: 'https://www.fieber.nl/wp-content/uploads/2015/07/Office-365-Business-Premium.jpg', name: 'Office 365', label: '+' },
-      { number: '', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUM4jo_1bFr9yd-6cRgUI03mj3txWSJRbxO9Y4jG7P59-24eAE', name: 'RIDIBOOKS', label: '+' },
+      { number: '', logo: 'https://is5-ssl.mzstatic.com/image/thumb/Purple113/v4/71/b3/0f/71b30f06-c3f3-13dc-7ad7-d99fae29f0c5/source/512x512bb.jpg', name: 'Tving', label: '+' },
       { number: '', logo: 'https://music-phinf.pstatic.net/20180625_230/1529912520094UdxG8_PNG/vibe_sns_1200X1200.png?type=w726', name: 'Vibe', label: '+' },
     ],
     arr2: [],
@@ -131,7 +131,7 @@ class Subscriptions extends Component {
                           </Modal.Header>
                           <Modal.Body>
                             <div className="container">
-                              <p style={{ marginBottom: '5px' }}>이용권</p>
+                              {/* <p style={{ marginBottom: '5px' }}>이용권</p>
                               <div className="row" style={{ margin: 'auto', textAlign: 'center', border: '1px solid black', borderRadius: '5px', padding: '10px' }}>
 
                                 <div className="input-group">
@@ -156,7 +156,7 @@ class Subscriptions extends Component {
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                              </div> */}
                               {/* <div className="row" style={{margin: 'auto', height: '100px', textAlign: 'center', marginBottom: '20px' }}>
                                 <div className="col-sm" style={{ borderRadius: '10px', border: '1px solid gray', marginLeft: '5px', marginRight: '5px', backgroundColor: {priceDivBgc} }} ref={this.styleDiv} onClick={this.handleColorChange.bind(this)}>
                                   <p>A</p>
@@ -252,7 +252,7 @@ class Subscriptions extends Component {
           <div className="row">
             <div className="col-sm"></div>
             <div className="col-sm">
-              <div className="circle"><a href="#" role="button" style={{ color: 'black' }}>Done</a></div>
+              <div className="circle"><a href="/dashboard" role="button" style={{ color: 'black' }}>Done</a></div>
             </div>
             <div className="col-sm"></div>
           </div>
