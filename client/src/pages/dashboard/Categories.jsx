@@ -24,6 +24,17 @@ class Categories extends Component {
     return (leftTime / (1000 * 3600 * 24));
   };
 
+  sortByPrice = (subscriptions) => {
+    console.log('clicked sortby price');
+    subscriptions.sort((a, b) => (a.price > b.price) ? -1: 1);
+  };
+
+  sortByLeftDay = (subscriptions) => {
+    console.log('clicked sortby leftday');
+    subscriptions.sort((a, b) => (this.calLeftDay(a) > this.calLeftDay(b) ? -1 : 1));
+    console.log(subscriptions);
+  };
+
   render() {
     //TODO :: ajax 로 data를 받아와서 처음에 null 값 error 가뜸 이곳에 스피너 같은거 넢어 주어야함
     if (this.props.data == null) {
@@ -39,10 +50,10 @@ class Categories extends Component {
           <p><u> 구독 중인 서비스 </u></p>
           <PageHeader title="구독 중인 서비스"
                       extra={[
-                        <Button key="2">
+                        <Button key="2" onClick={this.sortByPrice(this.props.data.subscriptions)}>
                           가격 순
                         </Button>,
-                        <Button key="1" type="primary">
+                        <Button key="1" type="primary" onClick={this.sortByLeftDay(this.props.data.subscriptions)}>
                           남은 일
                         </Button>,
                       ]}>
