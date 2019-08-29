@@ -11,51 +11,123 @@ class SignUp extends Component {
     email: '',
     password: '',
     passwordCheck: '',
-    passwordError: '',
+    errorMessage: '',
   };
 
   //회원 가입 버튼 클릭시
-  signupBtnClicked = (e) => {
-    console.log(e);
-    if(this.state.nickName === '' || this.state.email === '' || this.state.passwordCheck === '' || this.state.password === '' ){
+  signUpBtnClicked =  async (e) => {
+    e.preventDefault();
+
+    //공백 확인
+    if (!this.checkBlank()) {
       this.setState({
-        passwordError : '빈칸을 채워주세요',
+        errorMessage: '빈칸을 채워주세요',
       });
-      return
+      return false;
     }
 
-    //비민번호 같은지 확인
-    if (this.state.passwordCheck !== this.state.password) {
+    // 이메일 형식 확인
+    if (!this.checkEmailForm()) {
       this.setState({
-        passwordError : '비밀번호가 일치하지 않습니다.',
+        errorMessage: '이메일 형식이 올바르지 않습니다.',
       });
-      return
-    }else{
+      return false;
+    }
+
+    // 패스워드 같은지 확인
+    if (!this.checkEqualPassword()) {
       this.setState({
-        passwordError : '',
+        errorMessage: '비밀번호가 일치하지 않습니다.',
       });
-      //모두 통과시 createUser
-      service.createUser(this.state);
+      return false;
+    }
+
+    // 비밀번호 형식 확인.
+    if (!this.checkedPasswordForm()) {
+      return false;
+    }
+
+    //모두 통과시 createUser
+    const response = await service.createUser(this.state);
+
+    if(response.status === 409){
+      this.setState({
+        errorMessage: '이미 있는 아이디 입니다.',
+      });
+    }else if(response.status === 201){
+      alert("회원 가입 성공!");
     }
   };
 
+  checkEmailForm = () => {
+    const exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    if (!exptext.test(this.state.email)) {
+      return false;
+    }
+    return true;
+  };
+
+  checkBlank = () => {
+    if (this.state.nickName === '' || this.state.email === '' || this.state.passwordCheck === '' || this.state.password === '') {
+      return false;
+    }
+    return true;
+  };
+
+  checkEqualPassword = () => {
+    if (this.state.passwordCheck !== this.state.password) {
+      return false;
+    }
+    return true;
+  };
+
+  checkedPasswordForm = () => {
+    const pw = this.state.password;
+    const num = pw.search(/[0-9]/g);
+    const eng = pw.search(/[a-z]/ig);
+    const spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+    if(pw.length < 8 || pw.length > 20){
+      this.setState({
+        errorMessage: '8자리 ~ 20자리 이내로 입력해주세요.',
+      });
+      return false;
+    }
+
+    if(pw.search(/₩s/) !== -1){
+      this.setState({
+        errorMessage: '비밀번호는 공백업이 입력해주세요.',
+      });
+      return false;
+    } if(num < 0 || eng < 0 || spe < 0 ){
+      this.setState({
+        errorMessage: '영문,숫자, 특수문자를 혼합하여 입력해주세요.',
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  //textbox 채워 넣을때 이벤트
   onChangeNickName = (e) => {
     this.setState({
       nickName: e.target.value
     });
   };
+  //textbox 채워 넣을때 이벤트
   onChangePasswordCheck = (e) => {
     this.setState({
       passwordCheck: e.target.value
     });
   };
-
+  //textbox 채워 넣을때 이벤트
   onChangeEmail = (e) => {
     this.setState({
       email: e.target.value
     });
   };
-
+  //textbox 채워 넣을때 이벤트
   onChangePassword = (e) => {
     this.setState({
       password: e.target.value
@@ -73,7 +145,8 @@ class SignUp extends Component {
                 <h4 className="card-title mt-3 text-center">Sign Up</h4>
                 <p className="text-center">Get started with your free account</p>
                 <p>
-                  <button onClick={service.responseGoogle} className="btn btn-block btn-google" style={{backgroundColor: 'lightgray'}}>
+                  <button onClick={service.responseGoogle} className="btn btn-block btn-google"
+                          style={{backgroundColor: 'lightgray'}}>
                     <i className="fab fa-google"/> Login via google
                   </button>
                 </p>
@@ -114,12 +187,12 @@ class SignUp extends Component {
                            value={this.state.passwordCheck} onChange={this.onChangePasswordCheck}/>
                   </div>
                   <div>
-                    <label className="passwordErrorLabel">{this.state.passwordError}</label>
+                    <label className="passwordErrorLabel">{this.state.errorMessage}</label>
                   </div>
                   {/*회원가입 버튼*/}
                   <div className="form-group">
-                    <button type="submit" className="btn btn-primary btn-block" onClick={this.signupBtnClicked}> Create
-                      Account
+                    <button className="btn btn-primary btn-block"
+                            onClick={this.signUpBtnClicked}> Create Account
                     </button>
                   </div>
                   <p className="text-center">Have an account? <a href="/signin">Log In</a></p>

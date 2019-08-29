@@ -64,6 +64,7 @@
             <version>2.9.2</version>
         </dependency>
 
+        <!-- Swagger UI -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>

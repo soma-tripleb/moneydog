@@ -13,11 +13,13 @@ const getUserById = (params) => {
   return User.find(modelParams);
 };
 
-async function getUserByEmail(email) {
-  const user = User.findOne({email});
-  console.log(user);
-  return user;
-}
+const getUserByEmail = async (email) => {
+  return await User.findOne({email})
+    .then((user) => {
+      return user;
+    })
+    .catch((err) => console.log(err));
+};
 
 const createUser = (userInfo) => {
   return User.create(userInfo);

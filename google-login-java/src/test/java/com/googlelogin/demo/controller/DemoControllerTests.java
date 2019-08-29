@@ -29,11 +29,5 @@ public class DemoControllerTests {
             .andRespond(
                     withSuccess(new ClassPathResource("/test.json", getClass()), MediaType.APPLICATION_JSON));
 
-    /*
-    Book book = bookRestService.getRestBook();
-    assertThat(book.getId(), is(notNullValue()));
-    assertThat(book.getTitle(), is("title"));
-    assertThat(book.getPrice(), is(1000D));
-     */
   }
 }

@@ -1,25 +1,34 @@
 const UserRepository = require('./userRepository');
 
-const getUserById = (params) => {
-  return UserRepository.getUserById(params);
+const register = async (userInfo) => {
+  const user = await UserRepository.getUserByEmail(userInfo.email);
+  if (user === null) {
+    UserRepository.createUser(userInfo);
+    return true;
+  } else {
+    return false;
+  }
 };
 
-const getUserList = () => {
-  return UserRepository.getUserList();
+const login = async (userInfo) => {
+  const user = await UserRepository.getUserByEmail(userInfo.email);
+  if (user === null) {
+    return 400;
+  } else if (user.password === userInfo.password) {
+    return 200;
+  } else if (user.password !== userInfo.password) {
+    return 409;
+  };
 };
 
-const createUser = (userInfo) => {
-  return UserRepository.createUser(userInfo);
-};
 
-async function getUserByEmail(email) {
-  const user = await UserRepository.getUserByEmail(email);
-  return user;
-}
+const getUserByEmail = (email) => {
+  // return UserRepository.getUserByEmail(email);
+  UserRepository.getUserByEmail(email);
+};
 
 module.exports = {
-  getUserById: getUserById,
-  getUserList: getUserList,
-  createUser: createUser,
+  register: register,
+  login: login,
   getUserByEmail: getUserByEmail,
-};
+}
