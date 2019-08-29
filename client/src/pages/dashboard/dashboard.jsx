@@ -18,6 +18,7 @@ class DashBoard extends Component {
     user: null,
   };
 
+  // Component Life Cycle
   componentDidMount() {
     this.fetchPostInfo(1);
     this.fetchUserInfo('jimmyjaeyeon@gmail.com');
@@ -30,10 +31,6 @@ class DashBoard extends Component {
     });
   };
 
-  // componentDidMount() {
-  //   this.fetchPostInfo('jimmyjaeyeon@gmail.com');
-  // }
-  //
   fetchUserInfo = async (email) => {
     const response = await service.getUserByEmail(email);
     this.setState({
@@ -42,6 +39,7 @@ class DashBoard extends Component {
   };
 
   render() {
+    console.log('user : ', this.state.user);
     return (
         <>
           <div className="container">

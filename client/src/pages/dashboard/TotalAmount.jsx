@@ -4,8 +4,10 @@ class TotalAmount extends Component {
     constructor(props) {
     super(props);
   }
+
   render() {
-    if (this.props.user === null) {
+    console.log('this.props.data is null : ', this.props.data);
+    if (this.props.data === null) {
         return (
             <>
             </>

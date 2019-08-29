@@ -6,6 +6,5 @@ export function getUserServiceInfo(userID) {
 }
 
 export function getUserByEmail(email) {
-  console.log(`request : ${process.env.REACT_APP_NODE_API_URL}/users/${email}`)
   return axios.get(`${process.env.REACT_APP_NODE_API_URL}/users/${email}`);
 }
