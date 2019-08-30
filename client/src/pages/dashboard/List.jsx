@@ -12,13 +12,13 @@ class List extends Component {
     constructor(props) {
     super(props);
   }
+
   render() {
-      console.log(youtube);
     return(
      <div>
        <div className='row img-back'>
          <div className='col-3'>
-           <h3>22일</h3>
+           <h3>{this.props.date}일</h3>
          </div>
          <div className='img-border'>
            <img className="line-Img" src={Melon}
