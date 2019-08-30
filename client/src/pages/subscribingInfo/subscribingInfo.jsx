@@ -4,21 +4,14 @@ import * as service from './subscribingInfo.ajax';
 
 import './subscribingInfo.css';
 
-/*
-react dynamic form
-https://itnext.io/building-a-dynamic-controlled-form-in-react-together-794a44ee552c
-
-react form
-https://ko.reactjs.org/docs/forms.html
-*/
 class SubscribingInfo extends Component {
     constructor(props) {
         super(props);
 
         this.fetchPostInfo();
         this.state = {
-            userSubsList: [],
-            userInputList: [],
+            userSubsList: [],   // 사용자 데이터 받아오기
+            userInputList: [],    // 사용자 데이터 전달하기
         }
     }
 
@@ -26,14 +19,14 @@ class SubscribingInfo extends Component {
         const response = await service.getUserSubsInfo();
         const arrCnt = response.data.length;
 
-        let subsInfo = { payment: '', price: '' };
+        let subsInfo = { payment: "", price: "" };
         let subsInfoArr = [];
 
         for (let i = 0; i < arrCnt; i++) {
-            subsInfoArr.push(subsInfo);
+            console.log(i);
+            subsInfoArr.push({ payment: "", price: "" });
         }
 
-        console.log(arrCnt);
         this.setState({
             userSubsList: response.data.slice(),
             userInputList: subsInfoArr.slice(),
@@ -41,21 +34,28 @@ class SubscribingInfo extends Component {
     }
 
     handleChange = (e) => {
-        // let userInputList = [...this.state.userInputList];
-        // userInputList[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase();
-        // this.setState(
-        //     { userInputList }, () => console.log(this.state.userInputList)
-        // )
+        if (['payment', 'price'].includes(e.target.className)) {
+            let userInputList = [...this.state.userInputList];
+
+            console.log('target: ' + e.target.dataset.id + ' ' + e.target.className + ' ' + e.target.value)
+
+            userInputList[e.target.dataset.id][e.target.className] = e.target.value;
+            this.setState(
+                { userInputList }
+            )
+        } else {
+            this.setState({ [e.target.name]: e.target.value })
+        }
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(this.state.userPaymentList);
+        console.log(this.state.userInputList);
     }
 
     render() {
-        let { userInputList } = this.state;
+        let { userSubsList, userInputList } = this.state;
 
         return (
             <>
@@ -63,29 +63,41 @@ class SubscribingInfo extends Component {
                     <p>사용자 구독 서비스 정보 등록</p>
                     <div className="row">
                         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-                            {this.state.userSubsList.map(
-                                (content, i) => {
-                                    let subsPaymentId = `payment-${i}`;
-                                    let subsPriceId = `price-${i}`;
+                            {
+                                userSubsList.map(
+                                    (content, i) => {
+                                        let paymentId = `payment-${i}`;
+                                        let priceId = `price-${i}`;
 
-                                    return (
-                                        <div key={i} className="user-subs-info">
-                                            <span><img src={""} alt="logo" /></span>
-                                            <span>{content.name}</span>
-                                            <label htmlFor={subsPaymentId}>결제일</label>
-                                                <input type="text"
-                                                    name={subsPaymentId}
+                                        return (
+                                            <div key={i} className="user-subs-info">
+                                                <span><img src={""} alt="logo" /></span>
+                                                <span>{content.name}</span>
+                                                <label htmlFor={paymentId}>결제일</label>
+                                                <input
+                                                    type="text"
+                                                    name={paymentId}
                                                     data-id={i}
-                                                    id={subsPaymentId}
+                                                    id={paymentId}
                                                     value={userInputList[i].payment}
-                                                    className="payment" 
-                                                    />
-                                            <label>결제금액</label> 
-                                                <input type="text" />
-                                        </div>
-                                    )
-                                }
-                            )}
+                                                    placeholder="payment"
+                                                    className="payment"
+                                                />
+                                                <label htmlFor={priceId}>결제금액</label>
+                                                <input
+                                                    type="text"
+                                                    name={priceId}
+                                                    data-id={i}
+                                                    id={priceId}
+                                                    value={userInputList[i].price}
+                                                    placeholder="price"
+                                                    className="price"
+                                                />
+                                            </div>
+                                        )
+                                    }
+                                )
+                            }
                             <input type="submit" value="Submit" />
                         </form>
                     </div>
