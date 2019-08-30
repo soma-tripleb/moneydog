@@ -5,19 +5,19 @@ const commonParser = require('../parser/commonParser');
 
 const getSubscriptionList = () => {
   return subscriptionRepository.getSubscriptionList();
-}
+};
 
 const getSubscription = (response) => {
   if (commonParser.checkDomain(response) === 'apple') {
     return appleParser.getAppleInfo(response);
   }
   return googleParser.getGoolgeInfo(response);
-}
+};
 
 
 module.exports = {
   getSubscriptionList: getSubscriptionList,
   getSubscription: getSubscription,
 
-}
+};
 
