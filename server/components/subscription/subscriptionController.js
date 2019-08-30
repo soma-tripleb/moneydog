@@ -25,4 +25,9 @@ router.get('/:response', (req, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+  console.log('POST /subscriptions 사용자가 입력한 구독 서비스 정보');
+  console.log(req.body);
+});
+
 module.exports = router;
