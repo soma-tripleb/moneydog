@@ -22,9 +22,9 @@ const login = async (userInfo) => {
 };
 
 
-const getUserByEmail = (email) => {
-  // return UserRepository.getUserByEmail(email);
-  UserRepository.getUserByEmail(email);
+const getUserByEmail = async (email) => {
+  const user = await UserRepository.getUserByEmail(email);
+  return user;
 };
 
 module.exports = {
