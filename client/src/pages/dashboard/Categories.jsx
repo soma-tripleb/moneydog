@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {PageHeader, Button } from 'antd';
+import {PageHeader, Button, Spin, Icon } from 'antd';
 
 import Netflix from '../../static/img/templogo/netflix.png';
 import Melon from '../../static/img/templogo/melon.png';
@@ -44,7 +44,8 @@ class Categories extends Component {
     const {data} = this.props;
 
     if (this.props.data == null) {
-      return null;
+      const icon = <Icon type="loading" style={{ fontSize: 24}} spin />
+      return (<Spin indicator={icon} />);
     }
     //TODO :: ajax 로 data를 받아와서 처음에 null 값 error 가뜸 이곳에 스피너 같은거 넢어 주어야함
     // console.log(this.props.data.subscriptions);

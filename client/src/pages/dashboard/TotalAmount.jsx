@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Icon, Spin} from "antd";
 
 class TotalAmount extends Component {
     constructor(props) {
@@ -12,12 +13,11 @@ class TotalAmount extends Component {
   };
 
   render() {
-    if (this.props.data === null) {
-        return (
-            <>
-            </>
-        )
+    if (this.props.data == null) {
+      const icon = <Icon type="loading" style={{ fontSize: 24}} spin />
+      return (<Spin indicator={icon} />);
     }
+
     return(
      <div>
       TotalAmount
