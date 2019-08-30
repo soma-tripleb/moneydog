@@ -11,7 +11,7 @@ import Watcha from '../../static/img/templogo/watcha.png';
 class CalendarClass extends Component {
 
   onPanelChange = (value, mode) => {
-    console.log(value, mode);
+    console.log('test',value, mode);
   };
 
   arr = {
@@ -25,7 +25,6 @@ class CalendarClass extends Component {
     let listData;
     subscriptions.map((subscription) => {
       if (moment(subscription.renewal).date() === value.date()) {
-        console.log(`${subscription.name}이 ${value.date()}날에 일치`);
         listData = [ {type: subscription.name}];
       }
     });
