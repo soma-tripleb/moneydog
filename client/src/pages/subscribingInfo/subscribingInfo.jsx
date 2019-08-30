@@ -19,11 +19,9 @@ class SubscribingInfo extends Component {
         const response = await service.getUserSubsInfo();
         const arrCnt = response.data.length;
 
-        let subsInfo = { payment: "", price: "" };
         let subsInfoArr = [];
 
         for (let i = 0; i < arrCnt; i++) {
-            console.log(i);
             subsInfoArr.push({ payment: "", price: "" });
         }
 
@@ -36,9 +34,6 @@ class SubscribingInfo extends Component {
     handleChange = (e) => {
         if (['payment', 'price'].includes(e.target.className)) {
             let userInputList = [...this.state.userInputList];
-
-            console.log('target: ' + e.target.dataset.id + ' ' + e.target.className + ' ' + e.target.value)
-
             userInputList[e.target.dataset.id][e.target.className] = e.target.value;
             this.setState(
                 { userInputList }
@@ -51,6 +46,8 @@ class SubscribingInfo extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
+        service.updateUserSubsInfo(this.state.userInputList);
+
         console.log(this.state.userInputList);
     }
 
@@ -62,7 +59,7 @@ class SubscribingInfo extends Component {
                 <div className="container">
                     <p>사용자 구독 서비스 정보 등록</p>
                     <div className="row">
-                        <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+                        <form onSubmit={this.handleSubmit}>
                             {
                                 userSubsList.map(
                                     (content, i) => {
@@ -70,7 +67,7 @@ class SubscribingInfo extends Component {
                                         let priceId = `price-${i}`;
 
                                         return (
-                                            <div key={i} className="user-subs-info">
+                                            <div key={i}>
                                                 <span><img src={""} alt="logo" /></span>
                                                 <span>{content.name}</span>
                                                 <label htmlFor={paymentId}>결제일</label>
@@ -82,6 +79,7 @@ class SubscribingInfo extends Component {
                                                     value={userInputList[i].payment}
                                                     placeholder="payment"
                                                     className="payment"
+                                                    onChange={this.handleChange}
                                                 />
                                                 <label htmlFor={priceId}>결제금액</label>
                                                 <input
@@ -92,6 +90,7 @@ class SubscribingInfo extends Component {
                                                     value={userInputList[i].price}
                                                     placeholder="price"
                                                     className="price"
+                                                    onChange={this.handleChange}
                                                 />
                                             </div>
                                         )
