@@ -15,9 +15,9 @@ class CalendarClass extends Component {
   };
 
   arr = {
-    Netflix: Netflix,
+    netflix: Netflix,
     Melon: Melon,
-    "Watcha Play": Watcha,
+    watcha: Watcha,
     TVING: Tving,
   };
 
@@ -26,49 +26,24 @@ class CalendarClass extends Component {
     switch (value.date()) {
       case 5:
         listData = [
-          // { type: 'warning', content: 'This is warning event.' },
-          { type: 'Netflix'}
-          // { type: 'success', content: 'This is usual event.' },
+          { type: 'netflix'}
         ];
         break;
       case 12:
         listData = [
-          // { type: 'warning', content: 'This is warning event.' },
-          { type: 'Watcha Play'}
-          // { type: 'success', content: 'This is usual event.' },
+          { type: 'watcha'}
         ];
         break;
       case 15:
         listData = [
-          // { type: 'warning', content: 'This is warning event.' },
           { type: 'TVING'}
-          // { type: 'success', content: 'This is usual event.' },
         ];
         break;
       case 22:
         listData = [
-          // { type: 'warning', content: 'This is warning event.' },
           { type: 'Melon'}
-          // { type: 'success', content: 'This is usual event.' },
         ];
         break;
-      // case 10:
-      //   listData = [
-      //     { type: 'warning', content: 'This is warning event.' },
-      //     { type: 'success', content: 'This is usual event.' },
-      //     { type: 'error', content: 'This is error event.' },
-      //   ];
-      //   break;
-      // case 15:
-      //   listData = [
-      //     { type: 'warning', content: 'This is warning event' },
-      //     { type: 'success', content: 'This is very long usual event。。....' },
-      //     { type: 'error', content: 'This is error event 1.' },
-      //     { type: 'error', content: 'This is error event 2.' },
-      //     { type: 'error', content: 'This is error event 3.' },
-      //     { type: 'error', content: 'This is error event 4.' },
-      //   ];
-      //   break;
       default:
     }
     return listData || [];
