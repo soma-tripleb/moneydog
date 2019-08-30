@@ -9,15 +9,14 @@ import Tving from '../../static/img/templogo/tving.png';
 import Watcha from '../../static/img/templogo/watcha.png';
 
 class CalendarClass extends Component {
-  state = {
-    selectedValue: null,
-  };
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-  onSelect = (value) => {
-    this.setState({selectedValue: value}, () => {
-      console.log('날짜가 선택되었습니다.', this.state);
-    })
-  };
+  handleChange = (value) => {
+    this.props.handleChange(value);
+  }
 
   onPanelChange = (value, mode) => {
     console.log('test',value, mode);
@@ -76,13 +75,13 @@ class CalendarClass extends Component {
     if (this.props.data == null) {
       return null;
     }
-
+    console.log('pros : ', this.props);
     return (
       <div>
         <p><u> 월별 결제일 정보 </u></p>
-        <Alert message={`You selected date: ${this.state.selectedValue && this.state.selectedValue.format('YYYY-MM-DD')}`} />
+        <Alert message={`You selected date: ${this.props.date && this.props.date.format('YYYY-MM-DD')}`} />
         <Calendar fullscreen={false} onPanelChange={this.onPanelChange}
-          dateCellRender={this.dateCellRender} monthCellRender={this.monthCellRender} onSelect={this.onSelect} />
+          dateCellRender={this.dateCellRender} monthCellRender={this.monthCellRender} onSelect={this.handleChange} />
       </div>
     );
   }

@@ -13,8 +13,15 @@ import './dashboard.css';
 
 class DashBoard extends Component {
 
-  state = {
-    user: null,
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state= {user: null, selectedValue: null};
+  }
+
+  handleChange = (e) => {
+    console.log('dashboard에서 호출 e : ', e);
+    this.setState({selectedValue: e});
   };
 
   // Component Life Cycle
@@ -37,7 +44,7 @@ class DashBoard extends Component {
               <div className="col-md-6">
                 {/*달력*/}
                 <div className="calendar">
-                  <Calendar data={this.state.user}/>
+                  <Calendar handleChange={this.handleChange}  data={this.state.user}/>
                 </div>
                 <hr/>
                 <div className="list">
