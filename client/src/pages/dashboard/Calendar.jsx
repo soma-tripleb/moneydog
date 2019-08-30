@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Calendar } from 'antd';
-
+import moment from 'moment';
 import './Calendar.css';
 
 import Netflix from '../../static/img/templogo/netflix.png';
@@ -21,36 +21,20 @@ class CalendarClass extends Component {
     TVING: Tving,
   };
 
-  getListData = (value) => {
+  getListData = (value, subscriptions) => {
     let listData;
-    switch (value.date()) {
-      case 5:
-        listData = [
-          { type: 'netflix'}
-        ];
-        break;
-      case 12:
-        listData = [
-          { type: 'watcha'}
-        ];
-        break;
-      case 15:
-        listData = [
-          { type: 'TVING'}
-        ];
-        break;
-      case 22:
-        listData = [
-          { type: 'Melon'}
-        ];
-        break;
-      default:
-    }
+    subscriptions.map((subscription) => {
+      if (moment(subscription.renewal).date() === value.date()) {
+        console.log(`${subscription.name}이 ${value.date()}날에 일치`);
+        listData = [ {type: subscription.name}];
+      }
+    });
     return listData || [];
   }
 
   dateCellRender = (value) => {
-    const listData = this.getListData(value);
+    const subscriptions = this.props.data.subscriptions;
+    const listData = this.getListData(value, subscriptions);
     return (
         <ul className="events">
           {listData.map(item => (
@@ -63,8 +47,8 @@ class CalendarClass extends Component {
     );
   }
 
-  getMonthData = (value) => {
-    if (value.month() === 8) {
+  getMonthData = (moment) => {
+    if (moment.month() === 8) {
       return 1394;
     }
   }
@@ -80,6 +64,11 @@ class CalendarClass extends Component {
   }
 
   render() {
+    const {data} = this.props;
+    if (this.props.data == null) {
+      return null;
+    }
+
     return (
       <div>
         <p><u> 월별 결제일 정보 </u></p>

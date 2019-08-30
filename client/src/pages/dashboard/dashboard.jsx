@@ -37,7 +37,7 @@ class DashBoard extends Component {
               <div className="col-md-6">
                 {/*달력*/}
                 <div className="calendar">
-                  <Calendar/>
+                  <Calendar data={this.state.user}/>
                 </div>
                 <hr/>
                 <div className="list">
