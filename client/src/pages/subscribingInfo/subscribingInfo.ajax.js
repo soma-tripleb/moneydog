@@ -12,14 +12,5 @@ export function getUserSubsInfo() {
 TODO, 사용자별로 정보 보내주기 (ex, localhost:5000/subscriptions/1)
  */
 export function updateUserSubsInfo(inputSubsInfo) {
-    return axios.post(`${process.env.REACT_APP_NODE_API_URL}/subscriptions`, {
-        data: {
-            inputSubsInfo
-        }
-    }).then((res) => {
-        console.log(res);
-        console.log('axios success');
-    }).catch(err => {
-        return err.response;
-    });
+    return axios.post(`${process.env.REACT_APP_NODE_API_URL}/subscriptions`, { inputSubsInfo });
 }
