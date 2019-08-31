@@ -17,11 +17,11 @@ class Signin extends Component {
 
     if(response.status === 200 ){
 
+      localStorage.setItem('isLogin',"true");
       cookie.save('token', response.data.token, {
         path: '/'
       });
 
-      console.log(response.data.token);
       this.props.history.push('/user/subscribing');
     }else if (response.status === 409 ){
       alert(response.data.message);
