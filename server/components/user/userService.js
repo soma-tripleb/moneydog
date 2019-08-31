@@ -27,13 +27,11 @@ const login = async (userInfo) => {
 };
 
 const createJWT = (email) => {
-  const token = jwt.sign({
+  const payload = {
     email: email,
-  },
-  secretCode,
-  {
-    expiresIn:
-  '5m',
+  }
+  const token = jwt.sign(payload, secretCode, {
+    expiresIn: '30m',
   });
   return token;
 };
