@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
-import { Row, Layout } from 'antd';
+import {Row, Layout} from 'antd';
 
 import 'antd/dist/antd.less';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -12,23 +12,23 @@ import Router from './router';
 import './root.css';
 
 const Root = () => (
-  <BrowserRouter>
-    <Row>
-      <Layout className="layout">
+    <BrowserRouter>
+      <Row>
+        <Layout className="layout">
 
-        <div className="head">
-          <Head />
-        </div>
+          <div className="head">
+            <Head/>
+          </div>
 
-        <div className="app">
-          <Router />
-        </div>
+          <div className="app">
+            <Router/>
+          </div>
 
-        <Foot />
+          <Foot/>
 
-      </Layout>
-    </Row>
-  </BrowserRouter>
+        </Layout>
+      </Row>
+    </BrowserRouter>
 );
 
 export default Root;

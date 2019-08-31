@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export async function login(userInfo) {
   return await axios.post(`${process.env.REACT_APP_NODE_API_URL}/users/signIn`, {
     userInfo: {

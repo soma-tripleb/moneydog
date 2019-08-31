@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import  { Redirect } from 'react-router-dom'
+import cookie from 'react-cookies'
 
 import './signin.css';
 import * as service from "../signin/signin.ajax";
@@ -16,11 +16,17 @@ class Signin extends Component {
     const response = await service.login(this.state);
 
     if(response.status === 200 ){
-      this.props.history.push('/user/subscriptions');
+
+      cookie.save('token', response.data.token, {
+        path: '/'
+      });
+
+      console.log(response.data.token);
+      this.props.history.push('/user/subscribing');
     }else if (response.status === 409 ){
-      alert("비밀번호를 분");
+      alert(response.data.message);
     }else if (response.status === 400 ){
-      alert("아이디가 없습니다.");
+      alert(response.data.message);
     }
   };
 
