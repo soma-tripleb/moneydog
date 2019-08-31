@@ -8,21 +8,31 @@ class SubscribingInfo extends Component {
     constructor(props) {
         super(props);
 
-        this.fetchPostInfo();
+        this.getUserSubsList();
+
         this.state = {
             userSubsList: [],   // 사용자 데이터 받아오기
             userInputList: [],    // 사용자 데이터 전달하기
         }
     }
 
-    fetchPostInfo = async () => {
+    getUserSubsList = async () => {
         const response = await service.getUserSubsInfo();
         const arrCnt = response.data.length;
 
         let subsInfoArr = [];
 
         for (let i = 0; i < arrCnt; i++) {
-            subsInfoArr.push({ payment: "", price: "" });
+            let title = response.data[i].name;
+
+            subsInfoArr.push(
+                {
+                    title: title,
+                    payment: '',
+                    price: '',
+                    channel: '',
+                }
+            );
         }
 
         this.setState({
@@ -32,11 +42,16 @@ class SubscribingInfo extends Component {
     }
 
     handleChange = (e) => {
-        if (['payment', 'price'].includes(e.target.className)) {
+        console.log(e.target.value);
+
+        if (['payment', 'price', 'channel'].includes(e.target.className)) {
             let userInputList = [...this.state.userInputList];
             userInputList[e.target.dataset.id][e.target.className] = e.target.value;
+
             this.setState(
-                { userInputList }
+                {
+                    userInputList
+                }
             )
         } else {
             this.setState({ [e.target.name]: e.target.value })
@@ -47,8 +62,6 @@ class SubscribingInfo extends Component {
         e.preventDefault();
 
         service.updateUserSubsInfo(this.state.userInputList);
-
-        console.log(this.state.userInputList);
     }
 
     render() {
@@ -69,29 +82,57 @@ class SubscribingInfo extends Component {
                                         return (
                                             <div key={i}>
                                                 <span><img src={""} alt="logo" /></span>
+
                                                 <span>{content.name}</span>
+
                                                 <label htmlFor={paymentId}>결제일</label>
                                                 <input
                                                     type="text"
-                                                    name={paymentId}
+                                                    className="payment"
                                                     data-id={i}
+                                                    name={paymentId}
                                                     id={paymentId}
                                                     value={userInputList[i].payment}
-                                                    placeholder="payment"
-                                                    className="payment"
                                                     onChange={this.handleChange}
+                                                    placeholder="payment"
                                                 />
+
                                                 <label htmlFor={priceId}>결제금액</label>
                                                 <input
                                                     type="text"
-                                                    name={priceId}
+                                                    className="price"
                                                     data-id={i}
+                                                    name={priceId}
                                                     id={priceId}
                                                     value={userInputList[i].price}
-                                                    placeholder="price"
-                                                    className="price"
                                                     onChange={this.handleChange}
+                                                    placeholder="price"
                                                 />
+                                                
+                                                <div className="radio">
+                                                    <label>
+                                                        <input
+                                                            type="radio"
+                                                            className="channel"
+                                                            data-id={i}
+                                                            value="inapp"
+                                                            checked={userInputList[i].channel === 'inapp'}
+                                                            onChange={this.handleChange}
+                                                        />
+                                                        inapp
+                                                    </label>
+                                                    <label>
+                                                        <input
+                                                            type="radio"
+                                                            className="channel"
+                                                            data-id={i}
+                                                            value="site"
+                                                            checked={userInputList[i].channel === 'site'}
+                                                            onChange={this.handleChange}
+                                                        />
+                                                        site
+                                                    </label>
+                                                </div>
                                             </div>
                                         )
                                     }
