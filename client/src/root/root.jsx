@@ -1,4 +1,7 @@
 import React from 'react';
+import {Provider} from 'react-redux';
+import store from '../store';
+
 import {BrowserRouter} from 'react-router-dom';
 import {Row, Layout} from 'antd';
 
@@ -12,23 +15,25 @@ import Router from './router';
 import './root.css';
 
 const Root = () => (
-    <BrowserRouter>
-      <Row>
-        <Layout className="layout">
+    <Provider store={store}>
+      <BrowserRouter>
+        <Row>
+          <Layout className="layout">
 
-          <div className="head">
-            <Head/>
-          </div>
+            <div className="head">
+              <Head/>
+            </div>
 
-          <div className="app">
-            <Router/>
-          </div>
+            <div className="app">
+              <Router/>
+            </div>
 
-          <Foot/>
+            <Foot/>
 
-        </Layout>
-      </Row>
-    </BrowserRouter>
+          </Layout>
+        </Row>
+      </BrowserRouter>
+    </Provider>
 );
 
 export default Root;

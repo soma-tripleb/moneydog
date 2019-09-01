@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import cookie from 'react-cookies'
+import {connect} from 'react-redux';
+import * as actions from '../../actions/users'
 
 import './signin.css';
 import * as service from "../signin/signin.ajax";
@@ -11,21 +13,29 @@ class Signin extends Component {
     password: '',
   };
 
+  componentDidMount() {
+    this.props.handleLogin(
+        {
+          email: "tjddus1109@naver.com",
+          password: "1234",
+        });
+  }
+
   signInBtnClicked = async (e) => {
     e.preventDefault();
     const response = await service.login(this.state);
 
-    if(response.status === 200 ){
+    if (response.status === 200) {
 
-      localStorage.setItem('isLogin',"true");
+      // localStorage.setItem('isLogin',"true");
       cookie.save('token', response.data.token, {
         path: '/'
       });
 
       this.props.history.push('/user/subscribing');
-    }else if (response.status === 409 ){
+    } else if (response.status === 409) {
       alert(response.data.message);
-    }else if (response.status === 400 ){
+    } else if (response.status === 400) {
       alert(response.data.message);
     }
   };
@@ -52,7 +62,8 @@ class Signin extends Component {
               <article className="card-body mx-auto">
                 <h4 className="card-title mt-3 text-center">Sign In</h4>
                 <p>
-                  <button onClick={service.responseGoogle} className="btn btn-block btn-google" style={{backgroundColor: 'lightgray'}}>
+                  <button onClick={service.responseGoogle} className="btn btn-block btn-google"
+                          style={{backgroundColor: 'lightgray'}}>
                     <i className="fab fa-google"/> Login via google
                   </button>
                 </p>
@@ -91,4 +102,18 @@ class Signin extends Component {
   }
 }
 
-export default Signin;
+const mapStateToProps = state => ({
+  users: state.users.users
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleLogin: (userInfo) => {
+      dispatch(actions.login(userInfo))
+    },
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);
+
+// export default Signin;
