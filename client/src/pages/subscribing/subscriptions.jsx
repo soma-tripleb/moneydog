@@ -4,19 +4,15 @@ import update from 'react-addons-update';
 
 import SubsApp from './subsApp';
 
+import * as service from './subscriptions.ajax';
+
 import './subscriptions.css';
 
 class Subscriptions extends Component {
-  constructor(props) {
-    super(props);
-
-    this.styleDiv = React.createRef();
-  }
 
   state = {
     arr: [
       { number: '', logo: 'https://www.tubefilter.com/wp-content/uploads/2018/03/youtube-picture-in-picture.jpg', name: 'YouTube', label: '+' },
-      { number: '', logo: 'https://yt3.ggpht.com/a/AGF-l7--j4Ugc8V4M2wuVIak47WyqND4toWQepXr_Q=s900-c-k-c0xffffffff-no-rj-mo', name: 'Netflix', label: '+' },
       { number: '', logo: 'https://cdnimg.melon.co.kr/resource/mobile40/cds/common/image/mobile_apple_180x180.png', name: 'Melon', label: '+' },
       { number: '', logo: 'https://static.wanted.co.kr/images/wdes/0_4.ea590aaf.png', name: 'Watchar', label: '+' },
       { number: '', logo: 'https://tr4.cbsistatic.com/hub/i/r/2017/02/03/2a9700a9-f22a-48e4-a9a9-3148aa21009a/resize/1200x/5fda319b9ab0d2b09d696f3b8aab0089/icloud-logo.jpg', name: 'iCloud', label: '+' },
@@ -35,13 +31,24 @@ class Subscriptions extends Component {
     const newState = update(this.state, {
       arr2: {
         $push: [
-          { 'number': number, 'logo': logo, 'name': name, 'label': '-' }
+          { 
+            'number': number, 
+            'logo': logo, 
+            'name': name, 
+          }
         ]
       },
     });
 
     this.setState(newState);
   };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    service.updateUserSubsInfo(this.state.arr2);
+    window.location.assign('/user/subscribing-info');
+  }
 
   deleteContant = (number) => {
     const { arr2 } = this.state;
@@ -50,22 +57,7 @@ class Subscriptions extends Component {
     })
   };
 
-  handleClose = () => {
-    this.setState({
-      show: false,
-    })
-  }
-
-  handleShow = (appInfo) => {
-
-    this.setState({
-      show: true,
-    })
-  }
-
   render() {
-    const { show } = this.state;
-
     return (
       <>
         <div className="container main-container">
@@ -77,19 +69,21 @@ class Subscriptions extends Component {
               <div className="w-100 p-3" id="inner-container">
                 <p><u>Selecting App</u></p>
 
-                {this.state.arr.map(
-                  (content, i) => {
-                    return (
-                      <SubsApp key={i} onInsert={this.insertContact.bind(this)} subsAppInfo={
-                        {
-                          number: i,
-                          logo: content.logo,
-                          name: content.name,
-                          label: content.label,
-                        }
-                      } />
-                    )
-                  })}
+                {
+                  this.state.arr.map(
+                    (content, i) => {
+                      return (
+                        <SubsApp key={i} onInsert={this.insertContact.bind(this)} subsAppInfo={
+                          {
+                            number: i,
+                            logo: content.logo,
+                            name: content.name,
+                            label: content.label,
+                          }
+                        } />
+                      )
+                    })
+                }
 
               </div>
             </div>
@@ -99,36 +93,38 @@ class Subscriptions extends Component {
 
               <div className="w-100 p-3" id="inner-container">
                 <p><u>Selected App</u></p>
-                {this.state.arr2.map(
-                  (content, i) => {
-                    return (
-                      <>
-                        <div onClick={this.handleShow}>
-                          <SubsApp key={i} onDelete={this.deleteContant.bind(this)} subsAppInfo={
-                            {
-                              number: content.number,
-                              logo: content.logo,
-                              name: content.name,
-                              label: '-',
-                            }
-                          } />
-                        </div>
-                      </>
-                    )
-                  })}
+                
+                {
+                  this.state.arr2.map(
+                    (content, i) => {
+                      return (
+                        <SubsApp key={i} onDelete={this.deleteContant.bind(this)} subsAppInfo={
+                          {
+                            number: content.number,
+                            logo: content.logo,
+                            name: content.name,
+                            label: '-',
+                          }
+                        } />
+                      )
+                    })
+                }
+
               </div>
 
             </div>
           </div>
         </div>
 
-        <div className="container" style={{ textAlign: 'center' }}>
+        <div className="container submit-container">
           <div className="row">
-            <div className="col-sm"></div>
             <div className="col-sm">
-              <div className="circle"><a href="/dashboard" role="button" style={{ color: 'black' }}>Done</a></div>
+              <div className="circle">
+                <form onSubmit={this.handleSubmit}>
+                  <input type="submit" value="Submit"/>
+                </form>
+              </div>
             </div>
-            <div className="col-sm"></div>
           </div>
         </div>
       </>
