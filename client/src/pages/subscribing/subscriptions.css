@@ -33,6 +33,16 @@
   border: none;
 }
 
+.submit-container {
+  margin-top: 5vh;
+  text-align: center;
+}
+
+.submit-container input {
+  border: none;
+  background-color: transparent;
+}
+
 .circle {
   width:100px; 
   height:100px;
