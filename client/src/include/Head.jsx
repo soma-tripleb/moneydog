@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 class Head extends Component {
 
-  state ={
+   state ={
     islogin: localStorage.getItem('isLogin'),
   };
 

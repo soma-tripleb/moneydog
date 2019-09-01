@@ -3,12 +3,12 @@
     src: url(../static/font/gotham-ultraitalic-webfont.woff) format('truetype');
 }
 
-@font-face{
+@font-face {
     font-family: 'GOTHAN-XLIGHT';
     src: url(../static/font/gotham-xlight-webfont.woff) format('truetype');
 }
 
-@font-face{
+@font-face {
     font-family: 'GOTHAN-ULTRA';
     src: url(../static/font/gotham-ultra-webfont.woff) format('truetype');
 }
@@ -41,8 +41,4 @@ body {
 
 .ant-row .ant-col {
     height: 100%;
-}
-
-.app {
-    margin: 5vh;
 }

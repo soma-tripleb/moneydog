@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Route, Switch} from 'react-router-dom';
 
-import { Home, Report, Dashboard, Info, SignUp, SignIn, Subscribing,Recommend} from '../pages';
+import {Home, Report, Dashboard, Info, SignUp, SignIn, Subscribing, Recommend} from '../pages';
 
 class Router extends Component {
   render() {

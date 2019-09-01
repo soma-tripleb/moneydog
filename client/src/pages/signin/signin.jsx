@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import cookie from 'react-cookies'
 import {connect} from 'react-redux';
-import * as actions from '../../actions/users'
+import * as actions from '../../actions/auth';
 
 import './signin.css';
 import * as service from "../signin/signin.ajax";
@@ -13,20 +13,12 @@ class Signin extends Component {
     password: '',
   };
 
-  // componentDidMount() {
-  //   this.props.handleLogin(
-  //       {
-  //         email: "tjddus1109@naver.com",
-  //         password: "1234",
-  //       });
-  // }
-
   signInBtnClicked = async (e) => {
     e.preventDefault();
     const response = await service.login(this.state);
-    await this.props.handleLogin(this.state);
+    await this.props.loginRequest(this.state.email,this.state.password);
 
-    console.log(this.props.users.message);
+    console.log(this.props.status);
 
     if (response.status === 200) {
 
@@ -73,7 +65,7 @@ class Signin extends Component {
                 <p className="divider-text">
                   <span className="bg-light">OR</span>
                 </p>
-                {this.props.users.token}
+                {this.props.status}
                 <form>
                   {/*Email input*/}
                   <div className="form-group input-group">
@@ -107,17 +99,15 @@ class Signin extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.users.users
+  status: state.auth.login.status
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleLogin: async (userInfo) => {
-      await dispatch(actions.login(userInfo))
+    loginRequest: async (email,password) => {
+      await dispatch(actions.loginRequest(email,password))
     },
   }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signin);
-
-// export default Signin;
