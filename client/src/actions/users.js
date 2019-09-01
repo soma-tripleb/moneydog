@@ -14,9 +14,8 @@ import {GET_USERS} from "./types";
 //       .catch(err => console.log(err));
 // };
 
-export const login = (userInfo) => dispatch => {
-  console.log("test" + userInfo);
-  axios
+export const login = (userInfo) => async dispatch => {
+  await axios
       .post(`${process.env.REACT_APP_NODE_API_URL}/users/signIn`,
           {
             userInfo: {

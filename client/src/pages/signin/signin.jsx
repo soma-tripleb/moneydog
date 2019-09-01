@@ -13,17 +13,20 @@ class Signin extends Component {
     password: '',
   };
 
-  componentDidMount() {
-    this.props.handleLogin(
-        {
-          email: "tjddus1109@naver.com",
-          password: "1234",
-        });
-  }
+  // componentDidMount() {
+  //   this.props.handleLogin(
+  //       {
+  //         email: "tjddus1109@naver.com",
+  //         password: "1234",
+  //       });
+  // }
 
   signInBtnClicked = async (e) => {
     e.preventDefault();
     const response = await service.login(this.state);
+    await this.props.handleLogin(this.state);
+
+    console.log(this.props.users.message);
 
     if (response.status === 200) {
 
@@ -32,7 +35,7 @@ class Signin extends Component {
         path: '/'
       });
 
-      this.props.history.push('/user/subscribing');
+      // this.props.history.push('/user/subscribing');
     } else if (response.status === 409) {
       alert(response.data.message);
     } else if (response.status === 400) {
@@ -70,6 +73,7 @@ class Signin extends Component {
                 <p className="divider-text">
                   <span className="bg-light">OR</span>
                 </p>
+                {this.props.users.token}
                 <form>
                   {/*Email input*/}
                   <div className="form-group input-group">
@@ -108,8 +112,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleLogin: (userInfo) => {
-      dispatch(actions.login(userInfo))
+    handleLogin: async (userInfo) => {
+      await dispatch(actions.login(userInfo))
     },
   }
 };
