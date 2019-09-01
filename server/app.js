@@ -1,11 +1,15 @@
 const express = require('express');
 const app = express();
-// const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const db = require('./db/mongoDB');
+<<<<<<< HEAD
 const authCheck = require('./middlewares/auth');
+=======
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./config/swaggerApiDoc');
+>>>>>>> #40, swagger sample yaml 적용
 
 // MiddleWares
 app.use(logger('dev'));
@@ -34,5 +38,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 module.exports = app;
