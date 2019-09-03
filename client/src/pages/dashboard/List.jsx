@@ -17,10 +17,9 @@ class List extends Component {
 
   matchDate = (selectedValue, user) => {
     const subscriptions = user.subscriptions;
-    subscriptions.map((subscription) => {
+    return subscriptions.map((subscription) => {
       if (moment(subscription.renewal).date() === selectedValue) {
-        console.log(subscription.name);
-        return subscription.name;
+        return subscription;
       };
     });
   };
@@ -30,19 +29,20 @@ class List extends Component {
       const icon = <Icon type="loading" style={{ fontSize: 24}} spin />
       return (<Spin indicator={icon} />);
     }
+    const result = this.matchDate(this.props.date, this.props.data);
+    console.log('selected date result : ',result);
     return(
      <div>
        <div className='row img-back'>
          <div className='col-3'>
            <h3>{this.props.date}일</h3>
          </div>
-         <div className='img-border'>
-           <img className="line-Img" src={Melon}
-                alt="First slide" style={{height: '5vh', borderRadius: '5px'}}/>
-         </div>
-         <h3>{this.matchDate(this.props.date, this.props.data)}</h3>
        </div>
-      </div>
+       <div className='img-border'>
+         <img className="line-Img" src={Melon}
+              alt="First slide" style={{height: '5vh', borderRadius: '5px'}}/>
+       </div>
+     </div>
     );
   }
 }
