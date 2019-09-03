@@ -15,13 +15,28 @@ class List extends Component {
     super(props);
   };
 
+  state = {
+    result: null
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    const subscriptions = nextProps.data.subscriptions;
+    subscriptions.filter((subscription) => {
+      if (moment(subscription.renewal).date() === nextProps.date) {
+        this.state.result = subscription;
+      }
+    });
+  }
+
   matchDate = (selectedValue, user) => {
     const subscriptions = user.subscriptions;
-    return subscriptions.map((subscription) => {
+    return subscriptions.filter((subscription) => {
       if (moment(subscription.renewal).date() === selectedValue) {
-        return subscription;
+        // this.setState({result : subscription});
+        return true;
       };
     });
+    return false;
   };
 
   render() {
@@ -29,8 +44,7 @@ class List extends Component {
       const icon = <Icon type="loading" style={{ fontSize: 24}} spin />
       return (<Spin indicator={icon} />);
     }
-    const result = this.matchDate(this.props.date, this.props.data);
-    console.log('selected date result : ',result);
+
     return(
      <div>
        <div className='row img-back'>
@@ -38,10 +52,9 @@ class List extends Component {
            <h3>{this.props.date}일</h3>
          </div>
        </div>
-       <div className='img-border'>
-         <img className="line-Img" src={Melon}
-              alt="First slide" style={{height: '5vh', borderRadius: '5px'}}/>
-       </div>
+       {/*<div className='img-border'>*/}
+       {/*  <img className="line-Img" src={Melon} alt="First slide" style={{height: '5vh', borderRadius: '5px'}}/>*/}
+       {/*</div>*/}
      </div>
     );
   }
