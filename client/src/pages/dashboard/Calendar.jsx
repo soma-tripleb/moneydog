@@ -77,7 +77,6 @@ class CalendarClass extends Component {
     return (
       <div>
         <p><u> 월별 결제일 정보 </u></p>
-        <Alert message={`You selected date: ${this.props.date}`} />
         <Calendar fullscreen={false} onPanelChange={this.onPanelChange}
           dateCellRender={this.dateCellRender} monthCellRender={this.monthCellRender} onSelect={this.handleChange} />
       </div>

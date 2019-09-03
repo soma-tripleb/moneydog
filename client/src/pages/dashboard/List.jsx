@@ -24,20 +24,11 @@ class List extends Component {
     subscriptions.filter((subscription) => {
       if (moment(subscription.renewal).date() === nextProps.date) {
         this.state.result = subscription;
+      } else {
+        this.state.result = null;
       }
     });
   }
-
-  matchDate = (selectedValue, user) => {
-    const subscriptions = user.subscriptions;
-    return subscriptions.filter((subscription) => {
-      if (moment(subscription.renewal).date() === selectedValue) {
-        // this.setState({result : subscription});
-        return true;
-      };
-    });
-    return false;
-  };
 
   render() {
     if (this.props.data == null) {
@@ -52,9 +43,10 @@ class List extends Component {
            <h3>{this.props.date}일</h3>
          </div>
        </div>
-       {/*<div className='img-border'>*/}
-       {/*  <img className="line-Img" src={Melon} alt="First slide" style={{height: '5vh', borderRadius: '5px'}}/>*/}
-       {/*</div>*/}
+       <div className='img-border'>
+         <img className="line-Img" src={Melon} alt="First slide" style={{height: '5vh', borderRadius: '5px'}}/>
+       </div>
+       <div>{this.state.result ? this.state.result.name : "" }</div>
      </div>
     );
   }
