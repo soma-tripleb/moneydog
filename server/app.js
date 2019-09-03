@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-// const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
@@ -17,11 +16,13 @@ app.use(cookieParser());
 app.use(cors());
 
 // Api
+const indexRouter = require('./index');
 const usersRouter = require('./components/user/userController');
 const subscriptionRouter = require('./components/subscription/subscriptionController');
 
-app.use('/users', usersRouter);
 app.use(authCheck);
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 app.use('/subscriptions', subscriptionRouter);
 
 // error handler
@@ -34,5 +35,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 module.exports = app;
