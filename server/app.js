@@ -5,11 +5,12 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const db = require('./db/mongoDB');
+const authCheck = require('./middlewares/auth');
 
 // MiddleWares
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
 // HTTP 접근 제어 혹은 CORS(Cross-origin resource sharing, 출처가 다른 곳끼리 자원 공유
@@ -20,6 +21,7 @@ const usersRouter = require('./components/user/userController');
 const subscriptionRouter = require('./components/subscription/subscriptionController');
 
 app.use('/users', usersRouter);
+app.use(authCheck);
 app.use('/subscriptions', subscriptionRouter);
 
 // error handler

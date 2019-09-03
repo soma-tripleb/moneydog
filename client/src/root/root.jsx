@@ -1,34 +1,33 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
-import { Row, Layout } from 'antd';
+
+import {Provider} from 'react-redux';
+import store from '../store';
 
 import 'antd/dist/antd.less';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-
-//직접 만든 모듈들
 import {Head, Foot} from '../include';
+import {Row, Layout} from 'antd';
+
+import {BrowserRouter} from 'react-router-dom';
 import Router from './router';
+
 import './root.css';
 
 const Root = () => (
-  <BrowserRouter>
-    <Row>
-      <Layout className="layout">
+    <Provider store={store}>
+      <BrowserRouter>
 
-        <div className="head">
-          <Head />
-        </div>
+        <Row>
+          <Layout className="layout">
+            <Head/>
+            <Router/>
+            <Foot/>
+          </Layout>
+        </Row>
 
-        <div className="app">
-          <Router />
-        </div>
-
-        <Foot />
-
-      </Layout>
-    </Row>
-  </BrowserRouter>
+      </BrowserRouter>
+    </Provider>
 );
 
 export default Root;
