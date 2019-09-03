@@ -52,7 +52,7 @@ class DashBoard extends Component {
                 </div>
                 <hr/>
                 <div className="list">
-                  <List date={this.convertDate()} />
+                  <List date={this.convertDate()} data={this.state.user} />
                 </div>
               </div>
               {/*구독중인 서비스 list */}
