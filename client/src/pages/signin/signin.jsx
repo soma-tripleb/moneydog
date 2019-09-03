@@ -59,15 +59,13 @@ class Signin extends Component {
               <article className="card-body mx-auto">
                 <h4 className="card-title mt-3 text-center">Sign In</h4>
                 <p>
-                  <button onClick={service.responseGoogle} className="btn btn-block btn-google"
-                          style={{backgroundColor: 'lightgray'}}>
+                  <button onClick={service.responseGoogle} className="btn btn-block btn-google" style={{backgroundColor: 'lightgray'}}>
                     <i className="fab fa-google"/> Login via google
                   </button>
                 </p>
                 <p className="divider-text">
                   <span className="bg-light">OR</span>
                 </p>
-                {this.props.status}
                 <form>
                   {/*Email input*/}
                   <div className="form-group input-group">

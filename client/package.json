@@ -21,6 +21,7 @@
     "jquery": "^3.4.1",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
+    "moment": "^2.24.0",
     "popper.js": "^1.15.0",
     "react": "^16.8.6",
     "react-addons-update": "^15.6.2",

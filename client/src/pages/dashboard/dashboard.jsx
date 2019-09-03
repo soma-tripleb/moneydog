@@ -14,22 +14,13 @@ import './dashboard.css';
 class DashBoard extends Component {
 
   state = {
-    data: null,
     user: null,
   };
 
   // Component Life Cycle
   componentDidMount() {
-    this.fetchPostInfo(1);
     this.fetchUserInfo('jimmyjaeyeon@gmail.com');
   }
-
-  fetchPostInfo = async (postId) => {
-    const response = await service.getUserServiceInfo(postId);
-    this.setState({
-      data: response.data,
-    });
-  };
 
   fetchUserInfo = async (email) => {
     const response = await service.getUserByEmail(email);
@@ -39,7 +30,6 @@ class DashBoard extends Component {
   };
 
   render() {
-    console.log('user : ', this.state.user);
     return (
         <>
           <div className="container">
@@ -47,7 +37,7 @@ class DashBoard extends Component {
               <div className="col-md-6">
                 {/*달력*/}
                 <div className="calendar">
-                  <Calendar/>
+                  <Calendar data={this.state.user}/>
                 </div>
                 <hr/>
                 <div className="list">
@@ -61,7 +51,7 @@ class DashBoard extends Component {
                 </div>
                 <hr/>
                 <div className='categories'>
-                  <Categories data={this.state.data}/>
+                  <Categories data={this.state.user}/>
                 </div>
               </div>
 

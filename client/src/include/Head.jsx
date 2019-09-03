@@ -42,6 +42,9 @@ class Head extends Component {
             <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
           </li>
           <li className="nav-item">
+            <Link to="/user/subscribing-Info" className="nav-link">Subscribing Info</Link>
+          </li>
+          <li className="nav-item">
             <Link to="/dashboard" className="nav-link">Dashboard</Link>
           </li>
           <li className="nav-item">
