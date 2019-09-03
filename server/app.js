@@ -4,12 +4,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const db = require('./db/mongoDB');
-<<<<<<< HEAD
 const authCheck = require('./middlewares/auth');
-=======
-const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./config/swaggerApiDoc');
->>>>>>> #40, swagger sample yaml 적용
 
 // MiddleWares
 app.use(logger('dev'));
@@ -21,11 +16,13 @@ app.use(cookieParser());
 app.use(cors());
 
 // Api
+const indexRouter = require('./index');
 const usersRouter = require('./components/user/userController');
 const subscriptionRouter = require('./components/subscription/subscriptionController');
 
-app.use('/users', usersRouter);
 app.use(authCheck);
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 app.use('/subscriptions', subscriptionRouter);
 
 // error handler

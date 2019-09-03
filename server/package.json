@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon --exec babel-node ./bin/www",
-    "test": "node ./node_modules/mocha/bin/mocha --require babel-register --recursive ./**/*.spec.js"
+    "test": "node ./node_modules/mocha/bin/mocha --require babel-register --recursive ./**/*.spec.js",
+    "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
