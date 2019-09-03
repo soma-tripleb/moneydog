@@ -1,10 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component} from 'react';
 
 import youtube from '../../static/img/templogo/youtube.png';
 import Netflix from '../../static/img/templogo/netflix.png';
 import Melon from '../../static/img/templogo/melon.png';
 import Tving from '../../static/img/templogo/tving.png';
-import Watcha from '../../static/img/templogo/watcha.png';
+import watcha from '../../static/img/templogo/watcha.png';
 import moment from 'moment';
 
 import './List.css';
@@ -17,15 +17,16 @@ class List extends Component {
 
   state = {
     result: null
-  }
+  };
 
   componentWillReceiveProps(nextProps, nextContext) {
     const subscriptions = nextProps.data.subscriptions;
-    subscriptions.filter((subscription) => {
+    subscriptions.some((subscription) => {
+      console.log('filter subscription : ', subscription);
       if (moment(subscription.renewal).date() === nextProps.date) {
-        this.state.result = subscription;
+        return this.state.result = subscription;
       } else {
-        this.state.result = null;
+        return this.state.result = "";
       }
     });
   }
@@ -44,7 +45,7 @@ class List extends Component {
          </div>
        </div>
        <div className='img-border'>
-         <img className="line-Img" src={Melon} alt="First slide" style={{height: '5vh', borderRadius: '5px'}}/>
+         <img className="line-Img" src={Melon} style={{height: '5vh', borderRadius: '5px'}}/>
        </div>
        <div>{this.state.result ? this.state.result.name : "" }</div>
      </div>

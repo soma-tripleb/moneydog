@@ -69,7 +69,6 @@ class DashBoard extends Component {
             </div>
 
             <footer>
-              <p>DashBoard</p>
             </footer>
           </div>
         </>
