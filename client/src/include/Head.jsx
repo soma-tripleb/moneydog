@@ -1,7 +1,32 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import {connect} from "react-redux";
+
 class Head extends Component {
+
+  isLogined = () =>{
+    if( this.props.status === 'SUCCESS'){
+      return(
+          <>
+            <li className="nav-item">
+              <Link to="/signup" className="nav-link">Logout</Link>
+            </li>
+          </>
+      )
+    }else{
+      return(
+          <>
+            <li className="nav-item">
+              <Link to="/signup" className="nav-link">Sign-up</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/signin" className="nav-link">Sign-in</Link>
+            </li>
+          </>
+      )
+    }
+  };
 
   render() {
     return (
@@ -13,12 +38,6 @@ class Head extends Component {
         </ul>
 
         <ul className="nav justify-content-center" style={{fontFamily :'GOTHAN-XLIGHT'}}>
-          <li className="nav-item">
-            <Link to="/signup" className="nav-link">Sign-up</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/signin" className="nav-link">Sign-in</Link>
-          </li>
           <li className="nav-item">
             <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
           </li>
@@ -34,6 +53,9 @@ class Head extends Component {
           <li className="nav-item">
             <Link to="/recommend" className="nav-link">Recommend</Link>
           </li>
+
+          {this.isLogined()}
+
         </ul>
       </>
     );
@@ -41,4 +63,8 @@ class Head extends Component {
 
 }
 
-export default Head;
+const mapStateToProps = state => ({
+  status: state.auth.login.status
+});
+
+export default connect(mapStateToProps)(Head);
