@@ -36,7 +36,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// Swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 module.exports = app;
