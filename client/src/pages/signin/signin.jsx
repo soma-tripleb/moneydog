@@ -14,7 +14,9 @@ class Signin extends Component {
   };
 
   signInBtnClicked = async (e) => {
+
     e.preventDefault();
+
     const response = await service.login(this.state);
     await this.props.loginRequest(this.state.email,this.state.password);
 
@@ -27,7 +29,7 @@ class Signin extends Component {
         path: '/'
       });
 
-      // this.props.history.push('/user/subscribing');
+      this.props.history.push('/user/subscribing');
     } else if (response.status === 409) {
       alert(response.data.message);
     } else if (response.status === 400) {

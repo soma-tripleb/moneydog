@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
 
 import {Home, Report, Dashboard, Info, SignUp, SignIn, Subscribing, Recommend} from '../pages';
+import PrivateRouter from './privateRouter';
 
 class Router extends Component {
   render() {
@@ -10,14 +11,14 @@ class Router extends Component {
           <div>
             <Route exact path="/" component={Home}/>
             <Switch>
-              <Route path="/report" component={Report}/>
-              <Route path="/dashboard" component={Dashboard}/>
-              <Route path="/info" component={Info}/>
               {/* user */}
+              <PrivateRouter path="/report" component={Report}/>
               <Route path="/signup" component={SignUp}/>
               <Route path="/signin" component={SignIn}/>
-              <Route path="/user/subscribing" component={Subscribing}/>
-              <Route path="/recommend" component={Recommend}/>
+              <PrivateRouter path="/dashboard" component={Dashboard}/>
+              <PrivateRouter path="/info" component={Info}/>
+              <PrivateRouter path="/user/subscribing" component={Subscribing}/>
+              <PrivateRouter path="/recommend" component={Recommend}/>
             </Switch>
           </div>
         </>

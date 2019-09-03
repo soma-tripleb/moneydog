@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import {connect} from "react-redux";
+
 class Head extends Component {
 
-   state ={
-    islogin: localStorage.getItem('isLogin'),
-  };
-
   isLogined = () =>{
-    if( this.state.islogin === 'true'){
+    if( this.props.status === 'SUCCESS'){
       return(
           <>
             <li className="nav-item">
@@ -52,7 +50,9 @@ class Head extends Component {
           <li className="nav-item">
             <Link to="/recommend" className="nav-link">Recommend</Link>
           </li>
+
           {this.isLogined()}
+
         </ul>
       </>
     );
@@ -60,4 +60,8 @@ class Head extends Component {
 
 }
 
-export default Head;
+const mapStateToProps = state => ({
+  status: state.auth.login.status
+});
+
+export default connect(mapStateToProps)(Head);
