@@ -33,7 +33,9 @@ jobs:
       - run:
           name: install node modules
           command: npm install
-
+      - run:
+          name : eslint init
+          command: eslint --init
       - run:
           name: ESLing, write report
           command: |
