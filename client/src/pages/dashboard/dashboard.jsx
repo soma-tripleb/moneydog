@@ -4,7 +4,7 @@ import Calendar from './Calendar';
 import Categories from './Categories';
 import TotalAmount from './TotalAmount';
 import List from './List';
-
+import moment from 'moment';
 
 import * as service from './dashboard.ajax';
 
@@ -13,9 +13,20 @@ import './dashboard.css';
 
 class DashBoard extends Component {
 
-  state = {
-    user: null,
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state= {user: null, selectedValue: null};
+  }
+
+  handleChange = (e) => {
+    this.setState({selectedValue: e.format('YYYY-MM-DD')});
   };
+
+  convertDate = () => {
+    const convert = moment(this.state.selectedValue).date();
+    return convert;
+  }
 
   // Component Life Cycle
   componentDidMount() {
@@ -37,11 +48,11 @@ class DashBoard extends Component {
               <div className="col-md-6">
                 {/*달력*/}
                 <div className="calendar">
-                  <Calendar data={this.state.user}/>
+                  <Calendar date={this.state.selectedValue} handleChange={this.handleChange}  data={this.state.user}/>
                 </div>
                 <hr/>
                 <div className="list">
-                  <List/>
+                  <List date={this.convertDate()} data={this.state.user} />
                 </div>
               </div>
               {/*구독중인 서비스 list */}
@@ -58,7 +69,6 @@ class DashBoard extends Component {
             </div>
 
             <footer>
-              <p>DashBoard</p>
             </footer>
           </div>
         </>

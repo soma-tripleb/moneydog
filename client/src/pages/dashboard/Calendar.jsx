@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Calendar } from 'antd';
+import { Calendar, Alert} from 'antd';
 import moment from 'moment';
 import './Calendar.css';
 
@@ -9,6 +9,14 @@ import Tving from '../../static/img/templogo/tving.png';
 import Watcha from '../../static/img/templogo/watcha.png';
 
 class CalendarClass extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange = (value) => {
+    this.props.handleChange(value);
+  }
 
   onPanelChange = (value, mode) => {
     console.log('test',value, mode);
@@ -63,16 +71,14 @@ class CalendarClass extends Component {
   }
 
   render() {
-    const {data} = this.props;
     if (this.props.data == null) {
       return null;
     }
-
     return (
       <div>
         <p><u> 월별 결제일 정보 </u></p>
         <Calendar fullscreen={false} onPanelChange={this.onPanelChange}
-          dateCellRender={this.dateCellRender} monthCellRender={this.monthCellRender} />
+          dateCellRender={this.dateCellRender} monthCellRender={this.monthCellRender} onSelect={this.handleChange} />
       </div>
     );
   }

@@ -1,5 +1,5 @@
 .calendar {
-    box-shadow: 10px 10px 10px 10px lightgray;
+    box-shadow: 5px 5px 5px 5px lightgray;
     overflow: auto;
     width: 100%;
     font-weight: lighter;
@@ -9,7 +9,7 @@
 }
 
 .categories{
-    box-shadow: 10px 10px 10px 10px lightgray;
+    box-shadow: 5px 5px 5px 5px lightgray;
     overflow: auto;
     width: 100%;
     font-weight: lighter;
@@ -19,7 +19,7 @@
 }
 
 .TotalAmount {
-    box-shadow: 10px 10px 10px 10px lightgray;
+    box-shadow: 5px 5px 5px 5px lightgray;
     overflow: auto;
     width: 100%;
     font-weight: lighter;
@@ -29,7 +29,7 @@
 }
 
 .list {
-    box-shadow: 10px 10px 10px 10px lightgray;
+    box-shadow: 5px 5px 5px 5px lightgray;
     overflow: auto;
     width: 100%;
     font-weight: lighter;
