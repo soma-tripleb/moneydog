@@ -38,7 +38,7 @@ jobs:
           name: ESLing, write report
           command: |
             mkdir -p ~/reports
-            eslint . --exit .js --output-file ~/reports/eslint.xml
+            eslint . --ext .js --output-file ~/reports/eslint.xml
 
 #      - save_cache:
 #          paths:
