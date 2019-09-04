@@ -5,6 +5,9 @@
 version: 2 # use circleCI version2.0
 jobs:
   build:
+    branches:
+      only:
+        - dev
     docker:
       # specify the version you desire here
       - image: circleci/node:8
