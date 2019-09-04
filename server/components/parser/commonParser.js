@@ -2,21 +2,21 @@ const DomParser = require('dom-parser');
 
 const base64ToUtf8 = (base64encoded) => {
   return Buffer.from(base64encoded, 'base64').toString('utf8');
-}
+};
 
 const stringToJsonObject = (decodedResponse) => {
   return JSON.parse(decodedResponse);
-}
+};
 
 const convertHtml = (rawHtml) => {
   const parser = new DomParser();
   const wrapper = parser.parseFromString(rawHtml, 'text/html');
   return wrapper.rawHTML;
-}
+};
 
 const getEmailId = (jsonObject) => {
   return stringToJsonObject(base64ToUtf8(jsonObject)).payload.headers[0].value;
-}
+};
 
 const getDomain = (response) => {
   let domain;
@@ -34,7 +34,7 @@ const checkDomain = (response) => {
     return 'apple';
   }
   return 'google';
-}
+};
 
 module.exports = {
   base64ToUtf8: base64ToUtf8,
@@ -42,4 +42,4 @@ module.exports = {
   convertHtml: convertHtml,
   getEmailId: getEmailId,
   checkDomain: checkDomain,
-}
+};

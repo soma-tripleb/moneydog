@@ -7,7 +7,7 @@ const subscribeInfoSchema = new mongoose.Schema({
   paymentDay: {type: Number, required: true},
   price: {type: Number, required: true},
   currencyUnit: {type: String, required: true},
-  paymentPeriod: {type: String,required: true},
+  paymentPeriod: {type: String, required: true},
 },
 {
   timestamps: true,

@@ -26,4 +26,4 @@ describe('AppleParser 테스트', () => {
       assert.strictEqual(appleMusic.price, 8900);
     });
   });
-})
+});
