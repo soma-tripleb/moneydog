@@ -2,10 +2,9 @@ image: node:latest
 
 stages:
     - lint
+    - test
 
 eslint:
-    only:
-    - yh-issue-42
     stage: lint
     script:
         - echo eslint start
@@ -13,3 +12,12 @@ eslint:
         - npm install -g eslint
         - eslint --init
         - eslint app.js
+
+lets_test:
+  stage: test
+  script:
+  - echo hi
+  - cd /home/gitlab-runner
+  - touch devqa
+  tags:
+  - devqa90
