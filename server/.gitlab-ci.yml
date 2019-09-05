@@ -1,16 +1,14 @@
 image: node:latest
 
 stages:
-  - lint
+    - lint
 
 eslint:
-  stage:
-  script:
-    - echo eslint inspection
-    - npm install -g eslint
-    - eslint --init
-    - eslint app.js
-
-deploy-to-develop-server:
-  only:
-  - yh-issue-42
+    only:
+    - yh-issue-42
+    stage: lint
+    script:
+        - echo eslint start
+        - npm install -g eslint
+        - eslint --init
+        - eslint app.js
