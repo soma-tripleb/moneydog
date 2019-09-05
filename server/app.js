@@ -4,7 +4,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const db = require('./db/mongoDB');
-const authCheck = require('./middlewares/auth');
+
+import authCheck from './security/jwtAuthentication';
 
 // MiddleWares
 app.use(logger('dev'));
@@ -16,13 +17,13 @@ app.use(cookieParser());
 app.use(cors());
 
 // Api
-const indexRouter = require('./index');
-const usersRouter = require('./components/user/userController');
-const subscriptionRouter = require('./components/subscription/subscriptionController');
+import indexRouter from './index';
+import userRouter from './components/user/userController';
+import subscriptionRouter from './components/subscription/subscriptionController';
 
-app.use(authCheck);
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(authCheck);
+app.use('/users', userRouter);
 app.use('/subscriptions', subscriptionRouter);
 
 // error handler

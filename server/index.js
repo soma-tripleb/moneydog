@@ -1,7 +1,14 @@
-const router = require('express').Router();
+import express from 'express';
+
+const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.send('MoneyDog Server API');
+  res.status(200).json(
+    {
+      sucess: true,
+      message: 'MoneyDog Server API',
+    }
+  );
 });
 
-module.exports = router;
+export default router;

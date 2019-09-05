@@ -1,6 +1,6 @@
-const express = require('express');
-
-const UserService = require('./userService');
+import express from 'express';
+import UserService from './userService';
+import JWTAuthenticationToken from '../../security/jwtAuthenticationToken';
 
 const router = express.Router();
 
@@ -34,10 +34,15 @@ router.post('/signUp', (req, res) => {
 
 router.post('/signIn', async (req, res) => {
   const loginResponse = await UserService.login(req.body.userInfo);
+  const email = req.body.userInfo.email;
+
   if (loginResponse === 200) {
-    const token = UserService.createJWT(req.body.userInfo.email);
+    const token = JWTAuthenticationToken.createJWT(email);
+
     res.cookie('user', token);
+
     console.log(token);
+
     res.status(200).json({status: 200, message: '로그인에 성공했습니다.', token: token});
   } else if (loginResponse === 400) {
     res.status(400).json({status: 400, message: '없는 아이디 입니다.'});
@@ -46,4 +51,4 @@ router.post('/signIn', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
