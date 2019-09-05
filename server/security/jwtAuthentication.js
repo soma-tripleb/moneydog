@@ -1,11 +1,12 @@
 import dotenv from 'dotenv';
-import JsonWebToken from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 dotenv.config();
 
+const JSONWebToken = jwt;
 const secretCode = `${process.env.JWT_SECRET}`;
 
-export default function JWTAuthentication (req, res, next) {
-  const token = req.header('x-access-token') || req.query.token;
+const JWTAuthentication = (req, res, next) => {
+  const token = (req.header('x-access-token') || req.query.token);
 
   if (!token) {
     return res.status(403).json({
@@ -14,7 +15,7 @@ export default function JWTAuthentication (req, res, next) {
     });
   }
 
-  JsonWebToken.verify(token, secretCode, (err, decode) => {
+  JSONWebToken.verify(token, secretCode, (err, decode) => {
     if (err) {
       console.log(err);
       return res.status(403).json({
@@ -27,3 +28,5 @@ export default function JWTAuthentication (req, res, next) {
     }
   });
 };
+
+export default JWTAuthentication;
