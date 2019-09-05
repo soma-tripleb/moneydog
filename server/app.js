@@ -3,15 +3,20 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-const db = require('./db/mongoDB');
 
 import authCheck from './security/jwtAuthentication';
+import * as Sentry from '@sentry/node';
+
+// Error tracking
+Sentry.init({dsn: 'https://566bd809b9a0464e8e690a199ab83396@sentry.io/1553162'});
 
 // MiddleWares
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use(Sentry.Handlers.requestHandler());
+app.use(Sentry.Handlers.errorHandler());
 
 // HTTP 접근 제어 혹은 CORS(Cross-origin resource sharing, 출처가 다른 곳끼리 자원 공유
 app.use(cors());
@@ -34,7 +39,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.end(res.sentry + '\n');
 });
 
 module.exports = app;
