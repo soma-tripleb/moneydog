@@ -1,0 +1,11 @@
+image: node:latest
+
+stages:
+  - lint
+
+eslint:
+  stage:
+  script:
+    - npm install -g eslint
+    - eslint --init
+    - eslint app.js
