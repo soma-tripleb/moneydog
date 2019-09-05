@@ -33,14 +33,11 @@ jobs:
       - run:
           name: install node modules
           command: npm install
-      - run:
-          name : eslint init
-          command: eslint --init
-      - run:
-          name: ESLing, write report
-          command: |
-            mkdir -p ~/reports
-            eslint . --ext .js --output-file ~/reports/eslint.xml
+#      - run:
+#          name: ESLing, write report
+#          command: |
+#            mkdir -p ~/reports
+#            eslint . --ext .js --output-file ~/reports/eslint.xml
 
 #      - save_cache:
 #          paths:
