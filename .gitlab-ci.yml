@@ -9,6 +9,7 @@ eslint:
     stage: lint
     script:
         - echo eslint start
+        - cd server
         - npm install -g eslint
         - eslint --init
         - eslint app.js
