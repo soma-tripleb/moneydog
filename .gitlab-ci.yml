@@ -1,0 +1,27 @@
+image: gitlab-registry
+
+stages:
+    - server-lint
+    - client-lint
+
+server_lint_inspection:
+    stage: server-lint
+    before_script:
+    - export PATH=$PATH:/usr/local/bin
+    script:
+    - cd server
+    - npm install
+    - npm run lint
+    tags:
+    - moneydog
+
+client_lint_inspection:
+    stage: client-lint
+    before_script:
+    - export PATH=$PATH:/usr/local/bin
+    script:
+    - cd client
+    - npm install
+    - npm run lint
+    tags:
+    - moneydog
