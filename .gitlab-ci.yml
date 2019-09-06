@@ -1,13 +1,27 @@
-image: node:latest
+image: gitlab-registry
 
 stages:
-    - test
-    
-lets_test:
-  stage: test
-  script:
-  - echo hi
-  - cd /home/gitlab-runner
-  - touch moneydog
-  tags:
-  - moneydog
+    - server-lint
+    - client-lint
+
+server_lint_inspection:
+    stage: server-lint
+    before_script:
+    - export PATH=$PATH:/usr/local/bin
+    script:
+    - cd server
+    - npm install
+    - npm run lint
+    tags:
+    - moneydog
+
+client_lint_inspection:
+    stage: client-lint
+    before_script:
+    - export PATH=$PATH:/usr/local/bin
+    script:
+    - cd client
+    - npm install
+    - npm run lint
+    tags:
+    - moneydog
