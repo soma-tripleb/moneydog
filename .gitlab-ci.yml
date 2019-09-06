@@ -1,18 +1,8 @@
 image: node:latest
 
 stages:
-    - lint
     - test
-
-eslint:
-    stage: lint
-    script:
-        - echo eslint start
-        - cd server
-        - npm install -g eslint
-        - eslint --init
-        - eslint app.js
-
+    
 lets_test:
   stage: test
   script:
