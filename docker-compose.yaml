@@ -1,0 +1,36 @@
+version: "2"
+services:
+  nginx:
+    container_name: nginx
+    build:
+      dockerfile: Dockerfile.nginx
+      context: ./nginx
+    ports:
+      - "3000:80"
+    networks:
+      - backend
+
+    # 컨테이너끼리 내부적으로 연결할 때의 alias, A:B인경우 B라는 이름으로 A에 연결할 수 있다. nginx에서 app이라는 도메인을 통해 app 컨테이너에 접근할 수 있다.
+  client:
+    container_name: "client"
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+
+  server:
+    container_name: "server"
+    build:
+      dockerfile: Dockerfile
+      context: ./server
+    ports:
+      - "5000:5000"
+    networks:
+      - backend
+
+networks: # 가장 기본적인 bridge 네트워크
+  backend:
+    driver: bridge

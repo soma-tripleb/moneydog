@@ -25,4 +25,4 @@ describe('GoogleParser 테스트', () => {
       assert.strictEqual(watcha.price, 7900);
     });
   });
-})
+});
