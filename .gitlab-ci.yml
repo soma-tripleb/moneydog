@@ -18,6 +18,6 @@ lets_test:
   script:
   - echo hi
   - cd /home/gitlab-runner
-  - touch devqa
+  - touch moneydog
   tags:
-  - devqa90
+  - moneydog
