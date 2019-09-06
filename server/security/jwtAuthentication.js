@@ -1,10 +1,13 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+dotenv.config();
 
-const jwt = require('jsonwebtoken');
+const JSONWebToken = jwt;
 const secretCode = `${process.env.JWT_SECRET}`;
 
-const authMiddleware = (req, res, next) =>{
-  const token = req.header('x-access-token') || req.query.token;
+const JWTAuthentication = (req, res, next) => {
+  const token = (req.header('x-access-token') || req.query.token);
+
   if (!token) {
     return res.status(403).json({
       success: false,
@@ -12,7 +15,7 @@ const authMiddleware = (req, res, next) =>{
     });
   }
 
-  jwt.verify(token, secretCode, (err, decode) =>{
+  JSONWebToken.verify(token, secretCode, (err, decode) => {
     if (err) {
       console.log(err);
       return res.status(403).json({
@@ -26,4 +29,4 @@ const authMiddleware = (req, res, next) =>{
   });
 };
 
-module.exports = authMiddleware;
+export default JWTAuthentication;

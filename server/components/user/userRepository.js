@@ -1,4 +1,4 @@
-const User = require('../../models/user');
+import User from '../../models/user';
 
 const getUserList = () => {
   console.log(User.find({}));
@@ -25,9 +25,9 @@ const createUser = (userInfo) => {
   return User.create(userInfo);
 };
 
-module.exports = {
-  getUserList: getUserList,
-  getUserById: getUserById,
-  createUser: createUser,
-  getUserByEmail: getUserByEmail,
+export {
+  getUserList,
+  getUserById,
+  createUser,
+  getUserByEmail,
 };
