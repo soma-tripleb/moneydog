@@ -4,15 +4,24 @@ import mongoose from 'mongoose';
 
 const MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}`;
 
-const conn = mongoose.createConnection(MONGO_URI);
+// 유 connect 하는 부분
+const mongoConnect = () => {
+  mongoose.connect(MONGO_URI, {
+    useNewUrlParser: true,
+  })
+    .then(() => console.log('Connected mongo server'))
+    .catch((e) => {
+      console.error(e);
+    });
+};
 
-mongoose.connect(MONGO_URI, {
-  'user': `${process.env.DB_USER}`, 'pass': `${process.env.DB_PASSWORD}`,
-  'useNewUrlParser': true})
-  .then(() => console.log('Connected to mongod server'))
-  .catch((e) => {
-    console.log('mongodb 연결에 문제가 있습니다.');
-    console.error(e);
-  });
+// mongo 연결 해제 부분
+const mongoDisConnect = () => {
+  mongoose.disconnect()
+    .then(() => console.log('Disconnected mongo server'))
+    .catch((e) => {
+      console.error(e);
+    });
+};
 
-module.exports = conn;
+export {mongoConnect, mongoDisConnect};
