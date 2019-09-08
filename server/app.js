@@ -29,8 +29,8 @@ import userRouter from './components/user/userController';
 import subscriptionRouter from './components/subscription/subscriptionController';
 
 app.use('/', indexRouter);
-app.use(authCheck);
 app.use('/users', userRouter);
+app.use(authCheck);
 app.use('/subscriptions', subscriptionRouter);
 
 // error handler

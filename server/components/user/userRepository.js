@@ -14,7 +14,7 @@ const getUserById = (params) => {
 };
 
 const getUserByEmail = async (email) => {
-  return await User.findOne({email})
+  return await User.findOne({email: email})
     .then((user) => {
       return user;
     })
@@ -25,7 +25,7 @@ const createUser = (userInfo) => {
   return User.create(userInfo);
 };
 
-export {
+export default {
   getUserList,
   getUserById,
   createUser,
