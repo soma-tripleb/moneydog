@@ -6,11 +6,13 @@ const cors = require('cors');
 
 import authCheck from './security/jwtAuthentication';
 import * as Sentry from '@sentry/node';
+import {mongoConnect} from './db/mongoDB';
 
 // Error tracking
 Sentry.init({dsn: 'https://566bd809b9a0464e8e690a199ab83396@sentry.io/1553162'});
 
 // MiddleWares
+mongoConnect();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -27,8 +29,8 @@ import userRouter from './components/user/userController';
 import subscriptionRouter from './components/subscription/subscriptionController';
 
 app.use('/', indexRouter);
-app.use(authCheck);
 app.use('/users', userRouter);
+app.use(authCheck);
 app.use('/subscriptions', subscriptionRouter);
 
 // error handler

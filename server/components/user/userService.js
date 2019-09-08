@@ -24,15 +24,17 @@ const register = async (userInfo) => {
 const login = async (userInfo) => {
   const user = await UserRepository.getUserByEmail(userInfo.email);
 
+  if (user === null) {
+    return 400;
+  }
+
   const salt = user.content;
   const hashPassword = crypto
     .createHash('sha512')
     .update(userInfo.password + salt)
     .digest('hex');
 
-  if (user === null) {
-    return 400;
-  } else if (user.password === hashPassword) {
+  if (user.password === hashPassword) {
     return 200;
   } else if (user.password !== hashPassword) {
     return 409;
@@ -44,7 +46,7 @@ const getUserByEmail = async (email) => {
   return user;
 };
 
-export {
+export default {
   register,
   login,
   getUserByEmail,
