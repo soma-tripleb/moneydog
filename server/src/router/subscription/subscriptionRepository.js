@@ -1,14 +1,14 @@
-const Subscription = require('../../schemas/subscription');
+const SubscriptionTemplate = require('../../schemas/subscriptionTemplate');
 
 const getSubscriptionList = () => {
-  return Subscription.find({}, (err, subscriptions) => {
+  return SubscriptionTemplate.find({}, (err, subscriptions) => {
     if (err) throw err;
     // console.log(subscriptions);
   });
 };
 
 const getSubscriptionByName = (name) => {
-  return Subscription.find({name: {$regex: '^' + name}}, (err, subscriptions) => {
+  return SubscriptionTemplate.find({name: {$regex: '^' + name}}, (err, subscriptions) => {
     if (err) throw err;
   });
 };

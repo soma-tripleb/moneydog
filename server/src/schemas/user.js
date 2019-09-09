@@ -1,17 +1,37 @@
 import mongoose from 'mongoose';
 
-const UserSchema = new mongoose.Schema({
-  email: String,
-  username: String,
-  password: String,
-  content: String,
-},
-{
-  timestamps: true,
-});
+const pricePlanSchema = new mongoose.Schema(
+  {
+    name: {type: String},
+    price: {type: Number},
+    content: {type: String},
+  }
+);
 
-UserSchema.method({});
+const subscriptionSchema = new mongoose.Schema(
+  {
+    seq: {type: Number},
+    title: {type: String, required: true, unique: true},
+    price: {type: Number},
+    paymentDate: {type: Date},
+    channel: {type: String},
+    pricePlan: pricePlanSchema,
+  }
+);
 
-const User = mongoose.model('User', UserSchema);
+const userSchema = new mongoose.Schema(
+  {
+    seq: {type: Number},
+    email: {type: String, required: true, unique: true},
+    password: {type: String, required: true},
+    nickname: {type: String},
+    salt: {type: Number},
+    role: {type: String},
+    subscription: subscriptionSchema,
+  },
+  {
+    timestamps: true, // createAt & modifiedAt
+  }
+);
 
-export default User;
+export default mongoose.model('User', userSchema);
