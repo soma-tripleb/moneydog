@@ -10,11 +10,11 @@ const conn = mongoose.createConnection(MONGO_URI);
 const mongoConnect = () => {
   mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
-  })
-    .then(() => console.log('Connected mongo server'))
-    .catch((e) => {
-      console.error(e);
-    });
+  }).then(() => {
+    console.log('Connected mongo server');
+  }).catch((e) => {
+    console.error(e);
+  });
 };
 
 // mongo 연결 해제 부분
