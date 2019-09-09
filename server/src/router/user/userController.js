@@ -8,10 +8,10 @@ router.get('/', (req, res) => {
   console.log('get list호출');
   UserService.getUserList()
     .then((users) => {
-      res.send(users);
+      res.status(200).send(users);
     })
     .catch((e) => {
-      res.send(e);
+      res.status(400).send(e);
     });
 });
 

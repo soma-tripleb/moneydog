@@ -1,21 +1,33 @@
 import 'babel-polyfill';
 
 import request from 'supertest';
-import {expect, assert} from 'chai';
+import {expect} from 'chai';
+
 import app from '../app';
 
-describe('Test suite', ()=>{
-  it('should be ok', ()=>{
-    assert.equal(true, true);
+describe('GET /', () => {
+  it('should respond with Json message "MoneyDog Server API"', (done) => {
+    request(app)
+      .get('/')
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          done();
+          return;
+        }
+        expect(res.body.message).to.equal('MoneyDog Server API');
+        done();
+      });
   });
 });
 
-describe('Index Api Test', ()=>{
-  it('GET / 는', (done)=>{
+describe('User Api Test', ()=>{
+  it('Get /users 는 ', (done)=>{
     request(app)
-      .get('/')
-      .end((err, res)=>{
-        console.log('body' + res.body);
+      .get('/users')
+      .expect(200)
+      .end((err, res) =>{
+        console.log(res.body);
         done();
       });
   });

@@ -18,6 +18,6 @@ const createJWT = (param) => {
   return token;
 };
 
-export default {
+export {
   createJWT,
 };
