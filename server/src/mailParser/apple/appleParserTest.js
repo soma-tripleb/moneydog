@@ -1,6 +1,6 @@
 const {assert} = require('chai');
 const fs = require('fs');
-const appleParser = require('../apple/appleParser');
+const appleParser = require('./appleParser');
 
 describe('AppleParser 테스트', () => {
   const response = fs.readFileSync('./appleMusicReceipt.json');
