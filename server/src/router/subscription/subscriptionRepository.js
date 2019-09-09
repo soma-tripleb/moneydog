@@ -1,4 +1,4 @@
-const Subscription = require('../../models/subscription');
+const Subscription = require('../../schemas/subscription');
 
 const getSubscriptionList = () => {
   return Subscription.find({}, (err, subscriptions) => {

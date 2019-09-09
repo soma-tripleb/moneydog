@@ -1,5 +1,5 @@
 import express from 'express';
-import {createJWT} from './security/jwtAuthenticationToken';
+import {createJWT} from './src/security/jwtAuthenticationToken';
 
 const router = express.Router();
 const TEMPORALY_JWT_KEYWORD = 'yhpark';

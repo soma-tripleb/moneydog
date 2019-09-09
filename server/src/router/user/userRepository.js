@@ -1,4 +1,4 @@
-import User from '../../models/user';
+import User from '../../schemas/user';
 
 const getUserList = () => {
   console.log(User.find({}));

@@ -4,9 +4,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
-import authCheck from './security/jwtAuthentication';
+import authCheck from './src/security/jwtAuthentication';
 import * as Sentry from '@sentry/node';
-import {mongoConnect} from './db/mongoDB';
+import {mongoConnect} from './src/dbConfig/mongoDB';
 
 // Error tracking
 Sentry.init({dsn: 'https://566bd809b9a0464e8e690a199ab83396@sentry.io/1553162'});
@@ -25,8 +25,8 @@ app.use(cors());
 
 // Api
 import indexRouter from './index';
-import userRouter from './components/user/userController';
-import subscriptionRouter from './components/subscription/subscriptionController';
+import userRouter from './src/router/user/userController';
+import subscriptionRouter from './src/router/subscription/subscriptionController';
 
 app.use('/', indexRouter);
 app.use('/users', userRouter);
