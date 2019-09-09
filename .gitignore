@@ -27,3 +27,6 @@ lerna-debug.log*
 .env
 credentials.json
 token.json
+
+# Dockerfile
+docker-compose.yaml
