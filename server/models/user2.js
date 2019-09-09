@@ -27,9 +27,10 @@ const user2Schema = new mongoose.Schema(
     nickname: { type: String },
     role: { type: String },
     subscription: subscriptionSchema,
-    createdAt: { type: Date, default: Date.now },
-
   },
+  {
+    timestamps: true, // createAt & modifiedAt
+  }
 );
 
 export default mongoose.model('User2', user2Schema);
