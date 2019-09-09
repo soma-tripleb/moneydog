@@ -1,8 +1,8 @@
 import 'babel-polyfill';
 
 import request from 'supertest';
-import {expect, assert} from 'chai';
-import app from '../app';
+import {assert} from 'chai';
+import app from '../../app';
 
 describe('Test suite', ()=>{
   it('should be ok', ()=>{
