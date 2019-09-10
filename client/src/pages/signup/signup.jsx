@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-import {GoogleLogin} from 'react-google-login';
 
 import * as service from './signup.ajax';
 import './signup.css';
 
 class SignUp extends Component {
   state = {
-    nickName: '',
+    nickname: '',
     email: '',
     password: '',
     passwordCheck: '',
@@ -49,35 +48,27 @@ class SignUp extends Component {
     // 모두 통과시 createUser
     const response = await service.createUser(this.state);
 
-    if (response.status === 409) {
+    if (response.status === 400) {
       this.setState({
-        errorMessage: '이미 있는 아이디 입니다.',
+        errorMessage: '이미 존재하는 아이디 입니다.',
       });
     } else if (response.status === 201) {
-      alert('회원 가입 성공!');
+      alert('회원 가입 성공! 로그인 해주세요');
+      this.props.history.push('/user/subscribing');
     }
   };
 
   checkEmailForm = () => {
     const exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-    if (!exptext.test(this.state.email)) {
-      return false;
-    }
-    return true;
+    return exptext.test(this.state.email);
   };
 
   checkBlank = () => {
-    if (this.state.nickName === '' || this.state.email === '' || this.state.passwordCheck === '' || this.state.password === '') {
-      return false;
-    }
-    return true;
+    return !(this.state.nickname === '' || this.state.email === '' || this.state.passwordCheck === '' || this.state.password === '');
   };
 
   checkEqualPassword = () => {
-    if (this.state.passwordCheck !== this.state.password) {
-      return false;
-    }
-    return true;
+    return this.state.passwordCheck === this.state.password;
   };
 
   checkedPasswordForm = () => {
@@ -111,7 +102,7 @@ class SignUp extends Component {
   // textbox 채워 넣을때 이벤트
   onChangeNickName = (e) => {
     this.setState({
-      nickName: e.target.value,
+      nickname: e.target.value,
     });
   };
   // textbox 채워 넣을때 이벤트
@@ -167,7 +158,7 @@ class SignUp extends Component {
                       <span className="input-group-text"> <i className="fa fa-user"/> </span>
                     </div>
                     <input name="" className="form-control" placeholder="Nick name" type="text"
-                      value={this.state.nickName} onChange={this.onChangeNickName}/>
+                      value={this.state.nickname} onChange={this.onChangeNickName}/>
                   </div>
                   {/* createPW input*/}
                   <div className="form-group input-group">

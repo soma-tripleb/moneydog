@@ -20,12 +20,11 @@ export function responseGoogle(response) {
 }
 
 export function createUser(userInfo) {
-  return axios.post(`${process.env.REACT_APP_NODE_API_URL}/users/signUp`, {
+  return axios.post(`${process.env.REACT_APP_NODE_API_URL}/auth/signUp`, {
     userInfo: {
       email: userInfo.email,
-      username: userInfo.nickName,
       password: userInfo.password,
-      content: 'content',
+      nickname: userInfo.nickname,
     },
   }).catch((err) => {
     return err.response;
