@@ -1,5 +1,8 @@
+import 'babel-polyfill';
+import {should} from 'chai';
+
 const request = require('supertest');
-const app = require('../api/index');
+const app = require('../../app');
 
 describe('GET /user는', () => {
   describe('success', ()=>{
