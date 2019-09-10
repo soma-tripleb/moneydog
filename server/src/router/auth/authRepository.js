@@ -5,7 +5,9 @@ const getUserByEmail = async (email) => {
     .then((user) => {
       return user;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      return {status: 400, success: false, message: err.message};
+    });
 };
 
 const createUser = async (userInfo) => {

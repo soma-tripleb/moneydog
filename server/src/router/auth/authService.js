@@ -3,6 +3,7 @@ import crypto from 'crypto';
 dotenv.config();
 
 import AuthRepository from './authRepository';
+import {createJWT} from '../../security/jwtAuthenticationToken';
 
 const register = async (userInfo) => {
   userInfo.salt = (Math.round((new Date().valueOf() * Math.random())) + '');
@@ -16,10 +17,13 @@ const register = async (userInfo) => {
 };
 
 const login = async (userInfo) => {
+  console.log(userInfo.email);
   const user = await AuthRepository.getUserByEmail(userInfo.email);
 
+  console.log('user'+user);
+
   if (user === null) {
-    return 400;
+    return {status: 400, success: false, message: '없는 아이디 입니다.'};
   }
 
   const salt = user.salt;
@@ -29,9 +33,10 @@ const login = async (userInfo) => {
     .digest('hex');
 
   if (user.password === hashPassword) {
-    return 200;
+    const jwt = createJWT(user.email);
+    return {status: 200, success: true, message: '로그인에 성공 했습니다.', token: jwt};
   } else if (user.password !== hashPassword) {
-    return 409;
+    return {status: 409, success: false, message: '비밀번호가 틀렸습니다.'};
   }
 };
 
