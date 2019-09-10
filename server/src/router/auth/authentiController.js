@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/signUp', async (req, res) => {
   const userInfo = req.body.userInfo || '';
 
-  if (userInfo == '') {
+  if (userInfo === '') {
     res.status(400).json({status: 400, success: false, message: 'userInfo 정보가 없습니다.'});
     return;
   }
@@ -30,7 +30,7 @@ router.post('/signUp', async (req, res) => {
 router.post('/signIn', async (req, res) => {
   const userInfo = req.body.userInfo || '';
 
-  if (userInfo == '') {
+  if (userInfo === '') {
     res.status(400).json({status: 400, success: false, message: 'userInfo 정보가 없습니다.'});
     return;
   }

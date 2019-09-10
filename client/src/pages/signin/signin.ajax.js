@@ -1,16 +1,5 @@
 import axios from 'axios';
 
-export async function login(userInfo) {
-  return await axios.post(`${process.env.REACT_APP_NODE_API_URL}/users/signIn`, {
-    userInfo: {
-      email: userInfo.email,
-      password: userInfo.password,
-    },
-  }).catch( (err) =>{
-    return err.response;
-  });
-}
-
 export function responseGoogle(response) {
   axios.post('https://localhost:8090/tokensignin', {
     data: {
