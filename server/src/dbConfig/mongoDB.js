@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 
 const MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}`;
 
+const conn = mongoose.createConnection(MONGO_URI);
+
 // connect 하는 부분
 const mongoConnect = () => {
   if (process.env.NODE_ENV === 'test') {
@@ -37,4 +39,4 @@ const mongoDisConnect = () => {
     });
 };
 
-export {mongoConnect, mongoDisConnect};
+export {conn, mongoConnect, mongoDisConnect};

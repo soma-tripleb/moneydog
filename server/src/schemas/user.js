@@ -1,8 +1,10 @@
 import mongoose from 'mongoose';
+import autoInceement from 'mongoose-auto-increment';
+import {conn} from '../dbConfig/mongoDB';
 
 const pricePlanSchema = new mongoose.Schema(
   {
-    name: {type: String},
+    title: {type: String},
     price: {type: Number},
     content: {type: String},
   }
@@ -11,7 +13,7 @@ const pricePlanSchema = new mongoose.Schema(
 const subscriptionSchema = new mongoose.Schema(
   {
     seq: {type: Number},
-    title: {type: String, required: true, unique: true},
+    name: {type: String, required: true, unique: true},
     price: {type: Number},
     paymentDate: {type: Date},
     channel: {type: String},
@@ -21,17 +23,24 @@ const subscriptionSchema = new mongoose.Schema(
 
 const userSchema = new mongoose.Schema(
   {
-    seq: {type: Number},
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    nickname: {type: String},
-    salt: {type: Number},
-    role: {type: String},
+    nickname: {type: String, required: true},
+    salt: {type: Number, required: true},
+    role: {type: String, required: true},
     subscription: subscriptionSchema,
   },
   {
     timestamps: true, // createAt & modifiedAt
   }
 );
+
+autoInceement.initialize(conn);
+userSchema.plugin(autoInceement.plugin, {
+  model: 'User',
+  field: 'seq',
+  startAt: 1,
+  incrementBy: 1,
+});
 
 export default mongoose.model('User', userSchema);

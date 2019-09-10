@@ -1,7 +1,7 @@
 import express from 'express';
 import {createJWT} from './src/security/jwtAuthenticationToken';
 
-const router = express.Router();
+const router = express();
 const TEMPORALY_JWT_KEYWORD = 'yhpark';
 
 router.get('/', (req, res) => {
