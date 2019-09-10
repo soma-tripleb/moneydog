@@ -8,7 +8,7 @@ const conn = mongoose.createConnection(MONGO_URI);
 
 // connect 하는 부분
 const mongoConnect = () => {
-  console.log(`실행모드 : ${process.env.NODE_ENV}`);
+  console.log(`running mode : ${process.env.NODE_ENV}`);
   if (process.env.NODE_ENV === 'test') {
     const Mockgoose = require('mockgoose').Mockgoose;
     const mockgoose = new Mockgoose(mongoose);
@@ -17,7 +17,7 @@ const mongoConnect = () => {
         mongoose.connect(MONGO_URI, {useNewUrlParser: true})
           .then(() => console.log('Connected test mongo db using mockgoose'))
           .catch((e) => {
-            console.error(e);
+            console.error(`mockgoose error 발생 : ${e}`);
           });
       });
   } else {

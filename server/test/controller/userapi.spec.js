@@ -2,11 +2,15 @@ import 'babel-polyfill';
 
 import request from 'supertest';
 import {assert, expect} from 'chai';
-import {mongoConnect,mongoDisConnect} from '../src/dbConfig/mongoDB';
+import {mongoConnect, mongoDisConnect} from '../../src/dbConfig/mongoDB';
 
-import app from '../app';
+import app from '../../app';
 
 describe('GET /', () => {
+  before((done) => {
+    mongoConnect();
+    done();
+  })
   it('should respond with Json message "MoneyDog Server API"', (done) => {
     request(app)
       .get('/')
@@ -61,6 +65,7 @@ describe('GET /', () => {
           return;
         }
         const result = res.body;
+        console.log('result : ', result);
         assert.strictEqual(result.name, 'jimmy');
         assert.strictEqual(result.subscriptions[0].name, 'netflix');
       });
