@@ -1,6 +1,5 @@
 import express from 'express';
 import UserService from './userService';
-import JWTAuthenticationToken from '../../security/jwtAuthenticationToken';
 
 const router = express.Router();
 
