@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
+import {LineChart, Line, CartesianGrid, XAxis, YAxis} from 'recharts';
 
 class Charts extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class Charts extends Component {
             <CartesianGrid stroke="#ccc" />
             <XAxis dataKey="name" />
             <YAxis />
-            <Line type="monotone" dataKey="pv" stroke="#000" activeDot={{r:8}}/>
+            <Line type="monotone" dataKey="pv" stroke="#000" activeDot={{r: 8}}/>
           </LineChart>
         </>
     );

@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 
 class GmailTutorial extends Component {
-
   render() {
     return (
         <>
-          {/*Gmail*/}
+          {/* Gmail*/}
           <div className="container marketing">
 
             <div className="row featurette">
@@ -23,7 +22,7 @@ class GmailTutorial extends Component {
               </div>
               <div className="col-md-5">
                 <img className="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto"
-                     alt="Generic placeholder image"/>
+                  alt="Generic placeholder image"/>
               </div>
             </div>
           </div>

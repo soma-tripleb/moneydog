@@ -1,32 +1,29 @@
 import React, {Component} from 'react';
-import cookie from 'react-cookies'
+import cookie from 'react-cookies';
 import {connect} from 'react-redux';
 import * as actions from '../../actions/auth';
 
 import './signin.css';
-import * as service from "../signin/signin.ajax";
+import * as service from '../signin/signin.ajax';
 
 class Signin extends Component {
-
   state = {
     email: '',
     password: '',
   };
 
   signInBtnClicked = async (e) => {
-
     e.preventDefault();
 
     const response = await service.login(this.state);
-    await this.props.loginRequest(this.state.email,this.state.password);
+    await this.props.loginRequest(this.state.email, this.state.password);
 
     console.log(this.props.status);
 
     if (response.status === 200) {
-
       // localStorage.setItem('isLogin',"true");
       cookie.save('token', response.data.token, {
-        path: '/'
+        path: '/',
       });
 
       this.props.history.push('/user/subscribing');
@@ -39,13 +36,13 @@ class Signin extends Component {
 
   onChangeEmail = (e) => {
     this.setState({
-      email: e.target.value
+      email: e.target.value,
     });
   };
 
   onChangePassword = (e) => {
     this.setState({
-      password: e.target.value
+      password: e.target.value,
     });
   };
 
@@ -67,23 +64,23 @@ class Signin extends Component {
                   <span className="bg-light">OR</span>
                 </p>
                 <form>
-                  {/*Email input*/}
+                  {/* Email input*/}
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-envelope"/> </span>
                     </div>
                     <input name="emailInfo" className="form-control" placeholder="Email address" type="email"
-                           value={this.state.email} onChange={this.onChangeEmail}/>
+                      value={this.state.email} onChange={this.onChangeEmail}/>
                   </div>
-                  {/*createPW input*/}
+                  {/* createPW input*/}
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-lock"/> </span>
                     </div>
                     <input className="form-control" placeholder="Create password" type="password"
-                           value={this.state.password} onChange={this.onChangePassword}/>
+                      value={this.state.password} onChange={this.onChangePassword}/>
                   </div>
-                  {/*회원가입 버튼*/}
+                  {/* 회원가입 버튼*/}
                   <div className="form-group">
                     <button type="submit" className="btn btn-success btn-block" onClick={this.signInBtnClicked}> Sign In
                     </button>
@@ -98,16 +95,16 @@ class Signin extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  status: state.auth.login.status
+const mapStateToProps = (state) => ({
+  status: state.auth.login.status,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginRequest: async (email,password) => {
-      await dispatch(actions.loginRequest(email,password))
+    loginRequest: async (email, password) => {
+      await dispatch(actions.loginRequest(email, password));
     },
-  }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signin);

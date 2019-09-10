@@ -1,21 +1,20 @@
-import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
 
 class Head extends Component {
-
   isLogined = () =>{
-    if( this.props.status === 'SUCCESS'){
-      return(
+    if ( this.props.status === 'SUCCESS') {
+      return (
           <>
             <li className="nav-item">
               <Link to="/signup" className="nav-link">Logout</Link>
             </li>
           </>
-      )
-    }else{
-      return(
+      );
+    } else {
+      return (
           <>
             <li className="nav-item">
               <Link to="/signup" className="nav-link">Sign-up</Link>
@@ -24,7 +23,7 @@ class Head extends Component {
               <Link to="/signin" className="nav-link">Sign-in</Link>
             </li>
           </>
-      )
+      );
     }
   };
 
@@ -33,11 +32,11 @@ class Head extends Component {
       <>
         <ul className="nav justify-content-center">
           <li className="nav-item">
-            <Link to="/" className="navbar-brand nav-link" style={{fontFamily :'GOTHAN-ULTRA'}}>MONEYDOG</Link>
+            <Link to="/" className="navbar-brand nav-link" style={{fontFamily: 'GOTHAN-ULTRA'}}>MONEYDOG</Link>
           </li>
         </ul>
 
-        <ul className="nav justify-content-center" style={{fontFamily :'GOTHAN-XLIGHT'}}>
+        <ul className="nav justify-content-center" style={{fontFamily: 'GOTHAN-XLIGHT'}}>
           <li className="nav-item">
             <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
           </li>
@@ -60,11 +59,10 @@ class Head extends Component {
       </>
     );
   }
-
 }
 
-const mapStateToProps = state => ({
-  status: state.auth.login.status
+const mapStateToProps = (state) => ({
+  status: state.auth.login.status,
 });
 
 export default connect(mapStateToProps)(Head);
