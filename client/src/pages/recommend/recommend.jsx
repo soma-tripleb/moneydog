@@ -22,14 +22,14 @@ class Recommend extends Component {
           <div className="container">
             <div className="row">
 
-              {/*구독중인 서비스 list */}
+              {/* 구독중인 서비스 list */}
               <div className="col-md-6">
                 <h2>Recommend App</h2>
                 <div className='recommend'>
                   <div className="col-5">
                     <h4>VOD</h4>
                   </div>
-                  <div style={{margin: '0', color: 'cornflowerblue','textAlign' :'right'}}>
+                  <div style={{'margin': '0', 'color': 'cornflowerblue', 'textAlign': 'right'}}>
                     더보기
                   </div>
                   <div className="container w-100 p-3" id="inner-element">
@@ -104,7 +104,7 @@ class Recommend extends Component {
                   <div className="col-5">
                     <h4>Music</h4>
                   </div>
-                  <div style={{margin: '0', color: 'cornflowerblue','textAlign' :'right'}}>
+                  <div style={{'margin': '0', 'color': 'cornflowerblue', 'textAlign': 'right'}}>
                     더보기
                   </div>
                   <div className="container w-100 p-3" id="inner-element">
@@ -199,7 +199,7 @@ class Recommend extends Component {
                   </div>
                   <img src={Screen} />
 
-                  <div style={{margin: '0', color: 'cornflowerblue','textAlign' :'right'}}>
+                  <div style={{'margin': '0', 'color': 'cornflowerblue', 'textAlign': 'right'}}>
                     접기
                   </div>
                   <hr/>
@@ -222,7 +222,7 @@ class Recommend extends Component {
                       </div>
                     </div>
                   </div>
-                  <div style={{margin: '0', color: 'cornflowerblue','textAlign' :'right'}}>
+                  <div style={{'margin': '0', 'color': 'cornflowerblue', 'textAlign': 'right'}}>
                     더보기
                   </div>
                   <hr/>
@@ -245,7 +245,7 @@ class Recommend extends Component {
                       </div>
                     </div>
                   </div>
-                  <div style={{margin: '0', color: 'cornflowerblue','textAlign' :'right'}}>
+                  <div style={{'margin': '0', 'color': 'cornflowerblue', 'textAlign': 'right'}}>
                     더보기
                   </div>
                   <hr/>

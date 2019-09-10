@@ -7,7 +7,6 @@ import subscribe from '../../static/img/templogo/subscribe.png';
 import './carosel.css';
 
 class Carousel extends Component {
-
   render() {
     return (
         <>
@@ -20,15 +19,15 @@ class Carousel extends Component {
             <div className="carousel-inner">
               <div className="carousel-item active">
                 <img className="d-block w-50" src={dashboard}
-                     alt="First slide"/>
+                  alt="First slide"/>
               </div>
               <div className="carousel-item">
                 <img className="d-block w-50" src={report}
-                     alt="First slide"/>
+                  alt="First slide"/>
               </div>
               <div className="carousel-item">
                 <img className="d-block w-50" src={subscribe}
-                     alt="First slide"/>
+                  alt="First slide"/>
               </div>
             </div>
             <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

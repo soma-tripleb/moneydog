@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Calendar, Alert} from 'antd';
+import React, {Component} from 'react';
+import {Calendar, Alert} from 'antd';
 import moment from 'moment';
 import './Calendar.css';
 
@@ -19,7 +19,7 @@ class CalendarClass extends Component {
   }
 
   onPanelChange = (value, mode) => {
-    console.log('test',value, mode);
+    console.log('test', value, mode);
   };
 
   arr = {
@@ -33,7 +33,7 @@ class CalendarClass extends Component {
     let listData;
     subscriptions.map((subscription) => {
       if (moment(subscription.renewal).date() === value.date()) {
-        listData = [ {type: subscription.name}];
+        listData = [{type: subscription.name}];
       }
     });
     return listData || [];
@@ -43,14 +43,14 @@ class CalendarClass extends Component {
     const subscriptions = this.props.data.subscriptions;
     const listData = this.getListData(value, subscriptions);
     return (
-        <ul className="events">
-          {listData.map(item => (
-              <li key={item.type}>
-                <img className="subscribeImg" src={this.arr[item.type]}
-                     alt={item.type}/>
-              </li>
-          ))}
-        </ul>
+      <ul className="events">
+        {listData.map((item) => (
+          <li key={item.type}>
+            <img className="subscribeImg" src={this.arr[item.type]}
+              alt={item.type}/>
+          </li>
+        ))}
+      </ul>
     );
   }
 

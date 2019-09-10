@@ -41,17 +41,17 @@ class Info extends Component {
                     height: 100,
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
                   }}/>
                   <Input size='large' placeholder='Enter Price'
-                         style={{width: '33%', margin: 'auto', marginTop: '1rem'}}/>
+                    style={{width: '33%', margin: 'auto', marginTop: '1rem'}}/>
                   <Form {...formItemLayout}>
                     <div className='form-flex-container' style={{
                       padding: '1rem',
                       margin: '1rem',
                       display: 'flex',
                       flexDirection: 'row',
-                      alignItems: 'center'
+                      alignItems: 'center',
                     }}>
                       <Col span={12}>
                         <Form.Item label='Name'/>
@@ -81,7 +81,7 @@ class Info extends Component {
             </div>
           </Row>
         </>
-    )
+    );
   }
 }
 

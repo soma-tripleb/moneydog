@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export function responseGoogle(response) {
   axios.post('https://localhost:8090/tokensignin', {
@@ -13,7 +13,7 @@ export function responseGoogle(response) {
     },
   }).then((res) => {
     console.log('axios success');
-    window.location.href = "http://localhost:8080" + res.data; //to subscriptions
+    window.location.href = 'http://localhost:8080' + res.data; // to subscriptions
   }).catch((err) => {
     console.log(err);
   });
@@ -25,9 +25,9 @@ export function createUser(userInfo) {
       email: userInfo.email,
       username: userInfo.nickName,
       password: userInfo.password,
-      content: "content",
-    }
-  }).catch(err => {
+      content: 'content',
+    },
+  }).catch((err) => {
     return err.response;
   });
 }

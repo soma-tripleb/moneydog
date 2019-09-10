@@ -10,7 +10,11 @@
       "error",
       "always"
     ],
-    "new-cap": "off"
+    "new-cap": "off",
+    "max-len": "off",
+    "no-unused-vars": "off",
+    "no-invalid-this": "off",
+    "require-jsdoc": "off"
   },
   "parserOptions": {
     "ecmaVersion": 2018

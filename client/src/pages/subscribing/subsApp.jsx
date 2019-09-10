@@ -18,7 +18,6 @@ class SubsApp extends Component {
     } else {
       this.props.onInsert(subsAppInfo.number, subsAppInfo.logo, subsAppInfo.name);
     }
-
   };
 
   handlePopup = () => {
@@ -38,7 +37,7 @@ class SubsApp extends Component {
               </button>
             </div>
             <div className="col">
-              <img className="logo-img" src={subsAppInfo.logo} alt="x" style={{ height: '5vh', borderRadius: '5px' }} />
+              <img className="logo-img" src={subsAppInfo.logo} alt="x" style={{height: '5vh', borderRadius: '5px'}} />
             </div>
             <div className="col">
               {subsAppInfo.name}
@@ -46,7 +45,7 @@ class SubsApp extends Component {
           </div>
         </div>
       </>
-    )
+    );
   }
 }
 

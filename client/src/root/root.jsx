@@ -15,19 +15,19 @@ import Router from './router';
 import './root.css';
 
 const Root = () => (
-    <Provider store={store}>
-      <BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
 
-        <Row>
-          <Layout className="layout">
-            <Head/>
-            <Router/>
-            <Foot/>
-          </Layout>
-        </Row>
+      <Row>
+        <Layout className="layout">
+          <Head/>
+          <Router/>
+          <Foot/>
+        </Layout>
+      </Row>
 
-      </BrowserRouter>
-    </Provider>
+    </BrowserRouter>
+  </Provider>
 );
 
 export default Root;

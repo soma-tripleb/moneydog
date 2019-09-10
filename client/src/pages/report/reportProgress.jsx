@@ -1,5 +1,5 @@
 import React from 'react';
-import { Progress } from 'antd';
+import {Progress} from 'antd';
 
 const ReportProgress = () => {
   return (
@@ -10,6 +10,6 @@ const ReportProgress = () => {
       <Progress percent={100} />
       <Progress percent={50} showInfo={false} />
     </div>
-  )
-}
+  );
+};
 export default ReportProgress;
