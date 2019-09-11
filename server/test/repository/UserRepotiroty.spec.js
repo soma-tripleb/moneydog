@@ -37,8 +37,11 @@ after(async () => {
 
 describe('#UserRepository Test', () => {
   beforeEach((done) => {
-    console.log('beforeEach실행');
-    done();
+    userRepository.deleteAllUser()
+      .then(() => {
+        userRepository.createUser(UserMock)
+          .then(() => done());
+      });
   });
   it('#create', async () => {
     const createUser = {
@@ -77,10 +80,28 @@ describe('#UserRepository Test', () => {
     expect(user).be.equal(null);
   });
   it('#find all', async () => {
+    const createUser = {
+      email: 'jimmy@naver.com',
+      password: '1234',
+      nickname: 'jimmy',
+      salt: 111,
+      role: 'user',
+      subscription: {
+        name: 'netflix',
+        price: 14000,
+        channel: 'ios',
+        pricePlan: {
+          title: 'premium',
+          price: 14000,
+        },
+      },
+    };
+    await userRepository.createUser(createUser);
     const users = await userRepository.getUserList();
-    expect(users[0].email).to.equal('jimmy@naver.com');
-    expect(users[0].password).to.equal('1234');
-    const subscription = users[0].subscription;
+    expect(users[1].email).to.equal('jimmy@naver.com');
+    expect(users[1].password).to.equal('1234');
+    const subscription = users[1].subscription;
     expect(subscription.name).to.equal('netflix');
+    expect(users.length).be.equal(2);
   });
 });

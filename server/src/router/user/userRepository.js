@@ -24,7 +24,7 @@ const createUser = (userInfo) => {
 };
 
 const deleteAllUser = () => {
-  return User.destroy({ truncate: true});
+  return User.deleteMany({});
 };
 
 const deleteUserByEmail = (email) => {
