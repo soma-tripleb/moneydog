@@ -5,7 +5,7 @@ import {assert, expect} from 'chai';
 import {conn, mongoConnect, mongoDisConnect} from '../../src/dbConfig/mongoDB';
 
 import app from '../../app';
-import authRepository, {getUserByEmail} from '../../src/router/auth/authRepository';
+import authRepository from '../../src/router/auth/authRepository';
 
 describe('POST /signup', () => {
   it('회원가입하기', (done) => {
