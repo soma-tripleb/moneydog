@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import * as actions from '../../actions/auth';
 
 import './signin.css';
@@ -17,6 +18,7 @@ class Signin extends Component {
     const result = await this.props.loginRequest(this.state.email, this.state.password);
 
     if (result.status === 200) {
+      localStorage.setItem('auth', JSON.stringify(this.props.auth));
       this.props.history.push('/user/subscribing');
     } else if (result.status === 409) {
       alert(result.data.message);
@@ -76,7 +78,7 @@ class Signin extends Component {
                     <button type="submit" className="btn btn-success btn-block" onClick={this.signInBtnClicked}> Sign In
                     </button>
                   </div>
-                  <p className="text-center">Don't Have an account? <a href="/signup">Create New Account</a></p>
+                  <p className="text-center">Don't Have an account? <Link to="/signup" className="nav-link"> Create New Account </Link></p>
                 </form>
               </article>
             </div>
@@ -87,7 +89,7 @@ class Signin extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  status: state.auth.login.status,
+  auth: state.auth,
 });
 
 const mapDispatchToProps = (dispatch) => {

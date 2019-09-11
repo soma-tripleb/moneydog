@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import * as service from './signup.ajax';
 import './signup.css';
+import {Link} from "react-router-dom";
 
 class SignUp extends Component {
   state = {
@@ -185,7 +186,7 @@ class SignUp extends Component {
                       onClick={this.signUpBtnClicked}> Create Account
                     </button>
                   </div>
-                  <p className="text-center">Have an account? <a href="/signin">Log In</a></p>
+                  <p className="text-center">Have an account? <Link to="/signin" className="nav-link"> Log In </Link></p>
                 </form>
               </article>
             </div>

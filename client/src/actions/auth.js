@@ -30,6 +30,26 @@ export const loginRequest = (email, password) => async (dispatch) => {
     });
 };
 
+export const sessionRequest = (jwt) => async (dispatch) => {
+  const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/auth/sessionCheck`;
+  const AJAX_DATA = {
+    userInfo: {
+      jwt: jwt,
+    },
+  };
+
+  return await axios
+    .post(AJAX_URL, AJAX_DATA)
+    .then((res) => {
+      dispatch(loginSuccess(res.data.token));
+      return res;
+    })
+    .catch((err) => {
+      dispatch(loginFailure());
+      return err.response;
+    });
+};
+
 export function login() {
   return {
     type: AUTH_LOGIN,
