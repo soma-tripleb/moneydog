@@ -1,10 +1,8 @@
 import User from '../../schemas/user';
 
 const getUserList = () => {
-  console.log(User.find({}));
   return User.find({}, (err, users) => {
     if (err) throw err;
-    console.log('users : ', users);
   });
 };
 
@@ -31,7 +29,7 @@ const deleteAllUser = () => {
 
 const deleteUserByEmail = (email) => {
   return User.deleteOne({email: email});
-}
+};
 
 export default {
   getUserList,
