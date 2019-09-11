@@ -6,17 +6,15 @@ import mongoose from 'mongoose';
 import {expect} from 'chai';
 import { MongoMemoryServer} from 'mongodb-memory-server';
 import userRepository from '../../src/router/user/userRepository';
-import {mongoConnect} from '../../src/dbConfig/mongoDB';
 
-const MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}`;
 let mongoServer;
 
 before((done) => {
   mongoServer = new MongoMemoryServer();
   mongoServer
     .getConnectionString()
-    .then((MONGO_URI) => {
-      return mongoose.connect(MONGO_URI, (err) => {
+    .then((mongoUri) => {
+      return mongoose.connect(mongoUri, (err) => {
         if (err) {
           done(err);
         }

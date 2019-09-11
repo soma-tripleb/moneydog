@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 import mongoose from 'mongoose';
-import { MongoMemoryServer} from 'mongodb-memory-server';
 
 const MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}`;
 

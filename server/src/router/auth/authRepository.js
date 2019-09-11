@@ -26,7 +26,7 @@ const findAllUser = async () => {
     .catch((err) => {
       return {status: 400, success: false, message: err.message};
     });
-}
+};
 
 export default {
   createUser,
