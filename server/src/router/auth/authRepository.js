@@ -1,5 +1,4 @@
 import User from '../../schemas/user';
-
 const getUserByEmail = async (email) => {
   return await User.findOne({email: email})
     .then((user) => {
@@ -9,7 +8,6 @@ const getUserByEmail = async (email) => {
       return {status: 400, success: false, message: err.message};
     });
 };
-
 const createUser = async (userInfo) => {
   return await User.create(userInfo)
     .then((doc) => {
@@ -20,7 +18,18 @@ const createUser = async (userInfo) => {
     });
 };
 
+const findAllUser = async () => {
+  return await User.find({})
+    .then((users) => {
+      return users;
+    })
+    .catch((err) => {
+      return {status: 400, success: false, message: err.message};
+    });
+}
+
 export default {
   createUser,
   getUserByEmail,
+  findAllUser,
 };
