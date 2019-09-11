@@ -7,10 +7,6 @@ import {mongoConnect, mongoDisConnect} from '../../src/dbConfig/mongoDB';
 import app from '../../app';
 
 describe('GET /', () => {
-  before((done) => {
-    mongoConnect();
-    done();
-  })
   it('should respond with Json message "MoneyDog Server API"', (done) => {
     request(app)
       .get('/')
@@ -24,20 +20,14 @@ describe('GET /', () => {
         done();
       });
   });
+  after((done) => {
+    mongoDisConnect();
+    done();
+  });
 });
 
 describe('User Api Test', ()=>{
-  before((done)=>{
-    mongoConnect();
-    done();
-  });
-
-  after(()=>{
-    mongoDisConnect();
-  });
-
-
-  it('Get /users 는 ', (done)=>{
+  it('GET /users', (done)=>{
     request(app)
       .get('/users')
       .expect(200)
@@ -46,28 +36,8 @@ describe('User Api Test', ()=>{
         done();
       });
   });
-});
-
-
-describe('GET /', () => {
-  it('GET /users', () => {
-    request(app)
-      .get('/users')
-      .expect(200);
-  });
-
-  it('GET /users/jimmyjaeyeon@gmail.com', (done) => {
-    request(app)
-      .get('/users/jimmyjaeyeon@gmail.com')
-      .expect(200)
-      .end((err, res) => {
-        if (err) {
-          return;
-        }
-        const result = res.body;
-        console.log('result : ', result);
-        assert.strictEqual(result.name, 'jimmy');
-        assert.strictEqual(result.subscriptions[0].name, 'netflix');
-      });
+  after((done)=>{
+    mongoDisConnect();
+    done();
   });
 });
