@@ -20,9 +20,8 @@ describe('GET /', () => {
         done();
       });
   });
-  after((done) => {
+  after(() => {
     mongoDisConnect();
-    done();
   });
 });
 
@@ -36,8 +35,7 @@ describe('User Api Test', ()=>{
         done();
       });
   });
-  after((done)=>{
+  after(()=>{
     mongoDisConnect();
-    done();
   });
 });

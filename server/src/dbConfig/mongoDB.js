@@ -8,22 +8,21 @@ const conn = mongoose.createConnection(MONGO_URI);
 
 // connect 하는 부분
 const mongoConnect = () => {
-  console.log(`running mode : ${process.env.NODE_ENV}`);
+  mongoose.set('useFindAndModify', false);
+  mongoose.set('useNewUrlParser', true);
   if (process.env.NODE_ENV === 'test') {
     const Mockgoose = require('mockgoose').Mockgoose;
     const mockgoose = new Mockgoose(mongoose);
     mockgoose.prepareStorage()
       .then(() => {
-        mongoose.connect(MONGO_URI, {useNewUrlParser: true})
+        mongoose.connect(MONGO_URI)
           .then(() => console.log('Connected test mongo db using mockgoose'))
           .catch((e) => {
             console.error(`mockgoose error 발생 : ${e}`);
           });
       });
   } else {
-    mongoose.connect(MONGO_URI, {
-      useNewUrlParser: true,
-    })
+    mongoose.connect(MONGO_URI)
       .then(() => console.log('Connected mongo server'))
       .catch((e) => {
         console.error(e);

@@ -9,29 +9,35 @@ import UserMock from '../mock/userMock';
 describe('UserRepository Test', () => {
   describe('Database connect', () => {
     before(() => {
+      console.log('before mongo start');
       mongoConnect();
     });
-
-    after(() => {
-      mongoDisConnect();
-    });
-
     describe('#delete()', () => {
       it('테스트 전, Mock User id 제거', (done) => {
+        console.log('delete 시작');
         const userId = UserMock.email;
         User.deleteOne({email: userId}, (err) => {
           if (err) done(err);
           else done(err);
         });
       });
+      after(() => {
+        console.log('delete종료');
+        mongoDisConnect();
+      });
     });
 
     describe('#create()', () => {
       it('UserMock 으로 User 생성', (done) => {
+        console.log('create start');
         User.create((UserMock), function(err) {
           if (err) done(err);
           else done();
         });
+      });
+      after(() => {
+        console.log('create done');
+        mongoDisConnect();
       });
     });
 
@@ -44,6 +50,9 @@ describe('UserRepository Test', () => {
         }).then((user) => {
           console.log(user);
         });
+      });
+      after(() => {
+        mongoDisConnect();
       });
     });
 
@@ -62,6 +71,9 @@ describe('UserRepository Test', () => {
           assert(user.nickname, newNickname);
         });
       });
+      after(() => {
+        mongoDisConnect();
+      });
     });
 
     describe('#findAll()', () => {
@@ -77,6 +89,9 @@ describe('UserRepository Test', () => {
           });
         });
       });
+      after(() => {
+        mongoDisConnect();
+      });
     });
 
     describe('#findByUserEmailToSubscription()', () => {
@@ -89,6 +104,12 @@ describe('UserRepository Test', () => {
           console.log(user.subscription);
         });
       });
+      after(() => {
+        mongoDisConnect();
+      });
+    });
+    after(() => {
+      mongoDisConnect();
     });
   });
 });
