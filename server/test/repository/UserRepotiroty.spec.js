@@ -2,18 +2,16 @@ require('dotenv').config();
 import 'babel-polyfill';
 
 import User from '../../src/schemas/user';
-import {mongoConnect, mongoDisConnect} from '../../src/dbConfig/mongoDB';
 import UserMock from '../mock/userMock';
 import mongoose from 'mongoose';
 import {expect} from 'chai';
 import { MongoMemoryServer} from 'mongodb-memory-server';
+import userRepository from '../../src/router/user/userRepository';
 
 const MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}`;
 let mongoServer;
 
 before((done) => {
-  // mongoose.set('useFindAndModify', false);
-  // mongoose.set('useNewUrlParser', true);
   mongoServer = new MongoMemoryServer();
   mongoServer
     .getConnectionString()
@@ -38,12 +36,17 @@ after(async () => {
 
 describe('#UserRepository Test', () => {
   it('#create', async () => {
-    const user = await User.create(UserMock);
+    // const user = await User.create(UserMock);
+    const user = userRepository.create(UserMock);
     expect(user.email).to.equal('test@test.com');
     expect(user.password).to.equal('1234');
     const subscription = user.subscription;
     expect(subscription.name).to.equal('test-title');
   });
+
+  // it('#read user', async () => {
+  //
+  // })
 });
 
 // describe('UserRepository Test', () => {

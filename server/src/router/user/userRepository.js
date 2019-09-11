@@ -25,9 +25,19 @@ const createUser = (userInfo) => {
   return User.create(userInfo);
 };
 
+const deleteAllUser = () => {
+  return User.destroy({ truncate: true});
+};
+
+const deleteUserByEmail = (email) => {
+  return User.deleteOne({email: email});
+}
+
 export default {
   getUserList,
   getUserById,
   createUser,
   getUserByEmail,
+  deleteAllUser,
+  deleteUserByEmail,
 };
