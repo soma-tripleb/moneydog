@@ -11,16 +11,16 @@ const mongoConnect = () => {
   mongoose.set('useFindAndModify', false);
   mongoose.set('useNewUrlParser', true);
   if (process.env.NODE_ENV === 'test') {
-    const Mockgoose = require('mockgoose').Mockgoose;
-    const mockgoose = new Mockgoose(mongoose);
-    mockgoose.prepareStorage()
-      .then(() => {
-        mongoose.connect(MONGO_URI)
-          .then(() => console.log('Connected test mongo db using mockgoose'))
-          .catch((e) => {
-            console.error(`mockgoose error 발생 : ${e}`);
-          });
-      });
+    // const Mockgoose = require('mockgoose').Mockgoose;
+    // const mockgoose = new Mockgoose(mongoose);
+    // mockgoose.prepareStorage()
+    //   .then(() => {
+    //     mongoose.connect(MONGO_URI)
+    //       .then(() => console.log('Connected test mongo db using mockgoose'))
+    //       .catch((e) => {
+    //         console.error(`mockgoose error 발생 : ${e}`);
+    //       });
+    //   });
   } else {
     mongoose.connect(MONGO_URI)
       .then(() => console.log('Connected mongo server'))
