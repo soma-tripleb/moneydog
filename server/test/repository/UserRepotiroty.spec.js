@@ -24,7 +24,11 @@ before((done) => {
     })
     .then(() => {
       console.log('mongodb-memory-server running');
-      done();
+      // userRepository.deleteAllUser()
+      //   .then(() => userRepository.createUser(UserMock))
+      //   .then((done) => done());
+      userRepository.createUser(UserMock)
+        .then(() => done());
     });
 });
 
@@ -36,17 +40,28 @@ after(async () => {
 
 describe('#UserRepository Test', () => {
   it('#create', async () => {
-    // const user = await User.create(UserMock);
-    const user = userRepository.create(UserMock);
+    const createUser = {
+
+    }
+    const user = await userRepository.createUser(UserMock);
     expect(user.email).to.equal('test@test.com');
     expect(user.password).to.equal('1234');
     const subscription = user.subscription;
     expect(subscription.name).to.equal('test-title');
   });
 
-  // it('#read user', async () => {
-  //
-  // })
+  it('#read user', async () => {
+    const user = await userRepository.getUserByEmail('test@test.com');
+    expect(user.email).to.equal('test@test.com');
+    expect(user.password).to.equal('1234');
+    const subscription = user.subscription;
+    expect(subscription.name).to.equal('test-title');
+  });
+  it('#delete user', async () => {
+    await userRepository.deleteUserByEmail('test@test.com');
+    const user = await userRepository.getUserByEmail('test@test.com');
+    expect(user).be.equal(null);
+  });
 });
 
 // describe('UserRepository Test', () => {
