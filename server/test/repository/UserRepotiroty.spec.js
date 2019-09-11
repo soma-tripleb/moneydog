@@ -1,11 +1,51 @@
-// import 'babel-polyfill';
-//
-// import assert from 'assert';
-// import User from '../../src/schemas/user';
-// import {mongoConnect, mongoDisConnect} from '../../src/dbConfig/mongoDB';
-//
-// import UserMock from '../mock/userMock';
-//
+require('dotenv').config();
+import 'babel-polyfill';
+
+import User from '../../src/schemas/user';
+import {mongoConnect, mongoDisConnect} from '../../src/dbConfig/mongoDB';
+import UserMock from '../mock/userMock';
+import mongoose from 'mongoose';
+import {expect} from 'chai';
+import { MongoMemoryServer} from 'mongodb-memory-server';
+
+const MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}`;
+let mongoServer;
+
+before((done) => {
+  // mongoose.set('useFindAndModify', false);
+  // mongoose.set('useNewUrlParser', true);
+  mongoServer = new MongoMemoryServer();
+  mongoServer
+    .getConnectionString()
+    .then((MONGO_URI) => {
+      return mongoose.connect(MONGO_URI, (err) => {
+        if (err) {
+          done(err);
+        }
+      });
+    })
+    .then(() => {
+      console.log('mongodb-memory-server running');
+      done();
+    });
+});
+
+after(async () => {
+  await mongoose.disconnect();
+  await mongoServer.stop();
+  console.log('server stoped');
+});
+
+describe('#UserRepository Test', () => {
+  it('#create', async () => {
+    const user = await User.create(UserMock);
+    expect(user.email).to.equal('test@test.com');
+    expect(user.password).to.equal('1234');
+    const subscription = user.subscription;
+    expect(subscription.name).to.equal('test-title');
+  });
+});
+
 // describe('UserRepository Test', () => {
 //   describe('Database connect', () => {
 //     before((done) => {
