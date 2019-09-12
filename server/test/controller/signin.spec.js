@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 
 import request from 'supertest';
-import { assert } from 'chai';
 import app from '../../app';
 
 describe('POST /users/signIn', () => {

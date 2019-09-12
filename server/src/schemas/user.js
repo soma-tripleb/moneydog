@@ -4,9 +4,11 @@ import {conn} from '../dbConfig/mongoDB';
 
 const pricePlanSchema = new mongoose.Schema(
   {
-    title: {type: String},
-    price: {type: Number},
-    content: {type: String},
+    seq: {type: Number},
+    title: {type: String, required: true},
+    price: {type: String, required: true},
+    period: {type: String, required: true},
+    channel: {type: String},
   }
 );
 

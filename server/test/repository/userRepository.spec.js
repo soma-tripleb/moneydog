@@ -2,6 +2,7 @@ import 'babel-polyfill';
 import assert from 'assert';
 
 import User from '../../src/schemas/user';
+import UserRepository from '../../src/router/user/userRepository';
 import {mongoConnect, mongoDisConnect} from '../../src/dbConfig/mongoDB';
 
 import UserMock from '../mock/userMock';
@@ -41,8 +42,6 @@ describe('UserRepository Test', () => {
         User.findOne({email: userId}, (err) => {
           if (err) done(err);
           else done(err);
-        }).then((user) => {
-          console.log(user);
         });
       });
     });
@@ -69,12 +68,6 @@ describe('UserRepository Test', () => {
         User.find({}, (err) => {
           if (err) done(err);
           else done(err);
-        }).then((users) => {
-          users.map((user) => {
-            console.log('email: ' + user.email);
-            console.log(user);
-            console.log('');
-          });
         });
       });
     });
@@ -85,8 +78,16 @@ describe('UserRepository Test', () => {
         User.findOne({email: userId}, (err) => {
           if (err) done(err);
           else done(err);
-        }).then((user) => {
-          console.log(user.subscription);
+        });
+      });
+    });
+
+    describe('#findAllUsers()', () => {
+      it('UserRepository Method', (done) => {
+        UserRepository.findAllUsers().then((user) => {
+          done();
+        }).catch((done) => {
+          if (err) done(err);
         });
       });
     });

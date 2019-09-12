@@ -17,7 +17,6 @@ const mongoConnect = () => {
   });
 };
 
-// mongo 연결 해제 부분
 const mongoDisConnect = () => {
   mongoose.disconnect()
     .then(() => console.log('Disconnected mongo server'))

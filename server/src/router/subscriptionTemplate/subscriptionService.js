@@ -1,4 +1,4 @@
-const subscriptionRepository = require('./subscriptionRepository');
+const subscriptionRepository = require('./subsTmplReposiroty');
 const appleParser = require('../../mailParser/apple/appleParser');
 const googleParser = require('../../mailParser/google/googleParser');
 const commonParser = require('../../mailParser/commonParser');
