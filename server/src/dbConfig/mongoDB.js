@@ -2,6 +2,9 @@ require('dotenv').config();
 
 import mongoose from 'mongoose';
 
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+
 const MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}`;
 
 const conn = mongoose.createConnection(MONGO_URI);

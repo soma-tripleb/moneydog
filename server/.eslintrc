@@ -13,7 +13,9 @@
     "new-cap": "off",
     "object-curly-spacing": "off",
     "eol-last": "off",
-    "max-len": "off"
+    "max-len": "off",
+    "block-spacing": "off",
+    "brace-style": "off"
   },
   "parserOptions": {
     "ecmaVersion": 2018

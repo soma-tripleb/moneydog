@@ -25,14 +25,24 @@ const getUserById = (params) => {
   return User.find(modelParams);
 };
 
-const createUser = (userInfo) => {
-  return User.create(userInfo);
+const createOne = async (userInfo) => {
+  const createResult = await User.create((userInfo))
+    .then((result) => { return result; })
+    .catch((err) => { throw err; });
+
+  return User.find({ nickname: userInfo.nickname })
+    .then((result) => {
+      return { status: 201, success: true, message: createResult };
+    })
+    .catch((err) => {
+      return { status: 400, success: false, message: err.message };
+    });
 };
 
 export default {
   findAllUsers,
   findByUserEmail,
   getUserById,
-  createUser,
+  createOne,
   findSubscriptionByUserEmail,
 };
