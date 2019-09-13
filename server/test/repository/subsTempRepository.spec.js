@@ -95,8 +95,7 @@ describe('SubscriptionTemplate Test', () => {
       it('SubscriptionTemplate 생성', (done) => {
         SubsTmplRepo.saveOne(SubsTmplMock)
           .then((result) => {
-            console.log('save result:', result);
-            // assert.equal(result, 'success');
+            assert.equal(result.success, true);
             done();
           })
           .catch((err) => {

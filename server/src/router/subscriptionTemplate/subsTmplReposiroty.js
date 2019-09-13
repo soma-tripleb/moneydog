@@ -35,37 +35,18 @@ const findByName = (name) => {
 const saveOne = async (subsTmpl) => {
   const subsTmplName = subsTmpl.name;
 
-  return SubsTmpl.create(subsTmpl)
-    .then(() => {
-      return 'success';
-    })
-    .catch((err) => {
-      throw err;
-    });
-  /*
-  const result = await SubsTmpl.create(subsTmpl, (err) => {
-    if (err) return err.status;
-    return 'success';
-  });
+  const createResult = await SubsTmpl.create(subsTmpl);
 
+  const result = (createResult.name === subsTmplName) ?
+    {status: 201, success: true, message: createResult} :
+    'saveOne() fail';
   return result;
-  */
-  /*
-  return SubsTmpl.create(subsTmpl)
-    .then(() => {
-      return findByName(subsTmplName).then((result) => {
-        return result;
-      }).catch((err) => {
-        throw (err);
-      });
-    })
-    .catch((err) => {
-      throw err;
-    });
-    */
 };
 
-
+/**
+ * @param {*} subsTmplName 
+ * @result success : { n: 1, ok: 1, deletedCount: 1 }
+ */
 const deleteOne = (subsTmplName) => {
   return SubsTmpl.deleteOne({ name: subsTmplName })
     .then((result) => {

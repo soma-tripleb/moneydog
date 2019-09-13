@@ -33,8 +33,7 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 
 app.use('/users', userRouter);
-app.use('/subscriptions', subscriptionRouter);
-app.use(authCheck);
+app.use('/subs-tmpl', subsTmplRouter);
 
 // error handler
 app.use(function(err, req, res, next) {
