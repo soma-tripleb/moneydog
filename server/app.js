@@ -27,14 +27,13 @@ app.use(Sentry.Handlers.errorHandler());
 import indexRouter from './index';
 import authRouter from './src/router/auth/authentiController';
 import userRouter from './src/router/user/userController';
-import subscriptionRouter from './src/router/subscription/subscriptionController';
+import subsTmplRouter from './src/router/subscriptionTemplate/subsTmplController';
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 
 app.use('/users', userRouter);
-app.use('/subscriptions', subscriptionRouter);
-app.use(authCheck);
+app.use('/subs-tmpl', subsTmplRouter);
 
 // error handler
 app.use(function(err, req, res, next) {

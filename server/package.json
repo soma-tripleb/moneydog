@@ -6,7 +6,8 @@
     "start": "nodemon --exec babel-node ./bin/www",
     "test": "./node_modules/mocha/bin/mocha --require babel-register --recursive ./**/*.spec.js",
     "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
-    "lint": "./node_modules/.bin/eslint --ext .js src/router/ src/dbConfig/ src/schemas/ src/security/ test/ app.js index.js; exit 0"
+    "lint": "./node_modules/.bin/eslint --ext .js src/ test/ app.js index.js; exit 0;",
+    "test-subs-repo": "./node_modules/mocha/bin/mocha --require babel-register ./test/repository/subscriptionTemplate.spec.js"
   },
   "dependencies": {
     "@sentry/node": "^5.6.2",

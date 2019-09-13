@@ -1,11 +1,23 @@
 import User from '../../schemas/user';
 
-const getUserList = () => {
-  console.log(User.find({}));
+const findAllUsers = () => {
   return User.find({}, (err, users) => {
     if (err) throw err;
-    console.log('users : ', users);
+    else users;
   });
+};
+
+const findByUserEmail = (email) => {
+  return User.findOne({email: email}, (err, user) => {
+    if (err) throw err;
+    else user;
+  });
+};
+
+const findSubscriptionByUserEmail = (email) => {
+  return User.findOne({email: email})
+    .then((user) => user.subscription )
+    .catch((err) => err);
 };
 
 const getUserById = (params) => {
@@ -13,21 +25,14 @@ const getUserById = (params) => {
   return User.find(modelParams);
 };
 
-const getUserByEmail = async (email) => {
-  return await User.findOne({email: email})
-    .then((user) => {
-      return user;
-    })
-    .catch((err) => console.log(err));
-};
-
 const createUser = (userInfo) => {
   return User.create(userInfo);
 };
 
 export default {
-  getUserList,
+  findAllUsers,
+  findByUserEmail,
   getUserById,
   createUser,
-  getUserByEmail,
+  findSubscriptionByUserEmail,
 };
