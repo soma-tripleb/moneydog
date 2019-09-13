@@ -12,16 +12,6 @@ const mongoConnect = () => {
   mongoose.set('useNewUrlParser', true);
   if (process.env.NODE_ENV === 'test') {
     // test환경에 대한 mongo-memory-server코드를 차후 작성예정
-
-    // const mongoServer = new MongoMemoryServer();
-    // mongoose.Promise = Promise;
-    // mongoServer.getConnectionString().then((MONGO_URI) => {
-    //   return mongoose.connect(MONGO_URI, (err) => {
-    //     if (err) {
-    //       done(err);
-    //     }
-    //   });
-    // });
   } else {
     mongoose.connect(MONGO_URI)
       .then(() => console.log('Connected mongo server'))
@@ -31,7 +21,6 @@ const mongoConnect = () => {
   }
 };
 
-// mongo 연결 해제 부분
 const mongoDisConnect = () => {
   mongoose.disconnect()
     .then(() => console.log('Disconnected mongo server'))

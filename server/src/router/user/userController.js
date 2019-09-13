@@ -1,11 +1,12 @@
 import express from 'express';
 import UserService from './userService';
 
+import userRepository from './userRepository';
+
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  console.log('get list호출');
-  UserService.getUserList()
+  userRepository.findAllUsers()
     .then((users) => {
       res.status(200).send(users);
     })
@@ -14,13 +15,24 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:email', (req, res) => {
-  const result = UserService.getUserByEmail(req.params.email);
-  result
+router.get('/email/:email', (req, res) => {
+  userRepository.findByUserEmail(req.params.email)
     .then((user) => {
-      res.json(user);
+      res.send(user);
     })
-    .catch((err) => res.end(err));
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+router.get('/subscription/:email', (req, res) => {
+  userRepository.findSubscriptionByUserEmail(req.params.email)
+    .then((subscription) => {
+      res.send(subscription);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
 

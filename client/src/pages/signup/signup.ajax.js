@@ -13,7 +13,7 @@ export function responseGoogle(response) {
     },
   }).then((res) => {
     console.log('axios success');
-    window.location.href = 'http://localhost:8080' + res.data; // to subscriptions
+    window.location.href = 'http://localhost:8080' + res.data;
   }).catch((err) => {
     console.log(err);
   });
@@ -21,12 +21,13 @@ export function responseGoogle(response) {
 
 export function createUser(userInfo) {
   return axios.post(`${process.env.REACT_APP_NODE_API_URL}/users/signUp`, {
-    userInfo: {
-      email: userInfo.email,
-      username: userInfo.nickName,
-      password: userInfo.password,
-      content: 'content',
-    },
+    userInfo:
+      {
+        email: userInfo.email,
+        nickname: userInfo.nickName,
+        password: userInfo.password,
+        content: 'content',
+      },
   }).catch((err) => {
     return err.response;
   });

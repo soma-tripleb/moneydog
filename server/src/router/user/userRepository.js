@@ -1,22 +1,28 @@
 import User from '../../schemas/user';
 
-const getUserList = () => {
+const findAllUsers = () => {
   return User.find({}, (err, users) => {
     if (err) throw err;
+    else users;
   });
+};
+
+const findByUserEmail = (email) => {
+  return User.findOne({email: email}, (err, user) => {
+    if (err) throw err;
+    else user;
+  });
+};
+
+const findSubscriptionByUserEmail = (email) => {
+  return User.findOne({email: email})
+    .then((user) => user.subscription )
+    .catch((err) => err);
 };
 
 const getUserById = (params) => {
   const modelParams = Object.assign({}, params);
   return User.find(modelParams);
-};
-
-const getUserByEmail = async (email) => {
-  return await User.findOne({email: email})
-    .then((user) => {
-      return user;
-    })
-    .catch((err) => console.log(err));
 };
 
 const createUser = (userInfo) => {
@@ -32,10 +38,12 @@ const deleteUserByEmail = (email) => {
 };
 
 export default {
-  getUserList,
+  findAllUsers,
+  findByUserEmail,
   getUserById,
   createUser,
   getUserByEmail,
   deleteAllUser,
   deleteUserByEmail,
+  findSubscriptionByUserEmail,
 };
