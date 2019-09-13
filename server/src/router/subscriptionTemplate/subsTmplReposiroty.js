@@ -44,7 +44,7 @@ const saveOne = async (subsTmpl) => {
 };
 
 /**
- * @param {*} subsTmplName 
+ * @param {*} subsTmplName
  * @result success : { n: 1, ok: 1, deletedCount: 1 }
  */
 const deleteOne = (subsTmplName) => {
