@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-import {GoogleLogin} from 'react-google-login';
+import { Component } from 'react';
 
 import * as service from './signup.ajax';
 import './signup.css';
@@ -14,11 +13,11 @@ class SignUp extends Component {
     errorMessage: '',
   };
 
-  //회원 가입 버튼 클릭시
-  signUpBtnClicked =  async (e) => {
+  // 회원 가입 버튼 클릭시
+  signUpBtnClicked = async (e) => {
     e.preventDefault();
 
-    //공백 확인
+    // 공백 확인
     if (!this.checkBlank()) {
       this.setState({
         errorMessage: '빈칸을 채워주세요',
@@ -47,15 +46,15 @@ class SignUp extends Component {
       return false;
     }
 
-    //모두 통과시 createUser
+    // 모두 통과시 createUser
     const response = await service.createUser(this.state);
 
-    if(response.status === 409){
+    if (response.status === 409) {
       this.setState({
         errorMessage: '이미 있는 아이디 입니다.',
       });
-    }else if(response.status === 201){
-      alert("회원 가입 성공!");
+    } else if (response.status === 201) {
+      alert('회원 가입 성공!');
     }
   };
 
@@ -68,7 +67,10 @@ class SignUp extends Component {
   };
 
   checkBlank = () => {
-    if (this.state.nickName === '' || this.state.email === '' || this.state.passwordCheck === '' || this.state.password === '') {
+    if (this.state.nickName === '' ||
+        this.state.email === '' ||
+        this.state.passwordCheck === '' ||
+        this.state.password === '') {
       return false;
     }
     return true;
@@ -87,123 +89,132 @@ class SignUp extends Component {
     const eng = pw.search(/[a-z]/ig);
     const spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
-    if(pw.length < 8 || pw.length > 20){
+    if (pw.length < 8 || pw.length > 20) {
       this.setState({
         errorMessage: '8자리 ~ 20자리 이내로 입력해주세요.',
       });
       return false;
-    }
+    };
 
-    if(pw.search(/₩s/) !== -1){
+    if (pw.search(/₩s/) !== -1) {
       this.setState({
         errorMessage: '비밀번호는 공백업이 입력해주세요.',
       });
       return false;
-    } if(num < 0 || eng < 0 || spe < 0 ){
+    };
+
+    if (num < 0 || eng < 0 || spe < 0) {
       this.setState({
         errorMessage: '영문,숫자, 특수문자를 혼합하여 입력해주세요.',
       });
       return false;
-    }
+    };
 
     return true;
   };
 
-  //textbox 채워 넣을때 이벤트
+  // textbox 채워 넣을때 이벤트
   onChangeNickName = (e) => {
-    this.setState({
-      nickName: e.target.value
-    });
+    this.setState(
+      {
+        nickName: e.target.value,
+      }
+    );
   };
-  //textbox 채워 넣을때 이벤트
+  // textbox 채워 넣을때 이벤트
   onChangePasswordCheck = (e) => {
-    this.setState({
-      passwordCheck: e.target.value
-    });
+    this.setState(
+      {
+        passwordCheck: e.target.value,
+      }
+    );
   };
-  //textbox 채워 넣을때 이벤트
+  // textbox 채워 넣을때 이벤트
   onChangeEmail = (e) => {
-    this.setState({
-      email: e.target.value
-    });
+    this.setState(
+      {
+        email: e.target.value,
+      }
+    );
   };
-  //textbox 채워 넣을때 이벤트
+  // textbox 채워 넣을때 이벤트
   onChangePassword = (e) => {
-    this.setState({
-      password: e.target.value
-    });
+    this.setState(
+      {
+        password: e.target.value,
+      }
+    );
   };
 
   render() {
     return (
-        <>
-          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"/>
-          <div className="container">
+      <>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" />
+        <div className="container">
 
-            <div className="card bg-light">
-              <article className="card-body mx-auto">
-                <h4 className="card-title mt-3 text-center">Sign Up</h4>
-                <p className="text-center">Get started with your free account</p>
-                <p>
-                  <button onClick={service.responseGoogle} className="btn btn-block btn-google"
-                          style={{backgroundColor: 'lightgray'}}>
-                    <i className="fab fa-google"/> Login via google
+          <div className="card bg-light">
+            <article className="card-body mx-auto">
+              <h4 className="card-title mt-3 text-center">Sign Up</h4>
+              <p className="text-center">Get started with your free account</p>
+              <p>
+                <button onClick={service.responseGoogle} className="btn btn-block btn-google"
+                  style={{ backgroundColor: 'lightgray' }}>
+                  <i className="fab fa-google" /> Login via google
+                </button>
+              </p>
+              <p className="divider-text">
+                <span className="bg-light">OR</span>
+              </p>
+              <form>
+                {/* Email input */}
+                <div className="form-group input-group">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text"> <i className="fa fa-envelope" /> </span>
+                  </div>
+                  <input name="emailInfo" className="form-control" placeholder="Email address" type="email"
+                    value={this.state.email} onChange={this.onChangeEmail} />
+                </div>
+                {/* Full-name input */}
+                <div className="form-group input-group">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text"> <i className="fa fa-user" /> </span>
+                  </div>
+                  <input name="" className="form-control" placeholder="Nick name" type="text"
+                    value={this.state.nickName} onChange={this.onChangeNickName} />
+                </div>
+                {/* Create Password input */}
+                <div className="form-group input-group">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text"> <i className="fa fa-lock" /> </span>
+                  </div>
+                  <input className="form-control" placeholder="Create password" type="password"
+                    value={this.state.password} onChange={this.onChangePassword} />
+                </div>
+                {/* Check Password input */}
+                <div className="form-group input-group">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text"> <i className="fa fa-lock" /> </span>
+                  </div>
+                  <input className="form-control" placeholder="Repeat password" type="password"
+                    value={this.state.passwordCheck} onChange={this.onChangePasswordCheck} />
+                </div>
+                <div>
+                  <label className="passwordErrorLabel">{this.state.errorMessage}</label>
+                </div>
+                {/* 회원가입 버튼 */}
+                <div className="form-group">
+                  <button className="btn btn-primary btn-block"
+                    onClick={this.signUpBtnClicked}> Create Account
                   </button>
-                </p>
-                <p className="divider-text">
-                  <span className="bg-light">OR</span>
-                </p>
-                <form>
-                  {/*Email input*/}
-                  <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text"> <i className="fa fa-envelope"/> </span>
-                    </div>
-                    <input name="emailInfo" className="form-control" placeholder="Email address" type="email"
-                           value={this.state.email} onChange={this.onChangeEmail}/>
-                  </div>
-                  {/*fullname input*/}
-                  <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text"> <i className="fa fa-user"/> </span>
-                    </div>
-                    <input name="" className="form-control" placeholder="Nick name" type="text"
-                           value={this.state.nickName} onChange={this.onChangeNickName}/>
-                  </div>
-                  {/*createPW input*/}
-                  <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text"> <i className="fa fa-lock"/> </span>
-                    </div>
-                    <input className="form-control" placeholder="Create password" type="password"
-                           value={this.state.password} onChange={this.onChangePassword}/>
-                  </div>
-                  {/*checkPW input*/}
-                  <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text"> <i className="fa fa-lock"/> </span>
-                    </div>
-                    <input className="form-control" placeholder="Repeat password" type="password"
-                           value={this.state.passwordCheck} onChange={this.onChangePasswordCheck}/>
-                  </div>
-                  <div>
-                    <label className="passwordErrorLabel">{this.state.errorMessage}</label>
-                  </div>
-                  {/*회원가입 버튼*/}
-                  <div className="form-group">
-                    <button className="btn btn-primary btn-block"
-                            onClick={this.signUpBtnClicked}> Create Account
-                    </button>
-                  </div>
-                  <p className="text-center">Have an account? <a href="/signin">Log In</a></p>
-                </form>
-              </article>
-            </div>
+                </div>
+                <p className="text-center">Have an account? <a href="/signin">Log In</a></p>
+              </form>
+            </article>
           </div>
-        </>
+        </div>
+      </>
     );
   }
-
 }
 
 export default SignUp;

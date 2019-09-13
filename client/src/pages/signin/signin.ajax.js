@@ -1,12 +1,17 @@
-import axios from "axios";
+import axios from 'axios';
 
 export async function login(userInfo) {
-  return await axios.post(`${process.env.REACT_APP_NODE_API_URL}/users/signIn`, {
-    userInfo: {
-      email: userInfo.email,
-      password: userInfo.password,
+  return await axios.post(`${process.env.REACT_APP_NODE_API_URL}/users/signIn`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      userInfo: {
+        email: userInfo.email,
+        password: userInfo.password,
+      },
     }
-  }).catch( err =>{
+  ).catch((err) => {
     return err.response;
   });
 }

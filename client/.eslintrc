@@ -10,7 +10,10 @@
       "error",
       "always"
     ],
-    "new-cap": "off"
+    "new-cap": "off",
+    "require-jsdoc":"off",
+    "object-curly-spacing":"off",
+    "max-len":"off"
   },
   "parserOptions": {
     "ecmaVersion": 2018
