@@ -1,5 +1,4 @@
 import express from 'express';
-import UserService from './userService';
 
 import userRepository from './userRepository';
 
