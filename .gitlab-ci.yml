@@ -1,5 +1,8 @@
 image: gitlab-registry
 
+service:
+    - mongo:latest
+
 stages:
     - server-lint
     - client-lint
@@ -14,8 +17,10 @@ server_lint_inspection:
           - $DB_URL
           - $DB_USER
           - $DB_PASSWORD
+          - $DB_HOST
+          - $DB_PORT
     script:
-    - echo $DB_SCHEMA
+    - mongo --username soma --password 12345 --authenticationDatabase moneydog_db --host 15.164.55.46 --port 27017
     - cd server
     - npm install
     - npm run lint
