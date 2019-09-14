@@ -8,6 +8,12 @@ server_lint_inspection:
     stage: server-lint
     before_script:
     - export PATH=$PATH:/usr/local/bin
+    only:
+        variables:
+          - $DB_SCHEMA
+          - $DB_URL
+          - $DB_USER
+          - $DB_PASSWORD
     script:
     - echo $DB_SCHEMA
     - cd server
