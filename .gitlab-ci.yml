@@ -20,7 +20,7 @@ server_lint_inspection:
           - $DB_HOST
           - $DB_PORT
     script:
-    - mongo --username soma --password 12345 --authenticationDatabase moneydog_db --host 15.164.55.46 --port 27017
+    - mongo --username $DB_USER --password $DB_PASSWORD --authenticationDatabase moneydog_db --host $DB_HOST --port $DB_PORT
     - cd server
     - npm install
     - npm run lint
