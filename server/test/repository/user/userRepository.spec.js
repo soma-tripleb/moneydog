@@ -1,26 +1,25 @@
 import 'babel-polyfill';
 import assert from 'assert';
 
-import User from '../../src/schemas/user';
-import UserRepository from '../../src/router/user/userRepository';
-import {mongoConnect, mongoDisConnect} from '../../src/dbConfig/mongoDB';
+import User from '../../../src/schemas/user';
+import { mongoConnect, mongoDisConnect } from '../../../src/dbConfig/mongoDB';
 
-import UserMock from '../mock/userMock';
+import UserMock from '../../mock/userMock';
 
 describe('UserRepository Test', () => {
+  before(() => {
+    mongoConnect();
+  });
+
+  after(() => {
+    mongoDisConnect();
+  });
+
   describe('Database connect', () => {
-    before(() => {
-      mongoConnect();
-    });
-
-    after(() => {
-      mongoDisConnect();
-    });
-
     describe('#delete()', () => {
       it('테스트 전, Mock User id 제거', (done) => {
         const userId = UserMock.email;
-        User.deleteOne({email: userId}, (err) => {
+        User.deleteOne({ email: userId }, (err) => {
           if (err) done(err);
           else done(err);
         });
@@ -29,17 +28,29 @@ describe('UserRepository Test', () => {
 
     describe('#create()', () => {
       it('UserMock 으로 User 생성', (done) => {
-        User.create((UserMock), function(err) {
-          if (err) done(err);
-          else done();
-        });
+        const userResult = User.create((UserMock))
+          .then((result) => {
+            return result;
+          })
+          .catch((err) => {
+            throw err;
+          });
+
+        User.find({ nickname: userResult.nickname })
+          .then((result) => {
+            assert.equal(result.nickname, userResult.nickname);
+            done();
+          })
+          .catch((err) => {
+            done(err);
+          });
       });
     });
 
     describe('#find()', () => {
       it('User Id 로 User 검색', (done) => {
         const userId = UserMock.email;
-        User.findOne({email: userId}, (err) => {
+        User.findOne({ email: userId }, (err) => {
           if (err) done(err);
           else done(err);
         });
@@ -50,7 +61,7 @@ describe('UserRepository Test', () => {
       it('User nickname 수정', (done) => {
         const userId = UserMock.email;
         const newNickname = 'test-user2';
-        User.updateOne({email: userId}, {nickname: newNickname}, (err) => {
+        User.updateOne({ email: userId }, { nickname: newNickname }, (err) => {
           if (err) done(err);
           else done(err);
         });
@@ -65,9 +76,9 @@ describe('UserRepository Test', () => {
 
     describe('#findAll()', () => {
       it('User 전체 조회', (done) => {
-        User.find({}, (err) => {
+        User.find({}, (err, result) => {
           if (err) done(err);
-          else done(err);
+          else done();
         });
       });
     });
@@ -75,19 +86,9 @@ describe('UserRepository Test', () => {
     describe('#findByUserEmailToSubscription()', () => {
       it('User Id 로 User 검색 후 subscription 검색', (done) => {
         const userId = UserMock.email;
-        User.findOne({email: userId}, (err) => {
+        User.findOne({ email: userId }, (err) => {
           if (err) done(err);
           else done(err);
-        });
-      });
-    });
-
-    describe('#findAllUsers()', () => {
-      it('UserRepository Method', (done) => {
-        UserRepository.findAllUsers().then((user) => {
-          done();
-        }).catch((done) => {
-          if (err) done(err);
         });
       });
     });

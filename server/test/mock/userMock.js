@@ -5,14 +5,14 @@ const sampleDate = (() => {
 })();
 
 const pricePlan = {
-  title: 'test-name',
+  title: 'test-title',
   price: '99999',
   period: '1달',
   channel: 'site',
 };
 
 const subscription = {
-  name: 'test-title',
+  name: 'test-name',
   price: '99999',
   paymentDate: sampleDate,
   channel: 'inapp',

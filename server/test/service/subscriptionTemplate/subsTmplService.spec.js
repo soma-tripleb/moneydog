@@ -13,7 +13,7 @@ describe('SubscriptionTemplate Service Test', () => {
     mongoDisConnect();
   });
 
-  describe('Repository Method Test', () => {
+  describe('Repository Method', () => {
     describe('#deleteOne()', () => {
       it('SubsTmpl 삭제하기', (done) => {
         const SubsTmplMockName = SubsTmplMock.name;

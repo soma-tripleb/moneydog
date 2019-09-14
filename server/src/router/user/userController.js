@@ -1,39 +1,47 @@
 import express from 'express';
 import UserService from './userService';
 
-import userRepository from './userRepository';
-
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  userRepository.findAllUsers()
-    .then((users) => {
-      res.status(200).send(users);
+  UserService.getUserList()
+    .then((result) => {
+      res.send(result);
     })
     .catch((e) => {
-      res.status(400).send(e);
+      res.send(e);
     });
 });
 
-router.get('/email/:email', (req, res) => {
-  userRepository.findByUserEmail(req.params.email)
-    .then((user) => {
-      res.send(user);
+router.get('/:email', (req, res) => {
+  UserService.getUser(req.params.email)
+    .then((result) => {
+      res.send(result);
     })
     .catch((err) => {
       res.send(err);
     });
 });
 
-router.get('/subscription/:email', (req, res) => {
-  userRepository.findSubscriptionByUserEmail(req.params.email)
-    .then((subscription) => {
-      res.send(subscription);
+// body: Json Data
+router.post('/', (req, res) => {
+  UserService.createOne(req.body)
+    .then((result) => {
+      res.send(result);
     })
     .catch((err) => {
       res.send(err);
     });
 });
 
+router.delete('/email/:email', (req, res) => {
+  UserService.deleteOne(req.params.email)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
 
 export default router;
