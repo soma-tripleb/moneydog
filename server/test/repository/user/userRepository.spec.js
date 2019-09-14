@@ -2,7 +2,6 @@ import 'babel-polyfill';
 import assert from 'assert';
 
 import User from '../../../src/schemas/user';
-import UserRepository from '../../../src/router/user/userRepository';
 import { mongoConnect, mongoDisConnect } from '../../../src/dbConfig/mongoDB';
 
 import UserMock from '../../mock/userMock';
@@ -77,9 +76,9 @@ describe('UserRepository Test', () => {
 
     describe('#findAll()', () => {
       it('User 전체 조회', (done) => {
-        User.find({}, (err) => {
+        User.find({}, (err, result) => {
           if (err) done(err);
-          else done(err);
+          else done();
         });
       });
     });
@@ -90,16 +89,6 @@ describe('UserRepository Test', () => {
         User.findOne({ email: userId }, (err) => {
           if (err) done(err);
           else done(err);
-        });
-      });
-    });
-
-    describe('#findAllUsers()', () => {
-      it('UserRepository Method', (done) => {
-        UserRepository.findAllUsers().then((user) => {
-          done();
-        }).catch((done) => {
-          if (err) done(err);
         });
       });
     });

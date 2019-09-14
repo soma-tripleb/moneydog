@@ -80,9 +80,7 @@ describe('SubscriptionTemplate Test', () => {
 
         SubsTmplRepo.deleteOne(subsTmplName)
           .then((result) => {
-            assert.equal(result.n, 1);
-            assert.equal(result.ok, 1);
-            assert.equal(result.deletedCount, 1);
+            assert.equal(result.success, true);
             done();
           })
           .catch((err) => {
