@@ -9,10 +9,10 @@ server_lint_inspection:
     before_script:
     - export PATH=$PATH:/usr/local/bin
     script:
+    - echo $DB_SCHEMA
     - cd server
     - npm install
     - npm run lint
-    - npm run test-subs-repo
     tags:
     - moneydog
 
