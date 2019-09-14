@@ -1,6 +1,6 @@
 image: gitlab-registry
 
-service:
+services:
     - mongo:latest
 
 stages:
