@@ -12,6 +12,7 @@ server_lint_inspection:
     - cd server
     - npm install
     - npm run lint
+    - npm run test-subs-repo
     tags:
     - moneydog
 
