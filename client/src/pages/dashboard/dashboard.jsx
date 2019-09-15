@@ -12,7 +12,6 @@ import 'babel-polyfill';
 import './dashboard.css';
 
 class DashBoard extends Component {
-
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -46,16 +45,16 @@ class DashBoard extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-6">
-                {/*달력*/}
+                {/* 달력*/}
                 <div className="calendar">
-                  <Calendar date={this.state.selectedValue} handleChange={this.handleChange}  data={this.state.user}/>
+                  <Calendar date={this.state.selectedValue} handleChange={this.handleChange} data={this.state.user}/>
                 </div>
                 <hr/>
                 <div className="list">
                   <List date={this.convertDate()} data={this.state.user} />
                 </div>
               </div>
-              {/*구독중인 서비스 list */}
+              {/* 구독중인 서비스 list */}
               <div className="col-md-6">
                 <div className='TotalAmount'>
                   <TotalAmount data={this.state.user}/>

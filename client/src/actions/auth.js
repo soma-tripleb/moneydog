@@ -1,51 +1,82 @@
-import axios from "axios";
+import axios from 'axios';
 
 import {
   AUTH_LOGIN,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAILURE,
+  AUTH_LOGOUT,
 } from './ActionTypes';
 
 
-export const loginRequest = (email, password) => async dispatch => {
-
-  const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/users/signIn`;
+export const loginRequest = (email, password) => async (dispatch) => {
+  const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/auth/signIn`;
   const AJAX_DATA = {
     userInfo: {
       email: email,
       password: password,
-    }
+    },
   };
 
   dispatch(login());
 
-  await axios
-      .post(AJAX_URL,AJAX_DATA)
-      .then((res) => {
-        console.log("success");
-        dispatch(loginSuccess(email));
-      })
-      .catch((err) => {
-        console.log(err + "failed");
-        dispatch(loginFailure());
-      });
+  return await axios
+    .post(AJAX_URL, AJAX_DATA)
+    .then((res) => {
+      dispatch(loginSuccess(res.data.token));
+      return res;
+    })
+    .catch((err) => {
+      dispatch(loginFailure());
+      return err.response;
+    });
+};
+
+export const sessionRequest = (jwt) => async (dispatch) => {
+  const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/auth/sessionCheck`;
+  const AJAX_DATA = {
+    userInfo: {
+      jwt: jwt,
+    },
+  };
+
+  return await axios
+    .post(AJAX_URL, AJAX_DATA)
+    .then((res) => {
+      dispatch(loginSuccess(res.data.token));
+      return res;
+    })
+    .catch((err) => {
+      dispatch(loginFailure());
+      return err.response;
+    });
+};
+
+export const logoutRequest = () =>(dispatch) => {
+  dispatch(logout());
+  localStorage.removeItem('auth');
 };
 
 export function login() {
   return {
-    type: AUTH_LOGIN
+    type: AUTH_LOGIN,
   };
 }
 
-export function loginSuccess(username) {
+export function logout() {
+  return {
+    type: AUTH_LOGOUT,
+  };
+}
+
+export function loginSuccess(token) {
   return {
     type: AUTH_LOGIN_SUCCESS,
-    username
+    token,
   };
 }
 
 export function loginFailure() {
   return {
-    type: AUTH_LOGIN_FAILURE
+    type: AUTH_LOGIN_FAILURE,
   };
 }

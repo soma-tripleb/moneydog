@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import { Carousel, IndexInfo, GmailTutorial, IndexSignUp} from './index';
+import {Carousel, IndexInfo, GmailTutorial, IndexSignUp} from './index';
 
 class Home extends Component {
   state = {
@@ -18,9 +18,9 @@ class Home extends Component {
 
             <IndexInfo/>
 
-            {/*<hr className="featurette-divider"/>*/}
+            {/* <hr className="featurette-divider"/>*/}
 
-            {/*<GmailTutorial/>*/}
+            {/* <GmailTutorial/>*/}
 
             <hr className="featurette-divider"/>
 

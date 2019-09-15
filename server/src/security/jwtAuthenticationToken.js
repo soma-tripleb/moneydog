@@ -17,6 +17,17 @@ const createJWT = (param) => {
   );
 };
 
+const checkJWT = (token) =>{
+  return jwt.verify(token, secretCode, (err, decode) => {
+    if (err) {
+      console.log(err);
+      return {status: 401, success: false, message: err.message};
+    } else {
+      return {status: 200, success: true, message: 'session Check Success', token: createJWT(decode.param)};
+    }
+  });
+};
+
 export {
-  createJWT,
+  createJWT, checkJWT,
 };

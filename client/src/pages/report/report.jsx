@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Container, Row, Col, Card} from 'react-bootstrap';
 import {Table} from 'antd';
 
@@ -16,23 +16,23 @@ class Report extends Component {
       {
         name: 'Netflix',
         usage: 60,
-        price: 12000
+        price: 12000,
       },
       {
         name: 'Watcha Play',
         usage: 30,
-        price: 6900
+        price: 6900,
       },
       {
         name: 'TVING',
         usage: 20,
-        price: 5900
+        price: 5900,
       },
       {
         name: 'Melon',
         usage: 100,
-        price: 12000
-      }
+        price: 12000,
+      },
     ],
     columns: [
       {
@@ -43,8 +43,8 @@ class Report extends Component {
         title: 'Price',
         dataIndex: 'price',
 
-      }
-    ]
+      },
+    ],
   };
 
   render() {

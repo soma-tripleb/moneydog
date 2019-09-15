@@ -13,21 +13,19 @@ export function responseGoogle(response) {
     },
   }).then((res) => {
     console.log('axios success');
-    window.location.href = 'http://localhost:8080' + res.data;
+    window.location.href = 'http://localhost:8080' + res.data; // to subscriptions
   }).catch((err) => {
     console.log(err);
   });
 }
 
 export function createUser(userInfo) {
-  return axios.post(`${process.env.REACT_APP_NODE_API_URL}/users/signUp`, {
-    userInfo:
-      {
-        email: userInfo.email,
-        nickname: userInfo.nickName,
-        password: userInfo.password,
-        content: 'content',
-      },
+  return axios.post(`${process.env.REACT_APP_NODE_API_URL}/auth/signUp`, {
+    userInfo: {
+      email: userInfo.email,
+      password: userInfo.password,
+      nickname: userInfo.nickname,
+    },
   }).catch((err) => {
     return err.response;
   });
