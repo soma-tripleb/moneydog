@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 const request = require('supertest');
 const app = require('../api/index');
 

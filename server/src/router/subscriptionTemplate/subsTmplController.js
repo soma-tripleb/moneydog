@@ -1,20 +1,20 @@
 import express from 'express';
-import UserService from './userService';
+import SubsTmplService from './subsTmplService';
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  UserService.getUserList()
+  SubsTmplService.getSubscriptionTemplateList()
     .then((result) => {
       res.send(result);
     })
-    .catch((e) => {
-      res.send(e);
+    .catch((err) => {
+      res.send(err);
     });
 });
 
-router.get('/:email', (req, res) => {
-  UserService.getUser(req.params.email)
+router.get('/:name', (req, res) => {
+  SubsTmplService.getSubscriptionTemplate(req.params.name)
     .then((result) => {
       res.send(result);
     })
@@ -25,7 +25,7 @@ router.get('/:email', (req, res) => {
 
 // body: Json Data
 router.post('/', (req, res) => {
-  UserService.createOne(req.body)
+  SubsTmplService.createOne(req.body)
     .then((result) => {
       res.send(result);
     })
@@ -34,8 +34,8 @@ router.post('/', (req, res) => {
     });
 });
 
-router.delete('/email/:email', (req, res) => {
-  UserService.deleteOne(req.params.email)
+router.delete('/name/:name', (req, res) => {
+  SubsTmplService.deleteOne(req.params.name)
     .then((result) => {
       res.send(result);
     })

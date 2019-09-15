@@ -1,4 +1,5 @@
-image: gitlab-registry
+services:
+    - mongo:latest
 
 stages:
     - server-lint
@@ -8,10 +9,19 @@ server_lint_inspection:
     stage: server-lint
     before_script:
     - export PATH=$PATH:/usr/local/bin
+    only:
+        variables:
+          - $DB_SCHEMA
+          - $DB_URL
+          - $DB_USER
+          - $DB_PASSWORD
+          - $DB_HOST
+          - $DB_PORT
     script:
     - cd server
     - npm install
     - npm run lint
+    - npm run test-subs-repo
     tags:
     - moneydog
 

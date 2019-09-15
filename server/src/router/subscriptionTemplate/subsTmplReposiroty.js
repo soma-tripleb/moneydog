@@ -1,13 +1,13 @@
-import User from '../../schemas/user';
+import SubsTmpl from '../../schemas/subscriptionTemplate';
 
 /*
 * Method Naming
 * - 'Repository' 단 에서는 최대한 'mongoose' method 와 비슷하게 작성.
-* : 'findOne()'에서 'email' 을 통한 검색 일 경우, 파라미터를 통해서 조건 확인 할 수 있음.
+* : 'findOne()'에서 'name' 을 통한 검색 일 경우, 파라미터를 통해서 조건 확인 할 수 있음.
 * : 추상적으로 통일 한 후에, 'Service' 단에서 구체화.
 */
 const findAll = () => {
-  return User.find()
+  return SubsTmpl.find()
     .then((result) => {
       return { status: 201, success: true, message: result };
     })
@@ -16,8 +16,8 @@ const findAll = () => {
     });
 };
 
-const findOne = (email) => {
-  return User.find({ email: email })
+const findOne = (name) => {
+  return SubsTmpl.findOne({ name: name })
     .then((result) => {
       return { status: 201, success: true, message: result };
     })
@@ -26,12 +26,12 @@ const findOne = (email) => {
     });
 };
 
-const saveOne = async (user) => {
-  const createResult = await User.create((user))
+const saveOne = async (subsTmpl) => {
+  const createResult = await SubsTmpl.create((subsTmpl))
     .then((result) => { return result; })
     .catch((err) => { throw err; });
 
-  return User.find({ nickname: createResult.nickname })
+  return SubsTmpl.find({ name: createResult.name })
     .then((result) => {
       return { status: 201, success: true, message: result };
     })
@@ -42,16 +42,16 @@ const saveOne = async (user) => {
 
 /**
  *
- * @param {*} email
+ * @param {*} name
  * @return {result} true - { n: 1, ok: 1, deletedCount: 1 }
  */
-const deleteOne = (email) => {
-  return User.deleteOne({ email: email })
+const deleteOne = (name) => {
+  return SubsTmpl.deleteOne({ name: name })
     .then((result) => {
-      return { status: 201, success: true, message: { object: email, result } };
+      return { status: 201, success: true, message: { object: name, result } };
     })
     .catch((err) => {
-      throw err;
+      return err;
     });
 };
 
