@@ -18,6 +18,8 @@ const PrivateRouter = ({component: Component, status, ...rest}) => {
           return <Component {...props} />;
         } else if (status === 'WAITING') {
           return LODING;
+        } else if (status === 'LOGOUT') {
+          return <Redirect to='/signin '/>;
         } else {
           return <Redirect to='/signin'/>;
         }

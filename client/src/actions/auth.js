@@ -4,6 +4,7 @@ import {
   AUTH_LOGIN,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAILURE,
+  AUTH_LOGOUT,
 } from './ActionTypes';
 
 
@@ -50,9 +51,20 @@ export const sessionRequest = (jwt) => async (dispatch) => {
     });
 };
 
+export const logoutRequest = () =>(dispatch) => {
+  dispatch(logout());
+  localStorage.removeItem('auth');
+};
+
 export function login() {
   return {
     type: AUTH_LOGIN,
+  };
+}
+
+export function logout() {
+  return {
+    type: AUTH_LOGOUT,
   };
 }
 
