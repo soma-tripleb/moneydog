@@ -6,8 +6,10 @@
     "start": "nodemon --exec babel-node ./bin/www",
     "test": "cross-env NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register --timeout 120000 --recursive ./**/*.spec.js",
     "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
-    "lint": "./node_modules/.bin/eslint --ext .js src/ test/ app.js index.js; exit 0;",
-    "test-subs-repo": "./node_modules/mocha/bin/mocha --require babel-register ./test/repository/subscriptionTemplate.spec.js"
+    "lint": "./node_modules/.bin/eslint --fix --ext .js src/ test/ app.js index.js;",
+    "test-subs-repo": "./node_modules/mocha/bin/mocha --require babel-register ./test/repository/subsTmpl/subsTmplRepository.spec.js",
+    "test-user-repo": "./node_modules/mocha/bin/mocha --require babel-register ./test/repository/user/userRepository.spec.js",
+    "test-user-serv": "./node_modules/mocha/bin/mocha --require babel-register ./test/service/user/userService.spec.js"
   },
   "dependencies": {
     "@sentry/node": "^5.6.2",

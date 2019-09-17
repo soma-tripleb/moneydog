@@ -16,7 +16,7 @@ class CalendarClass extends Component {
 
   handleChange = (value) => {
     this.props.handleChange(value);
-  }
+  };
 
   onPanelChange = (value, mode) => {
     console.log('test', value, mode);
@@ -37,7 +37,7 @@ class CalendarClass extends Component {
       }
     });
     return listData || [];
-  }
+  };
 
   dateCellRender = (value) => {
     const subscriptions = this.props.data.subscriptions;
@@ -52,13 +52,13 @@ class CalendarClass extends Component {
         ))}
       </ul>
     );
-  }
+  };
 
   getMonthData = (moment) => {
     if (moment.month() === 8) {
       return 1394;
     }
-  }
+  };
 
   monthCellRender = (value) => {
     const num = this.getMonthData(value);
@@ -68,7 +68,7 @@ class CalendarClass extends Component {
         <span>Backlog number</span>
       </div>
     ) : null;
-  }
+  };
 
   render() {
     if (this.props.data == null) {

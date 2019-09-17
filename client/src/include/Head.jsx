@@ -2,14 +2,19 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 import {connect} from 'react-redux';
+import * as actions from '../actions/auth';
 
 class Head extends Component {
+  logout = ()=>{
+    this.props.logoutRequest();
+  };
+
   isLogined = () =>{
     if ( this.props.status === 'SUCCESS') {
       return (
           <>
             <li className="nav-item">
-              <Link to="/signup" className="nav-link">Logout</Link>
+              <a onClick={this.logout} className="nav-link">Logout</a>
             </li>
           </>
       );
@@ -65,4 +70,12 @@ const mapStateToProps = (state) => ({
   status: state.auth.login.status,
 });
 
-export default connect(mapStateToProps)(Head);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logoutRequest: () => {
+      dispatch(actions.logoutRequest());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Head);

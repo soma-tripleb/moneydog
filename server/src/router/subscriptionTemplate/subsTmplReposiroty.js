@@ -1,56 +1,54 @@
 import SubsTmpl from '../../schemas/subscriptionTemplate';
 
+/*
+* Method Naming
+* - 'Repository' 단 에서는 최대한 'mongoose' method 와 비슷하게 작성.
+* : 'findOne()'에서 'name' 을 통한 검색 일 경우, 파라미터를 통해서 조건 확인 할 수 있음.
+* : 추상적으로 통일 한 후에, 'Service' 단에서 구체화.
+*/
 const findAll = () => {
   return SubsTmpl.find()
     .then((result) => {
-      return {status: 201, success: true, message: result};
+      return { status: 201, success: true, message: result };
     })
     .catch((err) => {
-      const errMessage =
-      {
-        status: err.status,
-        success: err.success,
-        message: err.message,
-      };
-      throw errMessage;
+      throw err;
     });
 };
 
-const findByName = (name) => {
+const findOne = (name) => {
   return SubsTmpl.findOne({ name: name })
     .then((result) => {
-      return {status: 201, success: true, message: result};
+      return { status: 201, success: true, message: result };
     })
     .catch((err) => {
-      const errMessage =
-      {
-        status: err.status,
-        success: err.success,
-        message: err.message,
-      };
-      throw errMessage;
+      throw err;
     });
 };
 
 const saveOne = async (subsTmpl) => {
-  const subsTmplName = subsTmpl.name;
+  const createResult = await SubsTmpl.create((subsTmpl))
+    .then((result) => { return result; })
+    .catch((err) => { throw err; });
 
-  const createResult = await SubsTmpl.create(subsTmpl);
-
-  const result = (createResult.name === subsTmplName) ?
-    {status: 201, success: true, message: createResult} :
-    'saveOne() fail';
-  return result;
+  return SubsTmpl.find({ name: createResult.name })
+    .then((result) => {
+      return { status: 201, success: true, message: result };
+    })
+    .catch((err) => {
+      throw err;
+    });
 };
 
 /**
- * @param {*} subsTmplName
- * @result success : { n: 1, ok: 1, deletedCount: 1 }
+ *
+ * @param {*} name
+ * @return {result} true - { n: 1, ok: 1, deletedCount: 1 }
  */
-const deleteOne = (subsTmplName) => {
-  return SubsTmpl.deleteOne({ name: subsTmplName })
+const deleteOne = (name) => {
+  return SubsTmpl.deleteOne({ name: name })
     .then((result) => {
-      return result;
+      return { status: 201, success: true, message: { object: name, result } };
     })
     .catch((err) => {
       return err;
@@ -59,7 +57,7 @@ const deleteOne = (subsTmplName) => {
 
 export default {
   findAll,
-  findByName,
+  findOne,
   saveOne,
   deleteOne,
 };

@@ -4,11 +4,12 @@ import {
   AUTH_LOGIN,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAILURE,
+  AUTH_LOGOUT,
 } from './ActionTypes';
 
 
 export const loginRequest = (email, password) => async (dispatch) => {
-  const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/users/signIn`;
+  const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/auth/signIn`;
   const AJAX_DATA = {
     userInfo: {
       email: email,
@@ -18,16 +19,41 @@ export const loginRequest = (email, password) => async (dispatch) => {
 
   dispatch(login());
 
-  await axios
+  return await axios
     .post(AJAX_URL, AJAX_DATA)
     .then((res) => {
-      console.log('success');
-      dispatch(loginSuccess(email));
+      dispatch(loginSuccess(res.data.token));
+      return res;
     })
     .catch((err) => {
-      console.log(err + 'failed');
       dispatch(loginFailure());
+      return err.response;
     });
+};
+
+export const sessionRequest = (jwt) => async (dispatch) => {
+  const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/auth/sessionCheck`;
+  const AJAX_DATA = {
+    userInfo: {
+      jwt: jwt,
+    },
+  };
+
+  return await axios
+    .post(AJAX_URL, AJAX_DATA)
+    .then((res) => {
+      dispatch(loginSuccess(res.data.token));
+      return res;
+    })
+    .catch((err) => {
+      dispatch(loginFailure());
+      return err.response;
+    });
+};
+
+export const logoutRequest = () =>(dispatch) => {
+  dispatch(logout());
+  localStorage.removeItem('auth');
 };
 
 export function login() {
@@ -36,10 +62,16 @@ export function login() {
   };
 }
 
-export function loginSuccess(username) {
+export function logout() {
+  return {
+    type: AUTH_LOGOUT,
+  };
+}
+
+export function loginSuccess(token) {
   return {
     type: AUTH_LOGIN_SUCCESS,
-    username,
+    token,
   };
 }
 

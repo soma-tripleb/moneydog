@@ -3,7 +3,7 @@ import crypto from 'crypto';
 dotenv.config();
 
 import AuthRepository from './authRepository';
-import {createJWT} from '../../security/jwtAuthenticationToken';
+import {createJWT, checkJWT} from '../../security/jwtAuthenticationToken';
 
 const register = async (userInfo) => {
   userInfo.salt = (Math.round((new Date().valueOf() * Math.random())) + '');
@@ -17,10 +17,7 @@ const register = async (userInfo) => {
 };
 
 const login = async (userInfo) => {
-  console.log(userInfo.email);
   const user = await AuthRepository.getUserByEmail(userInfo.email);
-
-  console.log('user'+user);
 
   if (user === null) {
     return {status: 400, success: false, message: '없는 아이디 입니다.'};
@@ -40,7 +37,12 @@ const login = async (userInfo) => {
   }
 };
 
+const sessionCheck = async (userInfo) =>{
+  return checkJWT(userInfo.jwt);
+};
+
 export default {
   register,
   login,
+  sessionCheck,
 };
