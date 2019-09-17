@@ -21,7 +21,7 @@ before((done) => {
       });
     })
     .then(() => {
-      console.log('mongodb-memory-server running');
+      console.log('userRepository.spec.js ,mongodb-memory-server running');
       userRepository.createUser(UserMock)
         .then(() => done());
     });
@@ -35,6 +35,7 @@ after(async () => {
 
 describe('#UserRepository Test', () => {
   beforeEach((done) => {
+    console.log('before each run');
     userRepository.deleteAllUser()
       .then(() => {
         userRepository.createUser(UserMock)
@@ -58,7 +59,7 @@ describe('#UserRepository Test', () => {
         },
       },
     };
-    const user = await userRepository.createUser(createUser);
+    const user = await userRepository.saveOne(createUser);
     expect(user.email).to.equal('jimmy@naver.com');
     expect(user.password).to.equal('1234');
     const subscription = user.subscription;
@@ -66,14 +67,14 @@ describe('#UserRepository Test', () => {
   });
 
   it('#read user', async () => {
-    const user = await userRepository.getUserByEmail('test@test.com');
+    const user = await userRepository.findOne('test@test.com');
     expect(user.email).to.equal('test@test.com');
     expect(user.password).to.equal('1234');
     const subscription = user.subscription;
     expect(subscription.name).to.equal('test-title');
   });
   it('#delete user', async () => {
-    await userRepository.deleteUserByEmail('test@test.com');
+    await userRepository.deleteOne('test@test.com');
     const user = await userRepository.getUserByEmail('test@test.com');
     expect(user).be.equal(null);
   });
@@ -94,8 +95,8 @@ describe('#UserRepository Test', () => {
         },
       },
     };
-    await userRepository.createUser(createUser);
-    const users = await userRepository.getUserList();
+    await userRepository.saveOne(createUser);
+    const users = await userRepository.findAll();
     expect(users[1].email).to.equal('jimmy@naver.com');
     expect(users[1].password).to.equal('1234');
     const subscription = users[1].subscription;
