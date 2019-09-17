@@ -18,7 +18,6 @@ const JWTAuthentication = (req, res, next) => {
 
   JSONWebToken.verify(token, secretCode, (err, decode) => {
     if (err) {
-      console.log(err);
       return res.status(403).json({
         success: false,
         message: 'check token refresh',
