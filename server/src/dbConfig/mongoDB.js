@@ -9,15 +9,19 @@ const MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_USER}:${process.env.
 
 const conn = mongoose.createConnection(MONGO_URI);
 
-// 유 connect 하는 부분
+// connect 하는 부분
 const mongoConnect = () => {
-  mongoose.connect(MONGO_URI, {
-    useNewUrlParser: true,
-  }).then(() => {
-    console.log('Connected mongo server');
-  }).catch((e) => {
-    console.error(e);
-  });
+  mongoose.set('useFindAndModify', false);
+  mongoose.set('useNewUrlParser', true);
+  if (process.env.NODE_ENV === 'test') {
+    // test환경에 대한 mongo-memory-server코드를 차후 작성예정
+  } else {
+    mongoose.connect(MONGO_URI)
+      .then(() => console.log('Connected mongo server'))
+      .catch((e) => {
+        console.error(e);
+      });
+  }
 };
 
 const mongoDisConnect = () => {

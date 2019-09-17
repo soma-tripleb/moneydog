@@ -1,96 +1,105 @@
+require('dotenv').config();
 import 'babel-polyfill';
-import assert from 'assert';
 
-import User from '../../../src/schemas/user';
-import { mongoConnect, mongoDisConnect } from '../../../src/dbConfig/mongoDB';
+import UserMock from '../mock/userMock';
+import mongoose from 'mongoose';
+import {expect} from 'chai';
+import { MongoMemoryServer} from 'mongodb-memory-server';
+import userRepository from '../../src/router/user/userRepository';
 
-import UserMock from '../../mock/userMock';
+let mongoServer;
 
-describe('UserRepository Test', () => {
-  before(() => {
-    mongoConnect();
+before((done) => {
+  mongoServer = new MongoMemoryServer();
+  mongoServer
+    .getConnectionString()
+    .then((mongoUri) => {
+      return mongoose.connect(mongoUri, (err) => {
+        if (err) {
+          done(err);
+        }
+      });
+    })
+    .then(() => {
+      console.log('mongodb-memory-server running');
+      userRepository.createUser(UserMock)
+        .then(() => done());
+    });
+});
+
+after(async () => {
+  await mongoose.disconnect();
+  await mongoServer.stop();
+  console.log('server stoped');
+});
+
+describe('#UserRepository Test', () => {
+  beforeEach((done) => {
+    userRepository.deleteAllUser()
+      .then(() => {
+        userRepository.createUser(UserMock)
+          .then(() => done());
+      });
+  });
+  it('#create', async () => {
+    const createUser = {
+      email: 'jimmy@naver.com',
+      password: '1234',
+      nickname: 'jimmy',
+      salt: 111,
+      role: 'user',
+      subscription: {
+        name: 'netflix',
+        price: 14000,
+        channel: 'ios',
+        pricePlan: {
+          title: 'premium',
+          price: 14000,
+        },
+      },
+    };
+    const user = await userRepository.createUser(createUser);
+    expect(user.email).to.equal('jimmy@naver.com');
+    expect(user.password).to.equal('1234');
+    const subscription = user.subscription;
+    expect(subscription.name).to.equal('netflix');
   });
 
-  after(() => {
-    mongoDisConnect();
+  it('#read user', async () => {
+    const user = await userRepository.getUserByEmail('test@test.com');
+    expect(user.email).to.equal('test@test.com');
+    expect(user.password).to.equal('1234');
+    const subscription = user.subscription;
+    expect(subscription.name).to.equal('test-title');
   });
-
-  describe('Database connect', () => {
-    describe('#delete()', () => {
-      it('테스트 전, Mock User id 제거', (done) => {
-        const userId = UserMock.email;
-        User.deleteOne({ email: userId }, (err) => {
-          if (err) done(err);
-          else done(err);
-        });
-      });
-    });
-
-    describe('#create()', () => {
-      it('UserMock 으로 User 생성', (done) => {
-        const userResult = User.create((UserMock))
-          .then((result) => {
-            return result;
-          })
-          .catch((err) => {
-            throw err;
-          });
-
-        User.find({ nickname: userResult.nickname })
-          .then((result) => {
-            assert.equal(result.nickname, userResult.nickname);
-            done();
-          })
-          .catch((err) => {
-            done(err);
-          });
-      });
-    });
-
-    describe('#find()', () => {
-      it('User Id 로 User 검색', (done) => {
-        const userId = UserMock.email;
-        User.findOne({ email: userId }, (err) => {
-          if (err) done(err);
-          else done(err);
-        });
-      });
-    });
-
-    describe('#modify()', () => {
-      it('User nickname 수정', (done) => {
-        const userId = UserMock.email;
-        const newNickname = 'test-user2';
-        User.updateOne({ email: userId }, { nickname: newNickname }, (err) => {
-          if (err) done(err);
-          else done(err);
-        });
-        User.findOne({ email: userId }, (err) => {
-          if (err) err;
-          else err;
-        }).then((user) => {
-          assert(user.nickname, newNickname);
-        });
-      });
-    });
-
-    describe('#findAll()', () => {
-      it('User 전체 조회', (done) => {
-        User.find({}, (err, result) => {
-          if (err) done(err);
-          else done();
-        });
-      });
-    });
-
-    describe('#findByUserEmailToSubscription()', () => {
-      it('User Id 로 User 검색 후 subscription 검색', (done) => {
-        const userId = UserMock.email;
-        User.findOne({ email: userId }, (err) => {
-          if (err) done(err);
-          else done(err);
-        });
-      });
-    });
+  it('#delete user', async () => {
+    await userRepository.deleteUserByEmail('test@test.com');
+    const user = await userRepository.getUserByEmail('test@test.com');
+    expect(user).be.equal(null);
+  });
+  it('#find all', async () => {
+    const createUser = {
+      email: 'jimmy@naver.com',
+      password: '1234',
+      nickname: 'jimmy',
+      salt: 111,
+      role: 'user',
+      subscription: {
+        name: 'netflix',
+        price: 14000,
+        channel: 'ios',
+        pricePlan: {
+          title: 'premium',
+          price: 14000,
+        },
+      },
+    };
+    await userRepository.createUser(createUser);
+    const users = await userRepository.getUserList();
+    expect(users[1].email).to.equal('jimmy@naver.com');
+    expect(users[1].password).to.equal('1234');
+    const subscription = users[1].subscription;
+    expect(subscription.name).to.equal('netflix');
+    expect(users.length).be.equal(2);
   });
 });

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon --exec babel-node ./bin/www",
-    "test": "./node_modules/mocha/bin/mocha --require babel-register --recursive ./**/*.spec.js",
+    "test": "cross-env NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register --timeout 120000 --recursive ./**/*.spec.js",
     "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
     "lint": "./node_modules/.bin/eslint --fix --ext .js src/ test/ app.js index.js;",
     "test-subs-repo": "./node_modules/mocha/bin/mocha --require babel-register ./test/repository/subsTmpl/subsTmplRepository.spec.js",
@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@sentry/node": "^5.6.2",
-    "acorn": "^7.0.0",
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "^1.4.4",
@@ -29,6 +28,7 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
+    "acorn": "^7.0.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.2",
     "babel-polyfill": "^6.26.0",
@@ -37,11 +37,13 @@
     "babel-preset-node6": "^11.0.0",
     "babel-register": "^6.26.0",
     "chai": "^4.2.0",
+    "cross-env": "^5.2.1",
     "eslint": "^6.1.0",
     "eslint-config-google": "^0.13.0",
     "mocha": "^6.2.0",
-    "supertest": "^4.0.2",
+    "mongodb-memory-server": "^5.2.3",
     "nodemon": "^1.19.1",
+    "supertest": "^4.0.2",
     "swagger-jsdoc": "^3.4.0",
     "swagger-ui-express": "^4.0.7"
   }

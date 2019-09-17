@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import * as service from './signup.ajax';
 import './signup.css';
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
 
 class SignUp extends Component {
   state = {

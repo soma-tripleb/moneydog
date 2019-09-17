@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import './footer.css';
 
 class Foot extends Component {
-
   render() {
     return (
         <>

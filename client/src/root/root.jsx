@@ -15,7 +15,6 @@ import Router from './router';
 import './root.css';
 
 class Root extends Component {
-
   render() {
     return (
       <Provider store={store}>
