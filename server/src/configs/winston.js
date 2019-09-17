@@ -1,5 +1,6 @@
 import fs from 'fs';
 import winston from 'winston';
+const winstonDaily = require('winston-daily-rotate-file');
 const { createLogger, format } = require('winston');
 const { combine, label, printf } = format;
 const logDir = __dirname + '/../logs';
@@ -33,7 +34,11 @@ const logger = createLogger({
     myFormat,
   ),
   transports: [infoTransport, errorTransport],
-  exceptionHandlers: [errorTransport],
+  exceptionHandlers: [
+    new winston.transports.File({
+      filename: 'exceptions.log',
+    }),
+  ],
 });
 
 const stream = {

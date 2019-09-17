@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon --exec babel-node ./bin/www",
-    "dev": "cross-env NODE_ENV=dev nodemon --exec babel-node ./bin/www",
+    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./bin/www",
     "test": "cross-env NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register --timeout 120000 --recursive ./**/*.spec.js",
     "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
     "lint": "./node_modules/.bin/eslint --fix --ext .js src/ test/ app.js index.js;",
@@ -22,12 +22,14 @@
     "dom-parser": "^0.1.6",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "express-winston": "^3.3.0",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.0",
     "mongoose-auto-increment": "^5.0.1",
     "morgan": "~1.9.1",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.1.0"
   },
   "devDependencies": {
     "acorn": "^7.0.0",
