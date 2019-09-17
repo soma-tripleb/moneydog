@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
-
 import update from 'react-addons-update';
 
 import SubsApp from './subsApp';
-
 import * as service from './subscriptions.ajax';
+import * as image from '../../static/img/templogo'
 
 import './subscriptions.css';
 
 class Subscriptions extends Component {
   state = {
     arr: [
-      {number: '', logo: 'https://www.tubefilter.com/wp-content/uploads/2018/03/youtube-picture-in-picture.jpg', name: 'YouTube', label: '+'},
+      // {number: '', logo: 'https://www.tubefilter.com/wp-content/uploads/2018/03/youtube-picture-in-picture.jpg', name: 'YouTube', label: '+'},
+      {number: '', logo: image.melon, name: 'YouTube', label: '+'},
       {number: '', logo: 'https://cdnimg.melon.co.kr/resource/mobile40/cds/common/image/mobile_apple_180x180.png', name: 'Melon', label: '+'},
       {number: '', logo: 'https://static.wanted.co.kr/images/wdes/0_4.ea590aaf.png', name: 'Watchar', label: '+'},
       {number: '', logo: 'https://tr4.cbsistatic.com/hub/i/r/2017/02/03/2a9700a9-f22a-48e4-a9a9-3148aa21009a/resize/1200x/5fda319b9ab0d2b09d696f3b8aab0089/icloud-logo.jpg', name: 'iCloud', label: '+'},
@@ -24,7 +24,18 @@ class Subscriptions extends Component {
     arr2: [],
     show: false,
     setShow: false,
+  };
+
+  componentDidMount() {
+    this.ajaxGetSubTmtl();
   }
+
+  ajaxGetSubTmtl = async ()=>{
+    const response = await service.getSubTmtl();
+
+    console.log('asd',response.data.message);
+  };
+
 
   insertContact = (number, logo, name) => {
     const newState = update(this.state, {
