@@ -33,6 +33,7 @@ const logger = createLogger({
     myFormat,
   ),
   transports: [infoTransport, errorTransport],
+  exceptionHandlers: [errorTransport],
 });
 
 const stream = {
