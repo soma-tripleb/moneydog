@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+const morgan = require('morgan');
 const cors = require('cors');
 
 import authCheck from './src/security/jwtAuthentication';
 import * as Sentry from '@sentry/node';
 import {mongoConnect} from './src/configs/mongoDB';
+import {stream} from './src/configs/winston';
 
 // Error tracking
 Sentry.init({dsn: 'https://566bd809b9a0464e8e690a199ab83396@sentry.io/1553162'});
@@ -16,7 +17,7 @@ mongoConnect();
 
 // MiddleWares
 app.use(cors());
-app.use(logger('dev'));
+app.use(morgan('combined', { stream }));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
