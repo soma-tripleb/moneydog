@@ -37,16 +37,13 @@ expressWinston.requestWhitelist.push('body');
 expressWinston.responseWhitelist.push('body');
 app.use(expressWinston.logger({
   transports: [
-    new winston.transports.Console({
-      json: true,
-      colorize: true,
-    }),
     new winston.transports.File({
       filename: 'response.log',
       dirname: './src/logs',
       level: 'info',
     }),
   ],
+  colorize: true,
 }));
 
 
@@ -59,17 +56,18 @@ app.use('/subs-tmpl', subsTmplRouter);
 // error logger
 
 app.use(expressWinston.errorLogger({
+  showstack: true,
   transports: [
-    new winston.transports.Console({
-      json: true,
-      colorize: true,
-    }),
     new winston.transports.File({
       filename: 'error.log',
       dirname: './src/logs',
       level: 'error',
     }),
   ],
+  format: winston.format.combine(
+    winston.format.colorize(),
+    winston.format.json()
+  ),
 }));
 
 // error handler

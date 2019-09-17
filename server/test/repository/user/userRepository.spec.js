@@ -1,11 +1,11 @@
 require('dotenv').config();
 import 'babel-polyfill';
 
-import UserMock from '../mock/userMock';
+import UserMock from '../../mock/userMock';
 import mongoose from 'mongoose';
 import {expect} from 'chai';
 import { MongoMemoryServer} from 'mongodb-memory-server';
-import userRepository from '../../src/router/user/userRepository';
+import userRepository from '../../../src/router/user/userRepository';
 
 let mongoServer;
 

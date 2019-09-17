@@ -2,9 +2,9 @@ import 'babel-polyfill';
 
 import request from 'supertest';
 import {assert, expect} from 'chai';
-import {mongoConnect, mongoDisConnect} from '../src/configs/mongoDB';
+import {mongoConnect, mongoDisConnect} from '../../src/configs/mongoDB';
 
-import app from '../app';
+import app from '../../app';
 
 describe('GET /', () => {
   it('should respond with Json message "MoneyDog Server API"', (done) => {

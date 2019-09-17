@@ -9,6 +9,13 @@ if (!fs.existsSync(logDir)) {
   fs.mkdirSync(logDir);
 }
 
+const myFormat = printf((info) => {
+  if (info instanceof Error) {
+    return `${info.timestamp} [${info.label}] ${info.level}: ${info.message} ${info.stack}`;
+  }
+  return `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`;
+});
+
 const infoTransport = new winston.transports.File({
   filename: 'info.log',
   dirname: logDir,
@@ -27,6 +34,7 @@ const logger = createLogger({
     format.timestamp({
       format: 'YYYY-MM-DD HH:mm:ss',
     }),
+    myFormat,
   ),
   transports: [infoTransport, errorTransport],
   exceptionHandlers: [
