@@ -1,8 +1,11 @@
+import winston from 'winston';
+
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const cors = require('cors');
+const expressWinston = require('express-winston');
 
 import authCheck from './src/security/jwtAuthentication';
 import * as Sentry from '@sentry/node';
@@ -30,11 +33,29 @@ import authRouter from './src/router/auth/authentiController';
 import userRouter from './src/router/user/userController';
 import subsTmplRouter from './src/router/subscriptionTemplate/subsTmplController';
 
+// log the whole request and response body
+expressWinston.requestWhitelist.push('body');
+expressWinston.responseWhitelist.push('body');
+app.use(expressWinston.logger({
+  transports: [
+    new winston.transports.Console({
+      json: true,
+      colorize: true,
+    }),
+    new winston.transports.File({
+      filename: 'response.log',
+      level: 'info',
+    }),
+  ],
+}));
+
+
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use(authCheck);
 app.use('/users', userRouter);
 app.use('/subs-tmpl', subsTmplRouter);
+
 
 // error handler
 app.use(function(err, req, res, next) {
