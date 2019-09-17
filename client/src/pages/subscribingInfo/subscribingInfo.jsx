@@ -81,7 +81,7 @@ class SubscribingInfo extends Component {
 
                     return (
                       <div key={i}>
-                        <span><img src={""} alt="logo" /></span>
+                        <span><img src={''} alt="logo" /></span>
 
                         <span>{content.name}</span>
 
@@ -134,8 +134,8 @@ class SubscribingInfo extends Component {
                           </label>
                         </div>
                       </div>
-                    )
-                  }
+                    );
+                  },
                 )
               }
               <input type="submit" value="Submit" />
@@ -143,7 +143,7 @@ class SubscribingInfo extends Component {
           </div>
         </div>
       </>
-    )
+    );
   }
 }
 
