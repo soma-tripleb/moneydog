@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import {conn} from '../dbConfig/mongoDB';
+import {conn} from '../configs/mongoDB';
 
 const membershipSchema = new mongoose.Schema(
   {
