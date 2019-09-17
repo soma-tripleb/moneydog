@@ -34,7 +34,8 @@ describe('#UserRepository Test', () => {
         },
       },
     };
-    const user = await userRepository.saveOne(createUser);
+    const result = await userRepository.saveOne(createUser);
+    const user = result.message;
     expect(user.email).to.equal('jimmy@naver.com');
     expect(user.password).to.equal('1234');
     const subscription = user.subscription;
@@ -42,16 +43,18 @@ describe('#UserRepository Test', () => {
   });
 
   it('#read user', async () => {
-    const user = await userRepository.findOne('test@test.com');
-    expect(user.email).to.equal('test@test.com');
+    const result = await userRepository.findOne('jimmy@naver.com');
+    const user = result.message;
+    expect(user.email).to.equal('jimmy@naver.com');
     expect(user.password).to.equal('1234');
     const subscription = user.subscription;
-    expect(subscription.name).to.equal('test-title');
+    expect(subscription.name).to.equal('netflix');
   });
 
   it('#delete user', async () => {
-    await userRepository.deleteOne('test@test.com');
-    const user = await userRepository.getUserByEmail('test@test.com');
+    await userRepository.deleteOne('jimmy@naver.com');
+    const result = await userRepository.findOne('jimmy@naver.com');
+    const user = result.message;
     expect(user).be.equal(null);
   });
 

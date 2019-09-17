@@ -17,7 +17,7 @@ const findAll = () => {
 };
 
 const findOne = (email) => {
-  return User.find({ email: email })
+  return User.findOne({ email: email })
     .then((result) => {
       return { status: 201, success: true, message: result };
     })
@@ -31,7 +31,7 @@ const saveOne = async (user) => {
     .then((result) => { return result; })
     .catch((err) => { throw err; });
 
-  return await User.find({ nickname: createResult.nickname })
+  return await User.findOne({ email: createResult.email })
     .then((result) => {
       return { status: 201, success: true, message: result };
     })
