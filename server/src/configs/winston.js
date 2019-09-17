@@ -1,6 +1,6 @@
 import fs from 'fs';
 import winston from 'winston';
-const winstonDaily = require('winston-daily-rotate-file');
+const expressWinston = require('express-winston');
 const { createLogger, format } = require('winston');
 const { combine, label, printf } = format;
 const logDir = __dirname + '/../logs';
@@ -8,10 +8,6 @@ const logDir = __dirname + '/../logs';
 if (!fs.existsSync(logDir)) {
   fs.mkdirSync(logDir);
 }
-
-const myFormat = printf(({ level, message, label, timestamp }) => {
-  return `${level} [${timestamp}] [${label}] ${message}`;
-});
 
 const infoTransport = new winston.transports.File({
   filename: 'info.log',
@@ -31,7 +27,6 @@ const logger = createLogger({
     format.timestamp({
       format: 'YYYY-MM-DD HH:mm:ss',
     }),
-    myFormat,
   ),
   transports: [infoTransport, errorTransport],
   exceptionHandlers: [

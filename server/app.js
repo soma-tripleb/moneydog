@@ -11,7 +11,6 @@ import authCheck from './src/security/jwtAuthentication';
 import * as Sentry from '@sentry/node';
 import {mongoConnect} from './src/configs/mongoDB';
 import {stream} from './src/configs/winston';
-
 // Error tracking
 Sentry.init({dsn: 'https://566bd809b9a0464e8e690a199ab83396@sentry.io/1553162'});
 
@@ -44,6 +43,7 @@ app.use(expressWinston.logger({
     }),
     new winston.transports.File({
       filename: 'response.log',
+      dirname: './src/logs',
       level: 'info',
     }),
   ],
