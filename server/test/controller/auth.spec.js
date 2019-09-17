@@ -2,7 +2,7 @@
 //
 // import request from 'supertest';
 // import {assert, expect} from 'chai';
-// import {conn, mongoConnect, mongoDisConnect} from '../../src/dbConfig/mongoDB';
+// import {conn, mongoConnect, mongoDisConnect} from '../../src/configs/mongoDB';
 //
 // import app from '../../app';
 // import authRepository from '../../src/router/auth/authRepository';

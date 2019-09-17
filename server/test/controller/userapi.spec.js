@@ -2,7 +2,7 @@ import 'babel-polyfill';
 
 import request from 'supertest';
 import {assert, expect} from 'chai';
-import {mongoConnect, mongoDisConnect} from '../src/dbConfig/mongoDB';
+import {mongoConnect, mongoDisConnect} from '../src/configs/mongoDB';
 
 import app from '../app';
 
