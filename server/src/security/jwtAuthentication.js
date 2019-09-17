@@ -1,6 +1,5 @@
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-import {logger} from '../configs/winston';
 dotenv.config();
 
 const JSONWebToken = jwt;

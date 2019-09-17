@@ -1,6 +1,5 @@
 import fs from 'fs';
 import winston from 'winston';
-const expressWinston = require('express-winston');
 const { createLogger, format } = require('winston');
 const { combine, label, printf } = format;
 const logDir = __dirname + '/../logs';
