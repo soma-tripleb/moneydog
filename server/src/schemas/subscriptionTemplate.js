@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import autoIncrement from 'mongoose-auto-increment';
 
-const membershipSchema = mongoose.Schema(
+const membershipSchema = new mongoose.Schema(
   {
     seq: { type: Number },
     title: { type: String, required: true },
@@ -10,8 +11,9 @@ const membershipSchema = mongoose.Schema(
   }
 );
 
-const SubscriptionTemplateSchema = mongoose.Schema(
+const SubscriptionTemplateSchema = new mongoose.Schema(
   {
+    seq: { type: Number },
     name: { type: String, required: true },
     thumbnail: { type: String, required: true },
     membership: membershipSchema,
@@ -20,5 +22,12 @@ const SubscriptionTemplateSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+SubscriptionTemplateSchema.plugin(autoIncrement.plugin, {
+  model: 'SubscriptionTemplate',
+  field: 'seq',
+  startAt: 1,
+  incrementBy: 1,
+});
 
 export default mongoose.model('SubscriptionTemplate', SubscriptionTemplateSchema);

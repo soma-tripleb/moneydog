@@ -20,10 +20,6 @@ class SubsApp extends Component {
     }
   };
 
-  handlePopup = () => {
-    this.props.onPopup(this.props.subsAppInfo);
-  }
-
   render() {
     const {subsAppInfo} = this.props;
 
@@ -32,15 +28,15 @@ class SubsApp extends Component {
         <div className="container w-100 p-3" id="inner-element">
           <div className="row">
             <div className="col">
-              <button onClick={this.handleClick.bind(this)}>
-                {subsAppInfo.label}
-              </button>
-            </div>
-            <div className="col">
               <img className="logo-img" src={subsAppInfo.logo} alt="x" style={{height: '5vh', borderRadius: '5px'}} />
             </div>
             <div className="col">
               {subsAppInfo.name}
+            </div>
+            <div className="col">
+              <button onClick={this.handleClick}>
+                {subsAppInfo.label}
+              </button>
             </div>
           </div>
         </div>
