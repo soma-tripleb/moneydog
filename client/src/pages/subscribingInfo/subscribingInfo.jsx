@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 
-import SubsTmplService from './subscribingInfo.ajax';
+import * as service from './subscribingInfo.ajax';
 
 import './subscribingInfo.css';
 
@@ -19,7 +19,7 @@ class SubscribingInfo extends Component {
   }
 
   getUserSubsList = async () => {
-    const response = await SubsTmplService.getUserSubsInfo();
+    const response = await service.getUserSubsInfo();
     const arrCnt = response.data.length;
 
     const subsInfoArr = [];
@@ -44,6 +44,8 @@ class SubscribingInfo extends Component {
   }
 
   handleChange = (e) => {
+    console.log(e.target.value);
+
     if (['payment', 'price', 'channel'].includes(e.target.className)) {
       const userInputList = [...this.state.userInputList];
       userInputList[e.target.dataset.id][e.target.className] = e.target.value;
@@ -61,7 +63,7 @@ class SubscribingInfo extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    // service.updateUserSubsInfo(this.state.userInputList);
+    service.updateUserSubsInfo(this.state.userInputList);
   }
 
   render() {
@@ -147,4 +149,4 @@ class SubscribingInfo extends Component {
   }
 }
 
-export default connect(mapStateToProps)(SubscribingInfo);
+export default SubscribingInfo;
