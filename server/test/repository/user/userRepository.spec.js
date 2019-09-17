@@ -22,7 +22,7 @@ before((done) => {
     })
     .then(() => {
       console.log('userRepository.spec.js ,mongodb-memory-server running');
-      userRepository.createUser(UserMock)
+      userRepository.saveOne(UserMock)
         .then(() => done());
     });
 });
