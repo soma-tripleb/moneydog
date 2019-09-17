@@ -35,7 +35,6 @@ after(async () => {
 
 describe('#UserRepository Test', () => {
   beforeEach((done) => {
-    console.log('before each run');
     userRepository.deleteAllUser()
       .then(() => {
         userRepository.createUser(UserMock)
