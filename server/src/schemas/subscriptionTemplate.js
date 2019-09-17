@@ -12,7 +12,6 @@ const membershipSchema = mongoose.Schema(
 
 const SubscriptionTemplateSchema = mongoose.Schema(
   {
-    seq: { type: Number },
     name: { type: String, required: true },
     thumbnail: { type: String, required: true },
     membership: membershipSchema,
@@ -22,6 +21,4 @@ const SubscriptionTemplateSchema = mongoose.Schema(
   }
 );
 
-const SubscriptionTemplate = mongoose.model('SubscriptionTemplate', SubscriptionTemplateSchema);
-
-export default SubscriptionTemplate;
+export default mongoose.model('SubscriptionTemplate', SubscriptionTemplateSchema);
