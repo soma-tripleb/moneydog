@@ -40,12 +40,6 @@ const saveOne = async (user) => {
     });
 };
 
-const findSubscriptionByUserEmail = (email) => {
-  return User.findOne({email: email})
-    .then((user) => user.subscription )
-    .catch((err) => err);
-};
-
 /**
  *
  * @param {*} email
@@ -71,5 +65,4 @@ export default {
   saveOne,
   deleteOne,
   deleteAllUser,
-  findSubscriptionByUserEmail,
 };
