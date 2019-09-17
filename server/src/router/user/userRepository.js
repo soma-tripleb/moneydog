@@ -31,7 +31,7 @@ const saveOne = async (user) => {
     .then((result) => { return result; })
     .catch((err) => { throw err; });
 
-  return User.find({ nickname: createResult.nickname })
+  return await User.find({ nickname: createResult.nickname })
     .then((result) => {
       return { status: 201, success: true, message: result };
     })

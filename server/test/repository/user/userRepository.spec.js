@@ -1,46 +1,29 @@
+import {mongoConnect, mongoDisConnect} from '../../../src/dbConfig/mongoDB';
+
 require('dotenv').config();
 import 'babel-polyfill';
 
-import UserMock from '../mock/userMock';
-import mongoose from 'mongoose';
+import UserMock from '../../mock/userMock';
 import {expect} from 'chai';
-import { MongoMemoryServer} from 'mongodb-memory-server';
-import userRepository from '../../src/router/user/userRepository';
-
-let mongoServer;
-
-before((done) => {
-  mongoServer = new MongoMemoryServer();
-  mongoServer
-    .getConnectionString()
-    .then((mongoUri) => {
-      return mongoose.connect(mongoUri, (err) => {
-        if (err) {
-          done(err);
-        }
-      });
-    })
-    .then(() => {
-      console.log('mongodb-memory-server running');
-      userRepository.createUser(UserMock)
-        .then(() => done());
-    });
-});
-
-after(async () => {
-  await mongoose.disconnect();
-  await mongoServer.stop();
-  console.log('server stoped');
-});
+import userRepository from '../../../src/router/user/userRepository';
 
 describe('#UserRepository Test', () => {
-  beforeEach((done) => {
-    userRepository.deleteAllUser()
-      .then(() => {
-        userRepository.createUser(UserMock)
-          .then(() => done());
-      });
+  before(() => {
+    mongoConnect();
   });
+
+  after(() => {
+    mongoDisConnect();
+  });
+
+  // beforeEach((done) => {
+  //   userRepository.deleteAllUser()
+  //     .then(() => {
+  //       userRepository.createUser(UserMock)
+  //         .then(() => done());
+  //     });
+  // });
+
   it('#create', async () => {
     const createUser = {
       email: 'jimmy@naver.com',
@@ -55,10 +38,11 @@ describe('#UserRepository Test', () => {
         pricePlan: {
           title: 'premium',
           price: 14000,
+          period: '1',
         },
       },
     };
-    const user = await userRepository.createUser(createUser);
+    const user = await userRepository.saveOne(createUser);
     expect(user.email).to.equal('jimmy@naver.com');
     expect(user.password).to.equal('1234');
     const subscription = user.subscription;
