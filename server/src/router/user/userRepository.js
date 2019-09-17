@@ -70,8 +70,6 @@ export default {
   findOne,
   saveOne,
   deleteOne,
-  createUser,
-  getUserByEmail,
   deleteAllUser,
   findSubscriptionByUserEmail,
 };
