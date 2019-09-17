@@ -56,6 +56,21 @@ app.use(authCheck);
 app.use('/users', userRouter);
 app.use('/subs-tmpl', subsTmplRouter);
 
+// error logger
+
+app.use(expressWinston.errorLogger({
+  transports: [
+    new winston.transports.Console({
+      json: true,
+      colorize: true,
+    }),
+    new winston.transports.File({
+      filename: 'error.log',
+      dirname: './src/logs',
+      level: 'error',
+    }),
+  ],
+}));
 
 // error handler
 app.use(function(err, req, res, next) {
