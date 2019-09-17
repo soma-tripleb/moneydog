@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import autoInceement from 'mongoose-auto-increment';
+import autoIncrement from 'mongoose-auto-increment';
 import {conn} from '../configs/mongoDB';
 
 const pricePlanSchema = new mongoose.Schema(
@@ -37,8 +37,8 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-autoInceement.initialize(conn);
-userSchema.plugin(autoInceement.plugin, {
+autoIncrement.initialize(conn);
+userSchema.plugin(autoIncrement.plugin, {
   model: 'User',
   field: 'seq',
   startAt: 1,

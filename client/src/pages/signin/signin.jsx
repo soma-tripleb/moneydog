@@ -6,11 +6,17 @@ import * as actions from '../../actions/auth';
 import './signin.css';
 import * as service from '../signin/signin.ajax';
 
+import Cookies from 'js-cookie';
+
 class Signin extends Component {
-  state = {
-    email: '',
-    password: '',
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
 
   signInBtnClicked = async (e) => {
     e.preventDefault();
@@ -25,6 +31,8 @@ class Signin extends Component {
     } else if (result.status === 400) {
       alert(result.data.message);
     }
+
+    Cookies.set('auth', this.props.auth);
   };
 
   onChangeEmail = (e) => {

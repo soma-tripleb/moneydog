@@ -13,9 +13,12 @@ const conn = mongoose.createConnection(MONGO_URI);
 const mongoConnect = () => {
   mongoose.set('useFindAndModify', false);
   mongoose.set('useNewUrlParser', true);
+  console.log('node env : ', process.env.NODE_ENV);
   if (process.env.NODE_ENV === 'test') {
+    console.log('테스트 디비');
     // test환경에 대한 mongo-memory-server코드를 차후 작성예정
   } else {
+    console.log('일반 디비');
     mongoose.connect(MONGO_URI)
       .then(() => console.log('Connected mongo server'))
       .catch((e) => {
