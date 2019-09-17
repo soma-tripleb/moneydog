@@ -1,4 +1,5 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
+import Cookies from 'js-cookie';
 
 import * as service from './subscribingInfo.ajax';
 
@@ -8,12 +9,13 @@ class SubscribingInfo extends Component {
   constructor(props) {
     super(props);
 
-    this.getUserSubsList();
-
     this.state = {
       userSubsList: [],
       userInputList: [],
+      userToken: Cookies.getJSON('auth').status.JWT || 'No Token',
     };
+
+    this.getUserSubsList();
   }
 
   getUserSubsList = async () => {

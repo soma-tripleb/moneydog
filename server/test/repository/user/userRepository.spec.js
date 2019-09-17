@@ -1,4 +1,4 @@
-import {mongoConnect, mongoDisConnect} from '../../../src/dbConfig/mongoDB';
+import {mongoConnect, mongoDisConnect} from '../../../src/configs/mongoDB';
 
 require('dotenv').config();
 import 'babel-polyfill';
@@ -15,14 +15,6 @@ describe('#UserRepository Test', () => {
   after(() => {
     mongoDisConnect();
   });
-
-  // beforeEach((done) => {
-  //   userRepository.deleteAllUser()
-  //     .then(() => {
-  //       userRepository.createUser(UserMock)
-  //         .then(() => done());
-  //     });
-  // });
 
   it('#create', async () => {
     const createUser = {
@@ -50,17 +42,19 @@ describe('#UserRepository Test', () => {
   });
 
   it('#read user', async () => {
-    const user = await userRepository.getUserByEmail('test@test.com');
+    const user = await userRepository.findOne('test@test.com');
     expect(user.email).to.equal('test@test.com');
     expect(user.password).to.equal('1234');
     const subscription = user.subscription;
     expect(subscription.name).to.equal('test-title');
   });
+
   it('#delete user', async () => {
-    await userRepository.deleteUserByEmail('test@test.com');
+    await userRepository.deleteOne('test@test.com');
     const user = await userRepository.getUserByEmail('test@test.com');
     expect(user).be.equal(null);
   });
+
   it('#find all', async () => {
     const createUser = {
       email: 'jimmy@naver.com',
@@ -78,12 +72,5 @@ describe('#UserRepository Test', () => {
         },
       },
     };
-    await userRepository.createUser(createUser);
-    const users = await userRepository.getUserList();
-    expect(users[1].email).to.equal('jimmy@naver.com');
-    expect(users[1].password).to.equal('1234');
-    const subscription = users[1].subscription;
-    expect(subscription.name).to.equal('netflix');
-    expect(users.length).be.equal(2);
   });
 });
