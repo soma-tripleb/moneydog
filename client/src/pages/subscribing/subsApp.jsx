@@ -14,15 +14,11 @@ class SubsApp extends Component {
     const {subsAppInfo} = this.props;
 
     if (subsAppInfo.label === '-') {
-      this.props.onDelete(subsAppInfo.number, subsAppInfo.logo, subsAppInfo.name);
+      this.props.onDelete(subsAppInfo.seq, subsAppInfo.logo, subsAppInfo.name);
     } else {
-      this.props.onInsert(subsAppInfo.number, subsAppInfo.logo, subsAppInfo.name);
+      this.props.onInsert(subsAppInfo.seq, subsAppInfo.logo, subsAppInfo.name);
     }
   };
-
-  handlePopup = () => {
-    this.props.onPopup(this.props.subsAppInfo);
-  }
 
   render() {
     const {subsAppInfo} = this.props;
@@ -32,15 +28,15 @@ class SubsApp extends Component {
         <div className="container w-100 p-3" id="inner-element">
           <div className="row">
             <div className="col">
-              <button onClick={this.handleClick.bind(this)}>
-                {subsAppInfo.label}
-              </button>
-            </div>
-            <div className="col">
               <img className="logo-img" src={subsAppInfo.logo} alt="x" style={{height: '5vh', borderRadius: '5px'}} />
             </div>
             <div className="col">
               {subsAppInfo.name}
+            </div>
+            <div className="col">
+              <button onClick={this.handleClick}>
+                {subsAppInfo.label}
+              </button>
             </div>
           </div>
         </div>
