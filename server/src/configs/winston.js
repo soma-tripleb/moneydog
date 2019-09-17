@@ -1,5 +1,7 @@
 import fs from 'fs';
 import winston from 'winston';
+const { createLogger, format } = require('winston');
+const { combine, timestamp, label, printf } = format;
 const logDir = __dirname + '/../logs';
 
 if (!fs.existsSync(logDir)) {
@@ -7,7 +9,7 @@ if (!fs.existsSync(logDir)) {
 }
 
 const myFormat = printf(({ level, message, label, timestamp }) => {
-  return `${timestamp} [${label}] ${level}: ${message}`;
+  return `[${timestamp}] [${label}] ${level} ${message}`;
 });
 
 const infoTransport = new winston.transports.File({
@@ -22,12 +24,13 @@ const errorTransport = new winston.transports.File({
   level: 'error',
 });
 
-const logger = winston.createLogger({
+const logger = createLogger({
   format: combine(
     label({label: 'jimmy winston test'}),
-    timestamp(),
-    prettyPrint(),
-    myFormat
+    format.timestamp({
+      format: 'YYYY-MM-DD HH:mm:ss',
+    }),
+    myFormat,
   ),
   transports: [infoTransport, errorTransport],
 });
