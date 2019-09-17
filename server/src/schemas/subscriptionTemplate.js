@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
+import {conn} from '../dbConfig/mongoDB';
 
 const membershipSchema = new mongoose.Schema(
   {
@@ -23,6 +24,7 @@ const SubscriptionTemplateSchema = new mongoose.Schema(
   }
 );
 
+autoIncrement.initialize(conn);
 SubscriptionTemplateSchema.plugin(autoIncrement.plugin, {
   model: 'SubscriptionTemplate',
   field: 'seq',
