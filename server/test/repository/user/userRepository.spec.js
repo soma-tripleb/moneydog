@@ -3,7 +3,6 @@ import {mongoConnect, mongoDisConnect} from '../../../src/configs/mongoDB';
 require('dotenv').config();
 import 'babel-polyfill';
 
-import UserMock from '../../mock/userMock';
 import {expect} from 'chai';
 import userRepository from '../../../src/router/user/userRepository';
 
@@ -58,22 +57,22 @@ describe('#UserRepository Test', () => {
     expect(user).be.equal(null);
   });
 
-  it('#find all', async () => {
-    const createUser = {
-      email: 'jimmy@naver.com',
-      password: '1234',
-      nickname: 'jimmy',
-      salt: 111,
-      role: 'user',
-      subscription: {
-        name: 'netflix',
-        price: 14000,
-        channel: 'ios',
-        pricePlan: {
-          title: 'premium',
-          price: 14000,
-        },
-      },
-    };
-  });
+  // it('#find all', async () => {
+  //   const createUser = {
+  //     email: 'jimmy@naver.com',
+  //     password: '1234',
+  //     nickname: 'jimmy',
+  //     salt: 111,
+  //     role: 'user',
+  //     subscription: {
+  //       name: 'netflix',
+  //       price: 14000,
+  //       channel: 'ios',
+  //       pricePlan: {
+  //         title: 'premium',
+  //         price: 14000,
+  //       },
+  //     },
+  //   };
+  // });
 });
