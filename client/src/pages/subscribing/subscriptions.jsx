@@ -35,12 +35,19 @@ class Subscriptions extends Component {
   };
 
   // staticSubscribeArr 에서 SubscribingArr 로 옮기기
-  insertContact = (number, logo, name) => {
+  insertContact = (seq, logo, name) => {
+    let flag = false;
+    this.state.SubscribingArr.map((content) =>{
+      if (content.seq === seq) flag = true;
+    });
+
+    if (flag) return;
+
     const newState = update(this.state, {
       SubscribingArr: {
         $push: [
           {
-            'number': number,
+            'seq': seq,
             'logo': logo,
             'name': name,
           },
@@ -54,7 +61,7 @@ class Subscriptions extends Component {
   deleteContant = (number) => {
     const {SubscribingArr} = this.state;
     this.setState({
-      SubscribingArr: SubscribingArr.filter((info) => info.number !== number),
+      SubscribingArr: SubscribingArr.filter((info) => info.seq !== number),
     });
   };
 
@@ -70,7 +77,7 @@ class Subscriptions extends Component {
     const list = this.state.staticSubscribeArr.map(
       (content, i) => (<SubsApp key={i} onInsert={this.insertContact.bind(this)} subsAppInfo={
         {
-          number: i,
+          seq: content.seq,
           logo: content.logo,
           name: content.name,
           label: '+',
@@ -84,7 +91,7 @@ class Subscriptions extends Component {
     const list = this.state.SubscribingArr.map(
       (content, i) => (<SubsApp key={i} onDelete={this.deleteContant.bind(this)} subsAppInfo={
         {
-          number: i,
+          seq: content.seq,
           logo: content.logo,
           name: content.name,
           label: '-',

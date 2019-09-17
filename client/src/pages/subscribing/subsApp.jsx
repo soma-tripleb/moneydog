@@ -14,9 +14,9 @@ class SubsApp extends Component {
     const {subsAppInfo} = this.props;
 
     if (subsAppInfo.label === '-') {
-      this.props.onDelete(subsAppInfo.number, subsAppInfo.logo, subsAppInfo.name);
+      this.props.onDelete(subsAppInfo.seq, subsAppInfo.logo, subsAppInfo.name);
     } else {
-      this.props.onInsert(subsAppInfo.number, subsAppInfo.logo, subsAppInfo.name);
+      this.props.onInsert(subsAppInfo.seq, subsAppInfo.logo, subsAppInfo.name);
     }
   };
 
