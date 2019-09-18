@@ -1,6 +1,5 @@
 import fs from 'fs';
 import winston from 'winston';
-import app from '../../app';
 const expressWinston = require('express-winston');
 const { createLogger, format } = require('winston');
 const { combine, label, printf } = format;
