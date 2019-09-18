@@ -71,6 +71,7 @@ const customLogger = expressWinston.logger({
     }),
     winston.add(new winston.transports.MongoDB({
       db: conn.client.s.url,
+      level: 'info',
     }
     )),
   ],
