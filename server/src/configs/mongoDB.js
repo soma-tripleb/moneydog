@@ -14,9 +14,6 @@ const conn = mongoose.createConnection(MONGO_URI);
 const mongoConnect = () => {
   mongoose.set('useFindAndModify', false);
   mongoose.set('useNewUrlParser', true);
-
-  console.log('node env : ', process.env.NODE_ENV);
-
   if (process.env.NODE_ENV === 'test') {
     new MongoMemoryServer().getConnectionString()
       .then((url) =>{

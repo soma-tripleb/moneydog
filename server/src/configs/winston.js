@@ -1,7 +1,10 @@
 import fs from 'fs';
 import winston from 'winston';
+import {conn} from '../configs/mongoDB';
+const expressWinston = require('express-winston');
 const { createLogger, format } = require('winston');
 const { combine, label, printf } = format;
+require('winston-mongodb').MongoDB;
 const logDir = __dirname + '/../logs';
 
 if (!fs.existsSync(logDir)) {
@@ -9,10 +12,7 @@ if (!fs.existsSync(logDir)) {
 }
 
 const myFormat = printf((info) => {
-  if (info instanceof Error) {
-    return `${info.timestamp} [${info.label}] ${info.level}: ${info.message} ${info.stack}`;
-  }
-  return `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`;
+  return `${info.timestamp} [${process.env.NODE_ENV}] ${info.level}: ${info.message}`;
 });
 
 const infoTransport = new winston.transports.File({
@@ -49,4 +49,56 @@ const stream = {
   },
 };
 
-export { logger, stream };
+expressWinston.requestWhitelist.push('body');
+expressWinston.responseWhitelist.push('body');
+const customLogger = expressWinston.logger({
+  transports: [
+    new winston.transports.File({
+      filename: 'response.log',
+      dirname: './src/logs',
+      level: 'info',
+    }),
+    new winston.transports.File({
+      filename: 'warn.log',
+      dirname: './src/logs',
+      level: 'warn',
+    }),
+    new winston.transports.File({
+      filename: 'err.log',
+      dirname: './src/logs',
+      level: 'error',
+    }),
+    new winston.transports.MongoDB({
+      db: conn.client.s.url,
+      level: 'info',
+      capped: true,
+      metaKey: 'meta',
+    }),
+  ],
+  colorize: false,
+  expressFormat: true,
+  statusLevels: false,
+  level: (req, res) => {
+    let level;
+    if (res.statusCode >= 100) { level = 'info'; }
+    if (res.statusCode >= 400) { level = 'warn'; }
+    if (res.statusCode >= 500) { level = 'error'; }
+    return level;
+  },
+});
+
+const errorLogger = expressWinston.errorLogger({
+  transports: [
+    new winston.transports.File({
+      filename: 'error.log',
+      dirname: './src/logs',
+      level: 'error',
+    }),
+  ],
+  format: winston.format.combine(
+    winston.format.colorize(),
+    winston.format.json()
+  ),
+});
+
+export { logger, stream, customLogger, errorLogger };

@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
       res.send(result);
     })
     .catch((e) => {
+      console.log(`/users에서 에러`);
       res.send(e);
     });
 });
@@ -19,6 +20,7 @@ router.get('/:email', (req, res) => {
       res.send(result);
     })
     .catch((err) => {
+      console.log(`/users/:email에서 에러 발생`);
       res.send(err);
     });
 });
