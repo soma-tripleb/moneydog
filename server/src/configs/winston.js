@@ -1,5 +1,6 @@
 import fs from 'fs';
 import winston from 'winston';
+const expressWinston = require('express-winston');
 const { createLogger, format } = require('winston');
 const { combine, label, printf } = format;
 const logDir = __dirname + '/../logs';
@@ -50,4 +51,38 @@ const stream = {
   },
 };
 
-export { logger, stream };
+// log the whole request and response body
+expressWinston.requestWhitelist.push('body');
+expressWinston.responseWhitelist.push('body');
+const customLogger = expressWinston.logger({
+  transports: [
+    new winston.transports.File({
+      filename: 'response.log',
+      dirname: './src/logs',
+      level: 'info',
+    }),
+    new winston.transports.Console(),
+    new winston.transports.File({
+      filename: 'warn.log',
+      dirname: './src/logs',
+      level: 'warn',
+    }),
+    new winston.transports.File({
+      filename: 'err.log',
+      dirname: './src/logs',
+      level: 'error',
+    }),
+  ],
+  colorize: false,
+  expressFormat: true,
+  statusLevels: false,
+  level: (req, res) => {
+    let level;
+    if (res.statusCode >= 100) { level = 'info'; }
+    if (res.statusCode >= 400) { level = 'error'; }
+    if (res.statusCode >= 500) { level = 'error'; }
+    return level;
+  },
+});
+
+export { logger, stream, customLogger };
