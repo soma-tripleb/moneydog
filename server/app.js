@@ -5,12 +5,11 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const cors = require('cors');
-const expressWinston = require('express-winston');
 
 import authCheck from './src/security/jwtAuthentication';
 import * as Sentry from '@sentry/node';
 import {mongoConnect} from './src/configs/mongoDB';
-import {customLogger, stream} from './src/configs/winston';
+import {customLogger, errorLogger, stream} from './src/configs/winston';
 // Error tracking
 Sentry.init({dsn: 'https://566bd809b9a0464e8e690a199ab83396@sentry.io/1553162'});
 
@@ -40,20 +39,7 @@ app.use('/users', userRouter);
 app.use('/subs-tmpl', subsTmplRouter);
 
 // error logger
-app.use(expressWinston.errorLogger({
-  // showstack: true,
-  transports: [
-    new winston.transports.File({
-      filename: 'error.log',
-      dirname: './src/logs',
-      level: 'error',
-    }),
-  ],
-  format: winston.format.combine(
-    winston.format.colorize(),
-    winston.format.json()
-  ),
-}));
+app.use(errorLogger);
 
 // error handler
 app.use(function(err, req, res, next) {

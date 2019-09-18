@@ -1,5 +1,6 @@
 import fs from 'fs';
 import winston from 'winston';
+import app from '../../app';
 const expressWinston = require('express-winston');
 const { createLogger, format } = require('winston');
 const { combine, label, printf } = format;
@@ -85,4 +86,19 @@ const customLogger = expressWinston.logger({
   },
 });
 
-export { logger, stream, customLogger };
+const errorLogger = expressWinston.errorLogger({
+  // showstack: true,
+  transports: [
+    new winston.transports.File({
+      filename: 'error.log',
+      dirname: './src/logs',
+      level: 'error',
+    }),
+  ],
+  format: winston.format.combine(
+    winston.format.colorize(),
+    winston.format.json()
+  ),
+});
+
+export { logger, stream, customLogger, errorLogger };
