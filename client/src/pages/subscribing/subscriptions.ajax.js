@@ -1,13 +1,21 @@
 import axios from 'axios';
 require('dotenv').config();
 
-export function updateUserSubsInfo(inputSubsInfo) {
-  return axios.post(`${process.env.REACT_APP_NODE_API_URL}/subscriptions`, {inputSubsInfo});
-}
+const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
 
-export function getSubTmtl() {
-  return axios.get(`${process.env.REACT_APP_NODE_API_URL}/subs-tmpl`
+const getList = (token) => {
+  return axios.get(SERVER_URL + `/subs-tmpl`,
+    {
+      headers:
+      {
+        'x-access-token': token,
+      },
+    }
   ).catch((err) => {
     return err.response;
   });
-}
+};
+
+export default {
+  getList,
+};

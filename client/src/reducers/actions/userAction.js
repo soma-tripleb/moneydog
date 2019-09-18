@@ -1,17 +1,8 @@
 import axios from 'axios';
 
-import { GET_USERS, GET_USERS_SUBSTMPL_LIST } from './ActionTypes';
+import { GET_USERS, GET_USERS_SUBSTMPL_LIST } from '../actionType';
 
-export const getUserSubsTmplList = (list) => (dispatch) => {
-  dispatch(
-    {
-      type: GET_USERS_SUBSTMPL_LIST,
-      list,
-    }
-  );
-};
-
-export const login = (userInfo) => async (dispatch) => {
+const login = (userInfo) => async (dispatch) => {
   await axios
     .post(`${process.env.REACT_APP_NODE_API_URL}/users/signIn`,
       {
@@ -29,4 +20,18 @@ export const login = (userInfo) => async (dispatch) => {
     .catch((err) => {
       return err.response;
     });
+};
+
+const getUserSubsTmplList = (list) => (dispatch) => {
+  dispatch(
+    {
+      type: GET_USERS_SUBSTMPL_LIST,
+      list,
+    }
+  );
+};
+
+export default {
+  login,
+  getUserSubsTmplList,
 };

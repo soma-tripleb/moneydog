@@ -6,3 +6,8 @@
   margin: auto;
   height: auto;
 }
+
+.logo-img {
+  height: 5vh;
+  border-radius: 5px;
+}

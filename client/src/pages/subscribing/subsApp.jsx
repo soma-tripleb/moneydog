@@ -22,13 +22,13 @@ class SubsApp extends Component {
 
   render() {
     const {subsAppInfo} = this.props;
-
+    
     return (
       <>
         <div className="container w-100 p-3" id="inner-element">
           <div className="row">
             <div className="col">
-              <img className="logo-img" src={subsAppInfo.logo} alt="x" style={{height: '5vh', borderRadius: '5px'}} />
+              <img className="logo-img" src={`/` + subsAppInfo.logo} alt="x" />
             </div>
             <div className="col">
               {subsAppInfo.name}

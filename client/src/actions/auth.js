@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 import {
   AUTH_LOGIN,
@@ -54,6 +55,7 @@ export const sessionRequest = (jwt) => async (dispatch) => {
 export const logoutRequest = () =>(dispatch) => {
   dispatch(logout());
   localStorage.removeItem('auth');
+  Cookies.remove('auth');
 };
 
 export function login() {

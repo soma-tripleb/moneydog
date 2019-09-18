@@ -1,9 +1,17 @@
 import axios from 'axios';
 require('dotenv').config();
 
+const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
+
 // 'subscribing' 에서 선택한 구독 서비스 목록 가져오기
-const getUserSubsInfo = () => {
-  return axios.get(`${process.env.REACT_APP_NODE_API_URL}/subs-tmpl`);
+const getUserSubsInfo = (token) => {
+  console.log(token);
+  return axios.get(`${process.env.REACT_APP_NODE_API_URL}/`, {
+    headers:
+    {
+      'x-access-token': token,
+    },
+  });
 };
 
 /*
