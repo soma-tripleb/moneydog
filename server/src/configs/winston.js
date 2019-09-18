@@ -11,11 +11,7 @@ if (!fs.existsSync(logDir)) {
 }
 
 const myFormat = printf((info) => {
-  // console.log(JSON.stringify(info));
-  if (info instanceof Error) {
-    return `error 일때 ${info.timestamp} [${info.label}] ${info.level}: ${info.message} ${info.stack}`;
-  }
-  return `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`;
+  return `${info.timestamp} [${process.env.NODE_ENV}] ${info.level}: ${info.message}`;
 });
 
 const infoTransport = new winston.transports.File({
