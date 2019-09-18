@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 import mongoose from 'mongoose';
+const { MongoMemoryServer } = require('mongodb-memory-server');
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -13,12 +14,19 @@ const conn = mongoose.createConnection(MONGO_URI);
 const mongoConnect = () => {
   mongoose.set('useFindAndModify', false);
   mongoose.set('useNewUrlParser', true);
+
   console.log('node env : ', process.env.NODE_ENV);
+
   if (process.env.NODE_ENV === 'test') {
-    console.log('테스트 디비');
-    // test환경에 대한 mongo-memory-server코드를 차후 작성예정
+    new MongoMemoryServer().getConnectionString()
+      .then((url) =>{
+        return mongoose.connect(url);
+      })
+      .then(console.log('Connected Memory mongo server'))
+      .catch((e)=>{
+        console.error(e);
+      });
   } else {
-    console.log('일반 디비');
     mongoose.connect(MONGO_URI)
       .then(() => console.log('Connected mongo server'))
       .catch((e) => {
