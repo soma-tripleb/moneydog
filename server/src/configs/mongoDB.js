@@ -14,6 +14,7 @@ const mongoConnect = () => {
   mongoose.set('useFindAndModify', false);
   mongoose.set('useNewUrlParser', true);
   console.log('node env : ', process.env.NODE_ENV);
+  console.log(conn.client.s.url);
   if (process.env.NODE_ENV === 'test') {
     console.log('테스트 디비');
     // test환경에 대한 mongo-memory-server코드를 차후 작성예정

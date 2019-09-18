@@ -1,8 +1,10 @@
 import fs from 'fs';
 import winston from 'winston';
+import {conn, mongoConnect} from '../configs/mongoDB';
 const expressWinston = require('express-winston');
 const { createLogger, format } = require('winston');
 const { combine, label, printf } = format;
+require('winston-mongodb').MongoDB;
 const logDir = __dirname + '/../logs';
 
 if (!fs.existsSync(logDir)) {
@@ -67,6 +69,10 @@ const customLogger = expressWinston.logger({
       dirname: './src/logs',
       level: 'error',
     }),
+    winston.add(new winston.transports.MongoDB({
+      db: conn.client.s.url,
+    }
+    )),
   ],
   colorize: false,
   expressFormat: true,
