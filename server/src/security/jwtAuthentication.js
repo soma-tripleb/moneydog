@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
+import {logger} from '../configs/winston';
 dotenv.config();
 
 const JSONWebToken = jwt;
@@ -7,7 +8,6 @@ const secretCode = `${process.env.JWT_SECRET}`;
 
 const JWTAuthentication = (req, res, next) => {
   const token = (req.header('x-access-token') || req.query.token);
-
   if (!token) {
     return res.status(403).json({
       status: 403,

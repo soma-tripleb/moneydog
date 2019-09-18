@@ -42,8 +42,19 @@ app.use(expressWinston.logger({
       dirname: './src/logs',
       level: 'info',
     }),
+    new winston.transports.Console(),
   ],
-  colorize: true,
+  colorize: false,
+  expressFormat: true,
+  statusLevels: false,
+  level: (req, res) => {
+    let level;
+    if (res.statusCode >= 100) { level = 'info'; }
+    if (res.statusCode >= 400) { level = 'warn'; }
+    if (res.statusCode >= 500) { level = 'error'; }
+    if (res.statusCode == 401 || res.statusCode == 403) { level = 'critical'; }
+    return level;
+  },
 }));
 
 
@@ -54,9 +65,8 @@ app.use('/users', userRouter);
 app.use('/subs-tmpl', subsTmplRouter);
 
 // error logger
-
 app.use(expressWinston.errorLogger({
-  showstack: true,
+  // showstack: true,
   transports: [
     new winston.transports.File({
       filename: 'error.log',

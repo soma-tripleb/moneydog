@@ -9,8 +9,9 @@ if (!fs.existsSync(logDir)) {
 }
 
 const myFormat = printf((info) => {
+  // console.log(JSON.stringify(info));
   if (info instanceof Error) {
-    return `${info.timestamp} [${info.label}] ${info.level}: ${info.message} ${info.stack}`;
+    return `error 일때 ${info.timestamp} [${info.label}] ${info.level}: ${info.message} ${info.stack}`;
   }
   return `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`;
 });
