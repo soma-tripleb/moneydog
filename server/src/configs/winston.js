@@ -52,7 +52,6 @@ const stream = {
   },
 };
 
-// log the whole request and response body
 expressWinston.requestWhitelist.push('body');
 expressWinston.responseWhitelist.push('body');
 const customLogger = expressWinston.logger({
@@ -80,14 +79,13 @@ const customLogger = expressWinston.logger({
   level: (req, res) => {
     let level;
     if (res.statusCode >= 100) { level = 'info'; }
-    if (res.statusCode >= 400) { level = 'error'; }
+    if (res.statusCode >= 400) { level = 'warn'; }
     if (res.statusCode >= 500) { level = 'error'; }
     return level;
   },
 });
 
 const errorLogger = expressWinston.errorLogger({
-  // showstack: true,
   transports: [
     new winston.transports.File({
       filename: 'error.log',
