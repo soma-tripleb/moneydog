@@ -1,6 +1,6 @@
 import fs from 'fs';
 import winston from 'winston';
-import {conn, mongoConnect} from '../configs/mongoDB';
+import {conn} from '../configs/mongoDB';
 const expressWinston = require('express-winston');
 const { createLogger, format } = require('winston');
 const { combine, label, printf } = format;
@@ -58,7 +58,6 @@ const customLogger = expressWinston.logger({
       dirname: './src/logs',
       level: 'info',
     }),
-    new winston.transports.Console(),
     new winston.transports.File({
       filename: 'warn.log',
       dirname: './src/logs',
@@ -69,11 +68,12 @@ const customLogger = expressWinston.logger({
       dirname: './src/logs',
       level: 'error',
     }),
-    winston.add(new winston.transports.MongoDB({
+    new winston.transports.MongoDB({
       db: conn.client.s.url,
       level: 'info',
-    }
-    )),
+      capped: true,
+      metaKey: 'meta',
+    }),
   ],
   colorize: false,
   expressFormat: true,
