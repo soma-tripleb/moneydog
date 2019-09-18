@@ -48,6 +48,11 @@ app.use(expressWinston.logger({
       dirname: './src/logs',
       level: 'warn',
     }),
+    new winston.transports.File({
+      filename: 'err.log',
+      dirname: './src/logs',
+      level: 'error',
+    }),
   ],
   colorize: false,
   expressFormat: true,
@@ -55,7 +60,7 @@ app.use(expressWinston.logger({
   level: (req, res) => {
     let level;
     if (res.statusCode >= 100) { level = 'info'; }
-    if (res.statusCode >= 400) { level = 'warn'; }
+    if (res.statusCode >= 400) { level = 'error'; }
     if (res.statusCode >= 500) { level = 'error'; }
     return level;
   },
