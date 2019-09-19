@@ -13,3 +13,7 @@ export function getUserServiceInfo(userID) {
 export function getUserByEmail(email) {
   return axios.get(`${process.env.REACT_APP_NODE_API_URL}/users/${email}`);
 }
+
+export function getSubscription(token) {
+  return axios.get(`${process.env.REACT_APP_NODE_API_URL}`);
+}

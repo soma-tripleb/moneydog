@@ -22,7 +22,7 @@ export const loginRequest = (email, password) => async (dispatch) => {
   return await axios
     .post(AJAX_URL, AJAX_DATA)
     .then((res) => {
-      dispatch(loginSuccess(res.data.token));
+      dispatch(loginSuccess(res.data.token, email));
       return res;
     })
     .catch((err) => {
@@ -68,10 +68,11 @@ export function logout() {
   };
 }
 
-export function loginSuccess(token) {
+export function loginSuccess(token, email) {
   return {
     type: AUTH_LOGIN_SUCCESS,
     token,
+    email,
   };
 }
 

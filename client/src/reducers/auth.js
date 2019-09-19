@@ -33,6 +33,7 @@ export default function authentication(state = initialsState, action) {
       status: {
         isLoggedIn: {$set: true},
         JWT: {$set: action.token},
+        currentUser: {$set: action.email},
       },
     });
   case types.AUTH_LOGIN_FAILURE:
