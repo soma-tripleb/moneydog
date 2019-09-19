@@ -11,6 +11,7 @@ import {Row, Layout} from 'antd';
 
 import {BrowserRouter} from 'react-router-dom';
 import Router from './router';
+import {PersistGate} from 'redux-persist/types/integration/react';
 
 import './root.css';
 
@@ -18,17 +19,17 @@ class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
-
-          <Row>
-            <Layout className="layout">
-              <Head/>
-              <Router/>
-              <Foot/>
-            </Layout>
-          </Row>
-
-        </BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <Row>
+              <Layout className="layout">
+                <Head/>
+                <Router/>
+                <Foot/>
+              </Layout>
+            </Row>
+          </BrowserRouter>
+        </PersistGate>
       </Provider>
     );
   }
