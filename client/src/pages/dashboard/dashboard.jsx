@@ -10,6 +10,8 @@ import * as service from './dashboard.ajax';
 
 import 'babel-polyfill';
 import './dashboard.css';
+import * as actions from '../../actions/auth';
+import {connect} from 'react-redux';
 
 class DashBoard extends Component {
   constructor(props) {
@@ -74,5 +76,14 @@ class DashBoard extends Component {
     );
   }
 }
+// Access Redux store
+const mapStateToProps = (state) => ({
+  token: state.auth.status.JWT,
+  email: state.auth.status.currentUser,
+});
 
-export default DashBoard;
+// get action
+const mapDispatchToProps = (dispatch) => {
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);
