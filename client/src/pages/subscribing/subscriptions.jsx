@@ -120,16 +120,17 @@ class Subscriptions extends Component {
             <div className="row">
               Step 1. 구독중인 서비스를 추가 하세요
             </div>
+
             <div className="row">
               <div className="col-sm">
-                {/* <p id="inner-container-title">&lt;  구독 서비스 앱들  &gt;</p>*/}
+
                 <div className="w-100 p-3" id="inner-container">
                   <p><u>Selecting App</u></p>
                   {this.makeStaticSubscribeApp()}
                 </div>
               </div>
               <div className="col-sm">
-                {/* <p id="inner-container-title">&lt;  구독 중인 앱들  &gt;</p>*/}
+
                 <div className="w-100 p-3" id="inner-container">
                   <p><u>Selected App</u></p>
                   {this.makeSubscribingApp()}
@@ -141,11 +142,9 @@ class Subscriptions extends Component {
           <div className="container submit-container">
             <div className="row">
               <div className="col-sm">
-                {/* <div className="circle">*/}
                 <form onSubmit={this.handleSubmit}>
                   <input type="submit" value="NEXT"/>
                 </form>
-                {/* </div>*/}
               </div>
             </div>
           </div>

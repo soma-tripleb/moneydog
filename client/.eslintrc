@@ -20,7 +20,8 @@
     "no-invalid-this": "off",
     "no-unused-vars": "off",
     "brace-style": "off",
-    "block-spacing": "off"
+    "block-spacing": "off",
+    "comma-dangle": "off"
   },
   "parserOptions": {
     "ecmaVersion": 2018
