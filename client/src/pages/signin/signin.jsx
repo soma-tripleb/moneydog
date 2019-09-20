@@ -32,8 +32,8 @@ class Signin extends Component {
       alert(result.data.message);
     }
     const token = this.props.auth.status.JWT;
-    console.log(`decode value : ${JSON.stringify(jwtDecode(token).param)}`);
-    console.log(`token is ${token}`);
+    const email = jwtDecode(token).param;
+    console.log(`get email : ${email}`);
     Cookies.set('auth', this.props.auth);
   };
 

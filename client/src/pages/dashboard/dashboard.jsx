@@ -5,6 +5,7 @@ import Categories from './Categories';
 import TotalAmount from './TotalAmount';
 import List from './List';
 import moment from 'moment';
+import jwtDecode from 'jwt-decode';
 
 import * as service from './dashboard.ajax';
 
@@ -31,7 +32,9 @@ class DashBoard extends Component {
 
   // Component Life Cycle
   componentDidMount() {
-    this.fetchUserInfo('jimmyjaeyeon@gmail.com');
+    const loggedEmail = jwtDecode(this.props.token).param;
+    console.log(`login email : ${loggedEmail}`);
+    this.fetchUserInfo(loggedEmail);
   }
 
   fetchUserInfo = async (email) => {
@@ -79,11 +82,12 @@ class DashBoard extends Component {
 // Access Redux store
 const mapStateToProps = (state) => ({
   token: state.auth.status.JWT,
-  email: state.auth.status.currentUser,
+  // token: state.auth.status.JWT,
 });
 
 // get action
 const mapDispatchToProps = (dispatch) => {
+  return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);
