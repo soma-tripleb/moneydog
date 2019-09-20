@@ -32,9 +32,8 @@ class Signin extends Component {
       alert(result.data.message);
     }
     const token = this.props.auth.status.JWT;
-    console.log(`decode value : ${jwtDecode(token)}`);
+    console.log(`decode value : ${JSON.stringify(jwtDecode(token).param)}`);
     console.log(`token is ${token}`);
-    console.log(`status is ${this.props.auth.status}`);
     Cookies.set('auth', this.props.auth);
   };
 
