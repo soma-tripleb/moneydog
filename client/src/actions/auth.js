@@ -4,7 +4,7 @@ import {
   AUTH_LOGIN,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAILURE,
-  AUTH_LOGOUT, SAVE_CURRENT_USER,
+  AUTH_LOGOUT,
 } from './ActionTypes';
 
 
@@ -79,12 +79,5 @@ export function loginSuccess(token, email) {
 export function loginFailure() {
   return {
     type: AUTH_LOGIN_FAILURE,
-  };
-}
-
-export function saveCurrentUser() {
-  return {
-    type: SAVE_CURRENT_USER,
-    email,
   };
 }

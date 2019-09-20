@@ -12,27 +12,30 @@ const logger = createLogger();
 
 const middleware = [thunk, logger];
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  stateReconciler: hardSet,
-};
+// Normal redux
+const store = createStore(
+  rootReducer,
+  initialState,
+  composeWithDevTools(applyMiddleware(...middleware)),
+);
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-//
-// const store = createStore(
-//   rootReducer,
-//   initialState,
-//   composeWithDevTools(applyMiddleware(...middleware)),
-// );
-//
-// export default store;
+export default store;
 
+/*
+Redux-persist
+ */
+
+// const persistConfig = {
+//   key: 'root',
+//   storage,
+// };
+//
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
 // export default () => {
 //   const store = createStore(persistReducer, initialState, composeWithDevTools(applyMiddleware(...middleware)));
 //   const persistor = persistStore(store);
 //   return {store, persistor};
 // };
 
-export const store = createStore(persistedReducer, initialState, composeWithDevTools(applyMiddleware(...middleware)));
-export const persistor = persistStore(store);
+// export const store = createStore(persistedReducer, initialState, composeWithDevTools(applyMiddleware(...middleware)));
+// export const persistor = persistStore(store);

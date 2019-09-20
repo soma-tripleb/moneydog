@@ -20,7 +20,7 @@ class Signin extends Component {
 
   signInBtnClicked = async (e) => {
     e.preventDefault();
-
+    console.log(`sigin in state : ${this.state}`);
     const result = await this.props.loginRequest(this.state.email, this.state.password);
     if (result.status === 200) {
       localStorage.setItem('auth', JSON.stringify(this.props.auth));
