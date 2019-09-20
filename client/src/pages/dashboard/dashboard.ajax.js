@@ -10,10 +10,11 @@ export function getUserServiceInfo(userID) {
   });
 }
 
-export function getUserByEmail(email) {
-  return axios.get(`${process.env.REACT_APP_NODE_API_URL}/users/${email}`);
-}
-
-export function getSubscription(token) {
-  return axios.get(`${process.env.REACT_APP_NODE_API_URL}`);
+export function getUserByEmail(email, token) {
+  return axios.get(`${process.env.REACT_APP_NODE_API_URL}/users/${email}`, {
+    headers: {
+      // Request Header
+      'x-access-token': token,
+    },
+  });
 }
