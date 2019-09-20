@@ -1,8 +1,10 @@
 import express from 'express';
 import UserService from './userService';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
+// '/users'
 router.get('/', (req, res) => {
   UserService.getUserList()
     .then((result) => {
@@ -26,14 +28,24 @@ router.get('/:email', (req, res) => {
 });
 
 // body: Json Data
+// router.post('/', (req, res) => {
+//   UserService.createOne(req.body)
+//     .then((result) => {
+//       res.send(result);
+//     })
+//     .catch((err) => {
+//       res.send(err);
+//     });
+// });
+
 router.post('/', (req, res) => {
-  UserService.createOne(req.body)
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      res.send(err);
-    });
+  const body = req.body;
+  const token = req.header('x-access-token') || req.params.token;
+
+  const auth = jwt.decode(token);
+  const email = auth.param;
+
+  res.send({ status: 200, success: true, message: body});
 });
 
 router.delete('/email/:email', (req, res) => {

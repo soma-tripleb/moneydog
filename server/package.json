@@ -10,7 +10,9 @@
     "lint": "./node_modules/.bin/eslint --fix --ext .js src/ test/ app.js index.js;",
     "test-subs-repo": "./node_modules/mocha/bin/mocha --require babel-register ./test/repository/subsTmpl/subsTmplRepository.spec.js",
     "test-user-repo": "./node_modules/mocha/bin/mocha --require babel-register ./test/repository/user/userRepository.spec.js",
-    "test-user-serv": "./node_modules/mocha/bin/mocha --require babel-register ./test/service/user/userService.spec.js"
+    "test-user-serv": "./node_modules/mocha/bin/mocha --require babel-register ./test/service/user/userService.spec.js",
+    "test-user-valid": "./node_modules/mocha/bin/mocha --require babel-register ./test/service/user/userSubsInput.spec.js",
+    "test-user-subs": "./node_modules/mocha/bin/mocha --require babel-register ./test/repository/user/userSubsTmplRepository.spec.js"
   },
   "dependencies": {
     "@sentry/node": "^5.6.2",
