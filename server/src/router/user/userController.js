@@ -51,12 +51,10 @@ router.delete('/email/:email', (req, res) => {
 });
 
 router.get('/auth/check', (req, res, next) => {
-  console.log('users/auth 실행');
-  console.log(`param ${req.param}`);
-  const userEmail = jwtDecode(req.param.token).param;
-  console.log(`userEmail : ${userEmail}`);
-  const user = userService.getUser(userEmail);
-  user
+  const token = (req.header('x-access-token') || req.query.token);
+  const userEmail = jwtDecode(token).param;
+  console.log(`userEmail : ${JSON.stringify(userEmail)}`);
+  userService.getUser(userEmail)
     .then((result) => {
       res.send(result);
     })
