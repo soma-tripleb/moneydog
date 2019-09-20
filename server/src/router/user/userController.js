@@ -53,8 +53,7 @@ router.delete('/email/:email', (req, res) => {
 router.get('/auth/check', (req, res, next) => {
   const token = (req.header('x-access-token') || req.query.token);
   const userEmail = jwtDecode(token).param;
-  console.log(`userEmail : ${JSON.stringify(userEmail)}`);
-  userService.getUser(userEmail)
+  UserService.getUser(userEmail)
     .then((result) => {
       res.send(result);
     })
