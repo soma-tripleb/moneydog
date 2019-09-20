@@ -1,5 +1,6 @@
 import * as types from '../actions/ActionTypes';
 import update from 'react-addons-update';
+import {test} from '../actions/auth';
 
 const initialsState = {
   login: {

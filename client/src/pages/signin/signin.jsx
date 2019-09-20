@@ -22,7 +22,6 @@ class Signin extends Component {
     e.preventDefault();
 
     const result = await this.props.loginRequest(this.state.email, this.state.password);
-
     if (result.status === 200) {
       localStorage.setItem('auth', JSON.stringify(this.props.auth));
       this.props.history.push('/user/subscribing');

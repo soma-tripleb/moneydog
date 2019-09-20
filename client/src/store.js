@@ -5,6 +5,7 @@ import {createLogger} from 'redux-logger';
 import rootReducer from './reducers';
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 
 const initialState = {};
 const logger = createLogger();
@@ -14,6 +15,7 @@ const middleware = [thunk, logger];
 const persistConfig = {
   key: 'root',
   storage,
+  stateReconciler: hardSet,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -26,8 +28,11 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 //
 // export default store;
 
-export default () => {
-  const store = createStore(persistReducer, initialState, composeWithDevTools(applyMiddleware(...middleware)));
-  const persistor = persistStore(store);
-  return {store, persistor};
-};
+// export default () => {
+//   const store = createStore(persistReducer, initialState, composeWithDevTools(applyMiddleware(...middleware)));
+//   const persistor = persistStore(store);
+//   return {store, persistor};
+// };
+
+export const store = createStore(persistedReducer, initialState, composeWithDevTools(applyMiddleware(...middleware)));
+export const persistor = persistStore(store);

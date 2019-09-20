@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import {connect, Provider} from 'react-redux';
-import store from '../store';
+import {store, persistor} from '../store';
 
 import 'antd/dist/antd.less';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -11,7 +11,7 @@ import {Row, Layout} from 'antd';
 
 import {BrowserRouter} from 'react-router-dom';
 import Router from './router';
-import {PersistGate} from 'redux-persist/types/integration/react';
+import {PersistGate} from 'redux-persist/integration/react';
 
 import './root.css';
 
