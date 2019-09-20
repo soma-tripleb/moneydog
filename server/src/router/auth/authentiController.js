@@ -6,21 +6,10 @@ const router = express.Router();
 router.post('/signUp', async (req, res) => {
   const userInfo = req.body.userInfo || '';
 
-  if (userInfo === '') {
-    res.status(400).json({status: 400, success: false, message: 'userInfo 정보가 없습니다.'});
-    return;
-  }
-
-  if (!userInfo.hasOwnProperty('email')) {
-    res.status(400).json({status: 400, success: false, message: 'email key 가 없습니다.'});
-    return;
-  } else if (!userInfo.hasOwnProperty('password')) {
-    res.status(400).json({status: 400, success: false, message: 'password key 가 없습니다.'});
-    return;
-  } else if (!userInfo.hasOwnProperty('nickname')) {
-    res.status(400).json({status: 400, success: false, message: 'nickname key 가 없습니다.'});
-    return;
-  }
+  AuthService.checkParameter(res, userInfo);
+  AuthService.hasProperty(res,userInfo,'email');
+  AuthService.hasProperty(res,userInfo,'password');
+  AuthService.hasProperty(res,userInfo,'nickname');
 
   const result = await AuthService.register(userInfo);
 
@@ -30,18 +19,9 @@ router.post('/signUp', async (req, res) => {
 router.post('/signIn', async (req, res) => {
   const userInfo = req.body.userInfo || '';
 
-  if (userInfo === '') {
-    res.status(400).json({status: 400, success: false, message: 'userInfo 정보가 없습니다.'});
-    return;
-  }
-
-  if (!userInfo.hasOwnProperty('email')) {
-    res.status(400).json({status: 400, success: false, message: 'email key 가 없습니다.'});
-    return;
-  } else if (!userInfo.hasOwnProperty('password')) {
-    res.status(400).json({status: 400, success: false, message: 'password key 가 없습니다.'});
-    return;
-  }
+  AuthService.checkParameter(res, userInfo);
+  AuthService.hasProperty(res,userInfo,'email');
+  AuthService.hasProperty(res,userInfo,'password');
 
   const result = await AuthService.login(req.body.userInfo);
 
@@ -51,15 +31,8 @@ router.post('/signIn', async (req, res) => {
 router.post('/sessionCheck', async (req, res) => {
   const userInfo = req.body.userInfo || '';
 
-  if (userInfo === '') {
-    res.status(400).json({status: 400, success: false, message: 'userInfo 정보가 없습니다.'});
-    return;
-  }
-
-  if (!userInfo.hasOwnProperty('jwt')) {
-    res.status(400).json({status: 400, success: false, message: 'email key 가 없습니다.'});
-    return;
-  }
+  AuthService.checkParameter(res, userInfo);
+  AuthService.hasProperty(res,userInfo,'jwt');
 
   const result = await AuthService.sessionCheck(req.body.userInfo);
 
