@@ -7,6 +7,7 @@ import './signin.css';
 import * as service from '../signin/signin.ajax';
 
 import Cookies from 'js-cookie';
+import jwtDecode from 'jwt-decode';
 
 class Signin extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Signin extends Component {
 
   signInBtnClicked = async (e) => {
     e.preventDefault();
-    console.log(`sigin in state : ${this.state}`);
+    console.log(`sign in state : ${this.state}`);
     const result = await this.props.loginRequest(this.state.email, this.state.password);
     if (result.status === 200) {
       localStorage.setItem('auth', JSON.stringify(this.props.auth));
@@ -30,7 +31,10 @@ class Signin extends Component {
     } else if (result.status === 400) {
       alert(result.data.message);
     }
-
+    const token = this.props.auth.status.JWT;
+    console.log(`decode value : ${jwtDecode(token)}`);
+    console.log(`token is ${token}`);
+    console.log(`status is ${this.props.auth.status}`);
     Cookies.set('auth', this.props.auth);
   };
 
