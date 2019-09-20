@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Row, Col, Card} from 'react-bootstrap';
-import {Table} from 'antd';
+import {Row, Col, Card} from 'react-bootstrap';
 
 import './report.css';
 
@@ -50,55 +49,91 @@ class Report extends Component {
   render() {
     return (
       <>
-        <div className="report-content">
-          <Container className='report-container'>
-            <Row>
-              <Col sm={3}></Col>
-              <Col sm={6}>
-                <Card>
-                  <Card.Header>
-                    이번달 리포트
-                  </Card.Header>
-                  <Card>
-                    <Card.Body>
-                      <Card.Title>
-                        {this.state.month}월 결제 총액
-                      </Card.Title>
-                      <Card.Text>
-                        {this.state.currency}{this.state.total_pay}
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
+        <div className="container main-container">
+          <div className="row">
+            <div className="col-sm">
+              <div className="w-100 p-3" id="inner-container">
+                구독 리스트
+                <div className="container w-100 p-3" id="inner-element">
+                  <div className="row">
+                    <div className="col">
+                      {this.state.month}월 결제 총액
+                    </div>
+                    <div className="col">
+                      {this.state.currency}{this.state.total_pay}
+                    </div>
+                  </div>
+                </div>
+                <div className="container w-100 p-3" id="inner-element">
+                  <div className="row">
+                    <div className="col">
+                      {this.state.month}월 결제 총액
+                    </div>
+                    <div className="col">
+                      {this.state.currency}{this.state.total_pay}
+                    </div>
+                  </div>
+                </div>
+                <div className="container w-100 p-3" id="inner-element">
+                  <div className="row">
+                    <div className="col">
+                      {this.state.month}월 결제 총액
+                    </div>
+                    <div className="col">
+                      {this.state.currency}{this.state.total_pay}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-sm">
+              <div className="w-100 p-3" id="inner-container">
+                이번달 리포트
+                <Row>
+                  <Col>
+                    <Card>
+                      <Card.Header>
+                      이번달 리포트
+                      </Card.Header>
+                      <Card>
+                        <Card.Body>
+                          <Card.Title>
+                            {this.state.month}월 결제 총액
+                          </Card.Title>
+                          <Card.Text>
+                            {this.state.currency}{this.state.total_pay}
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                      <Card>
+                        <Card.Body>
+                          <Card.Title>
+                          Most used Service
+                          </Card.Title>
+                          <Card.Text>
+                            {this.state.most_used}
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                      <Card>
+                        <Card.Body>
+                          <Card.Title>
+                          Most unsed Service
+                          </Card.Title>
+                          <Card.Text>
+                            {this.state.most_unused}
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                      <Card>
+                      </Card>
+                    </Card>
+                  </Col>
+                </Row>
 
-                  <Card>
-                    <Card.Body>
-                      <Card.Title>
-                        Most used Service
-                      </Card.Title>
-                      <Card.Text>
-                        {this.state.most_used}
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-
-                  <Card>
-                    <Card.Body>
-                      <Card.Title>
-                        Most unsed Service
-                      </Card.Title>
-                      <Card.Text>
-                        {this.state.most_unused}
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                  <Card>
-                    <Table columns={this.state.columns} dataSource={this.state.subscriptions} bordered />
-                  </Card>
-                </Card>
-              </Col>
-              <Col sm={3}></Col>
-            </Row>
-          </Container>
+              </div>
+            </div>
+          </div>
         </div>
       </>
     );

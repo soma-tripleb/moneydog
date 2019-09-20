@@ -43,10 +43,10 @@ class Head extends Component {
 
         <ul className="nav justify-content-center" style={{fontFamily: 'GOTHAN-XLIGHT'}}>
           <li className="nav-item">
-            <Link to="/subscribing" className="nav-link">Subscribing</Link>
+            <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
           </li>
           <li className="nav-item">
-            <Link to="/subscribing-Info" className="nav-link">Subscribing Info</Link>
+            <Link to="/user/subscribing-Info" className="nav-link">Subscribing Info</Link>
           </li>
           <li className="nav-item">
             <Link to="/dashboard" className="nav-link">Dashboard</Link>
