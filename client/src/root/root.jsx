@@ -16,10 +16,14 @@ import {PersistGate} from 'redux-persist/integration/react';
 import './root.css';
 
 class Root extends Component {
+  componentWillMount() {
+
+  }
+
   render() {
     return (
       <Provider store={store}>
-        {/*<PersistGate loading={null} persistor={persistor}>*/}
+        <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>
             <Row>
               <Layout className="layout">
@@ -29,7 +33,7 @@ class Root extends Component {
               </Layout>
             </Row>
           </BrowserRouter>
-        {/*</PersistGate>*/}
+        </PersistGate>
       </Provider>
     );
   }
