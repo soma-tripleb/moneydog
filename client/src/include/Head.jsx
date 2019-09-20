@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../actions/auth';
 
+import './header.css';
+
 class Head extends Component {
   logout = ()=>{
     this.props.logoutRequest();
@@ -14,6 +16,18 @@ class Head extends Component {
       return (
           <>
             <li className="nav-item">
+              <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/user/subscribing-Info" className="nav-link">Subscribing Info</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/dashboard" className="nav-link">Dashboard</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/report" className="nav-link">Report</Link>
+            </li>
+            <li className="nav-item logout">
               <a onClick={this.logout} className="nav-link">Logout</a>
             </li>
           </>
@@ -42,21 +56,6 @@ class Head extends Component {
         </ul>
 
         <ul className="nav justify-content-center" style={{fontFamily: 'GOTHAN-XLIGHT'}}>
-          <li className="nav-item">
-            <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/user/subscribing-Info" className="nav-link">Subscribing Info</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/dashboard" className="nav-link">Dashboard</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/report" className="nav-link">Report</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/recommend" className="nav-link">Recommend</Link>
-          </li>
 
           {this.isLogined()}
 
