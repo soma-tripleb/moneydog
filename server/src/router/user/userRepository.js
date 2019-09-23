@@ -40,11 +40,6 @@ const saveOne = async (user) => {
     });
 };
 
-/**
- *
- * @param {*} email
- * @return {result} true - { n: 1, ok: 1, deletedCount: 1 }
- */
 const deleteOne = (email) => {
   return User.deleteOne({ email: email })
     .then((result) => {
@@ -59,10 +54,21 @@ const deleteAllUser = () => {
   return User.deleteMany({});
 };
 
+const updateMany = (email, subsInfoList) => {
+  return User.updateMany({ email: email }, { subscription: subsInfoList })
+    .then((result) => {
+      return { status: 201, success: true, message: result };
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
 export default {
   findAll,
   findOne,
   saveOne,
   deleteOne,
   deleteAllUser,
+  updateMany,
 };
