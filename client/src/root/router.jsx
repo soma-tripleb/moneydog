@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import PrivateRouter from './privateRouter';
 import { Home, Report, Dashboard, Info, SignUp, SignIn, Subscribing, SubscribingInfo, Recommend } from '../pages';
-import AuthActions from '../reducers/actions/authAction';
+import AuthActions from '../redux/actions/authAction';
 import { connect as ReduxConn } from 'react-redux';
 
 class Router extends Component {

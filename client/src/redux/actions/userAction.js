@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-import { GET_SUBS, GET_USERS_SUBSTMPL_LIST } from './ActionTypes';
+import {GET_SUBS, GET_USERS_SUBSTMPL_LIST } from './actionType';
+import Cookies from 'js-cookie';
 
-export const getUserSubsTmplList = (list) => (dispatch) => {
+const getUserSubsTmplList = (list) => (dispatch) => {
   dispatch(
     {
       type: GET_USERS_SUBSTMPL_LIST,
@@ -11,11 +12,13 @@ export const getUserSubsTmplList = (list) => (dispatch) => {
   );
 };
 
-// TODO: token 값 cookie 에 있는거 꺼내주는거로 바꿔줘야하는데
 export const getSubsInfo = () => async (dispatch) => {
+  const auth = Cookies.get('auth');
+
+  console.log('auth ', auth);
   const config = {
     headers: {
-      'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXJhbSI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE1NjkyMTY4OTksImV4cCI6MTU2OTIxODY5OX0.C1irv2odCztIaKZ58tvelZTHp4783S9CqTD1xbX3CHo',
+      'x-access-token': '',
     },
   };
   await axios
@@ -31,4 +34,9 @@ export const getSubsInfo = () => async (dispatch) => {
     .catch((err) => {
       return err.response;
     });
+};
+
+export default {
+  getUserSubsTmplList,
+  getSubsInfo
 };

@@ -20,7 +20,7 @@ const subscriptionSchema = new mongoose.Schema(
     seq: { type: Number },
     name: { type: String, unique: true },
     price: { type: Number },
-    paymentDate: { type: Date },
+    paymentDate: { type: Number },
     channel: { type: String },
     pricePlan: pricePlanSchema,
   },

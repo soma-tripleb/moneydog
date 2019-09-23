@@ -1,5 +1,5 @@
 //  user
-export const GET_USERS = 'GET_USERS';
+export const GET_SUBS = 'GET_SUBS';
 export const GET_USERS_SUBSTMPL_LIST = 'GET_USERS_SUBSTMPL_LIST';
 
 // auth

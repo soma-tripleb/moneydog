@@ -4,7 +4,7 @@ require('dotenv').config();
 const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
 
 const getList = (token) => {
-  return axios.get(SERVER_URL + `/subs-tmpl`,
+  return axios.get( `${SERVER_URL}/subs-tmpl`,
     {
       headers:
       {

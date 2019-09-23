@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { connect as ReduxConn } from 'react-redux';
-import AuthActions from '../reducers/actions/authAction';
+import AuthActions from '../redux/actions/authAction';
 
 import './header.css';
 

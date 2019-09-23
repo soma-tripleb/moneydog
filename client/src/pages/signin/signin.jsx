@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {connect as ReduxConn} from 'react-redux';
 import {Link} from 'react-router-dom';
-import * as authActions from '../../actions/auth';
-import * as userActions from '../../actions/users';
+
+import authActions from '../../redux/actions/authAction';
+import userActions from '../../redux/actions/userAction';
 
 import './signin.css';
 import * as service from '../signin/signin.ajax';
@@ -22,7 +23,7 @@ class Signin extends Component {
   signInBtnClicked = async (e) => {
     e.preventDefault();
 
-    const result = await this.props.REDUX_LOGIN_REQUEST(this.state.email, this.state.password);
+    const result = await this.props.loginRequest(this.state.email, this.state.password);
 
     if (result.status === 200) {
       localStorage.setItem('auth', JSON.stringify(this.props.auth));
@@ -104,7 +105,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    REDUX_LOGIN_REQUEST: async (email, password) => {
+    loginRequest: async (email, password) => {
       return await dispatch(authActions.loginRequest(email, password));
     },
     getSubsInfo: () => {
