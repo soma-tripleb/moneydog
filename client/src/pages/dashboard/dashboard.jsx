@@ -16,7 +16,11 @@ class DashBoard extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.state= {user: null, selectedValue: null};
+    this.state= {
+      user: null,
+      selectedValue: null,
+      staticSubscribeArr: []
+    };
   }
 
   handleChange = (e) => {

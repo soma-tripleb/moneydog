@@ -34,7 +34,6 @@ class Subscriptions extends Component {
     const userToken = Cookies.getJSON('auth').status.JWT;
 
     const response = await SubsTmplService.getList(userToken);
-
     this.setState({
       staticSubscribeArr: response.data.message,
     });
@@ -46,7 +45,7 @@ class Subscriptions extends Component {
     );
   };
 
-  // staticSubscribeArr 에서 SubscribingArr 로 옮기기
+  // staticSubscribeArr 에서 SubscribingArr 로 옮기기, /subscribing Selecting App에서 Selected App으로 선택하기
   insertContact = (seq, logo, name) => {
     let flag = false;
     this.state.SubscribingArr.map((content) =>{
