@@ -1,9 +1,10 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
-import users from './users';
-import auth from './auth';
+import auth from './domain/auth';
+import users from './domain/users';
 
-export default combineReducers({
-  users, auth,
-});
-
+export default combineReducers(
+  {
+    auth, users,
+  }
+);

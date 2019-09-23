@@ -22,9 +22,26 @@ const deleteOne = (name) => {
   return UserRepository.deleteOne(name);
 };
 
+const insertSubsInfo = async (email, subsInfoList) => {
+  const updateResult = () => {
+    return UserRepository.updateMany(email, subsInfoList);
+  };
+
+  return await updateResult()
+    .then((result) => {
+      if (result.success === true) {
+        return UserRepository.getUser(email);
+      };
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
 export default {
   getUserList,
   getUser,
   createOne,
   deleteOne,
+  insertSubsInfo,
 };

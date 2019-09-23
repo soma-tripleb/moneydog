@@ -3,8 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 
 import PrivateRouter from './privateRouter';
 import { Home, Report, Dashboard, Info, SignUp, SignIn, Subscribing, SubscribingInfo, Recommend } from '../pages';
-import * as actions from '../actions/auth';
-import { connect } from 'react-redux';
+import AuthActions from '../reducers/actions/authAction';
+import { connect as ReduxConn } from 'react-redux';
 
 class Router extends Component {
   initializeUserInfo = async () => {
@@ -14,7 +14,7 @@ class Router extends Component {
 
     const jsonJWT = JSON.parse(loggedInfo).status.JWT;
 
-    const responseToken = await this.props.sessionRequest(jsonJWT);
+    const responseToken = await this.props.REDUX_AUTH_SESSION_REQUEST(jsonJWT);
 
     if (responseToken.data === 200) {
       localStorage.setItem('auth', JSON.stringify(this.props.auth));
@@ -37,12 +37,12 @@ class Router extends Component {
             {/* user */}
             <Route path="/signup" component={SignUp} />
             <Route path="/signin" component={SignIn} />
-            <PrivateRouter path="/report" component={Report} />
-            <PrivateRouter path="/dashboard" component={Dashboard} />
+            <PrivateRouter path="/user/report" component={Report} />
+            <PrivateRouter path="/user/dashboard" component={Dashboard} />
             <PrivateRouter path="/info" component={Info} />
             <PrivateRouter path="/user/subscribing" component={Subscribing} />
             <PrivateRouter path="/user/subscribing-info" component={SubscribingInfo} />
-            <PrivateRouter path="/recommend" component={Recommend} />
+            <PrivateRouter path="/user/recommend" component={Recommend} />
           </Switch>
         </div>
       </>
@@ -50,18 +50,16 @@ class Router extends Component {
   }
 }
 
-// export default Router;
-
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    sessionRequest: async (jwt) => {
-      return await dispatch(actions.sessionRequest(jwt));
+    REDUX_AUTH_SESSION_REQUEST: async (jwt) => {
+      return await dispatch(AuthActions.sessionRequest(jwt));
     },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Router);
+export default ReduxConn(mapStateToProps, mapDispatchToProps)(Router);

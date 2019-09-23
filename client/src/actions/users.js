@@ -1,6 +1,15 @@
 import axios from 'axios';
 
-import {GET_SUBS} from './ActionTypes';
+import { GET_SUBS, GET_USERS_SUBSTMPL_LIST } from './ActionTypes';
+
+export const getUserSubsTmplList = (list) => (dispatch) => {
+  dispatch(
+    {
+      type: GET_USERS_SUBSTMPL_LIST,
+      list,
+    }
+  );
+};
 
 // TODO: token 값 cookie 에 있는거 꺼내주는거로 바꿔줘야하는데
 export const getSubsInfo = () => async (dispatch) => {
@@ -14,7 +23,6 @@ export const getSubsInfo = () => async (dispatch) => {
       config
     )
     .then((res) => {
-      console.log(res);
       dispatch({
         type: GET_SUBS,
         subsInfo: res.data.message,
