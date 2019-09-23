@@ -10,6 +10,7 @@ import * as service from './dashboard.ajax';
 
 import 'babel-polyfill';
 import './dashboard.css';
+import {connect} from 'react-redux';
 
 class DashBoard extends Component {
   constructor(props) {
@@ -29,11 +30,11 @@ class DashBoard extends Component {
 
   // Component Life Cycle
   componentDidMount() {
-    this.fetchUserInfo('jimmyjaeyeon@gmail.com');
+    this.fetchUserInfo();
   }
 
-  fetchUserInfo = async (email) => {
-    const response = await service.getUserByEmail(email);
+  fetchUserInfo = async () => {
+    const response = await service.getSubscriptionByToken(this.props.token);
     this.setState({
       user: response.data,
     });
@@ -74,5 +75,14 @@ class DashBoard extends Component {
     );
   }
 }
+// Access Redux store
+const mapStateToProps = (state) => ({
+  token: state.auth.status.JWT,
+});
 
-export default DashBoard;
+// get action
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);

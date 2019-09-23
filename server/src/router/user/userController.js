@@ -1,6 +1,6 @@
 import express from 'express';
 import UserService from './userService';
-import jwt from 'jsonwebtoken';
+import jwtDecode from 'jwt-decode';
 
 const router = express.Router();
 
@@ -61,6 +61,18 @@ router.delete('/email/:email', (req, res) => {
     })
     .catch((err) => {
       res.send(err);
+    });
+});
+
+router.get('/auth/check', (req, res, next) => {
+  const token = (req.header('x-access-token') || req.query.token);
+  const userEmail = jwtDecode(token).param;
+  UserService.getUser(userEmail)
+    .then((result) => {
+      res.send(result.message.subscription);
+    })
+    .catch((err) => {
+      res.send('유저가 없습니다. ', err);
     });
 });
 

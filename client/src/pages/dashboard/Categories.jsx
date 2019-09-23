@@ -1,24 +1,12 @@
 import React, {Component} from 'react';
 import {PageHeader, Button, Spin, Icon} from 'antd';
 
-import Netflix from '../../static/img/templogo/netflix.png';
-import Melon from '../../static/img/templogo/melon.png';
-import Tving from '../../static/img/templogo/tving.png';
-import Watcha from '../../static/img/templogo/watcha.png';
 import './Categories.css';
 
 class Categories extends Component {
   state = {
     subscriptions: null,
   };
-
-  arr = {
-    netflix: Netflix,
-    Melon: Melon,
-    watcha: Watcha,
-    TVING: Tving,
-  };
-
   calLeftDay = (renewal) => {
     const leftTime = new Date(renewal) - new Date(new Date().toISOString().slice(0, 10));
     return (leftTime / (1000 * 3600 * 24));
@@ -46,9 +34,6 @@ class Categories extends Component {
       const icon = <Icon type="loading" style={{fontSize: 24}} spin />;
       return (<Spin indicator={icon} />);
     }
-    // TODO :: ajax 로 data를 받아와서 처음에 null 값 error 가뜸 이곳에 스피너 같은거 넢어 주어야함
-    // console.log(this.props.data.subscriptions);
-
     return (
       <div>
         {/*  구독 중인 서비스*/}
@@ -56,12 +41,12 @@ class Categories extends Component {
         <PageHeader title="구독 중인 서비스"
           extra={[
             <Button key="2" onClick={() => {
-              this.sortByPrice(data.subscriptions);
+              this.sortByPrice(data);
             }}>
                           가격 순
             </Button>,
             <Button key="1" onClick={() => {
-              this.sortByLeftDay(data.subscriptions);
+              this.sortByLeftDay(data);
             }}>
                           남은 일
             </Button>,
@@ -69,12 +54,12 @@ class Categories extends Component {
         </PageHeader>
         <br/>
         <div>
-          {data.subscriptions.map((data, index) => {
+          {data.map((data, index) => {
             return (
               <div key={index} className="container w-100 p-3" id="inner-element">
                 <div className="row">
                   <div className="col">
-                    <img src={this.arr[data.name]} alt={data.name} style={{height: '5vh', borderRadius: '5px', paddingLeft: '0px'}}/>
+                    <img src='' alt={data.name} style={{height: '5vh', borderRadius: '5px', paddingLeft: '0px'}}/>
                   </div>
                   <div className="col">
                     {data.name}
@@ -83,7 +68,7 @@ class Categories extends Component {
                         ₩{data.price}
                   </div>
                   <div className="col">
-                    {this.calLeftDay(data.renewal)}일 남음
+                    renewal위치(data.renewal일 남음)
                   </div>
                 </div>
               </div>
