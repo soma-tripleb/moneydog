@@ -13,7 +13,7 @@ export function responseGoogle(response) {
     },
   }).then((res) => {
     console.log('axios success');
-    window.location.href = 'http://localhost:8080' + res.data; // to subscriptions
+    window.location.href = 'http://localhost:8080' + res.data;
   }).catch((err) => {
     console.log(err);
   });

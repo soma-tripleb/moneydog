@@ -9,7 +9,7 @@ import * as Sentry from '@sentry/node';
 import {mongoConnect} from './src/configs/mongoDB';
 import {customLogger, errorLogger, stream} from './src/configs/winston';
 // Error tracking
-Sentry.init({dsn: 'https://566bd809b9a0464e8e690a199ab83396@sentry.io/1553162'});
+// Sentry.init({dsn: 'https://566bd809b9a0464e8e690a199ab83396@sentry.io/1553162'});
 
 // DB Config
 mongoConnect();

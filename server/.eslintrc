@@ -15,7 +15,9 @@
     "eol-last": "off",
     "max-len": "off",
     "block-spacing": "off",
-    "brace-style": "off"
+    "brace-style": "off",
+    "require-jsdoc": "off",
+    "no-unused-vars": "off"
   },
   "parserOptions": {
     "ecmaVersion": 2018

@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import * as actions from '../../actions/auth';
+
+import {connect as ReduxConn} from 'react-redux';
+import AuthActions from '../../reducers/actions/authAction';
+
 
 import './signin.css';
 import * as service from '../signin/signin.ajax';
 
 import Cookies from 'js-cookie';
-import jwtDecode from 'jwt-decode';
 
 class Signin extends Component {
   constructor(props) {
@@ -21,8 +22,9 @@ class Signin extends Component {
 
   signInBtnClicked = async (e) => {
     e.preventDefault();
-    console.log(`sign in state : ${this.state}`);
-    const result = await this.props.loginRequest(this.state.email, this.state.password);
+
+    const result = await this.props.REDUX_LOGIN_REQUEST(this.state.email, this.state.password);
+
     if (result.status === 200) {
       localStorage.setItem('auth', JSON.stringify(this.props.auth));
       this.props.history.push('/user/subscribing');
@@ -31,9 +33,8 @@ class Signin extends Component {
     } else if (result.status === 400) {
       alert(result.data.message);
     }
-    const token = this.props.auth.status.JWT;
-    const email = jwtDecode(token).param;
-    console.log(`get email : ${email}`);
+
+    console.log(this.props.auth);
     Cookies.set('auth', this.props.auth);
   };
 
@@ -104,10 +105,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginRequest: async (email, password) => {
-      return await dispatch(actions.loginRequest(email, password));
+    REDUX_LOGIN_REQUEST: async (email, password) => {
+      return await dispatch(AuthActions.loginRequest(email, password));
     },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signin);
+export default ReduxConn(mapStateToProps, mapDispatchToProps)(Signin);

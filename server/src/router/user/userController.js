@@ -4,8 +4,8 @@ import jwtDecode from 'jwt-decode';
 
 const router = express.Router();
 
+// '/users'
 router.get('/', (req, res) => {
-  console.log('GET /users/ called');
   UserService.getUserList()
     .then((result) => {
       res.send(result);
@@ -17,7 +17,6 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:email', (req, res) => {
-  console.log(`/users/email 찍힘 ${req.param.email}`)
   UserService.getUser(req.params.email)
     .then((result) => {
       res.send(result);
@@ -29,14 +28,29 @@ router.get('/:email', (req, res) => {
 });
 
 // body: Json Data
+// router.post('/', (req, res) => {
+//   UserService.createOne(req.body)
+//     .then((result) => {
+//       res.send(result);
+//     })
+//     .catch((err) => {
+//       res.send(err);
+//     });
+// });
+
 router.post('/', (req, res) => {
-  console.log('POST /users/ called');
-  UserService.createOne(req.body)
+  const body = req.body;
+  const token = req.header('x-access-token') || req.params.token;
+
+  const auth = jwt.decode(token);
+  const email = auth.param;
+
+  UserService.insertSubsInfo(email, body)
     .then((result) => {
-      res.send(result);
+      res.send({ status: 200, success: true, message: result});
     })
     .catch((err) => {
-      res.send(err);
+      throw err;
     });
 });
 
