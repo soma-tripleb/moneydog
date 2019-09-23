@@ -32,14 +32,11 @@ class DashBoard extends Component {
 
   // Component Life Cycle
   componentDidMount() {
-    const loggedEmail = jwtDecode(this.props.token).param;
-    console.log(`login email : ${loggedEmail}`);
-    this.fetchUserInfo(loggedEmail);
+    this.fetchUserInfo();
   }
 
-  fetchUserInfo = async (email) => {
-    const response = await service.getUserByEmail(email, this.props.token);
-    console.log(`fetUserInfo : ${JSON.stringify(response)}`);
+  fetchUserInfo = async () => {
+    const response = await service.getSubscriptionByToken(this.props.token);
     this.setState({
       user: response.data,
     });
