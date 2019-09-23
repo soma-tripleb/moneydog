@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import {GET_SUBS} from './ActionTypes';
 
+// TODO: token 값 cookie 에 있는거 꺼내주는거로 바꿔줘야하는데
 export const getSubsInfo = () => async (dispatch) => {
   const config = {
     headers: {
