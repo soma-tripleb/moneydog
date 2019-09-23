@@ -11,6 +11,8 @@ import * as service from './dashboard.ajax';
 import 'babel-polyfill';
 import './dashboard.css';
 import {connect} from 'react-redux';
+import SubsTmplService from '../subscribing/subscriptions.ajax';
+import * as image from '../../static/img/templogo';
 
 class DashBoard extends Component {
   constructor(props) {
@@ -35,7 +37,22 @@ class DashBoard extends Component {
   // Component Life Cycle
   componentDidMount() {
     this.fetchUserInfo();
+    this.ajaxGetSubTemplate();
   }
+  // Get static Subsribe Service
+  ajaxGetSubTemplate = async () => {
+    const token = this.props.token;
+    const response = await SubsTmplService.getList(token);
+    this.setState({
+      staticSubscribeArr: response.data.message,
+    });
+
+    this.state.staticSubscribeArr.map(
+      (content) => {
+        content.logo = image[content.thumbnail];
+      }
+    );
+  };
 
   fetchUserInfo = async () => {
     const response = await service.getSubscriptionByToken(this.props.token);
