@@ -2,7 +2,6 @@ import 'babel-polyfill';
 import assert from 'assert';
 
 import User from '../../../src/schemas/user';
-import Subscription from '../../mock/subscription';
 
 import { mongoConnect, mongoDisConnect } from '../../../src/dbConfig/mongoDB';
 
@@ -77,7 +76,6 @@ describe('User, SubscriptionTemplate', () => {
         ).then((result) => {
           User.findOne({ email: email })
             .then((result) => {
-              
               // result.subscription.map((subsInfo) => {
               //   console.log(subsInfo);
               // });
@@ -87,13 +85,11 @@ describe('User, SubscriptionTemplate', () => {
             .catch((err) => {
               done(err);
             });
-
         }).catch((err) => {
           done(err);
         });
       });
     });
-
   });
 });
 
