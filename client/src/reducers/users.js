@@ -1,16 +1,15 @@
-import {GET_USERS} from '../actions/ActionTypes';
+import {GET_SUBS} from '../actions/ActionTypes';
 
 const initialsState = {
-  users: [],
+  subs: [],
 };
 
 export default function(state = initialsState, action ) {
   switch (action.type) {
-  case GET_USERS:
-    console.log(action.payload);
+  case GET_SUBS:
     return {
       ...state,
-      users: action.payload,
+      subs: action.subsInfo,
     };
   default:
     return state;

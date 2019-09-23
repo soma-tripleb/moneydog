@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import {Row, Col, Card} from 'react-bootstrap';
 
 import './report.css';
+import {connect} from 'react-redux';
+import SubsApp from '../subscribing/subsApp';
 
 class Report extends Component {
   state = {
-    title: 'Report page',
     total_pay: '36800',
     currency: '₩',
     month: 8,
@@ -46,6 +47,26 @@ class Report extends Component {
     ],
   };
 
+  showSubsList = () =>{
+    const list = this.props.subs.map(
+      (content, i) => (
+        <div className="container w-100 p-3" id="inner-element">
+          <div className="row">
+            <div className="col">
+              {content.name}
+            </div>
+            <div className="col">
+              {content.price}
+            </div>
+            <div className="col">
+              {content.channel}
+            </div>
+          </div>
+        </div>)
+    );
+    return list;
+  }
+
   render() {
     return (
       <>
@@ -54,36 +75,7 @@ class Report extends Component {
             <div className="col-sm">
               <div className="w-100 p-3" id="inner-container">
                 구독 리스트
-                <div className="container w-100 p-3" id="inner-element">
-                  <div className="row">
-                    <div className="col">
-                      {this.state.month}월 결제 총액
-                    </div>
-                    <div className="col">
-                      {this.state.currency}{this.state.total_pay}
-                    </div>
-                  </div>
-                </div>
-                <div className="container w-100 p-3" id="inner-element">
-                  <div className="row">
-                    <div className="col">
-                      {this.state.month}월 결제 총액
-                    </div>
-                    <div className="col">
-                      {this.state.currency}{this.state.total_pay}
-                    </div>
-                  </div>
-                </div>
-                <div className="container w-100 p-3" id="inner-element">
-                  <div className="row">
-                    <div className="col">
-                      {this.state.month}월 결제 총액
-                    </div>
-                    <div className="col">
-                      {this.state.currency}{this.state.total_pay}
-                    </div>
-                  </div>
-                </div>
+                {this.showSubsList()}
               </div>
             </div>
             <div className="col-sm">
@@ -140,4 +132,12 @@ class Report extends Component {
   }
 }
 
-export default Report;
+const mapStateToProps = (state) => ({
+  subs: state.users.subs,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return;
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Report);

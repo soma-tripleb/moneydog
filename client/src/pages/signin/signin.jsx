@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import * as actions from '../../actions/auth';
+import * as authActions from '../../actions/auth';
+import * as userActions from '../../actions/users';
 
 import './signin.css';
 import * as service from '../signin/signin.ajax';
@@ -25,6 +26,7 @@ class Signin extends Component {
 
     if (result.status === 200) {
       localStorage.setItem('auth', JSON.stringify(this.props.auth));
+      this.props.getSubsInfo();
       this.props.history.push('/user/subscribing');
     } else if (result.status === 409) {
       alert(result.data.message);
@@ -103,7 +105,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     loginRequest: async (email, password) => {
-      return await dispatch(actions.loginRequest(email, password));
+      return await dispatch(authActions.loginRequest(email, password));
+    },
+    getSubsInfo: () => {
+      dispatch(userActions.getSubsInfo());
     },
   };
 };
