@@ -7,9 +7,9 @@ router.post('/signUp', async (req, res) => {
   const userInfo = req.body.userInfo || '';
 
   AuthService.checkParameter(res, userInfo);
-  AuthService.hasProperty(res,userInfo,'email');
-  AuthService.hasProperty(res,userInfo,'password');
-  AuthService.hasProperty(res,userInfo,'nickname');
+  AuthService.hasProperty(res, userInfo, 'email');
+  AuthService.hasProperty(res, userInfo, 'password');
+  AuthService.hasProperty(res, userInfo, 'nickname');
 
   const result = await AuthService.register(userInfo);
 
@@ -18,10 +18,10 @@ router.post('/signUp', async (req, res) => {
 
 router.post('/signIn', async (req, res) => {
   const userInfo = req.body.userInfo || '';
-
   AuthService.checkParameter(res, userInfo);
-  AuthService.hasProperty(res,userInfo,'email');
-  AuthService.hasProperty(res,userInfo,'password');
+
+  AuthService.hasProperty(res, userInfo, 'email');
+  AuthService.hasProperty(res, userInfo, 'password');
 
   const result = await AuthService.login(req.body.userInfo);
 
@@ -32,7 +32,7 @@ router.post('/sessionCheck', async (req, res) => {
   const userInfo = req.body.userInfo || '';
 
   AuthService.checkParameter(res, userInfo);
-  AuthService.hasProperty(res,userInfo,'jwt');
+  AuthService.hasProperty(res, userInfo, 'jwt');
 
   const result = await AuthService.sessionCheck(req.body.userInfo);
 
