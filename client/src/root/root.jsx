@@ -16,21 +16,18 @@ import {PersistGate} from 'redux-persist/integration/react';
 import './root.css';
 
 class Root extends Component {
-
   render() {
     return (
       <Provider store={store}>
-        {/*<PersistGate loading={null} persistor={persistor}>*/}
-          <BrowserRouter>
-            <Row>
-              <Layout className="layout">
-                <Head/>
-                <Router/>
-                <Foot/>
-              </Layout>
-            </Row>
-          </BrowserRouter>
-        {/*</PersistGate>*/}
+        <BrowserRouter>
+          <Row>
+            <Layout className="layout">
+              <Head/>
+              <Router/>
+              <Foot/>
+            </Layout>
+          </Row>
+        </BrowserRouter>
       </Provider>
     );
   }

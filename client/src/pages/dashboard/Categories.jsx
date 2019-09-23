@@ -69,7 +69,6 @@ class Categories extends Component {
                   </div>
                   <div className="col">
                     renewal위치(data.renewal일 남음)
-                    {/*{this.calLeftDay(data.renewal)}일 남음*/}
                   </div>
                 </div>
               </div>
