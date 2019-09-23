@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
+import DateUtil from '../util/dateUtil';
 
 import { DatePicker } from 'antd';
 import moment from 'moment';
 
 const dateFormat = 'YYYY/MM/DD';
 
-const NOW = (() => {
-  const nowDate = 
-    new Date().toISOString()
-      .replace(/T/, ' ')
-      .replace(/\..+/, '')
-      .split(' ');
-
-  return nowDate[0]
-    .replace(/-/gi, '/');
-})();
+const NOW = DateUtil.NOW();
 
 class DatePickers extends Component {
   constructor(props) {
@@ -23,10 +15,8 @@ class DatePickers extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  // 두번째 파라미터가 원하는 순수 'date' 값
+  // 두번째 파라미터가 원하는 순수 'date' 값 - ant.disign ('date picker')
   handleChange = (dateSet, date) => {
-    console.log('DATE PICKER: ', date);
-
     this.props.onDatePickerChange(date);
   }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import update from 'react-addons-update';
 import { connect as ReduxConn } from 'react-redux';
+import DateUtil from '../../../src/pages/util/dateUtil';
 
 import Cookies from 'js-cookie';
 
@@ -8,6 +9,8 @@ import SubsTmpl from './subsTmpl';
 import SubsTmplService from './subscribingInfo.ajax';
 
 import './subscribingInfo.css';
+
+const NOW = DateUtil.NOW();
 
 const TEST_SUBS = [
   {
@@ -32,21 +35,21 @@ const TEST_SUBS_USER = [
     seq: 4,
     name: 'Bugs',
     price: '',
-    paymentDate: '',
+    paymentDate: NOW,
     channel: '',
   },
   {
     seq: 5,
     name: 'Flo',
     price: '',
-    paymentDate: '',
+    paymentDate: NOW,
     channel: '',
   },
   {
     seq: 6,
     name: 'Melon',
     price: '',
-    paymentDate: '',
+    paymentDate: NOW,
     channel: '',
   }
 ];
@@ -89,7 +92,7 @@ class SubscribingInfo extends Component {
           logo: Subscription.logo,
           name: Subscription.name,
           price: '',
-          paymentDate: '',
+          paymentDate: `${NOW}`,
           channel: 'inapp',
         });
       });
@@ -124,12 +127,15 @@ class SubscribingInfo extends Component {
       }
     });
 
+    console.log('SUBSCRIPTION: ', userInputList);
+
     // SubsTmplService.updateUserSubsInfo(userToken, userInputList);
   }
 
   handleUserInputChange = (name, element, userInput, date) => {
     console.log('SUBSCRIBING: ', userInput);
     console.log('SUBSCRIBING: ', date);
+
     let inputList = '';
 
     // TEST

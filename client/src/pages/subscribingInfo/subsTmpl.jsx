@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import DatePickers from '../util/DatePicker';
+import DatePickers from './DatePicker';
 
 import './subscribingInfo.css';
 
@@ -25,7 +25,6 @@ class SubsTmpl extends Component {
   }
 
   onDatePickerChange = (date) => {
-    console.log('ON DATE PICKER CHANGE: ' + date);
     this.setState({
       date: date,
     });
@@ -61,16 +60,8 @@ class SubsTmpl extends Component {
 
             <div className="col-sm">
               <label>결제일</label>
-              <input
-                type="text"
-                className="paymentDate"
-                name={paymentDateId}
-                data-id={info.name}
-                value={inputData.paymentDate}
-                onChange={this.handleChange}
-                placeholder="paymentDate"
-              />
               <DatePickers
+                className="paymentDate"
                 name={paymentDateId}
                 data-id={info.name}
                 onDatePickerChange={this.onDatePickerChange}
