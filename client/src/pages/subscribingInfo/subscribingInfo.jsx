@@ -5,6 +5,8 @@ import { connect as ReduxConn } from 'react-redux';
 import Cookies from 'js-cookie';
 
 import SubsTmpl from './subsTmpl';
+import SubsTmplService from './subscribingInfo.ajax';
+
 import './subscribingInfo.css';
 
 const TEST_SUBS = [
@@ -25,14 +27,33 @@ const TEST_SUBS = [
   },
 ];
 
-const UserInputTemplate = {
-  seq: '',
-  logo: '',
-  name: '',
-  price: '',
-  paymentDate: '',
-  channel: '',
-};
+const TEST_SUBS_USER = [
+  {
+    seq: 4,
+    name: 'Bugs',
+    price: '',
+    paymentDate: '',
+    channel: '',
+  },
+  {
+    seq: 5,
+    name: 'Flo',
+    price: '',
+    paymentDate: '',
+    channel: '',
+  },
+  {
+    seq: 6,
+    name: 'Melon',
+    price: '',
+    paymentDate: '',
+    channel: '',
+  }
+];
+
+const mapStateToProps = (state) => ({
+  USERS: state.users,
+});
 
 class SubscribingInfo extends Component {
   constructor(props) {
@@ -41,91 +62,90 @@ class SubscribingInfo extends Component {
     this.state = {
       userSubsList: [],
       userInputList: [],
-      substmpl: [
-        {
-          name: 'Bugs',
-          price: '',
-          paymentDate: '',
-          channel: '',
-        },
-        {
-          name: 'Flo',
-          price: '',
-          paymentDate: '',
-          channel: '',
-        },
-        {
-          name: 'Melon',
-          price: '',
-          paymentDate: '',
-          channel: '',
-        }
-      ],
     };
   }
 
   componentDidMount = () => {
-    const userList = this.props.USERS.subsTmplList;
-    this.getUserSubsList(userList);
+    const userSeletedList = this.props.USERS.subsTmplList;
+    const userSelectedListLength = this.props.USERS.subsTmplList.length;
+
+    this.getUserSubsList(userSeletedList, userSelectedListLength);
   }
 
-  getUserSubsList = (list) => {
-    const userSelectedSubscriptionList = list;
+  getUserSubsList = (userSeletedList, userSelectedListLength) => {
+    let tempSubsList = [];
+    let tempInputList = [];
 
-    const subsList = (this.props.USERS.subsTmplList.length === 0) ?TEST_SUBS : this.props.USERS.subsTmplList;
-
-    const tempList = [];
-    if (this.props.USERS.subsTmplList.length === 0) {
-
+    // TEST
+    if (userSelectedListLength === 0) {
+      tempSubsList = TEST_SUBS;
+      tempInputList = TEST_SUBS_USER;
     } else {
-      list.map((Subscription) => {
-        tempList.push({
+      tempSubsList = userSeletedList;
+
+      userSeletedList.map((Subscription) => {
+        tempInputList.push({
           seq: Subscription.seq,
           logo: Subscription.logo,
           name: Subscription.name,
           price: '',
           paymentDate: '',
-          channel: '',
+          channel: 'inapp',
         });
       });
     }
 
-    console.log(tempList);
-
     this.setState({
-      userSubsList: update(this.state.userSubsList, {$push: subsList}),
-      userInputList: update(this.state.userInputList, {$push: tempList})
+      userSubsList: update(this.state.userSubsList, { $push: tempSubsList }),
+      userInputList: update(this.state.userInputList, { $push: tempInputList })
     });
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { substmpl } = this.state;
+    const { userInputList } = this.state;
+    const userToken = Cookies.getJSON('auth').status.JWT;
 
-    substmpl.some((info) => {
+    userInputList.map((info) => {
       if (info.price === '') {
         alert('결제금액을 입력해주세요');
-        return true;
-      } else {
+        return false;
+      } ;
+
+      if (info.paymentDate === '') {
+        alert('결제일을 입력해주세요');
+        return false;
+      }
+
+      if (info.channel === '') {
+        alert('결제 체널을 체크해주세요');
+        return false;
       }
     });
-    // service.updateUserSubsInfo(this.state.userInputList);
-    console.log(this.state.substmpl);
+
+    SubsTmplService.updateUserSubsInfo(userToken, userInputList);
   }
 
   handleUserInputChange = (name, element, userInput) => {
-    const {substmpl} = this.state;
+    let inputList = '';
+
+    // TEST
+    if (this.state.userInputList.length === 0) {
+      inputList = TEST_SUBS_USER;
+    } else {
+      inputList = this.state.userInputList;
+    }
 
     this.setState({
-      substmpl: substmpl.map((info) => {
+      userInputList: inputList.map((info) => {
         if (info.name === name) {
           switch (element) {
             case 'price':
               return ({ ...info, price: userInput });
               break;
             case 'paymentDate':
-              return ({...info, paymentDate: userInput});
+              return ({ ...info, paymentDate: userInput });
               break;
             case 'channel':
               return ({ ...info, channel: userInput });
@@ -141,17 +161,14 @@ class SubscribingInfo extends Component {
   }
 
   InputSubscriptionTemplateInfo = () => {
-    const list = this.state.userInputList.map(
+    const inputList = this.state.userInputList;
+
+    const list = inputList.map(
       (content, i) => (
         <SubsTmpl
           key={i}
-          info={
-            {
-              index: i,
-              name: content.name,
-            }
-          }
-          inputData={this.state.userInputList[i]}
+          info={content}
+          inputData={inputList[i]}
           onUserInputChange={this.handleUserInputChange}
         >
         </SubsTmpl>
@@ -166,19 +183,17 @@ class SubscribingInfo extends Component {
         <div className="container">
           <p>사용자 구독 서비스 정보 등록</p>
           <div className="row">
-            <form onSubmit={this.handleSubmit}>
-              {this.InputSubscriptionTemplateInfo()}
-              <input type="submit" value="Submit" />
-            </form>
+            <div className="col">
+              <form onSubmit={this.handleSubmit}>
+                {this.InputSubscriptionTemplateInfo()}
+                <input type="submit" value="Submit" />
+              </form>
+            </div>
           </div>
         </div>
       </>
     );
   }
 };
-
-const mapStateToProps = (state) => ({
-  USERS: state.users,
-});
 
 export default ReduxConn(mapStateToProps)(SubscribingInfo);

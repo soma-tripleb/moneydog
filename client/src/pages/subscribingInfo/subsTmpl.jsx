@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './subscribingInfo.css';
+
 class SubsTmpl extends Component {
   constructor(props) {
     super(props);
@@ -23,55 +25,64 @@ class SubsTmpl extends Component {
 
     return (
       <>
-        <div>
-          <span>SubsTmpl : {info.name} </span>
+        <div className="container" id="subs-temp-container">
+          <div className="row">
+            <div className="col-sm">
+              <img className="logo-img" src={`/` + info.logo} alt="" />
+            </div>
 
-          <label>결제금액</label>
-          <input
-            type="text"
-            className="price"
-            name= {priceId}
-            data-id={info.name}
-            value={inputData[info.index]}
-            onChange={this.handleChange}
-            placeholder="price"
-          />
-
-          <label>결제일</label>
-          <input
-            type="text"
-            className="paymentDate"
-            name={paymentDateId}
-            data-id={info.name}
-            value={inputData[info.index]}
-            onChange={this.handleChange}
-            placeholder="paymentDate"
-          />
-
-          <div className="radio">
-            <label>
+            <div className="col-sm">
+              <label>결제금액</label>
               <input
-                type="radio"
-                className="channel"
+                type="text"
+                className="price"
+                name={priceId}
                 data-id={info.name}
-                value="inapp"
-                checked={inputData[info.index] === 'inapp'}
+                value={inputData.price}
                 onChange={this.handleChange}
+                placeholder="price"
               />
-              inapp
-            </label>
+            </div>
 
-            <label>
+            <div className="col-sm">
+              <label>결제일</label>
               <input
-                type="radio"
-                className="channel"
+                type="text"
+                className="paymentDate"
+                name={paymentDateId}
                 data-id={info.name}
-                value="site"
-                checked={inputData[info.index] === 'site'}
+                value={inputData.paymentDate}
                 onChange={this.handleChange}
+                placeholder="paymentDate"
               />
-              site
-            </label>
+            </div>
+
+            <div className="radio col-sm">
+              <label>
+                <input
+                  type="radio"
+                  className="channel"
+                  data-id={info.name}
+                  value="inapp"
+                  checked={(inputData.channel === 'inapp')}
+                  onChange={this.handleChange}
+                />
+                inapp
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  className="channel"
+                  data-id={info.name}
+                  value="site"
+                  checked={(inputData.channel === 'site')}
+                  onChange={this.handleChange}
+                />
+                site
+              </label>
+            </div>
+
           </div>
         </div>
       </>

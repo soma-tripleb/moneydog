@@ -45,7 +45,13 @@ router.post('/', (req, res) => {
   const auth = jwt.decode(token);
   const email = auth.param;
 
-  res.send({ status: 200, success: true, message: body});
+  UserService.insertSubsInfo(email, body)
+    .then((result) => {
+      res.send({ status: 200, success: true, message: result});
+    })
+    .catch((err) => {
+      throw err;
+    });
 });
 
 router.delete('/email/:email', (req, res) => {

@@ -1,0 +1,20 @@
+/* subsTmpl */
+
+.logo-img {
+  height: 5vh;
+  border-radius: 5px;
+}
+
+label {
+  display: inline;
+}
+
+.radio {
+  margin: auto;
+}
+
+#subs-temp-container {
+  border: 1px solid lightgray;
+  border-radius: 3%;
+  margin-bottom: 5px;
+}
