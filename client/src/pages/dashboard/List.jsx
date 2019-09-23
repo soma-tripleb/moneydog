@@ -20,7 +20,7 @@ class List extends Component {
   };
 
   componentWillReceiveProps(nextProps, nextContext) {
-    const subscriptions = nextProps.data.subscriptions;
+    const subscriptions = nextProps.data;
     subscriptions.some((subscription) => {
       console.log('filter subscription : ', subscription);
       if (moment(subscription.renewal).date() === nextProps.date) {
@@ -45,7 +45,7 @@ class List extends Component {
           </div>
         </div>
         <div className='img-border'>
-          <img className="line-Img" src={Melon} style={{height: '5vh', borderRadius: '5px'}}/>
+          <img className="line-Img" alt='img not found' src={Melon} style={{height: '5vh', borderRadius: '5px'}}/>
         </div>
         <div>{this.state.result ? this.state.result.name : '' }</div>
       </div>

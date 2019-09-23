@@ -40,7 +40,7 @@ class CalendarClass extends Component {
   };
 
   dateCellRender = (value) => {
-    const subscriptions = this.props.data.subscriptions;
+    const subscriptions = this.props.data;
     const listData = this.getListData(value, subscriptions);
     return (
       <ul className="events">
