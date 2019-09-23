@@ -20,7 +20,7 @@ class Report extends Component {
 
     const list = this.props.subs.map(
       (content, i) => (
-        <div className="container w-100 p-3" id="inner-element">
+        <div key={i} className="container w-100 p-3" id="inner-element">
           <div className="row">
             <div className="col">
               {content.name}
