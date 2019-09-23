@@ -39,7 +39,6 @@ class Router extends Component {
             <Route path="/signin" component={SignIn} />
             <PrivateRouter path="/user/report" component={Report} />
             <PrivateRouter path="/user/dashboard" component={Dashboard} />
-            <PrivateRouter path="/info" component={Info} />
             <PrivateRouter path="/user/subscribing" component={Subscribing} />
             <PrivateRouter path="/user/subscribing-info" component={SubscribingInfo} />
             <PrivateRouter path="/user/recommend" component={Recommend} />

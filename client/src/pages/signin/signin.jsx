@@ -26,7 +26,7 @@ class Signin extends Component {
     const result = await this.props.loginRequest(this.state.email, this.state.password);
 
     if (result.status === 200) {
-      localStorage.setItem('auth', JSON.stringify(this.props.auth));
+      Cookies.set('token', result.data.token);
       this.props.getSubsInfo();
       this.props.history.push('/user/subscribing');
     } else if (result.status === 409) {
@@ -34,8 +34,6 @@ class Signin extends Component {
     } else if (result.status === 400) {
       alert(result.data.message);
     }
-
-    Cookies.set('auth', this.props.auth);
   };
 
   onChangeEmail = (e) => {

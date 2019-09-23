@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {connect, Provider} from 'react-redux';
+import {Provider} from 'react-redux';
 import store from '../store';
 
 import 'antd/dist/antd.less';

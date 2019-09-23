@@ -51,7 +51,6 @@ const sessionRequest = (jwt) => async (dispatch) => {
 const logoutRequest = () =>(dispatch) => {
   dispatch(LOGOUT());
 
-  localStorage.removeItem('auth');
   Cookies.remove('auth');
 };
 

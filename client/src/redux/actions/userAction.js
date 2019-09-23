@@ -18,7 +18,7 @@ export const getSubsInfo = () => async (dispatch) => {
   console.log('auth ', auth);
   const config = {
     headers: {
-      'x-access-token': '',
+      'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXJhbSI6ImFkbWluQGZraWkub3JnIiwiaWF0IjoxNTY5MjQwMDE1LCJleHAiOjE1NjkyNTgwMTV9.74ZgHQ5tCFuQ8XHOZvBsBf_dWEaDM7ct3p6yN9OOYZc',
     },
   };
   await axios
