@@ -1,7 +1,7 @@
 import { GET_USERS, GET_USERS_SUBSTMPL_LIST } from '../actionType';
 import update from 'react-addons-update';
 
-// user
+// subscription
 const initialState =
 {
   subsTmplList: [],
@@ -16,7 +16,7 @@ export default function(state = initialState, action) {
       };
 
     case GET_USERS_SUBSTMPL_LIST:
-      console.log('user action method: ', action.list);
+      console.log('subscription action method: ', action.list);
       return update(state, {
         subsTmplList: { $set: action.list },
       });

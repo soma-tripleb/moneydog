@@ -14,18 +14,18 @@
 //       .post('/auth/signUp')
 //       .send({userInfo: {
 //         email: 'test@email.com',
-//         username: 'test user',
+//         username: 'test subscription',
 //         password: 'helloworld!',
 //         content: 'test content',
 //       }})
 //       .expect(201);
-//     const user = authRepository.getUserByEmail('test@email.com');
-//     user
+//     const subscription = authRepository.getUserByEmail('test@email.com');
+//     subscription
 //       .then((data) => {
-//         console.log('user info : ', data);
+//         console.log('subscription info : ', data);
 //       })
 //       .catch((e) => {
-//         console.error('user can not find');
+//         console.error('subscription can not find');
 //       });
 //     done();
 //   });

@@ -81,7 +81,7 @@ class Subscriptions extends Component {
     e.preventDefault();
 
     this.props.REDUX_USER_SET_SUBSTMPL_LIST(this.state.SubscribingArr);
-    this.props.history.push('/user/subscribing-info');
+    this.props.history.push('/subscription/subscribing-info');
   };
 
   makeStaticSubscribeApp = () => {

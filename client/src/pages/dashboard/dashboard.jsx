@@ -19,7 +19,7 @@ class DashBoard extends Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.state= {
-      user: null,
+      subscription: null,
       selectedValue: null,
       staticSubscribeArr: []
     };
@@ -36,7 +36,7 @@ class DashBoard extends Component {
 
   // Component Life Cycle
   componentDidMount() {
-    this.fetchUserInfo();
+    this.fetchSubscriptionInfo();
     this.ajaxGetSubTemplate();
   }
   // Get static Subsribe Service
@@ -50,16 +50,19 @@ class DashBoard extends Component {
     this.state.staticSubscribeArr.map(
       (content) => {
         content.logo = image[content.thumbnail];
+        console.log(`logo : ${content.logo}`);
       }
     );
   };
 
-  fetchUserInfo = async () => {
+  fetchSubscriptionInfo = async () => {
     const response = await service.getSubscriptionByToken(this.props.token);
     this.setState({
-      user: response.data,
+      subscription: response.data,
     });
   };
+
+  insertSubscibeLogo = ()
 
   render() {
     return (
@@ -69,21 +72,21 @@ class DashBoard extends Component {
               <div className="col-md-6">
                 {/* 달력*/}
                 <div className="calendar">
-                  <Calendar date={this.state.selectedValue} handleChange={this.handleChange} data={this.state.user}/>
+                  <Calendar date={this.state.selectedValue} handleChange={this.handleChange} data={this.state.subscription}/>
                 </div>
                 <hr/>
                 <div className="list">
-                  <List date={this.convertDate()} data={this.state.user} />
+                  <List date={this.convertDate()} data={this.state.subscription} />
                 </div>
               </div>
               {/* 구독중인 서비스 list */}
               <div className="col-md-6">
                 <div className='TotalAmount'>
-                  <TotalAmount data={this.state.user}/>
+                  <TotalAmount data={this.state.subscription}/>
                 </div>
                 <hr/>
                 <div className='categories'>
-                  <Categories data={this.state.user}/>
+                  <Categories data={this.state.subscription}/>
                 </div>
               </div>
 

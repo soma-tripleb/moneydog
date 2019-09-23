@@ -27,7 +27,7 @@ class Signin extends Component {
 
     if (result.status === 200) {
       localStorage.setItem('auth', JSON.stringify(this.props.auth));
-      this.props.history.push('/user/subscribing');
+      this.props.history.push('/subscription/subscribing');
     } else if (result.status === 409) {
       alert(result.data.message);
     } else if (result.status === 400) {
