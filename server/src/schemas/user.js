@@ -1,10 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-<<<<<<< HEAD
-import {conn} from '../configs/mongoDB';
-=======
-import { conn } from '../dbConfig/mongoDB';
->>>>>>> #51, 사용자 구독 서비스 정보 업데이트 테스트 코드 작성
+import { conn } from '../configs/mongoDB';
 
 const pricePlanSchema = new mongoose.Schema(
   {
