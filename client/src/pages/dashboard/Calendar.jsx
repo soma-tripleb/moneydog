@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
-import {Calendar, Alert} from 'antd';
+import {Calendar} from 'antd';
 import moment from 'moment';
 import './Calendar.css';
-
-import Netflix from '../../static/img/templogo/netflix.png';
-import Melon from '../../static/img/templogo/melon.png';
-import Tving from '../../static/img/templogo/tving.png';
-import Watcha from '../../static/img/templogo/watcha.png';
 
 class CalendarClass extends Component {
   constructor(props) {
@@ -17,18 +12,6 @@ class CalendarClass extends Component {
   handleChange = (value) => {
     this.props.handleChange(value);
   };
-
-  onPanelChange = (value, mode) => {
-    console.log('test', value, mode);
-  };
-
-  arr = {
-    netflix: Netflix,
-    Melon: Melon,
-    watcha: Watcha,
-    TVING: Tving,
-  };
-
   getListData = (value, subscriptions) => {
     let listData;
     subscriptions.map((subscription) => {
@@ -46,8 +29,8 @@ class CalendarClass extends Component {
       <ul className="events">
         {listData.map((item) => (
           <li key={item.type}>
-            <img className="subscribeImg" src={this.arr[item.type]}
-              alt={item.type}/>
+            <img className="subscribeImg" src=""
+              alt='img not found'/>
           </li>
         ))}
       </ul>
@@ -77,8 +60,7 @@ class CalendarClass extends Component {
     return (
       <div>
         <p><u> 월별 결제일 정보 </u></p>
-        <Calendar fullscreen={false} onPanelChange={this.onPanelChange}
-          dateCellRender={this.dateCellRender} monthCellRender={this.monthCellRender} onSelect={this.handleChange} />
+        <Calendar fullscreen={false} dateCellRender={this.dateCellRender} monthCellRender={this.monthCellRender} onSelect={this.handleChange} />
       </div>
     );
   }

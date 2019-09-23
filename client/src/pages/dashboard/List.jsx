@@ -1,10 +1,5 @@
 import React, {Component} from 'react';
 
-import youtube from '../../static/img/templogo/youtube.png';
-import Netflix from '../../static/img/templogo/netflix.png';
-import Melon from '../../static/img/templogo/melon.png';
-import Tving from '../../static/img/templogo/tving.png';
-import watcha from '../../static/img/templogo/watcha.png';
 import moment from 'moment';
 
 import './List.css';
@@ -22,7 +17,6 @@ class List extends Component {
   componentWillReceiveProps(nextProps, nextContext) {
     const subscriptions = nextProps.data;
     subscriptions.some((subscription) => {
-      console.log('filter subscription : ', subscription);
       if (moment(subscription.renewal).date() === nextProps.date) {
         return this.state.result = subscription;
       } else {
@@ -45,7 +39,7 @@ class List extends Component {
           </div>
         </div>
         <div className='img-border'>
-          <img className="line-Img" alt='img not found' src={Melon} style={{height: '5vh', borderRadius: '5px'}}/>
+          <img className="line-Img" alt='img not found' style={{height: '5vh', borderRadius: '5px'}}/>
         </div>
         <div>{this.state.result ? this.state.result.name : '' }</div>
       </div>

@@ -5,13 +5,11 @@ import Categories from './Categories';
 import TotalAmount from './TotalAmount';
 import List from './List';
 import moment from 'moment';
-import jwtDecode from 'jwt-decode';
 
 import * as service from './dashboard.ajax';
 
 import 'babel-polyfill';
 import './dashboard.css';
-import * as actions from '../../actions/auth';
 import {connect} from 'react-redux';
 
 class DashBoard extends Component {
@@ -80,7 +78,6 @@ class DashBoard extends Component {
 // Access Redux store
 const mapStateToProps = (state) => ({
   token: state.auth.status.JWT,
-  // token: state.auth.status.JWT,
 });
 
 // get action

@@ -1,24 +1,12 @@
 import React, {Component} from 'react';
 import {PageHeader, Button, Spin, Icon} from 'antd';
 
-import Netflix from '../../static/img/templogo/netflix.png';
-import Melon from '../../static/img/templogo/melon.png';
-import Tving from '../../static/img/templogo/tving.png';
-import Watcha from '../../static/img/templogo/watcha.png';
 import './Categories.css';
 
 class Categories extends Component {
   state = {
     subscriptions: null,
   };
-
-  arr = {
-    netflix: Netflix,
-    Melon: Melon,
-    watcha: Watcha,
-    TVING: Tving,
-  };
-
   calLeftDay = (renewal) => {
     const leftTime = new Date(renewal) - new Date(new Date().toISOString().slice(0, 10));
     return (leftTime / (1000 * 3600 * 24));
@@ -71,7 +59,7 @@ class Categories extends Component {
               <div key={index} className="container w-100 p-3" id="inner-element">
                 <div className="row">
                   <div className="col">
-                    <img src={this.arr[data.name]} alt={data.name} style={{height: '5vh', borderRadius: '5px', paddingLeft: '0px'}}/>
+                    <img src='' alt={data.name} style={{height: '5vh', borderRadius: '5px', paddingLeft: '0px'}}/>
                   </div>
                   <div className="col">
                     {data.name}
@@ -80,7 +68,7 @@ class Categories extends Component {
                         ₩{data.price}
                   </div>
                   <div className="col">
-                    renewal위치.
+                    renewal위치(data.renewal일 남음)
                     {/*{this.calLeftDay(data.renewal)}일 남음*/}
                   </div>
                 </div>
