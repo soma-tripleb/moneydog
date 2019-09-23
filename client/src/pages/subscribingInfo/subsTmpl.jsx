@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import DatePickers from '../util/DatePicker';
+
 import './subscribingInfo.css';
 
 class SubsTmpl extends Component {
@@ -7,13 +9,26 @@ class SubsTmpl extends Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+
+    this.state = {
+      date: '',
+    };
   }
 
   handleChange = (e) => {
     this.props.onUserInputChange(
       e.target.dataset.id,
       e.target.className,
-      e.target.value);
+      e.target.value,
+      this.state.date
+    );
+  }
+
+  onDatePickerChange = (date) => {
+    console.log('ON DATE PICKER CHANGE: ' + date);
+    this.setState({
+      date: date,
+    });
   }
 
   render() {
@@ -55,6 +70,12 @@ class SubsTmpl extends Component {
                 onChange={this.handleChange}
                 placeholder="paymentDate"
               />
+              <DatePickers
+                name={paymentDateId}
+                data-id={info.name}
+                onDatePickerChange={this.onDatePickerChange}
+                onChange={this.handleChange}
+              ></DatePickers>
             </div>
 
             <div className="radio col-sm">

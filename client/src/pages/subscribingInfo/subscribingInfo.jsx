@@ -124,10 +124,12 @@ class SubscribingInfo extends Component {
       }
     });
 
-    SubsTmplService.updateUserSubsInfo(userToken, userInputList);
+    // SubsTmplService.updateUserSubsInfo(userToken, userInputList);
   }
 
-  handleUserInputChange = (name, element, userInput) => {
+  handleUserInputChange = (name, element, userInput, date) => {
+    console.log('SUBSCRIBING: ', userInput);
+    console.log('SUBSCRIBING: ', date);
     let inputList = '';
 
     // TEST
