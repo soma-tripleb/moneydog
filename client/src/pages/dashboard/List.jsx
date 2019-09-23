@@ -14,16 +14,16 @@ class List extends Component {
     result: null,
   };
 
-  componentWillReceiveProps(nextProps, nextContext) {
-    const subscriptions = nextProps.data;
-    subscriptions.some((subscription) => {
-      if (moment(subscription.renewal).date() === nextProps.date) {
-        return this.state.result = subscription;
-      } else {
-        return this.state.result = '';
-      }
-    });
-  }
+  // componentWillReceiveProps(nextProps, nextContext) {
+  //   const subscriptions = nextProps.data;
+  //   subscriptions.some((subscription) => {
+  //     if (moment(subscription.renewal).date() === nextProps.date) {
+  //       return this.state.result = subscription;
+  //     } else {
+  //       return this.state.result = '';
+  //     }
+  //   });
+  // }
 
   render() {
     if (this.props.data == null) {

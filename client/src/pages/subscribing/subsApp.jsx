@@ -22,7 +22,6 @@ class SubsApp extends Component {
 
   render() {
     const {subsAppInfo} = this.props;
-
     return (
       <>
         <div className="container w-100 p-3" id="inner-element">

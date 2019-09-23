@@ -39,6 +39,10 @@ class DashBoard extends Component {
     this.fetchSubscriptionInfo();
     this.ajaxGetSubTemplate();
   }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.insertSubscibeLogo();
+  }
+
   // Get static Subsribe Service
   ajaxGetSubTemplate = async () => {
     const token = this.props.token;
@@ -50,7 +54,6 @@ class DashBoard extends Component {
     this.state.staticSubscribeArr.map(
       (content) => {
         content.logo = image[content.thumbnail];
-        console.log(`logo : ${content.logo}`);
       }
     );
   };
@@ -62,7 +65,17 @@ class DashBoard extends Component {
     });
   };
 
-  insertSubscibeLogo = ()
+  insertSubscibeLogo = () => {
+    const subscription = this.state.subscription;
+    const staticSubscribeArr = this.state.staticSubscribeArr;
+    subscription.map((subscribe) => {
+      staticSubscribeArr.map((staticName) => {
+        if (subscribe.name === staticName.name) {
+          subscribe.logo = staticName.logo;
+        }
+      });
+    });
+  };
 
   render() {
     return (
