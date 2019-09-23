@@ -26,11 +26,11 @@ const subscriptionSchema = new mongoose.Schema(
 const userSchema = new mongoose.Schema(
   {
     email: {type: String, required: true, unique: true},
-    password: {type: String, required: true},
+    password: {type: String, required: true ,trim: true},
     nickname: {type: String, required: true},
     salt: {type: Number, required: true},
     role: {type: String, required: true},
-    subscription: subscriptionSchema,
+    subscription: [subscriptionSchema],
   },
   {
     timestamps: true, // createAt & modifiedAt

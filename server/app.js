@@ -27,6 +27,7 @@ app.use(Sentry.Handlers.errorHandler());
 import indexRouter from './index';
 import authRouter from './src/router/auth/authentiController';
 import userRouter from './src/router/user/userController';
+import subsInfoRouter from './src/router/subscriptiionInfo/subsInfoController';
 import subsTmplRouter from './src/router/subscriptionTemplate/subsTmplController';
 
 app.use(customLogger);
@@ -34,6 +35,7 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use(authCheck);
 app.use('/users', userRouter);
+app.use('/subs-info', subsInfoRouter);
 app.use('/subs-tmpl', subsTmplRouter);
 
 // error logger
