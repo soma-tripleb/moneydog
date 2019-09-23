@@ -3,12 +3,11 @@ import express from 'express';
 import { createJWT } from './src/security/jwtAuthenticationToken';
 
 const router = express();
-const TEMPORALY_JWT_KEYWORD = 'yhpark';
 
 router.get('/', (req, res) => {
   const { headers, method, url } = req;
 
-  const token = createJWT(TEMPORALY_JWT_KEYWORD);
+  const token = createJWT(req.body.param);
 
   res.on('error', (err) => {
     console.error(err);

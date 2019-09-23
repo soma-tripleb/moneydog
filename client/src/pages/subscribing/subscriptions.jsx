@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import Cookies from 'js-cookie';
 import update from 'react-addons-update';
 
 import {connect as ReduxConn} from 'react-redux';
-import UserActions from '../../reducers/actions/userAction';
+import UserActions from '../../redux/actions/userAction';
 
 import SubsApp from './subsApp';
 import SubsTmplService from './subscriptions.ajax';
@@ -31,9 +30,8 @@ class Subscriptions extends Component {
 
   // subTemplate 배열에 저장 하고 image 이름에 맞춰 같이 저장 하기
   ajaxGetSubTmtl = async () => {
-    const userToken = Cookies.getJSON('auth').status.JWT;
 
-    const response = await SubsTmplService.getList(userToken);
+    const response = await SubsTmplService.getList();
 
     this.setState({
       staticSubscribeArr: response.data.message,
