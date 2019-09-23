@@ -18,3 +18,12 @@ export function getUserByEmail(email, token) {
     },
   });
 }
+
+export function getSubscriptionByToken(token) {
+  return axios.get(`${process.env.REACT_APP_NODE_API_URL}/users/auth/check`, {
+    headers: {
+      // Request Header
+      'x-access-token': token,
+    },
+  });
+}
