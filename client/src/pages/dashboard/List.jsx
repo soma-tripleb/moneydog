@@ -39,7 +39,7 @@ class List extends Component {
           </div>
         </div>
         <div className='img-border'>
-          <img className="line-Img" alt='img not found' style={{height: '5vh', borderRadius: '5px'}}/>
+          <img className="line-Img" alt='x' style={{height: '5vh', borderRadius: '5px'}}/>
         </div>
         <div>{this.state.result ? this.state.result.name : '' }</div>
       </div>

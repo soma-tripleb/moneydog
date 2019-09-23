@@ -59,7 +59,7 @@ class Categories extends Component {
               <div key={index} className="container w-100 p-3" id="inner-element">
                 <div className="row">
                   <div className="col">
-                    <img src='' alt={data.name} style={{height: '5vh', borderRadius: '5px', paddingLeft: '0px'}}/>
+                    <img src={'/'+ data.logo} alt={data.name} style={{height: '5vh', borderRadius: '5px', paddingLeft: '0px'}}/>
                   </div>
                   <div className="col">
                     {data.name}
