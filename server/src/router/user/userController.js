@@ -69,7 +69,7 @@ router.get('/auth/check', (req, res, next) => {
   const userEmail = jwtDecode(token).param;
   UserService.getUser(userEmail)
     .then((result) => {
-      res.send(result);
+      res.send(result.message.subscription);
     })
     .catch((err) => {
       res.send('유저가 없습니다. ', err);
