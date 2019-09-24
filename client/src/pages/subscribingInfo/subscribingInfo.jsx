@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import update from 'react-addons-update';
 import { connect as ReduxConn } from 'react-redux';
 
-import Cookies from 'js-cookie';
-
 import SubsTmpl from './subsTmpl';
 import SubsTmplService from './subscribingInfo.ajax';
 
@@ -105,8 +103,6 @@ class SubscribingInfo extends Component {
     e.preventDefault();
 
     const { userInputList } = this.state;
-    const userToken = Cookies.getJSON('auth').status.JWT;
-
     userInputList.map((info) => {
       if (info.price === '') {
         alert('결제금액을 입력해주세요');
@@ -124,8 +120,8 @@ class SubscribingInfo extends Component {
       }
     });
 
-    SubsTmplService.updateUserSubsInfo(userToken, userInputList);
-  }
+    SubsTmplService.updateUserSubsInfo(userInputList);
+  };
 
   handleUserInputChange = (name, element, userInput) => {
     let inputList = '';

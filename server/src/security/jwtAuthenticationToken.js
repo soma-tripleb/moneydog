@@ -29,6 +29,12 @@ const checkJWT = (token) =>{
   });
 };
 
+const decodeJWT = (token) =>{
+  return jwt.decode(token);
+};
+
 export {
-  createJWT, checkJWT,
+  createJWT,
+  checkJWT,
+  decodeJWT,
 };

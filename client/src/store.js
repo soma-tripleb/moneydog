@@ -2,21 +2,20 @@ import {createStore, applyMiddleware} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import {createLogger} from 'redux-logger';
-import rootReducer from './reducers';
+import rootReducer from './redux/reducers';
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 
 const initialState = {};
-const logger = createLogger();
+// const logger = createLogger();
 
-const middleware = [thunk, logger];
+const middleware = [thunk];
 
-// Normal redux
 const store = createStore(
   rootReducer,
   initialState,
-  composeWithDevTools(applyMiddleware(...middleware)),
+  composeWithDevTools(applyMiddleware(...middleware))
 );
 
 export default store;

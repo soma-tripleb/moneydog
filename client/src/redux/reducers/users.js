@@ -1,18 +1,19 @@
-import { GET_USERS, GET_USERS_SUBSTMPL_LIST } from '../actionType';
+import {GET_SUBS, GET_USERS_SUBSTMPL_LIST} from '../actions/actionType';
 import update from 'react-addons-update';
 
 // subscription
 const initialState =
 {
   subsTmplList: [],
+  subs: [],
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_USERS:
+    case GET_SUBS:
       return {
         ...state,
-        users: action.payload,
+        subs: action.subsInfo,
       };
 
     case GET_USERS_SUBSTMPL_LIST:

@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import Cookies from 'js-cookie';
 import update from 'react-addons-update';
 
 import {connect as ReduxConn} from 'react-redux';
-import UserActions from '../../reducers/actions/userAction';
+import UserActions from '../../redux/actions/userAction';
 
 import SubsApp from './subsApp';
 import SubsTmplService from './subscriptions.ajax';
@@ -31,9 +30,9 @@ class Subscriptions extends Component {
 
   // subTemplate 배열에 저장 하고 image 이름에 맞춰 같이 저장 하기
   ajaxGetSubTmtl = async () => {
-    const userToken = Cookies.getJSON('auth').status.JWT;
 
-    const response = await SubsTmplService.getList(userToken);
+    const response = await SubsTmplService.getList();
+
     this.setState({
       staticSubscribeArr: response.data.message,
     });
@@ -45,7 +44,7 @@ class Subscriptions extends Component {
     );
   };
 
-  // staticSubscribeArr 에서 SubscribingArr 로 옮기기, /subscribing Selecting App에서 Selected App으로 선택하기
+  // staticSubscribeArr 에서 SubscribingArr 로 옮기기
   insertContact = (seq, logo, name) => {
     let flag = false;
     this.state.SubscribingArr.map((content) =>{
@@ -81,7 +80,7 @@ class Subscriptions extends Component {
     e.preventDefault();
 
     this.props.REDUX_USER_SET_SUBSTMPL_LIST(this.state.SubscribingArr);
-    this.props.history.push('/subscription/subscribing-info');
+    this.props.history.push('/user/subscribing-info');
   };
 
   makeStaticSubscribeApp = () => {

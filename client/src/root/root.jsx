@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 
-import {connect, Provider} from 'react-redux';
+import {Provider} from 'react-redux';
 // import {store, persistor} from '../store';
 import store from '../store';
+
 import 'antd/dist/antd.less';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
@@ -20,6 +21,7 @@ class Root extends Component {
     return (
       <Provider store={store}>
         <BrowserRouter>
+
           <Row>
             <Layout className="layout">
               <Head/>
@@ -27,6 +29,7 @@ class Root extends Component {
               <Foot/>
             </Layout>
           </Row>
+
         </BrowserRouter>
       </Provider>
     );
