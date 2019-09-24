@@ -10,15 +10,7 @@ const persistConfig = {
   storage,
 };
 
-const initialState = {};
-
 const middleware = [thunk];
-
-const tempstore = createStore(
-  rootReducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
 
 const enhancedReducer = persistReducer(persistConfig, rootReducer);
 
