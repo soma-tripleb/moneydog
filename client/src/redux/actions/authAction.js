@@ -28,6 +28,31 @@ const loginRequest = (email, password) => async (dispatch) => {
     });
 };
 
+const registerRequest = (email, password, nickname) => async (dispatch) => {
+  const AJAX_URL = `${SERVER_URL}/auth/signUp`;
+  const AJAX_DATA = {
+    userInfo: {
+      email: email,
+      password: password,
+      nickname: nickname,
+    },
+  };
+
+  dispatch(LOGIN_TRY());
+
+  return axios
+    .post(AJAX_URL, AJAX_DATA)
+    .then((res) => {
+      dispatch(LOGIN_SUCCESS());
+      return res;
+    })
+    .catch((err) => {
+      dispatch(LOGIN_FAILURE());
+      return err.response;
+    });
+};
+
+
 const logoutRequest = () =>(dispatch) => {
   dispatch(LOGOUT());
 
@@ -45,4 +70,5 @@ const LOGIN_FAILURE = () => { return { type: AUTH_LOGIN_FAILURE }; };
 export default {
   loginRequest,
   logoutRequest,
+  registerRequest,
 };
