@@ -48,22 +48,28 @@ class DashBoard extends Component {
 
   // Get static Subsribe Service
   ajaxGetSubTemplate = async () => {
-    const token = this.props.token;
-    const response = await SubsTmplService.getList(token);
+    const response = await SubsTmplService.getList();
     this.setState({
       staticSubscribeArr: response.data.message,
     });
 
-    this.state.staticSubscribeArr.map(
-      (content) => {
-        content.logo = image[content.thumbnail];
-      }
-    );
+    this.setState({
+      staticSubscribeArr: this.state.staticSubscribeArr.map(
+        (content) => {
+          return {...content, logo: image[content.thumbnail]};
+        }
+      )
+    });
+    // this.state.staticSubscribeArr.map(
+    //   (content) => {
+    //     content.logo = image[content.thumbnail];
+    //   }
+    // );
     return this.state.staticSubscribeArr;
   };
 
   fetchSubscriptionInfo = async () => {
-    const response = await service.getSubscriptionByToken(this.props.token);
+    const response = await service.getSubscriptionByToken();
     this.setState({
       subscription: response.data,
     });
@@ -131,7 +137,7 @@ class DashBoard extends Component {
 }
 // Access Redux store
 const mapStateToProps = (state) => ({
-  token: state.auth.status.JWT,
+  // token: state.auth.status.JWT,
 });
 
 // get action
