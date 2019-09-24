@@ -30,7 +30,6 @@ class Subscriptions extends Component {
 
   // subTemplate 배열에 저장 하고 image 이름에 맞춰 같이 저장 하기
   ajaxGetSubTmtl = async () => {
-
     const response = await SubsTmplService.getList();
 
     this.setState({
