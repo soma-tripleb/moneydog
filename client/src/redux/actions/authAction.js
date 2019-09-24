@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import { AUTH_LOGIN_TRY, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE, AUTH_LOGOUT } from './actionType';
+import {AUTH_LOGIN_TRY, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE, AUTH_LOGOUT, GET_SUBS} from './actionType';
 
 const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
 
@@ -55,6 +55,10 @@ const registerRequest = (email, password, nickname) => async (dispatch) => {
 
 const logoutRequest = () =>(dispatch) => {
   dispatch(LOGOUT());
+  dispatch({
+    type: GET_SUBS,
+    subsInfo: [],
+  });
 
   Cookies.remove('token');
 };

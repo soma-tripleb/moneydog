@@ -23,10 +23,17 @@ export const getSubsInfo = () => async (dispatch) => {
   await axios
     .get(AJAX_URL, headerConfig)
     .then((res) => {
-      dispatch({
-        type: GET_SUBS,
-        subsInfo: res.data.message,
-      });
+      if (typeof res.data.message === 'string') {
+        dispatch({
+          type: GET_SUBS,
+          subsInfo: [],
+        });
+      } else {
+        dispatch({
+          type: GET_SUBS,
+          subsInfo: res.data.message,
+        });
+      }
     })
     .catch((err) => {
       return err.response;
