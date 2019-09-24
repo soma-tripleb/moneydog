@@ -15,8 +15,8 @@ class CalendarClass extends Component {
   getListData = (value, subscriptions) => {
     let listData;
     subscriptions.map((subscription) => {
-      if (moment(subscription.renewal).date() === value.date()) {
-        listData = [{type: subscription.name}];
+      if (moment(subscription.renewal).date() === value.date() && subscription.renewal != undefined) {
+        listData = [{type: subscription.logo}];
       }
     });
     return listData || [];
@@ -25,13 +25,11 @@ class CalendarClass extends Component {
   dateCellRender = (value) => {
     const subscriptions = this.props.data;
     const listData = this.getListData(value, subscriptions);
-    console.log(`list data : ${JSON.stringify(listData)}`);
     return (
       <ul className="events">
         {listData.map((item) => (
           <li key={item.type}>
-            <img className="subscribeImg" src=""
-              alt='img not found'/>
+            <img className="subscribeImg" src={'/'+item.type} alt='img not found'/>
           </li>
         ))}
       </ul>

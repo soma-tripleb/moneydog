@@ -40,16 +40,8 @@ class Categories extends Component {
         <p><u> 구독 중인 서비스 </u></p>
         <PageHeader title="구독 중인 서비스"
           extra={[
-            <Button key="2" onClick={() => {
-              this.sortByPrice(data);
-            }}>
-                          가격 순
-            </Button>,
-            <Button key="1" onClick={() => {
-              this.sortByLeftDay(data);
-            }}>
-                          남은 일
-            </Button>,
+            <Button key="2" onClick={() => {this.sortByPrice(data);}}>가격 순</Button>,
+            <Button key="1" onClick={() => {this.sortByLeftDay(data);}}>남은 일</Button>,
           ]}>
         </PageHeader>
         <br/>
