@@ -36,13 +36,9 @@ class DashBoard extends Component {
 
   // Component Life Cycle
   componentDidMount() {
-    // this.fetchSubscriptionInfo();
-    // this.ajaxGetSubTemplate();
     Promise.all([this.fetchSubscriptionInfo(), this.ajaxGetSubTemplate()])
       .then((values) => {
-        console.log(values);
-        console.log(`values0 : ${values[0]}`);
-        console.log(`values1 : ${values[1]}`);
+        this.insertSubscibeLogo(values[0], values[1]);
       });
   }
   // componentDidUpdate(prevProps, prevState, snapshot) {
@@ -74,12 +70,20 @@ class DashBoard extends Component {
     return this.state.subscription;
   };
 
-  insertSubscibeLogo = () => {
-    console.log('update logo');
-    const subscription = this.state.subscription;
-    const staticSubscribeArr = this.state.staticSubscribeArr;
-    console.log(`subscription : ${subscription}`)
-    console.log(`static : ${staticSubscribeArr}`)
+  // insertSubscibeLogo = () => {
+  //   const subscription = this.state.subscription;
+  //   const staticSubscribeArr = this.state.staticSubscribeArr;
+  //   subscription.map((subscribe) => {
+  //     staticSubscribeArr.map((staticName) => {
+  //       if (subscribe.name === staticName.name) {
+  //         subscribe.logo = staticName.logo;
+  //       }
+  //     });
+  //   });
+  //   return subscription;
+  // };
+
+  insertSubscibeLogo = (subscription, staticSubscribeArr) => {
     subscription.map((subscribe) => {
       staticSubscribeArr.map((staticName) => {
         if (subscribe.name === staticName.name) {
@@ -87,10 +91,10 @@ class DashBoard extends Component {
         }
       });
     });
+    return subscription;
   };
 
   render() {
-    console.log('render')
     return (
         <>
           <div className="container">

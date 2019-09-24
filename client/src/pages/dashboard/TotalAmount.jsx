@@ -17,7 +17,6 @@ class TotalAmount extends Component {
       const icon = <Icon type="loading" style={{fontSize: 24}} spin />;
       return (<Spin indicator={icon} />);
     }
-    console.log(`test : ${this.props.test}`)
     return (
       <div>
       TotalAmount
