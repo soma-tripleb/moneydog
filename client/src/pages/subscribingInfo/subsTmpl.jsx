@@ -36,12 +36,16 @@ class SubsTmpl extends Component {
     const dateObj = this.state.dateObject;
 
     if (e === undefined) {
+      console.log(dateObj);
+
       this.props.onUserInputChange(
         dateObj.dataId,
         dateObj.className,
         dateObj.date
       );
     } else {
+      console.log(e.target);
+
       let classNameTemp = '';
 
       if (e.target.id === 'price')
@@ -72,7 +76,8 @@ class SubsTmpl extends Component {
     const { info } = this.props;
     const inputData = this.props.inputData;
 
-    const priceId = `price-${info.index}`;
+    const inappId = `inapp-${info.name}`;
+    const siteId = `site-${info.name}`;
 
     return (
       <>
@@ -94,7 +99,6 @@ class SubsTmpl extends Component {
                   type="text"
                   id="price"
                   className="form-control"
-                  name={priceId}
                   data-id={info.name}
                   value={inputData.price}
                   onChange={this.handleChange}
@@ -120,26 +124,26 @@ class SubsTmpl extends Component {
                 <input
                   type="radio"
                   className="channel"
-                  name="inlineRadioOptions"
-                  id="inapp"
+                  name={info.name}
+                  id={inappId}
                   data-id={info.name}
                   value="inapp"
                   onChange={this.handleChange}
                 />
-                <label className="form-check-label" htmlFor="inapp">&nbsp;IN-APP</label>
+                <label className="form-check-label" htmlFor={inappId}>&nbsp;IN-APP</label>
               </div>
 
               <div className="form-check form-check-inline">
                 <input
                   type="radio"
                   className="channel"
-                  name="inlineRadioOptions"
-                  id="site"
+                  name={info.name}
+                  id={siteId}
                   data-id={info.name}
                   value="site"
                   onChange={this.handleChange}
                 />
-                <label className="form-check-label" htmlFor="site">&nbsp;SITE</label>
+                <label className="form-check-label" htmlFor={siteId}>&nbsp;SITE</label>
               </div>
             </div>
 
