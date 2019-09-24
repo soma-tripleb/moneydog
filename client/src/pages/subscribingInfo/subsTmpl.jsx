@@ -11,22 +11,51 @@ class SubsTmpl extends Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      date: '',
+      dateObject: {
+        className: 'paymentDate',
+        dataId: '',
+        date: '',
+      }
     };
   }
 
+  componentDidMount = () => {
+    const subsName = this.props.info.name;
+
+    this.setState({
+      dateObject: {
+        ...this.state.dateObject,
+        dataId: subsName,
+      }
+    });
+  }
+
   handleChange = (e) => {
-    this.props.onUserInputChange(
-      e.target.dataset.id,
-      e.target.className,
-      e.target.value,
-      this.state.date
-    );
+    const dateObj = this.state.dateObject;
+
+    if (e === undefined) {
+      this.props.onUserInputChange(
+        dateObj.dataId,
+        dateObj.className,
+        dateObj.date
+      );
+    } else {
+      this.props.onUserInputChange(
+        e.target.dataset.id,
+        e.target.className,
+        e.target.value,
+      );
+    }
   }
 
   onDatePickerChange = (date) => {
     this.setState({
-      date: date,
+      dateObject: {
+        ...this.state.dateObject,
+        date: date,
+      },
+    }, () => {
+      this.handleChange();
     });
   }
 
@@ -35,7 +64,6 @@ class SubsTmpl extends Component {
     const inputData = this.props.inputData;
 
     const priceId = `price-${info.index}`;
-    const paymentDateId = `paymentDate-${info.index}`;
 
     return (
       <>
@@ -61,11 +89,7 @@ class SubsTmpl extends Component {
             <div className="col-sm">
               <label>결제일</label>
               <DatePickers
-                className="paymentDate"
-                name={paymentDateId}
-                data-id={info.name}
                 onDatePickerChange={this.onDatePickerChange}
-                onChange={this.handleChange}
               ></DatePickers>
             </div>
 

@@ -8,51 +8,11 @@ import Cookies from 'js-cookie';
 import SubsTmpl from './subsTmpl';
 import SubsTmplService from './subscribingInfo.ajax';
 
+import { TEST_USER_SELECTED_SUBS, TEST_USER_SUBSTMPL_INFO_LIST } from './sample/userSubsDatas';
+
 import './subscribingInfo.css';
 
 const NOW = DateUtil.NOW();
-
-const TEST_SUBS = [
-  {
-    logo: undefined,
-    name: 'Bugs',
-    seq: 4,
-  },
-  {
-    logo: '53034c07a6a95b5c4d8f1bdaa97383d9.png',
-    name: 'Flo',
-    seq: 5,
-  },
-  {
-    logo: 'b5dd21c4668e2e0284ec5a1e4d9967ce.png',
-    name: 'Melon',
-    seq: 6,
-  },
-];
-
-const TEST_SUBS_USER = [
-  {
-    seq: 4,
-    name: 'Bugs',
-    price: '',
-    paymentDate: NOW,
-    channel: '',
-  },
-  {
-    seq: 5,
-    name: 'Flo',
-    price: '',
-    paymentDate: NOW,
-    channel: '',
-  },
-  {
-    seq: 6,
-    name: 'Melon',
-    price: '',
-    paymentDate: NOW,
-    channel: '',
-  }
-];
 
 const mapStateToProps = (state) => ({
   USERS: state.users,
@@ -81,8 +41,8 @@ class SubscribingInfo extends Component {
 
     // TEST
     if (userSelectedListLength === 0) {
-      tempSubsList = TEST_SUBS;
-      tempInputList = TEST_SUBS_USER;
+      tempSubsList = TEST_USER_SELECTED_SUBS;
+      tempInputList = TEST_USER_SUBSTMPL_INFO_LIST;
     } else {
       tempSubsList = userSeletedList;
 
@@ -110,20 +70,20 @@ class SubscribingInfo extends Component {
     const { userInputList } = this.state;
     const userToken = Cookies.getJSON('auth').status.JWT;
 
-    userInputList.map((info) => {
+    userInputList.some((info) => {
       if (info.price === '') {
         alert('결제금액을 입력해주세요');
-        return false;
+        return true;
       } ;
 
       if (info.paymentDate === '') {
         alert('결제일을 입력해주세요');
-        return false;
+        return true;
       }
 
       if (info.channel === '') {
         alert('결제 체널을 체크해주세요');
-        return false;
+        return true;
       }
     });
 
@@ -132,15 +92,16 @@ class SubscribingInfo extends Component {
     // SubsTmplService.updateUserSubsInfo(userToken, userInputList);
   }
 
-  handleUserInputChange = (name, element, userInput, date) => {
+  handleUserInputChange = (name, element, userInput) => {
+    console.log('SUBSCRIBING: ', name);
+    console.log('SUBSCRIBING: ', element);
     console.log('SUBSCRIBING: ', userInput);
-    console.log('SUBSCRIBING: ', date);
 
     let inputList = '';
 
     // TEST
     if (this.state.userInputList.length === 0) {
-      inputList = TEST_SUBS_USER;
+      inputList = TEST_USER_SUBSTMPL_INFO_LIST;
     } else {
       inputList = this.state.userInputList;
     }
