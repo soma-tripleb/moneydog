@@ -13,16 +13,17 @@ class List extends Component {
   state = {
     result: null,
   };
-
-  componentWillReceiveProps(nextProps, nextContext) {
-    const subscriptions = nextProps.data;
-    subscriptions.some((subscription) => {
-      if (moment(subscription.renewal).date() === nextProps.date) {
-        return this.state.result = subscription;
-      } else {
-        return this.state.result = '';
-      }
-    });
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const subscriptions = prevProps.data;
+    if (subscriptions != null) {
+      subscriptions.some((subscription) => {
+        if (moment(subscription.renewal).date() === prevState.date) {
+          return this.state.result = subscription;
+        } else {
+          return this.state.result = '';
+        }
+      });
+    }
   }
 
   render() {
