@@ -5,7 +5,7 @@ import {connect as ReduxConn} from 'react-redux';
 import authActions from '../../redux/actions/authAction';
 import * as service from './signup.ajax';
 import './signup.css';
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie';
 
 class SignUp extends Component {
   state = {

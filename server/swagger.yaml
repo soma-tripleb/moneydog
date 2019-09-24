@@ -8,10 +8,10 @@ info:
 host: "localhost:5000"
 basePath: /
 tags:
-  - name: user
+  - name: subscription
     description: 사용자 정보
   - name: subscription
-    description: 구독 서비스 정보 
+    description: 구독 서비스 정보
 schemes:
   - http
   - https
@@ -37,7 +37,7 @@ paths:
     post:
       tags:
         - subscription
-      summary: Add a new user subscriptions info
+      summary: Add a new subscription subscriptions info
       parameters:
         - in: body
           name: body
@@ -55,4 +55,3 @@ definitions:
         type: string
       name:
         type: string
-  
