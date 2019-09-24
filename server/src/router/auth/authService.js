@@ -13,7 +13,14 @@ const register = async (userInfo) => {
     .digest('hex');
   userInfo.role = 'BASIC';
 
-  return await AuthRepository.createUser(userInfo);
+  const result = await AuthRepository.createUser(userInfo);
+
+  if (result.status === 400 ) {
+    return result;
+  } else {
+    const jwt = createJWT(userInfo.email);
+    return {status: 201, success: true, message: '회원가입에 성공했습니다.', token: jwt};
+  }
 };
 
 const login = async (userInfo) => {

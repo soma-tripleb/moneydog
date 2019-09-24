@@ -14,7 +14,8 @@ class List extends Component {
     result: null,
   };
 
-  componentWillReceiveProps(nextProps, nextContext) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
     const subscriptions = nextProps.data;
     subscriptions.some((subscription) => {
       if (moment(subscription.renewal).date() === nextProps.date) {

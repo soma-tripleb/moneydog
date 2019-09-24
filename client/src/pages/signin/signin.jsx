@@ -28,7 +28,7 @@ class Signin extends Component {
     if (result.status === 200) {
       Cookies.set('token', result.data.token);
       this.props.getSubsInfo();
-      this.props.history.push('/user/subscribing');
+      this.props.history.push('/user/dashboard');
     } else if (result.status === 409) {
       alert(result.data.message);
     } else if (result.status === 400) {
