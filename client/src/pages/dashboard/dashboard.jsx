@@ -11,87 +11,43 @@ import * as service from './dashboard.ajax';
 import 'babel-polyfill';
 import './dashboard.css';
 import {connect} from 'react-redux';
-import SubsTmplService from '../subscribing/subscriptions.ajax';
 import * as image from '../../static/img/templogo';
 
 class DashBoard extends Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.state= {
-      subscription: null,
-      selectedValue: null,
-      staticSubscribeArr: []
-    };
-  }
+  state= {
+    subscription: null,
+    selectedValue: new Date(),
+    staticSubscribeArr: []
+  };
 
   handleChange = (e) => {
     this.setState({selectedValue: e.format('YYYY-MM-DD')});
   };
 
   convertDate = () => {
-    const convert = moment(this.state.selectedValue).date();
-    return convert;
-  }
-
-  // Component Life Cycle
-  componentDidMount() {
-    Promise.all([this.fetchSubscriptionInfo(), this.ajaxGetSubTemplate()])
-      .then((values) => {
-        this.insertSubscibeLogo(values[0], values[1]);
-      });
-  }
-  // componentDidUpdate(prevProps, prevState, snapshot) {
-  //   console.log('componentDidUpdate')
-  //   this.insertSubscibeLogo();
-  // }
-
-  // Get static Subsribe Service
-  ajaxGetSubTemplate = async () => {
-    const token = this.props.token;
-    const response = await SubsTmplService.getList(token);
-    this.setState({
-      staticSubscribeArr: response.data.message,
-    });
-
-    this.state.staticSubscribeArr.map(
-      (content) => {
-        content.logo = image[content.thumbnail];
-      }
-    );
-    return this.state.staticSubscribeArr;
+    return moment(this.state.selectedValue).date();
   };
 
+  componentDidMount() {
+    this.fetchSubscriptionInfo();
+  }
+
   fetchSubscriptionInfo = async () => {
-    const response = await service.getSubscriptionByToken(this.props.token);
+    const response = await service.getSubscriptionByToken();
+
     this.setState({
       subscription: response.data,
     });
-    return this.state.subscription;
-  };
 
-  // insertSubscibeLogo = () => {
-  //   const subscription = this.state.subscription;
-  //   const staticSubscribeArr = this.state.staticSubscribeArr;
-  //   subscription.map((subscribe) => {
-  //     staticSubscribeArr.map((staticName) => {
-  //       if (subscribe.name === staticName.name) {
-  //         subscribe.logo = staticName.logo;
-  //       }
-  //     });
-  //   });
-  //   return subscription;
-  // };
-
-  insertSubscibeLogo = (subscription, staticSubscribeArr) => {
-    subscription.map((subscribe) => {
-      staticSubscribeArr.map((staticName) => {
-        if (subscribe.name === staticName.name) {
-          subscribe.logo = staticName.logo;
+    this.setState({
+      subscription: this.state.subscription.map(
+        (content) => {
+          return {...content, logo: image[content.name.toLowerCase()]};
         }
-      });
+      )
     });
-    return subscription;
+
+    return this.state.subscription;
   };
 
   render() {
@@ -121,9 +77,6 @@ class DashBoard extends Component {
               </div>
 
             </div>
-
-            <footer>
-            </footer>
           </div>
         </>
     );
@@ -131,7 +84,6 @@ class DashBoard extends Component {
 }
 // Access Redux store
 const mapStateToProps = (state) => ({
-  token: state.auth.status.JWT,
 });
 
 // get action
