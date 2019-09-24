@@ -31,9 +31,20 @@ class Subscriptions extends Component {
   // subTemplate 배열에 저장 하고 image 이름에 맞춰 같이 저장 하기
   ajaxGetSubTmtl = async () => {
     const response = await SubsTmplService.getList();
+    const userSubsInfo = response.data.message;
+
+    this.props.subs.map((sub)=>{
+      const idx = userSubsInfo.findIndex((
+        (content) => {
+          return content.name.toLowerCase() === sub.name.toLowerCase();
+        }
+      ));
+      if (idx > -1) userSubsInfo.splice(idx, 1);
+    });
+
 
     this.setState({
-      staticSubscribeArr: response.data.message,
+      staticSubscribeArr: userSubsInfo,
     });
 
     this.setState({
@@ -157,7 +168,7 @@ class Subscriptions extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  users: state.users,
+  subs: state.users.subs,
 });
 
 const mapDispatchToProps = (dispatch) => {
