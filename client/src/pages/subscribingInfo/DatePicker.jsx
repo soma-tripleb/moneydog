@@ -28,6 +28,7 @@ class DatePickers extends Component {
             defaultValue={moment(NOW, dateFormat)}
             format={dateFormat}
             onChange={this.handleChange}
+            style={{width: '100%'}}
           />
         </div>
       </>

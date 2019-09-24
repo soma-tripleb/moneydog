@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Input } from 'antd';
+
 import DatePickers from './DatePicker';
 
 import './subscribingInfo.css';
@@ -40,9 +42,16 @@ class SubsTmpl extends Component {
         dateObj.date
       );
     } else {
+      let classNameTemp = '';
+
+      if (e.target.id === 'price')
+        classNameTemp = e.target.id;
+      else
+        classNameTemp = e.target.className;
+
       this.props.onUserInputChange(
         e.target.dataset.id,
-        e.target.className,
+        classNameTemp,
         e.target.value,
       );
     }
@@ -68,55 +77,70 @@ class SubsTmpl extends Component {
     return (
       <>
         <div className="container" id="subs-temp-container">
-          <div className="row">
-            <div className="col-sm">
+          <div className="row align-items-center">
+
+            {/* 사진 */}
+            <div className="logo col-xs-6 col-sm-3">
               <img className="logo-img" src={`/` + info.logo} alt="" />
             </div>
 
-            <div className="col-sm">
-              <label>결제금액</label>
-              <input
-                type="text"
-                className="price"
-                name={priceId}
-                data-id={info.name}
-                value={inputData.price}
-                onChange={this.handleChange}
-                placeholder="price"
-              />
+            {/* 결제 금액 */}
+            <div className="price col-xs-6 col-sm-3">
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">&#8361;</span>
+                </div>
+                <input
+                  type="text"
+                  id="price"
+                  className="form-control"
+                  name={priceId}
+                  data-id={info.name}
+                  value={inputData.price}
+                  onChange={this.handleChange}
+                  placeholder="결제 금액"
+                  aria-label="Amount (to the nearest dollar)"
+                />
+                {/* <div class="input-group-append">
+                  <span class="input-group-text">.00</span>
+                </div> */}
+              </div>
             </div>
 
-            <div className="col-sm">
-              <label>결제일</label>
+            {/* 결제일 */}
+            <div className="payment-date col-xs-6 col-sm-3">
               <DatePickers
                 onDatePickerChange={this.onDatePickerChange}
               ></DatePickers>
             </div>
 
-            <div className="radio col-sm">
-              <label>
+            {/* 결제 채널 */}
+            <div className="radio col-xs-6 col-sm-3">
+              <div className="form-check form-check-inline">
                 <input
                   type="radio"
                   className="channel"
+                  name="inlineRadioOptions"
+                  id="inapp"
                   data-id={info.name}
                   value="inapp"
-                  checked={(inputData.channel === 'inapp')}
                   onChange={this.handleChange}
                 />
-                inapp
-              </label>
+                <label className="form-check-label" htmlFor="inapp">&nbsp;IN-APP</label>
+              </div>
 
-              <label>
+              <div className="form-check form-check-inline">
                 <input
                   type="radio"
                   className="channel"
+                  name="inlineRadioOptions"
+                  id="site"
                   data-id={info.name}
                   value="site"
-                  checked={(inputData.channel === 'site')}
                   onChange={this.handleChange}
                 />
-                site
-              </label>
+                <label className="form-check-label" htmlFor="site">&nbsp;SITE</label>
+              </div>
             </div>
 
           </div>
