@@ -18,8 +18,8 @@ router.post('/signUp', async (req, res) => {
 
 router.post('/signIn', async (req, res) => {
   const userInfo = req.body.userInfo || '';
-  AuthService.checkParameter(res, userInfo);
 
+  AuthService.checkParameter(res, userInfo);
   AuthService.hasProperty(res, userInfo, 'email');
   AuthService.hasProperty(res, userInfo, 'password');
 

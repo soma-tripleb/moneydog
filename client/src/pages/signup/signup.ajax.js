@@ -18,15 +18,3 @@ export function responseGoogle(response) {
     console.log(err);
   });
 }
-
-export function createUser(userInfo) {
-  return axios.post(`${process.env.REACT_APP_NODE_API_URL}/auth/signUp`, {
-    userInfo: {
-      email: userInfo.email,
-      password: userInfo.password,
-      nickname: userInfo.nickname,
-    },
-  }).catch((err) => {
-    return err.response;
-  });
-}

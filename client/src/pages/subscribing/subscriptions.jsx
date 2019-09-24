@@ -36,11 +36,13 @@ class Subscriptions extends Component {
       staticSubscribeArr: response.data.message,
     });
 
-    this.state.staticSubscribeArr.map(
-      (content) => {
-        content.logo = image[content.thumbnail];
-      }
-    );
+    this.setState({
+      staticSubscribeArr: this.state.staticSubscribeArr.map(
+        (content) => {
+          return {...content, logo: image[content.thumbnail]};
+        }
+      )
+    });
   };
 
   // staticSubscribeArr 에서 SubscribingArr 로 옮기기
@@ -84,28 +86,32 @@ class Subscriptions extends Component {
 
   makeStaticSubscribeApp = () => {
     const list = this.state.staticSubscribeArr.map(
-      (content, i) => (<SubsApp key={i} onInsert={this.insertContact.bind(this)} subsAppInfo={
-        {
-          seq: content.seq,
-          logo: content.logo,
-          name: content.name,
-          label: '+',
-        }
-      }/>)
+      (content, i) => (
+        <SubsApp key={i+content.name} onInsert={this.insertContact.bind(this)} subsAppInfo={
+          {
+            seq: content.seq,
+            logo: content.logo,
+            name: content.name,
+            label: '+',
+          }
+        }/>
+      )
     );
     return list;
   };
 
   makeSubscribingApp = () => {
     const list = this.state.SubscribingArr.map(
-      (content, i) => (<SubsApp key={i} onDelete={this.deleteContant.bind(this)} subsAppInfo={
-        {
-          seq: content.seq,
-          logo: content.logo,
-          name: content.name,
-          label: '-',
-        }
-      }/>)
+      (content, i) => (
+        <SubsApp key={i+content.name} onDelete={this.deleteContant.bind(this)} subsAppInfo={
+          {
+            seq: content.seq,
+            logo: content.logo,
+            name: content.name,
+            label: '-',
+          }
+        }/>
+      )
     );
     return list;
   };

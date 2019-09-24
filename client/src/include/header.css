@@ -1,3 +1,11 @@
 .logout {
     color: #007BFF;
 }
+
+.headerFont {
+    font-family: fantasy;
+}
+
+.categoryFont {
+    font-family: sans-serif;
+}

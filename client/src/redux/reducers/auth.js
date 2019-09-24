@@ -7,16 +7,11 @@ const initialState =
   {
     status: 'INIT',
   },
-  status:
-  {
-    isLoggedIn: false,
-    currentUser: '',
-  },
 };
 
 export default function authentication(state = initialState, action) {
   switch (action.type) {
-    case ACTION_TYPE.AUTH_LOGIN:
+    case ACTION_TYPE.AUTH_LOGIN_TRY:
       return update(state, {
         login: {
           status: { $set: 'WAITING' },
@@ -32,10 +27,6 @@ export default function authentication(state = initialState, action) {
       return update(state, {
         login: {
           status: { $set: 'SUCCESS' },
-        },
-        status: {
-          isLoggedIn: { $set: true },
-          JWT: { $set: action.token },
         },
       });
     case ACTION_TYPE.AUTH_LOGIN_FAILURE:

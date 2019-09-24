@@ -13,6 +13,21 @@ class Report extends Component {
     most_unused: '-'
   };
 
+  componentDidMount() {
+    this.initialState();
+  }
+
+  initialState = () =>{
+    let totalPay = 0;
+    this.props.subs.map(
+      (content) =>{
+        totalPay += content.price;
+      });
+    this.setState({
+      total_pay: totalPay,
+    });
+  };
+
   showSubsList = () =>{
     if ( typeof this.props.subs === 'undefined') {
       return;

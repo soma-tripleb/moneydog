@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {connect as ReduxConn} from 'react-redux';
 
+import authActions from '../../redux/actions/authAction';
 import * as service from './signup.ajax';
 import './signup.css';
-import {Link} from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 class SignUp extends Component {
   state = {
@@ -47,15 +50,16 @@ class SignUp extends Component {
     }
 
     // 모두 통과시 createUser
-    const response = await service.createUser(this.state);
+    // const response = await service.createUser(this.state);
+    const result = await this.props.registerRequest(this.state.email, this.state.password, this.state.nickname);
 
-    if (response.status === 400) {
+    if (result.status === 400) {
       this.setState({
         errorMessage: '이미 존재하는 아이디 입니다.',
       });
-    } else if (response.status === 201) {
-      alert('회원 가입 성공! 로그인 해주세요');
-      this.props.history.push('/subscription/subscribing');
+    } else if (result.status === 201) {
+      Cookies.set('token', result.data.token);
+      this.props.history.push('/user/subscribing');
     }
   };
 
@@ -196,4 +200,15 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+const mapStateToProps = (state) => ({
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    registerRequest: async (email, password, nickname) => {
+      return await dispatch(authActions.registerRequest(email, password, nickname));
+    },
+  };
+};
+
+export default ReduxConn(mapStateToProps, mapDispatchToProps)(SignUp);

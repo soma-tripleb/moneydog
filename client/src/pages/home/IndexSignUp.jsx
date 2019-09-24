@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import dashboard from '../../static/img/templogo/dashboard.png';
+import dashboard from '../../static/img/index/dashboard.png';
 
 class IndexSignUp extends Component {
   render() {

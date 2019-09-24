@@ -51,10 +51,10 @@ class Head extends Component {
       <>
         <ul className="nav justify-content-center">
           <li className="nav-item">
-            <Link to="/" className="navbar-brand nav-link" style={{ fontFamily: 'GOTHAN-ULTRA' }}>MONEYDOG</Link>
+            <Link to="/" className="navbar-brand nav-link headerFont"> MONEY DOG </Link>
           </li>
         </ul>
-        <ul className="nav justify-content-center" style={{fontFamily: 'GOTHAN-XLIGHT'}}>
+        <ul className="nav justify-content-center categoryFont">
           {this.isLogined()}
         </ul>
       </>
