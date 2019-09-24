@@ -25,6 +25,7 @@ class CalendarClass extends Component {
   dateCellRender = (value) => {
     const subscriptions = this.props.data;
     const listData = this.getListData(value, subscriptions);
+    console.log(`list data : ${JSON.stringify(listData)}`);
     return (
       <ul className="events">
         {listData.map((item) => (
