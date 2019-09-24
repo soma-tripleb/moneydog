@@ -13,16 +13,17 @@ class List extends Component {
   state = {
     result: null,
   };
-
-  componentWillReceiveProps(nextProps, nextContext) {
-    const subscriptions = nextProps.data;
-    subscriptions.some((subscription) => {
-      if (moment(subscription.renewal).date() === nextProps.date) {
-        return this.state.result = subscription;
-      } else {
-        return this.state.result = '';
-      }
-    });
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const subscriptions = prevProps.data;
+    if (subscriptions != null) {
+      subscriptions.some((subscription) => {
+        if (moment(subscription.renewal).date() === prevState.date) {
+          return this.state.result = subscription;
+        } else {
+          return this.state.result = '';
+        }
+      });
+    }
   }
 
   render() {
@@ -30,7 +31,6 @@ class List extends Component {
       const icon = <Icon type="loading" style={{fontSize: 24}} spin />;
       return (<Spin indicator={icon} />);
     }
-
     return (
       <div>
         <div className='row img-back'>
@@ -38,9 +38,9 @@ class List extends Component {
             <h3>{this.props.date}일</h3>
           </div>
         </div>
-        <div className='img-border'>
-          <img className="line-Img" alt='img not found' style={{height: '5vh', borderRadius: '5px'}}/>
-        </div>
+        {this.state.result ? <div className='img-border'>
+          <img className="line-Img" alt='x' src={'/'+this.state.result.logo} style={{height: '5vh', borderRadius: '5px'}}/>
+        </div> : ''}
         <div>{this.state.result ? this.state.result.name : '' }</div>
       </div>
     );

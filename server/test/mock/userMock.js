@@ -22,7 +22,7 @@ const subscription = {
 const UserMock = {
   email: 'test@test.com',
   password: '1234',
-  nickname: 'test-user',
+  nickname: 'test-subscription',
   salt: '99999',
   role: 'test-role',
   subscription: subscription,

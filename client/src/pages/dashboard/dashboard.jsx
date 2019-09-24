@@ -11,12 +11,18 @@ import * as service from './dashboard.ajax';
 import 'babel-polyfill';
 import './dashboard.css';
 import {connect} from 'react-redux';
+import SubsTmplService from '../subscribing/subscriptions.ajax';
+import * as image from '../../static/img/templogo';
 
 class DashBoard extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.state= {user: null, selectedValue: null};
+    this.state= {
+      subscription: null,
+      selectedValue: null,
+      staticSubscribeArr: []
+    };
   }
 
   handleChange = (e) => {
@@ -30,14 +36,62 @@ class DashBoard extends Component {
 
   // Component Life Cycle
   componentDidMount() {
-    this.fetchUserInfo();
+    Promise.all([this.fetchSubscriptionInfo(), this.ajaxGetSubTemplate()])
+      .then((values) => {
+        this.insertSubscibeLogo(values[0], values[1]);
+      });
   }
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   console.log('componentDidUpdate')
+  //   this.insertSubscibeLogo();
+  // }
 
-  fetchUserInfo = async () => {
+  // Get static Subsribe Service
+  ajaxGetSubTemplate = async () => {
+    const token = this.props.token;
+    const response = await SubsTmplService.getList(token);
+    this.setState({
+      staticSubscribeArr: response.data.message,
+    });
+
+    this.state.staticSubscribeArr.map(
+      (content) => {
+        content.logo = image[content.thumbnail];
+      }
+    );
+    return this.state.staticSubscribeArr;
+  };
+
+  fetchSubscriptionInfo = async () => {
     const response = await service.getSubscriptionByToken(this.props.token);
     this.setState({
-      user: response.data,
+      subscription: response.data,
     });
+    return this.state.subscription;
+  };
+
+  // insertSubscibeLogo = () => {
+  //   const subscription = this.state.subscription;
+  //   const staticSubscribeArr = this.state.staticSubscribeArr;
+  //   subscription.map((subscribe) => {
+  //     staticSubscribeArr.map((staticName) => {
+  //       if (subscribe.name === staticName.name) {
+  //         subscribe.logo = staticName.logo;
+  //       }
+  //     });
+  //   });
+  //   return subscription;
+  // };
+
+  insertSubscibeLogo = (subscription, staticSubscribeArr) => {
+    subscription.map((subscribe) => {
+      staticSubscribeArr.map((staticName) => {
+        if (subscribe.name === staticName.name) {
+          subscribe.logo = staticName.logo;
+        }
+      });
+    });
+    return subscription;
   };
 
   render() {
@@ -48,21 +102,21 @@ class DashBoard extends Component {
               <div className="col-md-6">
                 {/* 달력*/}
                 <div className="calendar">
-                  <Calendar date={this.state.selectedValue} handleChange={this.handleChange} data={this.state.user}/>
+                  <Calendar date={this.state.selectedValue} handleChange={this.handleChange} data={this.state.subscription}/>
                 </div>
                 <hr/>
                 <div className="list">
-                  <List date={this.convertDate()} data={this.state.user} />
+                  <List date={this.convertDate()} data={this.state.subscription} />
                 </div>
               </div>
               {/* 구독중인 서비스 list */}
               <div className="col-md-6">
                 <div className='TotalAmount'>
-                  <TotalAmount data={this.state.user}/>
+                  <TotalAmount data={this.state.subscription}/>
                 </div>
                 <hr/>
                 <div className='categories'>
-                  <Categories data={this.state.user}/>
+                  <Categories data={this.state.subscription}/>
                 </div>
               </div>
 
