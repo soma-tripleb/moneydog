@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import PrivateRouter from './privateRouter';
-import { Home, Report, Dashboard, Info, SignUp, SignIn, Subscribing, SubscribingInfo, Recommend } from '../pages';
+import { Home, Report, Dashboard, SignUp, SignIn, Subscribing, SubscribingInfo, Recommend } from '../pages';
 
 class Router extends Component {
   render() {

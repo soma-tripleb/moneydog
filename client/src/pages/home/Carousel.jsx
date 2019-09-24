@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
-import dashboard from '../../static/img/templogo/dashboard.png';
-import report from '../../static/img/templogo/report.png';
-import subscribe from '../../static/img/templogo/subscribe.png';
+import dashboard from '../../static/img/index/dashboard.png';
+import report from '../../static/img/index/report.png';
+import subscribe from '../../static/img/index/subscribe.png';
 
 import './carosel.css';
 
