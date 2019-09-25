@@ -6,7 +6,6 @@ import 'antd/dist/antd.less';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import {Head, Foot} from '../include';
-import {Row, Layout} from 'antd';
 
 import {BrowserRouter} from 'react-router-dom';
 import Router from './router';
@@ -25,13 +24,11 @@ class Root extends Component {
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>
 
-            <Row>
-              <Layout className="layout">
-                <Head/>
-                <Router/>
-                <Foot/>
-              </Layout>
-            </Row>
+            <div className="layout">
+              <Head/>
+              <Router/>
+              <Foot/>
+            </div>
 
           </BrowserRouter>
         </PersistGate>

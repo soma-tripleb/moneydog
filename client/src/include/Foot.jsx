@@ -6,7 +6,7 @@ class Foot extends Component {
   render() {
     return (
         <>
-          <div className="m-t-3"/>
+          {/*<div className="m-t-3"/>*/}
           <footer className="mainfooter" role="contentinfo">
             <div className="footer-middle">
               <div className="container">

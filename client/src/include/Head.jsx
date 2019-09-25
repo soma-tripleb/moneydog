@@ -49,6 +49,7 @@ class Head extends Component {
   render() {
     return (
       <>
+        <header>
         <ul className="nav justify-content-center">
           <li className="nav-item">
             <Link to="/" className="navbar-brand nav-link headerFont"> MONEY DOG </Link>
@@ -57,6 +58,7 @@ class Head extends Component {
         <ul className="nav justify-content-center categoryFont">
           {this.isLogined()}
         </ul>
+        </header>
       </>
     );
   }
