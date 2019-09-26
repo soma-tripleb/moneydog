@@ -27,25 +27,24 @@ router.get('/:email', (req, res) => {
     });
 });
 
-// body: Json Data
-// router.post('/', (req, res) => {
-//   UserService.createOne(req.body)
-//     .then((result) => {
-//       res.send(result);
-//     })
-//     .catch((err) => {
-//       res.send(err);
-//     });
-// });
-
 router.post('/', (req, res) => {
-  const body = req.body;
+  UserService.createOne(req.body)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+router.post('/subs-info', (req, res) => {
+  const userData = req.body.userInputList;
   const token = req.header('x-access-token') || req.params.token;
 
   const auth = jwt.decode(token);
   const email = auth.param;
 
-  UserService.insertSubsInfo(email, body)
+  UserService.insertSubsInfo(email, userData)
     .then((result) => {
       res.send({ status: 200, success: true, message: result});
     })
