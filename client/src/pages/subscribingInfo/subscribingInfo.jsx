@@ -1,53 +1,16 @@
 import React, { Component } from 'react';
 import update from 'react-addons-update';
 import { connect as ReduxConn } from 'react-redux';
+import DateUtil from '../../../src/pages/util/dateUtil';
 
 import SubsTmpl from './subsTmpl';
 import SubsTmplService from './subscribingInfo.ajax';
 
+import { TEST_USER_SELECTED_SUBS, TEST_USER_SUBSTMPL_INFO_LIST } from './sample/userSubsDatas';
+
 import './subscribingInfo.css';
 
-const TEST_SUBS = [
-  {
-    logo: undefined,
-    name: 'Bugs',
-    seq: 4,
-  },
-  {
-    logo: '53034c07a6a95b5c4d8f1bdaa97383d9.png',
-    name: 'Flo',
-    seq: 5,
-  },
-  {
-    logo: 'b5dd21c4668e2e0284ec5a1e4d9967ce.png',
-    name: 'Melon',
-    seq: 6,
-  },
-];
-
-const TEST_SUBS_USER = [
-  {
-    seq: 4,
-    name: 'Bugs',
-    price: '',
-    paymentDate: '',
-    channel: '',
-  },
-  {
-    seq: 5,
-    name: 'Flo',
-    price: '',
-    paymentDate: '',
-    channel: '',
-  },
-  {
-    seq: 6,
-    name: 'Melon',
-    price: '',
-    paymentDate: '',
-    channel: '',
-  }
-];
+const NOW = DateUtil.NOW();
 
 const mapStateToProps = (state) => ({
   USERS: state.users,
@@ -76,8 +39,8 @@ class SubscribingInfo extends Component {
 
     // TEST
     if (userSelectedListLength === 0) {
-      tempSubsList = TEST_SUBS;
-      tempInputList = TEST_SUBS_USER;
+      tempSubsList = TEST_USER_SELECTED_SUBS;
+      tempInputList = TEST_USER_SUBSTMPL_INFO_LIST;
     } else {
       tempSubsList = userSeletedList;
 
@@ -87,8 +50,8 @@ class SubscribingInfo extends Component {
           logo: Subscription.logo,
           name: Subscription.name,
           price: '',
-          paymentDate: '',
-          channel: 'inapp',
+          paymentDate: `${NOW}`,
+          channel: '',
         });
       });
     }
@@ -99,36 +62,45 @@ class SubscribingInfo extends Component {
     });
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
 
     const { userInputList } = this.state;
-    userInputList.map((info) => {
+    const userToken = Cookies.getJSON('auth').status.JWT;
+
+    userInputList.some((info) => {
       if (info.price === '') {
         alert('결제금액을 입력해주세요');
-        return false;
+        return true;
       } ;
 
       if (info.paymentDate === '') {
         alert('결제일을 입력해주세요');
-        return false;
+        return true;
       }
 
       if (info.channel === '') {
         alert('결제 체널을 체크해주세요');
-        return false;
+        return true;
       }
     });
 
-    SubsTmplService.updateUserSubsInfo(userInputList);
-  };
+    const result = await SubsTmplService.updateUserSubsInfo(userToken, userInputList);
+
+    if (result.data.status === 200)
+      this.props.history.push('/user/dashboard');
+    else {
+      console.log(result);
+      alert('ERROR'); // TODO
+    }
+  }
 
   handleUserInputChange = (name, element, userInput) => {
     let inputList = '';
 
     // TEST
     if (this.state.userInputList.length === 0) {
-      inputList = TEST_SUBS_USER;
+      inputList = TEST_USER_SUBSTMPL_INFO_LIST;
     } else {
       inputList = this.state.userInputList;
     }
@@ -180,10 +152,17 @@ class SubscribingInfo extends Component {
           <p>사용자 구독 서비스 정보 등록</p>
           <div className="row">
             <div className="col">
-              <form onSubmit={this.handleSubmit}>
+              <form className="w-100 p-3" id="user-info-container">
                 {this.InputSubscriptionTemplateInfo()}
-                <input type="submit" value="Submit" />
               </form>
+            </div>
+          </div>
+        </div>
+
+        <div className="container submit-container">
+          <div className="row">
+            <div className="col">
+              <input type="submit" onClick={this.handleSubmit} value="NEXT" />
             </div>
           </div>
         </div>
