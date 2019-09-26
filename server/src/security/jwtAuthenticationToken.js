@@ -5,7 +5,7 @@ dotenv.config();
 const secretCode = `${process.env.JWT_SECRET}`;
 const EXPRIRE_TIME = '300m';
 
-// param is user email
+// param is subscription email
 const createJWT = (param) => {
   return jwt.sign(
     {
@@ -29,6 +29,12 @@ const checkJWT = (token) =>{
   });
 };
 
+const decodeJWT = (token) =>{
+  return jwt.decode(token);
+};
+
 export {
-  createJWT, checkJWT,
+  createJWT,
+  checkJWT,
+  decodeJWT,
 };

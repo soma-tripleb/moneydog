@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import Cookies from 'js-cookie';
 import update from 'react-addons-update';
 
 import {connect as ReduxConn} from 'react-redux';
-import UserActions from '../../reducers/actions/userAction';
+import UserActions from '../../redux/actions/userAction';
 
 import SubsApp from './subsApp';
 import SubsTmplService from './subscriptions.ajax';
@@ -31,19 +30,30 @@ class Subscriptions extends Component {
 
   // subTemplate 배열에 저장 하고 image 이름에 맞춰 같이 저장 하기
   ajaxGetSubTmtl = async () => {
-    const userToken = Cookies.getJSON('auth').status.JWT;
+    const response = await SubsTmplService.getList();
+    const userSubsInfo = response.data.message;
 
-    const response = await SubsTmplService.getList(userToken);
-
-    this.setState({
-      staticSubscribeArr: response.data.message,
+    this.props.subs.map((sub)=>{
+      const idx = userSubsInfo.findIndex((
+        (content) => {
+          return content.name.toLowerCase() === sub.name.toLowerCase();
+        }
+      ));
+      if (idx > -1) userSubsInfo.splice(idx, 1);
     });
 
-    this.state.staticSubscribeArr.map(
-      (content) => {
-        content.logo = image[content.thumbnail];
-      }
-    );
+
+    this.setState({
+      staticSubscribeArr: userSubsInfo,
+    });
+
+    this.setState({
+      staticSubscribeArr: this.state.staticSubscribeArr.map(
+        (content) => {
+          return {...content, logo: image[content.thumbnail]};
+        }
+      )
+    });
   };
 
   // staticSubscribeArr 에서 SubscribingArr 로 옮기기
@@ -87,28 +97,32 @@ class Subscriptions extends Component {
 
   makeStaticSubscribeApp = () => {
     const list = this.state.staticSubscribeArr.map(
-      (content, i) => (<SubsApp key={i} onInsert={this.insertContact.bind(this)} subsAppInfo={
-        {
-          seq: content.seq,
-          logo: content.logo,
-          name: content.name,
-          label: '+',
-        }
-      }/>)
+      (content, i) => (
+        <SubsApp key={i+content.name} onInsert={this.insertContact.bind(this)} subsAppInfo={
+          {
+            seq: content.seq,
+            logo: content.logo,
+            name: content.name,
+            label: '+',
+          }
+        }/>
+      )
     );
     return list;
   };
 
   makeSubscribingApp = () => {
     const list = this.state.SubscribingArr.map(
-      (content, i) => (<SubsApp key={i} onDelete={this.deleteContant.bind(this)} subsAppInfo={
-        {
-          seq: content.seq,
-          logo: content.logo,
-          name: content.name,
-          label: '-',
-        }
-      }/>)
+      (content, i) => (
+        <SubsApp key={i+content.name} onDelete={this.deleteContant.bind(this)} subsAppInfo={
+          {
+            seq: content.seq,
+            logo: content.logo,
+            name: content.name,
+            label: '-',
+          }
+        }/>
+      )
     );
     return list;
   };
@@ -154,7 +168,7 @@ class Subscriptions extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  users: state.users,
+  subs: state.users.subs,
 });
 
 const mapDispatchToProps = (dispatch) => {

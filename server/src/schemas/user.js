@@ -20,7 +20,7 @@ const subscriptionSchema = new mongoose.Schema(
     seq: { type: Number },
     name: { type: String, unique: true },
     price: { type: Number },
-    paymentDate: { type: Date },
+    paymentDate: { type: Number },
     channel: { type: String },
     pricePlan: pricePlanSchema,
   },
@@ -32,7 +32,7 @@ const subscriptionSchema = new mongoose.Schema(
 const userSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    password: { type: String, required: true, trim: true },
     nickname: { type: String, required: true },
     salt: { type: Number, required: true },
     role: { type: String, required: true },

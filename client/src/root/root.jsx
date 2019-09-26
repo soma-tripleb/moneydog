@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
-import {connect, Provider} from 'react-redux';
-import store from '../store';
+import {Provider} from 'react-redux';
 
 import 'antd/dist/antd.less';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -12,23 +11,30 @@ import {Row, Layout} from 'antd';
 import {BrowserRouter} from 'react-router-dom';
 import Router from './router';
 
+import configureStore from '../store';
+import {PersistGate} from 'redux-persist/integration/react';
+
+const { store, persistor } = configureStore();
+
 import './root.css';
 
 class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
 
-          <Row>
-            <Layout className="layout">
-              <Head/>
-              <Router/>
-              <Foot/>
-            </Layout>
-          </Row>
+            <Row>
+              <Layout className="layout">
+                <Head/>
+                <Router/>
+                <Foot/>
+              </Layout>
+            </Row>
 
-        </BrowserRouter>
+          </BrowserRouter>
+        </PersistGate>
       </Provider>
     );
   }

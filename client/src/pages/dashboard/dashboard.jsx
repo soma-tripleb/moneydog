@@ -10,33 +10,44 @@ import * as service from './dashboard.ajax';
 
 import 'babel-polyfill';
 import './dashboard.css';
+import {connect} from 'react-redux';
+import * as image from '../../static/img/templogo';
 
 class DashBoard extends Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.state= {user: null, selectedValue: null};
-  }
+  state= {
+    subscription: null,
+    selectedValue: new Date(),
+    staticSubscribeArr: []
+  };
 
   handleChange = (e) => {
     this.setState({selectedValue: e.format('YYYY-MM-DD')});
   };
 
   convertDate = () => {
-    const convert = moment(this.state.selectedValue).date();
-    return convert;
-  }
+    return moment(this.state.selectedValue).date();
+  };
 
-  // Component Life Cycle
   componentDidMount() {
-    this.fetchUserInfo('jimmyjaeyeon@gmail.com');
+    this.fetchSubscriptionInfo();
   }
 
-  fetchUserInfo = async (email) => {
-    const response = await service.getUserByEmail(email);
+  fetchSubscriptionInfo = async () => {
+    const response = await service.getSubscriptionByToken();
+
     this.setState({
-      user: response.data,
+      subscription: response.data,
     });
+
+    this.setState({
+      subscription: this.state.subscription.map(
+        (content) => {
+          return {...content, logo: image[content.name.toLowerCase()]};
+        }
+      )
+    });
+
+    return this.state.subscription;
   };
 
   render() {
@@ -47,32 +58,37 @@ class DashBoard extends Component {
               <div className="col-md-6">
                 {/* 달력*/}
                 <div className="calendar">
-                  <Calendar date={this.state.selectedValue} handleChange={this.handleChange} data={this.state.user}/>
+                  <Calendar date={this.state.selectedValue} handleChange={this.handleChange} data={this.state.subscription}/>
                 </div>
                 <hr/>
                 <div className="list">
-                  <List date={this.convertDate()} data={this.state.user} />
+                  <List date={this.convertDate()} data={this.state.subscription} />
                 </div>
               </div>
               {/* 구독중인 서비스 list */}
               <div className="col-md-6">
                 <div className='TotalAmount'>
-                  <TotalAmount data={this.state.user}/>
+                  <TotalAmount data={this.state.subscription}/>
                 </div>
                 <hr/>
                 <div className='categories'>
-                  <Categories data={this.state.user}/>
+                  <Categories data={this.state.subscription}/>
                 </div>
               </div>
 
             </div>
-
-            <footer>
-            </footer>
           </div>
         </>
     );
   }
 }
+// Access Redux store
+const mapStateToProps = (state) => ({
+});
 
-export default DashBoard;
+// get action
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);

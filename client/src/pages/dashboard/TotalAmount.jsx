@@ -17,7 +17,6 @@ class TotalAmount extends Component {
       const icon = <Icon type="loading" style={{fontSize: 24}} spin />;
       return (<Spin indicator={icon} />);
     }
-
     return (
       <div>
       TotalAmount
@@ -25,7 +24,7 @@ class TotalAmount extends Component {
           <div className="row">
             <div className="col">
               <button>
-             이번달 총 이용 금액은 {this.getTotalAmount(this.props.data.subscriptions)}입니다.
+             이번달 총 이용 금액은 {this.getTotalAmount(this.props.data)}입니다.
               </button>
             </div>
           </div>

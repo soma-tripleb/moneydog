@@ -41,7 +41,7 @@ describe('#UserRepository Test', () => {
     expect(subscription.name).to.equal('netflix');
   });
 
-  it('#read user', async () => {
+  it('#read subscription', async () => {
     const result = await userRepository.findOne('jimmy@naver.com');
     const user = result.message;
     expect(user.email).to.equal('jimmy@naver.com');
@@ -50,7 +50,7 @@ describe('#UserRepository Test', () => {
     expect(subscription.name).to.equal('netflix');
   });
 
-  it('#delete user', async () => {
+  it('#delete subscription', async () => {
     await userRepository.deleteOne('jimmy@naver.com');
     const result = await userRepository.findOne('jimmy@naver.com');
     const user = result.message;
@@ -63,7 +63,7 @@ describe('#UserRepository Test', () => {
   //     password: '1234',
   //     nickname: 'jimmy',
   //     salt: 111,
-  //     role: 'user',
+  //     role: 'subscription',
   //     subscription: {
   //       name: 'netflix',
   //       price: 14000,

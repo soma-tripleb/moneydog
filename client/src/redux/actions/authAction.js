@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import { AUTH_LOGIN, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE, AUTH_LOGOUT } from '../actionType';
+import {AUTH_LOGIN_TRY, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE, AUTH_LOGOUT, GET_SUBS} from './actionType';
 
 const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
 
@@ -14,12 +14,12 @@ const loginRequest = (email, password) => async (dispatch) => {
     },
   };
 
-  dispatch(LOGIN());
+  dispatch(LOGIN_TRY());
 
   return await axios
     .post(AJAX_URL, AJAX_DATA)
     .then((res) => {
-      dispatch(LOGIN_SUCCESS(res.data.token));
+      dispatch(LOGIN_SUCCESS());
       return res;
     })
     .catch((err) => {
@@ -28,18 +28,22 @@ const loginRequest = (email, password) => async (dispatch) => {
     });
 };
 
-const sessionRequest = (jwt) => async (dispatch) => {
-  const AJAX_URL = `${SERVER_URL}/auth/sessionCheck`;
+const registerRequest = (email, password, nickname) => async (dispatch) => {
+  const AJAX_URL = `${SERVER_URL}/auth/signUp`;
   const AJAX_DATA = {
     userInfo: {
-      jwt: jwt,
+      email: email,
+      password: password,
+      nickname: nickname,
     },
   };
 
-  return await axios
+  dispatch(LOGIN_TRY());
+
+  return axios
     .post(AJAX_URL, AJAX_DATA)
     .then((res) => {
-      dispatch(LOGIN_SUCCESS(res.data.token));
+      dispatch(LOGIN_SUCCESS());
       return res;
     })
     .catch((err) => {
@@ -48,23 +52,27 @@ const sessionRequest = (jwt) => async (dispatch) => {
     });
 };
 
+
 const logoutRequest = () =>(dispatch) => {
   dispatch(LOGOUT());
+  dispatch({
+    type: GET_SUBS,
+    subsInfo: [],
+  });
 
-  localStorage.removeItem('auth');
-  Cookies.remove('auth');
+  Cookies.remove('token');
 };
 
-const LOGIN = () => { return { type: AUTH_LOGIN }; };
+const LOGIN_TRY = () => { return { type: AUTH_LOGIN_TRY }; };
 
 const LOGOUT = () => { return { type: AUTH_LOGOUT }; };
 
-const LOGIN_SUCCESS = (token) => {return { type: AUTH_LOGIN_SUCCESS, token }; };
+const LOGIN_SUCCESS = () => {return { type: AUTH_LOGIN_SUCCESS }; };
 
 const LOGIN_FAILURE = () => { return { type: AUTH_LOGIN_FAILURE }; };
 
 export default {
   loginRequest,
-  sessionRequest,
   logoutRequest,
+  registerRequest,
 };
