@@ -53,7 +53,7 @@ class SubscribingInfo extends Component {
           name: Subscription.name,
           price: '',
           paymentDate: `${NOW}`,
-          channel: 'inapp',
+          channel: '',
         });
       });
     }
@@ -64,7 +64,7 @@ class SubscribingInfo extends Component {
     });
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
 
     const { userInputList } = this.state;
@@ -87,16 +87,17 @@ class SubscribingInfo extends Component {
       }
     });
 
-    console.log('SUBSCRIPTION: ', userInputList);
+    const result = await SubsTmplService.updateUserSubsInfo(userToken, userInputList);
 
-    // SubsTmplService.updateUserSubsInfo(userToken, userInputList);
+    if (result.data.status === 200)
+      this.props.history.push('/user/dashboard');
+    else {
+      console.log(result);
+      alert('ERROR'); // TODO
+    }
   }
 
   handleUserInputChange = (name, element, userInput) => {
-    console.log('SUBSCRIBING: ', name);
-    console.log('SUBSCRIBING: ', element);
-    console.log('SUBSCRIBING: ', userInput);
-
     let inputList = '';
 
     // TEST
@@ -153,10 +154,17 @@ class SubscribingInfo extends Component {
           <p>사용자 구독 서비스 정보 등록</p>
           <div className="row">
             <div className="col">
-              <form onSubmit={this.handleSubmit}>
+              <form className="w-100 p-3" id="user-info-container">
                 {this.InputSubscriptionTemplateInfo()}
-                <input type="submit" value="Submit" />
               </form>
+            </div>
+          </div>
+        </div>
+
+        <div className="container submit-container">
+          <div className="row">
+            <div className="col">
+              <input type="submit" onClick={this.handleSubmit} value="NEXT" />
             </div>
           </div>
         </div>

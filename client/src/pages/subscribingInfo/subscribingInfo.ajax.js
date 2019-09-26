@@ -15,7 +15,7 @@ const getUserSubsInfo = async (token) => {
 const updateUserSubsInfo = async (token, userInputList) => {
   return await axios({
     method: 'post',
-    url: `${SERVER_URL}/users`,
+    url: `${SERVER_URL}/users/subs-info`,
     headers: { 'x-access-token': token, 'Content-Type': 'application/json' },
     data: { userInputList },
     responseType: 'json',

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import { Input } from 'antd';
-
 import DatePickers from './DatePicker';
 
 import './subscribingInfo.css';
@@ -36,16 +34,12 @@ class SubsTmpl extends Component {
     const dateObj = this.state.dateObject;
 
     if (e === undefined) {
-      console.log(dateObj);
-
       this.props.onUserInputChange(
         dateObj.dataId,
         dateObj.className,
         dateObj.date
       );
     } else {
-      console.log(e.target);
-
       let classNameTemp = '';
 
       if (e.target.id === 'price')
@@ -81,7 +75,7 @@ class SubsTmpl extends Component {
 
     return (
       <>
-        <div className="container" id="subs-temp-container">
+        <div className="container w-100 p-2" id="user-info-elements">
           <div className="row align-items-center">
 
             {/* 사진 */}
@@ -91,9 +85,9 @@ class SubsTmpl extends Component {
 
             {/* 결제 금액 */}
             <div className="price col-xs-6 col-sm-3">
-              <div className="input-group">
+              <div className="input-group input-group-sm">
                 <div className="input-group-prepend">
-                  <span className="input-group-text">&#8361;</span>
+                  <span className="input-group-text" id="inputGroup-sizing-sm">&#8361;</span>
                 </div>
                 <input
                   type="text"
@@ -127,10 +121,10 @@ class SubsTmpl extends Component {
                   name={info.name}
                   id={inappId}
                   data-id={info.name}
-                  value="inapp"
+                  value="in-app"
                   onChange={this.handleChange}
                 />
-                <label className="form-check-label" htmlFor={inappId}>&nbsp;IN-APP</label>
+                <label className="form-check-label" id="label-text" htmlFor={inappId}>&nbsp;IN-APP</label>
               </div>
 
               <div className="form-check form-check-inline">
@@ -143,7 +137,7 @@ class SubsTmpl extends Component {
                   value="site"
                   onChange={this.handleChange}
                 />
-                <label className="form-check-label" htmlFor={siteId}>&nbsp;SITE</label>
+                <label className="form-check-label" id="label-text" htmlFor={siteId}>&nbsp;SITE</label>
               </div>
             </div>
 
