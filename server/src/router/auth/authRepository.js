@@ -1,6 +1,7 @@
-import User from '../../schemas/user';
+import UserSchema from '../../schemas/user';
+
 const getUserByEmail = async (email) => {
-  return await User.findOne({email: email})
+  return await UserSchema.User.findOne({email: email})
     .then((user) => {
       return user;
     })
@@ -9,7 +10,7 @@ const getUserByEmail = async (email) => {
     });
 };
 const createUser = async (userInfo) => {
-  return await User.create(userInfo)
+  return await UserSchema.User.create(userInfo)
     .then((doc) => {
       return {status: 201, success: true, message: '회원가입에 성공했습니다.'};
     })
@@ -19,7 +20,7 @@ const createUser = async (userInfo) => {
 };
 
 const findAllUser = async () => {
-  return await User.find({})
+  return await UserSchema.User.find({})
     .then((users) => {
       return users;
     })

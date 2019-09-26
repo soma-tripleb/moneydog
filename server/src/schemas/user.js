@@ -17,11 +17,15 @@ const pricePlanSchema = new mongoose.Schema(
 
 const subscriptionSchema = new mongoose.Schema(
   {
-    seq: { type: Number },
+    seq: { type: Number, required: true },
     name: { type: String, unique: true },
-    price: { type: Number },
-    paymentDate: { type: Number },
-    channel: { type: String },
+    price: { type: Number, required: true },
+    paymentDate: { type: Date, required: true },
+    channel: {
+      type: String,
+      enum: ['in-app', 'site'],
+      required: true,
+    },
     pricePlan: pricePlanSchema,
   },
   {
@@ -51,4 +55,12 @@ userSchema.plugin(autoIncrement.plugin, {
   incrementBy: 1,
 });
 
-export default mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+const Subscription = mongoose.model('Subscription', subscriptionSchema);
+const PricePlan = mongoose.model('PricePlan', pricePlanSchema);
+
+export default {
+  User,
+  Subscription,
+  PricePlan,
+};
