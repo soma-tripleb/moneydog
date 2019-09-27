@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import fs from 'fs';
+import path from 'path';
+
 import update from 'react-addons-update';
 
 import {connect as ReduxConn} from 'react-redux';
@@ -7,9 +10,13 @@ import UserActions from '../../redux/actions/userAction';
 import SubsApp from './subsApp';
 import SubsTmplService from './subscriptions.ajax';
 
-import * as image from '../../static/img/templogo';
+import * as images from '../../static/img/templogo';
 
 import './subscriptions.css';
+
+const mapStateToProps = (state) => ({
+  subs: state.users.subs,
+});
 
 class Subscriptions extends Component {
   constructor(props) {
@@ -28,31 +35,22 @@ class Subscriptions extends Component {
     this.ajaxGetSubTmtl();
   }
 
-  // subTemplate 배열에 저장 하고 image 이름에 맞춰 같이 저장 하기
+  // subTemplate 배열에 저장 하고 images 이름에 맞춰 같이 저장 하기
   ajaxGetSubTmtl = async () => {
-    const response = await SubsTmplService.getList();
-    const userSubsInfo = response.data.message;
+    const subsTmplResponse = await SubsTmplService.getList();
+    const subsTmplList = subsTmplResponse.data.message;
 
-    this.props.subs.map((sub)=>{
-      const idx = userSubsInfo.findIndex((
-        (content) => {
-          return content.name.toLowerCase() === sub.name.toLowerCase();
-        }
-      ));
-      if (idx > -1) userSubsInfo.splice(idx, 1);
-    });
+    // logo 필드 추가
+    subsTmplList.map((subsTmpl) => {
+      const subsTmplName = subsTmpl.thumbnail.toLowerCase();
 
-
-    this.setState({
-      staticSubscribeArr: userSubsInfo,
+      subsTmpl.logo = images[subsTmplName];
     });
 
     this.setState({
-      staticSubscribeArr: this.state.staticSubscribeArr.map(
-        (content) => {
-          return {...content, logo: image[content.thumbnail]};
-        }
-      )
+      staticSubscribeArr: subsTmplList,
+    }, () => {
+      console.log(this.state.staticSubscribeArr);
     });
   };
 
@@ -98,14 +96,17 @@ class Subscriptions extends Component {
   makeStaticSubscribeApp = () => {
     const list = this.state.staticSubscribeArr.map(
       (content, i) => (
-        <SubsApp key={i+content.name} onInsert={this.insertContact.bind(this)} subsAppInfo={
-          {
-            seq: content.seq,
-            logo: content.logo,
-            name: content.name,
-            label: '+',
-          }
-        }/>
+        <SubsApp
+          key={i + content.name}
+          onInsert={this.insertContact.bind(this)}
+          subsAppInfo={
+            {
+              seq: content.seq,
+              logo: content.logo,
+              name: content.name,
+              label: '+',
+            }
+          } />
       )
     );
     return list;
@@ -166,10 +167,6 @@ class Subscriptions extends Component {
     );
   }
 }
-
-const mapStateToProps = (state) => ({
-  subs: state.users.subs,
-});
 
 const mapDispatchToProps = (dispatch) => {
   return {
