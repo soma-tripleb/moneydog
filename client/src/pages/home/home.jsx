@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
-import {Carousel, IndexInfo, GmailTutorial, IndexSignUp} from './index';
+import {Carousel, IndexInfo, IndexSignUp} from './index';
+import './home.css';
 
 class Home extends Component {
   state = {
@@ -10,17 +11,13 @@ class Home extends Component {
   render() {
     return (
         <>
-          <div>
+          <div className="container homwWrap">
 
             <Carousel/>
 
             <hr className="featurette-divider"/>
 
             <IndexInfo/>
-
-            {/* <hr className="featurette-divider"/>*/}
-
-            {/* <GmailTutorial/>*/}
 
             <hr className="featurette-divider"/>
 

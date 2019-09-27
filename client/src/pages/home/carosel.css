@@ -4,7 +4,7 @@
 }
 
 .carousel {
-    margin-bottom: 10rem;
+    margin-bottom: 3rem;
 }
 
 .d-block {
@@ -12,6 +12,7 @@
 }
 
 .marketing > .row {
-    margin-bottom: 10rem;
-    margin-top: 10rem;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+    padding:  15px 15px 15px 15px
 }
