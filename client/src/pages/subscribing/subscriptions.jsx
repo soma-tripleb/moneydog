@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import fs from 'fs';
-import path from 'path';
 
 import update from 'react-addons-update';
 
@@ -49,8 +47,6 @@ class Subscriptions extends Component {
 
     this.setState({
       staticSubscribeArr: subsTmplList,
-    }, () => {
-      console.log(this.state.staticSubscribeArr);
     });
   };
 

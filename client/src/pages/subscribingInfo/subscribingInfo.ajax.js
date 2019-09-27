@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
 
-const TOKEN = Cookies.getJSON('token');
+const TOKEN = Cookies.get('token');
 
 const getUserSubsInfo = async () => {
   return await axios({

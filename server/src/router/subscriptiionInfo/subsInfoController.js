@@ -3,7 +3,6 @@ import SubsInfoService from './subsInfoService';
 
 const router = express.Router();
 
-
 router.get('/', (req, res) => {
   const token = (req.header('x-access-token') || req.query.token);
 

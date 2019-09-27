@@ -13,6 +13,7 @@ const findAll = () => {
 const findOne = (email) => {
   return UserSchema.User.findOne({ email: email })
     .then((result) => {
+      console.log(result);
       return { status: 201, success: true, message: result };
     })
     .catch((err) => {

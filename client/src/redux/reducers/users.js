@@ -1,4 +1,4 @@
-import {GET_SUBS, GET_USERS_SUBSTMPL_LIST} from '../actions/actionType';
+import {GET_SUBS, GET_USERS_SUBSTMPL_LIST, USER_INITIALLIZE} from '../actions/actionType';
 import update from 'react-addons-update';
 
 // subscription
@@ -21,6 +21,13 @@ export default function(state = initialState, action) {
       return update(state, {
         subsTmplList: { $set: action.list },
       });
+
+    case USER_INITIALLIZE:
+      return {
+        ...state,
+        subs: [],
+        subsTmplList: [],
+      };
 
     default:
       return state;

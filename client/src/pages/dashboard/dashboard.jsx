@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import React, {Component} from 'react';
 
 import Calendar from './Calendar';
@@ -6,9 +7,8 @@ import TotalAmount from './TotalAmount';
 import List from './List';
 import moment from 'moment';
 
-import * as service from './dashboard.ajax';
+import DashBoardService from './dashboard.ajax';
 
-import 'babel-polyfill';
 import './dashboard.css';
 import {connect} from 'react-redux';
 import * as image from '../../static/img/templogo';
@@ -33,14 +33,10 @@ class DashBoard extends Component {
   }
 
   fetchSubscriptionInfo = async () => {
-    const response = await service.getSubscriptionByToken();
-
+    const response = await DashBoardService.getUserSubs();
+    
     this.setState({
-      subscription: response.data,
-    });
-
-    this.setState({
-      subscription: this.state.subscription.map(
+      subscription: response.data.message.map(
         (content) => {
           return {...content, logo: image[content.name.toLowerCase()]};
         }

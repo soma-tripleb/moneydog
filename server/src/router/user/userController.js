@@ -17,6 +17,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:email', (req, res) => {
+  const token = req.header('x-access-token') || req.params.token;
+
+  const userEmail = jwtDecode(token).param;
+  
   UserService.getUser(req.params.email)
     .then((result) => {
       res.send(result);
@@ -60,18 +64,6 @@ router.delete('/email/:email', (req, res) => {
     })
     .catch((err) => {
       res.send(err);
-    });
-});
-
-router.get('/auth/check', (req, res, next) => {
-  const token = (req.header('x-access-token') || req.query.token);
-  const userEmail = jwtDecode(token).param;
-  UserService.getUser(userEmail)
-    .then((result) => {
-      res.send(result.message.subscription);
-    })
-    .catch((err) => {
-      res.send('유저가 없습니다. ', err);
     });
 });
 

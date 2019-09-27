@@ -3,8 +3,6 @@ import update from 'react-addons-update';
 import { connect as ReduxConn } from 'react-redux';
 import DateUtil from '../../../src/pages/util/dateUtil';
 
-import Cookies from 'js-cookie';
-
 import SubsTmpl from './subsTmpl';
 import SubsTmplService from './subscribingInfo.ajax';
 

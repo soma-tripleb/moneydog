@@ -1,7 +1,7 @@
-import User from '../../schemas/user';
+import UserSchema from '../../schemas/user';
 
 const findByUserInfo = (email) => {
-  return User.findOne({ email: email })
+  return UserSchema.User.findOne({ email: email })
     .then((result) => {
       return result;
     })
@@ -11,7 +11,7 @@ const findByUserInfo = (email) => {
 };
 
 const updateSubscription = async (email, subList) => {
-  return User.updateOne({email: email},
+  return UserSchema.User.updateOne({email: email},
     {$set: {subscription: subList}})
     .then((result) => {
       return result;

@@ -1,38 +1,22 @@
+import 'babel-polyfill';
 import Cookies from 'js-cookie';
 import dotenv from 'dotenv';
 dotenv.config();
 
 import axios from 'axios';
 
-export function getUserServiceInfo(userID) {
-  const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/subscribeInfo/${userID}`;
-  const headerConfig = {
-    headers: {
-      'x-access-token': Cookies.get('token'),
-    },
-  };
-  return axios
-    .get(AJAX_URL, headerConfig);
-}
+const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
+const TOKEN = Cookies.get('token');
 
-export function getUserByEmail(email) {
-  const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/users/${email}`;
-  const headerConfig = {
-    headers: {
-      'x-access-token': Cookies.get('token'),
-    },
-  };
-  return axios
-    .get(AJAX_URL, headerConfig);
-}
+const getUserSubs = () => {
+  return axios({
+    method: 'get',
+    url: `${SERVER_URL}/subs-info`,
+    headers: { 'x-access-token': TOKEN, 'Content-Type': 'application/json' },
+    responseType: 'json',
+  });
+};
 
-export function getSubscriptionByToken() {
-  const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/users/auth/check`;
-  const headerConfig = {
-    headers: {
-      'x-access-token': Cookies.get('token'),
-    },
-  };
-  return axios
-    .get(AJAX_URL, headerConfig);
-}
+export default {
+  getUserSubs,
+};
