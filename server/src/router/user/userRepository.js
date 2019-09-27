@@ -1,13 +1,7 @@
-import User from '../../schemas/user';
+import UserSchema from '../../schemas/user';
 
-/*
-* Method Naming
-* - 'Repository' 단 에서는 최대한 'mongoose' method 와 비슷하게 작성.
-* : 'findOne()'에서 'email' 을 통한 검색 일 경우, 파라미터를 통해서 조건 확인 할 수 있음.
-* : 추상적으로 통일 한 후에, 'Service' 단에서 구체화.
-*/
 const findAll = () => {
-  return User.find()
+  return UserSchema.User.find()
     .then((result) => {
       return { status: 201, success: true, message: result };
     })
@@ -17,8 +11,9 @@ const findAll = () => {
 };
 
 const findOne = (email) => {
-  return User.findOne({ email: email })
+  return UserSchema.User.findOne({ email: email })
     .then((result) => {
+      console.log(result);
       return { status: 201, success: true, message: result };
     })
     .catch((err) => {
@@ -27,11 +22,11 @@ const findOne = (email) => {
 };
 
 const saveOne = async (user) => {
-  const createResult = await User.create((user))
+  const createResult = await UserSchema.User.create((user))
     .then((result) => { return result; })
     .catch((err) => { throw err; });
 
-  return await User.findOne({ email: createResult.email })
+  return await UserSchema.User.findOne({ email: createResult.email })
     .then((result) => {
       return { status: 201, success: true, message: result };
     })
@@ -41,7 +36,7 @@ const saveOne = async (user) => {
 };
 
 const deleteOne = (email) => {
-  return User.deleteOne({ email: email })
+  return UserSchema.User.deleteOne({ email: email })
     .then((result) => {
       return { status: 201, success: true, message: { object: email, result } };
     })
@@ -51,17 +46,19 @@ const deleteOne = (email) => {
 };
 
 const deleteAllUser = () => {
-  return User.deleteMany({});
+  return UserSchema.User.deleteMany({});
 };
 
 const updateMany = (email, subsInfoList) => {
-  return User.updateMany({ email: email }, { subscription: subsInfoList })
-    .then((result) => {
-      return { status: 201, success: true, message: result };
-    })
-    .catch((err) => {
-      throw err;
-    });
+  return UserSchema.User.updateMany(
+    { email: email },
+    { $set: { subscription: subsInfoList } },
+    { runValidators: true }
+  ).then((result) => {
+    return { status: 201, success: true, message: result };
+  }).catch((err) => {
+    throw err;
+  });
 };
 
 export default {

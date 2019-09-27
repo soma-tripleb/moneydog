@@ -1,26 +1,44 @@
-import {GET_SUBS, GET_USERS_SUBSTMPL_LIST} from '../actions/actionType';
+import * as ACTION_TYPE from '../actions/actionType';
+
 import update from 'react-addons-update';
 
-// subscription
 const initialState =
-{
-  subsTmplList: [],
-  subs: [],
-};
+    {
+      tempSubscriptions: [],
+      subscriptions: [],
+    };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
-    case GET_SUBS:
+    case ACTION_TYPE.GET_SUBS:
       return {
         ...state,
-        subs: action.subsInfo,
+        subscriptions: action.subsInfo,
       };
 
-    case GET_USERS_SUBSTMPL_LIST:
-      console.log('subscription action method: ', action.list);
+    case ACTION_TYPE.GET_USERS_SUBSTMPL_LIST:
       return update(state, {
-        subsTmplList: { $set: action.list },
+        tempSubscriptions: {$set: action.list},
       });
+
+    case ACTION_TYPE.USER_INITIALLIZE:
+      return {
+        ...state,
+        subscriptions: [],
+        tempSubscriptions: [],
+      };
+
+    case ACTION_TYPE.INSERT_SUBSCRIPTIONS:
+      return {
+        ...state,
+        subscriptions: update(state.subscriptions, {$push: action.userSubscriptionList}),
+      };
+
+    case ACTION_TYPE.DELETE_TEMP_SUBSCRIPTIONS:
+      return {
+        ...state,
+        tempSubscriptions: [],
+      };
 
     default:
       return state;

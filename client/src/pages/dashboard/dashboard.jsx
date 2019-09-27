@@ -6,9 +6,6 @@ import TotalAmount from './TotalAmount';
 import List from './List';
 import moment from 'moment';
 
-import * as service from './dashboard.ajax';
-
-import 'babel-polyfill';
 import './dashboard.css';
 import {connect} from 'react-redux';
 import * as image from '../../static/img/templogo';
@@ -28,19 +25,14 @@ class DashBoard extends Component {
     return moment(this.state.selectedValue).date();
   };
 
-  componentDidMount() {
+  componentDidMount =() => {
     this.fetchSubscriptionInfo();
   }
 
-  fetchSubscriptionInfo = async () => {
-    const response = await service.getSubscriptionByToken();
+  fetchSubscriptionInfo = () => {
 
     this.setState({
-      subscription: response.data,
-    });
-
-    this.setState({
-      subscription: this.state.subscription.map(
+      subscription: this.props.subscriptions.map(
         (content) => {
           return {...content, logo: image[content.name.toLowerCase()]};
         }
@@ -84,6 +76,7 @@ class DashBoard extends Component {
 }
 // Access Redux store
 const mapStateToProps = (state) => ({
+  subscriptions: state.users.subscriptions,
 });
 
 // get action

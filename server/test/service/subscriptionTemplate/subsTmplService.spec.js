@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 import SubsTmplRepo from '../../../src/router/subscriptionTemplate/subsTmplReposiroty';
 import { mongoConnect, mongoDisConnect } from '../../../src/configs/mongoDB';
 import SubsTmplMock from '../../mock/subsTemplateMock';

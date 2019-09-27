@@ -27,8 +27,10 @@ class Signin extends Component {
 
     if (result.status === 200) {
       Cookies.set('token', result.data.token);
-      this.props.getSubsInfo();
+
+      await this.props.getSubsInfo();
       this.props.history.push('/user/dashboard');
+
     } else if (result.status === 409) {
       alert(result.data.message);
     } else if (result.status === 400) {
@@ -105,8 +107,8 @@ const mapDispatchToProps = (dispatch) => {
     loginRequest: async (email, password) => {
       return await dispatch(authActions.loginRequest(email, password));
     },
-    getSubsInfo: () => {
-      dispatch(userActions.getSubsInfo());
+    getSubsInfo: async () => {
+      await dispatch(userActions.getSubsInfo());
     },
   };
 };

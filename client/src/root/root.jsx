@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import {Provider} from 'react-redux';
 
+import 'babel-polyfill';
 import 'antd/dist/antd.less';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.min.js';

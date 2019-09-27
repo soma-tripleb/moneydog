@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --hot --host 0.0.0.0",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint --ext .js,.jsx src/; exit 0"
+    "lint": "./node_modules/.bin/eslint --fix --ext .js,.jsx src/; exit 0"
   },
   "author": "tripleB",
   "license": "MIT",

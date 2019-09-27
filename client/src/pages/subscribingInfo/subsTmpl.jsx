@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import DatePickers from './DatePicker';
+
 import './subscribingInfo.css';
 
 class SubsTmpl extends Component {
@@ -7,80 +9,136 @@ class SubsTmpl extends Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+
+    this.state = {
+      dateObject: {
+        className: 'paymentDate',
+        dataId: '',
+        date: '',
+      }
+    };
+  }
+
+  componentDidMount = () => {
+    const subsName = this.props.info.name;
+
+    this.setState({
+      dateObject: {
+        ...this.state.dateObject,
+        dataId: subsName,
+      }
+    });
   }
 
   handleChange = (e) => {
-    this.props.onUserInputChange(
-      e.target.dataset.id,
-      e.target.className,
-      e.target.value);
+    const dateObj = this.state.dateObject;
+
+    if (e === undefined) {
+      this.props.onUserInputChange(
+        dateObj.dataId,
+        dateObj.className,
+        dateObj.date
+      );
+    } else {
+      let classNameTemp = '';
+
+      if (e.target.id === 'price')
+        classNameTemp = e.target.id;
+      else
+        classNameTemp = e.target.className;
+
+      this.props.onUserInputChange(
+        e.target.dataset.id,
+        classNameTemp,
+        e.target.value,
+      );
+    }
+  }
+
+  onDatePickerChange = (date) => {
+    this.setState({
+      dateObject: {
+        ...this.state.dateObject,
+        date: date,
+      },
+    }, () => {
+      this.handleChange();
+    });
   }
 
   render() {
     const { info } = this.props;
     const inputData = this.props.inputData;
 
-    const priceId = `price-${info.index}`;
-    const paymentDateId = `paymentDate-${info.index}`;
+    const inappId = `inapp-${info.name}`;
+    const siteId = `site-${info.name}`;
 
     return (
       <>
-        <div className="container" id="subs-temp-container">
-          <div className="row">
-            <div className="col-sm">
+        <div className="container w-100 p-2" id="user-info-elements">
+          <div className="row align-items-center">
+
+            {/* 사진 */}
+            <div className="logo col-xs-6 col-sm-3">
               <img className="logo-img" src={`/` + info.logo} alt="" />
             </div>
 
-            <div className="col-sm">
-              <label>결제금액</label>
-              <input
-                type="text"
-                className="price"
-                name={priceId}
-                data-id={info.name}
-                value={inputData.price}
-                onChange={this.handleChange}
-                placeholder="price"
-              />
+            {/* 결제 금액 */}
+            <div className="price col-xs-6 col-sm-3">
+              <div className="input-group input-group-sm">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="inputGroup-sizing-sm">&#8361;</span>
+                </div>
+                <input
+                  type="text"
+                  id="price"
+                  className="form-control"
+                  data-id={info.name}
+                  value={inputData.price}
+                  onChange={this.handleChange}
+                  placeholder="결제 금액"
+                  aria-label="Amount (to the nearest dollar)"
+                />
+                {/* <div class="input-group-append">
+                  <span class="input-group-text">.00</span>
+                </div> */}
+              </div>
             </div>
 
-            <div className="col-sm">
-              <label>결제일</label>
-              <input
-                type="text"
-                className="paymentDate"
-                name={paymentDateId}
-                data-id={info.name}
-                value={inputData.paymentDate}
-                onChange={this.handleChange}
-                placeholder="paymentDate"
-              />
+            {/* 결제일 */}
+            <div className="payment-date col-xs-6 col-sm-3">
+              <DatePickers
+                onDatePickerChange={this.onDatePickerChange}
+              ></DatePickers>
             </div>
 
-            <div className="radio col-sm">
-              <label>
+            {/* 결제 채널 */}
+            <div className="radio col-xs-6 col-sm-3">
+              <div className="form-check form-check-inline">
                 <input
                   type="radio"
                   className="channel"
+                  name={info.name}
+                  id={inappId}
                   data-id={info.name}
-                  value="inapp"
-                  checked={(inputData.channel === 'inapp')}
+                  value="in-app"
                   onChange={this.handleChange}
                 />
-                inapp
-              </label>
+                <label className="form-check-label" id="label-text" htmlFor={inappId}>&nbsp;IN-APP</label>
+              </div>
 
-              <label>
+              <div className="form-check form-check-inline">
                 <input
                   type="radio"
                   className="channel"
+                  name={info.name}
+                  id={siteId}
                   data-id={info.name}
                   value="site"
-                  checked={(inputData.channel === 'site')}
                   onChange={this.handleChange}
                 />
-                site
-              </label>
+                <label className="form-check-label" id="label-text" htmlFor={siteId}>&nbsp;SITE</label>
+              </div>
             </div>
 
           </div>

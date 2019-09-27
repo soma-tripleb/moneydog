@@ -1,9 +1,9 @@
 import 'babel-polyfill';
 import assert from 'assert';
 
-import User from '../../../src/schemas/user';
+import UserSchema from '../../../src/schemas/user';
 
-import { mongoConnect, mongoDisConnect } from '../../../src/dbConfig/mongoDB';
+import { mongoConnect, mongoDisConnect } from '../../../src/configs/mongoDB';
 
 const subsTmplPricePlan = {
   title: '1개월 이용권',
@@ -12,10 +12,19 @@ const subsTmplPricePlan = {
 };
 
 const userInputList = [
-  { seq: 4, name: 'Bugs', price: 99999, paymentDate: '', channel: '', pricePlan: subsTmplPricePlan },
-  { seq: 5, name: 'Flo', price: 99999, paymentDate: '', channel: '', pricePlan: subsTmplPricePlan },
-  { seq: 6, name: 'Melon', price: 99999, paymentDate: '', channel: '', pricePlan: subsTmplPricePlan },
+  { seq: 4, name: 'Bugs', price: 99999, paymentDate: '', channel: '' },
+  { seq: 5, name: 'Flo', price: 99999, paymentDate: '', channel: '' },
+  { seq: 6, name: 'Melon', price: 99999, paymentDate: '', channel: '' },
 ];
+
+const userInput =
+{
+  seq: 4,
+  name: 'Bugs',
+  price: 'asd',
+  paymentDate: '',
+  channel: '',
+};
 
 describe('User, SubscriptionTemplate', () => {
   before(() => {
@@ -26,19 +35,13 @@ describe('User, SubscriptionTemplate', () => {
     mongoDisConnect();
   });
 
-  const email = 'jaeyeon93@naver.com';
+  const email = 'dudrnxps1@gmail.com';
 
   describe('사용자 정보 가져와서 구독 서비스 정보 업데이트', () => {
-    describe('#setUserSchema()', () => {
-      it('객체 만들어서 사용자 정보 넣기', (done) => {
-        done();
-      });
-    });
-
     describe('#update()', () => {
       it('콜백 해방', (done, err) => {
         const update = () => {
-          return User.updateMany({email: email}, {subscription: userInputList})
+          return UserSchema.User.updateMany({email: email}, {subscription: userInputList})
             .then((result) => {
               return result;
             })
@@ -70,11 +73,11 @@ describe('User, SubscriptionTemplate', () => {
 
     describe('#update()', () => {
       it('', (done) => {
-        User.updateMany(
+        UserSchema.User.updateMany(
           { email: 'jaeyeon93@naver.com' },
           { subscription: userInputList },
         ).then((result) => {
-          User.findOne({ email: email })
+          UserSchema.User.findOne({ email: email })
             .then((result) => {
               // result.subscription.map((subsInfo) => {
               //   console.log(subsInfo);

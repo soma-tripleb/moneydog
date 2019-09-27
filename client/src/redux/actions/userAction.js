@@ -1,19 +1,38 @@
 import axios from 'axios';
 
-import {GET_SUBS, GET_USERS_SUBSTMPL_LIST } from './actionType';
+import * as ACTION_TYPE from './actionType';
 import Cookies from 'js-cookie';
+
+const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
 
 const getUserSubsTmplList = (list) => (dispatch) => {
   dispatch(
     {
-      type: GET_USERS_SUBSTMPL_LIST,
+      type: ACTION_TYPE.GET_USERS_SUBSTMPL_LIST,
       list,
     }
   );
 };
 
-export const getSubsInfo = () => async (dispatch) => {
-  const AJAX_URL =`${process.env.REACT_APP_NODE_API_URL}/subs-info`;
+const insertUserSubscriptions = ( userSubscriptionList ) => (dispatch) => {
+  dispatch(
+    {
+      type: ACTION_TYPE.INSERT_SUBSCRIPTIONS,
+      userSubscriptionList,
+    }
+  );
+};
+
+const deleteTempSubscriptions = () => (dispatch) => {
+  dispatch(
+    {
+      type: ACTION_TYPE.DELETE_TEMP_SUBSCRIPTIONS,
+    }
+  );
+};
+
+const getSubsInfo = () => async (dispatch) => {
+  const AJAX_URL =`${SERVER_URL}/subs-info`;
   const headerConfig = {
     headers: {
       'x-access-token': Cookies.get('token'),
@@ -25,12 +44,12 @@ export const getSubsInfo = () => async (dispatch) => {
     .then((res) => {
       if (typeof res.data.message === 'string') {
         dispatch({
-          type: GET_SUBS,
+          type: ACTION_TYPE.GET_SUBS,
           subsInfo: [],
         });
       } else {
         dispatch({
-          type: GET_SUBS,
+          type: ACTION_TYPE.GET_SUBS,
           subsInfo: res.data.message,
         });
       }
@@ -42,5 +61,7 @@ export const getSubsInfo = () => async (dispatch) => {
 
 export default {
   getUserSubsTmplList,
-  getSubsInfo
+  getSubsInfo,
+  insertUserSubscriptions,
+  deleteTempSubscriptions
 };

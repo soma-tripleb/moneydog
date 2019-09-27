@@ -4,18 +4,15 @@ require('dotenv').config();
 
 const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
 
-const config = {
-  headers:
-      {
-        'x-access-token': Cookies.get('token'),
-      },
-};
-
-const getList = () => {
-  return axios.get( `${SERVER_URL}/subs-tmpl`,
-    config
-  ).catch((err) => {
-    return err.response;
+const getList = async () => {
+  return await axios({
+    method: 'get',
+    url: `${SERVER_URL}/subs-tmpl`,
+    headers: {
+      'x-access-token': Cookies.get('token'),
+      'Content-Type': 'application/json'
+    },
+    responseType: 'json',
   });
 };
 

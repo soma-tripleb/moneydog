@@ -1,6 +1,6 @@
 import express from 'express';
 import UserService from './userService';
-import jwtDecode from 'jwt-decode';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -17,6 +17,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:email', (req, res) => {
+  const token = req.header('x-access-token') || req.params.token;
+
+  const userEmail = jwtDecode(token).param;
+  
   UserService.getUser(req.params.email)
     .then((result) => {
       res.send(result);
@@ -27,25 +31,24 @@ router.get('/:email', (req, res) => {
     });
 });
 
-// body: Json Data
-// router.post('/', (req, res) => {
-//   UserService.createOne(req.body)
-//     .then((result) => {
-//       res.send(result);
-//     })
-//     .catch((err) => {
-//       res.send(err);
-//     });
-// });
-
 router.post('/', (req, res) => {
-  const body = req.body;
+  UserService.createOne(req.body)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+router.post('/subs-info', (req, res) => {
+  const userData = req.body.userInputList;
   const token = req.header('x-access-token') || req.params.token;
 
   const auth = jwt.decode(token);
   const email = auth.param;
 
-  UserService.insertSubsInfo(email, body)
+  UserService.insertSubsInfo(email, userData)
     .then((result) => {
       res.send({ status: 200, success: true, message: result});
     })
@@ -61,18 +64,6 @@ router.delete('/email/:email', (req, res) => {
     })
     .catch((err) => {
       res.send(err);
-    });
-});
-
-router.get('/auth/check', (req, res, next) => {
-  const token = (req.header('x-access-token') || req.query.token);
-  const userEmail = jwtDecode(token).param;
-  UserService.getUser(userEmail)
-    .then((result) => {
-      res.send(result.message.subscription);
-    })
-    .catch((err) => {
-      res.send('유저가 없습니다. ', err);
     });
 });
 
