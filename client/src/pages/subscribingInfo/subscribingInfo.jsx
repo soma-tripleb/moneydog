@@ -9,6 +9,7 @@ import SubsTmplService from './subscribingInfo.ajax';
 import { TEST_USER_SELECTED_SUBS, TEST_USER_SUBSTMPL_INFO_LIST } from './sample/userSubsDatas';
 
 import './subscribingInfo.css';
+import userActions from '../../redux/actions/userAction';
 
 const NOW = DateUtil.NOW();
 
@@ -27,11 +28,11 @@ class SubscribingInfo extends Component {
   }
 
   componentDidMount = () => {
-    const userSeletedList = this.props.USERS.subsTmplList;
-    const userSelectedListLength = this.props.USERS.subsTmplList.length;
+    const userSeletedList = this.props.USERS.tempSubscriptions;
+    const userSelectedListLength = userSeletedList.length;
 
     this.getUserSubsList(userSeletedList, userSelectedListLength);
-  }
+  };
 
   getUserSubsList = (userSeletedList, userSelectedListLength) => {
     let tempSubsList = [];
@@ -60,18 +61,19 @@ class SubscribingInfo extends Component {
       userSubsList: update(this.state.userSubsList, { $push: tempSubsList }),
       userInputList: update(this.state.userInputList, { $push: tempInputList })
     });
-  }
+  };
 
   handleSubmit = async (e) => {
     e.preventDefault();
 
     const { userInputList } = this.state;
+    const { reduxInsertUserSubscriptions, reduxDeleteTempSubscriptions, history} = this.props;
 
     userInputList.some((info) => {
       if (info.price === '') {
         alert('결제금액을 입력해주세요');
         return true;
-      } ;
+      }
 
       if (info.paymentDate === '') {
         alert('결제일을 입력해주세요');
@@ -84,15 +86,19 @@ class SubscribingInfo extends Component {
       }
     });
 
-    const result = await SubsTmplService.updateUserSubsInfo(userInputList);
+    await reduxInsertUserSubscriptions(userInputList);
+
+    const result = await SubsTmplService.updateUserSubsInfo(this.props.USERS.subscriptions);
+
+    reduxDeleteTempSubscriptions();
 
     if (result.data.status === 200)
-      this.props.history.push('/user/dashboard');
+      history.push('/user/dashboard');
     else {
       console.log(result);
       alert('ERROR'); // TODO
     }
-  }
+  };
 
   handleUserInputChange = (name, element, userInput) => {
     let inputList = '';
@@ -125,7 +131,7 @@ class SubscribingInfo extends Component {
         }
       }),
     });
-  }
+  };
 
   InputSubscriptionTemplateInfo = () => {
     const inputList = this.state.userInputList;
@@ -170,4 +176,15 @@ class SubscribingInfo extends Component {
   }
 };
 
-export default ReduxConn(mapStateToProps)(SubscribingInfo);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    reduxInsertUserSubscriptions: (userInputList) => {
+      dispatch(userActions.insertUserSubscriptions(userInputList));
+    },
+    reduxDeleteTempSubscriptions: () => {
+      dispatch(userActions.deleteTempSubscriptions());
+    }
+  };
+};
+
+export default ReduxConn(mapStateToProps, mapDispatchToProps)(SubscribingInfo);

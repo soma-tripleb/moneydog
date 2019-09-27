@@ -19,7 +19,7 @@ class Report extends Component {
 
   initialState = () =>{
     let totalPay = 0;
-    this.props.subs.map(
+    this.props.subscriptions.map(
       (content) =>{
         totalPay += content.price;
       });
@@ -29,11 +29,11 @@ class Report extends Component {
   };
 
   showSubsList = () =>{
-    if ( typeof this.props.subs === 'undefined') {
+    if ( typeof this.props.subscriptions === 'undefined') {
       return;
     }
 
-    const list = this.props.subs.map(
+    const list = this.props.subscriptions.map(
       (content, i) => (
         <div key={i} className="container w-100 p-3" id="inner-element">
           <div className="row">
@@ -104,7 +104,7 @@ class Report extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  subs: state.users.subs,
+  subscriptions: state.users.subscriptions,
 });
 
 export default connect(mapStateToProps)(Report);

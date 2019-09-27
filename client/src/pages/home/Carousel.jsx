@@ -16,17 +16,17 @@ class Carousel extends Component {
               <li data-target="#carouselExampleIndicators" data-slide-to="1"/>
               <li data-target="#carouselExampleIndicators" data-slide-to="2"/>
             </ol>
-            <div className="carousel-inner">
+            <div className="carousel-inner ">
               <div className="carousel-item active">
-                <img className="d-block w-50" src={dashboard}
+                <img className="d-block w-100" src={dashboard}
                   alt="First slide"/>
               </div>
               <div className="carousel-item">
-                <img className="d-block w-50" src={report}
+                <img className="d-block w-100" src={report}
                   alt="First slide"/>
               </div>
               <div className="carousel-item">
-                <img className="d-block w-50" src={subscribe}
+                <img className="d-block w-100" src={subscribe}
                   alt="First slide"/>
               </div>
             </div>

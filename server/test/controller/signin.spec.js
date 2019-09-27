@@ -3,14 +3,14 @@ import 'babel-polyfill';
 import request from 'supertest';
 import app from '../../app';
 
-describe('POST /users/signIn', () => {
+describe('POST /auth/signIn', () => {
   it('로그인', (done) => {
     request(app)
-      .post('/users/signIn')
+      .post('/auth/signIn')
       .send({
         userInfo: {
           email: 'admin@fkii.org',
-          passowd: '1234',
+          password: '1234',
         },
       })
       .end((err, res) => {

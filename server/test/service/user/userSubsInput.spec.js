@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import assert from 'assert';
 
 import { mongoConnect, mongoDisConnect } from '../../../src/configs/mongoDB';

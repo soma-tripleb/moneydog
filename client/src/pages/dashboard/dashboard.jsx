@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import React, {Component} from 'react';
 
 import Calendar from './Calendar';
@@ -6,8 +5,6 @@ import Categories from './Categories';
 import TotalAmount from './TotalAmount';
 import List from './List';
 import moment from 'moment';
-
-import DashBoardService from './dashboard.ajax';
 
 import './dashboard.css';
 import {connect} from 'react-redux';
@@ -28,15 +25,14 @@ class DashBoard extends Component {
     return moment(this.state.selectedValue).date();
   };
 
-  componentDidMount() {
+  componentDidMount =() => {
     this.fetchSubscriptionInfo();
   }
 
-  fetchSubscriptionInfo = async () => {
-    const response = await DashBoardService.getUserSubs();
-    
+  fetchSubscriptionInfo = () => {
+
     this.setState({
-      subscription: response.data.message.map(
+      subscription: this.props.subscriptions.map(
         (content) => {
           return {...content, logo: image[content.name.toLowerCase()]};
         }
@@ -80,6 +76,7 @@ class DashBoard extends Component {
 }
 // Access Redux store
 const mapStateToProps = (state) => ({
+  subscriptions: state.users.subscriptions,
 });
 
 // get action

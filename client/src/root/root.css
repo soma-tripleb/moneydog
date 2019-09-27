@@ -13,16 +13,16 @@
     src: url(../static/font/gotham-ultra-webfont.woff) format('truetype');
 }
 
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-}
+/*html, body {*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    margin: 0;*/
+/*}*/
 
-body {
-    display: flex;
-    flex-direction: column;
-}
+/*body {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
 
 #root {
     height: 100%;
@@ -31,14 +31,11 @@ body {
 
 #root > div {
     height: 100%;
+    background: #f0f2f5;
 }
 
 .layout {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-}
-
-.ant-row .ant-col {
-    height: 100%;
 }

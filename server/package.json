@@ -8,8 +8,9 @@
     "test": "cross-env NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register --timeout 120000 --recursive ./**/*.spec.js",
     "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
     "lint": "./node_modules/.bin/eslint --fix --ext .js src/ test/ app.js index.js;",
-    "test-subs-info-repo": "./node_modules/mocha/bin/mocha --require babel-register ./test/schema/user/subsInput.spec.js",
-    "test-subs-info-serv": "./node_modules/mocha/bin/mocha --require babel-register ./test/service/user/userSubsInput.spec.js"
+    "test-subs-info-repo": "NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register ./test/schema/user/subsInput.spec.js",
+    "test-subs-info-serv": "NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register ./test/service/user/userSubsInput.spec.js",
+    "test-controller": "NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register ./test/controller/authController.spec.js"
   },
   "dependencies": {
     "@sentry/node": "^5.6.2",

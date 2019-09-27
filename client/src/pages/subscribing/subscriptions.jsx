@@ -13,7 +13,7 @@ import * as images from '../../static/img/templogo';
 import './subscriptions.css';
 
 const mapStateToProps = (state) => ({
-  subs: state.users.subs,
+  subscriptions: state.users.subscriptions,
 });
 
 class Subscriptions extends Component {
@@ -35,13 +35,25 @@ class Subscriptions extends Component {
 
   // subTemplate 배열에 저장 하고 images 이름에 맞춰 같이 저장 하기
   ajaxGetSubTmtl = async () => {
+    const { subscriptions } = this.props;
+
     const subsTmplResponse = await SubsTmplService.getList();
     const subsTmplList = subsTmplResponse.data.message;
+
+    if (subscriptions.length !== 0) {
+      subscriptions.map((subscription) => {
+        const idx = subsTmplList.findIndex((item) => {
+          return item.name.toLowerCase() === subscription.name.toLowerCase();
+        });
+        if (idx > -1) subsTmplList.splice(idx, 1);
+      });
+    }
+    // TODO : subscriptions 과 subsTmpl 을 비교 해서 이름이 같으면 subsTmpl을 삭제한다.
+    // TODO : 정상 로직 일 경우, this.props.subscriptions.length === 0
 
     // logo 필드 추가
     subsTmplList.map((subsTmpl) => {
       const subsTmplName = subsTmpl.thumbnail.toLowerCase();
-
       subsTmpl.logo = images[subsTmplName];
     });
 
