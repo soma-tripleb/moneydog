@@ -1,6 +1,6 @@
 import express from 'express';
 import UserService from './userService';
-import jwtDecode from 'jwt-decode';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 

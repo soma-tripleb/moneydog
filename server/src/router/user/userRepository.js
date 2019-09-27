@@ -51,7 +51,7 @@ const deleteAllUser = () => {
 const updateMany = (email, subsInfoList) => {
   return UserSchema.User.updateMany(
     { email: email },
-    { subscription: subsInfoList },
+    { $set: { subscription: subsInfoList } },
     { runValidators: true }
   ).then((result) => {
     return { status: 201, success: true, message: result };

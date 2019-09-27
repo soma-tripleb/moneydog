@@ -1,5 +1,4 @@
 import UserRepository from './userRepository';
-import UserSchema from '../../schemas/user';
 
 const getUserList = () => {
   return UserRepository.findAll();
