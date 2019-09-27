@@ -3,6 +3,8 @@ import axios from 'axios';
 import {GET_SUBS, GET_USERS_SUBSTMPL_LIST } from './actionType';
 import Cookies from 'js-cookie';
 
+const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
+
 const getUserSubsTmplList = (list) => (dispatch) => {
   dispatch(
     {
@@ -13,7 +15,7 @@ const getUserSubsTmplList = (list) => (dispatch) => {
 };
 
 export const getSubsInfo = () => async (dispatch) => {
-  const AJAX_URL =`${process.env.REACT_APP_NODE_API_URL}/subs-info`;
+  const AJAX_URL =`${SERVER_URL}/subs-info`;
   const headerConfig = {
     headers: {
       'x-access-token': Cookies.get('token'),

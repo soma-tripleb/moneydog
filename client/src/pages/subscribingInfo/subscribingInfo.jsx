@@ -3,6 +3,8 @@ import update from 'react-addons-update';
 import { connect as ReduxConn } from 'react-redux';
 import DateUtil from '../../../src/pages/util/dateUtil';
 
+import Cookies from 'js-cookie';
+
 import SubsTmpl from './subsTmpl';
 import SubsTmplService from './subscribingInfo.ajax';
 
@@ -66,7 +68,6 @@ class SubscribingInfo extends Component {
     e.preventDefault();
 
     const { userInputList } = this.state;
-    const userToken = Cookies.getJSON('auth').status.JWT;
 
     userInputList.some((info) => {
       if (info.price === '') {
@@ -85,7 +86,7 @@ class SubscribingInfo extends Component {
       }
     });
 
-    const result = await SubsTmplService.updateUserSubsInfo(userToken, userInputList);
+    const result = await SubsTmplService.updateUserSubsInfo(userInputList);
 
     if (result.data.status === 200)
       this.props.history.push('/user/dashboard');
