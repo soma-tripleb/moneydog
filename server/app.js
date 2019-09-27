@@ -33,7 +33,7 @@ import subsTmplRouter from './src/router/subscriptionTemplate/subsTmplController
 app.use(customLogger);
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
-// app.use(authCheck);
+app.use(authCheck);
 app.use('/users', userRouter);
 app.use('/subs-info', subsInfoRouter);
 app.use('/subs-tmpl', subsTmplRouter);

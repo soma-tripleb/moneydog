@@ -11,9 +11,9 @@ class IndexInfo extends Component {
           {/* 우리 서비스의 목표 */}
           <div className="container marketing">
 
-            <div className="row">
+            <div className="row index-wrap">
 
-              <div className="col-lg-4">
+              <div className="col-lg-4 index-item">
                 <img
                   src={dashboard}
                   alt="Generic placeholder image" style={{height: '20vh', borderRadius: '5px'}}/>
@@ -22,7 +22,7 @@ class IndexInfo extends Component {
                 <p><a className="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
               </div>
 
-              <div className="col-lg-4">
+              <div className="col-lg-4 index-item">
                 <img
                   src={report}
                   alt="Generic placeholder image" style={{height: '20vh', borderRadius: '5px'}}/>
@@ -31,7 +31,7 @@ class IndexInfo extends Component {
                 <p><a className="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
               </div>
 
-              <div className="col-lg-4">
+              <div className="col-lg-4 index-item">
                 <img
                   src={subscribe}
                   alt="Generic placeholder image" style={{height: '20vh', borderRadius: '5px'}}/>

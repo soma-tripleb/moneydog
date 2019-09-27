@@ -1,7 +1,13 @@
+/*home*/
 .homwWrap {
     text-align: center;
 }
 
 .featurette-heading {
     font-size: 1rem;
+}
+
+/*index*/
+.index-wrap > .index-item {
+    padding: 5vh 5vh 5vh 5vh;
 }
