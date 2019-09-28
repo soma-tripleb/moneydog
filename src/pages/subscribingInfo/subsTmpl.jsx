@@ -28,7 +28,7 @@ class SubsTmpl extends Component {
         dataId: subsName,
       }
     });
-  }
+  };
 
   handleChange = (e) => {
     const dateObj = this.state.dateObject;
@@ -53,7 +53,7 @@ class SubsTmpl extends Component {
         e.target.value,
       );
     }
-  }
+  };
 
   onDatePickerChange = (date) => {
     this.setState({
@@ -64,7 +64,7 @@ class SubsTmpl extends Component {
     }, () => {
       this.handleChange();
     });
-  }
+  };
 
   render() {
     const { info } = this.props;
@@ -99,17 +99,12 @@ class SubsTmpl extends Component {
                   placeholder="결제 금액"
                   aria-label="Amount (to the nearest dollar)"
                 />
-                {/* <div class="input-group-append">
-                  <span class="input-group-text">.00</span>
-                </div> */}
               </div>
             </div>
 
             {/* 결제일 */}
             <div className="payment-date col-xs-6 col-sm-3">
-              <DatePickers
-                onDatePickerChange={this.onDatePickerChange}
-              ></DatePickers>
+              <DatePickers onDatePickerChange={this.onDatePickerChange}/>
             </div>
 
             {/* 결제 채널 */}

@@ -1,22 +1,15 @@
-import React, {Component} from 'react';
-import {Icon, Spin} from 'antd';
+import React, { Component } from 'react';
 
 class TotalAmount extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   getTotalAmount = (subscriptions) => {
-    let sum = 0;
-    subscriptions.map((subscription) => sum += subscription.price);
-    return sum;
+    if (this.props.data !== null) {
+      let sum = 0;
+      subscriptions.map((subscription) => sum += subscription.price);
+      return sum;
+    }
   };
 
   render() {
-    if (this.props.data == null) {
-      const icon = <Icon type="loading" style={{fontSize: 24}} spin />;
-      return (<Spin indicator={icon} />);
-    }
     return (
       <div>
       TotalAmount
@@ -35,3 +28,4 @@ class TotalAmount extends Component {
 }
 
 export default TotalAmount;
+

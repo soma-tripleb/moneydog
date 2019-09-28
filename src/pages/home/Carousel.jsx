@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 
-import dashboard from '../../static/img/index/dashboard.png';
-import report from '../../static/img/index/report.png';
-import subscribe from '../../static/img/index/subscribe.png';
-
-import './carosel.css';
+import dashboard from '../../../resources/static/img/index/dashboard.png';
+import report from '../../../resources/static/img/index/report.png';
+import subscribe from '../../../resources/static/img/index/subscribe.png';
 
 class Carousel extends Component {
   render() {

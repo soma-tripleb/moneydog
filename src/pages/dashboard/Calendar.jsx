@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Calendar} from 'antd';
 import moment from 'moment';
-import './Calendar.css';
 
 class CalendarClass extends Component {
   constructor(props) {
@@ -12,14 +11,15 @@ class CalendarClass extends Component {
   handleChange = (value) => {
     this.props.handleChange(value);
   };
+
   getListData = (value, subscriptions) => {
-    let listData;
+    let listData = [];
     subscriptions.map((subscription) => {
-      if (moment(subscription.renewal).date() === value.date() && subscription.renewal != undefined) {
+      if (moment(subscription.renewal).date() === value.date() && subscription.renewal !== undefined) {
         listData = [{type: subscription.logo}];
       }
     });
-    return listData || [];
+    return listData;
   };
 
   dateCellRender = (value) => {

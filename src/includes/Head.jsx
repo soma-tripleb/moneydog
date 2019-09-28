@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect as ReduxConn } from 'react-redux';
 import AuthActions from '../redux/actions/authAction';
 
-import './header.css';
+import './css/header.css';
 
 class Head extends Component {
   logout = () => {

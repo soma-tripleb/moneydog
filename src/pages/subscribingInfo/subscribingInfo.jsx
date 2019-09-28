@@ -116,13 +116,10 @@ class SubscribingInfo extends Component {
           switch (element) {
             case 'price':
               return ({ ...info, price: userInput });
-              break;
             case 'paymentDate':
               return ({ ...info, paymentDate: userInput });
-              break;
             case 'channel':
               return ({ ...info, channel: userInput });
-              break;
             default:
               return info;
           }

@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import {PageHeader, Button, Spin, Icon} from 'antd';
 
-import './Categories.css';
-import SubsApp from '../subscribing/subsApp';
-
 class Categories extends Component {
   state = {
     subscriptions: null,
@@ -33,16 +30,16 @@ class Categories extends Component {
       (data, index) => (
         <div key={index} className="container w-100 p-3" id="inner-element">
           <div className="row">
-            <div className="col">
-              <img src={'/'+ data.logo} alt={data.name} style={{height: '5vh', borderRadius: '5px', paddingLeft: '0px'}}/>
+            <div className="col categories-inner-item">
+              <img className="categories-inner-item-image" src={'/'+ data.logo} alt={data.name}/>
             </div>
-            <div className="col">
+            <div className="col categories-inner-item">
               {data.name}
             </div>
-            <div className="col">
+            <div className="col categories-inner-item">
                   ₩{data.price}
             </div>
-            <div className="col">
+            <div className="col categories-inner-item">
               {data.paymentDate}(D-{this.countRenualDate(data.paymentDate)})
             </div>
           </div>

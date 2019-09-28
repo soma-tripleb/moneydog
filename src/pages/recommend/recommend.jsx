@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 
-import Netflix from '../../static/img/templogo/netflix.png';
-import Tving from '../../static/img/templogo/tving.png';
-import Watcha from '../../static/img/templogo/watcha.png';
-import Melon from '../../static/img/templogo/melon.png';
-import Flo from '../../static/img/templogo/Flo.png';
-import Bugs from '../../static/img/templogo/Bugs.png';
-import NaverCloud from '../../static/img/templogo/NaverCloud.png';
-import Screen from '../../static/img/templogo/Screen.png';
+import Netflix from '../../../resources/static/img/templogo/netflix.png';
+import Tving from '../../../resources/static/img/templogo/tving.png';
+import Watcha from '../../../resources/static/img/templogo/watcha.png';
+import Melon from '../../../resources/static/img/templogo/melon.png';
+import Flo from '../../../resources/static/img/templogo/Flo.png';
+import Bugs from '../../../resources/static/img/templogo/Bugs.png';
+import NaverCloud from '../../../resources/static/img/templogo/NaverCloud.png';
+import Screen from '../../../resources/static/img/templogo/Screen.png';
 
 import './recommend.css';
 

@@ -8,7 +8,7 @@ import UserActions from '../../redux/actions/userAction';
 import SubsApp from './subsApp';
 import SubsTmplService from './subscriptions.ajax';
 
-import * as images from '../../static/img/templogo';
+import * as images from '../../../resources/static/img/templogo';
 
 import './subscriptions.css';
 
@@ -48,8 +48,6 @@ class Subscriptions extends Component {
         if (idx > -1) subsTmplList.splice(idx, 1);
       });
     }
-    // TODO : subscriptions 과 subsTmpl 을 비교 해서 이름이 같으면 subsTmpl을 삭제한다.
-    // TODO : 정상 로직 일 경우, this.props.subscriptions.length === 0
 
     // logo 필드 추가
     subsTmplList.map((subsTmpl) => {

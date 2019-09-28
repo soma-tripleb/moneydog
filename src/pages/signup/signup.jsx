@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import {connect as ReduxConn} from 'react-redux';
 
 import authActions from '../../redux/actions/authAction';
-import * as service from './signup.ajax';
 import './signup.css';
 import Cookies from 'js-cookie';
 
@@ -140,7 +139,7 @@ class SignUp extends Component {
                 <h4 className="card-title mt-3 text-center">Sign Up</h4>
                 <p className="text-center">Get started with your free account</p>
                 <p>
-                  <button onClick={service.responseGoogle} className="btn btn-block btn-google"
+                  <button className="btn btn-block btn-google"
                     style={{backgroundColor: 'lightgray'}}>
                     <i className="fab fa-google"/> Login via google
                   </button>

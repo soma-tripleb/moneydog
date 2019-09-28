@@ -6,7 +6,6 @@ import authActions from '../../redux/actions/authAction';
 import userActions from '../../redux/actions/userAction';
 
 import './signin.css';
-import * as service from '../signin/signin.ajax';
 
 import Cookies from 'js-cookie';
 
@@ -60,7 +59,7 @@ class Signin extends Component {
               <article className="card-body mx-auto">
                 <h4 className="card-title mt-3 text-center">Sign In</h4>
                 <p>
-                  <button onClick={service.responseGoogle} className="btn btn-block btn-google" style={{backgroundColor: 'lightgray'}}>
+                  <button className="btn btn-block btn-google" style={{backgroundColor: 'lightgray'}}>
                     <i className="fab fa-google"/> Login via google
                   </button>
                 </p>

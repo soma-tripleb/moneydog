@@ -8,7 +8,7 @@ import moment from 'moment';
 
 import './dashboard.css';
 import {connect} from 'react-redux';
-import * as image from '../../static/img/templogo';
+import * as image from '../../../resources/static/img/templogo';
 
 class DashBoard extends Component {
   state= {
@@ -27,10 +27,9 @@ class DashBoard extends Component {
 
   componentDidMount =() => {
     this.fetchSubscriptionInfo();
-  }
+  };
 
   fetchSubscriptionInfo = () => {
-
     this.setState({
       subscription: this.props.subscriptions.map(
         (content) => {
@@ -43,6 +42,8 @@ class DashBoard extends Component {
   };
 
   render() {
+    const {subscription, selectedValue} = this.state;
+
     return (
         <>
           <div className="container">
@@ -50,21 +51,21 @@ class DashBoard extends Component {
               <div className="col-md-6">
                 {/* 달력*/}
                 <div className="calendar">
-                  <Calendar date={this.state.selectedValue} handleChange={this.handleChange} data={this.state.subscription}/>
+                  <Calendar date={selectedValue} handleChange={this.handleChange} data={subscription}/>
                 </div>
                 <hr/>
                 <div className="list">
-                  <List date={this.convertDate()} data={this.state.subscription} />
+                  <List date={this.convertDate()} data={subscription} />
                 </div>
               </div>
               {/* 구독중인 서비스 list */}
               <div className="col-md-6">
                 <div className='TotalAmount'>
-                  <TotalAmount data={this.state.subscription}/>
+                  <TotalAmount data={subscription}/>
                 </div>
                 <hr/>
                 <div className='categories'>
-                  <Categories data={this.state.subscription}/>
+                  <Categories data={subscription}/>
                 </div>
               </div>
 
