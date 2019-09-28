@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'GOTHAN-ULTRAITALIC';
+    src: url(../static/font/gotham-ultraitalic-webfont.woff) format('truetype');
+}
+
+@font-face {
+    font-family: 'GOTHAN-XLIGHT';
+    src: url(../static/font/gotham-xlight-webfont.woff) format('truetype');
+}
+
+@font-face {
+    font-family: 'GOTHAN-ULTRA';
+    src: url(../static/font/gotham-ultra-webfont.woff) format('truetype');
+}
+
+/*html, body {*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    margin: 0;*/
+/*}*/
+
+/*body {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+#root > div {
+    height: 100%;
+    background: #f0f2f5;
+}
+
+.layout {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,40 @@
+/* subscriptionInfo */
+#user-info-container {
+  box-shadow: 10px 10px 10px 10px lightgray;
+  max-height: 60vh;
+  overflow: auto;
+  width: 100%;
+}
+
+.submit-container {
+  margin-top: 5vh;
+  text-align: center;
+}
+
+/* subsTmpl */
+#user-info-elements {
+  margin-bottom: 12px;
+  background-color: whitesmoke;
+  box-shadow: 3px 3px 3px 3px lightgray; 
+  text-align: center;
+  border-radius: 3%;
+  font-size: 2vw;
+}
+
+.logo-img {
+  height: 5vh;
+  border-radius: 5px;
+}
+
+label {
+  display: inline;
+}
+
+.logo, .price, .payment-date, .radio {
+  margin: 1vh 0 1vh 0;
+}
+
+#label-text {
+  font-weight: lighter;
+  font-size: 1.5vw;
+}
