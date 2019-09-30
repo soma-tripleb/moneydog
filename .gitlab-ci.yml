@@ -9,6 +9,8 @@ default:
     before_script:
         - export PATH=$PATH:/usr/local/bin
         - npm install
+    tags:
+        - react
 
 client_build_test:
     stage: build
@@ -16,7 +18,7 @@ client_build_test:
         - echo 'client build start'
         - npm run build
     tags:
-        - client
+        - react
 
 client_lint_test:
     stage: lint
@@ -24,4 +26,4 @@ client_lint_test:
         - echo 'client lint start'
         - npm run lint
     tags:
-        - client
+        - react
