@@ -1,14 +1,27 @@
 image: node:latest
 
 stages:
+    - build
     - client-lint
 
-client_lint_inspection:
-    stage: client-lint
+default:
     before_script:
-    - export PATH=$PATH:/usr/local/bin
+        - npm install
+        - export PATH=$PATH:/usr/local/bin
+
+client_build_test:
+    stage: build
     script:
-    - npm install
-    - npm run lint
+        - echo 'client build start'
+        - npm run build
     tags:
-    - client
+        - client
+
+client_lint_test:
+    stage: lint
+    script:
+        - echo 'client lint start'
+        - npm run lint
+    tags:
+        - client
+
