@@ -69,11 +69,6 @@
 }
 
 /* Categories */
-.categories-inner-item {
-    width: 100px;
-    height: 50px;
-}
-
 .categories-inner-item-image{
     height: 5vh;
     border-radius: 5px;

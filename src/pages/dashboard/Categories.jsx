@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+
+import Item from './item';
 import {PageHeader, Button, Spin, Icon} from 'antd';
 
 class Categories extends Component {
@@ -28,34 +30,10 @@ class Categories extends Component {
   showUserSubsList = () =>{
     const list = this.props.data.map(
       (data, index) => (
-        <div key={index} className="container w-100 p-3" id="inner-element">
-          <div className="row">
-            <div className="col categories-inner-item">
-              <img className="categories-inner-item-image" src={'/'+ data.logo} alt={data.name}/>
-            </div>
-            <div className="col categories-inner-item">
-              {data.name}
-            </div>
-            <div className="col categories-inner-item">
-                  ₩{data.price}
-            </div>
-            <div className="col categories-inner-item">
-              {data.paymentDate}(D-{this.countRenualDate(data.paymentDate)})
-            </div>
-          </div>
-        </div>
+        <Item key={index} data={data}/>
       )
     );
     return list;
-  };
-
-  countRenualDate = (date) => {
-    const currentDate = new Date();
-    if (currentDate < date) {
-      return date - currentDate.getDate();
-    } else {
-      return (new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0)).getDate() -currentDate.getDate() + date;
-    }
   };
 
   render() {
