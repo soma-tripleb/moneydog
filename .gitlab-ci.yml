@@ -7,8 +7,8 @@ stages:
 
 default:
     before_script:
-        - npm install
         - export PATH=$PATH:/usr/local/bin
+        - npm install
 
 client_build_test:
     stage: build
