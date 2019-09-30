@@ -1,8 +1,10 @@
-require('dotenv').config();
-
 import 'babel-polyfill';
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
+
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
