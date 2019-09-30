@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import {Calendar} from 'antd';
 import moment from 'moment';
 
@@ -13,6 +14,8 @@ class CalendarClass extends Component {
   };
 
   getListData = (value, subscriptions) => {
+    // console.log('value1: ', moment(value._d).format('YYYY/MM/DD'));
+
     let listData = [];
     subscriptions.map((subscription) => {
       if (moment(subscription.renewal).date() === value.date() && subscription.renewal !== undefined) {
@@ -25,13 +28,28 @@ class CalendarClass extends Component {
   dateCellRender = (value) => {
     const subscriptions = this.props.data;
     const listData = this.getListData(value, subscriptions);
+
+    const calendarDate = moment(value._d).format('YYYY/MM/DD');
+
+    subscriptions.map((subscription) => {
+      const subsDate = moment(subscription.paymentDate).format('YYYY/MM/DD');
+
+      if (subsDate === calendarDate) {
+        console.log(subscription.name);
+        console.log(subscription.logo);
+        console.log(subsDate);
+      }
+    });
+
     return (
       <ul className="events">
-        {listData.map((item) => (
-          <li key={item.type}>
-            <img className="subscribeImg" src={'/'+item.type} alt='img not found'/>
-          </li>
-        ))}
+        {
+          listData.map((item) => (
+            <li key={item.type}>
+              <img className="subscribeImg" src={'/' + item.type} alt='img not found' />
+            </li>
+          ))
+        }
       </ul>
     );
   };
@@ -59,7 +77,12 @@ class CalendarClass extends Component {
     return (
       <div>
         <p><u> 월별 결제일 정보 </u></p>
-        <Calendar fullscreen={false} dateCellRender={this.dateCellRender} monthCellRender={this.monthCellRender} onSelect={this.handleChange} />
+        <Calendar
+          fullscreen={false}
+          dateCellRender={this.dateCellRender}
+          monthCellRender={this.monthCellRender}
+          onSelect={this.handleChange}
+        />
       </div>
     );
   }
