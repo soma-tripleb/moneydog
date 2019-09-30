@@ -25,4 +25,3 @@ client_lint_test:
         - npm run lint
     tags:
         - client
-
