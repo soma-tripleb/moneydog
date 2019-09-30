@@ -5,7 +5,7 @@ import {decodeJWT} from '../../security/jwtAuthenticationToken';
 const getSubsInfo = async (token) => {
   const tokenParam = decodeJWT(token).param;
   const userInfo = await SubsInfoRepository.findByUserInfo(tokenParam);
-  
+
 
   if (userInfo === null) {
     return {status: 400, success: false, message: '존재하지 않는 아이디 입니다.'};
