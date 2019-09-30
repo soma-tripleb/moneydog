@@ -13,40 +13,31 @@ class CalendarClass extends Component {
     this.props.handleChange(value);
   };
 
-  getListData = (value, subscriptions) => {
-    // console.log('value1: ', moment(value._d).format('YYYY/MM/DD'));
-
-    let listData = [];
-    subscriptions.map((subscription) => {
-      if (moment(subscription.renewal).date() === value.date() && subscription.renewal !== undefined) {
-        listData = [{type: subscription.logo}];
-      }
-    });
-    return listData;
-  };
-
   dateCellRender = (value) => {
     const subscriptions = this.props.data;
-    const listData = this.getListData(value, subscriptions);
 
-    const calendarDate = moment(value._d).format('YYYY/MM/DD');
+    const dateMatchedSubscriptions =[];
+    const calendarDate = moment(value._d).format('DD');
 
     subscriptions.map((subscription) => {
-      const subsDate = moment(subscription.paymentDate).format('YYYY/MM/DD');
+      const subsDate = moment(subscription.paymentDate).format('DD');
 
       if (subsDate === calendarDate) {
+        console.log(subscription);
         console.log(subscription.name);
         console.log(subscription.logo);
         console.log(subsDate);
+
+        dateMatchedSubscriptions.push(subscription);
       }
     });
 
     return (
       <ul className="events">
         {
-          listData.map((item) => (
-            <li key={item.type}>
-              <img className="subscribeImg" src={'/' + item.type} alt='img not found' />
+          dateMatchedSubscriptions.map((subscriptions) => (
+            <li key={subscriptions.seq}>
+              <img className="calendar-subscriptions-img" src={'/' + subscriptions.logo} alt='x' />
             </li>
           ))
         }
@@ -69,6 +60,10 @@ class CalendarClass extends Component {
       </div>
     ) : null;
   };
+
+  mode = (month, year) => {
+    console.log(month, year);
+  }
 
   render() {
     if (this.props.data == null) {

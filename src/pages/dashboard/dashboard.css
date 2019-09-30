@@ -64,8 +64,9 @@
     height: 70px;
 }
 
-.subscribeImg {
+.calendar-subscriptions-img {
     width: 50%;
+    border-radius: 0.5vh;
 }
 
 /* Categories */
