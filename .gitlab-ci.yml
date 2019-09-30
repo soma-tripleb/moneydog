@@ -2,7 +2,7 @@ image: node:latest
 
 stages:
     - build
-    - client-lint
+    - lint
 
 default:
     before_script:
