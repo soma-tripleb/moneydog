@@ -1,8 +1,4 @@
-image:
-    docker run --rm -t -i gitlab/gitlab-runner --help
-
-services:
-    - mongo:latest
+image: node:latest
 
 stages:
     - client-lint
