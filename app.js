@@ -19,7 +19,6 @@ dotenv.config();
 // DB Config
 mongoConnect();
 
-
 // MiddleWares
 app.use(cors());
 app.use(morgan('combined', { stream }));

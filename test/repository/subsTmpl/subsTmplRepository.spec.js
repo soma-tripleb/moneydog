@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import assert from 'assert';
 import SubsTmpl from '../../../src/schemas/subscriptionTemplate';
 import SubsTmplRepo from '../../../src/router/subscriptionTemplate/subsTmplReposiroty';
-import { mongoConnect, mongoDisConnect } from '../../../src/configs/mongoDB';
+import { mongoConnect, mongoDisConnect } from '../../../src/config/mongoDB';
 import SubsTmplMock from '../../mock/subsTmpl/subsTmplMock';
 
 describe('SubscriptionTemplate Test', () => {

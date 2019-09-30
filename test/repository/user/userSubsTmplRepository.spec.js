@@ -3,7 +3,7 @@ import assert from 'assert';
 
 import UserSchema from '../../../src/schemas/user';
 
-import { mongoConnect, mongoDisConnect } from '../../../src/configs/mongoDB';
+import { mongoConnect, mongoDisConnect } from '../../../src/config/mongoDB';
 
 const subsTmplPricePlan = {
   title: '1개월 이용권',
