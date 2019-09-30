@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import { conn } from '../configs/mongoDB';
+import { conn } from '../config/mongoDB';
 
 const pricePlanSchema = new mongoose.Schema(
   {

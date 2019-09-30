@@ -19,6 +19,7 @@ server_lint_inspection:
     script:
     - npm install
     - npm run lint
+    - npm run test-controller
     tags:
     - server
 

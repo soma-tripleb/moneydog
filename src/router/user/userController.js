@@ -20,7 +20,7 @@ router.get('/:email', (req, res) => {
   const token = req.header('x-access-token') || req.params.token;
 
   const userEmail = jwtDecode(token).param;
-  
+
   UserService.getUser(req.params.email)
     .then((result) => {
       res.send(result);
