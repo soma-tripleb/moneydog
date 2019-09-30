@@ -1,3 +1,6 @@
+image:
+    docker run --rm -t -i gitlab/gitlab-runner --help
+
 services:
     - mongo:latest
 
