@@ -20,5 +20,5 @@ server_lint_inspection:
     - npm install
     - npm run lint
     tags:
-    - moneydog
+    - server
 
