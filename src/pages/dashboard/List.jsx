@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import moment from 'moment';
 
@@ -29,12 +29,12 @@ class List extends Component {
 
     if (result) {
       return (
-          <>
-            <div className='list-img-border'>
-              <img className="line-img" alt='x' src={'/' + result.logo} />
-            </div>
-            <div>{result ? result.name : ''}</div>
-          </>
+        <>
+          <div className='list-img-border'>
+            <img className="line-img" alt='x' src={'/' + result.logo} />
+          </div>
+          <div>{result ? result.name : ''}</div>
+        </>
       );
     }
   };
