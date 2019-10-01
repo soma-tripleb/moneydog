@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
-// '/users'
+// 'user'
 router.get('/', (req, res) => {
   UserService.getUserList()
     .then((result) => {
