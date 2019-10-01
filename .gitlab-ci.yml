@@ -22,6 +22,7 @@ server_lint_inspection:
     tags:
     - shell
 
+
 server_deploy_Only_master:
   stage: server-deploy
   script:
