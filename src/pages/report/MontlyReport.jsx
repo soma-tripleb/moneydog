@@ -20,25 +20,25 @@ class MontlyReport extends Component {
   render() {
     const {totalPay, currency, month, mostUsed, mostUnused } = this.props.data;
     return (
-        <>
-          <div className="col-sm report-inner-container">
-            <div className="w-100 p-3" id="inner-container">
+      <>
+        <div className="col-sm report-inner-container">
+          <div className="w-100 p-3" id="inner-container">
               이번달 리포트
-              <Row>
-                <Col>
-                  <Card>
-                    <Card.Header>
-                      {month}월 리포트
-                    </Card.Header>
-                    {this.showThisMonthData(`이번달 결제 총액`, `${currency} ${totalPay}`)}
-                    {this.showThisMonthData('Most used Service', `${mostUsed}`)}
-                    {this.showThisMonthData('Most unsed Service', `${mostUnused}`)}
-                  </Card>
-                </Col>
-              </Row>
-            </div>
+            <Row>
+              <Col>
+                <Card>
+                  <Card.Header>
+                    {month}월 리포트
+                  </Card.Header>
+                  {this.showThisMonthData(`이번달 결제 총액`, `${currency} ${totalPay}`)}
+                  {this.showThisMonthData('Most used Service', `${mostUsed}`)}
+                  {this.showThisMonthData('Most unsed Service', `${mostUnused}`)}
+                </Card>
+              </Col>
+            </Row>
           </div>
-        </>
+        </div>
+      </>
     );
   }
 }

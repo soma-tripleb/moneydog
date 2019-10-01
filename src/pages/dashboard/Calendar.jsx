@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import {Calendar} from 'antd';
+import { Calendar } from 'antd';
 import moment from 'moment';
+
+import { something as SOMETHING_IMG } from '../../../resources/static/img/templogo/index';
 
 class CalendarClass extends Component {
   constructor(props) {
@@ -16,33 +18,47 @@ class CalendarClass extends Component {
   dateCellRender = (value) => {
     const subscriptions = this.props.data;
 
-    const dateMatchedSubscriptions =[];
+    const dateMatchedSubscriptions = [];
     const calendarDate = moment(value._d).format('DD');
 
     subscriptions.map((subscription) => {
       const subsDate = moment(subscription.paymentDate).format('DD');
 
       if (subsDate === calendarDate) {
-        console.log(subscription);
-        console.log(subscription.name);
-        console.log(subscription.logo);
-        console.log(subsDate);
-
         dateMatchedSubscriptions.push(subscription);
       }
     });
 
-    return (
-      <ul className="events">
-        {
-          dateMatchedSubscriptions.map((subscriptions) => (
-            <li key={subscriptions.seq}>
-              <img className="calendar-subscriptions-img" src={'/' + subscriptions.logo} alt='x' />
+    const dmsLength = dateMatchedSubscriptions.length;
+    const showCalendarSubscriptions = dateMatchedSubscriptions[0];
+
+    let result = '';
+
+    switch (dmsLength) {
+      case 0:
+        break;
+      case 1:
+        result = (
+          <ul className="events">
+            <li key={showCalendarSubscriptions.seq}>
+              <img className="calendar-subscriptions-img" src={'/' + showCalendarSubscriptions.logo} alt='x' />
             </li>
-          ))
-        }
-      </ul>
-    );
+          </ul>
+        );
+        break;
+      default:
+        result = (
+          <ul className="events">
+            <li key={showCalendarSubscriptions.seq}>
+              <img className="calendar-subscriptions-img front" src={'/' + showCalendarSubscriptions.logo} alt='x' />
+              <img className="calendar-subscriptions-img back" src={'/' + SOMETHING_IMG} alt='x' />
+            </li>
+          </ul>
+        );
+        break;
+    }
+
+    return result;
   };
 
   getMonthData = (moment) => {
