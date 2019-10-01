@@ -16,14 +16,15 @@ stages:
 client_lint_inspection:
     stage: client-lint
     script:
+        - pwd
         - npm run lint
     tags:
         - shell
 
 client_deploy_Only_master:
     stage: client-deploy
-    only:
-        - master
+#    only:
+#        - master
     script:
         - cp $REACT_ENV ./env
         - docker stop $(docker ps -a -q)
