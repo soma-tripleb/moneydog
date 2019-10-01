@@ -1,5 +1,5 @@
-services:
-    - mongo:latest
+#services:
+#    - mongo:latest
 
 stages:
     - server-lint
@@ -7,14 +7,14 @@ stages:
 
 server_lint_inspection:
     stage: server-lint
-    only:
-        variables:
-          - $DB_SCHEMA
-          - $DB_URL
-          - $DB_USER
-          - $DB_PASSWORD
-          - $DB_HOST
-          - $DB_PORT
+#    only:
+#        variables:
+#          - $DB_SCHEMA
+#          - $DB_URL
+#          - $DB_USER
+#          - $DB_PASSWORD
+#          - $DB_HOST
+#          - $DB_PORT
     script:
     - npm install
     - npm run lint
