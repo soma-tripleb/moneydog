@@ -31,12 +31,12 @@
 
 before_script:
     - who
-    - sudo docker info
+    - docker info
 
 build_image:
     script:
-        - sudo docker build --tag client:react -f Dockerfile.dev .
-        - sudo docker run -it -p 80:80 --privileged client:react
+        - docker build --tag client:react -f Dockerfile.dev .
+        - docker run -it -p 80:80 --privileged client:react
     tags:
         - shell
 
