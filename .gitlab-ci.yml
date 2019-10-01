@@ -4,12 +4,10 @@ stages:
     - client-build
     - client-lint
 
-before_script:
-    - export PATH=$PATH:/usr/local/bin
-    - npm install
-
 client_build_test:
     stage: client-build
+    before_script:
+        - npm install
     script:
         - npm run build
     tags:
@@ -22,3 +20,10 @@ client_lint_inspection:
     tags:
         - react
 
+client_deploy:
+    stage: client-deploy
+    script:
+        - sudo docker build --tag client:react -f Dockerfile.dev .
+        - sudo docker run -it -p 80:80 client:react
+    tags:
+        - react
