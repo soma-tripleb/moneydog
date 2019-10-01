@@ -23,10 +23,10 @@ client_lint_inspection:
 
 client_deploy_Only_master:
     stage: client-deploy
-#    only:
-#        - master
+    only:
+        - master
     script:
-        - cp $REACT_ENV ./.env
+        - cp $ENV ./.env
         - docker stop $(docker ps -a -q)
         - docker rm $(docker ps -a -q)
         - docker rmi $(docker images -q)
