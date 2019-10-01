@@ -1,14 +1,23 @@
 image: node:latest
 
 stages:
+    - client-build
     - client-lint
+
+client_build_test:
+    stage: client-build
+    before_script:
+        - export PATH=$PATH:/usr/local/bin
+        - npm install
+    script:
+        - npm run build
+    tags:
+        - react
+
 
 client_lint_inspection:
     stage: client-lint
-    before_script:
-        - export PATH=$PATH:/usr/local/bin
     script:
-        - npm install
         - npm run lint
     tags:
         - react
