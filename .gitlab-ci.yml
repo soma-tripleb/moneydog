@@ -1,24 +1,37 @@
-image: node:latest
 
 stages:
-    - client-build
+#    - client-build
     - client-lint
+    - client-deploy
 
-before_script:
-    - export PATH=$PATH:/usr/local/bin
-    - npm install
-
-client_build_test:
-    stage: client-build
-    script:
-        - npm run build
-    tags:
-        - react
+#client_build_test:
+#    stage: client-build
+#    before_script:
+#        - npm install
+#    script:
+#        - npm run build
+#    tags:
+#        - shell
 
 client_lint_inspection:
     stage: client-lint
     script:
+        - pwd
         - npm run lint
     tags:
-        - react
+        - shell
+
+client_deploy_Only_master:
+    stage: client-deploy
+    only:
+        - master
+    script:
+        - cp $ENV ./.env
+        - docker stop $(docker ps -a -q)
+        - docker rm $(docker ps -a -q)
+        - docker rmi $(docker images -q)
+        - docker build --tag client:react -f Dockerfile.dev .
+        - docker run -id -p 80:80 client:react
+    tags:
+        - shell
 
