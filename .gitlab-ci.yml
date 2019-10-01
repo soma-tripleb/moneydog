@@ -26,7 +26,7 @@ client_deploy_Only_master:
 #    only:
 #        - master
     script:
-        - cp $REACT_ENV ./env
+        - cp $REACT_ENV ./.env
         - docker stop $(docker ps -a -q)
         - docker rm $(docker ps -a -q)
         - docker rmi $(docker images -q)
