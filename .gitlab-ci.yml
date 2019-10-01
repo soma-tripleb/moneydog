@@ -35,8 +35,11 @@ before_script:
 
 build_image:
     script:
+        - docker stop $(docker ps -a -q)
+        - docker rm $(docker ps -a -q)
+        - docker rmi $(docker images -q)
         - docker build --tag client:react -f Dockerfile.dev .
-        - docker run -i -p 80:80 client:react
+        - docker run -id -p 80:80 client:react
     tags:
         - shell
 
