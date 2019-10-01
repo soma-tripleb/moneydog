@@ -36,6 +36,15 @@ const checkDomain = (response) => {
   return 'google';
 };
 
+const fs = require('fs');
+const response = fs.readFileSync('./netflix/netflix_upgrade.json');
+const html = base64ToUtf8(stringToJsonObject(base64ToUtf8(response)).payload.parts[1].body.data);
+console.log(html);
+fs.writeFile('./netflix/netflix_upgrade.html', html, (err) => {
+  if (err) throw err;
+  console.log('File has benn saved');
+});;
+
 module.exports = {
   base64ToUtf8: base64ToUtf8,
   stringToJsonObject: stringToJsonObject,
