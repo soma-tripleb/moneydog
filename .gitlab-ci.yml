@@ -1,9 +1,9 @@
-image: node:latest
-
-stages:
+#image: node:latest
+#
+#stages:
 #    - client-build
 #    - client-lint
-    - client-deploy
+#    - client-deploy
 
 #client_build_test:
 #    stage: client-build
@@ -21,10 +21,21 @@ stages:
 #    tags:
 #        - react
 
-client_deploy_Only_master:
-    stage: client-deploy
+#client_deploy_Only_master:
+#    stage: client-deploy
+#    script:
+#        - docker build --tag client:react -f Dockerfile.dev .
+#        - docker run -it -p 80:80 --privileged client:react
+#    tags:
+#        - react
+
+before_script:
+    - docker info
+
+build_image:
     script:
         - docker build --tag client:react -f Dockerfile.dev .
-        - docker run -it -p 80:80 client:react
+        - docker run -it -p 80:80 --privileged client:react
     tags:
-        - react
+        - shell
+
