@@ -1,5 +1,4 @@
-services:
-    - mongo:latest
+image: node:latest
 
 stages:
     - client-lint
@@ -12,4 +11,4 @@ client_lint_inspection:
         - npm install
         - npm run lint
     tags:
-        - moneydog
+        - client
