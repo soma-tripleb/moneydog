@@ -1,39 +1,29 @@
-#image: node:latest
-#
-#stages:
-#    - client-build
-#    - client-lint
-#    - client-deploy
 
-#client_build_test:
-#    stage: client-build
-#    before_script:
-#        - npm install
-#    script:
-#        - npm run build
-#    tags:
-#        - react
-#
-#client_lint_inspection:
-#    stage: client-lint
-#    script:
-#        - npm run lint
-#    tags:
-#        - react
+stages:
+    - client-build
+    - client-lint
+    - client-deploy
 
-#client_deploy_Only_master:
-#    stage: client-deploy
-#    script:
-#        - docker build --tag client:react -f Dockerfile.dev .
-#        - docker run -it -p 80:80 --privileged client:react
-#    tags:
-#        - react
+client_build_test:
+    stage: client-build
+    before_script:
+        - npm install
+    script:
+        - npm run build
+    tags:
+        - shell
 
-before_script:
-    - who
-    - docker info
+client_lint_inspection:
+    stage: client-lint
+    script:
+        - npm run lint
+    tags:
+        - shell
 
-build_image:
+client_deploy_Only_master:
+    stage: client-deploy
+    only:
+        - master
     script:
         - docker stop $(docker ps -a -q)
         - docker rm $(docker ps -a -q)
