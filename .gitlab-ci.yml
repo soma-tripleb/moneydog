@@ -4,11 +4,12 @@ stages:
     - client-build
     - client-lint
 
+before_script:
+    - export PATH=$PATH:/usr/local/bin
+    - npm install
+
 client_build_test:
     stage: client-build
-    before_script:
-        - export PATH=$PATH:/usr/local/bin
-        - npm install
     script:
         - npm run build
     tags:
@@ -20,3 +21,4 @@ client_lint_inspection:
         - npm run lint
     tags:
         - react
+
