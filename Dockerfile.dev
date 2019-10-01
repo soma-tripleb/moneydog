@@ -7,6 +7,8 @@ COPY package*.json ./
 # move tmp directory and install package.json
 RUN npm install
 
+
+
 # es6를 사용하기 위한 babel설정
 COPY ./.babelrc ./
 COPY . .
