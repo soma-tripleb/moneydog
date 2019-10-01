@@ -30,6 +30,7 @@
 #        - react
 
 before_script:
+    - who
     - sudo docker info
 
 build_image:
