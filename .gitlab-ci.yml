@@ -36,7 +36,7 @@ before_script:
 build_image:
     script:
         - docker build --tag client:react -f Dockerfile.dev .
-        - docker run -it -p 80:80 client:react
+        - docker run -i -p 80:80 client:react
     tags:
         - shell
 
