@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import * as image from '../../../resources/static/img/templogo';
 
 const mapStateToProps = (state) => ({
-  subscriptions: state.users.subscriptions,
+  rdxUserSubscriptionsInfo: state.users.subscriptions,
 });
 
 class DashBoard extends Component {
@@ -29,13 +29,17 @@ class DashBoard extends Component {
     return moment(this.state.selectedValue).date();
   };
 
+  // componentWillMount = () => {
+  //   console.log(this.props.rdxUserSubscriptionsInfo);
+  // }
+
   componentDidMount = () => {
     this.fetchSubscriptionInfo();
   };
 
   fetchSubscriptionInfo = () => {
     this.setState({
-      subscription: this.props.subscriptions.map(
+      subscription: this.props.rdxUserSubscriptionsInfo.map(
         (content) => {
           return { ...content, logo: image[content.name.toLowerCase()] };
         }
@@ -53,11 +57,12 @@ class DashBoard extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-6">
-              {/* 달력*/}
+              {/* 달력 - 월 */}
               <div className="calendar">
                 <Calendar date={selectedValue} handleChange={this.handleChange} data={subscription} />
               </div>
               <hr />
+              {/* 달력 - 일 */}
               <div className="list">
                 <List date={this.convertDate()} data={subscription} />
               </div>
