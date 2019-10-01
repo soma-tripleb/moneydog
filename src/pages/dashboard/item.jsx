@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 class Item extends Component {
-
   countRenualDate = (date) => {
     const currentDate = new Date();
     if (currentDate < date) {
@@ -19,7 +18,7 @@ class Item extends Component {
 
   render() {
     const {logo, name, price, paymentDate} = this.props.data;
-    const paymentDateFormat = this.dataFormat(paymentDate); //YYYY-MM-DD
+    const paymentDateFormat = this.dataFormat(paymentDate); // YYYY-MM-DD
 
     return (
       <>
