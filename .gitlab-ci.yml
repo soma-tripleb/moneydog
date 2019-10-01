@@ -11,4 +11,4 @@ client_lint_inspection:
         - npm install
         - npm run lint
     tags:
-        - client
+        - client, react
