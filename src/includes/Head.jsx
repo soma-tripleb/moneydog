@@ -14,23 +14,23 @@ class Head extends Component {
   isLogined = () => {
     if (this.props.status === 'SUCCESS') {
       return (
-          <>
-            <li className="nav-item">
-              <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/user/subscribing-Info" className="nav-link">Subscribing Info</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/user/dashboard" className="nav-link">Dashboard</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/user/report" className="nav-link">Report</Link>
-            </li>
-            <li className="nav-item logout">
-              <a onClick={this.logout} className="nav-link">Logout</a>
-            </li>
-          </>
+        <>
+          <li className="nav-item">
+            <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/user/subscribing-Info" className="nav-link">Subscribing Info</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/user/dashboard" className="nav-link">Dashboard</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/user/report" className="nav-link">Report</Link>
+          </li>
+          <li className="nav-item logout">
+            <a onClick={this.logout} className="nav-link">Logout</a>
+          </li>
+        </>
       );
     } else {
       return (
