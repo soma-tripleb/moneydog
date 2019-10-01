@@ -1,31 +1,15 @@
-image: node:latest
+services:
+    - mongo:latest
 
 stages:
-    - default
-    - build
-    - lint
+    - client-lint
 
-default:
+client_lint_inspection:
+    stage: client-lint
     before_script:
         - export PATH=$PATH:/usr/local/bin
+    script:
         - npm install
-    tags:
-        - moneydog
-
-client_build_test:
-    stage: build
-    script:
-        - echo 'client build start'
-        - npm run build
-    tags:
-        - moneydog
-
-client_lint_test:
-    stage: lint
-    script:
-        - echo 'client lint start'
         - npm run lint
     tags:
         - moneydog
-
-
