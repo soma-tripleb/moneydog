@@ -14,7 +14,6 @@ client_build_test:
     tags:
         - react
 
-
 client_lint_inspection:
     stage: client-lint
     script:
