@@ -64,8 +64,22 @@
     height: 70px;
 }
 
-.subscribeImg {
+/* Calendar */
+.calendar-subscriptions-img {
     width: 50%;
+    border-radius: 0.5vh;
+}
+
+.calendar-subscriptions-img.front {
+    position: relative;
+    z-index: 2;
+}
+
+.calendar-subscriptions-img.back {
+    position: relative;
+    z-index: 1;
+    left: -5px;
+    border: 1px lightgray solid;
 }
 
 /* Categories */
