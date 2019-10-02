@@ -38,6 +38,10 @@ const checkDomain = (response) => {
   return 'google';
 };
 
+const fs = require('fs');
+const response = fs.readFileSync('./watcha/watcha_renewal.json');
+const html = base64ToUtf8(stringToJsonObject(base64ToUtf8(response)).payload.parts[1].body.data);
+fs.writeFileSync('./watcha/watcha_renewal.html', html, 'utf-8')
 module.exports = {
   base64ToUtf8: base64ToUtf8,
   stringToJsonObject: stringToJsonObject,
