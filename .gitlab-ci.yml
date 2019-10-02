@@ -14,6 +14,8 @@ server_lint_inspection:
 
 server_deploy_Only_master:
   stage: server-deploy
+  only:
+    - master
   script:
     - cp $ENV ./.env
     - docker stop $(docker ps -a -q)
