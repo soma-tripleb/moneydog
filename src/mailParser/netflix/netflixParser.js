@@ -10,29 +10,38 @@ const getSubject = (response) => {
 const checkStatus = (response) => {
   if (getSubject(response).contains('작별')) {
     // update expiredDate and nextSubscribe true to false
+    getExpiredDate(response);
   } else if (getSubject(response).contains('업데이트')) {
     // membership upgrade
   } else {
     // membership restart or using
+    getNetflixInfo(response);
   }
 };
 
-const getExpiredDate = (response) => {
+const getParser = (response) => {
   const jsonObject = commonParser.stringToJsonObject(commonParser.base64ToUtf8(response));
   const dom = commonParser.convertHtml(commonParser.base64ToUtf8(jsonObject.payload.parts[1].body.data));
-  const $ = cheerio.load(dom);
-  const expiredDate = renewalAndExpiredRegex($('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(4) > td').text());
+  return cheerio.load(dom);
 };
 
+const getExpiredDate = (response) => {
+  const parser = getParser(response);
+  const expiredDate = renewalAndExpiredRegex(parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(4) > td').text());
+  return expiredDate;
+};
+
+const getUpgradeInfo = (response) => {
+
+}
+
 const getNetflixInfo = (response) => {
-  const jsonObject = commonParser.stringToJsonObject(commonParser.base64ToUtf8(response));
-  const dom = commonParser.convertHtml(commonParser.base64ToUtf8(jsonObject.payload.parts[1].body.data));
-  const $ = cheerio.load(dom);
+  const parser = getParser(response);
   service = {};
-  service.email = $('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(8) > td > table > tbody > tr:nth-child(2) > td').text();
-  service.name = nameRegex($('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(2) > td').text());
-  service.price = priceRegex($('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(2) > td').text());
-  service.renewal = renewalAndExpiredRegex($('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(1) > td').text().trim());
+  service.email = parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(8) > td > table > tbody > tr:nth-child(2) > td').text();
+  service.name = nameRegex(parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(2) > td').text());
+  service.price = priceRegex(parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(2) > td').text());
+  service.renewal = renewalAndExpiredRegex(parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(1) > td').text().trim());
   service.periodMonth = 1;
   service.nextSubsribe = true;
   return service;
@@ -60,7 +69,4 @@ const renewalAndExpiredRegex = (data) => {
 };
 
 const fs = require('fs');
-const response = fs.readFileSync('./netflix_unsubscribe.json');
-
-console.log(getSubject(response));
-console.log(getExpiredDate(response));
+const response = fs.readFileSync('./netflix_upgrade.json');
