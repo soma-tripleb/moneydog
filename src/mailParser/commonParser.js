@@ -1,4 +1,5 @@
 const DomParser = require('dom-parser');
+const cheerio = require('cheerio');
 
 const base64ToUtf8 = (base64encoded) => {
   return Buffer.from(base64encoded, 'base64').toString('utf8');
@@ -38,14 +39,17 @@ const checkDomain = (response) => {
   return 'google';
 };
 
-const fs = require('fs');
-const response = fs.readFileSync('./watcha/watcha_renewal.json');
-const html = base64ToUtf8(stringToJsonObject(base64ToUtf8(response)).payload.parts[1].body.data);
-fs.writeFileSync('./watcha/watcha_renewal.html', html, 'utf-8')
+const getParser = (response) => {
+  const jsonObject = commonParser.stringToJsonObject(commonParser.base64ToUtf8(response));
+  const dom = commonParser.convertHtml(commonParser.base64ToUtf8(jsonObject.payload.parts[1].body.data));
+  return cheerio.load(dom);
+};
+
 module.exports = {
   base64ToUtf8: base64ToUtf8,
   stringToJsonObject: stringToJsonObject,
   convertHtml: convertHtml,
   getEmailId: getEmailId,
   checkDomain: checkDomain,
+  getParser, getParser,
 };
