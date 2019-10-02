@@ -10,31 +10,37 @@ const getSubject = (response) => {
 const checkStatus = (response) => {
   const subject = getSubject(response).value;
   if (subject.includes('작별')) {
-    // update expiredDate and nextSubscribe true to false
-    getExpiredDate(response);
+    // update expiredDate and nextSubscribe true to false, 구독해지
+    return getExpiredDate(response);
   } else if (subject.includes('업데이트')) {
-    // membership upgrade
-    getUpgradeInfo(response);
+    // 멤버십 요금 변경
+    return getUpgradeInfo(response);
   } else if (subject.includes('가입')) {
-    // membership sign-up or resign-up
-    getNetflixInfo(response);
+    // 신규가입, 재가입
+    return getNetflixInfo(response);
+  } else if (subject.includes('취향') || subject.includes('재시작')) {
+    // 여기서 true는 구독사용에 대해서 true를 이야기한다.
+    return true;
   }
   // 취향, 재시작 이라는 단어가 있으면 넷플릭스를 현재 사용중.
   // update nextSubsribe true
 };
 
+// response를 DOM형태로 만들고, cheerio에 DOM을 로드
 const getParser = (response) => {
   const jsonObject = commonParser.stringToJsonObject(commonParser.base64ToUtf8(response));
   const dom = commonParser.convertHtml(commonParser.base64ToUtf8(jsonObject.payload.parts[1].body.data));
   return cheerio.load(dom);
 };
 
+// 구독해지할때, 해지예정일
 const getExpiredDate = (response) => {
   const parser = getParser(response);
   const expiredDate = renewalAndExpiredRegex(parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(4) > td').text());
   return expiredDate;
 };
 
+// 멤버십 변경할때, 변경된 서비스의 이름, 가격 정보
 const getUpgradeInfo = (response) => {
   const parser = getParser(response);
   const updateService = {};
@@ -43,6 +49,7 @@ const getUpgradeInfo = (response) => {
   return updateService;
 };
 
+// 신규가입과 재가입에 대한 결제정보
 const getNetflixInfo = (response) => {
   const parser = getParser(response);
   service = {};
@@ -55,7 +62,7 @@ const getNetflixInfo = (response) => {
   return service;
 };
 
-// extract service name
+// 서비스 이름을 정규표현식으로 추출
 const nameRegex = (data) => {
   const regex = /[가-힣]{3,4}/;
   return regex.exec(data)[0];
