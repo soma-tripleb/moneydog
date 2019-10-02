@@ -77,14 +77,10 @@ class CalendarClass extends Component {
     ) : null;
   };
 
-  mode = (month, year) => {
-    console.log(month, year);
-  }
-
   render() {
-    if (this.props.data == null) {
+    if (this.props.data == null)
       return null;
-    }
+
     return (
       <div>
         <p><u> 월별 결제일 정보 </u></p>
