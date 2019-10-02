@@ -2,13 +2,8 @@ const cheerio = require('cheerio');
 const commonParser = require('../commonParser');
 const moment = require('moment');
 
-const getSubject = (response) => {
-  const subject = commonParser.stringToJsonObject(commonParser.base64ToUtf8(response)).payload.headers[18];
-  return subject;
-};
-
 const checkStatus = (response) => {
-  const subject = getSubject(response).value;
+  const subject = getNetflixEmailSubject(response).value;
   if (subject.includes('작별')) {
     // update expiredDate and nextSubscribe true to false, 구독해지
     return getExpiredDate(response);
@@ -24,6 +19,14 @@ const checkStatus = (response) => {
   }
   // 취향, 재시작 이라는 단어가 있으면 넷플릭스를 현재 사용중.
   // update nextSubsribe true
+  const service = {};
+  service.nextSubsribe = true;
+  return service;
+};
+
+const getNetflixEmailSubject = (response) => {
+  const subject = commonParser.stringToJsonObject(commonParser.base64ToUtf8(response)).payload.headers[18];
+  return subject;
 };
 
 // response를 DOM형태로 만들고, cheerio에 DOM을 로드
@@ -36,17 +39,18 @@ const getParser = (response) => {
 // 구독해지할때, 해지예정일
 const getExpiredDate = (response) => {
   const parser = getParser(response);
-  const expiredDate = renewalAndExpiredRegex(parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(4) > td').text());
-  return expiredDate;
+  const service = {};
+  service.expiredDate = renewalAndExpiredRegex(parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(4) > td').text());
+  return service;
 };
 
 // 멤버십 변경할때, 변경된 서비스의 이름, 가격 정보
 const getUpgradeInfo = (response) => {
   const parser = getParser(response);
-  const updateService = {};
-  updateService.updatedName = parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(7) > td > table > tbody > tr:nth-child(2) > td').text();
-  updateService.updatedPrice = priceRegex(parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(8) > td > table > tbody > tr:nth-child(2) > td').text());
-  return updateService;
+  const service = {};
+  service.updatedName = parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(7) > td > table > tbody > tr:nth-child(2) > td').text();
+  service.updatedPrice = priceRegex(parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(8) > td > table > tbody > tr:nth-child(2) > td').text());
+  return service;
 };
 
 // 신규가입과 재가입에 대한 결제정보
