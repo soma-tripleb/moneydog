@@ -28,12 +28,12 @@ class SubscriptionList extends Component {
   render() {
     return (
       <>
-        <div className="col-sm report-inner-container">
-          <div className="w-100 p-3" id="inner-container">
+        {/*<div className="col-sm report-inner-container">*/}
+        {/*  <div className="w-100 p-3" id="inner-container">*/}
            구독 리스트
             {this.showSubsList()}
-          </div>
-        </div>
+        {/*  </div>*/}
+        {/*</div>*/}
       </>
     );
   }

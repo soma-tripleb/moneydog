@@ -21,8 +21,8 @@ class MontlyReport extends Component {
     const {totalPay, currency, month, mostUsed, mostUnused } = this.props.data;
     return (
       <>
-        <div className="col-sm report-inner-container">
-          <div className="w-100 p-3" id="inner-container">
+        {/*<div className="col-sm report-inner-container">*/}
+        {/*  <div className="w-100 p-3" id="inner-container">*/}
               이번달 리포트
             <Row>
               <Col>
@@ -36,8 +36,8 @@ class MontlyReport extends Component {
                 </Card>
               </Col>
             </Row>
-          </div>
-        </div>
+        {/*  </div>*/}
+        {/*</div>*/}
       </>
     );
   }
