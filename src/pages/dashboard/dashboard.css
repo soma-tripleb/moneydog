@@ -9,6 +9,16 @@
     height: 75%;
 }
 
+.list {
+    box-shadow: 5px 5px 5px 5px lightgray;
+    font-weight: lighter;
+    font-size: 1vw;
+    padding: 20px;
+    width: auto;
+    height: 15%;
+}
+
+
 .categories{
     box-shadow: 5px 5px 5px 5px lightgray;
     overflow: auto;
@@ -80,24 +90,28 @@
 }
 
 /* List */
-.list {
-    box-shadow: 5px 5px 5px 5px lightgray;
-    font-weight: lighter;
-    font-size: 1vw;
-    padding: 20px;
-    width: auto;
-}
-
 .list-container {
     width: auto;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
 }
 
 .list-img-border {
     margin-right: 0.7vw;
+    margin-bottom: 1vh;
     border-radius: 5px;
     background: white;
     display: inline-block;
+    padding: 0;
+    text-align: center;
+}
+
+.list-logo-img {
+    height: 5vh;
+}
+
+/* TotalAmount */
+.total-amount-text {
+    font-size: 2rem;
 }

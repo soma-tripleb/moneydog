@@ -29,10 +29,6 @@ class DashBoard extends Component {
     return moment(this.state.selectedValue).date();
   };
 
-  // componentWillMount = () => {
-  //   console.log(this.props.rdxUserSubscriptionsInfo);
-  // }
-
   componentDidMount = () => {
     this.fetchSubscriptionInfo();
   };

@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
 
 class TotalAmount extends Component {
-  getTotalAmount = (subscriptions) => {
+  constructor(props) {
+    super(props);
+  }
+
+  getTotalAmount = () => {
+    let sum = 0;
+
     if (this.props.data !== null) {
-      let sum = 0;
-      subscriptions.map((subscription) => sum += subscription.price);
-      return sum;
+      this.props.data.map((subscription) => {
+        sum += Number(subscription.price);
+      });
     }
+
+    return this.numberWithCommas(sum);
   };
+
+  numberWithCommas = (number) => {
+    return String(number).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
 
   render() {
     return (
       <div>
-      TotalAmount
+        TotalAmount
         <div className="container w-100 p-3" id="inner-element">
           <div className="row">
             <div className="col">
-              <button>
-             이번달 총 이용 금액은 {this.getTotalAmount(this.props.data)}입니다.
-              </button>
+              <span className="total-amount-text">₩ {this.getTotalAmount()}</span>
             </div>
           </div>
         </div>
