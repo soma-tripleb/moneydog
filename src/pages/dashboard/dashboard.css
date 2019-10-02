@@ -1,41 +1,41 @@
 /* dashboard */
+.dashboard-inner {
+    padding: 2vh 2vh 2vh 2vh;
+}
+
 .calendar {
-    box-shadow: 5px 5px 5px 5px lightgray;
+    box-shadow: 1vh 1vh 1vh 1vh lightgray;
     overflow: auto;
     width: 100%;
     font-weight: lighter;
     font-size: 1vw;
-    padding: 20px;
-    height: 70%;
+    padding: 2vh;
 }
 
 .list {
-    box-shadow: 5px 5px 5px 5px lightgray;
+    box-shadow: 1vh 1vh 1vh 1vh lightgray;
     font-weight: lighter;
     font-size: 1vw;
-    padding: 20px;
+    padding: 2vh;
     width: auto;
-    height: 20%;
 }
 
 .categories{
-    box-shadow: 5px 5px 5px 5px lightgray;
+    box-shadow: 1vh 1vh 1vh 1vh lightgray;
     overflow: auto;
     width: 100%;
     font-weight: lighter;
     font-size: 1vw;
-    padding: 20px;
-    height: 75%;
+    padding: 2vh;
 }
 
 .TotalAmount {
-    box-shadow: 5px 5px 5px 5px lightgray;
+    box-shadow: 1vh 1vh 1vh 1vh lightgray;
     overflow: auto;
     width: 100%;
     font-weight: lighter;
     font-size: 1vw;
-    padding: 20px;
-    height: 15%;
+    padding: 2vh;
 }
 
 /* Calendar */
@@ -49,7 +49,7 @@
     white-space: nowrap;
     width: 100%;
     text-overflow: ellipsis;
-    font-size: 12px;
+    font-size: 4vh;
 }
 .notes-month {
     text-align: center;
@@ -60,17 +60,22 @@
 }
 
 .ant-fullcalendar td {
-    height: 70px;
+    height: 7vh;
 }
 
 .ant-fullcalendar-header .ant-radio-group{
     display: none;
 }
 
-/* Calendar */
+.ant-fullcalendar-value {
+    font-size: 1vh;
+}
+
+/* Calendar, Date */
 .calendar-subscriptions-img {
     width: 50%;
     border-radius: 0.5vh;
+    border: 1px lightgray solid;
 }
 
 .calendar-subscriptions-img.front {
@@ -93,7 +98,7 @@
 }
 
 .ant-page-header {
-    padding: none !important;
+    padding: 0;
 }
 
 /* List */
@@ -107,7 +112,7 @@
 
 .list-inner-container {
     width: auto;
-    overflow-x: auto;
+    overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
     height: 100%;
@@ -119,7 +124,6 @@
     border-radius: 5px;
     background: white;
     display: inline-block;
-    padding: 0 0 10px 0;
     text-align: center;
 }
 

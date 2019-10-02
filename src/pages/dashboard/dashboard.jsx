@@ -52,7 +52,7 @@ class DashBoard extends Component {
       <>
         <div className="container">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-6 dashboard-inner">
               {/* 달력 - 월 */}
               <div className="calendar">
                 <span className="component-title"><u>월별 결제일 정보</u></span>
@@ -66,7 +66,7 @@ class DashBoard extends Component {
               </div>
             </div>
             {/* 구독중인 서비스 list */}
-            <div className="col-md-6">
+            <div className="col-md-6 dashboard-inner">
               <div className='TotalAmount'>
                 <span className="component-title"><u>총 결제 금액 정보</u></span>
                 <TotalAmount data={subscription} />
