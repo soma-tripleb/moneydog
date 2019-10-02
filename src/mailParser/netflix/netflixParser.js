@@ -8,11 +8,13 @@ const getSubject = (response) => {
 };
 
 const checkStatus = (response) => {
-  if (getSubject(response).contains('작별')) {
+  const subject = getSubject(response).value;
+  if (subject.includes('작별')) {
     // update expiredDate and nextSubscribe true to false
     getExpiredDate(response);
-  } else if (getSubject(response).contains('업데이트')) {
+  } else if (subject.includes('업데이트')) {
     // membership upgrade
+    getUpgradeInfo(response);
   } else {
     // membership restart or using
     getNetflixInfo(response);
@@ -32,8 +34,12 @@ const getExpiredDate = (response) => {
 };
 
 const getUpgradeInfo = (response) => {
-
-}
+  const parser = getParser(response);
+  const name = parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(7) > td > table > tbody > tr:nth-child(2) > td').text();
+  console.log(`upgrade membership name : ${name}`);
+  const price = parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(8) > td > table > tbody > tr:nth-child(2) > td').text();
+  console.log(`upgrade membership price : ${price}`);
+};
 
 const getNetflixInfo = (response) => {
   const parser = getParser(response);
@@ -70,3 +76,4 @@ const renewalAndExpiredRegex = (data) => {
 
 const fs = require('fs');
 const response = fs.readFileSync('./netflix_upgrade.json');
+checkStatus(response);
