@@ -12,21 +12,26 @@ const getNetflixInfo = (response) => {
   const $ = cheerio.load(dom);
   service = {};
   service.email = $('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(8) > td > table > tbody > tr:nth-child(2) > td').text();
-  // service.name = convertNameReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(1) > span > span').text().trim());
-  // service.price = convertPriceReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(2) > span').text());
+  service.name = convertNameReg($('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(2) > td').text());
+  service.price = convertPriceReg($('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(2) > td').text());
   // service.date = convertDateReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(5)').text());
   // service.renewal = convertRenewalReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(3) > td:nth-child(1)').text());
   // service.periodMonth = calPeriod(service.renewal, service.date);
-  console.log(`service : ${service.fromEmail}`);
-  console.log(`regex : ${namePriceReg($('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(2) > td').text())}`)
+  console.log(`service : ${service}`);
+  console.log(`price : ${service.price}`);
   return service;
 };
 
-const namePriceReg = (data) => {
-  console.log(`input data : ${data}`);
-  const regexp = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*/gi;
-  return regexp.match(data);
+const convertNameReg = (data) => {
+  const regex = /[가-힣]{3,4}/;
+  return regex.exec(data)[0];
 };
+
+const convertPriceReg = (data) => {
+  console.log(`${data}`);
+  const priceRegex = /[0-9]{2},[0-9]{3}/;
+  return parseInt(priceRegex.exec(data)[0].replace(',', ''));
+}
 
 const fs = require('fs');
 const response = fs.readFileSync('./netflix_membership_signup.json');
