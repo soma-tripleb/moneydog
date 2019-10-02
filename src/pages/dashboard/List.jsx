@@ -57,7 +57,7 @@ class List extends Component {
     return list.map((subscription, i) => {
       return (
         <div className='col-2 list-img-border' key={i}>
-          <p>{subscription.name}</p>
+          <p className='list-img-border-title'>{subscription.name}</p>
           <img className="list-logo-img" src={'/' + subscription.logo} alt='x'/>
         </div>
       );
@@ -68,7 +68,7 @@ class List extends Component {
     return (
       <>
         <div>
-          <p>{this.props.date}일</p>
+          <span className="list-title">{this.props.date}일</span>
           <div className='list-container'>
             {this.showSubscriptionsByDate()}
           </div>
