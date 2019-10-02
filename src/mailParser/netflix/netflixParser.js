@@ -15,10 +15,9 @@ const getNetflixInfo = (response) => {
   service.email = $('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(8) > td > table > tbody > tr:nth-child(2) > td').text();
   service.name = convertNameReg($('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(2) > td').text());
   service.price = convertPriceReg($('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(2) > td').text());
-  // service.date = convertDateReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(5)').text());
   service.renewal = convertRenewalReg($('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(1) > td').text().trim());
   service.periodMonth = 1;
-  console.log(`service : ${JSON.stringify(service)}`);
+  service.nextSubsribe = true;
   return service;
 };
 
@@ -44,5 +43,6 @@ const convertRenewalReg = (data) => {
 };
 
 const fs = require('fs');
-const response = fs.readFileSync('./netflix_membership_signup.json');
-console.log(getNetflixInfo(response));
+const response = fs.readFileSync('./netflix_unsubscribe.json');
+
+console.log(getSubject(response));
