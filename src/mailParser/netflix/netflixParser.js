@@ -36,9 +36,9 @@ const convertRenewalReg = (data) => {
   console.log(data);
   const yearRegex = /[0-9]{4}/;
   const monthRegex = /\s[0-9]{2}/g;
-  const monthAndDay = data.match(monthRegex);
-  console.log(monthAndDay);
-  return moment(`${yearRegex.exec(data)[0]}-${monthAndDay[0]}-${monthAndDay[1]}`);
+  const monthAndDay = data.match(monthRegex).map((day) => day.replace(' ', ''));
+  const fullDay = `${yearRegex.exec(data)[0]}${monthAndDay[0]}${monthAndDay[1]}`;
+  return moment(fullDay).format('YYYY-MM-DD');
 }
 
 const fs = require('fs');
