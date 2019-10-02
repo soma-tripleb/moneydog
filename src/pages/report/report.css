@@ -1,8 +1,10 @@
 .report-inner-container{
-    padding: 5vh;
-    margin: auto;
-}
+    box-shadow: 10px 10px 10px 10px lightgray;
+    overflow: auto;
+    width: 100%;
+    font-weight: lighter;
+    font-size: 1vw;
 
-#inner-container {
-    margin: auto;
+    padding: 5vh;
+    margin: 5vh auto 5vh auto ;
 }
