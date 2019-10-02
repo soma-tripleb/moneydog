@@ -36,9 +36,13 @@ class Report extends Component {
         <div className="container main-container">
           <div className="row">
 
-            <SubscriptionList data={this.props.subscriptions}/>
-            <MontlyReport data={this.state}/>
+            <div className="col-sm report-inner-container">
+              <div className="w-50 p-3" id="inner-container">
 
+                <MontlyReport data={this.state}/>
+                <SubscriptionList data={this.props.subscriptions}/>
+              </div>
+            </div>
           </div>
         </div>
       </>
