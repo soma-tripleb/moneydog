@@ -32,6 +32,8 @@ const getDomain = (response) => {
 const checkDomain = (response) => {
   if (getDomain(response).indexOf('apple') != -1) {
     return 'apple';
+  } else if (getDomain(response).indexOf('netflix') != -1) {
+    return 'netflix';
   }
   return 'google';
 };
