@@ -17,29 +17,31 @@ const getNetflixInfo = (response) => {
   service.price = convertPriceReg($('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(2) > td').text());
   // service.date = convertDateReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(5)').text());
   service.renewal = convertRenewalReg($('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(1) > td').text().trim());
-  // service.periodMonth = calPeriod(service.renewal, service.date);
+  service.periodMonth = 1;
   console.log(`service : ${JSON.stringify(service)}`);
   return service;
 };
 
+// extract service name
 const convertNameReg = (data) => {
   const regex = /[가-힣]{3,4}/;
   return regex.exec(data)[0];
 };
 
+// extract service price
 const convertPriceReg = (data) => {
   const priceRegex = /[0-9]{2},[0-9]{3}/;
   return parseInt(priceRegex.exec(data)[0].replace(',', ''));
 };
 
+// extract and calculate renewal date
 const convertRenewalReg = (data) => {
-  console.log(data);
   const yearRegex = /[0-9]{4}/;
-  const monthRegex = /\s[0-9]{2}/g;
-  const monthAndDay = data.match(monthRegex).map((day) => day.replace(' ', ''));
-  const fullDay = `${yearRegex.exec(data)[0]}${monthAndDay[0]}${monthAndDay[1]}`;
-  return moment(fullDay).format('YYYY-MM-DD');
-}
+  const monthRegex = /[0-9]{2}/g;
+  const monthAndDay = data.match(monthRegex); // return 4 values [20,19,10,31] => 2019-10-31.
+  const fullDay = `${yearRegex.exec(data)[0]}${monthAndDay[2]}${monthAndDay[3]}`;
+  return moment(fullDay).format('YYYY-MM-DD'); // return 2019-10-31
+};
 
 const fs = require('fs');
 const response = fs.readFileSync('./netflix_membership_signup.json');
