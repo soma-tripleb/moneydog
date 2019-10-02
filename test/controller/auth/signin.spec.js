@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 
 import request from 'supertest';
-import app from '../../app';
+import app from '../../../app';
 
 describe('POST /auth/signIn', () => {
   it('로그인', (done) => {

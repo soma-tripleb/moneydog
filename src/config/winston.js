@@ -1,6 +1,6 @@
 import fs from 'fs';
 import winston from 'winston';
-import {conn} from '../configs/mongoDB';
+import { conn } from './mongoDB';
 const expressWinston = require('express-winston');
 const { createLogger, format } = require('winston');
 const { combine, label, printf } = format;
@@ -29,7 +29,7 @@ const errorTransport = new winston.transports.File({
 
 const logger = createLogger({
   format: combine(
-    label({label: 'dev'}),
+    label({ label: 'dev' }),
     format.timestamp({
       format: 'YYYY-MM-DD HH:mm:ss',
     }),

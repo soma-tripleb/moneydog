@@ -1,24 +1,27 @@
-services:
-    - mongo:latest
-
 stages:
     - server-lint
+    - server-deploy
 
 server_lint_inspection:
     stage: server-lint
-    before_script:
-    - export PATH=$PATH:/usr/local/bin
-    only:
-        variables:
-          - $DB_SCHEMA
-          - $DB_URL
-          - $DB_USER
-          - $DB_PASSWORD
-          - $DB_HOST
-          - $DB_PORT
     script:
     - npm install
     - npm run lint
+    - npm run test-controller
     tags:
-    - server
+    - shell
 
+
+server_deploy_Only_master:
+  stage: server-deploy
+  only:
+    - master
+  script:
+    - cp $ENV ./.env
+    - docker stop $(docker ps -a -q)
+    - docker rm $(docker ps -a -q)
+    - docker rmi $(docker images -q)
+    - docker build --tag server:node -f Dockerfile .
+    - docker run -id -p 5000:5000 server:node
+  tags:
+    - shell
