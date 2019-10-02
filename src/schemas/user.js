@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import { conn } from '../configs/mongoDB';
+import { conn } from '../config/mongoDB';
 
 const pricePlanSchema = new mongoose.Schema(
   {
@@ -19,6 +19,7 @@ const subscriptionSchema = new mongoose.Schema(
   {
     seq: { type: Number, required: true },
     name: { type: String, unique: true },
+    logo: { type: String, required: true },
     price: { type: Number, required: true },
     paymentDate: { type: Date, required: true },
     channel: {

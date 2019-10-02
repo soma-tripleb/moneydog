@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import assert from 'assert';
 
-import { mongoConnect, mongoDisConnect } from '../../../src/configs/mongoDB';
+import { mongoConnect, mongoDisConnect } from '../../../src/config/mongoDB';
 import UserRepository from '../../../src/router/user/userRepository';
 import UserMock from '../../mock/userMock';
 

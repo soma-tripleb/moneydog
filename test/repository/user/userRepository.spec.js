@@ -1,4 +1,4 @@
-import {mongoConnect, mongoDisConnect} from '../../../src/configs/mongoDB';
+import {mongoConnect, mongoDisConnect} from '../../../src/config/mongoDB';
 
 require('dotenv').config();
 import 'babel-polyfill';

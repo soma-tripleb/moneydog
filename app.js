@@ -1,15 +1,20 @@
-const express = require('express');
-const app = express();
-const cookieParser = require('cookie-parser');
-const morgan = require('morgan');
-const cors = require('cors');
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
+import cors from 'cors';
+import dotenv from 'dotenv';
+
+import * as Sentry from '@sentry/node';
 
 import authCheck from './src/security/jwtAuthentication';
-import * as Sentry from '@sentry/node';
-import {mongoConnect} from './src/configs/mongoDB';
-import {customLogger, errorLogger, stream} from './src/configs/winston';
+import {mongoConnect} from './src/config/mongoDB';
+import {customLogger, errorLogger, stream} from './src/config/winston';
+
 // Error tracking
 // Sentry.init({dsn: 'https://566bd809b9a0464e8e690a199ab83396@sentry.io/1553162'});
+
+const app = express();
+dotenv.config();
 
 // DB Config
 mongoConnect();
