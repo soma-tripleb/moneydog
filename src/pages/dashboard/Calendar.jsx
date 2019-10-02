@@ -8,6 +8,7 @@ import { something as SOMETHING_IMG } from '../../../resources/static/img/templo
 class CalendarClass extends Component {
   constructor(props) {
     super(props);
+
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -61,29 +62,12 @@ class CalendarClass extends Component {
     return result;
   };
 
-  getMonthData = (moment) => {
-    if (moment.month() === 8) {
-      return 1394;
-    }
-  };
-
-  monthCellRender = (value) => {
-    const num = this.getMonthData(value);
-    return num ? (
-      <div className="notes-month">
-        <section>{num}</section>
-        <span>Backlog number</span>
-      </div>
-    ) : null;
-  };
-
   render() {
     if (this.props.data == null)
       return null;
 
     return (
       <div>
-        <p><u> 월별 결제일 정보 </u></p>
         <Calendar
           fullscreen={false}
           dateCellRender={this.dateCellRender}

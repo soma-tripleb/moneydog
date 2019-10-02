@@ -18,7 +18,6 @@
     height: 20%;
 }
 
-
 .categories{
     box-shadow: 5px 5px 5px 5px lightgray;
     overflow: auto;
@@ -91,6 +90,10 @@
     height: 5vh;
     border-radius: 5px;
     padding-left: 0px;
+}
+
+.ant-page-header {
+    padding: none !important;
 }
 
 /* List */

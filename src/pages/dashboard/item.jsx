@@ -16,6 +16,10 @@ class Item extends Component {
     return result[0];
   };
 
+  numberWithCommas = (number) => {
+    return String(number).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
   render() {
     const {logo, name, price, paymentDate} = this.props.data;
     const paymentDateFormat = this.dataFormat(paymentDate); // YYYY-MM-DD
@@ -28,7 +32,7 @@ class Item extends Component {
               <img className="categories-inner-item-image" src={'/'+ logo} alt={name}/>
             </div>
             <div className="col">
-                  ₩{price}
+                  ₩ {this.numberWithCommas(price)}
             </div>
             <div className="col">
               {paymentDateFormat}

@@ -24,7 +24,6 @@ class TotalAmount extends Component {
   render() {
     return (
       <div>
-        TotalAmount
         <div className="container w-100 p-3" id="inner-element">
           <div className="row">
             <div className="col">
