@@ -52,13 +52,13 @@ class List extends Component {
   }
 
   showSubscriptionsByDate = () => {
-    const tempList = this.state.matchedSubscriptionList;
-    const list = ((tempList !== undefined) ? tempList : []);
+    const list = ((this.state.matchedSubscriptionList !== undefined) ? this.state.matchedSubscriptionList : []);
 
     return list.map((subscription, i) => {
       return (
         <div className='col-2 list-img-border' key={i}>
           <p>{subscription.name}</p>
+          <img className="list-logo-img" src={'/' + subscription.logo} alt='x'/>
         </div>
       );
     });
