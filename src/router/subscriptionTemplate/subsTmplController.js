@@ -23,7 +23,6 @@ router.get('/:name', (req, res) => {
     });
 });
 
-// body: Json Data
 router.post('/', (req, res) => {
   SubsTmplService.createOne(req.body)
     .then((result) => {
