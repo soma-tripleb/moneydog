@@ -1,8 +1,102 @@
-.report-inner-container{
-    padding: 5vh;
+.report-container {
     margin: auto;
 }
+.report-inner-container{
+    box-shadow: 10px 10px 10px 10px lightgray;
+    overflow: auto;
+    width: 100%;
+    font-weight: lighter;
+    font-size: 1vw;
 
-#inner-container {
-    margin: auto;
+    padding: 2vh;
+    margin: 5vh auto 5vh auto ;
+}
+
+
+/*페이지 종이 질감 그림자 생성*/
+.page {
+    background: #000;
+
+    /* Optional Gradient */
+    background: -moz-linear-gradient(top,  #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+    background: linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+}
+
+.page h2 {
+    text-align: center;
+    padding: 0 0 0 10px;
+    font: 400 4vh 'Lilita One', Helvetica, sans-serif;
+}
+
+.page p {
+    padding: 10px 20px;
+    font: 2vh Helvetica, sans-serif;
+    color: #f0f2f5;
+}
+
+.foldtl {
+    position: relative;
+    -webkit-box-shadow: 10px 10px 5px rgba(100,100,100,0.8);
+    -moz-box-shadow: 10px 10px 5px rgba(100,100,100,0.8);
+    box-shadow: 10px 10px 5px rgba(100,100,100,0.8);
+}
+.foldtl:before {
+    content: "";
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 0px;
+    height: 0px;
+    border-bottom: 10vh solid #eee;
+    border-left: 10vh solid transparent;
+    -webkit-box-shadow: 7px 7px 7px rgba(0,0,0,0.3);
+    -moz-box-shadow: 7px 7px 7px rgba(0,0,0,0.3);
+    box-shadow: 7px 7px 7px rgba(0,0,0,0.3);
+}
+
+.foldtl:after {
+    content: "";
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 0px;
+    height: 0px;
+    border-top: 10vh solid #f0f2f5;
+    border-right: 10vh solid transparent;
+}
+
+/*card*/
+div.card-body {
+    height: 14vh;
+    padding: 2vh;
+}
+
+div.card-title {
+    font-size: 2vh;
+    padding: 0;
+    margin: 1vh;
+    text-decoration: underline;
+}
+
+p.card-text {
+    font-size: 3vh;
+    color: black;
+    padding: 0;
+    margin: 1vh;
+    font-weight: unset;
+}
+
+.headerFont {
+    font-size: 4vh;
+    font-weight: bold;
+    padding: 2vh;
+}
+
+.subs-inner-item {
+    font-size: 2vh;
 }

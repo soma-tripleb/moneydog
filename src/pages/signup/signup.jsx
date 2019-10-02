@@ -132,7 +132,7 @@ class SignUp extends Component {
     return (
       <>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"/>
-        <div className="container">
+        <div className="container registerContainer">
 
           <div className="card bg-light">
             <article className="card-body mx-auto">

@@ -1,20 +1,25 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class SubscriptionList extends Component {
-  showSubsList = () =>{
-    if ( typeof this.props.data === 'undefined') {
+
+  numberWithCommas = (number) => {
+    return String(number).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  showSubsList = () => {
+    if (typeof this.props.data === 'undefined') {
       return;
     }
 
     const list = this.props.data.map(
       (content, i) => (
         <div key={i} className="container w-100 p-3" id="inner-element">
-          <div className="row">
+          <div className="row subs-inner-item">
             <div className="col">
               {content.name}
             </div>
             <div className="col">
-              {content.price}
+              ₩ {this.numberWithCommas(content.price)}
             </div>
             <div className="col">
               {content.channel}
@@ -27,14 +32,10 @@ class SubscriptionList extends Component {
 
   render() {
     return (
-      <>
-        {/*<div className="col-sm report-inner-container">*/}
-        {/*  <div className="w-100 p-3" id="inner-container">*/}
-           구독 리스트
-            {this.showSubsList()}
-        {/*  </div>*/}
-        {/*</div>*/}
-      </>
+        <>
+          <div className="headerFont">구독 리스트</div>
+          {this.showSubsList()}
+        </>
     );
   }
 }
