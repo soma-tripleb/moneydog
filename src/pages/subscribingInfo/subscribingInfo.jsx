@@ -10,6 +10,7 @@ import { TEST_USER_SELECTED_SUBS, TEST_USER_SUBSTMPL_INFO_LIST } from './sample/
 
 import './subscribingInfo.css';
 import userActions from '../../redux/actions/userAction';
+import authActions from '../../redux/actions/authAction';
 
 const NOW = DateUtil.NOW();
 
@@ -67,7 +68,7 @@ class SubscribingInfo extends Component {
     e.preventDefault();
 
     const { userInputList } = this.state;
-    const { reduxInsertUserSubscriptions, reduxDeleteTempSubscriptions, history} = this.props;
+    const { reduxInsertUserSubscriptions, reduxDeleteTempSubscriptions, reduxFinishAddSubsStep, history} = this.props;
 
     userInputList.some((info) => {
       if (info.price === '') {
@@ -92,9 +93,10 @@ class SubscribingInfo extends Component {
 
     reduxDeleteTempSubscriptions();
 
-    if (result.data.status === 200)
+    if (result.data.status === 200) {
+      reduxFinishAddSubsStep();
       history.push('/user/dashboard');
-    else {
+    } else {
       console.log(result);
       alert('ERROR'); // TODO
     }
@@ -180,6 +182,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     reduxDeleteTempSubscriptions: () => {
       dispatch(userActions.deleteTempSubscriptions());
+    },
+    reduxFinishAddSubsStep: ()=>{
+      dispatch(authActions.finishAddSubsStep());
     }
   };
 };

@@ -29,10 +29,10 @@ export default function authentication(state = initialState, action) {
           status: { $set: 'SUCCESS' },
         },
       });
-    case ACTION_TYPE.AUTH_LOGIN_FAILURE:
+    case ACTION_TYPE.AUTH_SUBS_STEP:
       return update(state, {
         login: {
-          status: { $set: 'FAILURE' },
+          status: { $set: 'ADD_SUBS_STEP' },
         },
       });
     default:
