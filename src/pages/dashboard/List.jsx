@@ -67,9 +67,9 @@ class List extends Component {
   render() {
     return (
       <>
-        <div>
-          <span className="list-title">{this.props.date}일</span>
-          <div className='list-container'>
+        <div className="list-container">
+          <p className="list-title">{this.props.date}일</p>
+          <div className='list-inner-container'>
             {this.showSubscriptionsByDate()}
           </div>
         </div>

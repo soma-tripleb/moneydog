@@ -6,7 +6,7 @@
     font-weight: lighter;
     font-size: 1vw;
     padding: 20px;
-    height: 75%;
+    height: 70%;
 }
 
 .list {
@@ -15,7 +15,7 @@
     font-size: 1vw;
     padding: 20px;
     width: auto;
-    height: 15%;
+    height: 20%;
 }
 
 
@@ -97,19 +97,26 @@
 .list-title {
     display: inline-block;
 }
+
 .list-container {
+    height: 90%;
+}
+
+.list-inner-container {
     width: auto;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
+    height: 100%;
+    padding-top: 1vh;
 }
 
 .list-img-border {
-    margin-right: 0.7vw;
+    margin-right: 1vw;
     border-radius: 5px;
     background: white;
     display: inline-block;
-    padding-bottom: 10px;
+    padding: 0 0 10px 0;
     text-align: center;
 }
 
