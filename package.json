@@ -21,6 +21,7 @@
     "dotenv-webpack": "^1.7.0",
     "file-loader": "^4.1.0",
     "fs": "0.0.1-security",
+    "googleapis": "^43.0.0",
     "jquery": "^3.4.1",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^2.2.0",
