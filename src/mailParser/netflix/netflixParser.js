@@ -15,10 +15,12 @@ const checkStatus = (response) => {
   } else if (subject.includes('업데이트')) {
     // membership upgrade
     getUpgradeInfo(response);
-  } else {
-    // membership restart or using
+  } else if (subject.includes('가입')) {
+    // membership sign-up or resign-up
     getNetflixInfo(response);
   }
+  // 취향, 재시작 이라는 단어가 있으면 넷플릭스를 현재 사용중.
+  // update nextSubsribe true
 };
 
 const getParser = (response) => {
@@ -35,10 +37,10 @@ const getExpiredDate = (response) => {
 
 const getUpgradeInfo = (response) => {
   const parser = getParser(response);
-  const name = parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(7) > td > table > tbody > tr:nth-child(2) > td').text();
-  console.log(`upgrade membership name : ${name}`);
-  const price = parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(8) > td > table > tbody > tr:nth-child(2) > td').text();
-  console.log(`upgrade membership price : ${price}`);
+  const updateService = {};
+  updateService.updatedName = parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(7) > td > table > tbody > tr:nth-child(2) > td').text();
+  updateService.updatedPrice = priceRegex(parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(8) > td > table > tbody > tr:nth-child(2) > td').text());
+  return updateService;
 };
 
 const getNetflixInfo = (response) => {
@@ -73,7 +75,3 @@ const renewalAndExpiredRegex = (data) => {
   const fullDay = `${yearRegex.exec(data)[0]}${monthAndDay[2]}${monthAndDay[3]}`;
   return moment(fullDay).format('YYYY-MM-DD'); // return 2019-10-31
 };
-
-const fs = require('fs');
-const response = fs.readFileSync('./netflix_upgrade.json');
-checkStatus(response);
