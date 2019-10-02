@@ -1,17 +1,7 @@
 
 stages:
-#    - client-build
     - client-lint
     - client-deploy
-
-#client_build_test:
-#    stage: client-build
-#    before_script:
-#        - npm install
-#    script:
-#        - npm run build
-#    tags:
-#        - shell
 
 client_lint_inspection:
     stage: client-lint
