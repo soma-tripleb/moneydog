@@ -7,6 +7,16 @@ const getSubject = (response) => {
   return subject;
 };
 
+const checkStatus = (response) => {
+  if (getSubject(response).contains('작별')) {
+    // update unsubsribe method
+  } else if (getSubject(response).contains('업데이트')) {
+    // membership upgrade
+  } else {
+    // membership restart or using
+  }
+}
+
 const getNetflixInfo = (response) => {
   const jsonObject = commonParser.stringToJsonObject(commonParser.base64ToUtf8(response));
   const dom = commonParser.convertHtml(commonParser.base64ToUtf8(jsonObject.payload.parts[1].body.data));
