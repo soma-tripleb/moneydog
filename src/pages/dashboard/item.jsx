@@ -28,13 +28,9 @@ class Item extends Component {
               <img className="categories-inner-item-image" src={'/'+ logo} alt={name}/>
             </div>
             <div className="col">
-              {name}
-            </div>
-            <div className="col">
                   ₩{price}
             </div>
             <div className="col">
-              {/* {paymentDate}(D-{this.countRenualDate(paymentDate)}) */}
               {paymentDateFormat}
             </div>
           </div>

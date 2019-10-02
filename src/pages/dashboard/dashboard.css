@@ -6,7 +6,7 @@
     font-weight: lighter;
     font-size: 1vw;
     padding: 20px;
-    height: 75%;
+    height: 70%;
 }
 
 .list {
@@ -15,7 +15,7 @@
     font-size: 1vw;
     padding: 20px;
     width: auto;
-    height: 15%;
+    height: 20%;
 }
 
 
@@ -26,7 +26,7 @@
     font-weight: lighter;
     font-size: 1vw;
     padding: 20px;
-    height: 65%;
+    height: 75%;
 }
 
 .TotalAmount {
@@ -36,7 +36,7 @@
     font-weight: lighter;
     font-size: 1vw;
     padding: 20px;
-    height: 25%;
+    height: 15%;
 }
 
 /* Calendar */
@@ -62,6 +62,10 @@
 
 .ant-fullcalendar td {
     height: 70px;
+}
+
+.ant-fullcalendar-header .ant-radio-group{
+    display: none;
 }
 
 /* Calendar */
@@ -90,25 +94,39 @@
 }
 
 /* List */
+.list-title {
+    display: inline-block;
+}
+
 .list-container {
+    height: 80%;
+}
+
+.list-inner-container {
     width: auto;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
+    height: 100%;
+    padding-top: 1vh;
 }
 
 .list-img-border {
-    margin-right: 0.7vw;
-    margin-bottom: 1vh;
+    margin-right: 1vw;
     border-radius: 5px;
     background: white;
     display: inline-block;
-    padding: 0;
+    padding: 0 0 10px 0;
     text-align: center;
+}
+
+.list-img-border-title {
+    text-align: 0.5rem;
 }
 
 .list-logo-img {
     height: 5vh;
+    border-radius: 5px;
 }
 
 /* TotalAmount */
