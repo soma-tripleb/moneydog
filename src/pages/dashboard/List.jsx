@@ -68,7 +68,7 @@ class List extends Component {
     return (
       <>
         <div className="list-container">
-          <p className="list-title">{this.props.date}일</p>
+          <span className="list-title">{this.props.date}일</span>
           <div className='list-inner-container'>
             {this.showSubscriptionsByDate()}
           </div>
