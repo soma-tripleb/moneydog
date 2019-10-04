@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { connect as ReduxConn } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
-
 import authActions from '../../redux/actions/authAction';
 import userActions from '../../redux/actions/userAction';
-import GoogleApi from '../util/googleApi.spec';
 
 import './signin.css';
 
@@ -51,23 +48,6 @@ class Signin extends Component {
     });
   };
 
-  responseGoogle = (res) => {
-    console.log('LOGIN GOOGLE');
-    console.log(res);
-
-    GoogleApi.listMessages(res.googleId, res.accessToken)
-      .then((result) => {
-        console.log('messages list: ', result.data.messages);
-      })
-      .catch((err) => {
-        throw err;
-      });
-  };
-
-  logoutGoogle = (res) => {
-    console.log('LOGOUT GOOGLE: ', res);
-  };
-
   render() {
     return (
       <>
@@ -80,24 +60,6 @@ class Signin extends Component {
               <p className="divider-text">
                 <span className="bg-light">REACT GOOGLE LOGIN</span>
               </p>
-              <p>
-                <GoogleLogin
-                  clientId='532345922072-50gar7lh5ca5rvepjs7iisa6lu28d741.apps.googleusercontent.com'
-                  scope={'https://www.googleapis.com/auth/gmail.readonly'}
-                  onSuccess={this.responseGoogle}
-                  onFailure={this.responseGoogle}
-                  cookiePolicy={'single_host_origin'}
-                />
-              </p>
-              {/* <p>
-                <GoogleLogout
-                  clientId='532345922072-50gar7lh5ca5rvepjs7iisa6lu28d741.apps.googleusercontent.com'
-                  scope={'https://www.googleapis.com/auth/gmail.readonly'}
-                  onLogoutSuccess={this.logoutGoogle}
-                  onLogoutFailure={this.logoutGoogle}
-                  onRequest={this.logoutGoogle}
-                />
-              </p> */}
               <p className="divider-text">
                 <span className="bg-light">OR</span>
               </p>
