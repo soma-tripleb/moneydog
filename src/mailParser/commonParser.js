@@ -1,4 +1,6 @@
 const DomParser = require('dom-parser');
+const cheerio = require('cheerio');
+const moment = require('moment');
 
 const base64ToUtf8 = (base64encoded) => {
   return Buffer.from(base64encoded, 'base64').toString('utf8');
@@ -34,8 +36,26 @@ const checkDomain = (response) => {
     return 'apple';
   } else if (getDomain(response).indexOf('netflix') != -1) {
     return 'netflix';
+  } else if (getDomain(response).indexOf('watcha') != -1) {
+    return 'watcha';
   }
   return 'google';
+};
+
+const getParser = (response) => {
+  const jsonObject = stringToJsonObject(base64ToUtf8(response));
+  const dom = convertHtml(base64ToUtf8(jsonObject.payload.parts[1].body.data));
+  return cheerio.load(dom);
+};
+
+const getReceivedDate = (response) => {
+  const receivedDate = stringToJsonObject(base64ToUtf8(response)).payload.headers[1];
+  return mailReceivedDateRegex(receivedDate.value);
+};
+
+const mailReceivedDateRegex = (receivedDate) => {
+  const regex = /[a-zA-Z]{3},\s[0-9]{1,2}\s[a-zA-Z]{3}\s[0-9]{4}\s[0-9: -]*/;
+  return moment(regex.exec(receivedDate)[0]).format('YYYY-MM-DD');
 };
 
 module.exports = {
@@ -44,4 +64,6 @@ module.exports = {
   convertHtml: convertHtml,
   getEmailId: getEmailId,
   checkDomain: checkDomain,
+  getParser: getParser,
+  getReceivedDate: getReceivedDate,
 };
