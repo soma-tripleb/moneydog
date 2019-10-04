@@ -5,11 +5,11 @@ const fs = require('fs');
 const response = fs.readFileSync('./watcha_renewal.json');
 
 const checkStatus = (response) => {
-  const subject = watchaEmailSubject(response).value;
+  const subject = watchaEmailSubject(response);
   if (subject.includes('남은 7일')) {
-    // 해지할 예정.
+    // 7일 뒤 해지할 예정.
+    console.log(commonParser.mailReceivedDateRegex(response));
   } else if (subject.includes('갱신')) {
-    // 계속 이용
     getWathcaInfo(response);
   }
 };
@@ -27,15 +27,18 @@ const getWathcaInfo = (response) => {
 
 const watchaEmailSubject = (response) => {
   const subject = commonParser.stringToJsonObject(commonParser.base64ToUtf8(response)).payload.headers[21];
-  return subject;
+  return subject.value;
 };
+
+// 왓차는 해지 일주일전에 메일을 보낸다. 메일을 받은 날짜(ReceivedDate)를 구해서 일주일을 더해서 expiredDate를 구해야된다.
+
 
 const dateRegex = (date) => {
   const yearRegex = /[0-9]{4}/;
   const monthRegex = /[0-9]{2}/g;
-  const monthAndDay = date.match(monthRegex); // return 4 values [20,19,10,31] => 2019-10-31.
+  const monthAndDay = date.match(monthRegex);
   const fullDay = `${yearRegex.exec(date)[0]}${monthAndDay[2]}${monthAndDay[3]}`;
-  return moment(fullDay).format('YYYY-MM-DD'); // return 2019-10-31
+  return moment(fullDay).format('YYYY-MM-DD');
 };
 
 const priceRegex = (price) => {
