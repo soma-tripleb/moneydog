@@ -41,8 +41,6 @@ const userSchema = new mongoose.Schema(
     nickname: { type: String, required: true },
     salt: { type: Number, required: true },
     role: { type: String, required: true },
-    access_token: { type: String },
-    refresh_token: { type: String },
     subscription: [subscriptionSchema],
   },
   {
