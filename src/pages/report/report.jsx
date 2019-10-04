@@ -7,26 +7,8 @@ import MontlyReport from './MontlyReport';
 
 class Report extends Component {
   state = {
-    totalPay: '-',
     currency: '₩',
     month: new Date().getMonth() +1,
-    mostUsed: '-',
-    mostUnused: '-'
-  };
-
-  componentDidMount() {
-    this.initialState();
-  }
-
-  initialState = () =>{
-    let totalPay = 0;
-    this.props.subscriptions.map(
-      (content) =>{
-        totalPay += content.price;
-      });
-    this.setState({
-      totalPay: totalPay,
-    });
   };
 
 
@@ -35,10 +17,17 @@ class Report extends Component {
       <>
         <div className="container main-container">
           <div className="row">
-
-            <SubscriptionList data={this.props.subscriptions}/>
-            <MontlyReport data={this.state}/>
-
+            <div className="col-sm-8 report-container">
+              <div className="col-sm page foldtl report-inner-container">
+                <h2>Report</h2>
+                <MontlyReport props={this.state} data={this.props.subscriptions}/>
+                <SubscriptionList data={this.props.subscriptions}/>
+              </div>
+              {/* <div className="col-sm-6 report-inner-container">*/}
+              {/*  <MontlyReport data={this.state}/>*/}
+              {/*  <SubscriptionList data={this.props.subscriptions}/>*/}
+              {/* </div>*/}
+            </div>
           </div>
         </div>
       </>

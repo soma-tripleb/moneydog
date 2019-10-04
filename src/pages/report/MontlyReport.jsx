@@ -1,8 +1,32 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Card, Col, Row} from 'react-bootstrap';
 
 class MontlyReport extends Component {
-  showThisMonthData = (header, body) =>{
+  state = {
+    totalPrice: 0,
+  };
+
+  componentDidMount() {
+    this.calculateTotalPrice();
+  };
+
+  calculateTotalPrice = () =>{
+    let totalPay = 0;
+    this.props.data.map(
+      (content) =>{
+        totalPay += Number(content.price);
+      });
+
+    this.setState({
+      totalPrice: totalPay,
+    });
+  };
+
+  numberWithCommas = (number) => {
+    return String(number).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  showThisMonthData = (header, body) => {
     return (
       <Card>
         <Card.Body>
@@ -17,27 +41,26 @@ class MontlyReport extends Component {
     );
   };
 
+  averageSubsPrice = (totalPay, subsAmount) =>{
+    return Math.ceil(Number(totalPay) / Number(subsAmount));
+  };
+
   render() {
-    const {totalPay, currency, month, mostUsed, mostUnused } = this.props.data;
+    const {currency, month} = this.props.props;
     return (
         <>
-          <div className="col-sm report-inner-container">
-            <div className="w-100 p-3" id="inner-container">
-              이번달 리포트
-              <Row>
-                <Col>
-                  <Card>
-                    <Card.Header>
-                      {month}월 리포트
-                    </Card.Header>
-                    {this.showThisMonthData(`이번달 결제 총액`, `${currency} ${totalPay}`)}
-                    {this.showThisMonthData('Most used Service', `${mostUsed}`)}
-                    {this.showThisMonthData('Most unsed Service', `${mostUnused}`)}
-                  </Card>
-                </Col>
-              </Row>
-            </div>
-          </div>
+          <Row>
+            <Col>
+              <div className="headerFont">
+                {month}월 리포트
+              </div>
+              <Card>
+                {this.showThisMonthData(`결제 총액`, `${currency} ${this.numberWithCommas(this.state.totalPrice)}`)}
+                {this.showThisMonthData('평균 구독 가격', '₩ '+this.averageSubsPrice(this.state.totalPrice, this.props.data.length) ) }
+                {this.showThisMonthData('총 구독 앱 수', `${this.props.data.length} 개`)}
+              </Card>
+            </Col>
+          </Row>
         </>
     );
   }

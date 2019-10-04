@@ -1,15 +1,27 @@
-services:
-    - mongo:latest
 
 stages:
     - client-lint
+    - client-deploy
 
 client_lint_inspection:
     stage: client-lint
-    before_script:
-    - export PATH=$PATH:/usr/local/bin
     script:
-    - npm install
-    - npm run lint
+        - pwd
+        - npm run lint
     tags:
-    - moneydog
+        - shell
+
+client_deploy_Only_master:
+    stage: client-deploy
+    only:
+        - master
+    script:
+        - cp $ENV ./.env
+        - docker stop $(docker ps -a -q)
+        - docker rm $(docker ps -a -q)
+        - docker rmi $(docker images -q)
+        - docker build --tag client:react -f Dockerfile.dev .
+        - docker run -id -p 80:80 client:react
+    tags:
+        - shell
+

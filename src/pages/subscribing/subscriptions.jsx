@@ -136,40 +136,40 @@ class Subscriptions extends Component {
 
   render() {
     return (
-        <>
-          <div className="container main-container">
-            <div className="row">
+      <>
+        <div className="container main-container">
+          <div className="row">
               Step 1. 구독중인 서비스를 추가 하세요
-            </div>
+          </div>
 
-            <div className="row">
-              <div className="col-sm">
+          <div className="row">
+            <div className="col-sm">
 
-                <div className="w-100 p-3" id="inner-container">
-                  <p><u>Selecting App</u></p>
-                  {this.makeStaticSubscribeApp()}
-                </div>
+              <div className="w-100 p-3" id="inner-container">
+                <p><u>Selecting App</u></p>
+                {this.makeStaticSubscribeApp()}
               </div>
-              <div className="col-sm">
+            </div>
+            <div className="col-sm">
 
-                <div className="w-100 p-3" id="inner-container">
-                  <p><u>Selected App</u></p>
-                  {this.makeSubscribingApp()}
-                </div>
+              <div className="w-100 p-3" id="inner-container">
+                <p><u>Selected App</u></p>
+                {this.makeSubscribingApp()}
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="container submit-container">
-            <div className="row">
-              <div className="col-sm">
-                <form onSubmit={this.handleSubmit}>
-                  <input type="submit" value="NEXT"/>
-                </form>
-              </div>
+        <div className="container submit-container">
+          <div className="row">
+            <div className="col-sm">
+              <form onSubmit={this.handleSubmit}>
+                <input type="submit" value="NEXT"/>
+              </form>
             </div>
           </div>
-        </>
+        </div>
+      </>
     );
   }
 }

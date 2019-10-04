@@ -1,42 +1,41 @@
 /* dashboard */
+.dashboard-inner {
+    padding: 2vh 2vh 2vh 2vh;
+}
+
 .calendar {
-    box-shadow: 5px 5px 5px 5px lightgray;
+    box-shadow: 1vh 1vh 1vh 1vh lightgray;
     overflow: auto;
     width: 100%;
     font-weight: lighter;
     font-size: 1vw;
-    padding: 20px;
-    height: 75%;
-}
-
-.categories{
-    box-shadow: 5px 5px 5px 5px lightgray;
-    overflow: auto;
-    width: 100%;
-    font-weight: lighter;
-    font-size: 1vw;
-    padding: 20px;
-    height: 65%;
-}
-
-.TotalAmount {
-    box-shadow: 5px 5px 5px 5px lightgray;
-    overflow: auto;
-    width: 100%;
-    font-weight: lighter;
-    font-size: 1vw;
-    padding: 20px;
-    height: 25%;
+    padding: 2vh;
 }
 
 .list {
-    box-shadow: 5px 5px 5px 5px lightgray;
+    box-shadow: 1vh 1vh 1vh 1vh lightgray;
+    font-weight: lighter;
+    font-size: 1vw;
+    padding: 2vh;
+    width: auto;
+}
+
+.categories{
+    box-shadow: 1vh 1vh 1vh 1vh lightgray;
     overflow: auto;
     width: 100%;
     font-weight: lighter;
     font-size: 1vw;
-    padding: 20px;
-    height: 15%;
+    padding: 2vh;
+}
+
+.TotalAmount {
+    box-shadow: 1vh 1vh 1vh 1vh lightgray;
+    overflow: auto;
+    width: 100%;
+    font-weight: lighter;
+    font-size: 1vw;
+    padding: 2vh;
 }
 
 /* Calendar */
@@ -50,7 +49,7 @@
     white-space: nowrap;
     width: 100%;
     text-overflow: ellipsis;
-    font-size: 12px;
+    font-size: 4vh;
 }
 .notes-month {
     text-align: center;
@@ -61,45 +60,83 @@
 }
 
 .ant-fullcalendar td {
-    height: 70px;
+    height: 7vh;
 }
 
-.subscribeImg {
+.ant-fullcalendar-header .ant-radio-group{
+    display: none;
+}
+
+.ant-fullcalendar-value {
+    font-size: 1vh;
+}
+
+/* Calendar, Date */
+.calendar-subscriptions-img {
     width: 50%;
+    border-radius: 0.5vh;
+    border: 1px lightgray solid;
+}
+
+.calendar-subscriptions-img.front {
+    position: relative;
+    z-index: 2;
+}
+
+.calendar-subscriptions-img.back {
+    position: relative;
+    z-index: 1;
+    left: -5px;
+    border: 1px lightgray solid;
 }
 
 /* Categories */
-.categories-inner-item {
-    width: 100px;
-    height: 50px;
-}
-
 .categories-inner-item-image{
     height: 5vh;
     border-radius: 5px;
     padding-left: 0px;
 }
 
-/* List */
-.list-loading {
-    font-size: 5vh;
+.ant-page-header {
+    padding: 0;
 }
 
-.line-img {
-    display: block;
-    max-width:100%; max-height:100%;
-    width: 90%;
-    margin:auto;
-    top:0; bottom:0; left:0; right:0;
-    position: absolute;
+/* List */
+.list-title {
+    display: inline-block;
+}
+
+.list-container {
+    height: 80%;
+}
+
+.list-inner-container {
+    width: auto;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    height: 100%;
+    padding-top: 1vh;
+}
+
+.list-img-border {
+    margin-right: 1vw;
+    border-radius: 5px;
+    background: white;
+    display: inline-block;
+    text-align: center;
+}
+
+.list-img-border-title {
+    text-align: 0.5rem;
+}
+
+.list-logo-img {
     height: 5vh;
     border-radius: 5px;
 }
 
-.list-img-border {
-    border-radius: 15px;
-    background: #ffffff;
-    width: 10%;
-    padding-bottom: 10%;
-    position: relative;
+/* TotalAmount */
+.total-amount-text {
+    font-size: 2rem;
 }

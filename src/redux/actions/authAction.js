@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import {AUTH_LOGIN_TRY, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE, AUTH_LOGOUT, USER_INITIALLIZE} from './actionType';
+import {AUTH_LOGIN_TRY, AUTH_LOGIN_SUCCESS, AUTH_SUBS_STEP, AUTH_LOGOUT, USER_INITIALLIZE} from './actionType';
 
 const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
 
@@ -23,7 +23,7 @@ const loginRequest = (email, password) => async (dispatch) => {
       return res;
     })
     .catch((err) => {
-      dispatch(LOGIN_FAILURE());
+      dispatch(LOGOUT());
       return err.response;
     });
 };
@@ -43,17 +43,16 @@ const registerRequest = (email, password, nickname) => async (dispatch) => {
   return axios
     .post(AJAX_URL, AJAX_DATA)
     .then((res) => {
-      dispatch(LOGIN_SUCCESS());
+      dispatch(ADD_SUBSCRIPTION_STEP());
       return res;
     })
     .catch((err) => {
-      dispatch(LOGIN_FAILURE());
+      dispatch(LOGOUT());
       return err.response;
     });
 };
 
-
-const logoutRequest = () =>(dispatch) => {
+const logoutRequest = () => (dispatch) => {
   dispatch(LOGOUT());
   dispatch({
     type: USER_INITIALLIZE,
@@ -62,15 +61,28 @@ const logoutRequest = () =>(dispatch) => {
   Cookies.remove('token');
 };
 
-const LOGIN_TRY = () => { return { type: AUTH_LOGIN_TRY }; };
+const finishAddSubsStep= () => (dispatch) => {
+  dispatch(LOGIN_SUCCESS());
+};
 
-const LOGOUT = () => { return { type: AUTH_LOGOUT }; };
+const LOGIN_TRY = () => {
+  return {type: AUTH_LOGIN_TRY};
+};
 
-const LOGIN_SUCCESS = () => {return { type: AUTH_LOGIN_SUCCESS }; };
+const LOGOUT = () => {
+  return {type: AUTH_LOGOUT};
+};
 
-const LOGIN_FAILURE = () => { return { type: AUTH_LOGIN_FAILURE }; };
+const LOGIN_SUCCESS = () => {
+  return {type: AUTH_LOGIN_SUCCESS};
+};
+
+const ADD_SUBSCRIPTION_STEP = () => {
+  return {type: AUTH_SUBS_STEP};
+};
 
 export default {
+  finishAddSubsStep,
   loginRequest,
   logoutRequest,
   registerRequest,
