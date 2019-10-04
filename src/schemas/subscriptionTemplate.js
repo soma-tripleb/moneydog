@@ -16,7 +16,7 @@ const SubscriptionTemplateSchema = new mongoose.Schema(
   {
     seq: { type: Number },
     name: { type: String, required: true },
-    thumbnail: { type: String, required: true },
+    logoURI: { type: String, required: true },
     membership: membershipSchema,
   },
   {

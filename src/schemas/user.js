@@ -19,7 +19,7 @@ const subscriptionSchema = new mongoose.Schema(
   {
     seq: { type: Number, required: true },
     name: { type: String, unique: true },
-    logo: { type: String, required: true },
+    logoURI: { type: String, required: true },
     price: { type: Number, required: true },
     paymentDate: { type: Date, required: true },
     channel: {

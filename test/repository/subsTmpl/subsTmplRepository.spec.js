@@ -45,11 +45,11 @@ describe('SubscriptionTemplate Test', () => {
     });
 
     describe('#modify()', () => {
-      it('SubscriptionTemplate thumbnail 수정', (done) => {
+      it('SubscriptionTemplate logoURI 수정', (done) => {
         const SubsTmplName = SubsTmplMock.name;
-        const newThumbnail = 'test-path2';
+        const newLogoURI = 'test-path2';
 
-        SubsTmpl.updateOne({ name: SubsTmplName }, { thumbnail: newThumbnail }, (err) => {
+        SubsTmpl.updateOne({ name: SubsTmplName }, { logoURI: newLogoURI }, (err) => {
           if (err) done(err);
           else done(err);
         });
@@ -58,7 +58,7 @@ describe('SubscriptionTemplate Test', () => {
           if (err) err;
           else err;
         }).then((subsTmpl) => {
-          assert(subsTmpl.thumbnail, newThumbnail);
+          assert(subsTmpl.logoRUI, newLogoURI);
         });
       });
     });
