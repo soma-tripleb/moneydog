@@ -29,10 +29,11 @@ const getWathcaInfo = (response) => {
 const getExpiredDate = (response) => {
   const service = {};
   service.expiredDate = moment(commonParser.getReceivedDate(response)).add(7, 'days').format('YYYY-MM-DD');
+  service.nextSubsribe = false;
   return service;
 };
 
-// watcha Subject로 왓챠의 상태판별
+// watcha Subject로 왓챠의 상태판별. 왓차는 갱신, 해지 2개가 있다.
 const watchaEmailSubject = (response) => {
   const subject = commonParser.stringToJsonObject(commonParser.base64ToUtf8(response)).payload.headers[21];
   return subject.value;
