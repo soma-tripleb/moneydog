@@ -57,12 +57,12 @@ class Signin extends Component {
           <div className="card bg-light">
             <article className="card-body mx-auto">
               <h4 className="card-title mt-3 text-center">Sign In</h4>
-              <p className="divider-text">
-                <span className="bg-light">REACT GOOGLE LOGIN</span>
-              </p>
-              <p className="divider-text">
-                <span className="bg-light">OR</span>
-              </p>
+              {/* <p className="divider-text">*/}
+              {/*  <span className="bg-light">REACT GOOGLE LOGIN</span>*/}
+              {/* </p>*/}
+              {/* <p className="divider-text">*/}
+              {/*  <span className="bg-light">OR</span>*/}
+              {/* </p>*/}
               <form>
                 {/* Email input*/}
                 <div className="form-group input-group">
@@ -82,7 +82,7 @@ class Signin extends Component {
                 </div>
                 {/* 회원가입 버튼*/}
                 <div className="form-group">
-                  <button type="submit" className="btn btn-success btn-block" onClick={this.signInBtnClicked}> 
+                  <button type="submit" className="btn btn-success btn-block" onClick={this.signInBtnClicked}>
                     Sign In
                   </button>
                 </div>

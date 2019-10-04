@@ -8,13 +8,7 @@ import UserActions from '../../redux/actions/userAction';
 import SubsApp from './subsApp';
 import SubsTmplService from './subscriptions.ajax';
 
-import * as images from '../../../resources/static/img/templogo';
-
 import './subscriptions.css';
-
-const mapStateToProps = (state) => ({
-  subscriptions: state.users.subscriptions,
-});
 
 class Subscriptions extends Component {
   constructor(props) {
@@ -23,8 +17,6 @@ class Subscriptions extends Component {
     this.state = {
       staticSubscribeArr: [],
       SubscribingArr: [],
-      show: false,
-      setShow: false,
     };
   }
 
@@ -40,6 +32,8 @@ class Subscriptions extends Component {
     const subsTmplResponse = await SubsTmplService.getList();
     const subsTmplList = subsTmplResponse.data.message;
 
+    console.log(subsTmplList);
+
     if (subscriptions.length !== 0) {
       subscriptions.map((subscription) => {
         const idx = subsTmplList.findIndex((item) => {
@@ -49,19 +43,13 @@ class Subscriptions extends Component {
       });
     }
 
-    // logo 필드 추가
-    subsTmplList.map((subsTmpl) => {
-      const subsTmplName = subsTmpl.thumbnail.toLowerCase();
-      subsTmpl.logo = images[subsTmplName];
-    });
-
     this.setState({
       staticSubscribeArr: subsTmplList,
     });
   };
 
   // staticSubscribeArr 에서 SubscribingArr 로 옮기기
-  insertContact = (seq, logo, name) => {
+  insertContact = (seq, logoURI, name) => {
     let flag = false;
     this.state.SubscribingArr.map((content) =>{
       if (content.seq === seq) flag = true;
@@ -74,7 +62,7 @@ class Subscriptions extends Component {
         $push: [
           {
             'seq': seq,
-            'logo': logo,
+            'logoURI': logoURI,
             'name': name,
           },
         ],
@@ -83,7 +71,7 @@ class Subscriptions extends Component {
     this.setState(newState);
   };
 
-  // staticSubscribeArr 에서 지우기
+  // SubscribeArr 에서 지우기
   deleteContant = (number) => {
     const {SubscribingArr} = this.state;
     this.setState({
@@ -108,7 +96,7 @@ class Subscriptions extends Component {
           subsAppInfo={
             {
               seq: content.seq,
-              logo: content.logo,
+              logoURI: content.logoURI,
               name: content.name,
               label: '+',
             }
@@ -124,7 +112,7 @@ class Subscriptions extends Component {
         <SubsApp key={i+content.name} onDelete={this.deleteContant.bind(this)} subsAppInfo={
           {
             seq: content.seq,
-            logo: content.logo,
+            logoURI: content.logoURI,
             name: content.name,
             label: '-',
           }
@@ -145,14 +133,14 @@ class Subscriptions extends Component {
           <div className="row">
             <div className="col-sm">
 
-              <div className="w-100 p-3" id="inner-container">
+              <div className="w-100" id="inner-container">
                 <p><u>Selecting App</u></p>
                 {this.makeStaticSubscribeApp()}
               </div>
             </div>
             <div className="col-sm">
 
-              <div className="w-100 p-3" id="inner-container">
+              <div className="w-100" id="inner-container">
                 <p><u>Selected App</u></p>
                 {this.makeSubscribingApp()}
               </div>
@@ -174,10 +162,14 @@ class Subscriptions extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  subscriptions: state.users.subscriptions,
+});
+
 const mapDispatchToProps = (dispatch) => {
   return {
     REDUX_USER_SET_SUBSTMPL_LIST: (list) => {
-      dispatch(UserActions.getUserSubsTmplList(list));
+      dispatch(UserActions.setUserSubsTmplList(list));
     },
   };
 };

@@ -58,7 +58,7 @@ class List extends Component {
       return (
         <div className='col-2 list-img-border' key={i}>
           <p className='list-img-border-title'>{subscription.name}</p>
-          <img className="list-logo-img" src={'/' + subscription.logo} alt='x'/>
+          <img className="list-logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subscription.logoURI} alt='x'/>
         </div>
       );
     });
