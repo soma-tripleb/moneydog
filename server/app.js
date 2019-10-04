@@ -1,40 +1,54 @@
 const express = require('express');
 const app = express();
-const path = require('path');
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+const morgan = require('morgan');
 const cors = require('cors');
 
-// MiddleWares
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+import authCheck from './src/security/jwtAuthentication';
+import * as Sentry from '@sentry/node';
+import {mongoConnect} from './src/configs/mongoDB';
+import {customLogger, errorLogger, stream} from './src/configs/winston';
+// Error tracking
+// Sentry.init({dsn: 'https://566bd809b9a0464e8e690a199ab83396@sentry.io/1553162'});
 
-// HTTP 접근 제어 혹은 CORS(Cross-origin resource sharing, 출처가 다른 곳끼리 자원 공유
+// DB Config
+mongoConnect();
+
+// MiddleWares
 app.use(cors());
+app.use(morgan('combined', { stream }));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(Sentry.Handlers.requestHandler());
+app.use(Sentry.Handlers.errorHandler());
 
 // Api
-const indexRouter = require('./api/index');
-const usersRouter = require('./components/user/userController');
-const subscribeInfo = require('./api/subscribeInfo');
-const subscriptionRouter = require('./components/subscription/subscriptionController');
+import indexRouter from './index';
+import authRouter from './src/router/auth/authentiController';
+import userRouter from './src/router/user/userController';
+import subsInfoRouter from './src/router/subscriptiionInfo/subsInfoController';
+import subsTmplRouter from './src/router/subscriptionTemplate/subsTmplController';
 
+app.use(customLogger);
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/subscribeInfo', subscribeInfo);
-app.use('/subscriptions', subscriptionRouter);
+app.use('/auth', authRouter);
+app.use(authCheck);
+app.use('/users', userRouter);
+app.use('/subs-info', subsInfoRouter);
+app.use('/subs-tmpl', subsTmplRouter);
+
+// error logger
+app.use(errorLogger);
 
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.end(res.sentry + '\n');
 });
 
-module.exports = app;
+export default app;

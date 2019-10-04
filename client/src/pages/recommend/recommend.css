@@ -1,0 +1,19 @@
+.recommend {
+    box-shadow: 10px 10px 10px 10px lightgray;
+    overflow: auto;
+    width: 100%;
+    font-weight: lighter;
+    font-size: 1vw;
+    padding: 20px;
+    height: 45%;
+}
+
+.simillyUsed {
+    box-shadow: 10px 10px 10px 10px lightgray;
+    overflow: auto;
+    width: 100%;
+    font-weight: lighter;
+    font-size: 1vw;
+    padding: 20px;
+    height: 90%;
+}

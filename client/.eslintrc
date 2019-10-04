@@ -4,13 +4,25 @@
   "rules": {
     "indent": [
       "error",
-      2
+      2,
+      {
+        "SwitchCase": 1
+      }
     ],
     "semi": [
       "error",
       "always"
     ],
-    "new-cap": "off"
+    "new-cap": "off",
+    "require-jsdoc": "off",
+    "object-curly-spacing": "off",
+    "max-len": "off",
+    "no-invalid-this": "off",
+    "no-unused-vars": "off",
+    "brace-style": "off",
+    "block-spacing": "off",
+    "comma-dangle": "off",
+    "curly": "off"
   },
   "parserOptions": {
     "ecmaVersion": 2018

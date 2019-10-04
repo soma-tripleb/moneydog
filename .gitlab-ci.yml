@@ -1,0 +1,36 @@
+services:
+    - mongo:latest
+
+stages:
+    - server-lint
+    - client-lint
+
+server_lint_inspection:
+    stage: server-lint
+    before_script:
+    - export PATH=$PATH:/usr/local/bin
+    only:
+        variables:
+          - $DB_SCHEMA
+          - $DB_URL
+          - $DB_USER
+          - $DB_PASSWORD
+          - $DB_HOST
+          - $DB_PORT
+    script:
+    - cd server
+    - npm install
+    - npm run lint
+    tags:
+    - moneydog
+
+client_lint_inspection:
+    stage: client-lint
+    before_script:
+    - export PATH=$PATH:/usr/local/bin
+    script:
+    - cd client
+    - npm install
+    - npm run lint
+    tags:
+    - moneydog

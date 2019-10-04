@@ -1,0 +1,39 @@
+.calendar {
+    box-shadow: 5px 5px 5px 5px lightgray;
+    overflow: auto;
+    width: 100%;
+    font-weight: lighter;
+    font-size: 1vw;
+    padding: 20px;
+    height: 75%;
+}
+
+.categories{
+    box-shadow: 5px 5px 5px 5px lightgray;
+    overflow: auto;
+    width: 100%;
+    font-weight: lighter;
+    font-size: 1vw;
+    padding: 20px;
+    height: 65%;
+}
+
+.TotalAmount {
+    box-shadow: 5px 5px 5px 5px lightgray;
+    overflow: auto;
+    width: 100%;
+    font-weight: lighter;
+    font-size: 1vw;
+    padding: 20px;
+    height: 25%;
+}
+
+.list {
+    box-shadow: 5px 5px 5px 5px lightgray;
+    overflow: auto;
+    width: 100%;
+    font-weight: lighter;
+    font-size: 1vw;
+    padding: 20px;
+    height: 15%;
+}

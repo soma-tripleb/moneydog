@@ -3,28 +3,54 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --exec babel-node ./bin/www"
+    "start": "nodemon --exec babel-node ./bin/www",
+    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./bin/www",
+    "test": "cross-env NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register --timeout 120000 --recursive ./**/*.spec.js",
+    "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
+    "lint": "./node_modules/.bin/eslint --fix --ext .js src/ test/ app.js index.js;",
+    "test-subs-info-repo": "NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register ./test/schema/user/subsInput.spec.js",
+    "test-subs-info-serv": "NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register ./test/service/user/userSubsInput.spec.js",
+    "test-controller": "NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register ./test/controller/authController.spec.js"
   },
   "dependencies": {
-    "chai": "^4.2.0",
+    "@sentry/node": "^5.6.2",
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
+    "dom-parser": "^0.1.6",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "express-winston": "^3.3.0",
     "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^2.2.0",
     "mongoose": "^5.6.0",
     "mongoose-auto-increment": "^5.0.1",
     "morgan": "~1.9.1",
-    "pug": "^2.0.0-beta11",
-    "request": "^2.88.0"
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.1.0",
+    "winston-mongodb": "^5.0.0"
   },
   "devDependencies": {
+    "acorn": "^7.0.0",
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "nodemon": "^1.19.1",
     "babel-eslint": "^10.0.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-node6": "^11.0.0",
+    "babel-register": "^6.26.0",
+    "chai": "^4.2.0",
+    "cross-env": "^5.2.1",
     "eslint": "^6.1.0",
-    "eslint-config-google": "^0.13.0"
+    "eslint-config-google": "^0.13.0",
+    "mocha": "^6.2.0",
+    "mongodb-memory-server": "^5.2.3",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2",
+    "swagger-jsdoc": "^3.4.0",
+    "swagger-ui-express": "^4.0.7"
   }
 }
