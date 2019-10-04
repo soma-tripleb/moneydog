@@ -34,10 +34,12 @@ import authRouter from './src/router/auth/authentiController';
 import userRouter from './src/router/user/userController';
 import subsInfoRouter from './src/router/subscriptiionInfo/subsInfoController';
 import subsTmplRouter from './src/router/subscriptionTemplate/subsTmplController';
+import oAuth2Router from './src/router/auth/google/oAuth2Controller';
 
 app.use(customLogger);
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/google', oAuth2Router);
 app.use(authCheck);
 app.use('/users', userRouter);
 app.use('/subs-info', subsInfoRouter);
