@@ -13,7 +13,7 @@ class SubscriptionList extends Component {
 
     const list = this.props.data.map(
       (content, i) => (
-        <div key={i} className="container w-100 p-3" id="inner-element">
+        <div key={i} className="container w-100" id="inner-element">
           <div className="row subs-inner-item">
             <div className="col">
               {content.name}

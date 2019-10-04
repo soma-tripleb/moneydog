@@ -42,7 +42,7 @@ class CalendarClass extends Component {
         result = (
           <ul className="events">
             <li key={showCalendarSubscriptions.seq}>
-              <img className="calendar-subscriptions-img" src={'/' + showCalendarSubscriptions.logo} alt='x' />
+              <img className="calendar-subscriptions-img" src={`${process.env.REACT_APP_IMAGE_URI}` + showCalendarSubscriptions.logoURI} alt='x' />
             </li>
           </ul>
         );
@@ -51,8 +51,8 @@ class CalendarClass extends Component {
         result = (
           <ul className="events">
             <li key={showCalendarSubscriptions.seq}>
-              <img className="calendar-subscriptions-img front" src={'/' + showCalendarSubscriptions.logo} alt='x' />
-              <img className="calendar-subscriptions-img back" src={'/' + SOMETHING_IMG} alt='x' />
+              <img className="calendar-subscriptions-img front" src={`${process.env.REACT_APP_IMAGE_URI}` + showCalendarSubscriptions.logoURI} alt='x' />
+              <img className="calendar-subscriptions-img back" src={`${process.env.REACT_APP_IMAGE_URI}` + '/subscriptionLogo/something.png'} alt='x' />
             </li>
           </ul>
         );

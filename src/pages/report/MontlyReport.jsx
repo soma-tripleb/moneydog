@@ -42,7 +42,7 @@ class MontlyReport extends Component {
   };
 
   averageSubsPrice = (totalPay, subsAmount) =>{
-    return Math.ceil(Number(totalPay) / Number(subsAmount));
+    return this.numberWithCommas(Math.ceil(Number(totalPay) / Number(subsAmount)));
   };
 
   render() {

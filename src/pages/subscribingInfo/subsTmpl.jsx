@@ -80,7 +80,7 @@ class SubsTmpl extends Component {
 
             {/* 사진 */}
             <div className="logo col-xs-6 col-sm-3">
-              <img className="logo-img" src={`/` + info.logo} alt="" />
+              <img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + info.logoURI} alt="" />
             </div>
 
             {/* 결제 금액 */}
@@ -141,6 +141,6 @@ class SubsTmpl extends Component {
       </>
     );
   }
-};
+}
 
 export default SubsTmpl;

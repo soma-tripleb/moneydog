@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 
 const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
 
-const getUserSubsTmplList = (list) => (dispatch) => {
+const setUserSubsTmplList = (list) => (dispatch) => {
   dispatch(
     {
       type: ACTION_TYPE.GET_USERS_SUBSTMPL_LIST,
@@ -60,7 +60,7 @@ const getSubsInfo = () => async (dispatch) => {
 };
 
 export default {
-  getUserSubsTmplList,
+  setUserSubsTmplList,
   getSubsInfo,
   insertUserSubscriptions,
   deleteTempSubscriptions

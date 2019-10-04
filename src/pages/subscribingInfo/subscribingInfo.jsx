@@ -30,14 +30,14 @@ class SubscribingInfo extends Component {
 
   componentDidMount = () => {
     const userSeletedList = this.props.USERS.tempSubscriptions;
-    const userSelectedListLength = userSeletedList.length;
 
-    this.getUserSubsList(userSeletedList, userSelectedListLength);
+    this.getUserSubsList(userSeletedList);
   };
 
-  getUserSubsList = (userSeletedList, userSelectedListLength) => {
+  getUserSubsList = (userSeletedList) => {
     let tempSubsList = [];
     let tempInputList = [];
+    const userSelectedListLength = userSeletedList.length;
 
     // TEST
     if (userSelectedListLength === 0) {
@@ -49,7 +49,7 @@ class SubscribingInfo extends Component {
       userSeletedList.map((Subscription) => {
         tempInputList.push({
           seq: Subscription.seq,
-          logo: Subscription.logo,
+          logoURI: Subscription.logoURI,
           name: Subscription.name,
           price: '',
           paymentDate: `${NOW}`,
