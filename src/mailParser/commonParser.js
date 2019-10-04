@@ -40,8 +40,8 @@ const checkDomain = (response) => {
 };
 
 const getParser = (response) => {
-  const jsonObject = commonParser.stringToJsonObject(commonParser.base64ToUtf8(response));
-  const dom = commonParser.convertHtml(commonParser.base64ToUtf8(jsonObject.payload.parts[1].body.data));
+  const jsonObject = stringToJsonObject(base64ToUtf8(response));
+  const dom = convertHtml(base64ToUtf8(jsonObject.payload.parts[1].body.data));
   return cheerio.load(dom);
 };
 
