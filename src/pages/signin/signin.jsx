@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect as ReduxConn} from 'react-redux';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect as ReduxConn } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
@@ -62,21 +62,24 @@ class Signin extends Component {
       .catch((err) => {
         throw err;
       });
-  }
+  };
 
   logoutGoogle = (res) => {
     console.log('LOGOUT GOOGLE: ', res);
-  }
+  };
 
   render() {
     return (
       <>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" />
         <div className="container loginContainer">
 
           <div className="card bg-light">
             <article className="card-body mx-auto">
               <h4 className="card-title mt-3 text-center">Sign In</h4>
+              <p className="divider-text">
+                <span className="bg-light">REACT GOOGLE LOGIN</span>
+              </p>
               <p>
                 <GoogleLogin
                   clientId='532345922072-50gar7lh5ca5rvepjs7iisa6lu28d741.apps.googleusercontent.com'
@@ -102,22 +105,23 @@ class Signin extends Component {
                 {/* Email input*/}
                 <div className="form-group input-group">
                   <div className="input-group-prepend">
-                    <span className="input-group-text"> <i className="fa fa-envelope"/> </span>
+                    <span className="input-group-text"> <i className="fa fa-envelope" /> </span>
                   </div>
                   <input name="emailInfo" className="form-control" placeholder="Email address" type="email"
-                    value={this.state.email} onChange={this.onChangeEmail}/>
+                    value={this.state.email} onChange={this.onChangeEmail} />
                 </div>
                 {/* createPW input*/}
                 <div className="form-group input-group">
                   <div className="input-group-prepend">
-                    <span className="input-group-text"> <i className="fa fa-lock"/> </span>
+                    <span className="input-group-text"> <i className="fa fa-lock" /> </span>
                   </div>
                   <input className="form-control" placeholder="Create password" type="password"
-                    value={this.state.password} onChange={this.onChangePassword}/>
+                    value={this.state.password} onChange={this.onChangePassword} />
                 </div>
                 {/* 회원가입 버튼*/}
                 <div className="form-group">
-                  <button type="submit" className="btn btn-success btn-block" onClick={this.signInBtnClicked}> Sign In
+                  <button type="submit" className="btn btn-success btn-block" onClick={this.signInBtnClicked}> 
+                    Sign In
                   </button>
                 </div>
                 <p className="text-center">Don't Have an account? <Link to="/signup" className="nav-link"> Create New Account </Link></p>

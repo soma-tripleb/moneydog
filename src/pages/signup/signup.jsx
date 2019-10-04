@@ -6,6 +6,8 @@ import authActions from '../../redux/actions/authAction';
 import './signup.css';
 import Cookies from 'js-cookie';
 
+import GoogleApi from '../util/googleApi.spec';
+
 class SignUp extends Component {
   state = {
     nickname: '',
@@ -128,6 +130,18 @@ class SignUp extends Component {
     });
   };
 
+  customGoogleLogin = () => {
+    console.log('CUSTOM GOOGLE LOGIN');
+
+    GoogleApi.authLogin()
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  };
+
   render() {
     return (
       <>
@@ -139,14 +153,15 @@ class SignUp extends Component {
               <h4 className="card-title mt-3 text-center">Sign Up</h4>
               <p className="text-center">Get started with your free account</p>
               <p>
-                <button className="btn btn-block btn-google"
-                  style={{backgroundColor: 'lightgray'}}>
+                <button className="btn btn-block btn-google" onClick={this.customGoogleLogin}>
                   <i className="fab fa-google"/> Login via google
                 </button>
               </p>
+
               <p className="divider-text">
                 <span className="bg-light">OR</span>
               </p>
+
               <form>
                 {/* Email input*/}
                 <div className="form-group input-group">
