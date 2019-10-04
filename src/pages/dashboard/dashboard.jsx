@@ -8,7 +8,6 @@ import moment from 'moment';
 
 import './dashboard.css';
 import { connect } from 'react-redux';
-import * as image from '../../../resources/static/img/templogo';
 
 const mapStateToProps = (state) => ({
   rdxUserSubscriptionsInfo: state.users.subscriptions,
@@ -35,11 +34,7 @@ class DashBoard extends Component {
 
   fetchSubscriptionInfo = () => {
     this.setState({
-      subscription: this.props.rdxUserSubscriptionsInfo.map(
-        (content) => {
-          return { ...content, logo: image[content.name.toLowerCase()] };
-        }
-      )
+      subscription: this.props.rdxUserSubscriptionsInfo
     });
 
     return this.state.subscription;
