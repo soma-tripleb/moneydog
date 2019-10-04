@@ -15,7 +15,7 @@ class SubsApp extends Component {
     const {subsAppInfo} = this.props;
     return (
       <>
-        <div className="container w-100 p-3" id="inner-element">
+        <div className="container w-100" id="inner-element">
           <div className="row">
             <div className="col">
               <img className="logo-img" src={`/` + subsAppInfo.logo} alt="x" />

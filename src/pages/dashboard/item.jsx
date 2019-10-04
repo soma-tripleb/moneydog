@@ -26,7 +26,7 @@ class Item extends Component {
 
     return (
       <>
-        <div className="container w-100 p-3" id="inner-element">
+        <div className="container w-100" id="inner-element">
           <div className="row">
             <div className="col">
               <img className="categories-inner-item-image" src={'/'+ logo} alt={name}/>

@@ -145,14 +145,14 @@ class Subscriptions extends Component {
           <div className="row">
             <div className="col-sm">
 
-              <div className="w-100 p-3" id="inner-container">
+              <div className="w-100" id="inner-container">
                 <p><u>Selecting App</u></p>
                 {this.makeStaticSubscribeApp()}
               </div>
             </div>
             <div className="col-sm">
 
-              <div className="w-100 p-3" id="inner-container">
+              <div className="w-100" id="inner-container">
                 <p><u>Selected App</u></p>
                 {this.makeSubscribingApp()}
               </div>

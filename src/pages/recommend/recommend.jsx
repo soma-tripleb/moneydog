@@ -32,7 +32,7 @@ class Recommend extends Component {
                 <div style={{'margin': '0', 'color': 'cornflowerblue', 'textAlign': 'right'}}>
                     더보기
                 </div>
-                <div className="container w-100 p-3" id="inner-element">
+                <div className="container w-100" id="inner-element">
                   <div className="row">
                     <div className="col-2" style={{margin: 'auto'}}>
                       <h5>No 1.</h5>
@@ -53,7 +53,7 @@ class Recommend extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="container w-100 p-3" id="inner-element">
+                <div className="container w-100" id="inner-element">
                   <div className="row">
                     <div className="col-2" style={{margin: 'auto'}}>
                       <h5>No 2.</h5>
@@ -74,7 +74,7 @@ class Recommend extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="container w-100 p-3" id="inner-element">
+                <div className="container w-100" id="inner-element">
                   <div className="row">
                     <div className="col-2" style={{margin: 'auto'}}>
                       <h5>No 3.</h5>
@@ -107,7 +107,7 @@ class Recommend extends Component {
                 <div style={{'margin': '0', 'color': 'cornflowerblue', 'textAlign': 'right'}}>
                     더보기
                 </div>
-                <div className="container w-100 p-3" id="inner-element">
+                <div className="container w-100" id="inner-element">
                   <div className="row">
                     <div className="col-2" style={{margin: 'auto'}}>
                       <h5>No 1.</h5>
@@ -128,7 +128,7 @@ class Recommend extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="container w-100 p-3" id="inner-element">
+                <div className="container w-100" id="inner-element">
                   <div className="row">
                     <div className="col-2" style={{margin: 'auto'}}>
                       <h5>No 2.</h5>
@@ -149,7 +149,7 @@ class Recommend extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="container w-100 p-3" id="inner-element">
+                <div className="container w-100" id="inner-element">
                   <div className="row">
                     <div className="col-2" style={{margin: 'auto'}}>
                       <h5>No 3.</h5>
@@ -179,7 +179,7 @@ class Recommend extends Component {
               <h2>Similarly used App</h2>
               <div className='simillyUsed'>
 
-                <div className="container w-100 p-3" id="inner-element">
+                <div className="container w-100" id="inner-element">
                   <div className="row">
                     <div className="col-2">
                       <img src={NaverCloud} alt="test" style={{height: '5vh', borderRadius: '5px'}}/>
@@ -204,7 +204,7 @@ class Recommend extends Component {
                 </div>
                 <hr/>
 
-                <div className="container w-100 p-3" id="inner-element">
+                <div className="container w-100" id="inner-element">
                   <div className="row">
                     <div className="col-2">
                       <img src={Watcha} alt="test" style={{height: '5vh', borderRadius: '5px'}}/>
@@ -227,7 +227,7 @@ class Recommend extends Component {
                 </div>
                 <hr/>
 
-                <div className="container w-100 p-3" id="inner-element">
+                <div className="container w-100" id="inner-element">
                   <div className="row">
                     <div className="col-2">
                       <img src={Tving} alt="test" style={{height: '5vh', borderRadius: '5px'}}/>

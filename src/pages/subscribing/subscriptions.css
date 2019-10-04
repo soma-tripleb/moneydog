@@ -21,11 +21,12 @@
 
 /* element */
 #inner-element {
-  margin-bottom: 12px;
+  margin-bottom: 2vh;
   background-color: whitesmoke;
   box-shadow: 3px 3px 3px 3px lightgray;
   text-align: center;
   border-radius: 3%;
+  padding: 1.5vh;
 }
 
 #inner-element button {

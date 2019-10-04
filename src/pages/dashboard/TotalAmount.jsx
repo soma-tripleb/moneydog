@@ -24,7 +24,7 @@ class TotalAmount extends Component {
   render() {
     return (
       <div>
-        <div className="container w-100 p-3" id="inner-element">
+        <div className="container w-100" id="inner-element">
           <div className="row">
             <div className="col">
               <span className="total-amount-text">₩ {this.getTotalAmount()}</span>
