@@ -8,9 +8,9 @@ const checkStatus = (response) => {
   const subject = watchaEmailSubject(response);
   if (subject.includes('남은 7일')) {
     // 7일 뒤 해지할 예정.
-    console.log(commonParser.mailReceivedDateRegex(response));
+    return getExpiredDate(response);
   } else if (subject.includes('갱신')) {
-    getWathcaInfo(response);
+    return getWathcaInfo(response);
   }
 };
 
@@ -25,13 +25,18 @@ const getWathcaInfo = (response) => {
   return service;
 };
 
+// 메일을 받은 날로부터 7주일 뒤에 만료(ExpiredDate)설정
+const getExpiredDate = (response) => {
+  const service = {};
+  service.expiredDate = moment(commonParser.getReceivedDate(response)).add(7, 'days').format('YYYY-MM-DD');
+  return service;
+};
+
+// watcha Subject로 왓챠의 상태판별
 const watchaEmailSubject = (response) => {
   const subject = commonParser.stringToJsonObject(commonParser.base64ToUtf8(response)).payload.headers[21];
   return subject.value;
 };
-
-// 왓차는 해지 일주일전에 메일을 보낸다. 메일을 받은 날짜(ReceivedDate)를 구해서 일주일을 더해서 expiredDate를 구해야된다.
-
 
 const dateRegex = (date) => {
   const yearRegex = /[0-9]{4}/;
@@ -47,3 +52,5 @@ const priceRegex = (price) => {
 };
 
 getWathcaInfo(response);
+
+console.log(getExpiredDate(response));

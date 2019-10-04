@@ -50,12 +50,12 @@ const getParser = (response) => {
 
 const getReceivedDate = (response) => {
   const receivedDate = stringToJsonObject(base64ToUtf8(response)).payload.headers[1];
-  return receivedDate.value;
+  return mailReceivedDateRegex(receivedDate.value);
 };
 
-const mailReceivedDateRegex = (response) => {
+const mailReceivedDateRegex = (receivedDate) => {
   const regex = /[a-zA-Z]{3},\s[0-9]{1,2}\s[a-zA-Z]{3}\s[0-9]{4}\s[0-9: -]*/;
-  return moment(regex.exec(getReceivedDate(response))[0]).format('YYYY-MM-DD');
+  return moment(regex.exec(receivedDate)[0]).format('YYYY-MM-DD');
 };
 
 module.exports = {
@@ -65,5 +65,5 @@ module.exports = {
   getEmailId: getEmailId,
   checkDomain: checkDomain,
   getParser: getParser,
-  mailReceivedDateRegex: mailReceivedDateRegex,
+  getReceivedDate: getReceivedDate,
 };
