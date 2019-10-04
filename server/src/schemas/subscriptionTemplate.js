@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import {conn} from '../configs/mongoDB';
+import {conn} from '../config/mongoDB';
 
 const membershipSchema = new mongoose.Schema(
   {
@@ -16,7 +16,7 @@ const SubscriptionTemplateSchema = new mongoose.Schema(
   {
     seq: { type: Number },
     name: { type: String, required: true },
-    thumbnail: { type: String, required: true },
+    logoURI: { type: String, required: true },
     membership: membershipSchema,
   },
   {

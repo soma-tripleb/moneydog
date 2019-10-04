@@ -3,28 +3,13 @@ import assert from 'assert';
 
 import UserSchema from '../../../src/schemas/user';
 
-import { mongoConnect, mongoDisConnect } from '../../../src/configs/mongoDB';
-
-const subsTmplPricePlan = {
-  title: '1개월 이용권',
-  price: 99999,
-  period: '1개월',
-};
+import { mongoConnect, mongoDisConnect } from '../../../src/config/mongoDB';
 
 const userInputList = [
   { seq: 4, name: 'Bugs', price: 99999, paymentDate: '', channel: '' },
   { seq: 5, name: 'Flo', price: 99999, paymentDate: '', channel: '' },
   { seq: 6, name: 'Melon', price: 99999, paymentDate: '', channel: '' },
 ];
-
-const userInput =
-{
-  seq: 4,
-  name: 'Bugs',
-  price: 'asd',
-  paymentDate: '',
-  channel: '',
-};
 
 describe('User, SubscriptionTemplate', () => {
   before(() => {

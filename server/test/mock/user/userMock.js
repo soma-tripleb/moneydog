@@ -16,6 +16,7 @@ const Subscriptions = [
   {
     seq: 2,
     name: 'test-name2',
+    logoURI: '22f48e58d38c794afc74a7e666ffcfc1.png',
     price: 99999,
     paymentDate: '2019/09/26',
     channel: 'in-app',
