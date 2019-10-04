@@ -11,3 +11,42 @@
 .index-wrap > .index-item {
     padding: 5vh 5vh 5vh 5vh;
 }
+
+.index-item > img {
+    height: 20vh;
+    border-radius: 5px;
+}
+
+/* carousel */
+.carousel-inner {
+    top: 0;
+    min-width: 100%;
+}
+
+.carousel {
+    margin-bottom: 5vh;
+}
+
+.d-block {
+    margin: auto;
+}
+
+.marketing > .row {
+    margin-bottom: 5vh;
+    margin-top: 5vh;
+}
+
+/*카로셀 최대 크기 지정*/
+.carousel-inner {
+    height: 45vmax;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/*이미지들 카로셀 최대 크기로 지정*/
+.carousel-inner > .carousel-item {
+    height: max-content;
+    margin: 0 auto;
+    text-align: center;
+}
+

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import PrivateRouter from './privateRouter';
-import { Home, Report, Dashboard, SignUp, SignIn, Subscribing, SubscribingInfo, Recommend } from '../pages';
+import { Home, Report, Dashboard, SignUp, SignIn, Subscribing, SubscribingInfo, Recommend, Info } from '../pages';
 
 import './router.css';
 
@@ -17,6 +17,7 @@ class Router extends Component {
             <Route path="/signup" component={SignUp} />
             <Route path="/signin" component={SignIn} />
             <PrivateRouter path="/user/report" component={Report} />
+            <PrivateRouter path="/user/info" component={Info} />
             <PrivateRouter path="/user/dashboard" component={Dashboard} />
             <PrivateRouter path="/user/subscribing" component={Subscribing} />
             <PrivateRouter path="/user/subscribing-info" component={SubscribingInfo} />

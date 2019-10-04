@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "webpack-cli",
     "dev": "webpack-dev-server --hot --host 0.0.0.0",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint --fix --ext .js,.jsx src/; exit 0"
+    "lint": "./node_modules/.bin/eslint --fix --ext .js,.jsx src; exit 0"
   },
   "author": "tripleB",
   "license": "MIT",
@@ -30,15 +31,10 @@
     "react": "^16.8.6",
     "react-addons-update": "^15.6.2",
     "react-dom": "^16.8.6",
-    "react-google-login": "^5.0.5",
-    "react-google-oauth": "^1.0.0",
-    "react-helmet": "^5.2.1",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
-    "recharts": "^1.7.1",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
-    "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "style-loader": "^0.23.1",

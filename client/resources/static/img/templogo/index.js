@@ -6,4 +6,5 @@ export {default as netflix} from './netflix.png';
 export {default as tving} from './tving.png';
 export {default as watcha} from './watcha.png';
 export {default as youtube} from './youtube.png';
+export {default as something} from './something.png';
 

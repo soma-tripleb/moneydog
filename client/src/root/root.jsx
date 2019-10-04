@@ -6,7 +6,7 @@ import 'babel-polyfill';
 import 'antd/dist/antd.less';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import {Head, Foot} from '../include';
+import {Head, Foot} from '../includes';
 
 import {BrowserRouter} from 'react-router-dom';
 import Router from './router';

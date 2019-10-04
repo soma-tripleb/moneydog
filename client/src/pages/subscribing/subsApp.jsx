@@ -1,22 +1,14 @@
 import React, {Component} from 'react';
-
-import './subsApp.css';
+require('dotenv').config();
 
 class SubsApp extends Component {
-  state = {
-    number: this.props.number,
-    logo: this.props.logo,
-    name: this.props.name,
-    label: this.props.label,
-  };
-
   handleClick = () => {
-    const {subsAppInfo} = this.props;
+    const {subsAppInfo, onDelete, onInsert} = this.props;
 
     if (subsAppInfo.label === '-') {
-      this.props.onDelete(subsAppInfo.seq, subsAppInfo.logo, subsAppInfo.name);
+      onDelete(subsAppInfo.seq, subsAppInfo.logoURI, subsAppInfo.name);
     } else {
-      this.props.onInsert(subsAppInfo.seq, subsAppInfo.logo, subsAppInfo.name);
+      onInsert(subsAppInfo.seq, subsAppInfo.logoURI, subsAppInfo.name);
     }
   };
 
@@ -24,10 +16,10 @@ class SubsApp extends Component {
     const {subsAppInfo} = this.props;
     return (
       <>
-        <div className="container w-100 p-3" id="inner-element">
+        <div className="container w-100" id="inner-element">
           <div className="row">
             <div className="col">
-              <img className="logo-img" src={`/` + subsAppInfo.logo} alt="x" />
+              <img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />
             </div>
             <div className="col">
               {subsAppInfo.name}

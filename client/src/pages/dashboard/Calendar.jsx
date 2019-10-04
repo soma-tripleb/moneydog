@@ -1,65 +1,79 @@
-import React, {Component} from 'react';
-import {Calendar} from 'antd';
+import React, { Component } from 'react';
+
+import { Calendar } from 'antd';
 import moment from 'moment';
-import './Calendar.css';
+
+import { something as SOMETHING_IMG } from '../../../resources/static/img/templogo';
 
 class CalendarClass extends Component {
   constructor(props) {
     super(props);
+
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange = (value) => {
     this.props.handleChange(value);
   };
-  getListData = (value, subscriptions) => {
-    let listData;
-    subscriptions.map((subscription) => {
-      if (moment(subscription.renewal).date() === value.date() && subscription.renewal != undefined) {
-        listData = [{type: subscription.logo}];
-      }
-    });
-    return listData || [];
-  };
 
   dateCellRender = (value) => {
     const subscriptions = this.props.data;
-    const listData = this.getListData(value, subscriptions);
-    return (
-      <ul className="events">
-        {listData.map((item) => (
-          <li key={item.type}>
-            <img className="subscribeImg" src={'/'+item.type} alt='img not found'/>
-          </li>
-        ))}
-      </ul>
-    );
-  };
 
-  getMonthData = (moment) => {
-    if (moment.month() === 8) {
-      return 1394;
+    const dateMatchedSubscriptions = [];
+    const calendarDate = moment(value._d).format('DD');
+
+    subscriptions.map((subscription) => {
+      const subsDate = moment(subscription.paymentDate).format('DD');
+
+      if (subsDate === calendarDate) {
+        dateMatchedSubscriptions.push(subscription);
+      }
+    });
+
+    const dmsLength = dateMatchedSubscriptions.length;
+    const showCalendarSubscriptions = dateMatchedSubscriptions[0];
+
+    let result = '';
+
+    switch (dmsLength) {
+      case 0:
+        break;
+      case 1:
+        result = (
+          <ul className="events">
+            <li key={showCalendarSubscriptions.seq}>
+              <img className="calendar-subscriptions-img" src={`${process.env.REACT_APP_IMAGE_URI}` + showCalendarSubscriptions.logoURI} alt='x' />
+            </li>
+          </ul>
+        );
+        break;
+      default:
+        result = (
+          <ul className="events">
+            <li key={showCalendarSubscriptions.seq}>
+              <img className="calendar-subscriptions-img front" src={`${process.env.REACT_APP_IMAGE_URI}` + showCalendarSubscriptions.logoURI} alt='x' />
+              <img className="calendar-subscriptions-img back" src={`${process.env.REACT_APP_IMAGE_URI}` + '/subscriptionLogo/something.png'} alt='x' />
+            </li>
+          </ul>
+        );
+        break;
     }
-  };
 
-  monthCellRender = (value) => {
-    const num = this.getMonthData(value);
-    return num ? (
-      <div className="notes-month">
-        <section>{num}</section>
-        <span>Backlog number</span>
-      </div>
-    ) : null;
+    return result;
   };
 
   render() {
-    if (this.props.data == null) {
+    if (this.props.data == null)
       return null;
-    }
+
     return (
       <div>
-        <p><u> 월별 결제일 정보 </u></p>
-        <Calendar fullscreen={false} dateCellRender={this.dateCellRender} monthCellRender={this.monthCellRender} onSelect={this.handleChange} />
+        <Calendar
+          fullscreen={false}
+          dateCellRender={this.dateCellRender}
+          monthCellRender={this.monthCellRender}
+          onSelect={this.handleChange}
+        />
       </div>
     );
   }
