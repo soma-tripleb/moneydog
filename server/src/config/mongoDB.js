@@ -6,8 +6,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// const MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}`;
-const MONGO_URI = `${process.env.DOCUMENT_URI}`;
+const MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}`;
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
