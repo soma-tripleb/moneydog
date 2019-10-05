@@ -7,9 +7,7 @@ stages:
 server_lint_inspection:
     stage: server-lint
     script:
-      - ls
-      - pwd
-      - cd /builds/root/p1022_moneydog/server
+      - cd ./server
       - npm install
       - npm run lint
       - npm run test-controller
