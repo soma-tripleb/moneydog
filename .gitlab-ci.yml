@@ -7,6 +7,8 @@ stages:
 server_lint_inspection:
     stage: server-lint
     script:
+      - ls
+      - pwd
       - cd /server
       - npm install
       - npm run lint
