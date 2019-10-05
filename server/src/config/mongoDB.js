@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // const MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}`;
-const MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_CLUSTER}:${process.env.DB_PORT} --username ${process.env.DB_USER} --password ${process.env.DB_PASSWORD}`;
+const MONGO_URI = `${process.env.DOCUMENT_URI}`;
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
