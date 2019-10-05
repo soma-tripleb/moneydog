@@ -9,7 +9,7 @@ server_lint_inspection:
     script:
       - ls
       - pwd
-      - cd /server
+      - cd /builds/root/p1022_moneydog/server
       - npm install
       - npm run lint
       - npm run test-controller
