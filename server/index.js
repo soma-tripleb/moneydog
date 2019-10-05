@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     console.error(err);
   });
 
-  const body = {
+  const data = {
     success: true,
     message: 'MoneyDog Server API',
     token: token,
@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
 
-  const responseBody = { headers, method, url, body };
+  const responseBody = { headers, method, url, data };
 
   res.write(JSON.stringify(responseBody));
   res.end();

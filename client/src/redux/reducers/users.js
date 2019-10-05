@@ -8,7 +8,7 @@ const initialState =
       subscriptions: [],
     };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case ACTION_TYPE.GET_SUBS:
       return {

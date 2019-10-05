@@ -3,14 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --exec babel-node ./bin/www",
-    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./bin/www",
+    "start": "nodemon --exec babel-node bin/www",
+    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node bin/www",
     "test": "cross-env NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register --timeout 120000 --recursive ./**/*.spec.js",
     "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
-    "lint": "./node_modules/.bin/eslint --fix --ext .js src/ test/ app.js index.js;",
-    "test-subs-info-repo": "NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register ./test/schema/user/subsInput.spec.js",
-    "test-subs-info-serv": "NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register ./test/service/user/userSubsInput.spec.js",
-    "test-controller": "NODE_ENV=test ./node_modules/mocha/bin/mocha --require babel-register ./test/controller/authController.spec.js"
+    "lint": "./node_modules/.bin/eslint --fix --ext .js src test/ app.js index.js;",
+    "test-controller": "./node_modules/mocha/bin/mocha --require babel-register test/controller/index.spec.js;"
   },
   "dependencies": {
     "@sentry/node": "^5.6.2",
@@ -23,9 +21,12 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-winston": "^3.3.0",
+    "googleapis": "^39.2.0",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
+    "moment": "^2.24.0",
+    "mongodb": "^3.3.2",
     "mongoose": "^5.6.0",
     "mongoose-auto-increment": "^5.0.1",
     "morgan": "~1.9.1",

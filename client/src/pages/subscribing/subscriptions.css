@@ -21,11 +21,12 @@
 
 /* element */
 #inner-element {
-  margin-bottom: 12px;
+  margin-bottom: 2vh;
   background-color: whitesmoke;
-  box-shadow: 3px 3px 3px 3px lightgray; 
+  box-shadow: 3px 3px 3px 3px lightgray;
   text-align: center;
   border-radius: 3%;
+  padding: 1.5vh;
 }
 
 #inner-element button {
@@ -41,4 +42,19 @@
 .submit-container input {
   border: none;
   background-color: transparent;
+}
+
+/*SubApp.css*/
+#inner-element>div .col:nth-child(odd) {
+  margin: auto;
+}
+
+.col {
+  margin: auto;
+  height: auto;
+}
+
+.logo-img {
+  height: 5vh;
+  border-radius: 5px;
 }

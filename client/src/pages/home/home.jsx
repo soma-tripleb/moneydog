@@ -4,27 +4,23 @@ import {Carousel, IndexInfo, IndexSignUp} from './index';
 import './home.css';
 
 class Home extends Component {
-  state = {
-    text: 'Home Page',
-  };
-
   render() {
     return (
-        <>
-          <div className="container homwWrap">
+      <>
+        <div className="container homwWrap">
 
-            <Carousel/>
+          <Carousel/>
 
-            <hr className="featurette-divider"/>
+          <hr className="featurette-divider"/>
 
-            <IndexInfo/>
+          <IndexInfo/>
 
-            <hr className="featurette-divider"/>
+          <hr className="featurette-divider"/>
 
-            <IndexSignUp/>
+          <IndexSignUp/>
 
-          </div>
-        </>
+        </div>
+      </>
     );
   }
 }

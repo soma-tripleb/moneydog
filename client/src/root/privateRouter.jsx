@@ -11,10 +11,10 @@ const PrivateRouter = ({component: Component, status, ...rest}) => {
           return <Redirect to='/'/>;
         } else if (status=== 'SUCCESS') {
           return <Component {...props} />;
+        } else if (status === 'ADD_SUBS_STEP') {
+          return <Component {...props} />;
         } else if (status === 'WAITING') {
           return <> LODING </>;
-        } else if (status === 'FAILURE') {
-          return <Redirect to='/signin '/>;
         } else {
           return <Redirect to='/signin'/>;
         }

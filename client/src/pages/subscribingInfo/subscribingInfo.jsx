@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import update from 'react-addons-update';
 import { connect as ReduxConn } from 'react-redux';
-import DateUtil from '../../../src/pages/util/dateUtil';
+import DateUtil from '../util/dateUtil';
 
 import SubsTmpl from './subsTmpl';
 import SubsTmplService from './subscribingInfo.ajax';
@@ -10,6 +10,7 @@ import { TEST_USER_SELECTED_SUBS, TEST_USER_SUBSTMPL_INFO_LIST } from './sample/
 
 import './subscribingInfo.css';
 import userActions from '../../redux/actions/userAction';
+import authActions from '../../redux/actions/authAction';
 
 const NOW = DateUtil.NOW();
 
@@ -29,14 +30,14 @@ class SubscribingInfo extends Component {
 
   componentDidMount = () => {
     const userSeletedList = this.props.USERS.tempSubscriptions;
-    const userSelectedListLength = userSeletedList.length;
 
-    this.getUserSubsList(userSeletedList, userSelectedListLength);
+    this.getUserSubsList(userSeletedList);
   };
 
-  getUserSubsList = (userSeletedList, userSelectedListLength) => {
+  getUserSubsList = (userSeletedList) => {
     let tempSubsList = [];
     let tempInputList = [];
+    const userSelectedListLength = userSeletedList.length;
 
     // TEST
     if (userSelectedListLength === 0) {
@@ -48,7 +49,7 @@ class SubscribingInfo extends Component {
       userSeletedList.map((Subscription) => {
         tempInputList.push({
           seq: Subscription.seq,
-          logo: Subscription.logo,
+          logoURI: Subscription.logoURI,
           name: Subscription.name,
           price: '',
           paymentDate: `${NOW}`,
@@ -67,7 +68,7 @@ class SubscribingInfo extends Component {
     e.preventDefault();
 
     const { userInputList } = this.state;
-    const { reduxInsertUserSubscriptions, reduxDeleteTempSubscriptions, history} = this.props;
+    const { reduxInsertUserSubscriptions, reduxDeleteTempSubscriptions, reduxFinishAddSubsStep, history} = this.props;
 
     userInputList.some((info) => {
       if (info.price === '') {
@@ -92,9 +93,10 @@ class SubscribingInfo extends Component {
 
     reduxDeleteTempSubscriptions();
 
-    if (result.data.status === 200)
+    if (result.data.status === 200) {
+      reduxFinishAddSubsStep();
       history.push('/user/dashboard');
-    else {
+    } else {
       console.log(result);
       alert('ERROR'); // TODO
     }
@@ -116,13 +118,10 @@ class SubscribingInfo extends Component {
           switch (element) {
             case 'price':
               return ({ ...info, price: userInput });
-              break;
             case 'paymentDate':
               return ({ ...info, paymentDate: userInput });
-              break;
             case 'channel':
               return ({ ...info, channel: userInput });
-              break;
             default:
               return info;
           }
@@ -183,6 +182,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     reduxDeleteTempSubscriptions: () => {
       dispatch(userActions.deleteTempSubscriptions());
+    },
+    reduxFinishAddSubsStep: ()=>{
+      dispatch(authActions.finishAddSubsStep());
     }
   };
 };
