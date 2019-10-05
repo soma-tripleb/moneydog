@@ -30,7 +30,7 @@ lerna-debug.log*
 .env
 credentials.json
 token.json
+*.pem
 
 # Dockerfile
 docker-compose.yaml
-
