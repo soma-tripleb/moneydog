@@ -7,9 +7,10 @@ stages:
 server_lint_inspection:
     stage: server-lint
     script:
-    - npm install
-    - npm run lint
-    - npm run test-controller
+      - cd ./server
+      - npm install
+      - npm run lint
+      - npm run test-controller
     tags:
     - shell
 
@@ -30,7 +31,7 @@ server_deploy_Only_master:
 client_lint_inspection:
     stage: client-lint
     script:
-        - pwd
+        - cd ./client
         - npm run lint
     tags:
         - shell
