@@ -26,16 +26,16 @@ class Head extends Component {
           </li>
         </>
       );
-    } else if (this.props.status === 'ADD_SUBS_STEP'){
+    } else if (this.props.status === 'ADD_SUBS_STEP') {
       return (
-          <>
-            <li className="nav-item">
-              <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/user/subscribing-Info" className="nav-link">Subscribing Info</Link>
-            </li>
-          </>
+        <>
+          <li className="nav-item">
+            <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/user/subscribing-Info" className="nav-link">Subscribing Info</Link>
+          </li>
+        </>
       );
     } else {
       return (

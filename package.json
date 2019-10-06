@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node server/bin/www",
+    "dev-server": "nodemon --exec babel-node server/bin/www",
+    "dev-client": "webpack-dev-server --hot --host 0.0.0.0",
     "build": "webpack-cli",
-    "dev": "webpack-dev-server --hot --host 0.0.0.0",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint --fix --ext .js,.jsx src; exit 0"
+    "lint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js server/ client/",
+    "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit"
   },
   "author": "tripleB",
   "license": "MIT",

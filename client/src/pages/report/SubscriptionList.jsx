@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 class SubscriptionList extends Component {
-
   numberWithCommas = (number) => {
     return String(number).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
@@ -32,10 +31,10 @@ class SubscriptionList extends Component {
 
   render() {
     return (
-        <>
-          <div className="headerFont">구독 리스트</div>
-          {this.showSubsList()}
-        </>
+      <>
+        <div className="headerFont">구독 리스트</div>
+        {this.showSubsList()}
+      </>
     );
   }
 }
