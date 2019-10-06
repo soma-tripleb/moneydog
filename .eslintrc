@@ -14,13 +14,15 @@
       "always"
     ],
     "new-cap": "off",
-    "require-jsdoc": "off",
     "object-curly-spacing": "off",
+    "eol-last": "off",
     "max-len": "off",
+    "block-spacing": "off",
+    "brace-style": "off",
+    "require-jsdoc": "off",
+    "padded-blocks": "off",
     "no-invalid-this": "off",
     "no-unused-vars": "off",
-    "brace-style": "off",
-    "block-spacing": "off",
     "comma-dangle": "off",
     "curly": "off"
   },
