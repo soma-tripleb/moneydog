@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import assert from 'assert';
 
 import UserSchema from '../../../src/schemas/user';
@@ -6,7 +6,7 @@ import UserMock from '../../mock/user/userMock';
 import BadUserMock from '../../mock/user/badUserMock';
 import GoodUserMock from '../../mock/user/userMock';
 
-import { mongoConnect, mongoDisConnect } from '../../../src/configs/mongoDB';
+import { mongoConnect, mongoDisConnect } from '../../../src/config/mongoDB';
 
 describe('User, SubscriptionTemplate', () => {
   before(() => {

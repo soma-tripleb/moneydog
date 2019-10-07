@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import { mongoConnect, mongoDisConnect } from '../../../src/configs/mongoDB';
+import { mongoConnect, mongoDisConnect } from '../../../src/config/mongoDB';
 
 import UserSchema from '../../../src/schemas/user';
 

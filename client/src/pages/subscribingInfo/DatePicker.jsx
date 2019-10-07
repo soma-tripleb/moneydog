@@ -18,7 +18,7 @@ class DatePickers extends Component {
   // 두번째 파라미터가 원하는 순수 'date' 값 - ant.disign ('date picker')
   handleChange = (dateSet, date) => {
     this.props.onDatePickerChange(date);
-  }
+  };
 
   render() {
     return (
