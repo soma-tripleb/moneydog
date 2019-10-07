@@ -1,7 +1,7 @@
 import {mongoConnect, mongoDisConnect} from '../../../src/config/mongoDB';
 
 require('dotenv').config();
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 import {expect} from 'chai';
 import userRepository from '../../../src/router/user/userRepository';

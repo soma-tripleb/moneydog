@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { createJWT } from './src/security/jwtAuthenticationToken';
+import { createJWT } from '../security/jwtAuthenticationToken';
 
 const router = express();
 
