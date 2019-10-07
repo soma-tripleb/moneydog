@@ -6,6 +6,7 @@
   "scripts": {
     "dev-server": "nodemon --exec babel-node ./server/bin/www",
     "dev-client": "webpack-dev-server --hot --host 0.0.0.0",
+    "dev": "npm run dev-server && npm run dev-client",
     "build": "webpack-cli",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js server/ client/",

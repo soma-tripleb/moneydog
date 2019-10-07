@@ -29,7 +29,7 @@ app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.errorHandler());
 
 // Api
-import indexRouter from './index';
+import indexRouter from './src/router';
 import authRouter from './src/router/auth/authentiController';
 import userRouter from './src/router/user/userController';
 import subsInfoRouter from './src/router/subscriptiionInfo/subsInfoController';

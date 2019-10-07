@@ -5,7 +5,8 @@ const expressWinston = require('express-winston');
 const { createLogger, format } = require('winston');
 const { combine, label, printf } = format;
 require('winston-mongodb').MongoDB;
-const logDir = __dirname + '/../logs';
+// const logDir = __dirname + '/../logs';
+const logDir = './server/logs';
 
 if (!fs.existsSync(logDir)) {
   fs.mkdirSync(logDir);
@@ -38,7 +39,8 @@ const logger = createLogger({
   transports: [infoTransport, errorTransport],
   exceptionHandlers: [
     new winston.transports.File({
-      filename: 'exceptions.log',
+      filename: './server/exceptions.log',
+      dirname: logDir,
     }),
   ],
 });
@@ -51,21 +53,25 @@ const stream = {
 
 expressWinston.requestWhitelist.push('body');
 expressWinston.responseWhitelist.push('body');
+
 const customLogger = expressWinston.logger({
   transports: [
     new winston.transports.File({
       filename: 'response.log',
-      dirname: './src/logs',
+      // dirname: './src/logs',
+      dirname: logDir,
       level: 'info',
     }),
     new winston.transports.File({
       filename: 'warn.log',
-      dirname: './src/logs',
+      // dirname: './src/logs',
+      dirname: logDir,
       level: 'warn',
     }),
     new winston.transports.File({
       filename: 'err.log',
-      dirname: './src/logs',
+      // dirname: './src/logs',
+      dirname: logDir,
       level: 'error',
     }),
     new winston.transports.MongoDB({
@@ -91,7 +97,8 @@ const errorLogger = expressWinston.errorLogger({
   transports: [
     new winston.transports.File({
       filename: 'error.log',
-      dirname: './src/logs',
+      // dirname: './src/logs',
+      dirname: logDir,
       level: 'error',
     }),
   ],
