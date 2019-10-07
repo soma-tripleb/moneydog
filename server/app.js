@@ -58,4 +58,4 @@ app.use(function(err, req, res, next) {
   res.end(res.sentry + '\n');
 });
 
-export default app;
+module.exports = app;

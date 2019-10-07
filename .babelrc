@@ -1,3 +1,6 @@
 {
-  "plugins": [ "async-to-promises" ]
+  "presets": ["@babel/preset-env"],
+  "plugins": [
+    "async-to-promises"
+  ]
 }
