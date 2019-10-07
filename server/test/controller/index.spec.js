@@ -4,7 +4,7 @@ import assert from 'assert';
 import request from 'supertest';
 
 import express from 'express';
-import index from '../../index';
+import index from '../../src/router';
 
 const app = express();
 
