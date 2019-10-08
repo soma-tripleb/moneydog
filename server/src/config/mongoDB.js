@@ -22,7 +22,6 @@ const createConn = async ()=>{
   if (process.env.NODE_ENV === 'test') {
     const uri = await mongod.getConnectionString()
       .then((ur) => ur);
-
     conn.openUri(uri);
   } else {
     conn.openUri(MONGO_URI);

@@ -5,31 +5,29 @@ import {assert} from 'chai';
 
 describe('SubscriptionTemplate Service Test', () => {
   before(() => {
-    console.log('before connection');
     mongoConnect();
-    console.log('after connection');
+    // Bugs Insert
+    const bugs = SubsTmplMock.userInputList[0];
+    SubsTmplRepo.saveOne(bugs);
   });
 
   after(() => {
-    console.log('before disconnect');
     mongoDisConnect();
-    console.log('after disconnect');
   });
 
   describe('Repository Method', () => {
-    // describe('#deleteOne()', () => {
-    //   it('SubsTmpl 삭제하기', (done) => {
-    //     const SubsTmplMockName = SubsTmplMock.userInputList[0].name;
-    //     SubsTmplRepo.deleteOne(SubsTmplMockName)
-    //       .then((result) => {
-    //         console.log(result);
-    //         done();
-    //       })
-    //       .catch((err) => {
-    //         done(err);
-    //       });
-    //   });
-    // });
+    describe('#deleteOne()', () => {
+      it('Bugs 삭제하기', (done) => {
+        SubsTmplRepo.deleteOne(SubsTmplMock.userInputList[0].name)
+          .then((result) => {
+            assert.equal(201, result.status);
+            done();
+          })
+          .catch((err) => {
+            done(err);
+          });
+      });
+    });
 
     describe('#saveOne()', () => {
       it('SubsTmpl 저장하기', (done) => {
@@ -62,7 +60,7 @@ describe('SubscriptionTemplate Service Test', () => {
         SubsTmplRepo.findAll()
           .then((result) => {
             const list = result.message;
-            assert.equal(8, list.length);
+            assert.equal(2, list.length);
             assert.equal('Flo', list[0].name);
             done();
           })

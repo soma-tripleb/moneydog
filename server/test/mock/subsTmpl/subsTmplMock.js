@@ -1,4 +1,4 @@
-const subscriptionList = [
+const subsTmplList = [
   {
     name: 'Bugs',
     logoURI: '/subscriptionLogo/bugs.png',
@@ -32,5 +32,5 @@ const subscriptionList = [
 ];
 
 export default {
-  userInputList: subscriptionList,
+  userInputList: subsTmplList,
 };
