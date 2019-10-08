@@ -1,6 +1,6 @@
 import SubsTmplRepo from '../../../src/router/subscriptionTemplate/subsTmplReposiroty';
 import { mongoConnect, mongoDisConnect } from '../../../src/config/mongoDB';
-import SubsTmplMock from '../../mock/subsTemplateMock';
+import SubsTmplMock from '../../mock/subsTmpl/subsTmplMock';
 
 describe('SubscriptionTemplate Service Test', () => {
   before(() => {
@@ -14,7 +14,10 @@ describe('SubscriptionTemplate Service Test', () => {
   describe('Repository Method', () => {
     describe('#deleteOne()', () => {
       it('SubsTmpl 삭제하기', (done) => {
-        const SubsTmplMockName = SubsTmplMock.name;
+        console.log(SubsTmplMock.userInputList);
+        done();
+        const SubsTmplMockName = SubsTmplMock.userInputList[0].name;
+        console.log(`name temp : ${SubsTmplMockName}`);
         SubsTmplRepo.deleteOne(SubsTmplMockName)
           .then((result) => {
             console.log(result);

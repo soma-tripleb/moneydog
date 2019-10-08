@@ -22,4 +22,6 @@ const userInputList = [
   },
 ];
 
-export default userInputList;
+export default {
+  userInputList,
+};
