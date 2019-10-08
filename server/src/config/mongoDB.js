@@ -36,6 +36,7 @@ createConn();
 const mongoConnect = () => {
   mongoose.set('useFindAndModify', false);
   mongoose.set('useNewUrlParser', true);
+  mongoose.set('useUnifiedTopology', true);
   if (process.env.NODE_ENV === 'test') {
     mongod.getConnectionString()
       .then((url) =>{
