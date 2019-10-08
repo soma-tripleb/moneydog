@@ -3,7 +3,7 @@ dotenv.config();
 
 import { google } from 'googleapis';
 
-const getToken = (code) => {
+const getToken = async (code) => {
   const {
     GOOGLE_API_CLIENT_ID,
     GOOGLE_API_CLIENT_SECRET,

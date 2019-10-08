@@ -4,11 +4,12 @@ dotenv.config();
 
 import GoogleOAuthApi from '../../../util/google/googleOAuthApi';
 
+import { google } from 'googleapis';
+
 const router = express.Router();
+let oauth2Client;
 
 router.get('/oauth', (req, res) => {
-  console.log('GOOGLE OAUTH');
-
   const oauthUrl = process.env.GOOGLE_API_OAUTH_URL;
   const redirectUri = process.env.GOOGLE_API_REDIRECT_URL_ENCODE;
   const clientId = process.env.GOOGLE_API_CLIENT_ID;
@@ -26,11 +27,56 @@ router.get('/oauth', (req, res) => {
 });
 
 router.get('/signup', async (req, res) => {
-  console.log('GOOGLE SIGNUP');
+  // const token = await GoogleOAuthApi.getToken(req.query.code);
 
-  const token = await GoogleOAuthApi.getToken(req.query.code);
+  const {tokens} = await oauth2Client.getToken(req.query.code);
+  oauth2Client.setCredentials(tokens);
 
-  res.send(JSON.stringify(token));
+  oauth2Client.on('tokens', (tokens) => {
+    if (tokens.refresh_token) {
+      // store the refresh_token in my database!
+      console.log(tokens.refresh_token);
+    }
+    console.log(tokens.access_token);
+  });
+
+
+  const gmail = await google.gmail({version: 'v1', auth: oauth2Client});
+
+  // gmail.users.labels.list({userId: 'dudrnxps1@gmail.com'})
+  //   .then((result) => {
+  //     console.log(result);
+  //   })
+  //   .catch((err) => {
+  //     throw err;
+  //   });
+
+  const result = await gmail.users.messages.list({userId: 'dudrnxps1@gmail.com'});
+
+  res.send(result);
+});
+
+router.get('/api', (erq, res) => {
+  oauth2Client = new google.auth.OAuth2(
+    process.env.GOOGLE_API_CLIENT_ID,
+    process.env.GOOGLE_API_CLIENT_SECRET,
+    process.env.GOOGLE_API_REDIRECT_URL,
+  );
+   
+  // generate a url that asks permissions for Blogger and Google Calendar scopes
+  const scopes = [
+    'https://www.googleapis.com/auth/gmail.readonly',
+  ];
+   
+  const url = oauth2Client.generateAuthUrl({
+    // 'online' (default) or 'offline' (gets refresh_token)
+    access_type: 'offline',
+   
+    // If you only need one scope you can pass it as a string
+    scope: scopes
+  });
+
+  res.redirect(url);
 });
 
 export default router;
