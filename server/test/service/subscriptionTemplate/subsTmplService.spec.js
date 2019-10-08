@@ -45,19 +45,19 @@ describe('SubscriptionTemplate Service Test', () => {
     //   });
     // });
     //
-    // describe('findOne()', () => {
-    //   it('SubsTmpl 이름으로 구독 서비스 정보 찾기', (done) => {
-    //     const SubsTmplMockName = SubsTmplMock.userInputList[0].name;
-    //     SubsTmplRepo.findByName(SubsTmplMockName)
-    //       .then((result) => {
-    //         console.log(result);
-    //         done();
-    //       })
-    //       .catch((err) => {
-    //         done(err);
-    //       });
-    //   });
-    // });
+    describe('findOne()', () => {
+      it('SubsTmpl 이름으로 구독 서비스 정보 찾기', (done) => {
+        const SubsTmplMockName = SubsTmplMock.userInputList[0].name;
+        SubsTmplRepo.findOne(SubsTmplMockName)
+          .then((result) => {
+            assert('Bugs', result.message.name);
+            done();
+          })
+          .catch((err) => {
+            done(err);
+          });
+      });
+    });
 
     describe('findAll()', () => {
       it('SubsTmpl 전체 구독 서비스 목록 출력', (done) => {
