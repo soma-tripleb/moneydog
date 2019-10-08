@@ -1,27 +1,36 @@
-const userInputList = [
+const subscriptionList = [
   {
-    seq: 4,
     name: 'Bugs',
-    price: 99999,
-    paymentDate: '',
-    channel: '',
+    logoURI: '/subscriptionLogo/bugs.png',
+    membership: {
+      title: 'test-title2',
+      price: 99999.0,
+      period: '1달',
+      channel: 'site'
+    }
   },
   {
-    seq: 5,
     name: 'Flo',
-    price: 99999,
-    paymentDate: '',
-    channel: '',
+    logoURI: '/subscriptionLogo/flo.png',
+    membership: {
+      title: 'test-title2',
+      price: 99999,
+      period: '1달',
+      channel: 'site'
+    }
   },
   {
-    seq: 6,
     name: 'Melon',
-    price: 99999,
-    paymentDate: '',
-    channel: '',
+    logoURI: '/subscriptionLogo/melon.png',
+    membership: {
+      title: 'test-title2',
+      price: 99999,
+      period: '1달',
+      channel: 'site'
+    }
   },
 ];
 
 export default {
-  userInputList,
+  userInputList: subscriptionList,
 };

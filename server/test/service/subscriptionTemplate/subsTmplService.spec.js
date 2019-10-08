@@ -31,20 +31,18 @@ describe('SubscriptionTemplate Service Test', () => {
     //   });
     // });
 
-    // describe('#saveOne()', () => {
-    //   it('SubsTmpl 저장하기', (done) => {
-    //     console.log('save db');
-    //     SubsTmplRepo.saveOne(SubsTmplMock.userInputList[0])
-    //       .then((result) => {
-    //         console.log(result);
-    //         done();
-    //       })
-    //       .catch((err) => {
-    //         done(err);
-    //       });
-    //   });
-    // });
-    //
+    describe('#saveOne()', () => {
+      it('SubsTmpl 저장하기', (done) => {
+        SubsTmplRepo.saveOne(SubsTmplMock.userInputList[1])
+          .then((result) => {
+            console.log(result);
+            done();
+          })
+          .catch((err) => {
+            done(err);
+          });
+      });
+    });
     describe('findOne()', () => {
       it('SubsTmpl 이름으로 구독 서비스 정보 찾기', (done) => {
         const SubsTmplMockName = SubsTmplMock.userInputList[0].name;
