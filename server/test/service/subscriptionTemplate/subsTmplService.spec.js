@@ -30,10 +30,11 @@ describe('SubscriptionTemplate Service Test', () => {
     });
 
     describe('#saveOne()', () => {
-      it('SubsTmpl 저장하기', (done) => {
+      it('SubsTmpl FLo 저장하기', (done) => {
         SubsTmplRepo.saveOne(SubsTmplMock.userInputList[1])
           .then((result) => {
-            console.log(result);
+            assert.equal(201, result.status);
+            assert.equal(result.message[0].name, 'Flo');
             done();
           })
           .catch((err) => {
@@ -61,7 +62,6 @@ describe('SubscriptionTemplate Service Test', () => {
           .then((result) => {
             const list = result.message;
             assert.equal(2, list.length);
-            assert.equal('Flo', list[0].name);
             done();
           })
           .catch((err) => {
