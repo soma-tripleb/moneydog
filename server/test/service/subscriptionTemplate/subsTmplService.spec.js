@@ -1,6 +1,7 @@
 import SubsTmplRepo from '../../../src/router/subscriptionTemplate/subsTmplReposiroty';
 import { mongoConnect, mongoDisConnect } from '../../../src/config/mongoDB';
 import SubsTmplMock from '../../mock/subsTmpl/subsTmplMock';
+import {assert} from 'chai';
 
 describe('SubscriptionTemplate Service Test', () => {
   before(() => {
@@ -12,22 +13,19 @@ describe('SubscriptionTemplate Service Test', () => {
   });
 
   describe('Repository Method', () => {
-    describe('#deleteOne()', () => {
-      it('SubsTmpl 삭제하기', (done) => {
-        console.log(SubsTmplMock.userInputList);
-        done();
-        const SubsTmplMockName = SubsTmplMock.userInputList[0].name;
-        console.log(`name temp : ${SubsTmplMockName}`);
-        SubsTmplRepo.deleteOne(SubsTmplMockName)
-          .then((result) => {
-            console.log(result);
-            done();
-          })
-          .catch((err) => {
-            done(err);
-          });
-      });
-    });
+    // describe('#deleteOne()', () => {
+    //   it('SubsTmpl 삭제하기', (done) => {
+    //     const SubsTmplMockName = SubsTmplMock.userInputList[0].name;
+    //     SubsTmplRepo.deleteOne(SubsTmplMockName)
+    //       .then((result) => {
+    //         console.log(result);
+    //         done();
+    //       })
+    //       .catch((err) => {
+    //         done(err);
+    //       });
+    //   });
+    // });
 
     describe('#saveOne()', () => {
       it('SubsTmpl 저장하기', (done) => {
@@ -60,7 +58,7 @@ describe('SubscriptionTemplate Service Test', () => {
       it('SubsTmpl 전체 구독 서비스 목록 출력', (done) => {
         SubsTmplRepo.findAll()
           .then((result) => {
-            console.log(result);
+            assert.equal(8, result.length);
             done();
           })
           .catch((err) => {
