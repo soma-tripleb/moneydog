@@ -2,7 +2,15 @@ import '@babel/polyfill';
 import request from 'supertest';
 import {assert} from 'chai';
 import {mongoConnect, mongoDisConnect} from '../../../src/config/mongoDB';
-import app from '../../../app';
+import subsTmplRouter from '../../../src/router/subscriptionTemplate/subsTmplController';
+import authRouter from '../../../src/router/auth/authentiController';
+import express from 'express';
+// import app from '../../../app';
+
+const app = express();
+app.use(express.json());
+app.use('/auth', authRouter);
+app.use('/subs-tmpl', subsTmplRouter);
 
 describe('Subscription Template Controller Test', () => {
   let token;
