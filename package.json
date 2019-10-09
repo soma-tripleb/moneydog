@@ -43,7 +43,7 @@
     "less-loader": "^5.0.0",
     "moment": "^2.24.0",
     "mongoose": "^5.6.0",
-    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-plugin-autoinc": "^1.1.9",
     "morgan": "~1.9.1",
     "popper.js": "^1.15.0",
     "react": "^16.8.6",
