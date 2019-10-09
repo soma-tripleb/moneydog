@@ -12,20 +12,20 @@ describe('Subscription Template Controller Test', () => {
           email: 'admin@fkii.org',
           password: '1234',
         },
-      })
+      }
       .end((err, res) => {
         if (err) done(err);
-        const token = res.text.token;
-        console.log(`token : ${token}`);
+        const json = JSON.stringify(res);
+        const token = json.token;
         done();
-      });
+      })
   });
   it('GET /subs-tmpl 테스트하기', () => {
     request(app)
       .get('/subs-tmpl')
       .end((err, res) => {
         if (err) throw err;
-        console.log(JSON.stringify(res));
+        // console.log(JSON.stringify(res));
       });
   });
   after((done) => {
