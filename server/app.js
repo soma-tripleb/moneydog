@@ -36,7 +36,9 @@ import subsInfoRouter from './src/router/subscriptiionInfo/subsInfoController';
 import subsTmplRouter from './src/router/subscriptionTemplate/subsTmplController';
 import oAuth2Router from './src/router/auth/google/oAuth2Controller';
 
-app.use(customLogger);
+if (process.env.NODE_ENV !== 'test') {
+  app.use(customLogger);
+}
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/google', oAuth2Router);

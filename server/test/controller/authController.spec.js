@@ -1,9 +1,11 @@
 import '@babel/polyfill';
 
+import assert from 'assert';
 import request from 'supertest';
-import app from '../../../app';
+const app = require('../../app');
 
-describe('POST /auth/signIn', () => {
+describe('auth controller test', () => {
+
   it('로그인', (done) => {
     request(app)
       .post('/auth/signIn')
@@ -15,8 +17,10 @@ describe('POST /auth/signIn', () => {
       })
       .end((err, res) => {
         if (err) return done(err);
-        console.log(res.body);
-        done();
+        else {
+          console.log(res.body);
+          done();
+        }
       });
   });
 });
