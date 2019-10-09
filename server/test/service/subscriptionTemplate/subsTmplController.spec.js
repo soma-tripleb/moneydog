@@ -24,7 +24,9 @@ describe('Subscription Template Controller Test', () => {
       .set('x-access-token', token)
       .end((err, res) => {
         if (err) throw err;
-        console.log(JSON.stringify(res));
+        const result = JSON.parse(res.text);
+        assert.equal(201, result.status);
+        assert.equal(8, result.message.length);
       });
   });
   after((done) => {
