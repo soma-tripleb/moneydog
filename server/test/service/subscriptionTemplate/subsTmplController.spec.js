@@ -19,12 +19,12 @@ describe('Subscription Template Controller Test', () => {
       });
   });
   it('GET /subs-tmpl 테스트하기', () => {
-    console.log(`it token : ${token}`);
     request(app)
       .get('/subs-tmpl')
+      .set('x-access-token', token)
       .end((err, res) => {
         if (err) throw err;
-        // console.log(JSON.stringify(res));
+        console.log(JSON.stringify(res));
       });
   });
   after((done) => {
