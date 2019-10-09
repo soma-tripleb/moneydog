@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js server/ client/",
     "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
-    "spec-test": "mocha --require @babel/register --timeout 120000 --recursive ./**/subsTmplController.spec.js"
+    "spec-test": "mocha --exit --require @babel/register --timeout 5000 --recursive ./**/subsTmplController.spec.js"
   },
   "author": "tripleB",
   "license": "MIT",

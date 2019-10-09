@@ -18,7 +18,7 @@ describe('Subscription Template Controller Test', () => {
         done();
       });
   });
-  it('GET /subs-tmpl 테스트하기', () => {
+  it('GET /subs-tmpl 테스트하기', (done) => {
     request(app)
       .get('/subs-tmpl')
       .set('x-access-token', token)
@@ -27,6 +27,7 @@ describe('Subscription Template Controller Test', () => {
         const result = JSON.parse(res.text);
         assert.equal(201, result.status);
         assert.equal(8, result.message.length);
+        done();
       });
   });
   after((done) => {
