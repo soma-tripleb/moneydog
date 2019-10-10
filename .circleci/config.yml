@@ -3,7 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/node:10 # the primary container, where your job's commands are run
-    context: .env file
 #    environment:
 #      REACT_APP_NODE_API_URL: $REACT_APP_NODE_API_URL
 #      REACT_APP_IMAGE_URI: $REACT_APP_IMAGE_URI
@@ -20,6 +19,7 @@ jobs:
 #      GOOGLE_API_REDIRECT_URL: $GOOGLE_API_REDIRECT_URL
 #      GOOGLE_API_SCOPE: $GOOGLE_API_SCOPE
     steps:
+      - context: .env file
       - checkout # check out the code in the project directory
       - run: npm install
       - run: npm run lint
