@@ -28,14 +28,14 @@ jobs:
           name: node_module install
           command: npm install
       - run:
-          name: 'check lint'
+          name: check lint
           command: npm run lint
       - run:
-          name: 'running test'
+          name: running test
           commnad: npm run test
       - run:
-          name: 'make build file'
+          name: make build file
           command: npm run build
       - run:
-          name: 'npm run build success'
+          name: npm run build success
           command: echo success
