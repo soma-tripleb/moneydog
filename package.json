@@ -8,10 +8,10 @@
     "dev-client": "webpack-dev-server --hot --host 0.0.0.0",
     "dev": "npm run dev-server && npm run dev-client",
     "build": "webpack-cli",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test mocha --require @babel/register --no-timeout --exit server/test/*",
     "lint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js server/ client/",
     "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
-    "test-google": "mocha --require @babel/register ./server/test/util/google/googleApiTest.spec.js"
+    "test-google": "mocha --require @babel/register ./server/test/util/google/googleApiTest.spec.js",
     "spec-test": "mocha --exit --require @babel/register --timeout 12000 --recursive ./**/subsTmplController.spec.js"
   },
   "author": "tripleB",
@@ -45,7 +45,7 @@
     "less-loader": "^5.0.0",
     "moment": "^2.24.0",
     "mongoose": "^5.6.0",
-    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-plugin-autoinc": "^1.1.9",
     "morgan": "~1.9.1",
     "popper.js": "^1.15.0",
     "react": "^16.8.6",

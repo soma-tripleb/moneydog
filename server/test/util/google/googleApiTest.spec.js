@@ -11,7 +11,6 @@ describe('Google API', () => {
       assert.equal(process.env.GOOGLE_API_REDIRECT_URL_ENCODE, 'http%3A%2F%2Flocalhost%3A5000%2Fgoogle%2Fsignup');
       assert.equal(process.env.GOOGLE_API_CLIENT_ID, '532345922072-50gar7lh5ca5rvepjs7iisa6lu28d741.apps.googleusercontent.com');
       assert.equal(process.env.GOOGLE_API_CLIENT_SECRET, 'QNzzHMDXr4MXhpxUuefGZnXO');
-
       done();
     });
   });
