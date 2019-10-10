@@ -18,7 +18,6 @@ jobs:
       GOOGLE_API_CLIENT_SECRET: $GOOGLE_API_CLIENT_SECRET
       GOOGLE_API_REDIRECT_URL: $GOOGLE_API_REDIRECT_URL
       GOOGLE_API_SCOPE: $GOOGLE_API_SCOPE
-
     steps:
       - checkout # check out the code in the project directory
       - run:
