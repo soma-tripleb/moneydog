@@ -1,15 +1,23 @@
 import fs from 'fs';
 import winston from 'winston';
-import { conn } from './mongoDB';
 const expressWinston = require('express-winston');
 const { createLogger, format } = require('winston');
 const { combine, label, printf } = format;
-require('winston-mongodb').MongoDB;
-// const logDir = __dirname + '/../logs';
-const logDir = './server/logs';
+import 'winston-mongodb';
+import dotenv from 'dotenv';
+dotenv.config();
 
+
+const logDir = './server/logs';
 if (!fs.existsSync(logDir)) {
   fs.mkdirSync(logDir);
+}
+
+let MONGO_URI;
+if (process.env.NODE_ENV === 'test') {
+  MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.TEST_DB_URL}`;
+} else {
+  MONGO_URI = `${process.env.DB_SCHEMA}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DEV_DB_URL}`;
 }
 
 const myFormat = printf((info) => {
@@ -58,27 +66,28 @@ const customLogger = expressWinston.logger({
   transports: [
     new winston.transports.File({
       filename: 'response.log',
-      // dirname: './src/logs',
       dirname: logDir,
       level: 'info',
     }),
     new winston.transports.File({
       filename: 'warn.log',
-      // dirname: './src/logs',
       dirname: logDir,
       level: 'warn',
     }),
     new winston.transports.File({
       filename: 'err.log',
-      // dirname: './src/logs',
       dirname: logDir,
       level: 'error',
     }),
     new winston.transports.MongoDB({
-      db: conn.client.s.url,
+      db: MONGO_URI,
       level: 'info',
       capped: true,
       metaKey: 'meta',
+      options: {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+      },
     }),
   ],
   colorize: false,
@@ -97,7 +106,6 @@ const errorLogger = expressWinston.errorLogger({
   transports: [
     new winston.transports.File({
       filename: 'error.log',
-      // dirname: './src/logs',
       dirname: logDir,
       level: 'error',
     }),

@@ -11,6 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js server/ client/",
     "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
+    "test-google": "mocha --require @babel/register ./server/test/util/google/googleApiTest.spec.js"
     "spec-test": "mocha --exit --require @babel/register --timeout 12000 --recursive ./**/subsTmplController.spec.js"
   },
   "author": "tripleB",

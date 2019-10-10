@@ -11,7 +11,7 @@ import {mongoConnect} from './src/config/mongoDB';
 import {customLogger, errorLogger, stream} from './src/config/winston';
 
 // Error tracking
-Sentry.init({dsn: 'https://566bd809b9a0464e8e690a199ab83396@sentry.io/1553162'});
+// Sentry.init({dsn: 'https://566bd809b9a0464e8e690a199ab83396@sentry.io/1553162'});
 
 const app = express();
 dotenv.config();
@@ -36,7 +36,9 @@ import subsInfoRouter from './src/router/subscriptiionInfo/subsInfoController';
 import subsTmplRouter from './src/router/subscriptionTemplate/subsTmplController';
 import oAuth2Router from './src/router/auth/google/oAuth2Controller';
 
-app.use(customLogger);
+if (process.env.NODE_ENV !== 'test') {
+  app.use(customLogger);
+}
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/google', oAuth2Router);
