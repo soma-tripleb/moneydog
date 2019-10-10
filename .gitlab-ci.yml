@@ -18,11 +18,3 @@ test:
   stage: test
   script:
     - npm run test
-
-delpoyToAWS:
-  only:
-    - master
-  stage: deploy
-  script:
-    - bash deploy/deploy.sh
-
