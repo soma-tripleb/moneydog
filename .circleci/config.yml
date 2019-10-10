@@ -23,19 +23,19 @@ jobs:
       - checkout # check out the code in the project directory
       - run:
           name: update-npm
-          command: 'sudo npm install -g npm@latest'
+          command: sudo npm install -g npm@latest
       - run:
           name: node_module install
-          command: 'npm install'
+          command: npm install
       - run:
           name: 'check lint'
-          command: 'npm run lint'
+          command: npm run lint
       - run:
           name: 'running test'
-          commnad: 'npm run test'
+          commnad: npm run test
       - run:
           name: 'make build file'
-          command: 'npm run build'
+          command: npm run build
       - run:
           name: 'npm run build success'
-          command: 'echo success'
+          command: echo success
