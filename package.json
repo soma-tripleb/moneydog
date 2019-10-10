@@ -10,7 +10,9 @@
     "build": "webpack-cli",
     "test": "NODE_ENV=test mocha --require @babel/register --timeout 15000 --exit server/test/*",
     "lint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js server/ client/",
-    "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit"
+    "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
+    "spec-test": "cross-env NODE_ENV=test mocha --require @babel/register --timeout 120000 --recursive ./**/subsTmplService.spec.js",
+    "test-google": "mocha --require @babel/register ./server/test/util/google/googleApiTest.spec.js"
   },
   "author": "tripleB",
   "license": "MIT",

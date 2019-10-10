@@ -3,22 +3,36 @@ dotenv.config();
 
 import { google } from 'googleapis';
 
-const getToken = (code) => {
-  const {
-    GOOGLE_API_CLIENT_ID,
-    GOOGLE_API_CLIENT_SECRET,
-    GOOGLE_API_REDIRECT_URL,
-  } = process.env;
+class GoogleOAuthApi {
 
-  const oAuth2Client = new google.auth.OAuth2(
-    GOOGLE_API_CLIENT_ID,
-    GOOGLE_API_CLIENT_SECRET,
-    GOOGLE_API_REDIRECT_URL
-  );
+  constructor() {
+    this.oauth2Client = new google.auth.OAuth2(
+      process.env.GOOGLE_API_CLIENT_ID,
+      process.env.GOOGLE_API_CLIENT_SECRET,
+      process.env.GOOGLE_API_REDIRECT_URL,
+    );
 
-  return oAuth2Client.getToken(code);
+    this.code = '';
+  }
+
+  set setCode(code) {
+    this.code = code;
+  }
+
+  get getCode() {
+    return this.code;
+  }
+
+  async url() {
+    return await this.oauth2Client.generateAuthUrl({
+      access_type: 'offline',
+      scope: [process.env.GOOGLE_API_SCOPE],
+    });
+  }
+
+  async getTokensAsync(code) {
+    return await this.oauth2Client.getToken(code);
+  }
 };
 
-export default {
-  getToken,
-};
+export default GoogleOAuthApi;
