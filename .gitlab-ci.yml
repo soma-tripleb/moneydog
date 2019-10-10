@@ -1,0 +1,28 @@
+image: node10
+
+before_script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - npm install
+
+stages:
+  - test
+  - deploy
+
+# Job Lint
+lint:
+  stage: test
+  script:
+    - npm run lint
+
+test:
+  stage: test
+  script:
+    - npm run test
+
+delpoyToAWS:
+  only:
+    - master
+  stage: deploy
+  script:
+    - bash deploy/deploy.sh
+
