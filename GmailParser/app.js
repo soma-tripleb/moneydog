@@ -11,7 +11,15 @@ import mongodb from './config/mongo/db';
 
 const app = express();
 
-mongodb.connect();
+const db = new mongodb.Conn();
+// const findFunc = new mongodb.findDocuments();
+// db.setStrategy = {
+//   dbName: 'test',
+//   document: 'users',
+//   func: findFunc,
+// };
+
+// db.conn();
 
 app.use(logger('dev'));
 app.use(express.json());
