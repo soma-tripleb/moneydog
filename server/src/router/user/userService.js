@@ -20,7 +20,7 @@ const insertSubsInfo = (email, subsInfoList) => {
   return UserRepository.updateMany(email, subsInfoList);
 };
 
-export default {
+export {
   getUserList,
   getUser,
   createOne,

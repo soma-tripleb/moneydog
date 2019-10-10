@@ -8,6 +8,7 @@
     "dev-client": "webpack-dev-server --hot --host 0.0.0.0",
     "dev": "npm run dev-server && npm run dev-client",
     "build": "webpack-cli",
+    "test": "NODE_ENV=test mocha --require @babel/register --timeout 15000 --exit server/test/*",
     "lint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js server/ client/",
     "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
     "spec-test": "cross-env NODE_ENV=test mocha --require @babel/register --timeout 120000 --recursive ./**/subsTmplService.spec.js",
@@ -44,7 +45,7 @@
     "less-loader": "^5.0.0",
     "moment": "^2.24.0",
     "mongoose": "^5.6.0",
-    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-plugin-autoinc": "^1.1.9",
     "morgan": "~1.9.1",
     "popper.js": "^1.15.0",
     "react": "^16.8.6",
@@ -63,9 +64,9 @@
     "winston-mongodb": "^5.0.0"
   },
   "devDependencies": {
+    "@babel/node": "^7.6.2",
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.5.4",
-    "@babel/node": "^7.6.2",
     "@babel/plugin-proposal-class-properties": "^7.5.0",
     "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.5.4",

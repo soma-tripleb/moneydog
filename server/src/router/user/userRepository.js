@@ -61,7 +61,7 @@ const updateMany = (email, subsInfoList) => {
   });
 };
 
-export default {
+export {
   findAll,
   findOne,
   saveOne,

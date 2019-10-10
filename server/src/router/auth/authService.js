@@ -3,9 +3,24 @@ import crypto from 'crypto';
 dotenv.config();
 
 import AuthRepository from './authRepository';
+import {checkedPasswordForm} from '../../../../public/userInfoCheck';
 import {createJWT, checkJWT} from '../../security/jwtAuthenticationToken';
 
 const register = async (userInfo) => {
+
+  // pw check
+  const pwCheckResult = checkedPasswordForm(userInfo.password);
+  if (typeof pwCheckResult === 'string') {
+    return {status: 400, success: false, message: pwCheckResult};
+  }
+
+  // user id check
+  const user = await AuthRepository.getUserByEmail(userInfo.email);
+  if (user !== null) {
+    return {status: 400, success: false, message: '이미 존재하는 아이디 입니다.'};
+  }
+
+
   userInfo.salt = (Math.round((new Date().valueOf() * Math.random())) + '');
   userInfo.password = crypto
     .createHash('sha512')
@@ -50,7 +65,7 @@ const sessionCheck = async (userInfo) =>{
 
 const checkParameter = (res, param) =>{
   if (param === '') {
-    res.status(400).json({status: 400, success: false, message: 'userInfo 정보가 없습니다.!'});
+    res.status(400).json({status: 400, success: false, message: 'userInfo 정보가 없습니다.!'}).end();
   }
 };
 
