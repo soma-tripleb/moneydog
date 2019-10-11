@@ -21,13 +21,4 @@ router.post('/signIn', async (req, res) => {
   return res.status(result.status).json(result);
 });
 
-router.post('/sessionCheck', async (req, res) => {
-  const userInfo = req.body.userInfo || '';
-  if (!AuthService.haveJWT(userInfo)) {
-    return res.status(400).json({status: 400, success: false, message: 'userInfo 정보가 부족합니다!'}).end();
-  }
-  const result = await AuthService.sessionCheck(req.body.userInfo);
-  return res.status(result.status).json(result);
-});
-
 export default router;
