@@ -28,14 +28,15 @@ jobs:
       - run: npm run build
       - run: echo success
       - run: ls
+      - run: mkdir bucket && echo "lorum ipsum" > bucket/build_asset.txt
       - aws-s3/sync:
-          from: dist
+          from: bucket
           to: 's3://moneydog-build/prefix'
           arguments: |
             --acl public-read
           overwrite: true
       - run: echo aws-s3-sync success
       - aws-s3/copy:
-          from: dist/*
+          from: bucket/build_asset.txt
           to: 's3://moneydog-build'
           argument: '--dryrun'
