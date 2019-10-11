@@ -62,12 +62,19 @@ const sessionCheck = async (userInfo) =>{
   return checkJWT(userInfo.jwt);
 };
 
-const signUpCheckParam = (param) => {
-  if (param === '' || !param.hasOwnProperty('email') || !param.hasOwnProperty('password') || !param.hasOwnProperty('nickname')) {
+const checkParam = (param) => {
+  if (param === '' || !param.hasOwnProperty('email') || !param.hasOwnProperty('password')) {
     return false;
   }
   return true;
 };
+
+const checkState = (param) => {
+  if (!checkParam(param)) {
+    return {status: 400, success: false, message: 'userInfo 정보가 부족합니다!'};
+  }
+
+}
 
 const hasProperty = (res, param, key) =>{
   if (!param.hasOwnProperty(key)) {
@@ -80,6 +87,6 @@ export default {
   register,
   login,
   sessionCheck,
-  checkParameter: signUpCheckParam,
+  checkParameter: checkParam,
   hasProperty,
 };
