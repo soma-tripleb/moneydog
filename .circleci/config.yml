@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  aws-s3: circleci/aws-s3@1.0.0
 jobs:
   build:
     docker:
@@ -25,3 +27,15 @@ jobs:
       - run: npm run test
       - run: npm run build
       - run: echo success
+      - run: ls
+      - aws-s3/sync:
+          from: bucket
+          to: 's3://moneydog-build/prefix'
+          arguments: |
+            --acl public-read
+          overwrite: true
+      - run: echo aws-s3-sync success
+      - aws-s3/copy:
+          from: ./dist/*
+          to: 's3://moneydog-build'
+          argument: '--dryrun'
