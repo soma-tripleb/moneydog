@@ -20,6 +20,8 @@ jobs:
           GOOGLE_API_CLIENT_SECRET: $GOOGLE_API_CLIENT_SECRET
           GOOGLE_API_REDIRECT_URL: $GOOGLE_API_REDIRECT_URL
           GOOGLE_API_SCOPE: $GOOGLE_API_SCOPE
+          AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+          AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
 
     steps:
       - checkout # check out the code in the project directory
