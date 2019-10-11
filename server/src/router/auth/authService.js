@@ -69,13 +69,6 @@ const checkParam = (param) => {
   return true;
 };
 
-const checkState = (param) => {
-  if (!checkParam(param)) {
-    return {status: 400, success: false, message: 'userInfo 정보가 부족합니다!'};
-  }
-
-}
-
 const hasProperty = (res, param, key) =>{
   if (!param.hasOwnProperty(key)) {
     console.log(`key가 없을때. ${key}`);

@@ -23,7 +23,7 @@ describe('auth controller test', () => {
           expect(response.body).has.all.keys(['status', 'message', 'success']);
           expect(response.body.status).to.equal(400);
           expect(response.body.success).to.be.false;
-          expect(response.body.message).to.equal('userInfo 정보가 부족합니다!');
+          expect(response.body.message).to.equal('id 또는 password를 확인해주세요.');
         })
         .end((err, res) => {
           if (err) {
@@ -48,7 +48,7 @@ describe('auth controller test', () => {
           expect(response.body).has.all.keys(['status', 'message', 'success']);
           expect(response.body.status).to.equal(400);
           expect(response.body.success).to.be.false;
-          expect(response.body.message).to.equal('userInfo 정보가 부족합니다!');
+          expect(response.body.message).to.equal('id 또는 password를 확인해주세요.');
         })
         .end((err, res) => {
           if (err) {
@@ -191,7 +191,7 @@ describe('auth controller test', () => {
           ]);
           expect(response.body.status).to.equal(400);
           expect(response.body.success).to.be.false;
-          expect(response.body.message).to.equal('userInfo 정보가 부족합니다!');
+          expect(response.body.message).to.equal('id 또는 password를 확인해주세요.');
         })
         .end((err, res) => {
           if (err) {
@@ -218,7 +218,7 @@ describe('auth controller test', () => {
           ]);
           expect(response.body.status).to.equal(400);
           expect(response.body.success).to.be.false;
-          expect(response.body.message).to.equal('password key 가 없습니다.');
+          expect(response.body.message).to.equal('id 또는 password를 확인해주세요.');
         })
         .end((err, res) => {
           if (err) {
