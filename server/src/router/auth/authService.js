@@ -62,7 +62,7 @@ const sessionCheck = async (userInfo) =>{
   return checkJWT(userInfo.jwt);
 };
 
-const checkParameter = (param) =>{
+const signUpCheckParam = (param) => {
   if (param === '' || !param.hasOwnProperty('email') || !param.hasOwnProperty('password') || !param.hasOwnProperty('nickname')) {
     return false;
   }
@@ -80,6 +80,6 @@ export default {
   register,
   login,
   sessionCheck,
-  checkParameter,
+  checkParameter: signUpCheckParam,
   hasProperty,
 };
