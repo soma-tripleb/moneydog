@@ -191,7 +191,7 @@ describe('auth controller test', () => {
           ]);
           expect(response.body.status).to.equal(400);
           expect(response.body.success).to.be.false;
-          expect(response.body.message).to.equal('userInfo 정보가 없습니다.!');
+          expect(response.body.message).to.equal('userInfo 정보가 부족합니다!');
         })
         .end((err, res) => {
           if (err) {

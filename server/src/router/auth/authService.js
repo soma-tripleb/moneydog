@@ -69,17 +69,10 @@ const checkParameter = (param) =>{
   return true;
 };
 
-const haveJWT = (param) => {
-  if (checkParameter(param) && param.hasOwnProperty('jwt')) {
-    return true;
-  }
-};
-
 // const checkParameter = (res, param) =>{
-//   if (param === '' || !param.hasOwnProperty('email') || !param.hasOwnProperty('password') || !param.hasOwnProperty('nickname')) {
+//   if (param === '') {
 //     return res.status(400).json({status: 400, success: false, message: 'userInfo 정보가 부족합니다!'}).end();
 //   }
-//   console.log(`param이 ${JSON.stringify(param)}일때 검증 통과`);
 // };
 
 const hasProperty = (res, param, key) =>{
