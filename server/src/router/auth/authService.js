@@ -29,7 +29,6 @@ const register = async (userInfo) => {
   userInfo.role = 'BASIC';
 
   const result = await AuthRepository.createUser(userInfo);
-  console.log(`register에서 result : ${JSON.stringify(result)}`);
   if (result.status === 400 ) {
     return result;
   } else {
@@ -63,11 +62,17 @@ const sessionCheck = async (userInfo) =>{
   return checkJWT(userInfo.jwt);
 };
 
-const checkParameter = (res, param) =>{
+const checkParameter = (param) =>{
   if (param === '' || !param.hasOwnProperty('email') || !param.hasOwnProperty('password') || !param.hasOwnProperty('nickname')) {
     return false;
   }
   return true;
+};
+
+const haveJWT = (param) => {
+  if (checkParameter(param) && param.hasOwnProperty('jwt')) {
+    return true;
+  }
 };
 
 // const checkParameter = (res, param) =>{
@@ -91,4 +96,5 @@ export default {
   sessionCheck,
   checkParameter,
   hasProperty,
+  haveJWT,
 };
