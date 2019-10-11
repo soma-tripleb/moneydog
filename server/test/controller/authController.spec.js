@@ -20,12 +20,10 @@ describe('auth controller test', () => {
         .expect('Content-Type', /json/)
         .expect(400)
         .expect((response)=>{
-          expect(response.body).has.all.keys([
-            'status', 'message', 'success'
-          ]);
+          expect(response.body).has.all.keys(['status', 'message', 'success']);
           expect(response.body.status).to.equal(400);
           expect(response.body.success).to.be.false;
-          expect(response.body.message).to.equal('userInfo 정보가 없습니다.!');
+          expect(response.body.message).to.equal('id 또는 password를 확인해주세요.');
         })
         .end((err, res) => {
           if (err) {
@@ -47,12 +45,10 @@ describe('auth controller test', () => {
         .expect('Content-Type', /json/)
         .expect(400)
         .expect((response)=>{
-          expect(response.body).has.all.keys([
-            'status', 'message', 'success'
-          ]);
+          expect(response.body).has.all.keys(['status', 'message', 'success']);
           expect(response.body.status).to.equal(400);
           expect(response.body.success).to.be.false;
-          expect(response.body.message).to.equal('password key 가 없습니다.');
+          expect(response.body.message).to.equal('id 또는 password를 확인해주세요.');
         })
         .end((err, res) => {
           if (err) {
@@ -76,9 +72,7 @@ describe('auth controller test', () => {
         .expect('Content-Type', /json/)
         .expect(400)
         .expect((response)=>{
-          expect(response.body).has.all.keys([
-            'status', 'message', 'success'
-          ]);
+          expect(response.body).has.all.keys(['status', 'message', 'success']);
           expect(response.body.status).to.equal(400);
           expect(response.body.success).to.be.false;
           expect(response.body.message).to.equal('8자리 ~ 20자리 이내로 입력해주세요.');
@@ -96,18 +90,12 @@ describe('auth controller test', () => {
       request(app)
         .post('/auth/signUp')
         .send({
-          userInfo: {
-            email: 'admin@fkii.org',
-            password: '1234 5678',
-            nickname: 'admin',
-          }
+          userInfo: {email: 'admin@fkii.org', password: '1234 5678', nickname: 'admin'}
         })
         .expect('Content-Type', /json/)
         .expect(400)
         .expect((response)=>{
-          expect(response.body).has.all.keys([
-            'status', 'message', 'success'
-          ]);
+          expect(response.body).has.all.keys(['status', 'message', 'success']);
           expect(response.body.status).to.equal(400);
           expect(response.body.success).to.be.false;
           expect(response.body.message).to.equal('비밀번호는 공백업이 입력해주세요.');
@@ -125,18 +113,12 @@ describe('auth controller test', () => {
       request(app)
         .post('/auth/signUp')
         .send({
-          userInfo: {
-            email: 'admin@fkii.org',
-            password: '123456789',
-            nickname: 'admin',
-          }
+          userInfo: {email: 'admin@fkii.org', password: '123456789', nickname: 'admin'}
         })
         .expect('Content-Type', /json/)
         .expect(400)
         .expect((response)=>{
-          expect(response.body).has.all.keys([
-            'status', 'message', 'success'
-          ]);
+          expect(response.body).has.all.keys(['status', 'message', 'success']);
           expect(response.body.status).to.equal(400);
           expect(response.body.success).to.be.false;
           expect(response.body.message).to.equal('영문,숫자, 특수문자를 혼합하여 입력해주세요.');
@@ -154,18 +136,12 @@ describe('auth controller test', () => {
       request(app)
         .post('/auth/signUp')
         .send({
-          userInfo: {
-            email: 'admin@fkii.org',
-            password: '!qwer1234',
-            nickname: 'admin',
-          }
+          userInfo: {email: 'admin@fkii.org', password: '!qwer1234', nickname: 'admin'}
         })
         .expect('Content-Type', /json/)
         .expect(201)
         .expect((response)=>{
-          expect(response.body).has.all.keys([
-            'status', 'message', 'success', 'token'
-          ]);
+          expect(response.body).has.all.keys(['status', 'message', 'success', 'token']);
           expect(response.body.status).to.equal(201);
           expect(response.body.success).to.be.true;
           expect(response.body.message).to.equal('회원가입에 성공했습니다.');
@@ -183,18 +159,12 @@ describe('auth controller test', () => {
       request(app)
         .post('/auth/signUp')
         .send({
-          userInfo: {
-            email: 'admin@fkii.org',
-            password: '!qwer1234',
-            nickname: 'admin',
-          }
+          userInfo: {email: 'admin@fkii.org', password: '!qwer1234', nickname: 'admin'}
         })
         .expect('Content-Type', /json/)
         .expect(400)
         .expect((response)=>{
-          expect(response.body).has.all.keys([
-            'status', 'message', 'success'
-          ]);
+          expect(response.body).has.all.keys(['status', 'message', 'success']);
           expect(response.body.status).to.equal(400);
           expect(response.body.success).to.be.false;
           expect(response.body.message).to.equal('이미 존재하는 아이디 입니다.');
@@ -207,12 +177,9 @@ describe('auth controller test', () => {
           done(err);
         });
     });
-
   });
 
-
   describe('POST /auth/signIn TEST CASE', () => {
-
     it('userInfo 없이 로그인 시도하면 400 error 를 내보낸다.', (done) => {
       request(app)
         .post('/auth/signIn')
@@ -224,7 +191,7 @@ describe('auth controller test', () => {
           ]);
           expect(response.body.status).to.equal(400);
           expect(response.body.success).to.be.false;
-          expect(response.body.message).to.equal('userInfo 정보가 없습니다.!');
+          expect(response.body.message).to.equal('id 또는 password를 확인해주세요.');
         })
         .end((err, res) => {
           if (err) {
@@ -251,7 +218,7 @@ describe('auth controller test', () => {
           ]);
           expect(response.body.status).to.equal(400);
           expect(response.body.success).to.be.false;
-          expect(response.body.message).to.equal('password key 가 없습니다.');
+          expect(response.body.message).to.equal('id 또는 password를 확인해주세요.');
         })
         .end((err, res) => {
           if (err) {
@@ -345,7 +312,5 @@ describe('auth controller test', () => {
           done(err);
         });
     });
-
   });
-
 });

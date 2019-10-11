@@ -20,16 +20,16 @@ const mongoConnect = () => {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
-      .then(() => console.log('Connected mongo server'))
-      .catch((err) => console.log(`DB Connection Error: , ${err.message}`));
+    .then(() => console.log('Connected mongo server'))
+    .catch((err) => console.log(`DB Connection Error: , ${err.message}`));
 };
 
 const mongoDisConnect = () => {
   mongoose.disconnect()
-      .then(() => console.log('Disconnected mongo server'))
-      .catch((e) => {
-        console.error(e);
-      });
+    .then(() => console.log('Disconnected mongo server'))
+    .catch((e) => {
+      console.error(e);
+    });
 };
 
 export {mongoConnect, mongoDisConnect};

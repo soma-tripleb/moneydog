@@ -8,11 +8,11 @@
     "dev-client": "webpack-dev-server --hot --host 0.0.0.0",
     "dev": "npm run dev-server && npm run dev-client",
     "build": "webpack-cli",
-    "test": "NODE_ENV=test mocha --require @babel/register --timeout 15000 --exit server/test/*",
+    "test": "NODE_ENV=test mocha --require @babel/register --no-timeout --exit server/test/*",
     "lint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js server/ client/",
     "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
-    "spec-test": "cross-env NODE_ENV=test mocha --require @babel/register --timeout 120000 --recursive ./**/subsTmplService.spec.js",
-    "test-google": "mocha --require @babel/register ./server/test/util/google/googleApiTest.spec.js"
+    "test-google": "mocha --require @babel/register ./server/test/util/google/googleApiTest.spec.js",
+    "spec-test": "mocha --exit --require @babel/register --timeout 12000 --recursive ./**/subsTmplController.spec.js"
   },
   "author": "tripleB",
   "license": "MIT",
@@ -64,9 +64,9 @@
     "winston-mongodb": "^5.0.0"
   },
   "devDependencies": {
-    "@babel/node": "^7.6.2",
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.5.4",
+    "@babel/node": "^7.6.2",
     "@babel/plugin-proposal-class-properties": "^7.5.0",
     "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.5.4",
