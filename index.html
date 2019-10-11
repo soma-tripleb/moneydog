@@ -17,6 +17,13 @@
 </head>
 <body>
     <div id="root"></div>
-    <script src="../app.jsx"></script>
+    <script class="build-path" src="../app.jsx"></script>
+    <script type="text/javascript">
+        var path = document.getElementsByClassName('build-path');
+
+        path[0].src = './dist/app.jsx';
+
+        console.log(path[0].src);
+    </script>
 </body>
 </html>

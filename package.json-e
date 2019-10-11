@@ -1,6 +1,6 @@
 {
   "name": "moneydog",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,11 +8,12 @@
     "dev-client": "webpack-dev-server --hot --host 0.0.0.0",
     "dev": "npm run dev-server && npm run dev-client",
     "build": "webpack-cli",
-    "test": "NODE_ENV=test mocha --require @babel/register --timeout 12000 --exit server/test/*",
+    "build2": "webpack --output-filename=app.jsx",
+    "test": "NODE_ENV=test mocha --require @babel/register --timeout 15000 --exit server/test/*",
     "lint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js server/ client/",
     "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
-    "test-google": "mocha --require @babel/register ./server/test/util/google/googleApiTest.spec.js",
-    "spec-test": "mocha --exit --require @babel/register --timeout 12000 --recursive ./**/subsTmplController.spec.js"
+    "spec-test": "cross-env NODE_ENV=test mocha --require @babel/register --timeout 120000 --recursive ./**/subsTmplService.spec.js",
+    "test-google": "mocha --require @babel/register ./server/test/util/google/googleApiTest.spec.js"
   },
   "author": "tripleB",
   "license": "MIT",
