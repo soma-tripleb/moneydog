@@ -36,12 +36,12 @@ jobs:
       - run: mkdir bucket && echo "lorum ipsum" > bucket/build_asset.txt
       - aws-s3/sync:
           from: dist
-          to: 's3://moneydog-build/prefix'
+          to: 's3://moneydog-build/build'
           arguments: |
             --acl public-read
           overwrite: true
       - run: echo aws-s3-sync success
       - aws-s3/copy:
-          from: dist/*
+          from: dist/
           to: 's3://moneydog-build'
           arguments: '--dryrun'
