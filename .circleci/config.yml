@@ -20,8 +20,7 @@ jobs:
       GOOGLE_API_SCOPE: $GOOGLE_API_SCOPE
     steps:
       - checkout # check out the code in the project directory
-      - run : echo hello world test
-      - run : echo $DB_USER
+      - run: echo ${DB_USER} ${DB_SCHEMA} ${GOOGLE_API_SCOPE}
       - run: npm install
       - run: npm run lint
       - run: npm run test
