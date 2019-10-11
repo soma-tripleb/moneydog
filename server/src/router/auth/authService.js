@@ -69,6 +69,12 @@ const checkParameter = (param) =>{
   return true;
 };
 
+const haveJWT = (param) => {
+  if (checkParameter(param) && param.hasOwnProperty('jwt')) {
+    return true;
+  }
+};
+
 // const checkParameter = (res, param) =>{
 //   if (param === '') {
 //     return res.status(400).json({status: 400, success: false, message: 'userInfo 정보가 부족합니다!'}).end();
