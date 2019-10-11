@@ -39,5 +39,4 @@ jobs:
       - aws-s3/copy:
           from: bucket/build_asset.txt
           to: 's3://moneydog-build'
-          argument: |
-            --dryrun
+          arguments: '--dryrun'
