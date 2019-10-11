@@ -29,13 +29,13 @@ jobs:
       - run: echo success
       - run: ls
       - aws-s3/sync:
-          from: bucket
+          from: dist
           to: 's3://moneydog-build/prefix'
           arguments: |
             --acl public-read
           overwrite: true
       - run: echo aws-s3-sync success
       - aws-s3/copy:
-          from: ./dist/*
+          from: dist/*
           to: 's3://moneydog-build'
           argument: '--dryrun'
