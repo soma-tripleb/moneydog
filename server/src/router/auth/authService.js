@@ -65,11 +65,17 @@ const sessionCheck = async (userInfo) =>{
 
 const checkParameter = (res, param) =>{
   if (param === '' || !param.hasOwnProperty('email') || !param.hasOwnProperty('password') || !param.hasOwnProperty('nickname')) {
-    console.log(`param이 issue가 있다.`);
-    res.status(400).json({status: 400, success: false, message: 'userInfo 정보가 없습니다.!'}).end();
+    return false;
   }
-  console.log(`param이 ${JSON.stringify(param)}일때 검증 통과`);
+  return true;
 };
+
+// const checkParameter = (res, param) =>{
+//   if (param === '' || !param.hasOwnProperty('email') || !param.hasOwnProperty('password') || !param.hasOwnProperty('nickname')) {
+//     return res.status(400).json({status: 400, success: false, message: 'userInfo 정보가 부족합니다!'}).end();
+//   }
+//   console.log(`param이 ${JSON.stringify(param)}일때 검증 통과`);
+// };
 
 const hasProperty = (res, param, key) =>{
   // console.log(`key : ${key}`);
