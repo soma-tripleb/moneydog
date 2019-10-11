@@ -7,6 +7,7 @@ router.post('/signUp', async (req, res) => {
   const userInfo = req.body.userInfo || '';
 
   AuthService.checkParameter(res, userInfo);
+  console.log(`checkParam result : ${AuthService.checkParameter(res, userInfo)}`);
   AuthService.hasProperty(res, userInfo, 'email');
   AuthService.hasProperty(res, userInfo, 'password');
   AuthService.hasProperty(res, userInfo, 'nickname');
