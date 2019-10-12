@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@1.0.11
+  aws-ecr: circleci/aws-ecr@0.0.2
 jobs:
   build:
     docker:
@@ -30,7 +31,6 @@ jobs:
       - run: npm run lint
       - run: npm run test
       - run: npm run build
-      - run: echo success
       - aws-s3/sync:
           from: dist
           to: 's3://moneydog-build/build'
@@ -42,3 +42,11 @@ jobs:
           from: dist/
           to: 's3://moneydog-build'
           arguments: '--dryrun'
+
+      - ecr/build_and_push_image:
+        accounr_url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+        repo: "${AWS_RESOURCE_NAME_PREFIX}"
+        region: ${AWS_DEFAULT_REGION}
+        tag: "${CIRCLE_SHA1}"
+      - run: echo ecr success
+
