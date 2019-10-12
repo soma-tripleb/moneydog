@@ -53,9 +53,7 @@ jobs:
         steps:
           - run: echo ecr start
           - run:
-              command: |
-                  docker push $<<parameters.account-url>>/<<parameters.repo>>:${tag}
-                done
+              command: docker push $<<parameters.account-url>>/<<parameters.repo>>:${tag}
               name: Push image to Amazon ECR
           - run: echo ecr finish
 
