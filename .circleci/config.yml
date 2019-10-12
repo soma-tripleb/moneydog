@@ -44,13 +44,18 @@ jobs:
           to: 's3://moneydog-build'
           arguments: '--dryrun'
 
-      - aws-ecr/build-and-push-image:
-          account_url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
-          repo: "${AWS_RESOURCE_NAME_PREFIX}"
-          region: ${AWS_DEFAULT_REGION}
-          tag:
-            default: latest
-            description: A comma-seperated string containing docker image tags (default=latest)
-            type: string
-      - run: echo ecr success
+  push-image:
+      description: Push a container image to AWS ECR Registry
+      parameters:
+        account-url: AWS_ECR_ACCOUNT_URL
+        repo: moneydog
+        tag: latest
+        steps:
+          - run: echo ecr start
+          - run:
+              command: |
+                  docker push $<<parameters.account-url>>/<<parameters.repo>>:${tag}
+                done
+              name: Push image to Amazon ECR
+          - run: echo ecr finish
 
