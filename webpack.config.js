@@ -1,5 +1,6 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
   name: 'moneydog-root',
@@ -22,6 +23,10 @@ module.exports = {
 
   plugins: [
     new Dotenv(),
+    new ManifestPlugin({
+      fileName: 'assets.json',
+      basePath: '/'
+    }),
   ],
 
   module: {
@@ -42,7 +47,7 @@ module.exports = {
           plugins: [
             '@babel/plugin-proposal-class-properties',
             'react-hot-loader/babel',
-            ['import', {'libraryName': 'antd', 'style': true}],
+            ['import', { 'libraryName': 'antd', 'style': true }],
           ],
         },
       },
@@ -83,6 +88,6 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'app.jsx'
+    filename: '1.0.5.app.jsx'
   },
 };

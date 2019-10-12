@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# bash shell checker
+echo '현재 OS: ' $SHELL
+
+if [ "$SHELL" != "/bin/bash" ]; then 
+  echo 'WARNNING! bash shell 에서만 동작합니다.' 
+  exit
+fi
+
 # package.json
 keyword1="\"version\""
 
@@ -14,7 +22,7 @@ do
     next=`expr $result + 1`
     next_version=\"${next:0:1}\.${next:1:1}\.${next:2}\"\,
 
-    sed -i -e 's/'${value}'/'${next_version}'/' "$PWD/package.json"
+    sed -i '' 's/'${value}'/'${next_version}'/' "$PWD/package.json"
     break;
   fi
 done < $PWD/package.json
@@ -30,7 +38,7 @@ do
     value=${line##* }   # 'version'.app.jsx 
 
     next_app=\'${next:0:1}\.${next:1:1}\.${next:2}\.app.jsx\'
-    sed -i -e 's/'${value}'/'${next_app}'/' "$PWD/webpack.config.js"
+    sed -i '' 's/'${value}'/'${next_app}'/' "$PWD/webpack.config.js"
     break;
   fi  
 done < $PWD/webpack.config.js
