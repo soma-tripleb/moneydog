@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@1.0.11
-  aws-ecr: circleci/aws-ecr@0.0.2
+  aws-ecr: circleci/aws-ecr@6.5.0
 jobs:
   build:
     docker:
@@ -24,6 +24,7 @@ jobs:
           AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
           AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
           AWS_REGION: $AWS_REGION
+          AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID
 
     steps:
       - checkout # check out the code in the project directory
@@ -43,10 +44,13 @@ jobs:
           to: 's3://moneydog-build'
           arguments: '--dryrun'
 
-      - aws-ecr/build_and_push_image:
+      - aws-ecr/build-and-push-image:
           accounr_url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
           repo: "${AWS_RESOURCE_NAME_PREFIX}"
           region: ${AWS_DEFAULT_REGION}
-          tag: jimy_ecr_test
+          tag:
+            default: latest
+            description: A comma-seperated string containing docker image tags (default=latest)
+            type: string
       - run: echo ecr success
 
