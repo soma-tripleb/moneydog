@@ -1,0 +1,5 @@
+{
+  "client_id": "532345922072-50gar7lh5ca5rvepjs7iisa6lu28d741.apps.googleusercontent.com",
+  "client_secret": "QNzzHMDXr4MXhpxUuefGZnXO",
+  "redirect_uri": "http://localhost:5000/google/signup"
+}

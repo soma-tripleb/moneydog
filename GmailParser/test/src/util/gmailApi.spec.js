@@ -6,6 +6,7 @@ dotenv.config();
 
 import { google } from 'googleapis';
 import GmailSearchQuery from '../../../src/resources/static/GmailSearchQuery.json';
+import GmailApiInfo from '../../../src/resources/static/GmailApiInfo.json';
 
 describe('Gmail API 사용하기', () => {
   const useremail = 'dudrnxps1@gmail.com';
@@ -13,6 +14,31 @@ describe('Gmail API 사용하기', () => {
 
   const messageList = [];
   let auth;
+
+  describe('Gmail API OAuth 함수 만들기', () => {
+    it('#oAuth2Client', (done) => {
+      const authential = (credential, refreshToken, callback) => {
+        const { client_id, client_secret, redirect_uri } = credential;
+        const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uri);
+
+        oAuth2Client.setCredentials(refreshToken);
+
+        callback(oAuth2Client);
+      };
+
+      const test = (auth, err) => {
+        assert.equal(auth._clientId, GmailApiInfo.client_id);
+        assert.equal(auth._clientSecret, GmailApiInfo.client_secret);
+        assert.equal(auth.redirectUri, GmailApiInfo.redirect_uri);
+
+        if (err) throw done(err);
+      };
+
+      authential(GmailApiInfo, refreshToken, test);
+
+      done();
+    });
+  });
 
   describe('사용자의 `refresh token 으로 API 사용', () => {
     it('#getMessageList', (done) => {
