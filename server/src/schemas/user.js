@@ -40,7 +40,8 @@ const userSchema = new mongoose.Schema(
     nickname: { type: String, required: true },
     salt: { type: Number, required: true },
     role: { type: String, required: true },
-    subscription: { type: [subscriptionSchema] }
+    refreshToken: { type: String },
+    subscription: [subscriptionSchema],
   },
   {
     timestamps: true,

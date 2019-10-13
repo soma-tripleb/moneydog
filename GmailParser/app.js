@@ -4,22 +4,11 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-import indexRouter from './routes/index';
-import usersRouter from './routes/users';
-
-import mongodb from './config/mongo/db';
+import indexRouter from './src/routes/index';
+import usersRouter from './src/routes/users';
+import gmailRouter from './src/routes/user/gmailController';
 
 const app = express();
-
-const db = new mongodb.Conn();
-// const findFunc = new mongodb.findDocuments();
-// db.setStrategy = {
-//   dbName: 'test',
-//   document: 'users',
-//   func: findFunc,
-// };
-
-// db.conn();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -29,6 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/gmail', gmailRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

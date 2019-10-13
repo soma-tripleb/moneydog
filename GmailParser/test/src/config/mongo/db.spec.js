@@ -38,7 +38,7 @@ describe('MongoDB TEST', () => {
 
           assert.equal(collection.s.namespace.db, 'test');
           assert.equal(collection.s.namespace.collection, 'log');
-          
+
           client.close();
           done();
         })
