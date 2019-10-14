@@ -38,9 +38,6 @@ jobs:
       - run: sudo ./versioning.sh run
       - run: npm run test
       - run: sudo npm run build
-      - run: ls -al ./dist
-      - run: cat ./index.html
-#      - run: echo success
       - slack/notify:
           message: " Lint Test Build 에 성공 했습니다. :smile:"
           color: "#f4e242"
