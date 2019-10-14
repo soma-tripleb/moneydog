@@ -104,6 +104,7 @@ jobs:
               $docker_tag_args \
               <<parameters.path>>
             name: Build docker image
+      - run: echo build success
 
 
 
