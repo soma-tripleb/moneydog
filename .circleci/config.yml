@@ -43,7 +43,6 @@ jobs:
           title: "Lint-Test-Build 과정 에 성공 했습니다."
           webhook: $SLACK_WEBHOOK
           footer: "Money Dog"
-          footer_icon: "https://moneydog-image.s3.ap-northeast-2.amazonaws.com/favicon.png"
       - aws-s3/sync:
           from: dist
           to: 's3://moneydog-build/build'
