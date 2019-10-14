@@ -7,8 +7,7 @@ workflows:
   jimmy-custom-build:
     jobs:
       - webpack-upload
-
-
+      - build-and-push-image
 
 jobs:
   webpack-upload:
@@ -50,5 +49,41 @@ jobs:
           from: dist/
           to: 's3://moneydog-build'
           arguments: '--dryrun'
-  build-and-push-image:
+  build-image:
+    description: Build a docker image
+    parameters:
+      account-url:
+        default: AWS_ECR_ACCOUNT_URL
+        type: env_var_name
+      dockerfile:
+        default: Dockerfile
+        type: string
+      path:
+        default: .
+        type: string
+      repo:
+        description: 'Name of an Amazon ECR repo'
+        type: string
+      tag:
+        default: latest
+        type: string
+      extra-build-args:
+        default: "-t test"
+        type: string
+    steps:
+      - run:
+          command: |
+            docker_tag_args=""
+            IFS="," read -ra DOCKER_TAGS \<<< "<< parameters.tag >>"
+            for tag in "${DOCKER_TAGS[@]}"; do
+              docker_tag_args="$docker_tag_args -t $<<parameters.account-url>>/<<parameters.repo>>:$tag"
+            done
+            docker build \
+              <<#parameters.extra-build-args>><<parameters.extra-build-args>><</parameters.extra-build-args>> \
+              -f <<parameters.dockerfile>> \
+              $docker_tag_args \
+              <<parameters.path>>
+            name: Build docker image
+
+
 
