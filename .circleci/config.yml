@@ -28,14 +28,17 @@ jobs:
 
     steps:
       - slack/approval:
-          message: "시작 : circle ci 에 파이프 라인이 올러겄어요 !"
+          message: "시작 : circle ci 에 파이프 라인이 올라갔어요 !"
           color: "#42e2f4"
           webhook: $SLACK_WEBHOOK
       - checkout # check out the code in the project directory
       - run: npm install
       - run: npm run lint
+      - run: chmod 755 ./versioning.sh
+      - run: sh ./versioning.sh
       - run: npm run test
       - run: npm run build
+      - run: cat ./index.html
 #      - run: echo success
       - slack/notify:
           message: " Lint Test Build 에 성공 했습니다. :smile:"

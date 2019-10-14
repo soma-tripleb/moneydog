@@ -1,6 +1,5 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
-const ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
   name: 'moneydog-root',
@@ -23,10 +22,6 @@ module.exports = {
 
   plugins: [
     new Dotenv(),
-    new ManifestPlugin({
-      fileName: 'assets.json',
-      basePath: '/'
-    }),
   ],
 
   module: {
@@ -88,6 +83,6 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'app.jsx'
+    filename: '1.0.1.app.jsx'
   },
 };
