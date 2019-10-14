@@ -4,59 +4,103 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.5.0
 
 workflows:
-  build_and_push_image:
+  build_and_push_deploy:
     jobs:
-      - aws-ecr/build-and-push-image:
-          account-url: AWS_ECR_ACCOUNT_URL
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          dockerfile: Dockerfile
-          path: ./server/
-          profile-name: myProfileName
-          region: AWS_REGION
-          repo: "moneydog"
-          tag: 'latest,moneydog'
+      - webpack-upload
+      - aws-ecr/build-and-push-image
+jobs:
+  webpack-upload:
+    docker:
+      - image: circleci/node:10 # the primary container, where your job's commands are run
+        environment:
+          REACT_APP_NODE_API_URL: $REACT_APP_NODE_API_URL
+          REACT_APP_IMAGE_URI: $REACT_APP_IMAGE_URI
+          DB_SCHEMA: $DB_SCHEMA
+          DB_USER: $DB_USER
+          DB_PASSWORD: $DB_PASSWORD
+          PROD_DB_URL: $PROD_DB_URL
+          DEV_DB_URL: $DEV_DB_URL
+          TEST_DB_URL: $TEST_DB_URL
+          MIGRATE_dbConnectionUri: $MIGRATE_dbConnectionUri
+          JWT_SECRET: $JWT_SECRET
+          GOOGLE_API_CLIENT_ID: $GOOGLE_API_CLIENT_ID
+          GOOGLE_API_CLIENT_SECRET: $GOOGLE_API_CLIENT_SECRET
+          GOOGLE_API_REDIRECT_URL: $GOOGLE_API_REDIRECT_URL
+          GOOGLE_API_SCOPE: $GOOGLE_API_SCOPE
+          AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+          AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+          AWS_REGION: $AWS_REGION
+          AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID
+    steps:
+      - run: echo step start
+      - checkout # check out the code in the project directory
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build
+      - aws-s3/sync:
+          from: dist
+          to: 's3://moneydog-build/build'
+          arguments: |
+            --acl public-read
+          overwrite: true
+      - run: echo aws-s3-sync success
+      - aws-s3/copy:
+          from: dist/
+          to: 's3://moneydog-build'
+          arguments: '--dryrun'
 
-#
-#jobs:
-#  build:
-#    docker:
-#      - image: circleci/node:10 # the primary container, where your job's commands are run
-#        environment:
-#          REACT_APP_NODE_API_URL: $REACT_APP_NODE_API_URL
-#          REACT_APP_IMAGE_URI: $REACT_APP_IMAGE_URI
-#          DB_SCHEMA: $DB_SCHEMA
-#          DB_USER: $DB_USER
-#          DB_PASSWORD: $DB_PASSWORD
-#          PROD_DB_URL: $PROD_DB_URL
-#          DEV_DB_URL: $DEV_DB_URL
-#          TEST_DB_URL: $TEST_DB_URL
-#          MIGRATE_dbConnectionUri: $MIGRATE_dbConnectionUri
-#          JWT_SECRET: $JWT_SECRET
-#          GOOGLE_API_CLIENT_ID: $GOOGLE_API_CLIENT_ID
-#          GOOGLE_API_CLIENT_SECRET: $GOOGLE_API_CLIENT_SECRET
-#          GOOGLE_API_REDIRECT_URL: $GOOGLE_API_REDIRECT_URL
-#          GOOGLE_API_SCOPE: $GOOGLE_API_SCOPE
-#          AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-#          AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-#          AWS_REGION: $AWS_REGION
-#          AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID
-#
-#    steps:
-#      - run: echo step start
-#      - checkout # check out the code in the project directory
-#      - run: npm install
-#      - run: npm run lint
-#      - run: npm run test
-#      - run: npm run build
-#      - aws-s3/sync:
-#          from: dist
-#          to: 's3://moneydog-build/build'
-#          arguments: |
-#            --acl public-read
-#          overwrite: true
-#      - run: echo aws-s3-sync success
-#      - aws-s3/copy:
-#          from: dist/
-#          to: 's3://moneydog-build'
-#          arguments: '--dryrun'
+  build-and-push-image:
+    parameters:
+      account-url:
+        default: AWS_ECR_ACCOUNT_URL
+        type: env_var_name
+      aws-access-key-id:
+        default: AWS_ACCESS_KEY_ID
+        type: env_var_name
+      aws-secret-access-key:
+        default: AWS_SECRET_ACCESS_KEY
+        type: env_var_name
+      dockerfile:
+        default: Dockerfile
+        type: string
+      executor:
+        default: default
+        description: executor to use for this job
+        type: executor
+      extra-build-args:
+        default: ''
+        description: >
+          Extra flags to pass to docker build. For examples, see
+          https://docs.docker.com/engine/reference/commandline/build
+        type: string
+      checkout:
+        default: true
+        type: boolean
+      region:
+        default: AWS_REGION
+        type: env_var_name
+      repo: "moneydog"
+      tag:
+        default: latest
+        type: string
+    steps:
+      - when:
+          condition: <<parameters.checkout>>
+          steps:
+            - checkout
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-access-key-id: <<parameters.aws-access-key-id>>
+          aws-region: <<parameters.region>>
+          aws-secret-access-key: <<parameters.aws-secret-access-key>>
+          profile-name: <<parameters.profile-name>>
+      - build-image:
+          account-url: <<parameters.account-url>>
+          dockerfile: <<parameters.dockerfile>>
+          repo: <<parameters.repo>>
+          tag: <<parameters.tag>>
+      - push-image:
+          account-url: <<parameters.account-url>>
+          repo: <<parameters.repo>>
+          tag: <<parameters.tag>>
