@@ -1,12 +1,14 @@
 version: 2.1
 orbs:
-#  aws-s3: circleci/aws-s3@1.0.11
+  aws-s3: circleci/aws-s3@1.0.11
   aws-ecr: circleci/aws-ecr@6.5.0
 
 workflows:
-  build_and_push_deploy:
+  jimmy-custom-build:
     jobs:
       - webpack-upload
+
+
 
 jobs:
   webpack-upload:
@@ -48,3 +50,5 @@ jobs:
           from: dist/
           to: 's3://moneydog-build'
           arguments: '--dryrun'
+  build-and-push-image:
+
