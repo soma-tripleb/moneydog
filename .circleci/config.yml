@@ -43,6 +43,7 @@ jobs:
         default: ./
         type: string
       repo:
+        default: moneydog
         type: string
       tag:
         default: latest
