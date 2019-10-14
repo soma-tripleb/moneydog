@@ -16,8 +16,6 @@ workflows:
           region: AWS_REGION
           repo: "moneydog"
           tag: 'latest,moneydog'
-      steps:
-        - run: echo ecr start
 
 #
 #jobs:
