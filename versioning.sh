@@ -5,7 +5,6 @@ echo '`S3` 저장소에 올려 놓은 version.txt 파일을 읽어서 버전 확
 
 # bash shell checker
 echo '현재 OS: ' $SHELL
-echo '현재 디렉터리 위치: ' $PWD
 
 # s3 에서 version.txt 파일 읽어오기
 dir=dist
@@ -26,28 +25,16 @@ do
 
   NEXT_VERSION=${NEXT_VERSION_NUM:0:1}\.${NEXT_VERSION_NUM:1:1}\.${NEXT_VERSION_NUM:2}
   
-  echo "무따옴효"
-  sed -i -e 's/'${VERSION}'/'${NEXT_VERSION}'/' $PWD/dist/version.txt
-  sed -i'' 's/'${VERSION}'/'${NEXT_VERSION}'/' $PWD/dist/version.txt
-  sed -i '' -e 's/'${VERSION}'/'${NEXT_VERSION}'/' $PWD/dist/version.txt
-
-  echo "쌍따옴효"
+  echo "쌍따옴효1"
   sed -i -e 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
+  echo "쌍따옴효2"
   sed -i'' 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
+  echo "쌍따옴효3"
   sed -i '' -e 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
 
 done < $PWD/dist/version.txt
-echo "CURRENT_VERSION\t: $VERSION"
-echo "NEXT_VERSION\t: $NEXT_VERSION"
-
-echo "박영환"
-echo $PWD/dist/version.txt
-echo "쌍따옴효"
-echo "$PWD/dist/version.txt"
-echo "정성연"
-cat $PWD/dist/version.txt
-echo "쌍따옴효"
-cat "$PWD/dist/version.txt"
+echo -e "CURRENT_VERSION\t: $VERSION"
+echo -e "NEXT_VERSION\t: $NEXT_VERSION"
 
 # package.json
 keyword1="\"version\""
@@ -67,7 +54,7 @@ do
     break;
   fi
 done < $PWD/package.json
-echo "version\t\t:" $next_version | tr -d '",'
+echo -e "version\t\t:" $next_version | tr -d '",'
 
 # webpack.config.js
 keyword2="app.jsx"
@@ -79,11 +66,11 @@ do
     value=${line##* } 
 
     next_app=\'${next:0:1}\.${next:1:1}\.${next:2}\.app.jsx\'
-    sed -i '' 's/'${value}'/'${next_app}'/' `$PWD/webpack.config.js`
+    sed -i -e 's/'${value}'/'${next_app}'/' `$PWD/webpack.config.js`
     break;
   fi  
 done < $PWD/webpack.config.js
-echo "filename\t:" $next_app | tr -d "\'"
+echo -e "filename\t:" $next_app | tr -d "\'"
 
 # index.html
 keyword3="app.jsx"
@@ -99,7 +86,7 @@ do
     prod_path=$prod_path$next_version
     prod_path=$prod_path"app.jsx"
 
-    sudo sed -i '' "s/$dev_path/$prod_path/g" `index.html`
+    sed -i -e '' "s/$dev_path/$prod_path/g" `index.html`
   fi
 done < $PWD/index.html
-echo "index.html\t:" $prod_path
+echo -e "index.html\t:" $prod_path
