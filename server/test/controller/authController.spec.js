@@ -160,11 +160,8 @@ describe('auth controller test', () => {
           expect(response.body.message).to.equal('회원가입에 성공했습니다.');
         })
         .end((err, res) => {
-          if (err) {
-            done(err);
-            return;
-          }
-          done(err);
+          if (err) throw done(err);
+          done(res);
         });
     });
 
