@@ -5,6 +5,7 @@ echo '`S3` 저장소에 올려 놓은 version.txt 파일을 읽어서 버전 확
 
 # bash shell checker
 echo '현재 OS: ' $SHELL
+echo '현재 디렉터리 위치: ' $PWD
 
 # s3 에서 version.txt 파일 읽어오기
 dir=dist
@@ -25,7 +26,7 @@ do
 
   NEXT_VERSION=${NEXT_VERSION_NUM:0:1}\.${NEXT_VERSION_NUM:1:1}\.${NEXT_VERSION_NUM:2}
 
-  sed -i '' 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
+  sed -i -e 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
 
 done < $PWD/dist/version.txt
 echo "CURRENT_VERSION\t: $VERSION"
