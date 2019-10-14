@@ -1,75 +1,64 @@
 version: 2.1
 orbs:
-  aws-s3: circleci/aws-s3@1.0.11
-  aws-ecr: circleci/aws-ecr@0.0.10
-#  aws-ecr: circleci/aws-ecr@6.5.0
-jobs:
-  build:
-    docker:
-      - image: circleci/node:10 # the primary container, where your job's commands are run
-        environment:
-          REACT_APP_NODE_API_URL: $REACT_APP_NODE_API_URL
-          REACT_APP_IMAGE_URI: $REACT_APP_IMAGE_URI
-          DB_SCHEMA: $DB_SCHEMA
-          DB_USER: $DB_USER
-          DB_PASSWORD: $DB_PASSWORD
-          PROD_DB_URL: $PROD_DB_URL
-          DEV_DB_URL: $DEV_DB_URL
-          TEST_DB_URL: $TEST_DB_URL
-          MIGRATE_dbConnectionUri: $MIGRATE_dbConnectionUri
-          JWT_SECRET: $JWT_SECRET
-          GOOGLE_API_CLIENT_ID: $GOOGLE_API_CLIENT_ID
-          GOOGLE_API_CLIENT_SECRET: $GOOGLE_API_CLIENT_SECRET
-          GOOGLE_API_REDIRECT_URL: $GOOGLE_API_REDIRECT_URL
-          GOOGLE_API_SCOPE: $GOOGLE_API_SCOPE
-          AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-          AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-          AWS_REGION: $AWS_REGION
-          AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID
+#  aws-s3: circleci/aws-s3@1.0.11
+  aws-ecr: circleci/aws-ecr@6.5.0
 
-    steps:
-      - checkout # check out the code in the project directory
-      - run: npm install
-      - run: npm run lint
-      - run: npm run test
-      - run: npm run build
-      - aws-s3/sync:
-          from: dist
-          to: 's3://moneydog-build/build'
-          arguments: |
-            --acl public-read
-          overwrite: true
-      - run: echo aws-s3-sync success
-      - aws-s3/copy:
-          from: dist/
-          to: 's3://moneydog-build'
-          arguments: '--dryrun'
-      - aws-ecr/build_and_push_image:
-          account-url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
-          repo: "${AWS_RESOURCE_NAME_PREFIX}"
-          region: ${AWS_REGION}
-          tag: "jaeyeon-ecr-test"
+workflows:
+  build_and_push_image:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          dockerfile: Dockerfile
+          path: ./server/
+          profile-name: myProfileName
+          region: AWS_REGION
+          repo: "moneydog"
+          tag: 'latest,moneydog'
+      steps:
+        - run: echo ecr start
 
-#    push-image:
-#      description: Push a container image to the Amazon ECR registry
-#      parameters:
-#        account-url:
-#          default: AWS_ECR_ACCOUNT_URL
-#          description: |
-#            Env var storing Amazon ECR account URL that maps to an AWS account, e.g. {awsAccountNum}.dkr.ecr.us-west-2.amazonaws.com defaults to AWS_ECR_ACCOUNT_URL
-#          type: env_var_name
-#        repo:
-#          default: moneydog
-#          description: Name of an Amazon ECR repository
-#          type: string
-#        tag:
-#          default: latest
-#          description: A comma-separated string containing docker image tags (default
-#            = latest)
-#          type: string
-#      steps:
-#        - run: echo ecr start
-#        - run:
-#            command: docker push $<<parameters.account-url>>/<<parameters.repo>>:${tag}
-#            name: Push image to Amazon ECR
-#        - run: echo ecr finish
+#
+#jobs:
+#  build:
+#    docker:
+#      - image: circleci/node:10 # the primary container, where your job's commands are run
+#        environment:
+#          REACT_APP_NODE_API_URL: $REACT_APP_NODE_API_URL
+#          REACT_APP_IMAGE_URI: $REACT_APP_IMAGE_URI
+#          DB_SCHEMA: $DB_SCHEMA
+#          DB_USER: $DB_USER
+#          DB_PASSWORD: $DB_PASSWORD
+#          PROD_DB_URL: $PROD_DB_URL
+#          DEV_DB_URL: $DEV_DB_URL
+#          TEST_DB_URL: $TEST_DB_URL
+#          MIGRATE_dbConnectionUri: $MIGRATE_dbConnectionUri
+#          JWT_SECRET: $JWT_SECRET
+#          GOOGLE_API_CLIENT_ID: $GOOGLE_API_CLIENT_ID
+#          GOOGLE_API_CLIENT_SECRET: $GOOGLE_API_CLIENT_SECRET
+#          GOOGLE_API_REDIRECT_URL: $GOOGLE_API_REDIRECT_URL
+#          GOOGLE_API_SCOPE: $GOOGLE_API_SCOPE
+#          AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+#          AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+#          AWS_REGION: $AWS_REGION
+#          AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID
+#
+#    steps:
+#      - run: echo step start
+#      - checkout # check out the code in the project directory
+#      - run: npm install
+#      - run: npm run lint
+#      - run: npm run test
+#      - run: npm run build
+#      - aws-s3/sync:
+#          from: dist
+#          to: 's3://moneydog-build/build'
+#          arguments: |
+#            --acl public-read
+#          overwrite: true
+#      - run: echo aws-s3-sync success
+#      - aws-s3/copy:
+#          from: dist/
+#          to: 's3://moneydog-build'
+#          arguments: '--dryrun'
