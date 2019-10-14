@@ -4,7 +4,7 @@ echo '#versioning'
 echo '`S3` 저장소에 올려 놓은 version.txt 파일을 읽어서 버전 확인 후 파일을 업데이트'
 
 # bash shell checker
-echo '현재 OS: ' $SHELL
+# echo '현재 OS: ' $SHELL
 
 # s3 에서 version.txt 파일 읽어오기
 dir=dist
