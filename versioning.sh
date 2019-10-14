@@ -24,13 +24,8 @@ do
   NEXT_VERSION_NUM=`expr $VERSION_NUM + 1`
 
   NEXT_VERSION=${NEXT_VERSION_NUM:0:1}\.${NEXT_VERSION_NUM:1:1}\.${NEXT_VERSION_NUM:2}
-  
-  echo "쌍따옴효1"
+
   sed -i -e 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
-  echo "쌍따옴효2"
-  sed -i'' 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
-  echo "쌍따옴효3"
-  sed -i '' -e 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
 
 done < $PWD/dist/version.txt
 echo -e "CURRENT_VERSION\t: $VERSION"
@@ -66,7 +61,7 @@ do
     value=${line##* } 
 
     next_app=\'${next:0:1}\.${next:1:1}\.${next:2}\.app.jsx\'
-    sed -i -e 's/'${value}'/'${next_app}'/' `$PWD/webpack.config.js`
+    sed -i -e 's/'${value}'/'${next_app}'/' "$PWD/webpack.config.js"
     break;
   fi  
 done < $PWD/webpack.config.js
@@ -86,7 +81,7 @@ do
     prod_path=$prod_path$next_version
     prod_path=$prod_path"app.jsx"
 
-    sed -i -e '' "s/$dev_path/$prod_path/g" `index.html`
+    sed -i -e 's/'${dev_path}'/'${prod_path}'/g' "$PWD/index.html"
   fi
 done < $PWD/index.html
 echo -e "index.html\t:" $prod_path
