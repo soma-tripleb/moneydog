@@ -5,8 +5,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import { google } from 'googleapis';
-import GmailSearchQuery from '../../../src/resources/static/GmailSearchQuery.json';
-import GmailApiInfo from '../../../src/resources/static/GmailApiInfo.json';
 
 describe('Gmail API 사용하기', () => {
   const useremail = 'dudrnxps1@gmail.com';
@@ -17,9 +15,9 @@ describe('Gmail API 사용하기', () => {
 
   describe('Gmail API OAuth 함수 만들기', () => {
     it('#oAuth2Client', (done) => {
-      const authential = (credential, refreshToken, callback) => {
-        const { client_id, client_secret, redirect_uri } = credential;
-        const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uri);
+      const authential = (refreshToken, callback) => {
+        const { GOOGLE_API_CLIENT_ID, GOOGLE_API_CLIENT_SECRET, GOOGLE_API_REDIRECT_URL } = process.env;
+        const oAuth2Client = new google.auth.OAuth2(GOOGLE_API_CLIENT_ID, GOOGLE_API_CLIENT_SECRET, GOOGLE_API_REDIRECT_URL);
 
         oAuth2Client.setCredentials(refreshToken);
 
