@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@1.0.11
+  slack: circleci/slack@x.y.z
 jobs:
   build:
     docker:
@@ -25,6 +26,10 @@ jobs:
           AWS_REGION: $AWS_REGION
 
     steps:
+      - slack/approval:
+          message: "CI approval message"
+          color: "#42e2f4"
+          webhhook: "webhook"
       - checkout # check out the code in the project directory
       - run: npm install
       - run: npm run lint
