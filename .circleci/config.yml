@@ -25,6 +25,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
           AWS_REGION: $AWS_REGION
 
+
     steps:
       - slack/approval:
           message: "시작 : circle ci 에 파이프 라인이 올러겄어요 !"
@@ -59,11 +60,3 @@ jobs:
           success_message: "s3 에 잘 올라갔습니다"
           failure_message: "실패했습니다."
           webhook: $SLACK_WEBHOOK
-
-
-
-
-
-
-
-
