@@ -14,5 +14,3 @@ RUN npm install
 COPY .babelrc ./
 COPY . .
 EXPOSE 5000
-# CMD는 명령어를 배열 형태로 배치하며 실제로 앱을 실행시키는 커맨드가 들어간다.
-CMD ["npm", "run","dev-server"]

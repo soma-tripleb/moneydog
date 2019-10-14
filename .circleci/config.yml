@@ -6,10 +6,10 @@ orbs:
 workflows:
   jimmy-custom-build:
     jobs:
-      - build-image
+      - build-image-push-image
 
 jobs:
-  build-image:
+  build-image-push-image:
     docker:
       - image: circleci/node:10 # the primary container, where your job's commands are run
         environment:
@@ -41,6 +41,12 @@ jobs:
       path:
         default: ./
         type: string
+      checkout:
+        default: true
+        type: boolean
+      create-repo:
+        default: false
+        type: boolean
       repo:
         default: moneydog
         type: string
@@ -50,6 +56,12 @@ jobs:
       extra-build-args:
         default: -t test
         type: string
+      workspace-root:
+        default: .
+        type: string
+      attach-workspace:
+        default: false
+        type: boolean
     steps:
       - checkout # check out the code in the project directory
       - run: npm install
@@ -68,22 +80,36 @@ jobs:
           to: 's3://moneydog-build'
           arguments: '--dryrun'
       - run: ls
-      - setup_remote_docker
-      - run: docker --version
-      - run:
-          command: |
-            docker_tag_args=""
-            IFS="," read -ra DOCKER_TAGS \<<< "<< parameters.tag >>"
-            for tag in "${DOCKER_TAGS[@]}"; do
-              docker_tag_args="$docker_tag_args -t $<<parameters.account-url>>/<<parameters.repo>>:$tag"
-            done
-            docker build \
-              <<#parameters.extra-build-args>><<parameters.extra-build-args>><</parameters.extra-build-args>> \
-              -f <<parameters.dockerfile>> \
-              $docker_tag_args \
-              <<parameters.path>>
-            name: Build docker image
-      - run: echo build success
-
-
-
+      - when:
+          condition: <<parameters.checkout>>
+          steps:
+            - checkout
+            - aws-cli/install
+            - aws-cli/configure:
+                aws-access-key-id: <<parameters.aws-access-key-id>>
+                aws-region: <<parameters.region>>
+                aws-secret-access-key: <<parameters.aws-secret-access-key>>
+                profile-name: <<parameters.profile-name>>
+            - when:
+                condition: <<parameters.attach-workspace>>
+                steps:
+                  - attach_workspace:
+                      at: <<parameters.workspace-root>>
+            - when:
+                condition: <<parameters.setup-remote-docker>>
+                steps:
+                  - setup_remote_docker
+            - ecr-login:
+                region: <<parameters.region>>
+            - build-image:
+                account-url: <<parameters.account-url>>
+                dockerfile: <<parameters.dockerfile>>
+                extra-build-args: <<parameters.extra-build-args>>
+                path: <<parameters.path>>
+                repo: <<parameters.repo>>
+                tag: <<parameters.tag>>
+            - push-image:
+                account-url: <<parameters.account-url>>
+                repo: <<parameters.repo>>
+                tag: <<parameters.tag>>
+      - run : echo build and push success
