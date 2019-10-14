@@ -7,7 +7,7 @@ workflows:
   build_and_push_deploy:
     jobs:
       - webpack-upload
-      - aws-ecr/build-and-push-image
+
 jobs:
   webpack-upload:
     docker:
@@ -32,7 +32,6 @@ jobs:
           AWS_REGION: $AWS_REGION
           AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID
     steps:
-      - run: echo step start
       - checkout # check out the code in the project directory
       - run: npm install
       - run: npm run lint
@@ -49,58 +48,3 @@ jobs:
           from: dist/
           to: 's3://moneydog-build'
           arguments: '--dryrun'
-
-  build-and-push-image:
-    parameters:
-      account-url:
-        default: AWS_ECR_ACCOUNT_URL
-        type: env_var_name
-      aws-access-key-id:
-        default: AWS_ACCESS_KEY_ID
-        type: env_var_name
-      aws-secret-access-key:
-        default: AWS_SECRET_ACCESS_KEY
-        type: env_var_name
-      dockerfile:
-        default: Dockerfile
-        type: string
-      executor:
-        default: default
-        description: executor to use for this job
-        type: executor
-      extra-build-args:
-        default: ''
-        description: >
-          Extra flags to pass to docker build. For examples, see
-          https://docs.docker.com/engine/reference/commandline/build
-        type: string
-      checkout:
-        default: true
-        type: boolean
-      region:
-        default: AWS_REGION
-        type: env_var_name
-      repo: "moneydog"
-      tag:
-        default: latest
-        type: string
-    steps:
-      - when:
-          condition: <<parameters.checkout>>
-          steps:
-            - checkout
-      - aws-cli/install
-      - aws-cli/configure:
-          aws-access-key-id: <<parameters.aws-access-key-id>>
-          aws-region: <<parameters.region>>
-          aws-secret-access-key: <<parameters.aws-secret-access-key>>
-          profile-name: <<parameters.profile-name>>
-      - build-image:
-          account-url: <<parameters.account-url>>
-          dockerfile: <<parameters.dockerfile>>
-          repo: <<parameters.repo>>
-          tag: <<parameters.tag>>
-      - push-image:
-          account-url: <<parameters.account-url>>
-          repo: <<parameters.repo>>
-          tag: <<parameters.tag>>
