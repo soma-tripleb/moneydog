@@ -6,7 +6,6 @@ orbs:
 workflows:
   jimmy-custom-build:
     jobs:
-#      - webpack-upload
       - build-image
 
 jobs:
@@ -69,6 +68,8 @@ jobs:
           to: 's3://moneydog-build'
           arguments: '--dryrun'
       - run: ls
+      - setup_remote_docker
+      - run: docker --version
       - run:
           command: |
             docker_tag_args=""
