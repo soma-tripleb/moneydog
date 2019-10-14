@@ -11,7 +11,7 @@ echo '현재 디렉터리 위치: ' $PWD
 dir=dist
 
 if [ ! -d $dir ]; then
-    mkdir $PWD/$dir
+    mkdir -m 755 $PWD/$dir
 fi
 
 curl "https://moneydog-build.s3.ap-northeast-2.amazonaws.com/build/version.txt" > ./dist/version.txt

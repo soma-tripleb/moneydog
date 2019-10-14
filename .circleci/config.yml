@@ -34,7 +34,6 @@ jobs:
       - checkout # check out the code in the project directory
       - run: npm install
       - run: npm run lint
-      - run: chmod 755 ./dist/version.txt
       - run: chmod 755 ./versioning.sh
       - run: chmod 755 ./package.json
       - run: chmod 755 ./webpack.config.js
