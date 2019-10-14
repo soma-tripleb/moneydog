@@ -7,7 +7,7 @@ workflows:
   jimmy-custom-build:
     jobs:
       - webpack-upload
-      - build-and-push-image
+      - build-image
 
 jobs:
   webpack-upload:
