@@ -35,6 +35,8 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: chmod 755 ./versioning.sh
+      - run: chmod 755 ./package.json
+      - run: chmod 755 ./webpack.config.js
       - run: ls -al
       - run: sudo ./versioning.sh run
       - run: npm run test

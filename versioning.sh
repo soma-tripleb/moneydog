@@ -82,7 +82,7 @@ do
     prod_path=$prod_path$next_version
     prod_path=$prod_path"app.jsx"
 
-    sed -i '' "s/$dev_path/$prod_path/g" `index.html`
+    sudo sed -i '' "s/$dev_path/$prod_path/g" `index.html`
   fi
 done < $PWD/index.html
 echo "index.html\t:" $prod_path
