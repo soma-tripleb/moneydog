@@ -11,8 +11,7 @@
     "test": "NODE_ENV=test mocha --require @babel/register --timeout 12000 --exit server/test/*",
     "lint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js server/ client/",
     "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
-    "test-google": "mocha --require @babel/register ./server/test/util/google/googleApiTest.spec.js",
-    "spec-test": "mocha --exit --require @babel/register --timeout 12000 --recursive ./**/subsTmplController.spec.js"
+    "spec-test": "cross-env NODE_ENV=test mocha --require @babel/register --timeout 120000 --recursive ./**/subsTmplService.spec.js"
   },
   "author": "tripleB",
   "license": "MIT",
