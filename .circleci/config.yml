@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@1.0.11
+  slack: circleci/slack@3.4.0
 jobs:
   build:
     docker:
@@ -24,13 +25,25 @@ jobs:
           AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
           AWS_REGION: $AWS_REGION
 
+
     steps:
+      - slack/approval:
+          message: "시작 : circle ci 에 파이프 라인이 올러겄어요 !"
+          color: "#42e2f4"
+          webhook: $SLACK_WEBHOOK
       - checkout # check out the code in the project directory
       - run: npm install
       - run: npm run lint
       - run: npm run test
       - run: npm run build
-      - run: echo success
+#      - run: echo success
+      - slack/notify:
+          message: " Lint Test Build 에 성공 했습니다. :smile:"
+          color: "#f4e242"
+          author_name: "Money Dog"
+          title: "Lint-Test-Build 과정 에 성공 했습니다."
+          webhook: $SLACK_WEBHOOK
+          footer: "Money Dog"
       - aws-s3/sync:
           from: dist
           to: 's3://moneydog-build/build'
@@ -42,3 +55,14 @@ jobs:
           from: dist/
           to: 's3://moneydog-build'
           arguments: '--dryrun'
+      - slack/status:
+          fail_only: true
+          success_message: "s3 에 잘 올라갔습니다"
+          failure_message: "실패했습니다."
+          webhook: $SLACK_WEBHOOK
+
+
+
+
+
+
