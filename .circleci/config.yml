@@ -1,9 +1,6 @@
 version: 2.1
-
 orbs:
   aws-s3: circleci/aws-s3@1.0.11
-  slack: circleci/slack@3.4.0
-
 jobs:
   build:
     docker:
@@ -27,26 +24,23 @@ jobs:
           AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
           AWS_REGION: $AWS_REGION
 
-      steps:
-        - slack/approval-notification:
-            message: Pending approval
-            webhook: webhook
-        - checkout # check out the code in the project directory
-        - run: npm install
-        - run: npm run lint
-        - run: npm run test
-        - run: npm run build
-        - run: echo success
-        - aws-s3/sync:
-            from: dist
-            to: 's3://moneydog-build/build'
-            arguments: |
-              --acl public-read
-            overwrite: true
-        - run: echo aws-s3-sync success
-        - aws-s3/copy:
-            from: dist/
-            to: 's3://moneydog-build'
-            arguments: '--dryrun'
+    steps:
+      - checkout # check out the code in the project directory
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build
+      - run: echo success
+      - aws-s3/sync:
+          from: dist
+          to: 's3://moneydog-build/build'
+          arguments: |
+            --acl public-read
+          overwrite: true
+      - run: echo aws-s3-sync success
+      - aws-s3/copy:
+          from: dist/
+          to: 's3://moneydog-build'
+          arguments: '--dryrun'
 
 
