@@ -1,7 +1,8 @@
 version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@1.0.11
-  aws-ecr: circleci/aws-ecr@6.5.0
+  aws-ecr: circleci/aws-ecr@0.0.10
+#  aws-ecr: circleci/aws-ecr@6.5.0
 jobs:
   build:
     docker:
@@ -43,27 +44,32 @@ jobs:
           from: dist/
           to: 's3://moneydog-build'
           arguments: '--dryrun'
+      - aws-ecr/build_and_push_image:
+          account-url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+          repo: "${AWS_RESOURCE_NAME_PREFIX}"
+          region: ${AWS_REGION}
+          tag: "jaeyeon-ecr-test"
 
-    push-image:
-      description: Push a container image to the Amazon ECR registry
-      parameters:
-        account-url:
-          default: AWS_ECR_ACCOUNT_URL
-          description: |
-            Env var storing Amazon ECR account URL that maps to an AWS account, e.g. {awsAccountNum}.dkr.ecr.us-west-2.amazonaws.com defaults to AWS_ECR_ACCOUNT_URL
-          type: env_var_name
-        repo:
-          default: moneydog
-          description: Name of an Amazon ECR repository
-          type: string
-        tag:
-          default: latest
-          description: A comma-separated string containing docker image tags (default
-            = latest)
-          type: string
-      steps:
-        - run: echo ecr start
-        - run:
-            command: docker push $<<parameters.account-url>>/<<parameters.repo>>:${tag}
-            name: Push image to Amazon ECR
-        - run: echo ecr finish
+#    push-image:
+#      description: Push a container image to the Amazon ECR registry
+#      parameters:
+#        account-url:
+#          default: AWS_ECR_ACCOUNT_URL
+#          description: |
+#            Env var storing Amazon ECR account URL that maps to an AWS account, e.g. {awsAccountNum}.dkr.ecr.us-west-2.amazonaws.com defaults to AWS_ECR_ACCOUNT_URL
+#          type: env_var_name
+#        repo:
+#          default: moneydog
+#          description: Name of an Amazon ECR repository
+#          type: string
+#        tag:
+#          default: latest
+#          description: A comma-separated string containing docker image tags (default
+#            = latest)
+#          type: string
+#      steps:
+#        - run: echo ecr start
+#        - run:
+#            command: docker push $<<parameters.account-url>>/<<parameters.repo>>:${tag}
+#            name: Push image to Amazon ECR
+#        - run: echo ecr finish
