@@ -35,7 +35,7 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: chmod 755 ./versioning.sh
-      - run: sh ./versioning.sh
+      - run: ./versioning.sh run
       - run: npm run test
       - run: npm run build
       - run: cat ./index.html
