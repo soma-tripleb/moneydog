@@ -25,15 +25,13 @@ do
   NEXT_VERSION_NUM=`expr $VERSION_NUM + 1`
 
   NEXT_VERSION=${NEXT_VERSION_NUM:0:1}\.${NEXT_VERSION_NUM:1:1}\.${NEXT_VERSION_NUM:2}
-
-  sed -i -e 's/'${VERSION}'/'${NEXT_VERSION}'/' `$PWD/dist/version.txt`
-  sed -i'' 's/'${VERSION}'/'${NEXT_VERSION}'/' `$PWD/dist/version.txt`
-  sed -i '' -e 's/'${VERSION}'/'${NEXT_VERSION}'/' `$PWD/dist/version.txt`
-
+  
+  echo "무따옴효"
   sed -i -e 's/'${VERSION}'/'${NEXT_VERSION}'/' $PWD/dist/version.txt
   sed -i'' 's/'${VERSION}'/'${NEXT_VERSION}'/' $PWD/dist/version.txt
   sed -i '' -e 's/'${VERSION}'/'${NEXT_VERSION}'/' $PWD/dist/version.txt
 
+  echo "쌍따옴효"
   sed -i -e 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
   sed -i'' 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
   sed -i '' -e 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
@@ -41,6 +39,15 @@ do
 done < $PWD/dist/version.txt
 echo "CURRENT_VERSION\t: $VERSION"
 echo "NEXT_VERSION\t: $NEXT_VERSION"
+
+echo "박영환"
+echo $PWD/dist/version.txt
+echo "쌍따옴효"
+echo "$PWD/dist/version.txt"
+echo "정성연"
+cat $PWD/dist/version.txt
+echo "쌍따옴효"
+cat "$PWD/dist/version.txt"
 
 # package.json
 keyword1="\"version\""
