@@ -27,6 +27,16 @@ do
   NEXT_VERSION=${NEXT_VERSION_NUM:0:1}\.${NEXT_VERSION_NUM:1:1}\.${NEXT_VERSION_NUM:2}
 
   sed -i -e 's/'${VERSION}'/'${NEXT_VERSION}'/' `$PWD/dist/version.txt`
+  sed -i'' 's/'${VERSION}'/'${NEXT_VERSION}'/' `$PWD/dist/version.txt`
+  sed -i '' -e 's/'${VERSION}'/'${NEXT_VERSION}'/' `$PWD/dist/version.txt`
+
+  sed -i -e 's/'${VERSION}'/'${NEXT_VERSION}'/' $PWD/dist/version.txt
+  sed -i'' 's/'${VERSION}'/'${NEXT_VERSION}'/' $PWD/dist/version.txt
+  sed -i '' -e 's/'${VERSION}'/'${NEXT_VERSION}'/' $PWD/dist/version.txt
+
+  sed -i -e 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
+  sed -i'' 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
+  sed -i '' -e 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
 
 done < $PWD/dist/version.txt
 echo "CURRENT_VERSION\t: $VERSION"
@@ -46,7 +56,7 @@ do
     next=`expr $result + 1`
     next_version=\"${next:0:1}\.${next:1:1}\.${next:2}\"\,
 
-    sed -i '' 's/'${value}'/'${next_version}'/' `$PWD/package.json`
+    sed -i -e 's/'${value}'/'${next_version}'/' "$PWD/package.json"
     break;
   fi
 done < $PWD/package.json
