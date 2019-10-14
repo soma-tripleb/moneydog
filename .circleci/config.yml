@@ -79,7 +79,7 @@ jobs:
         default: Dockerfile
         type: string
       path:
-        default: .
+        default: ./
         type: string
       repo:
         default: moneydog
@@ -91,6 +91,8 @@ jobs:
         default: -t test
         type: string
     steps:
+      - run: ls
+      - run: cd server && ls
       - run:
           command: |
             docker_tag_args=""
