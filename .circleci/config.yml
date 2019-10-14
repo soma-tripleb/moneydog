@@ -51,7 +51,7 @@ jobs:
           arguments: '--dryrun'
   build-image:
     docker:
-      - images: circleci/node:10
+      - image: circleci/node:10
         environment:
           REACT_APP_NODE_API_URL: $REACT_APP_NODE_API_URL
           REACT_APP_IMAGE_URI: $REACT_APP_IMAGE_URI
@@ -82,13 +82,13 @@ jobs:
         default: .
         type: string
       repo:
-        description: 'Name of an Amazon ECR repo'
+        default: moneydog
         type: string
       tag:
         default: latest
         type: string
       extra-build-args:
-        default: "-t test"
+        default: -t test
         type: string
     steps:
       - run:
