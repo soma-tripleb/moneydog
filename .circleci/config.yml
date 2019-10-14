@@ -37,7 +37,8 @@ jobs:
       - run: chmod 755 ./versioning.sh
       - run: sudo ./versioning.sh run
       - run: npm run test
-      - run: npm run build
+      - run: sudo npm run build
+      - run: ls -al ./dist
       - run: cat ./index.html
 #      - run: echo success
       - slack/notify:
