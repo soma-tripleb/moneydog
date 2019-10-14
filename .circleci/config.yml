@@ -47,3 +47,6 @@ jobs:
           from: dist/
           to: 's3://moneydog-build'
           arguments: '--dryrun'
+
+
+
