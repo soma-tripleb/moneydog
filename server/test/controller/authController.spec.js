@@ -149,7 +149,7 @@ describe('auth controller test', () => {
       request(app)
         .post('/auth/signUp')
         .send({
-          userInfo: {email: 'tjddus1109@fkii.org', password: '!qwer1234', nickname: 'admin'}
+          userInfo: {email: 'tjddus1109@fkii.org', password: '!hello1234', nickname: 'admin'}
         })
         .expect('Content-Type', /json/)
         .expect(201)
