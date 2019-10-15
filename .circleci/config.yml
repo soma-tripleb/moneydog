@@ -3,6 +3,7 @@ orbs:
   aws-s3: circleci/aws-s3@1.0.11
   aws-ecr: circleci/aws-ecr@6.5.0
   aws-cli: circleci/aws-cli@0.1.15
+  slack: circleci/slack@3.4.0
 
 workflows:
   jimmy-custom-build:
@@ -74,6 +75,10 @@ jobs:
         default: .
         type: string
     steps:
+      - slack/approval:
+          message: "시작 : circle ci 에 파이프 라인이 올러겄어요 !"
+          color: "#42e2f4"
+          webhook: $SLACK_WEBHOOK
       - checkout
       - setup_remote_docker
       - run: npm install
@@ -129,3 +134,8 @@ jobs:
           account-url: <<parameters.account-url>>
           repo: <<parameters.repo>>
           tag: <<parameters.tag>>
+      - slack/status:
+          fail_only: true
+          success_message: "ECR에 image가 잘 올라갔습니다"
+          failure_message: "실패했습니다."
+          webhook: $SLACK_WEBHOOK

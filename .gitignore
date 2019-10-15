@@ -27,3 +27,6 @@ token.json
 
 # Dockerfile
 docker-compose.yaml
+
+# build
+dist/

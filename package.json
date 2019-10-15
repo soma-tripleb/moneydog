@@ -5,14 +5,13 @@
   "main": "index.js",
   "scripts": {
     "dev-server": "nodemon --exec babel-node ./server/bin/www",
-    "dev-client": "webpack-dev-server --hot --host 0.0.0.0",
+    "dev-client": "NODE_ENV=development webpack-dev-server --hot --host 0.0.0.0",
     "dev": "npm run dev-server && npm run dev-client",
     "build": "webpack-cli",
     "test": "NODE_ENV=test mocha --require @babel/register --timeout 12000 --exit server/test/*",
     "lint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js server/ client/",
     "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
-    "test-google": "mocha --require @babel/register ./server/test/util/google/googleApiTest.spec.js",
-    "spec-test": "mocha --exit --require @babel/register --timeout 12000 --recursive ./**/subsTmplController.spec.js"
+    "spec-test": "cross-env NODE_ENV=test mocha --require @babel/register --timeout 120000 --recursive ./**/subsTmplService.spec.js"
   },
   "author": "tripleB",
   "license": "MIT",
@@ -72,6 +71,7 @@
     "@babel/preset-env": "^7.5.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.6.2",
+    "@webpack-cli/migrate": "^0.1.8",
     "acorn": "^7.0.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
@@ -86,11 +86,13 @@
     "nodemon": "^1.19.1",
     "react-bootstrap": "^1.0.0-beta.11",
     "react-hot-loader": "^4.12.6",
+    "semver": "^6.3.0",
     "supertest": "^4.0.2",
     "swagger-jsdoc": "^3.4.0",
     "swagger-ui-express": "^4.0.7",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6",
-    "webpack-dev-server": "^3.7.2"
+    "webpack-dev-server": "^3.7.2",
+    "webpack-manifest-plugin": "^2.2.0"
   }
 }

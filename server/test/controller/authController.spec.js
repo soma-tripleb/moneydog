@@ -17,22 +17,7 @@ describe('auth controller test', () => {
           password: '!qwer1234',
           nickname: 'admin',
         }
-      })
-      .expect((res)=>{
-        console.log(res,'before ok');
       });
-    await request(app)
-        .post('/auth/signUp')
-        .send({
-          userInfo: {
-            email: `admin2@fkii.org`,
-            password: '!qwer1234',
-            nickname: 'admin',
-          }
-        })
-        .expect((res)=>{
-          console.log(res,'before ok');
-        });
   });
 
   after(()=>{
@@ -164,25 +149,10 @@ describe('auth controller test', () => {
       request(app)
         .post('/auth/signUp')
         .send({
-          userInfo: {email: 'tjddus1109@fkii.org', password: '!qwer1234', nickname: 'admin', subscription: [
-            {
-              seq: 1,
-              name: 'test-name1',
-              logoURI: '22f48e58d38c794afc74a7e666ffcfc1.png',
-              price: 99999,
-              paymentDate: '2019/09/26',
-              channel: 'in-app',
-              pricePlan: {
-                title: 'test-title',
-                price: '99999',
-                period: '1달',
-                channel: 'site',
-              },
-            }
-          ]}
+          userInfo: {email: 'tjddus1109@fkii.org', password: '!qwer1234', nickname: 'admin'}
         })
         .expect('Content-Type', /json/)
-        // .expect(201)
+        .expect(201)
         .expect((response)=>{
           expect(response.body).has.all.keys(['status', 'message', 'success', 'token']);
           expect(response.body.status).to.equal(201);
