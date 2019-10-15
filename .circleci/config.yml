@@ -75,7 +75,7 @@ jobs:
         type: string
     steps:
       - checkout
-      - set_remote_docker
+      - setup_remote_docker
       - run: npm install
       - run: npm run lint
       - run: npm run test
