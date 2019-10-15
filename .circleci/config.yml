@@ -75,6 +75,7 @@ jobs:
         type: string
     steps:
       - checkout
+      - set_remote_docker
       - run: npm install
       - run: npm run lint
       - run: npm run test
@@ -85,12 +86,10 @@ jobs:
           arguments: |
             --acl public-read
           overwrite: true
-      - run: echo aws-s3-sync success
       - aws-s3/copy:
           from: dist/
           to: 's3://moneydog-build'
           arguments: '--dryrun'
-      - run: ls
       - when:
           condition: <<parameters.checkout>>
           steps:
