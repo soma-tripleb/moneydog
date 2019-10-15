@@ -11,7 +11,7 @@ workflows:
       - build-and-push-image
 jobs:
   build-and-push-image:
-    docker:
+    docker: # executor
       - image: circleci/node:10 # the primary container, where your job's commands are run
         environment:
           REACT_APP_NODE_API_URL: $REACT_APP_NODE_API_URL
@@ -87,6 +87,7 @@ jobs:
       - run: sudo ./versioning.sh run
       - run: npm run test
       - run: sudo npm run build
+      - run: ls
       - slack/notify:
           message: " Lint Test Build 에 성공 했습니다. :smile:"
           color: "#f4e242"
