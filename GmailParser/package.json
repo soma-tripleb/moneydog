@@ -7,16 +7,26 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node ./app.js"
+    "start": "nodemon --exec babel-node app.js",
+    "test": "NODE_ENV=test mocha --require @babel/register ./test/**/**.spec.js ",
+    "test-gmail-api": "NODE_ENV=test mocha --require @babel/register ./test/src/util/**.spec.js "
   },
   "author": "triple-b",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
+    "googleapis": "^43.0.0",
+    "pm2": "^4.0.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
     "@babel/core": "^7.6.4",
     "@babel/node": "^7.6.3",
+    "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.6.3",
-    "express": "^4.17.1",
-    "googleapis": "^43.0.0"
+    "@babel/preset-stage-2": "^7.0.0",
+    "@babel/register": "^7.6.2",
+    "mocha": "^6.2.1",
+    "nodemon": "^1.19.3"
   }
 }
