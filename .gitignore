@@ -4,7 +4,7 @@
 
 node_modules/
 package-lock.json
-dist/
+dist
 
 # api
 api/node_modules/
@@ -27,6 +27,3 @@ token.json
 
 # Dockerfile
 docker-compose.yaml
-
-# build
-dist/
