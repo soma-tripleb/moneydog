@@ -106,9 +106,9 @@ jobs:
           steps:
             - attach_workspace:
                 at: <<parameters.workspace-root>>
-      - ecr-login:
+      - aws-ecr/ecr-login:
           region: <<parameters.region>>
-      - build-image:
+      - aws-ecr/build-image:
           account-url: <<parameters.account-url>>
           dockerfile: <<parameters.dockerfile>>
           extra-build-args: <<parameters.extra-build-args>>
@@ -126,7 +126,7 @@ jobs:
                 aws ecr create-repository --profile <<parameters.profile-name>>
                 --region $<<parameters.region>> --repository-name
                 <<parameters.repo>>
-      - push-image:
+      - aws-ecr/push-image:
           account-url: <<parameters.account-url>>
           repo: <<parameters.repo>>
           tag: <<parameters.tag>>
