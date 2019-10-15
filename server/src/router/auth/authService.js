@@ -7,13 +7,11 @@ import {checkedPasswordForm} from '../../../../public/userInfoCheck';
 import {createJWT, checkJWT} from '../../security/jwtAuthenticationToken';
 
 const register = async (userInfo) => {
-
   // pw check
   const pwCheckResult = checkedPasswordForm(userInfo.password);
   if (typeof pwCheckResult === 'string') {
     return {status: 400, success: false, message: pwCheckResult};
   }
-
   // user id check
   const user = await AuthRepository.getUserByEmail(userInfo.email);
   if (user !== null) {
