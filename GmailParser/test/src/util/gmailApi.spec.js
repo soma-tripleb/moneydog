@@ -9,7 +9,7 @@ import { google } from 'googleapis';
 
 describe('Gmail API 사용하기', () => {
 
-  const useremail = 'dudrnxps1@gmail.com';
+  const USER_EMAIL = 'dudrnxps1@gmail.com';
   const {
     REFRESH_TOKEN_SAMPLE,
     GOOGLE_API_CLIENT_ID,
@@ -17,7 +17,8 @@ describe('Gmail API 사용하기', () => {
     GOOGLE_API_REDIRECT_URL } = process.env;
 
   const messageList = [];
-  let auth;
+
+  let _AUTH;
 
   describe('API 사용을 위한 변수 정보 확인', () => {
     it('`refresh_token` / `client_id` / `client_secret` / `redirect_url`', (done) => {
@@ -31,76 +32,64 @@ describe('Gmail API 사용하기', () => {
   });
 
   describe('Gmail API OAuth 인증 함수 만들기', () => {
-    it('#oAuth2Client', (done) => {
+    it('#oAuth2Client', async (done) => {
 
-      const authential = (refreshToken, callback) => {
-        const { GOOGLE_API_CLIENT_ID, GOOGLE_API_CLIENT_SECRET, GOOGLE_API_REDIRECT_URL } = process.env;
-
+      const authential = (refreshToken, err) => {
         const oAuth2Client = new google.auth.OAuth2(
           GOOGLE_API_CLIENT_ID,
           GOOGLE_API_CLIENT_SECRET,
-          GOOGLE_API_REDIRECT_URL );
+          GOOGLE_API_REDIRECT_URL);
 
         oAuth2Client.setCredentials(refreshToken);
 
-        callback(oAuth2Client);
-      };
-
-      const test = (auth, err) => {
-        assert.equal(auth._clientId, GOOGLE_API_CLIENT_ID);
-        assert.equal(auth._clientSecret, GOOGLE_API_CLIENT_SECRET);
-        assert.equal(auth.redirectUri, GOOGLE_API_REDIRECT_URL);
-
         if (err) throw done(err);
+
+        return oAuth2Client;
       };
 
-      authential(process.env.REFRESH_TOKEN_SAMPLE, test);
+      _AUTH = await authential('dsa');
 
-      done();
-    });
-  });
+      const gmail = await google.gmail({ version: 'v1', auth: _AUTH });
 
-  describe('사용자의 `refresh token 으로 API 사용', () => {
-    it('#getMessageList', (done) => {
+      console.log(_AUTH);
 
-      const oauth2Client = new google.auth.OAuth2(
-        process.env.GOOGLE_API_CLIENT_ID,
-        process.env.GOOGLE_API_CLIENT_SECRET,
-        process.env.GOOGLE_API_REDIRECT_URL,
-      );
-
-      oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN_SAMPLE });
-      auth = oauth2Client;
-
-      google.gmail({ version: 'v1', auth: oauth2Client })
-        .users.messages.list({ 'userId': useremail, 'q': GMAIL_SEARCH_QUERY.APPLE })
-        .then((result) => {
+      gmail.users.messages.list({ 'userId': USER_EMAIL, 'q': GMAIL_SEARCH_QUERY.APPLE })
+        .then((result, err) => {
           assert.equal(result.status, 200);
           assert.equal(result.statusText, 'OK');
 
           result.data.messages.map((info) => {
+            console.log(info);
             messageList.push(info.id);
           });
 
+          if (err) throw done(err);
           done();
         })
-        .catch((err) => {
-          throw done(err);
-        });
+        .catch((err) => { throw done(err); });
+
+    });
+  });
+
+  describe('만든 OAuth 함수로 Gmail Message 불러오기', () => {
+    it('#getMessageList', (done) => {
+      done();
     });
   });
 
   describe('Message 목록으로 내용 가져오기', () => {
-    it('getMessage', (done) => {
-      const gmail = google.gmail({ version: 'v1', auth: auth });
+    it('#getMessage', (done) => {
+
+      const gmail = google.gmail({ version: 'v1', auth: _AUTH });
 
       messageList.some(async (message) => {
-        const result = await gmail.users.messages.get({ 'userId': useremail, 'id': message });
+        const result = await gmail.users.messages.get({ 'userId': USER_EMAIL, 'id': message });
 
         if (message !== result.data.id) throw done(err);
       });
 
       done();
+
     });
   });
 });
