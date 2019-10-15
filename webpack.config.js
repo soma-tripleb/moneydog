@@ -83,6 +83,6 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '1.0.0.app.jsx'
+    filename: 'app.jsx'
   },
 };
