@@ -25,7 +25,7 @@ class List extends Component {
     const { subscriptionList, subscriptionByDateMap } = this.state;
 
     subscriptionList.map((subscription) => {
-      const date = moment(subscription.paymentDate).date();
+      const date = moment(subscription.paymentDate, 'YYYY/MM/DD').date();
 
       let tempList = [];
 

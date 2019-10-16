@@ -28,10 +28,15 @@ class SubscribingInfo extends Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     const userSeletedList = this.props.USERS.tempSubscriptions;
 
     this.getUserSubsList(userSeletedList);
+  };
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount()');
+
   };
 
   getUserSubsList = (userSeletedList) => {

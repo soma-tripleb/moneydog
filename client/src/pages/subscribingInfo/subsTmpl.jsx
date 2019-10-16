@@ -19,7 +19,7 @@ class SubsTmpl extends Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     const subsName = this.props.info.name;
 
     this.setState({
