@@ -10,7 +10,6 @@ import { TEST_USER_SELECTED_SUBS, TEST_USER_SUBSTMPL_INFO_LIST } from './sample/
 
 import './subscribingInfo.css';
 import userActions from '../../redux/actions/userAction';
-import authActions from '../../redux/actions/authAction';
 
 const NOW = DateUtil.NOW();
 
@@ -28,10 +27,15 @@ class SubscribingInfo extends Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     const userSeletedList = this.props.USERS.tempSubscriptions;
 
-    this.getUserSubsList(userSeletedList);
+    if (userSeletedList.length)
+      this.getUserSubsList(userSeletedList);
+  };
+
+  componentWillUnmount() {
+    this.props.reduxDeleteTempSubscriptions();
   };
 
   getUserSubsList = (userSeletedList) => {
@@ -68,7 +72,7 @@ class SubscribingInfo extends Component {
     e.preventDefault();
 
     const { userInputList } = this.state;
-    const { reduxInsertUserSubscriptions, reduxDeleteTempSubscriptions, reduxFinishAddSubsStep, history} = this.props;
+    const { reduxInsertUserSubscriptions , history} = this.props;
 
     userInputList.some((info) => {
       if (info.price === '') {
@@ -87,14 +91,12 @@ class SubscribingInfo extends Component {
       }
     });
 
-    await reduxInsertUserSubscriptions(userInputList);
-
-    const result = await SubsTmplService.updateUserSubsInfo(this.props.USERS.subscriptions);
-
-    reduxDeleteTempSubscriptions();
+    console.log(this.props.USERS.subscriptions);
+    console.log(userInputList);
+    const result = await SubsTmplService.updateUserSubsInfo(userInputList);
 
     if (result.data.status === 200) {
-      reduxFinishAddSubsStep();
+      await reduxInsertUserSubscriptions(userInputList);
       history.push('/user/dashboard');
     } else {
       console.log(result);
@@ -173,7 +175,7 @@ class SubscribingInfo extends Component {
       </>
     );
   }
-};
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -183,9 +185,6 @@ const mapDispatchToProps = (dispatch) => {
     reduxDeleteTempSubscriptions: () => {
       dispatch(userActions.deleteTempSubscriptions());
     },
-    reduxFinishAddSubsStep: ()=>{
-      dispatch(authActions.finishAddSubsStep());
-    }
   };
 };
 
