@@ -99,8 +99,6 @@ jobs:
       - aws-s3/sync:
           from: dist
           to: 's3://moneydog-build/build'
-          arguments: |
-            --acl public-read
           overwrite: true
       - aws-s3/copy:
           from: ./index.html
