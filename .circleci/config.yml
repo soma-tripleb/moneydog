@@ -3,7 +3,6 @@ orbs:
   aws-s3: circleci/aws-s3@1.0.11
   aws-ecr: circleci/aws-ecr@6.5.0
   aws-cli: circleci/aws-cli@0.1.15
-  aws-ecs: circleci/aws-ecs@0.0.18
   slack: circleci/slack@3.4.0
 
 workflows:
@@ -104,6 +103,10 @@ jobs:
             --acl public-read
           overwrite: true
       - aws-s3/copy:
+          from: ./index.html
+          to: 's3://moneydog-build'
+          arguments: '--dryrun'
+      - aws-s3/copy:
           from: dist/
           to: 's3://moneydog-build'
           arguments: '--dryrun'
@@ -151,9 +154,3 @@ jobs:
           success_message: "ECR에 image가 잘 올라갔습니다"
           failure_message: "실패했습니다."
           webhook: $SLACK_WEBHOOK
-
-
-
-
-
-
