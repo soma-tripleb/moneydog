@@ -16,6 +16,12 @@ class Head extends Component {
       return (
         <>
           <li className="nav-item">
+            <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/user/subscribing-Info" className="nav-link">Subscribing Info</Link>
+          </li>
+          <li className="nav-item">
             <Link to="/user/dashboard" className="nav-link">Dashboard</Link>
           </li>
           <li className="nav-item">
@@ -23,17 +29,6 @@ class Head extends Component {
           </li>
           <li className="nav-item logout">
             <a onClick={this.logout} className="nav-link">Logout</a>
-          </li>
-        </>
-      );
-    } else if (this.props.status === 'ADD_SUBS_STEP') {
-      return (
-        <>
-          <li className="nav-item">
-            <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/user/subscribing-Info" className="nav-link">Subscribing Info</Link>
           </li>
         </>
       );

@@ -57,13 +57,13 @@ keyword2="app.jsx"
 while read line
 do
   if [[ "$line" == *"${keyword2}"* ]];then
-    key=${line%%: *} 
-    value=${line##* } 
+    key=${line%%: *}
+    value=${line##* }
 
     next_app=\'${next:0:1}\.${next:1:1}\.${next:2}\.app.jsx\'
     sed -i -e 's/'${value}'/'${next_app}'/' "$PWD/webpack.config.js"
     break;
-  fi  
+  fi
 done < $PWD/webpack.config.js
 echo -e "filename\t:" $next_app | tr -d "\'"
 
@@ -76,7 +76,7 @@ do
 
     next_version=${next:0:1}\.${next:1:1}\.${next:2}\.
 
-    dev_path="\.\/app\.jsx"
+    dev_path="\.\.\/app\.jsx"
     prod_path="https:\/\/moneydog-build.s3.ap-northeast-2.amazonaws.com\/"
     prod_path=$prod_path$next_version
     prod_path=$prod_path"app.jsx"
