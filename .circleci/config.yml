@@ -11,7 +11,7 @@ workflows:
       - build-and-push-image
 jobs:
   build-and-push-image:
-    docker:
+    docker: # executor
       - image: circleci/node:10 # the primary container, where your job's commands are run
         environment:
           REACT_APP_NODE_API_URL: $REACT_APP_NODE_API_URL
@@ -97,8 +97,6 @@ jobs:
       - aws-s3/sync:
           from: dist
           to: 's3://moneydog-build/build'
-          arguments: |
-            --acl public-read
           overwrite: true
       - aws-s3/copy:
           from: dist/
@@ -148,9 +146,3 @@ jobs:
           success_message: "ECR에 image가 잘 올라갔습니다"
           failure_message: "실패했습니다."
           webhook: $SLACK_WEBHOOK
-
-
-
-
-
-

@@ -49,11 +49,10 @@ const deleteAllUser = () => {
   return UserSchema.User.deleteMany({});
 };
 
-const updateMany = (email, subsInfoList) => {
-  console.log(`updateMany value ${JSON.stringify(subsInfoList)}`);
-  return UserSchema.User.updateMany(
+const update = (email, subsInfoList) => {
+  return UserSchema.User.update(
     { email: email },
-    { $set: { subscription: subsInfoList } },
+    { $push: { subscription: subsInfoList } },
     { runValidators: true }
   ).then((result) => {
     return { status: 201, success: true, message: result };
@@ -68,5 +67,5 @@ export default {
   saveOne,
   deleteOne,
   deleteAllUser,
-  updateMany,
+  update,
 };

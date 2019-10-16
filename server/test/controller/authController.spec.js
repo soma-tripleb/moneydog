@@ -1,8 +1,8 @@
 import '@babel/polyfill';
+import userRepository from '../../src/router/user/userRepository';
 
 import chai from 'chai';
 import request from 'supertest';
-import {deleteOne} from '../../src/router/user/userRepository';
 const app = require('../../app');
 const expect = chai.expect;
 
@@ -21,8 +21,8 @@ describe('auth controller test', () => {
   });
 
   after(()=>{
-    deleteOne('tjddus1109@fkii.org');
-    deleteOne('admin@fkii.org');
+    userRepository.deleteOne('tjddus1109@fkii.org');
+    userRepository.deleteOne('admin@fkii.org');
   });
 
   describe('POST /auth/signUp TEST CASE', () => {
