@@ -88,7 +88,7 @@ jobs:
       - run: npm run test
       - run: sudo npm run build
       - run: ls
-      - run: cat ./index.html
+      - run: copy ./index.html ./dist
       - slack/notify:
           message: " Lint Test Build 에 성공 했습니다. :smile:"
           color: "#f4e242"
@@ -96,16 +96,18 @@ jobs:
           title: "Lint-Test-Build 과정 에 성공 했습니다."
           webhook: $SLACK_WEBHOOK
           footer: "Money Dog"
-      - run: echo before sync && ls
+      - aws-s3/sync:
+          from: ./index.html
+          to: 's3://moneydog-build'
+          overwrite: true
+      - aws-s3/copy:
+          from: dist/
+          to: 's3://moneydog-build'
+          arguments: '--dryrun'
       - aws-s3/sync:
           from: dist
           to: 's3://moneydog-build/build'
           overwrite: true
-      - run: echo after sync && ls
-      - aws-s3/copy:
-          from: ../index.html
-          to: 's3://moneydog-build'
-          arguments: '--dryrun'
       - aws-s3/copy:
           from: dist/
           to: 's3://moneydog-build'
