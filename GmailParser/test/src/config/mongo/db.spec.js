@@ -7,7 +7,7 @@ import mongoDB from '../../../../src/config/mongo/db';
 
 dotenv.config();
 
-describe('MongoDB TEST', () => {
+describe('`db.spec.js`', () => {
 
   let PRODUCTION_DB_URL;
   let DEVELOPMENT_DB_URL;
@@ -20,31 +20,58 @@ describe('MongoDB TEST', () => {
   });
 
   describe('Connection Info 확인', () => {
-    it('`.env` 파일 설정 정보 체크', (done) => {
-      assert.equal(PRODUCTION_DB_URL, 'moneydog-test-p9fsb.mongodb.net/prod?retryWrites=true&w=majority');
-      assert.equal(DEVELOPMENT_DB_URL, 'moneydog-test-p9fsb.mongodb.net/dev?retryWrites=true&w=majority');
-      assert.equal(TEST_DB_URL, 'moneydog-test-p9fsb.mongodb.net/test?retryWrites=true&w=majority');
+    it('`.env` 파일 설정 정보 체크', () => {
 
-      done();
+      return new Promise((resolve) => {
+
+        assert.equal(PRODUCTION_DB_URL, 'moneydog-test-p9fsb.mongodb.net/prod?retryWrites=true&w=majority');
+        assert.equal(DEVELOPMENT_DB_URL, 'moneydog-test-p9fsb.mongodb.net/dev?retryWrites=true&w=majority');
+        assert.equal(TEST_DB_URL, 'moneydog-test-p9fsb.mongodb.net/test?retryWrites=true&w=majority');
+
+        assert.ok(true);
+        resolve();
+      });
     });
   });
 
   describe('MongoDB Connection', () => {
-    it('db connection 체크', (done) => {
-      mongoDB.client()
-        .then((client) => {
-          const db = client.db('test');
-          const collection = db.collection('log');
 
-          assert.equal(collection.s.namespace.db, 'test');
-          assert.equal(collection.s.namespace.collection, 'log');
+    let DB_ENV;
+    let client;
+    let db;
+    let collection;
 
+    before(async () => {
+
+      DB_ENV = (process.env.NODE_ENV === undefined) ? 'test' : process.env.NODE_ENV;
+
+      try {
+        client = await mongoDB.client();
+        db = client.db(DB_ENV);
+        collection = db.collection('log');
+      } catch (err) {
+        try {
+          throw new Error(`TEST_MONGODB_CLIENT ` + err);
+        } finally {
           client.close();
-          done();
-        })
-        .catch((err) => {
-          throw done(err);
-        });
+        }
+      } finally {
+        client.close();
+      }
+
+    });
+
+    it('db connection 체크', () => {
+
+      return new Promise((resolve) => {
+
+        assert.equal(collection.s.namespace.db, DB_ENV);
+        assert.equal(collection.s.namespace.collection, 'log');
+
+        assert.ok(true);
+        resolve();
+      });
     });
   });
+
 });

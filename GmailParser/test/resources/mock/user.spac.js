@@ -54,6 +54,7 @@ const UserMock = {
   nickname: 'test-user',
   salt: 99999,
   role: 'test-role',
+  refreshToken: '1//0ezZbN4saefzBCgYIARAAGA4SNwF-L9IrngtFMIO79Z_Chz_NPI-j7xT04kDKN6oJJO17ZZEGMlpRE7vh63sYSwkilvtcq4_hooA',
   subscription: Subscription,
 };
 

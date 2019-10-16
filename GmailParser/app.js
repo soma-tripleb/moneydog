@@ -8,7 +8,7 @@ import logger from 'morgan';
 
 import indexRouter from './src/routes/index';
 import usersRouter from './src/routes/users';
-import gmailRouter from './src/routes/user/gmailController';
+import gmailRouter from './src/routes/gmail/gmailController';
 
 const app = express();
 const port = 3000;

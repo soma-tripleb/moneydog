@@ -9,7 +9,9 @@
   "scripts": {
     "start": "nodemon --exec babel-node app.js",
     "test": "NODE_ENV=test mocha --require @babel/register ./test/**/**.spec.js ",
-    "test-gmail-api": "NODE_ENV=test mocha --require @babel/register ./test/src/util/**.spec.js "
+    "test-db": "mocha --require @babel/register ./test/src/config/mongo/db.spec.js",
+    "test-repo": "mocha --require @babel/register ./test/src/repository/userRepository.spec.js",
+    "test-util": "mocha --require @babel/register ./test/src/util/gmailApi.spec.js"
   },
   "author": "triple-b",
   "license": "ISC",

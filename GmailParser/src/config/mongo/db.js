@@ -12,12 +12,12 @@ const TEST_URL = process.env.TEST_DB_URL;
 
 const client = async () => {
 
-  const ENV = process.env.NODE_ENV;
-
   const PREFIX = DB_SCHEMA.concat(DB_USER).concat(':').concat(DB_PASSWORD).concat('@');
 
+  const DB_ENV = (process.env.NODE_ENV === undefined) ? 'test' : process.env.NODE_ENV;
+
   let POSTFIX;
-  switch (ENV) {
+  switch (DB_ENV) {
     case 'production':
       POSTFIX = PRODUCTION_URL;
       break;
@@ -32,7 +32,7 @@ const client = async () => {
       break;
   };
 
-  console.log(`MONGO DB CONNECTION IN ${ENV}`);
+  console.log(`MONGO DB CONNECTION IN ${DB_ENV}`);
   const DB_URL = PREFIX.concat(POSTFIX);
 
   const client = await MongoClient.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
