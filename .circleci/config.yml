@@ -101,7 +101,7 @@ jobs:
           to: 's3://moneydog-build/build'
           overwrite: true
       - aws-s3/copy:
-          from: ./index.html
+          from: index.html
           to: 's3://moneydog-build'
           arguments: '--dryrun'
       - aws-s3/copy:
