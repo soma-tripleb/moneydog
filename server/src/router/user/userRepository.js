@@ -67,5 +67,5 @@ export default {
   saveOne,
   deleteOne,
   deleteAllUser,
-  update: update,
+  update,
 };
