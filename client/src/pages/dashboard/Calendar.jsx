@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import { Calendar } from 'antd';
 import moment from 'moment';
 
-import { something as SOMETHING_IMG } from '../../../resources/static/img/templogo';
-
 class CalendarClass extends Component {
   constructor(props) {
     super(props);

@@ -60,10 +60,6 @@ const logoutRequest = () => (dispatch) => {
   Cookies.remove('token');
 };
 
-const finishAddSubsStep= () => (dispatch) => {
-  dispatch(LOGIN_SUCCESS());
-};
-
 const LOGIN_TRY = () => {
   return {type: AUTH_LOGIN_TRY};
 };
@@ -77,7 +73,6 @@ const LOGIN_SUCCESS = () => {
 };
 
 export default {
-  finishAddSubsStep,
   loginRequest,
   logoutRequest,
   registerRequest,
