@@ -5,7 +5,7 @@ RUN npm install nodemon -g
 
 WORKDIR /usr/src/server
 
-COPY package*.json ./
+COPY package.json ./
 
 # move tmp directory and install package.json
 RUN npm install
@@ -14,3 +14,4 @@ RUN npm install
 COPY .babelrc ./
 COPY . .
 EXPOSE 5000
+CMD ["npm","run", "dev"]

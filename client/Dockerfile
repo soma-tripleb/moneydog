@@ -2,7 +2,7 @@ FROM mhart/alpine-node:10
 
 WORKDIR /usr/src/client
 
-COPY package*.json ./
+COPY package.json ./
 
 # move tmp directory and install package.json
 RUN npm install
