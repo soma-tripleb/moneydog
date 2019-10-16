@@ -50,6 +50,7 @@ const deleteAllUser = () => {
 };
 
 const updateMany = (email, subsInfoList) => {
+  console.log(`updateMany value ${JSON.stringify(subsInfoList)}`);
   return UserSchema.User.updateMany(
     { email: email },
     { $set: { subscription: subsInfoList } },
@@ -61,7 +62,7 @@ const updateMany = (email, subsInfoList) => {
   });
 };
 
-export {
+export default {
   findAll,
   findOne,
   saveOne,
