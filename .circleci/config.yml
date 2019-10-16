@@ -98,16 +98,16 @@ jobs:
           footer: "Money Dog"
       - run: echo before sync && ls
       - aws-s3/sync:
-          from: ./
+          from: dist
           to: 's3://moneydog-build/build'
           overwrite: true
       - run: echo after sync && ls
       - aws-s3/copy:
-          from: ./index.html
+          from: ../index.html
           to: 's3://moneydog-build'
           arguments: '--dryrun'
       - aws-s3/copy:
-          from: ./dist/
+          from: dist/
           to: 's3://moneydog-build'
           arguments: '--dryrun'
       - when:
