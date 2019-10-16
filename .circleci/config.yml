@@ -95,8 +95,9 @@ jobs:
           title: "Lint-Test-Build 과정 에 성공 했습니다."
           webhook: $SLACK_WEBHOOK
           footer: "Money Dog"
+      - run: pwd && ls
       - aws-s3/sync:
-          from: index.html
+          from: ./index.html
           to: 's3://moneydog-build'
           overwrite: true
       - aws-s3/copy:
