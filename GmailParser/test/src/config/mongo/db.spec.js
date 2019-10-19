@@ -4,10 +4,60 @@ import assert from 'assert';
 import dotenv from 'dotenv';
 
 import mongoDB from '../../../../src/config/mongo/db';
+import { MongoClient } from 'mongodb';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 
 dotenv.config();
 
 describe('`db.spec.js`', () => {
+
+  let mongoServer;
+  let client;
+
+  const opts = { useNewUrlParser: true, useUnifiedTopology: true };
+
+  before(async () => {
+    mongoServer = new MongoMemoryServer();
+    const mongoUri = await mongoServer.getConnectionString();
+
+    client = new MongoClient(mongoUri, opts);
+  });
+
+  after(async () => {
+    await client.close();
+    await mongoServer.stop();
+  });
+
+  describe('TEST 환경에서 사용할 Memory DB 연결 테스트', () => {
+    it('mongodb-memory-server 연결하기', () => {
+
+      return new Promise(async (resolve) => {
+
+        try {
+          await client.connect();
+
+          const db = client.db();
+
+          db.collection('users').insertOne(
+            {
+              email: 'testemail',
+              name: 'testname',
+            }
+          ).then((result) => {
+            assert.equal(result.ops[0].email, 'testemail');
+            assert.equal(result.ops[0].name, 'testname');
+          }).catch((err) => { throw err; });
+
+        } catch (err) {
+          throw new Error('Memory Mongo Test ' + err.stack);
+        }
+
+        client.close();
+        resolve();
+      });
+
+    });
+  });
 
   let PRODUCTION_DB_URL;
   let DEVELOPMENT_DB_URL;
@@ -29,7 +79,7 @@ describe('`db.spec.js`', () => {
         assert.equal(TEST_DB_URL, 'moneydog-test-p9fsb.mongodb.net/test?retryWrites=true&w=majority');
 
         assert.ok(true);
-        resolve();
+        resolve();c
       });
     });
   });

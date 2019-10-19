@@ -7,8 +7,8 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
 import indexRouter from './src/routes/index';
-import usersRouter from './src/routes/users';
-import gmailRouter from './src/routes/gmail/gmailController';
+import googleRouter from './src/routes/google/googleController';
+import gmailRouter from './src/routes/google/gmail/gmailController';
 
 const app = express();
 const port = 3000;
@@ -20,8 +20,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/gmail', gmailRouter);
+app.use('/google', googleRouter);
+app.use('/google/gmail', gmailRouter);
 
 app.listen(port, () => {
   console.log(`application is listening on port ${port}...`);
@@ -40,7 +40,10 @@ app.use((err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({
+    message: err.message,
+    error: err
+  });
 });
 
 module.exports = app;

@@ -39,28 +39,17 @@ const PricePlan = {
   channel: 'site',
 };
 
-const Subscription = {
-  seq: 1,
-  name: 'test-name',
-  price: 99999,
-  paymentDate: '2019/09/26',
-  channel: 'in-app',
-  pricePlan: PricePlan,
-};
-
-const UserMock = {
+const User = {
   email: 'test@test.com',
   password: '1234',
   nickname: 'test-user',
   salt: 99999,
   role: 'test-role',
-  refreshToken: '1//0ezZbN4saefzBCgYIARAAGA4SNwF-L9IrngtFMIO79Z_Chz_NPI-j7xT04kDKN6oJJO17ZZEGMlpRE7vh63sYSwkilvtcq4_hooA',
-  subscription: Subscription,
+  subscription: Subscriptions,
 };
 
 export default {
-  UserMock,
-  Subscription,
+  User,
   PricePlan,
   Subscriptions,
 };

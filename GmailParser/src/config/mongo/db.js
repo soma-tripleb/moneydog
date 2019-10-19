@@ -9,6 +9,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 const PRODUCTION_URL = process.env.PROD_DB_URL;
 const DEVELOPMENT_URL = process.env.DEV_DB_URL;
 const TEST_URL = process.env.TEST_DB_URL;
+const GMAIL_URL =process.env.GMAIL_URL;
 
 const client = async () => {
 
@@ -27,6 +28,8 @@ const client = async () => {
     case 'test':
       POSTFIX = TEST_URL;
       break;
+    case 'gmail':
+      POSTFIX = GMAIL_URL;
     default:
       POSTFIX = TEST_URL;
       break;
