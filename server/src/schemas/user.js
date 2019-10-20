@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
-import autoIncrement from 'mongoose-auto-increment';
-import { conn } from '../config/mongoDB';
+import { autoIncrement } from 'mongoose-plugin-autoinc';
 
 const pricePlanSchema = new mongoose.Schema(
   {
@@ -18,7 +17,7 @@ const pricePlanSchema = new mongoose.Schema(
 const subscriptionSchema = new mongoose.Schema(
   {
     seq: { type: Number, required: true },
-    name: { type: String, unique: true },
+    name: { type: String, required: true },
     logoURI: { type: String, required: true },
     price: { type: Number, required: true },
     paymentDate: { type: Date, required: true },
@@ -41,15 +40,15 @@ const userSchema = new mongoose.Schema(
     nickname: { type: String, required: true },
     salt: { type: Number, required: true },
     role: { type: String, required: true },
+    refreshToken: { type: String },
     subscription: [subscriptionSchema],
   },
   {
-    timestamps: true, // createAt & modifiedAt
+    timestamps: true,
   }
 );
 
-autoIncrement.initialize(conn);
-userSchema.plugin(autoIncrement.plugin, {
+userSchema.plugin(autoIncrement, {
   model: 'User',
   field: 'seq',
   startAt: 1,

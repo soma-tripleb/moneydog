@@ -5,32 +5,34 @@ dotenv.config();
 import GoogleOAuthApi from '../../../util/google/googleOAuthApi';
 
 const router = express.Router();
+const GoogleOAuth = new GoogleOAuthApi();
 
 router.get('/oauth', (req, res) => {
-  console.log('GOOGLE OAUTH');
-
-  const oauthUrl = process.env.GOOGLE_API_OAUTH_URL;
-  const redirectUri = process.env.GOOGLE_API_REDIRECT_URL_ENCODE;
-  const clientId = process.env.GOOGLE_API_CLIENT_ID;
-
-  const googleOAuthLoginUrl = oauthUrl
-    .concat('?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgmail.readonly')
-    .concat('&access_type=offline')
-    .concat('&include_granted_scopes=true')
-    .concat('&state=state_parameter_passthrough_value')
-    .concat('&redirect_uri=').concat(redirectUri)
-    .concat('&response_type=code')
-    .concat('&client_id=').concat(clientId);
-
-  res.redirect(googleOAuthLoginUrl);
+  GoogleOAuth.url()
+    .then((result) => {
+      res.redirect(result);
+    })
+    .catch((err) => {
+      throw err;
+    });
 });
 
+// 'Google api console' 에 등록된 'redirect_url' 이기 때문에, uri 바뀌면 안됨.
 router.get('/signup', async (req, res) => {
-  console.log('GOOGLE SIGNUP');
+  const code = req.query.code;
 
-  const token = await GoogleOAuthApi.getToken(req.query.code);
+  /*
+    구글 회원가입이 아닌 'Gmail' 권한만 획득하는 과정.
 
-  res.send(JSON.stringify(token));
+    회원 가입 -> 구글 권한 획득 -> 회원 가입
+  */
+  GoogleOAuth.getTokensAsync(code)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      throw err;
+    });
 });
 
 export default router;

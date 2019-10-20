@@ -17,7 +17,7 @@ const deleteOne = (name) => {
 };
 
 const insertSubsInfo = (email, subsInfoList) => {
-  return UserRepository.updateMany(email, subsInfoList);
+  return UserRepository.update(email, subsInfoList);
 };
 
 export default {

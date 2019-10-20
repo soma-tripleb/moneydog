@@ -1,48 +1,148 @@
-# Javascript Node CircleCI 2.0 configuration file
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-version: 2 # use circleCI version2.0
+version: 2.1
+orbs:
+  aws-s3: circleci/aws-s3@1.0.11
+  aws-ecr: circleci/aws-ecr@6.5.0
+  aws-cli: circleci/aws-cli@0.1.15
+  slack: circleci/slack@3.4.0
+
+workflows:
+  jimmy-custom-build:
+    jobs:
+      - build-and-push-image
 jobs:
-  build:
-    branches:
-      only:
-        - dev
-        - jy-issue-37
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:8
+  build-and-push-image:
+    docker: # executor
+      - image: circleci/node:10 # the primary container, where your job's commands are run
+        environment:
+          REACT_APP_NODE_API_URL: $REACT_APP_NODE_API_URL
+          REACT_APP_IMAGE_URI: $REACT_APP_IMAGE_URI
+          DB_SCHEMA: $DB_SCHEMA
+          DB_USER: $DB_USER
+          DB_PASSWORD: $DB_PASSWORD
+          PROD_DB_URL: $PROD_DB_URL
+          DEV_DB_URL: $DEV_DB_URL
+          TEST_DB_URL: $TEST_DB_URL
+          MIGRATE_dbConnectionUri: $MIGRATE_dbConnectionUri
+          JWT_SECRET: $JWT_SECRET
+          GOOGLE_API_CLIENT_ID: $GOOGLE_API_CLIENT_ID
+          GOOGLE_API_CLIENT_SECRET: $GOOGLE_API_CLIENT_SECRET
+          GOOGLE_API_REDIRECT_URL: $GOOGLE_API_REDIRECT_URL
+          GOOGLE_API_SCOPE: $GOOGLE_API_SCOPE
+    parameters:
+      account-url:
+        default: AWS_ECR_ACCOUNT_URL
+        type: env_var_name
+      aws-access-key-id:
+        default: AWS_ACCESS_KEY_ID
+        type: env_var_name
+      aws-secret-access-key:
+        default: AWS_SECRET_ACCESS_KEY
+        type: env_var_name
+      dockerfile:
+        default: Dockerfile
+        type: string
+      path:
+        default: ./
+        type: string
+      repo:
+        default: moneydog
+        type: string
+      tag:
+        default: latest
+        type: string
+      extra-build-args:
+        default: -t test
+        type: string
+      checkout:
+        default: true
+        type: boolean
+      create-repo:
+        default: false
+        type: boolean
+      profile-name:
+        default: default
+        type: string
+      region:
+        default: AWS_REGION
+        type: env_var_name
+      setup-remote-docker:
+        default: false
+        type: boolean
+      attach-workspace:
+        default: false
+        type: boolean
+      workspace-root:
+        default: .
+        type: string
+    steps:
+      - slack/approval:
+          message: "시작 : circle ci 에 파이프 라인이 올라갔어요 !"
+          color: "#42e2f4"
+          webhook: $SLACK_WEBHOOK
+      - checkout
+      - setup_remote_docker
+      - run: npm install
+      - run: npm run lint
+      - run: chmod 755 ./versioning.sh
+      - run: sudo ./versioning.sh run
+      - run: npm run test
+      - run: sudo npm run build
+      - slack/notify:
+          message: " Lint Test Build 에 성공 했습니다. :smile:"
+          color: "#f4e242"
+          author_name: "Money Dog"
+          title: "Lint-Test-Build 과정 에 성공 했습니다."
+          webhook: $SLACK_WEBHOOK
+          footer: "Money Dog"
+      - aws-s3/sync:
+          from: dist
+          to: 's3://moneydog-build/build'
+          overwrite: true
+      - aws-s3/copy:
+          from: dist/
+          to: 's3://moneydog-build'
+          arguments: '--dryrun'
+      - when:
+          condition: <<parameters.checkout>>
+          steps:
+            - checkout
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-access-key-id: <<parameters.aws-access-key-id>>
+          aws-region: <<parameters.region>>
+          aws-secret-access-key: <<parameters.aws-secret-access-key>>
+          profile-name: <<parameters.profile-name>>
+      - when:
+          condition: <<parameters.attach-workspace>>
+          steps:
+            - attach_workspace:
+                at: <<parameters.workspace-root>>
+      - aws-ecr/ecr-login:
+          region: <<parameters.region>>
+      - aws-ecr/build-image:
+          account-url: <<parameters.account-url>>
+          dockerfile: <<parameters.dockerfile>>
+          extra-build-args: <<parameters.extra-build-args>>
+          path: <<parameters.path>>
+          repo: <<parameters.repo>>
+          tag: <<parameters.tag>>
+      - when:
+          condition: <<parameters.create-repo>>
+          steps:
+            - run: >
+                aws ecr describe-repositories --profile <<parameters.profile-name>>
+                --region $<<parameters.region>> --repository-names
+                <<parameters.repo>> > /dev/null 2>&1 || \
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/server
-
-    steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
-      - run:
-          name: update-npm
-          command: 'sudo npm i -g npm@latest'
-      # Download and cache dependencies
-#      - restore_cache:
-#          keys:
-#            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-#            - v1-dependencies-
-
-      - run:
-          name: install node modules
-          command: npm install
-#      - run:
-#          name: ESLing, write report
-#          command: |
-#            mkdir -p ~/reports
-#            eslint . --ext .js --output-file ~/reports/eslint.xml
-
-#      - save_cache:
-#          paths:
-#            - ./node_modules
-#          key: v1-dependencies-{{ checksum "package.json" }}
-
-      # run tests!
-      # - run: npm test
+                aws ecr create-repository --profile <<parameters.profile-name>>
+                --region $<<parameters.region>> --repository-name
+                <<parameters.repo>>
+      - aws-ecr/push-image:
+          account-url: <<parameters.account-url>>
+          repo: <<parameters.repo>>
+          tag: <<parameters.tag>>
+      - slack/status:
+          fail_only: true
+          success_message: "ECR에 image가 잘 올라갔습니다"
+          failure_message: "실패했습니다."
+          webhook: $SLACK_WEBHOOK

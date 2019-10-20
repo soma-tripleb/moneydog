@@ -48,20 +48,20 @@ class MontlyReport extends Component {
   render() {
     const {currency, month} = this.props.props;
     return (
-        <>
-          <Row>
-            <Col>
-              <div className="headerFont">
-                {month}월 리포트
-              </div>
-              <Card>
-                {this.showThisMonthData(`결제 총액`, `${currency} ${this.numberWithCommas(this.state.totalPrice)}`)}
-                {this.showThisMonthData('평균 구독 가격', '₩ '+this.averageSubsPrice(this.state.totalPrice, this.props.data.length) ) }
-                {this.showThisMonthData('총 구독 앱 수', `${this.props.data.length} 개`)}
-              </Card>
-            </Col>
-          </Row>
-        </>
+      <>
+        <Row>
+          <Col>
+            <div className="headerFont">
+              {month}월 리포트
+            </div>
+            <Card>
+              {this.showThisMonthData(`결제 총액`, `${currency} ${this.numberWithCommas(this.state.totalPrice)}`)}
+              {this.showThisMonthData('평균 구독 가격', '₩ '+this.averageSubsPrice(this.state.totalPrice, this.props.data.length) ) }
+              {this.showThisMonthData('총 구독 앱 수', `${this.props.data.length} 개`)}
+            </Card>
+          </Col>
+        </Row>
+      </>
     );
   }
 }

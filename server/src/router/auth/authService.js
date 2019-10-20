@@ -3,9 +3,22 @@ import crypto from 'crypto';
 dotenv.config();
 
 import AuthRepository from './authRepository';
+import {checkedPasswordForm} from '../../../../public/userInfoCheck';
 import {createJWT, checkJWT} from '../../security/jwtAuthenticationToken';
 
 const register = async (userInfo) => {
+  // pw check
+  const pwCheckResult = checkedPasswordForm(userInfo.password);
+  if (typeof pwCheckResult === 'string') {
+    return {status: 400, success: false, message: pwCheckResult};
+  }
+  // user id check
+  const user = await AuthRepository.getUserByEmail(userInfo.email);
+  if (user !== null) {
+    return {status: 400, success: false, message: '이미 존재하는 아이디 입니다.'};
+  }
+
+
   userInfo.salt = (Math.round((new Date().valueOf() * Math.random())) + '');
   userInfo.password = crypto
     .createHash('sha512')
@@ -14,7 +27,6 @@ const register = async (userInfo) => {
   userInfo.role = 'BASIC';
 
   const result = await AuthRepository.createUser(userInfo);
-
   if (result.status === 400 ) {
     return result;
   } else {
@@ -48,14 +60,16 @@ const sessionCheck = async (userInfo) =>{
   return checkJWT(userInfo.jwt);
 };
 
-const checkParameter = (res, param) =>{
-  if (param === '') {
-    res.status(400).json({status: 400, success: false, message: 'userInfo 정보가 없습니다.!'});
+const checkParam = (param) => {
+  if (param === '' || !param.hasOwnProperty('email') || !param.hasOwnProperty('password')) {
+    return false;
   }
+  return true;
 };
 
 const hasProperty = (res, param, key) =>{
   if (!param.hasOwnProperty(key)) {
+    console.log(`key가 없을때. ${key}`);
     res.status(400).json({status: 400, success: false, message: `${key} key 가 없습니다.`});
   }
 };
@@ -64,6 +78,6 @@ export default {
   register,
   login,
   sessionCheck,
-  checkParameter,
+  checkParameter: checkParam,
   hasProperty,
 };

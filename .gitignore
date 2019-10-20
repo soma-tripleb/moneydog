@@ -2,16 +2,9 @@
 .idea/
 .vscode/
 
-# server
 node_modules/
 package-lock.json
-# client
-client/node_modules/
-client/package-lock.json
-
-# server
-server/node_modules/
-server/package-lock.json
+dist
 
 # api
 api/node_modules/
@@ -30,7 +23,7 @@ lerna-debug.log*
 .env
 credentials.json
 token.json
+*.pem
 
 # Dockerfile
 docker-compose.yaml
-

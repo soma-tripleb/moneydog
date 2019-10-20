@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import assert from 'assert';
 import SubsTmpl from '../../../src/schemas/subscriptionTemplate';
 import SubsTmplRepo from '../../../src/router/subscriptionTemplate/subsTmplReposiroty';

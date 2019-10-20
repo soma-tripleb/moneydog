@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import { Calendar } from 'antd';
 import moment from 'moment';
 
-import { something as SOMETHING_IMG } from '../../../resources/static/img/templogo';
-
 class CalendarClass extends Component {
   constructor(props) {
     super(props);
@@ -20,11 +18,10 @@ class CalendarClass extends Component {
     const subscriptions = this.props.data;
 
     const dateMatchedSubscriptions = [];
-    const calendarDate = moment(value._d).format('DD');
+    const calendarDate = value._d.getDate();
 
     subscriptions.map((subscription) => {
-      const subsDate = moment(subscription.paymentDate).format('DD');
-
+      const subsDate = moment(subscription.paymentDate, 'YYYY/MM/DD').date();
       if (subsDate === calendarDate) {
         dateMatchedSubscriptions.push(subscription);
       }

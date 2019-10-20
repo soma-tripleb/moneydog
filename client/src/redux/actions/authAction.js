@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import {AUTH_LOGIN_TRY, AUTH_LOGIN_SUCCESS, AUTH_SUBS_STEP, AUTH_LOGOUT, USER_INITIALLIZE} from './actionType';
+import {AUTH_LOGIN_TRY, AUTH_LOGIN_SUCCESS, AUTH_LOGOUT, USER_INITIALLIZE} from './actionType';
 
 const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
 
@@ -43,7 +43,6 @@ const registerRequest = (email, password, nickname) => async (dispatch) => {
   return axios
     .post(AJAX_URL, AJAX_DATA)
     .then((res) => {
-      dispatch(ADD_SUBSCRIPTION_STEP());
       return res;
     })
     .catch((err) => {
@@ -61,10 +60,6 @@ const logoutRequest = () => (dispatch) => {
   Cookies.remove('token');
 };
 
-const finishAddSubsStep= () => (dispatch) => {
-  dispatch(LOGIN_SUCCESS());
-};
-
 const LOGIN_TRY = () => {
   return {type: AUTH_LOGIN_TRY};
 };
@@ -77,12 +72,7 @@ const LOGIN_SUCCESS = () => {
   return {type: AUTH_LOGIN_SUCCESS};
 };
 
-const ADD_SUBSCRIPTION_STEP = () => {
-  return {type: AUTH_SUBS_STEP};
-};
-
 export default {
-  finishAddSubsStep,
   loginRequest,
   logoutRequest,
   registerRequest,

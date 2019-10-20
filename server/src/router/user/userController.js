@@ -44,10 +44,8 @@ router.post('/', (req, res) => {
 router.post('/subs-info', (req, res) => {
   const userData = req.body.userInputList;
   const token = req.header('x-access-token') || req.params.token;
-
   const auth = jwt.decode(token);
   const email = auth.param;
-
   UserService.insertSubsInfo(email, userData)
     .then((result) => {
       res.send({ status: 200, success: true, message: result});

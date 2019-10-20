@@ -25,10 +25,10 @@ class DashBoard extends Component {
   };
 
   convertDate = () => {
-    return moment(this.state.selectedValue).date();
+    return moment(this.state.selectedValue, 'YYYY-MM-DD').date();
   };
 
-  componentDidMount = () => {
+  componentDidMount() {
     this.fetchSubscriptionInfo();
   };
 
