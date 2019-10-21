@@ -83,8 +83,8 @@ jobs:
       - setup_remote_docker
       - run: npm install
       - run: npm run lint
-      - run: echo "REACT_APP_NODE_API_URL: $REACT_APP_NODE_API_URL"
-      - run: echo "REACT_APP_NODE_API_URL: $REACT_APP_NODE_API_URL\nREACT_APP_IMAGE_URI: $REACT_APP_IMAGE_URI" >> .env
+      - run: echo "REACT_APP_NODE_API_URL=$REACT_APP_NODE_API_URL"
+      - run: echo "REACT_APP_NODE_API_URL=$REACT_APP_NODE_API_URL\nREACT_APP_IMAGE_URI=$REACT_APP_IMAGE_URI" >> .env
       - run: cat .env
       - run: chmod 755 ./versioning.sh
       - run: sudo ./versioning.sh run
