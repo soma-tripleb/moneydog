@@ -2,13 +2,30 @@ import React, {Component} from 'react';
 require('dotenv').config();
 
 class SubsApp extends Component {
+
   handleClick = () => {
     const {subsAppInfo, onDelete, onInsert} = this.props;
-
     if (subsAppInfo.label === '-') {
       onDelete(subsAppInfo.seq, subsAppInfo.logoURI, subsAppInfo.name);
     } else {
       onInsert(subsAppInfo.seq, subsAppInfo.logoURI, subsAppInfo.name);
+    }
+  };
+
+  showSubscribeActionBtn = () => {
+    if (this.props.subsAppInfo.label === '-') {
+      return (<button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">-</button> );
+    } else {
+      return ( <button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">+</button>);
+    }
+  };
+
+  showSubscibeImg = (subsAppInfo) =>{
+    if (subsAppInfo.logoURI === '') {
+      console.log(subsAppInfo.color);
+      return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0]}</button>);
+    } else {
+      return (<img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
     }
   };
 
@@ -19,15 +36,13 @@ class SubsApp extends Component {
         <div className="container w-100" id="inner-element">
           <div className="row">
             <div className="col">
-              <img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />
+              {this.showSubscibeImg(subsAppInfo)}
             </div>
             <div className="col">
               {subsAppInfo.name}
             </div>
             <div className="col">
-              <button onClick={this.handleClick}>
-                {subsAppInfo.label}
-              </button>
+              {this.showSubscribeActionBtn()}
             </div>
           </div>
         </div>
