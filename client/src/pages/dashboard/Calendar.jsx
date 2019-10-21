@@ -14,6 +14,15 @@ class CalendarClass extends Component {
     this.props.handleChange(value);
   };
 
+  showSubscibeImg = (subsAppInfo) =>{
+    if (subsAppInfo.logoURI === '') {
+      console.log(subsAppInfo.color);
+      return (<button className="calendar-subscriptions-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0]}</button>);
+    } else {
+      return (<img className="calendar-subscriptions-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
+    }
+  };
+
   dateCellRender = (value) => {
     const subscriptions = this.props.data;
 
@@ -39,7 +48,8 @@ class CalendarClass extends Component {
         result = (
           <ul className="events">
             <li key={showCalendarSubscriptions.seq}>
-              <img className="calendar-subscriptions-img" src={`${process.env.REACT_APP_IMAGE_URI}` + showCalendarSubscriptions.logoURI} alt='x' />
+              {/*<img className="calendar-subscriptions-img" src={`${process.env.REACT_APP_IMAGE_URI}` + showCalendarSubscriptions.logoURI} alt='x' />*/}
+              {this.showSubscibeImg(showCalendarSubscriptions)}
             </li>
           </ul>
         );
@@ -48,7 +58,8 @@ class CalendarClass extends Component {
         result = (
           <ul className="events">
             <li key={showCalendarSubscriptions.seq}>
-              <img className="calendar-subscriptions-img front" src={`${process.env.REACT_APP_IMAGE_URI}` + showCalendarSubscriptions.logoURI} alt='x' />
+              {/*<img className="calendar-subscriptions-img front" src={`${process.env.REACT_APP_IMAGE_URI}` + showCalendarSubscriptions.logoURI} alt='x' />*/}
+              {this.showSubscibeImg(showCalendarSubscriptions)}
               <img className="calendar-subscriptions-img back" src={`${process.env.REACT_APP_IMAGE_URI}` + '/subscriptionLogo/something.png'} alt='x' />
             </li>
           </ul>

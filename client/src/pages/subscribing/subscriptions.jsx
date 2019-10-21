@@ -6,6 +6,7 @@ import {connect as ReduxConn} from 'react-redux';
 import UserActions from '../../redux/actions/userAction';
 
 import SubsApp from './subsApp';
+import UserCustomSubscription from './userCustomSubscription';
 import SubsTmplService from './subscriptions.ajax';
 
 import './subscriptions.css';
@@ -54,20 +55,36 @@ class Subscriptions extends Component {
     this.state.SubscribingArr.map((content) =>{
       if (content.seq === seq) flag = true;
     });
-
     if (flag) return;
 
-    const newState = update(this.state, {
-      SubscribingArr: {
-        $push: [
-          {
-            'seq': seq,
-            'logoURI': logoURI,
-            'name': name,
-          },
-        ],
-      },
-    });
+    let newState;
+    if (logoURI === '') {
+      newState = update(this.state, {
+        SubscribingArr: {
+          $push: [
+            {
+              'seq': seq,
+              'logoURI': logoURI,
+              'name': name,
+              'color': '#'+Math.round(Math.random() * 0xffffff).toString(16),
+            },
+          ],
+        },
+      });
+    } else {
+      newState = update(this.state, {
+        SubscribingArr: {
+          $push: [
+            {
+              'seq': seq,
+              'logoURI': logoURI,
+              'name': name,
+            },
+          ],
+        },
+      });
+    }
+
     this.setState(newState);
   };
 
@@ -114,6 +131,7 @@ class Subscriptions extends Component {
             seq: content.seq,
             logoURI: content.logoURI,
             name: content.name,
+            color: content.color,
             label: '-',
           }
         }/>
@@ -136,8 +154,11 @@ class Subscriptions extends Component {
               <div className="w-100" id="inner-container">
                 <p><u>Selecting App</u></p>
                 {this.makeStaticSubscribeApp()}
+                <p><u>새로운 서비스를 추가 할 수 있어요</u></p>
+                <UserCustomSubscription onInsert={this.insertContact.bind(this)}/>
               </div>
             </div>
+
             <div className="col-sm">
 
               <div className="w-100" id="inner-container">

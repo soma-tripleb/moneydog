@@ -66,6 +66,15 @@ class SubsTmpl extends Component {
     });
   };
 
+  showSubscibeImg = (subsAppInfo) =>{
+    if (subsAppInfo.logoURI === '') {
+      console.log(subsAppInfo.color);
+      return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0]}</button>);
+    } else {
+      return (<img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
+    }
+  };
+
   render() {
     const { info } = this.props;
     const inputData = this.props.inputData;
@@ -80,7 +89,7 @@ class SubsTmpl extends Component {
 
             {/* 사진 */}
             <div className="logo col-xs-6 col-sm-3">
-              <img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + info.logoURI} alt="" />
+              {this.showSubscibeImg(info)}
             </div>
 
             {/* 결제 금액 */}

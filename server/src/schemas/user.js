@@ -16,9 +16,10 @@ const pricePlanSchema = new mongoose.Schema(
 
 const subscriptionSchema = new mongoose.Schema(
   {
-    seq: { type: Number, required: true },
+    seq: { type: mongoose.Schema.Types.Mixed, required: true },
     name: { type: String, required: true },
-    logoURI: { type: String, required: true },
+    logoURI: { type: String },
+    color: {type: String},
     price: { type: Number, required: true },
     paymentDate: { type: Date, required: true },
     channel: {

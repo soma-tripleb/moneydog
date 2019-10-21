@@ -37,7 +37,7 @@ class List extends Component {
         subscriptionByDateMap.set(date, [subscription]);
       }
     });
-  }
+  };
 
   static getDerivedStateFromProps(nextProps, prevState) {
     let result;
@@ -51,6 +51,15 @@ class List extends Component {
     return result;
   }
 
+  showSubscibeImg = (subsAppInfo) =>{
+    if (subsAppInfo.logoURI === '') {
+      console.log(subsAppInfo.color);
+      return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0]}</button>);
+    } else {
+      return (<img className="list-logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
+    }
+  };
+
   showSubscriptionsByDate = () => {
     const list = ((this.state.matchedSubscriptionList !== undefined) ? this.state.matchedSubscriptionList : []);
 
@@ -58,7 +67,7 @@ class List extends Component {
       return (
         <div className='col-2 list-img-border' key={i}>
           <p className='list-img-border-title'>{subscription.name}</p>
-          <img className="list-logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subscription.logoURI} alt='x'/>
+          {this.showSubscibeImg(subscription)}
         </div>
       );
     });

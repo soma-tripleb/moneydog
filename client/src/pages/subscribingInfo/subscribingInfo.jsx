@@ -52,9 +52,7 @@ class SubscribingInfo extends Component {
 
       userSeletedList.map((Subscription) => {
         tempInputList.push({
-          seq: Subscription.seq,
-          logoURI: Subscription.logoURI,
-          name: Subscription.name,
+          ...Subscription,
           price: '',
           paymentDate: `${NOW}`,
           channel: '',
@@ -113,7 +111,6 @@ class SubscribingInfo extends Component {
     } else {
       inputList = this.state.userInputList;
     }
-
     this.setState({
       userInputList: inputList.map((info) => {
         if (info.name === name) {

@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 
 class Item extends Component {
-  // countRenualDate = (date) => {
-  //   //   const currentDate = new Date();
-  //   //   if (currentDate < date) {
-  //   //     return date - currentDate.getDate();
-  //   //   } else {
-  //   //     return (new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0)).getDate() -currentDate.getDate() + date;
-  //   //   }
-  //   // };
 
   dataFormat = (date) => {
     const result = date.split('T');
-
     return result[0];
   };
 
   numberWithCommas = (number) => {
     return String(number).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
+  };
+
+  showSubscibeImg = (subsAppInfo) =>{
+    if (subsAppInfo.logoURI === '') {
+      console.log(subsAppInfo.color);
+      return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0]}</button>);
+    } else {
+      return (<img className="list-logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
+    }
+  };
+
 
   render() {
     const {logoURI, name, price, paymentDate} = this.props.data;
@@ -29,7 +30,7 @@ class Item extends Component {
         <div className="container w-100" id="inner-element">
           <div className="row">
             <div className="col">
-              <img className="categories-inner-item-image" src={`${process.env.REACT_APP_IMAGE_URI}`+ logoURI} alt={name}/>
+              {this.showSubscibeImg(this.props.data)}
             </div>
             <div className="col">
                   ₩ {this.numberWithCommas(price)}

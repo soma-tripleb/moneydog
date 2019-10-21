@@ -84,6 +84,13 @@
     border: 1px lightgray solid;
 }
 
+.calendar-subscriptions-Btn {
+    width: 50%;
+    border-radius: 0.5vh;
+    border: 1px lightgray solid;
+}
+
+
 .calendar-subscriptions-img.front {
     position: relative;
     z-index: 2;
