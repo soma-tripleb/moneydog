@@ -4,23 +4,27 @@ const moment = require('moment');
 
 const checkStatus = (response) => {
   const subject = getNetflixEmailSubject(response).value;
+
+  let service = {};
+
   if (subject.includes('작별')) {
     // update expiredDate and nextSubscribe true to false, 구독해지
-    return getExpiredDate(response);
+    service = getExpiredDate(response);
   } else if (subject.includes('업데이트')) {
     // 멤버십 요금 변경
-    return getUpgradeInfo(response);
+    service = getUpgradeInfo(response);
   } else if (subject.includes('가입')) {
     // 신규가입, 재가입
-    return getNetflixInfo(response);
+    service = getNetflixInfo(response);
   } else if (subject.includes('취향') || subject.includes('재시작')) {
     // 여기서 true는 구독사용에 대해서 true를 이야기한다.
-    return true;
+    true;
   }
   // 취향, 재시작 이라는 단어가 있으면 넷플릭스를 현재 사용중.
   // update nextSubsribe true
-  const service = {};
   service.nextSubsribe = true;
+  service.snippet = subject;
+
   return service;
 };
 
@@ -56,7 +60,7 @@ const getUpgradeInfo = (response) => {
 // 신규가입과 재가입에 대한 결제정보
 const getNetflixInfo = (response) => {
   const parser = getParser(response);
-  service = {};
+  const service = {};
   service.email = parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(8) > td > table > tbody > tr:nth-child(2) > td').text();
   service.name = nameRegex(parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(2) > td').text());
   service.price = priceRegex(parser('#container > tbody > tr > td > table.shell > tbody > tr > td > table > tbody > tr:nth-child(11) > td > table > tbody > tr:nth-child(2) > td').text());
@@ -85,4 +89,8 @@ const renewalAndExpiredRegex = (data) => {
   const monthAndDay = data.match(monthRegex); // return 4 values [20,19,10,31] => 2019-10-31.
   const fullDay = `${yearRegex.exec(data)[0]}${monthAndDay[2]}${monthAndDay[3]}`;
   return moment(fullDay).format('YYYY-MM-DD'); // return 2019-10-31
+};
+
+export default {
+  checkStatus
 };

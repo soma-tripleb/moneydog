@@ -5,7 +5,8 @@ const getGoolgeInfo = (response) => {
   const jsonObject = commonParser.stringToJsonObject(commonParser.base64ToUtf8(response));
   const dom = commonParser.convertHtml(commonParser.base64ToUtf8(jsonObject.payload.parts[1].body.data));
   const $ = cheerio.load(dom);
-  service = {};
+
+  const service = {};
   service.fromEmail = getFromEmail(response);
   service.email = commonParser.getEmailId(response);
   service.name = convertNameReg($('#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(1) > span > span').text().trim());
@@ -46,7 +47,7 @@ const fromEmailReg = (fromEmail) => {
 };
 
 const calPeriod = (date, renewal) => {
-  return Math.floor(Math.abs(new Date(renewal) - new Date(date)) / (1000*60*60*24*30));
+  return Math.floor(Math.abs(new Date(renewal) - new Date(date)) / (1000 * 60 * 60 * 24 * 30));
 };
 
 

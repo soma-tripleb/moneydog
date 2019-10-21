@@ -1,11 +1,9 @@
 const commonParser = require('../commonParser');
 const moment = require('moment');
 
-const fs = require('fs');
-const response = fs.readFileSync('./watcha_renewal.json');
-
 const checkStatus = (response) => {
   const subject = watchaEmailSubject(response);
+
   if (subject.includes('남은 7일')) {
     // 7일 뒤 해지할 예정.
     return getExpiredDate(response);
@@ -16,12 +14,14 @@ const checkStatus = (response) => {
 
 const getWathcaInfo = (response) => {
   const $ = commonParser.getParser(response);
-  service = {};
+  const service = {};
+
+  service.snippet = watchaEmailSubject(response);
   service.paymentDate = dateRegex($('body > div > div > div:nth-child(4) > div > div:nth-child(5) > div > div:nth-child(2) > p > span:nth-child(1)').text());
   service.price = priceRegex($('body > div > div > div:nth-child(4) > div > div:nth-child(5) > div > div:nth-child(2) > p > span:nth-child(5)').text());
   service.renewalDate = dateRegex($('body > div > div > div:nth-child(4) > div > div:nth-child(5) > div > div:nth-child(2) > p > span:nth-child(7)').text());
   service.nextSubsribe = true;
-  console.log(service);
+
   return service;
 };
 
@@ -52,6 +52,6 @@ const priceRegex = (price) => {
   return parseInt(regex.exec(price)[0].replace(',', ''));
 };
 
-getWathcaInfo(response);
-
-console.log(getExpiredDate(response));
+export default {
+  checkStatus
+};
