@@ -86,7 +86,7 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: echo $ENVFILE
-      - run: echo $ENVFILE >> .env
+      - run: echo -e $ENVFILE >> .env
       - run: cat .env
       - run: chmod 755 ./versioning.sh
       - run: sudo ./versioning.sh run
