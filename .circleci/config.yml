@@ -70,7 +70,7 @@ jobs:
       - setup_remote_docker
       - run: npm install
       - run: npm run lint
-      - run: cat $ENFFILE
+      - run: echo $ENFFILE
       - run: echo "$ENFFILE" >> .env
       - run: cat .env
       - run: chmod 755 ./versioning.sh
