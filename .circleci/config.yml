@@ -14,20 +14,7 @@ jobs:
     docker: # executor
       - image: circleci/node:10 # the primary container, where your job's commands are run
         environment:
-          REACT_APP_NODE_API_URL: $REACT_APP_NODE_API_URL
-          REACT_APP_IMAGE_URI: $REACT_APP_IMAGE_URI
-          DB_SCHEMA: $DB_SCHEMA
-          DB_USER: $DB_USER
-          DB_PASSWORD: $DB_PASSWORD
-          PROD_DB_URL: $PROD_DB_URL
-          DEV_DB_URL: $DEV_DB_URL
-          TEST_DB_URL: $TEST_DB_URL
-          MIGRATE_dbConnectionUri: $MIGRATE_dbConnectionUri
-          JWT_SECRET: $JWT_SECRET
-          GOOGLE_API_CLIENT_ID: $GOOGLE_API_CLIENT_ID
-          GOOGLE_API_CLIENT_SECRET: $GOOGLE_API_CLIENT_SECRET
-          GOOGLE_API_REDIRECT_URL: $GOOGLE_API_REDIRECT_URL
-          GOOGLE_API_SCOPE: $GOOGLE_API_SCOPE
+          ENFFILE: $ENFFILE
     parameters:
       account-url:
         default: AWS_ECR_ACCOUNT_URL
@@ -83,11 +70,13 @@ jobs:
       - setup_remote_docker
       - run: npm install
       - run: npm run lint
+      - run: cat $ENFFILE
+      - run: echo "$ENFFILE" >> .env
+      - run: cat .env
       - run: chmod 755 ./versioning.sh
       - run: sudo ./versioning.sh run
       - run: npm run test
       - run: sudo npm run build
-      -
       - slack/notify:
           message: " Lint Test Build 에 성공 했습니다. :smile:"
           color: "#f4e242"
