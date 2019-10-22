@@ -78,9 +78,6 @@ jobs:
       - run: echo $ENVFILE
       - run: echo -e $ENVFILE >> .env
       - run: cat .env
-      - run: chmod 755 ./versioning.sh
-      - run: sudo ./versioning.sh run
-      - run: cat ./index.html
       - run: npm run test
       - run: sudo npm run build
       - slack/notify:
