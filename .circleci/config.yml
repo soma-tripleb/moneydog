@@ -78,7 +78,10 @@ jobs:
       - run: npm run lint
       - run: echo ENVFILE
       - run: echo "$ENVFILE" >> .env
+      - run: echo $ENVFILE >> .envtest
+      - run: echo "hello\nworld"
       - run: cat .env
+      - run: cat .envtest
       - run: chmod 755 ./versioning.sh
       - run: sudo ./versioning.sh run
       - run: npm run test
