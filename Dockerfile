@@ -14,7 +14,7 @@ COPY ./ /app
 # move tmp directory and install package.json
 RUN npm install
 
-EXPOSE 80 443 5000
+EXPOSE 80
 
 ADD start.sh /
 CMD ["/start.sh"]
