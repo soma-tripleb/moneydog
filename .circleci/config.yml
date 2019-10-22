@@ -11,12 +11,13 @@ executors:
     docker: # executor
       - image: circleci/node:10 # the primary container, where your job's commands are run
         environment:
-          ENFFILE: $ENFFILE
+          ENVFILE: $ENVFILE
 
 workflows:
   jimmy-custom-build:
     jobs:
       - build-and-push-image
+
 jobs:
   build-and-push-image:
     executor: my-executor
@@ -75,8 +76,8 @@ jobs:
       - setup_remote_docker
       - run: npm install
       - run: npm run lint
-      - run: echo $ENFFILE
-      - run: echo "$ENFFILE" >> .env
+      - run: echo ENVFILE
+      - run: echo "$ENVFILE" >> .env
       - run: cat .env
       - run: chmod 755 ./versioning.sh
       - run: sudo ./versioning.sh run
