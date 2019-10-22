@@ -1,16 +1,16 @@
 @font-face {
     font-family: 'GOTHAN-ULTRAITALIC';
-    src: url(../../resources/static/font/gotham-ultraitalic-webfont.woff) format('truetype');
+    src: url(https://moneydog-image.s3.ap-northeast-2.amazonaws.com/font/gotham-ultraitalic-webfont.woff) format('truetype');
 }
 
 @font-face {
     font-family: 'GOTHAN-XLIGHT';
-    src: url(../../resources/static/font/gotham-xlight-webfont.woff) format('truetype');
+    src: url(https://moneydog-image.s3.ap-northeast-2.amazonaws.com/font/gotham-xlight-webfont.woff) format('truetype');
 }
 
 @font-face {
     font-family: 'GOTHAN-ULTRA';
-    src: url(../../resources/static/font/gotham-ultra-webfont.woff) format('truetype');
+    src: url(https://moneydog-image.s3.ap-northeast-2.amazonaws.com/font/gotham-ultra-webfont.woff) format('truetype');
 }
 
 /*html, body {*/

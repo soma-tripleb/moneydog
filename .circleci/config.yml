@@ -3,8 +3,15 @@ orbs:
   aws-s3: circleci/aws-s3@1.0.11
   aws-ecr: circleci/aws-ecr@6.5.0
   aws-cli: circleci/aws-cli@0.1.15
-  aws-ecs: circleci/aws-ecs@0.0.19
   slack: circleci/slack@3.4.0
+
+executors:
+  my-executor:
+    docker: # executor
+      - image: circleci/node:10 # the primary container, where your job's commands are run
+        environment:
+          ENVFILE: $ENVFILE
+
 
 workflows:
   jimmy-custom-build:
@@ -12,24 +19,7 @@ workflows:
       - build-and-push-image
 jobs:
   build-and-push-image:
-    docker: # executor
-      - image: circleci/node:10 # the primary container, where your job's commands are run
-        environment:
-          REACT_APP_NODE_API_URL: $REACT_APP_NODE_API_URL
-          REACT_APP_IMAGE_URI: $REACT_APP_IMAGE_URI
-          DB_SCHEMA: $DB_SCHEMA
-          DB_USER: $DB_USER
-          DB_PASSWORD: $DB_PASSWORD
-          PROD_DB_URL: $PROD_DB_URL
-          DEV_DB_URL: $DEV_DB_URL
-          TEST_DB_URL: $TEST_DB_URL
-          MIGRATE_dbConnectionUri: $MIGRATE_dbConnectionUri
-          JWT_SECRET: $JWT_SECRET
-          GOOGLE_API_CLIENT_ID: $GOOGLE_API_CLIENT_ID
-          GOOGLE_API_CLIENT_SECRET: $GOOGLE_API_CLIENT_SECRET
-          GOOGLE_API_REDIRECT_URL: $GOOGLE_API_REDIRECT_URL
-          GOOGLE_API_SCOPE: $GOOGLE_API_SCOPE
-          ENVFILE: $ENVFILE
+    executor: my-executor
     parameters:
       account-url:
         default: AWS_ECR_ACCOUNT_URL
@@ -88,8 +78,6 @@ jobs:
       - run: echo $ENVFILE
       - run: echo -e $ENVFILE >> .env
       - run: cat .env
-      - run: chmod 755 ./versioning.sh
-      - run: sudo ./versioning.sh run
       - run: npm run test
       - run: sudo npm run build
       - slack/notify:
@@ -138,7 +126,6 @@ jobs:
                 aws ecr describe-repositories --profile <<parameters.profile-name>>
                 --region $<<parameters.region>> --repository-names
                 <<parameters.repo>> > /dev/null 2>&1 || \
-
                 aws ecr create-repository --profile <<parameters.profile-name>>
                 --region $<<parameters.region>> --repository-name
                 <<parameters.repo>>
@@ -151,5 +138,3 @@ jobs:
           success_message: "ECR에 image가 잘 올라갔습니다"
           failure_message: "실패했습니다."
           webhook: $SLACK_WEBHOOK
-  deploy-service-update:
-
