@@ -7,7 +7,9 @@ import GoogleParser from '../../../../../src/util/parser/email/google/googlePars
 import NetflixParser from '../../../../../src/util/parser/email/netflix/netflixParser';
 import WatchaParser from '../../../../../src/util/parser/email/watcha/watchaParser';
 
-describe.only('Email Parser 테스트', () => {
+import AppleReceipt from '../../../../../src/model/dto/mail/apple';
+
+describe('Email Parser 테스트', () => {
 
   describe('Apple 영수증 Parser', () => {
     it('#apple, apple-music', () => {
@@ -15,9 +17,10 @@ describe.only('Email Parser 테스트', () => {
       return fs.readFile(path.join(__dirname, '..', '..', '..', '..', '/resources/mock/email/apple/appleMusicReceipt.json'), (err, data) => {
         if (err) throw err;
 
-        const parsing = AppleParser.getAppleInfo(data);
+        const AppleMusic = new AppleReceipt();
+        const result = AppleParser.getAppleInfo(data, AppleMusic);
 
-        assert.equal('Apple Music 구독 멤버십', parsing.name);
+        assert.equal('Apple Music 구독 멤버십', result.name);
       });
 
     });
@@ -27,9 +30,10 @@ describe.only('Email Parser 테스트', () => {
       return fs.readFile(path.join(__dirname, '..', '..', '..', '..', '/resources/mock/email/apple/watchaReceipt.json'), (err, data) => {
         if (err) throw err;
 
-        const parsing = AppleParser.getAppleInfo(data);
+        const AppleWatcha = new AppleReceipt();
+        const result = AppleParser.getAppleInfo(data, AppleWatcha);
 
-        assert.equal('왓챠플레이 - WATCHA PLAY, 이용권 (자동 갱신)', parsing.name);
+        assert.equal('왓챠플레이 - WATCHA PLAY, 이용권 (자동 갱신)', result.name);
       });
 
     });
@@ -39,9 +43,10 @@ describe.only('Email Parser 테스트', () => {
       return fs.readFile(path.join(__dirname, '..', '..', '..', '..', '/resources/mock/email/apple/youtubeReceipt.json'), (err, data) => {
         if (err) throw err;
 
-        const parsing = AppleParser.getAppleInfo(data);
+        const AppleYoutube = new AppleReceipt();
+        const result = AppleParser.getAppleInfo(data, AppleYoutube);
 
-        assert.equal('YouTube, YouTube Red (자동 갱신)', parsing.name);
+        assert.equal('YouTube, YouTube Red (자동 갱신)', result.name);
       });
 
     });

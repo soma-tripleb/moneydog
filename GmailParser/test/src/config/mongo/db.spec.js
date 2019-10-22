@@ -2,12 +2,12 @@ import '@babel/polyfill';
 
 import assert from 'assert';
 import dotenv from 'dotenv';
+dotenv.config();
 
 import mongoDB from '../../../../src/config/mongo/db';
 import { MongoClient } from 'mongodb';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 
-dotenv.config();
 
 describe('`db.spec.js`', () => {
 
@@ -79,7 +79,7 @@ describe('`db.spec.js`', () => {
         assert.equal(TEST_DB_URL, 'moneydog-test-p9fsb.mongodb.net/test?retryWrites=true&w=majority');
 
         assert.ok(true);
-        resolve();c
+        resolve();
       });
     });
   });
@@ -91,34 +91,29 @@ describe('`db.spec.js`', () => {
     let db;
     let collection;
 
-    before(async () => {
+    it('db connection 체크', () => {
 
-      DB_ENV = (process.env.NODE_ENV === undefined) ? 'test' : process.env.NODE_ENV;
+      return new Promise(async (resolve) => {
 
-      try {
-        client = await mongoDB.client();
-        db = client.db(DB_ENV);
-        collection = db.collection('log');
-      } catch (err) {
+        DB_ENV = (process.env.NODE_ENV === undefined) ? 'test' : process.env.NODE_ENV;
+
         try {
-          throw new Error(`TEST_MONGODB_CLIENT ` + err);
+          client = await mongoDB.client();
+          db = client.db(DB_ENV);
+          collection = db.collection('log');
+
+          assert.equal(collection.s.namespace.db, DB_ENV);
+          assert.equal(collection.s.namespace.collection, 'log');
+        } catch (err) {
+          try {
+            throw new Error(`TEST_MONGODB_CLIENT ` + err);
+          } finally {
+            client.close();
+          }
         } finally {
           client.close();
         }
-      } finally {
-        client.close();
-      }
 
-    });
-
-    it('db connection 체크', () => {
-
-      return new Promise((resolve) => {
-
-        assert.equal(collection.s.namespace.db, DB_ENV);
-        assert.equal(collection.s.namespace.collection, 'log');
-
-        assert.ok(true);
         resolve();
       });
     });

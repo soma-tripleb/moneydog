@@ -1,7 +1,7 @@
 import GmailApi from '../util/gmailApi';
 import UserQuery from '../db/usersQuery';
 
-import GMAIL_SEARCH_QUERY from '../resources/static/GmailSearchQuery.json';
+import GMAIL_SEARCH_QUERY from '../../resources/static/GmailSearchQuery.json';
 
 const userMessagesId = async (useremail) => {
   try {
@@ -9,7 +9,7 @@ const userMessagesId = async (useremail) => {
 
     const Gmail = new GmailApi(userRefreshToken);
 
-    return await Gmail.listMessages(useremail, GMAIL_SEARCH_QUERY.APPLE);
+    return await Gmail.listMessages(useremail, GMAIL_SEARCH_QUERY.test);
   } catch (err) {
     throw err;
   }
@@ -31,7 +31,7 @@ const userMessages = async (useremail) => {
 
       const content = await Gmail.getMessages(useremail, messageId);
 
-      result.push(content.data.snippet);
+      result.push(content);
     });
 
     await Promise.all(promise);

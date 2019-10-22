@@ -9,6 +9,7 @@ import logger from 'morgan';
 import indexRouter from './src/routes/index';
 import googleRouter from './src/routes/google/googleController';
 import gmailRouter from './src/routes/google/gmail/gmailController';
+import parsingRouter from './src/routes/parsing/parsingController';
 
 const app = express();
 const port = 3000;
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/google', googleRouter);
 app.use('/google/gmail', gmailRouter);
+app.use('/parsing', parsingRouter);
 
 app.listen(port, () => {
   console.log(`application is listening on port ${port}...`);
