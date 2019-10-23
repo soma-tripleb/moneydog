@@ -29,10 +29,10 @@
   padding: 1.5vh;
 }
 
-#inner-element button {
-  background-color: whitesmoke;
-  border: none;
-}
+/*#inner-element button {*/
+/*  background-color: whitesmoke;*/
+/*  border: none;*/
+/*}*/
 
 .submit-container {
   margin-top: 5vh;
@@ -57,4 +57,13 @@
 .logo-img {
   height: 5vh;
   border-radius: 5px;
+}
+
+.logo-Btn {
+  height: 5vh;
+  width: 5vh;
+  font-size: 3vh;
+  font-family: monospace;
+  border-radius: 5px;
+  border: 0;
 }

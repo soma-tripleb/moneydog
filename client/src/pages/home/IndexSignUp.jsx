@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import dashboard from '../../../resources/static/img/index/dashboard.png';
 
 class IndexSignUp extends Component {
   render() {
@@ -17,7 +16,7 @@ class IndexSignUp extends Component {
               </Link>
             </div>
             <div className="col-md-5 order-md-1">
-              <img className="featurette-image img-fluid mx-auto" src={dashboard}
+              <img className="featurette-image img-fluid mx-auto" src={`${process.env.REACT_APP_IMAGE_URI}/home/dashboard.png`}
                 alt="Generic placeholder image"/>
             </div>
           </div>

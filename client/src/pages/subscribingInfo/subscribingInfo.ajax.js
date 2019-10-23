@@ -5,8 +5,6 @@ require('dotenv').config();
 const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
 
 const updateUserSubsInfo = async (userInputList) => {
-  console.log(Cookies.get('token'));
-  console.log(userInputList);
   return await axios({
     method: 'post',
     url: `${SERVER_URL}/users/subs-info`,
