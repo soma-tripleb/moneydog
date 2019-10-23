@@ -18,10 +18,11 @@ workflows:
       - build-and-push-image:
           requires:
             - lint-and-test
-          branches:
-            only:
-              - master
-              - jy-issue-105
+          filters:
+            branches:
+              only:
+                - master
+                - jy-issue-105
 jobs:
   lint-and-test:
     executor: my-executor
