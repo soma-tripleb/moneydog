@@ -15,14 +15,14 @@ workflows:
   jimmy-custom-build:
     jobs:
       - lint-and-test
-      - build-and-push-image:
-          requires:
-            - lint-and-test
-          filters:
-            branches:
-              only:
-                - master
-                - jy-issue-105
+#      - build-and-push-image:
+#          requires:
+#            - lint-and-test
+#          filters:
+#            branches:
+#              only:
+#                - master
+#                - jy-issue-105
 jobs:
   lint-and-test:
     executor: my-executor
@@ -41,112 +41,112 @@ jobs:
       - run: sudo ./versioning.sh run
   #      - run: npm run test
 
-  build-and-push-image:
-    executor: my-executor
-    parameters:
-      account-url:
-        default: AWS_ECR_ACCOUNT_URL
-        type: env_var_name
-      aws-access-key-id:
-        default: AWS_ACCESS_KEY_ID
-        type: env_var_name
-      aws-secret-access-key:
-        default: AWS_SECRET_ACCESS_KEY
-        type: env_var_name
-      dockerfile:
-        default: Dockerfile
-        type: string
-      path:
-        default: ./
-        type: string
-      repo:
-        default: moneydog
-        type: string
-      tag:
-        default: latest
-        type: string
-      extra-build-args:
-        default: -t test
-        type: string
-      checkout:
-        default: true
-        type: boolean
-      create-repo:
-        default: false
-        type: boolean
-      profile-name:
-        default: default
-        type: string
-      region:
-        default: AWS_REGION
-        type: env_var_name
-      setup-remote-docker:
-        default: false
-        type: boolean
-      attach-workspace:
-        default: false
-        type: boolean
-      workspace-root:
-        default: .
-        type: string
-    steps:
-      - run: ls
-      - run: sudo npm run build
-      - slack/notify:
-          message: " Lint Test Build 에 성공 했습니다. :smile:"
-          color: "#f4e242"
-          author_name: "Money Dog"
-          title: "Lint-Test-Build 과정 에 성공 했습니다."
-          webhook: $SLACK_WEBHOOK
-          footer: "Money Dog"
-      - aws-s3/sync:
-          from: dist
-          to: 's3://moneydog-build'
-          overwrite: true
-      - aws-s3/copy:
-          from: dist/
-          to: 's3://moneydog-build'
-          arguments: '--dryrun'
-      - when:
-          condition: <<parameters.checkout>>
-          steps:
-            - checkout
-      - aws-cli/install
-      - aws-cli/configure:
-          aws-access-key-id: <<parameters.aws-access-key-id>>
-          aws-region: <<parameters.region>>
-          aws-secret-access-key: <<parameters.aws-secret-access-key>>
-          profile-name: <<parameters.profile-name>>
-      - when:
-          condition: <<parameters.attach-workspace>>
-          steps:
-            - attach_workspace:
-                at: <<parameters.workspace-root>>
-      - aws-ecr/ecr-login:
-          region: <<parameters.region>>
-      - aws-ecr/build-image:
-          account-url: <<parameters.account-url>>
-          dockerfile: <<parameters.dockerfile>>
-          extra-build-args: <<parameters.extra-build-args>>
-          path: <<parameters.path>>
-          repo: <<parameters.repo>>
-          tag: <<parameters.tag>>
-      - when:
-          condition: <<parameters.create-repo>>
-          steps:
-            - run: >
-                aws ecr describe-repositories --profile <<parameters.profile-name>>
-                --region $<<parameters.region>> --repository-names
-                <<parameters.repo>> > /dev/null 2>&1 || \
-                aws ecr create-repository --profile <<parameters.profile-name>>
-                --region $<<parameters.region>> --repository-name
-                <<parameters.repo>>
-      - aws-ecr/push-image:
-          account-url: <<parameters.account-url>>
-          repo: <<parameters.repo>>
-          tag: <<parameters.tag>>
-      - slack/status:
-          fail_only: true
-          success_message: "ECR에 image가 잘 올라갔습니다"
-          failure_message: "실패했습니다."
-          webhook: $SLACK_WEBHOOK
+#  build-and-push-image:
+#    executor: my-executor
+#    parameters:
+#      account-url:
+#        default: AWS_ECR_ACCOUNT_URL
+#        type: env_var_name
+#      aws-access-key-id:
+#        default: AWS_ACCESS_KEY_ID
+#        type: env_var_name
+#      aws-secret-access-key:
+#        default: AWS_SECRET_ACCESS_KEY
+#        type: env_var_name
+#      dockerfile:
+#        default: Dockerfile
+#        type: string
+#      path:
+#        default: ./
+#        type: string
+#      repo:
+#        default: moneydog
+#        type: string
+#      tag:
+#        default: latest
+#        type: string
+#      extra-build-args:
+#        default: -t test
+#        type: string
+#      checkout:
+#        default: true
+#        type: boolean
+#      create-repo:
+#        default: false
+#        type: boolean
+#      profile-name:
+#        default: default
+#        type: string
+#      region:
+#        default: AWS_REGION
+#        type: env_var_name
+#      setup-remote-docker:
+#        default: false
+#        type: boolean
+#      attach-workspace:
+#        default: false
+#        type: boolean
+#      workspace-root:
+#        default: .
+#        type: string
+#    steps:
+#      - run: ls
+#      - run: sudo npm run build
+#      - slack/notify:
+#          message: " Lint Test Build 에 성공 했습니다. :smile:"
+#          color: "#f4e242"
+#          author_name: "Money Dog"
+#          title: "Lint-Test-Build 과정 에 성공 했습니다."
+#          webhook: $SLACK_WEBHOOK
+#          footer: "Money Dog"
+#      - aws-s3/sync:
+#          from: dist
+#          to: 's3://moneydog-build'
+#          overwrite: true
+#      - aws-s3/copy:
+#          from: dist/
+#          to: 's3://moneydog-build'
+#          arguments: '--dryrun'
+#      - when:
+#          condition: <<parameters.checkout>>
+#          steps:
+#            - checkout
+#      - aws-cli/install
+#      - aws-cli/configure:
+#          aws-access-key-id: <<parameters.aws-access-key-id>>
+#          aws-region: <<parameters.region>>
+#          aws-secret-access-key: <<parameters.aws-secret-access-key>>
+#          profile-name: <<parameters.profile-name>>
+#      - when:
+#          condition: <<parameters.attach-workspace>>
+#          steps:
+#            - attach_workspace:
+#                at: <<parameters.workspace-root>>
+#      - aws-ecr/ecr-login:
+#          region: <<parameters.region>>
+#      - aws-ecr/build-image:
+#          account-url: <<parameters.account-url>>
+#          dockerfile: <<parameters.dockerfile>>
+#          extra-build-args: <<parameters.extra-build-args>>
+#          path: <<parameters.path>>
+#          repo: <<parameters.repo>>
+#          tag: <<parameters.tag>>
+#      - when:
+#          condition: <<parameters.create-repo>>
+#          steps:
+#            - run: >
+#                aws ecr describe-repositories --profile <<parameters.profile-name>>
+#                --region $<<parameters.region>> --repository-names
+#                <<parameters.repo>> > /dev/null 2>&1 || \
+#                aws ecr create-repository --profile <<parameters.profile-name>>
+#                --region $<<parameters.region>> --repository-name
+#                <<parameters.repo>>
+#      - aws-ecr/push-image:
+#          account-url: <<parameters.account-url>>
+#          repo: <<parameters.repo>>
+#          tag: <<parameters.tag>>
+#      - slack/status:
+#          fail_only: true
+#          success_message: "ECR에 image가 잘 올라갔습니다"
+#          failure_message: "실패했습니다."
+#          webhook: $SLACK_WEBHOOK
