@@ -11,13 +11,35 @@ executors:
       - image: circleci/node:10 # the primary container, where your job's commands are run
         environment:
           ENVFILE: $ENVFILE
-
-
 workflows:
   jimmy-custom-build:
     jobs:
-      - build-and-push-image
+      - lint-and-test
+      - build-and-push-image:
+          requires:
+            - lint-and-test
+          branches:
+            only:
+              - master
+              - jy-issue-105
 jobs:
+  lint-and-test:
+    executor: my-executor
+    steps:
+      - slack/approval:
+          message: "시작 : circle ci 에 파이프 라인이 올라갔어요 !"
+          color: "#42e2f4"
+          webhook: $SLACK_WEBHOOK
+      - checkout
+      - setup_remote_docker
+      - run: npm install
+      - run: npm run lint
+      - run: echo -e $ENVFILE >> .env
+      - run: cat .env
+      - run: chmod 755 ./versioning.sh
+      - run: sudo ./versioning.sh run
+  #      - run: npm run test
+
   build-and-push-image:
     executor: my-executor
     parameters:
@@ -67,19 +89,7 @@ jobs:
         default: .
         type: string
     steps:
-      - slack/approval:
-          message: "시작 : circle ci 에 파이프 라인이 올라갔어요 !"
-          color: "#42e2f4"
-          webhook: $SLACK_WEBHOOK
-      - checkout
-      - setup_remote_docker
-      - run: npm install
-      - run: npm run lint
-      - run: echo -e $ENVFILE >> .env
-      - run: cat .env
-      - run: chmod 755 ./versioning.sh
-      - run: sudo ./versioning.sh run
-#      - run: npm run test
+      - run: ls
       - run: sudo npm run build
       - slack/notify:
           message: " Lint Test Build 에 성공 했습니다. :smile:"
