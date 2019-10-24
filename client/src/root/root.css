@@ -31,7 +31,7 @@
 
 #root > div {
     height: 100%;
-    background-image: url(https://moneydog-image.s3.ap-northeast-2.amazonaws.com/includes/background.png);
+    background-image: url(https://moneydog-image.s3.ap-northeast-2.amazonaws.com/includes/background_dark.png);
 }
 
 .layout {

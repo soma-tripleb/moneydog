@@ -50,7 +50,7 @@ class Head extends Component {
     return (
       <>
         <header>
-          <div className="container">
+          <div className="container headerContainer">
             <div className="row">
               <div className="col-md-6">
                 <ul className="nav">

@@ -1,6 +1,6 @@
 header {
     /*background: #f0f2f5;*/
-    background-image: url(https://moneydog-image.s3.ap-northeast-2.amazonaws.com/includes/background.png);
+    background-image: url(https://moneydog-image.s3.ap-northeast-2.amazonaws.com/includes/background_dark.png);
 }
 
 .logout {
@@ -41,10 +41,15 @@ header {
 }
 
 .categoryFont > ul > li > a {
+    font-weight: bold;
     font-size: 2.5vh;
     font-family: sans-serif;
 }
 
 .nav-user {
     text-decoration: underline;
+}
+
+.headerContainer{
+    padding: 2vh;
 }
