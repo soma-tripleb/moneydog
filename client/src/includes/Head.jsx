@@ -25,7 +25,7 @@ class Head extends Component {
             <NavLink to="/user/subscribing" className="nav-link" >구독관리</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/user/info" className="nav-link"><span className="nav-user">user</span> 님</NavLink>
+            <NavLink to="/user/info" className="nav-link"><span className="nav-user">{this.props.nickname}</span> 님</NavLink>
           </li>
           {/* <li className="nav-item logout">*/}
           {/*  <a onClick={this.logout} className="nav-link">Logout</a>*/}
@@ -78,6 +78,7 @@ class Head extends Component {
 
 const mapStateToProps = (state) => ({
   status: state.auth.login.status,
+  nickname: state.auth.login.nickname,
 });
 
 const mapDispatchToProps = (dispatch) => {
