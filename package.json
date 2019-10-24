@@ -49,6 +49,7 @@
     "mongoose-plugin-autoinc": "^1.1.9",
     "morgan": "~1.9.1",
     "popper.js": "^1.15.0",
+    "puppeteer": "^1.20.0",
     "react": "^16.8.6",
     "react-addons-update": "^15.6.2",
     "react-dom": "^16.8.6",
