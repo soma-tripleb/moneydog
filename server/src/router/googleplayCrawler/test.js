@@ -1,10 +1,23 @@
 const puppeteer = require('puppeteer');
 
-(async () => {
-  const browser = await puppeteer.launch({headless: false, slowMo: 500, devtool: true});
-  const page = await browser.newPage();
-  await page.goto('https://news.ycombinator.com', {waitUntil: 'networkidle2'});
-  await page.pdf({path: 'hn.pdf', format: 'A4'});
+const run = async () => {
+  try {
+    // const browser = await puppeteer.launch({headless: false});
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto('https://play.google.com/store/account/subscriptions');
+    await page.waitFor('body');
+    await page.screenshot({path: 'testshot.png'});
+    // redirect accounts.google.com
+    await page.$('#identifierId');
+    await page.keyboard.type('jimmyjaeyeon');
+    await page.screenshot({path: 'testshot2.png'});
+    await page.click('#identifierNext');
+    await page.screenshot({path: 'testshot3.png'});
+    await browser.close();
+  } catch (e) {
+    console.log(`error : ${e}`);
+  }
+};
 
-  // await browser.close();
-})().catch(((error) => console.log(`error : ${error}`)));
+run();
