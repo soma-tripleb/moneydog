@@ -25,7 +25,7 @@ class Head extends Component {
             <NavLink to="/user/subscribing" className="nav-link" >구독관리</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/user/subscribing" className="nav-link" >구독관리</NavLink>
+            <NavLink to="/user/info" className="nav-link"><span className="nav-user">user</span> 님</NavLink>
           </li>
           {/* <li className="nav-item logout">*/}
           {/*  <a onClick={this.logout} className="nav-link">Logout</a>*/}

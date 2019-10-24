@@ -19,6 +19,7 @@ const loginRequest = (email, password) => async (dispatch) => {
   return await axios
     .post(AJAX_URL, AJAX_DATA)
     .then((res) => {
+      console.log(res);
       dispatch(LOGIN_SUCCESS());
       return res;
     })

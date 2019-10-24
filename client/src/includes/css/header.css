@@ -44,3 +44,7 @@ header {
     font-size: 2.5vh;
     font-family: sans-serif;
 }
+
+.nav-user {
+    text-decoration: underline;
+}

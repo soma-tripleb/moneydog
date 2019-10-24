@@ -26,9 +26,6 @@ class userCustomSubscription extends Component {
     e.preventDefault();
     const {customServiceArray} = this.state;
 
-    console.log(i, e.target.value);
-
-
     this.setState({
       customServiceArray: update(
         customServiceArray, {
