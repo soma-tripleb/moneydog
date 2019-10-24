@@ -1,7 +1,7 @@
 import assert from 'assert';
 
 import AppleParser2 from '../../../../src/util/parser/email/apple/appleParser2';
-import AppleReceiptForm from '../../../../src/model/dto/mail/apple2';
+import AppleReceiptForm from '../../../../src/model/dto/apple2';
 import AppleMusicJSON from '../../../resources/mock/email/apple/appleMusicReceipt.json';
 
 describe('Apple 영수증 Parser 테스트', () => {

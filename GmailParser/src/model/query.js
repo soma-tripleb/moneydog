@@ -1,16 +1,23 @@
-export default class MailQuery {
-  constructor() {
-    this.from = '';
-    this.subject = '';
+
+class Query {
+  constructor(from, subect) {
+    this.from = from;
+    this.subject = subect;
   }
 
-  setFrom(from) {
-    if (from === undefined) from = '';
+  set fromElem(from) {
+    if (typeof from === 'undefined') from = '';
     this.from = from;
   }
 
-  setSubject(subject) {
-    if (subject === undefined) subject = '';
+  set subjectElem(subject) {
+    if (typeof subject === 'undefined') subject = '';
     this.subject = subject;
   }
+
+  queryMaker() {
+    return 'from:(' + this.from + ')' + ' ' + 'subject:(' + this.subject + ')';
+  }
 }
+
+export default Query;

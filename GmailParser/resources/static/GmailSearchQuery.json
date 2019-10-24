@@ -1,18 +1,6 @@
 {
-  "from": {
+  "FROM": {
     "APPLE": "from:<no_reply@email.apple.com>",
     "NETFLIX": "from:<info@mailer.netflix.com>"
-  },
-  "subject": {
-    "key": [
-      "subscription", 
-      "receipt"
-    ],
-    "value": [
-      "구독", 
-      "영수증"
-    ],
-    "length": 3
-  },
-  "test": "from:(no_reply@email.apple.com) subject:(영수증)"
+  }
 }

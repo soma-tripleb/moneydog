@@ -7,7 +7,7 @@ import GoogleParser from '../../../../../src/util/parser/email/google/googlePars
 import NetflixParser from '../../../../../src/util/parser/email/netflix/netflixParser';
 import WatchaParser from '../../../../../src/util/parser/email/watcha/watchaParser';
 
-import AppleReceipt from '../../../../../src/model/dto/mail/apple';
+import AppleReceipt from '../../../../../src/model/dto/apple';
 
 describe('Email Parser 테스트', () => {
 

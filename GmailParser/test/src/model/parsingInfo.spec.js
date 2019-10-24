@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import Common from '../../../src/model/dto/mail/common';
+import Common from '../../../src/model/dto/common';
 
 describe('Parsing Info 객체 테스트', () => {
 

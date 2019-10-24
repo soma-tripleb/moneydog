@@ -1,13 +1,18 @@
-class AppleDiverseBody {
+class Apple {
   constructor() {
     this.id = null;
     this.snippet = null;
-    this.date = null;
-    this.from = null;
     this.subject = null;
+    this.from = null;
+    this.bodyText = null;
+
+    // body
+    this.fromEmail = null;
     this.name = null;
     this.price = null;
     this.date = null;
+    this.renewal = null;
+    this.periodMonth = null;
 
     Object.preventExtensions(this);
   }
@@ -20,20 +25,20 @@ class AppleDiverseBody {
     this.snippet = snippet;
   }
 
-  setDate(date) {
-    this.date = date;
+  setSubject(subject) {
+    this.subject = subject;
   }
 
   setFrom(from) {
     this.from = from;
   }
 
-  setSubject(subject) {
-    this.subject = subject;
+  setBodyText(bodyText) {
+    this.bodyText = bodyText;
   }
 
-  setBody(body) {
-    this.body = body;
+  setFromEmail(fromEmail) {
+    this.fromEmail = fromEmail;
   }
 
   setName(name) {
@@ -47,6 +52,14 @@ class AppleDiverseBody {
   setDate(date) {
     this.date = date;
   }
+
+  setRenewal(renewal) {
+    this.renewal = renewal;
+  }
+
+  setPeriodMonth(periodMonth) {
+    this.periodMonth = periodMonth;
+  }
 }
 
-export default AppleDiverseBody;
+export default Apple;

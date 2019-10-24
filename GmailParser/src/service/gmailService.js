@@ -1,6 +1,9 @@
 import GmailApi from '../util/gmailApi';
 import UserQuery from '../db/usersQuery';
 
+import GmailForm from '../model/dto/gmailForm';
+import GmailParser from '../util/parser/email/gmailParser';
+
 import GMAIL_SEARCH_QUERY from '../../resources/static/GmailSearchQuery.json';
 
 const userMessagesId = async (useremail) => {
@@ -15,13 +18,13 @@ const userMessagesId = async (useremail) => {
   }
 };
 
-const userMessages = async (useremail) => {
+const userMessages = async (useremail, q) => {
   try {
     const userRefreshToken = await UserQuery.getRefreshToken(useremail);
 
     const Gmail = new GmailApi(userRefreshToken);
 
-    const messagesList = await Gmail.listMessages(useremail, GMAIL_SEARCH_QUERY.APPLE);
+    const messagesList = await Gmail.listMessages(useremail, q);
 
     const result = [];
 
@@ -43,7 +46,33 @@ const userMessages = async (useremail) => {
   }
 };
 
+const messagesParse = async (useremail, q) => {
+
+  let messagesList;
+
+  try {
+    messagesList = await userMessages(useremail, q);
+  } catch (err) {
+    throw err;
+  }
+
+  const result = [];
+
+  const promise = messagesList.map((messages) => {
+    const GmailDTO = new GmailForm();
+
+    const parsing = GmailParser.metadataParse(messages, GmailDTO);
+
+    result.push(parsing);
+  });
+
+  await Promise.all(promise);
+
+  return result;
+};
+
 export default {
   userMessagesId,
   userMessages,
+  messagesParse,
 };
