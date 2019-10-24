@@ -4,14 +4,43 @@ header {
 }
 
 .logout {
-    color: #007BFF;
+    color: #000;
 }
 
 .headerFont {
-    font-family: fantasy;
+    color: #000;
+    font-size: 7vh;
+    font-weight: bold;
+    padding: 0;
+}
+.nav-link{
+    color: #000;
 }
 
-.categoryFont {
+.active {
+    color: #42AEEC;
+}
+
+.subHeaderFont {
+    color: #000;
+    font-size: 3vh;
+    padding: 0;
+}
+
+.headerBold{
+    font-weight: bold;
+}
+
+.categoryFont{
+    margin: auto 0 auto 0;
+    padding: 0;
+}
+
+.categoryFont > ul{
+    float: right;
+}
+
+.categoryFont > ul > li > a {
+    font-size: 2.5vh;
     font-family: sans-serif;
 }
-
