@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
+import TotalAmount from './TotalAmount';
+import DuePayment from './DuePayment';
 import Calendar from './Calendar';
 import Categories from './Categories';
-import TotalAmount from './TotalAmount';
 import List from './List';
 import moment from 'moment';
 
@@ -52,7 +53,7 @@ class DashBoard extends Component {
                 <TotalAmount data={subscription} />
               </div>
               <div className="col-md-3 rightLine">
-                <TotalAmount data={subscription} />
+                <DuePayment data={subscription}/>
               </div>
               <div className="col-md">
                 광고

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class TotalAmount extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   getTotalAmount = () => {
     let sum = 0;
