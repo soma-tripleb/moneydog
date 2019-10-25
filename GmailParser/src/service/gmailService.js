@@ -1,7 +1,10 @@
 import GmailApi from '../util/gmailApi';
 import UserQuery from '../db/usersQuery';
 
-import GMAIL_SEARCH_QUERY from '../resources/static/GmailSearchQuery.json';
+import GmailForm from '../model/dto/gmailForm';
+import GmailParser from '../util/parser/email/gmailParser';
+
+import GMAIL_SEARCH_QUERY from '../../resources/static/GmailSearchQuery.json';
 
 const userMessagesId = async (useremail) => {
   try {
@@ -9,19 +12,19 @@ const userMessagesId = async (useremail) => {
 
     const Gmail = new GmailApi(userRefreshToken);
 
-    return await Gmail.listMessages(useremail, GMAIL_SEARCH_QUERY.APPLE);
+    return await Gmail.listMessages(useremail, GMAIL_SEARCH_QUERY.test);
   } catch (err) {
     throw err;
   }
 };
 
-const userMessages = async (useremail) => {
+const userMessages = async (useremail, q) => {
   try {
     const userRefreshToken = await UserQuery.getRefreshToken(useremail);
 
     const Gmail = new GmailApi(userRefreshToken);
 
-    const messagesList = await Gmail.listMessages(useremail, GMAIL_SEARCH_QUERY.APPLE);
+    const messagesList = await Gmail.listMessages(useremail, q);
 
     const result = [];
 
@@ -31,7 +34,7 @@ const userMessages = async (useremail) => {
 
       const content = await Gmail.getMessages(useremail, messageId);
 
-      result.push(content.data.snippet);
+      result.push(content);
     });
 
     await Promise.all(promise);
@@ -43,7 +46,33 @@ const userMessages = async (useremail) => {
   }
 };
 
+const messagesParse = async (useremail, q) => {
+
+  let messagesList;
+
+  try {
+    messagesList = await userMessages(useremail, q);
+  } catch (err) {
+    throw err;
+  }
+
+  const result = [];
+
+  const promise = messagesList.map((messages) => {
+    const GmailDTO = new GmailForm();
+
+    const parsing = GmailParser.metadataParse(messages, GmailDTO);
+
+    result.push(parsing);
+  });
+
+  await Promise.all(promise);
+
+  return result;
+};
+
 export default {
   userMessagesId,
   userMessages,
+  messagesParse,
 };
