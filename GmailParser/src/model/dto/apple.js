@@ -7,7 +7,6 @@ class Apple {
     this.bodyText = null;
 
     // body
-    this.fromEmail = null;
     this.name = null;
     this.price = null;
     this.date = null;
@@ -34,11 +33,7 @@ class Apple {
   }
 
   setBodyText(bodyText) {
-    this.bodyText = bodyText;
-  }
-
-  setFromEmail(fromEmail) {
-    this.fromEmail = fromEmail;
+    this.bodyText = bodyText.replace(/\r\n/gi, '');
   }
 
   setName(name) {
