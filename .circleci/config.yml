@@ -115,11 +115,11 @@ jobs:
           footer: "Money Dog"
       - aws-s3/sync:
           from: dist
-          to: 's3://moneydog-build'
+          to: 's3://moneydog/build'
           overwrite: true
       - aws-s3/copy:
           from: dist/
-          to: 's3://moneydog-build'
+          to: 's3://moneydog/build'
           arguments: '--dryrun'
       - when:
           condition: <<parameters.checkout>>
