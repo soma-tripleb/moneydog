@@ -12,15 +12,15 @@ class Carousel extends Component {
           </ol>
           <div className="carousel-inner ">
             <div className="carousel-item active">
-              <img className="d-block w-100" src={`${process.env.REACT_APP_IMAGE_URI}/home/dashboard.png`}
+              <img className="d-block w-100" src={`${process.env.REACT_APP_IMAGE_URI}/img/dashboard.png`}
                 alt="First slide"/>
             </div>
             <div className="carousel-item">
-              <img className="d-block w-100" src={`${process.env.REACT_APP_IMAGE_URI}/home/report.png`}
+              <img className="d-block w-100" src={`${process.env.REACT_APP_IMAGE_URI}/img/report.png`}
                 alt="First slide"/>
             </div>
             <div className="carousel-item">
-              <img className="d-block w-100" src={`${process.env.REACT_APP_IMAGE_URI}/home/subscribe.png`}
+              <img className="d-block w-100" src={`${process.env.REACT_APP_IMAGE_URI}/img/subscribe.png`}
                 alt="First slide"/>
             </div>
           </div>

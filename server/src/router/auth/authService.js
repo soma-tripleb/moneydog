@@ -50,7 +50,7 @@ const login = async (userInfo) => {
 
   if (user.password === hashPassword) {
     const jwt = createJWT(user.email);
-    return {status: 200, success: true, message: '로그인에 성공 했습니다.', token: jwt};
+    return {status: 200, success: true, message: '로그인에 성공 했습니다.', nickname: user.nickname, token: jwt};
   } else if (user.password !== hashPassword) {
     return {status: 409, success: false, message: '비밀번호가 틀렸습니다.'};
   }

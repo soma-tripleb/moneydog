@@ -35,13 +35,10 @@
 }
 
 .TotalAmount {
-    box-shadow: 1vh 1vh 1vh 1vh lightgray;
-    overflow: auto;
+    box-shadow: 0vh 0vh 10px 10px #f3f3f3;
+    background: #ffffff;
     width: 100%;
-    font-weight: lighter;
-    font-size: 1vw;
-    padding: 2vh;
-    height:25%;
+    border-radius: 2vh;
 }
 
 /* Calendar */
@@ -152,4 +149,36 @@
 /* TotalAmount */
 .total-amount-text {
     font-size: 2rem;
+}
+
+.row > div {
+    text-align: center;
+}
+
+.amount-container{
+    margin: 5vh 0 5vh 0;
+    border-right: 1px #d8d8d8 solid;
+    padding: 0;
+}
+
+.TotalAmount >div {
+    padding: 0;
+}
+
+.component-title{
+    font-weight: bold;
+    font-size: 3vh;
+}
+
+.pricePredix {
+    font-size: 2vh;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 4vh;
+}
+
+.redColor{
+    color: red;
 }

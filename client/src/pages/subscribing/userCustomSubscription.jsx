@@ -26,9 +26,6 @@ class userCustomSubscription extends Component {
     e.preventDefault();
     const {customServiceArray} = this.state;
 
-    console.log(i, e.target.value);
-
-
     this.setState({
       customServiceArray: update(
         customServiceArray, {
@@ -79,7 +76,7 @@ class userCustomSubscription extends Component {
         <div key={idx} className="container w-100" id="inner-element">
           <div className="row">
             <div className="col">
-              <img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + '/moneydog_black.png'} alt="x" />
+              <img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + '/img/moneydog_black.png'} alt="x" />
             </div>
             <div className="col">
               <input type="text" className="form-control"

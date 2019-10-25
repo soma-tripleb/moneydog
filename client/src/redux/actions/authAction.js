@@ -19,7 +19,7 @@ const loginRequest = (email, password) => async (dispatch) => {
   return await axios
     .post(AJAX_URL, AJAX_DATA)
     .then((res) => {
-      dispatch(LOGIN_SUCCESS());
+      dispatch(LOGIN_SUCCESS(res.data.nickname));
       return res;
     })
     .catch((err) => {
@@ -68,8 +68,11 @@ const LOGOUT = () => {
   return {type: AUTH_LOGOUT};
 };
 
-const LOGIN_SUCCESS = () => {
-  return {type: AUTH_LOGIN_SUCCESS};
+const LOGIN_SUCCESS = (nickname) => {
+  return {
+    type: AUTH_LOGIN_SUCCESS,
+    nickname: nickname
+  };
 };
 
 export default {
