@@ -40,12 +40,12 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(customLogger);
 }
 app.use('/', indexRouter);
-app.use('/auth', authRouter);
-app.use('/google', oAuth2Router);
+app.use('/api/auth', authRouter);
+app.use('/api/google', oAuth2Router);
 app.use(authCheck);
-app.use('/users', userRouter);
-app.use('/subs-info', subsInfoRouter);
-app.use('/subs-tmpl', subsTmplRouter);
+app.use('/api/users', userRouter);
+app.use('/api/subs-info', subsInfoRouter);
+app.use('/api/subs-tmpl', subsTmplRouter);
 
 // error logger
 app.use(errorLogger);
