@@ -16,7 +16,7 @@ class IndexSignUp extends Component {
               </Link>
             </div>
             <div className="col-md-5 order-md-1">
-              <img className="featurette-image img-fluid mx-auto" src={`${process.env.REACT_APP_IMAGE_URI}/home/dashboard.png`}
+              <img className="featurette-image img-fluid mx-auto" src={`${process.env.REACT_APP_IMAGE_URI}/img/dashboard.png`}
                 alt="Generic placeholder image"/>
             </div>
           </div>
