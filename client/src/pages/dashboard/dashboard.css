@@ -1,37 +1,45 @@
-/* dashboard */
+/*dashboard */
 .dashboard-inner {
     padding: 2vh 2vh 5vh 2vh;
     height: 92vh;
 }
 
 .calendar {
-    box-shadow: 1vh 1vh 1vh 1vh lightgray;
+    box-shadow: 0vh 0vh 10px 10px #f3f3f3;
+    background: #ffffff;
+    border-radius: 2vh;
     overflow: auto;
     width: 100%;
-    font-weight: lighter;
+
     font-size: 1vw;
     padding: 2vh;
-    height:75%;
+    height: 75%;
 }
 
 .list {
-    box-shadow: 1vh 1vh 1vh 1vh lightgray;
+    box-shadow: 0vh 0vh 10px 10px #f3f3f3;
+    background: #ffffff;
+    width: auto;
+    border-radius: 2vh;
+
     font-weight: lighter;
     font-size: 1vw;
     padding: 2vh;
-    width: auto;
-    height:20%;
+    height: 20%;
 }
 
-.categories{
-    box-shadow: 1vh 1vh 1vh 1vh lightgray;
-    overflow: auto;
+.categories {
+    box-shadow: 0vh 0vh 10px 10px #f3f3f3;
+    background: #ffffff;
     width: 100%;
+    border-radius: 2vh;
+    overflow: auto;
+
     font-weight: lighter;
     font-size: 1vw;
     padding: 2vh;
     height: 54.5%;
-    height:70%;
+    height: 70%;
 }
 
 .TotalAmount {
@@ -47,6 +55,7 @@
     margin: 0;
     padding: 0;
 }
+
 .events .ant-badge-status {
     overflow: hidden;
     white-space: nowrap;
@@ -54,10 +63,12 @@
     text-overflow: ellipsis;
     font-size: 4vh;
 }
+
 .notes-month {
     text-align: center;
     font-size: 28px;
 }
+
 .notes-month section {
     font-size: 28px;
 }
@@ -66,12 +77,24 @@
     height: 7vh;
 }
 
-.ant-fullcalendar-header .ant-radio-group{
+.ant-fullcalendar-header .ant-radio-group {
     display: none;
 }
 
+.ant-fullcalendar-column-header-inner {
+    text-align: center;
+}
+
+
 .ant-fullcalendar-value {
     font-size: 1vh;
+    font-weight: bold;
+}
+
+.ant-fullcalendar-fullscreen .ant-fullcalendar-value {
+    width: auto;
+    text-align: left;
+    background: transparent;
 }
 
 /* Calendar, Date */
@@ -101,7 +124,7 @@
 }
 
 /* Categories */
-.categories-inner-item-image{
+.categories-inner-item-image {
     height: 5vh;
     border-radius: 5px;
     padding-left: 0px;
@@ -155,17 +178,17 @@
     text-align: center;
 }
 
-.amount-container{
+.amount-container {
     margin: 5vh 0 5vh 0;
     border-right: 1px #d8d8d8 solid;
     padding: 0;
 }
 
-.TotalAmount >div {
+.TotalAmount > div {
     padding: 0;
 }
 
-.component-title{
+.component-title {
     font-weight: bold;
     font-size: 3vh;
 }
@@ -179,6 +202,6 @@
     font-size: 4vh;
 }
 
-.redColor{
+.redColor {
     color: red;
 }
