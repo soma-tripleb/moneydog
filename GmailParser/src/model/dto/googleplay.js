@@ -1,12 +1,19 @@
 class GooglePlay {
   constructor() {
-    this.id = null;
-    this.snippet = null;
-    this.subject = null;
+    // metadata in 'headers'
+    this.messageId = null;
+    this.createAt = null;
     this.from = null;
-    this.bodyText = null;
+    this.to = null;
+    this.subject = null;
+
+    // metadata in 'data'
+    this.snippet = null;
 
     // body
+    this.bodyText = null;
+
+    // iframe
     this.name = null;
     this.price = null;
     this.date = null;
@@ -16,24 +23,32 @@ class GooglePlay {
     Object.preventExtensions(this);
   }
 
-  setId(id) {
-    this.id = id;
+  setMessageId(messageId) {
+    this.messageId = messageId;
   }
 
-  setSnippet(snippet) {
-    this.snippet = snippet;
-  }
-
-  setSubject(subject) {
-    this.subject = subject;
+  setCreateAt(createaAt) {
+    this.createAt = createaAt;
   }
 
   setFrom(from) {
     this.from = from;
   }
 
+  setTo(to) {
+    this.to = to;
+  }
+
+  setSubject(subject) {
+    this.subject = subject;
+  }
+
+  setSnippet(snippet) {
+    this.snippet = snippet;
+  }
+
   setBodyText(bodyText) {
-    this.bodyText = bodyText.replace(/\r\n/gi, '');
+    this.bodyText = bodyText;
   }
 
   setName(name) {

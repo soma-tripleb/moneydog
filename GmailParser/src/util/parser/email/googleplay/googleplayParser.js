@@ -1,7 +1,5 @@
-import cheerio from 'cheerio';
-import GOOGLEPLAY_WATCHA_RECEIPT from '../../../../../test/resources/mock/email/googleplay/googleplayWatchaReceipt.json';
-
 import CommonParser from '../commonParser';
+import cheerio from 'cheerio';
 
 const GooglePlayReceiptParser = (() => {
 
@@ -39,48 +37,60 @@ const GooglePlayReceiptParser = (() => {
 
   return {
     metadataParse: async (json, dto, callback) => {
-      // const data = json.data;
-      const data = GOOGLEPLAY_WATCHA_RECEIPT.data;
 
-      let id = null;
-      let snippet = null;
-      let subject = null;
+      const data = json.data;
+
+      let messageId = null;
+      let createAt = null;
       let from = null;
+      let to = null;
+      let subject = null;
+      let snippet = null;
       let bodyText = null;
-
-      id = data.id;
-      snippet = data.snippet;
 
       data.payload.headers.some((headers) => {
         const name = headers.name.toLowerCase();
 
         switch (name) {
+          case 'message-id':
+            messageId = headers.value;
+            break;
+          case 'date':
+            createAt = headers.value;
+            break;
           case 'from':
             from = headers.value;
+            break;
+          case 'to':
+            to = headers.value;
             break;
           case 'subject':
             subject = headers.value;
             break;
         }
 
-        if ((from !== null) && (subject !== null))
+        if ((messageId !== null) && (createAt !== null) && (from !== null) && (to !== null) && (subject !== null))
           return false;
       });
 
-      bodyText = CommonParser.base64ToUtf8(data.payload.parts[0].body.data);
+      snippet = data.snippet;
 
+      bodyText = CommonParser.base64ToUtf8(data.payload.parts[0].body.data);
       const iframeBody = data.payload.parts[1].body.data;
 
-      dto.setId(id);
-      dto.setSnippet(snippet);
-      dto.setSubject(subject);
+      dto.setMessageId(messageId);
+      dto.setCreateAt(createAt);
       dto.setFrom(from);
+      dto.setTo(to);
+      dto.setSubject(subject);
+      dto.setSnippet(snippet);
       dto.setBodyText(bodyText);
 
       return await callback(dto, iframeBody);
     },
 
     iframeParse: (dto, iframeBody) => {
+
       const body = iframeBody;
 
       let name = '';

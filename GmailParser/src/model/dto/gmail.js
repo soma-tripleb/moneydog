@@ -1,4 +1,4 @@
-class GmailForm {
+class Gmail {
   constructor() {
     // metadata in 'headers'
     this.messageId = null;
@@ -41,13 +41,13 @@ class GmailForm {
     this.snippet = snippet;
   }
 
-  setBody1(body) {
-    this.body1 = body;
+  setBody1(body1) {
+    this.body1 = body1;
   }
 
-  setBody2(body) {
-    this.body2 = body;
+  setBody2(body2) {
+    this.body2 = body2;
   }
 }
 
-export default GmailForm;
+export default Gmail;
