@@ -58,6 +58,10 @@ const mailReceivedDateRegex = (receivedDate) => {
   return moment(regex.exec(receivedDate)[0]).format('YYYY-MM-DD');
 };
 
+const replaceAll = (str, searchStr, replaceStr) => {
+  return str.split(searchStr).join(replaceStr);
+};
+
 export default {
   base64ToUtf8,
   stringToJsonObject,
@@ -66,4 +70,5 @@ export default {
   checkDomain,
   getParser,
   getReceivedDate,
+  replaceAll,
 };

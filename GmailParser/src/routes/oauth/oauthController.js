@@ -4,7 +4,7 @@ const router = express.Router();
 import GoogleOAuth from '../../util/googleOAuth';
 import GoogleService from '../../service/googleService';
 
-router.get('/oauth', (req, res) => {
+router.get('/', (req, res) => {
   const OAuth2Client = new GoogleOAuth();
 
   res.redirect(OAuth2Client.url());

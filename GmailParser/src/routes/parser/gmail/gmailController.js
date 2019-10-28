@@ -60,6 +60,7 @@ router.get('/messages/parsing', wrapper(async (req, res) => {
   const config = {
     useremail,
     'search-query': {
+      status: 'changeable',
       query: q,
       from,
       subject,

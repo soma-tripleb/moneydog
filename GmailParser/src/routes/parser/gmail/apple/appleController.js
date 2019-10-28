@@ -19,8 +19,21 @@ router.get('/receipt', wrapper(async (req, res) => {
   const useremail = req.query.useremail;
 
   const result = await AppleService.parse(useremail);
+  const count = result.length;
 
-  res.send({ useremail, result });
+  const config = {
+    useremail,
+    'search-query': {
+      status: 'fixed',
+      query: 'from:(apple) subject:(영수증)',
+    },
+    'data': {
+      count,
+      result,
+    }
+  };
+
+  res.send(config);
 }));
 
 export default router;

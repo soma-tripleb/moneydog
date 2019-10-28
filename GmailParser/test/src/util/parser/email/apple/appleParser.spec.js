@@ -1,16 +1,16 @@
 import assert from 'assert';
 
-import AppleReceiptParser from '../../../../../src/util/parser/email/apple/appleReceiptParser';
+import AppleReceiptParser from '../../../../../../src/util/parser/email/apple/appleReceiptParser';
 
-import AppleReceipt from '../../../../../src/model/dto/apple';
+import AppleReceipt from '../../../../../../src/model/dto/apple';
 
-import AppleMusicReceiptJSON from '../../../../resources/mock/email/apple/appleMusicReceipt.json';
-import AppleWatchReceiptJSON from '../../../../resources/mock/email/apple/watchaReceipt.json';
-import AppleYoutubeReceiptJSON from '../../../../resources/mock/email/apple/youtubeReceipt.json';
+import AppleMusicReceiptJSON from '../../../../../resources/mock/email/apple/appleMusicReceipt.json';
+import AppleWatchReceiptJSON from '../../../../../resources/mock/email/apple/watchaReceipt.json';
+import AppleYoutubeReceiptJSON from '../../../../../resources/mock/email/apple/youtubeReceipt.json';
 
-describe('Email Parser 테스트', () => {
+describe('Apple(App Store) 메일 파싱하기', () => {
 
-  describe('Apple 영수증 Parser', () => {
+  describe('Apple 영수증 Parser `from:(apple) subject:(영수증)`', () => {
     it('#apple, apple-music', async () => {
       try {
         const AppleMusicDTO = new AppleReceipt();

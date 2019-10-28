@@ -1,8 +1,9 @@
-const cheerio = require('cheerio');
-const commonParser = require('../commonParser');
+import cheerio from 'cheerio';
+import commonParser from '../commonParser';
 
 const getGoolgeInfo = (response) => {
   const jsonObject = commonParser.stringToJsonObject(commonParser.base64ToUtf8(response));
+
   const dom = commonParser.convertHtml(commonParser.base64ToUtf8(jsonObject.payload.parts[1].body.data));
   const $ = cheerio.load(dom);
 
@@ -50,7 +51,7 @@ const fromEmailReg = (fromEmail) => {
   return emailReg.exec(fromEmail)[1];
 };
 
-module.exports = {
-  getGoolgeInfo: getGoolgeInfo,
-  getFromEmail: getFromEmail,
+export default {
+  getGoolgeInfo,
+  getFromEmail
 };
