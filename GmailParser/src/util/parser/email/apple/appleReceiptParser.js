@@ -1,11 +1,31 @@
 import CommonParser from '../commonParser';
 import cheerio from 'cheerio';
 
-const PRICE_TAG = 'body > table > tbody > tr > td > div.aapl-desktop-div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(3) > td > table > tbody > tr:nth-child(3) > td.price-cell > span';
-
-const DATE_TAG = 'body > table:nth-child(4) > tbody > tr > td > div.aapl-desktop-div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(2) > td';
-
 const AppleReceiptParser = (() => {
+
+  const PRICE_TAG = 'body > table > tbody > tr > td > div.aapl-desktop-div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(3) > td > table > tbody > tr:nth-child(3) > td.price-cell > span';
+
+  const DATE_TAG = 'body > table:nth-child(4) > tbody > tr > td > div.aapl-desktop-div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(2) > td';
+
+  const convertPrice = (price) => {
+    return parseInt(price.replace('￦', '').replace(',', ''));
+  };
+
+  const convertDateReg = (date) => {
+    const dateReg = /\d{4}.\d{1,2}.\d{1,2}/;
+    return dateReg.exec(date)[0];
+  };
+
+  const calPeriod = (date, renewal) => {
+    return Math.floor(Math.abs(new Date(renewal) - new Date(date)) / (1000 * 60 * 60 * 24 * 30));
+  };
+
+  const convertRenewalReg = (renewal) => {
+    const renewalReg = /\d{4}.\d{1,2}.\d{1,2}/;
+
+    return renewalReg.exec(renewal)[0];
+  };
+
   return {
     metadataParse: async (json, dto, callback) => {
 
@@ -84,24 +104,5 @@ const AppleReceiptParser = (() => {
     }
   };
 })();
-
-const convertPrice = (price) => {
-  return parseInt(price.replace('￦', '').replace(',', ''));
-};
-
-const convertDateReg = (date) => {
-  const dateReg = /\d{4}.\d{1,2}.\d{1,2}/;
-  return dateReg.exec(date)[0];
-};
-
-const calPeriod = (date, renewal) => {
-  return Math.floor(Math.abs(new Date(renewal) - new Date(date)) / (1000 * 60 * 60 * 24 * 30));
-};
-
-const convertRenewalReg = (renewal) => {
-  const renewalReg = /\d{4}.\d{1,2}.\d{1,2}/;
-
-  return renewalReg.exec(renewal)[0];
-};
 
 export default AppleReceiptParser;
