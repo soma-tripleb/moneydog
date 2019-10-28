@@ -49,10 +49,12 @@ router.get('/messages/parsing', wrapper(async (req, res) => {
   // TODO, query 검증
   const useremail = req.query.useremail;
   const from = (req.query.from === undefined) ? '' : req.query.from;
-  const subject = (req.query.subject === undefined) ? '' : req.query.subject;
+  const hasTheWords = (req.query.hasTheWords === undefined) ? '' : req.query.hasTheWords;
 
-  const SearchQuery = new Query(from, subject);
+  const SearchQuery = new Query(from, hasTheWords);
   const q = SearchQuery.queryMaker();
+
+  console.log(q);
 
   const result = await GmailService.messagesParse(useremail, q);
   const count = result.length;
@@ -60,9 +62,10 @@ router.get('/messages/parsing', wrapper(async (req, res) => {
   const config = {
     useremail,
     'search-query': {
+      status: 'changeable',
       query: q,
       from,
-      subject,
+      hasTheWords,
     },
     'data': {
       count,

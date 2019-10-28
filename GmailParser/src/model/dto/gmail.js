@@ -1,37 +1,44 @@
 class GmailForm {
   constructor() {
-    // metadata
-    this.id = null;
-    this.snippet = null;
-    this.date = null;
+    // metadata in 'headers'
+    this.messageId = null;
+    this.createAt = null;
     this.from = null;
+    this.to = null;
     this.subject = null;
 
-    // iframe
+    // metadata in 'data'
+    this.snippet = null;
+
+    // iframe in 'payload > parts'
     this.body1 = null;
     this.body2 = null;
 
     Object.preventExtensions(this);
   }
 
-  setId(id) {
-    this.id = id;
+  setMessageId(messageId) {
+    this.messageId = messageId;
   }
 
-  setSnippet(snippet) {
-    this.snippet = snippet;
-  }
-
-  setDate(date) {
-    this.date = date;
+  setCreateAt(createaAt) {
+    this.createAt = createaAt;
   }
 
   setFrom(from) {
     this.from = from;
   }
 
+  setTo(to) {
+    this.to = to;
+  }
+
   setSubject(subject) {
     this.subject = subject;
+  }
+
+  setSnippet(snippet) {
+    this.snippet = snippet;
   }
 
   setBody1(body) {

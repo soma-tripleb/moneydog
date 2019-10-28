@@ -1,8 +1,8 @@
 
 class Query {
-  constructor(from, subect) {
+  constructor(from, hasTheWords) {
     this.from = from;
-    this.subject = subect;
+    this.hasTheWords = hasTheWords;
   }
 
   set fromElem(from) {
@@ -10,13 +10,13 @@ class Query {
     this.from = from;
   }
 
-  set subjectElem(subject) {
-    if (typeof subject === 'undefined') subject = '';
-    this.subject = subject;
+  set hasTheWordsElem(hasTheWords) {
+    if (typeof hasTheWords === 'undefined') hasTheWords = '';
+    this.hasTheWords = hasTheWords;
   }
 
   queryMaker() {
-    return 'from:(' + this.from + ')' + ' ' + 'subject:(' + this.subject + ')';
+    return 'from:(' + this.from + ')' + ' ' + this.hasTheWords;
   }
 }
 

@@ -1,7 +1,7 @@
 import GmailApi from '../util/gmailApi';
 import UserQuery from '../db/usersQuery';
 
-import GmailForm from '../model/dto/gmailForm';
+import Gmail from '../model/dto/gmail';
 import GmailParser from '../util/parser/email/gmailParser';
 
 import GMAIL_SEARCH_QUERY from '../../resources/static/GmailSearchQuery.json';
@@ -59,7 +59,7 @@ const messagesParse = async (useremail, q) => {
   const result = [];
 
   const promise = messagesList.map((messages) => {
-    const GmailDTO = new GmailForm();
+    const GmailDTO = new Gmail();
 
     const parsing = GmailParser.metadataParse(messages, GmailDTO);
 

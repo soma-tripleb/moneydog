@@ -1,18 +1,35 @@
-import CommonParser from '../commonParser';
 import cheerio from 'cheerio';
+import GOOGLEPLAY_WATCHA_RECEIPT from '../../../../../test/resources/mock/email/googleplay/googleplayWatchaReceipt.json';
 
-const AppleReceiptParser = (() => {
+import CommonParser from '../commonParser';
 
-  const PRICE_TAG = 'body > table > tbody > tr > td > div.aapl-desktop-div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(3) > td > table > tbody > tr:nth-child(3) > td.price-cell > span';
+const GooglePlayReceiptParser = (() => {
 
-  const DATE_TAG = 'body > table:nth-child(4) > tbody > tr > td > div.aapl-desktop-div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(2) > td';
+  const NAME_TAG = '#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(1) > span > span';
 
-  const convertPrice = (price) => {
-    return parseInt(price.replace('￦', '').replace(',', ''));
+  const PRICE_TAG = '#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(2) > span';
+
+  const DATE_TAG = '#gamma > div > div:nth-child(2) > div > div:nth-child(5)';
+
+  const RENEWAL_TAG = '#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(3) > td:nth-child(1)';
+
+  const convertNameReg = (name) => {
+    const nameReg = /\(([^)]+)\)/;
+    return nameReg.exec(name)[1];
+  };
+
+  const convertPriceReg = (price) => {
+    const priceReg = /\₩(.*?)\n/;
+    return parseInt(priceReg.exec(price)[1].replace(',', ''));
+  };
+
+  const convertRenewalReg = (renewal) => {
+    const renewalReg = /\d{4}\.\s\d{1,2}\.\s\d{1,2}/g;
+    return renewalReg.exec(renewal)[0];
   };
 
   const convertDateReg = (date) => {
-    const dateReg = /\d{4}.\d{1,2}.\d{1,2}/;
+    const dateReg = /\d{4}\.\s\d{1,2}\.\s\d{1,2}/g;
     return dateReg.exec(date)[0];
   };
 
@@ -20,16 +37,10 @@ const AppleReceiptParser = (() => {
     return Math.floor(Math.abs(new Date(renewal) - new Date(date)) / (1000 * 60 * 60 * 24 * 30));
   };
 
-  const convertRenewalReg = (renewal) => {
-    const renewalReg = /\d{4}.\d{1,2}.\d{1,2}/;
-
-    return renewalReg.exec(renewal)[0];
-  };
-
   return {
     metadataParse: async (json, dto, callback) => {
-
-      const data = json.data;
+      // const data = json.data;
+      const data = GOOGLEPLAY_WATCHA_RECEIPT.data;
 
       let id = null;
       let snippet = null;
@@ -84,13 +95,13 @@ const AppleReceiptParser = (() => {
 
       const $ = cheerio.load(dom);
 
-      name = $('span[class=title]').contents().get('0').data;
+      name = convertNameReg($(NAME_TAG).text().trim());
 
-      price = convertPrice($(PRICE_TAG).text());
+      price = convertPriceReg($(PRICE_TAG).text());
 
       date = convertDateReg($(DATE_TAG).text());
 
-      renewal = convertRenewalReg($('span[class=renewal]').contents().get('0').data.trim());
+      renewal = convertRenewalReg($(RENEWAL_TAG).text());
 
       periodMonth = calPeriod(renewal, date);
 
@@ -105,4 +116,4 @@ const AppleReceiptParser = (() => {
   };
 })();
 
-export default AppleReceiptParser;
+export default GooglePlayReceiptParser;
