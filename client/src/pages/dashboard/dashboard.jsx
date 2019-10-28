@@ -47,6 +47,7 @@ class DashBoard extends Component {
     return (
       <>
         <div className="container">
+
           <div className="align-self-center">
             <div className="row align-items-center TotalAmount">
               <div className="col-md-3 rightLine">
@@ -60,6 +61,7 @@ class DashBoard extends Component {
               </div>
             </div>
           </div>
+
           <div className="row">
             <div className="col-md-6 dashboard-inner">
               {/* 달력 - 월 */}
@@ -74,6 +76,7 @@ class DashBoard extends Component {
                 <List date={this.convertDate()} data={subscription} />
               </div>
             </div>
+
             {/* 구독중인 서비스 list */}
             <div className="col-md-6 dashboard-inner">
               {/* <div className='TotalAmount'>*/}

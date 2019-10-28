@@ -1,13 +1,33 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 import { Calendar } from 'antd';
 import moment from 'moment';
 
+const staticday = ['일', '월', '화', '수', '목', '금', '토', '일'];
+
 class CalendarClass extends Component {
+
   constructor(props) {
     super(props);
-
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const calendarNode = ReactDOM.findDOMNode(this);
+
+    if (calendarNode instanceof HTMLElement) {
+      const days = calendarNode.querySelectorAll('.ant-fullcalendar-column-header-inner');
+      days.forEach((item, index)=>{
+        item.innerHTML = staticday[index];
+      });
+      const dates = calendarNode.querySelectorAll('.ant-fullcalendar-value');
+      dates.forEach((item, index)=>{
+        if ( item.innerHTML[0] === '0'){
+          item.innerHTML = item.innerHTML[1];
+        }
+      });
+    }
   }
 
   handleChange = (value) => {
@@ -68,6 +88,7 @@ class CalendarClass extends Component {
   };
 
   render() {
+
     if (this.props.data == null)
       return null;
 

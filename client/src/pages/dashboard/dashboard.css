@@ -1,7 +1,7 @@
 /*dashboard */
 .dashboard-inner {
     padding: 2vh 2vh 5vh 2vh;
-    height: 92vh;
+    /*height: 92vh;*/
 }
 
 .calendar {
@@ -13,7 +13,6 @@
 
     font-size: 1vw;
     padding: 2vh;
-    height: 75%;
 }
 
 .list {
@@ -25,7 +24,7 @@
     font-weight: lighter;
     font-size: 1vw;
     padding: 2vh;
-    height: 20%;
+    /*height: 20%;*/
 }
 
 .categories {
@@ -38,8 +37,8 @@
     font-weight: lighter;
     font-size: 1vw;
     padding: 2vh;
-    height: 54.5%;
-    height: 70%;
+    /*height: 54.5%;*/
+    /*height: 70%;*/
 }
 
 .TotalAmount {
@@ -73,28 +72,63 @@
     font-size: 28px;
 }
 
-.ant-fullcalendar td {
-    height: 7vh;
+/*ant sell 둥굴게, 색상*/
+.ant-fullcalendar-date {
+    background: #F8F7F7;
+    border-radius: 1.5vh;
 }
 
+/*.ant-fullcalendar-cell{*/
+/*    height:0;*/
+/*}*/
+.ant-fullcalendar table {
+    height: unset;
+}
+
+.ant-fullcalendar-fullscreen .ant-fullcalendar-value{
+    position: absolute;
+}
+.ant-fullcalendar-fullscreen .ant-fullcalendar-content{
+    position: absolute;
+}
+
+/*ant 기본 테두리 지우기*/
+.ant-fullcalendar-fullscreen .ant-fullcalendar-date{
+    border-top: #fff;
+    height: unset;
+    margin: 0.2vh;
+    padding: 0 0 100% 0;
+    position: relative;
+}
+
+
+/*이번달 배경색 변경*/
+.ant-fullcalendar-last-month-cell > .ant-fullcalendar-date {
+    background: #DDDDDD ;
+}
+/*다음달 배경색 변경*/
+.ant-fullcalendar-next-month-btn-day  > .ant-fullcalendar-date{
+    background: #DDDDDD ;
+}
+/*ant header month year 지우기*/
 .ant-fullcalendar-header .ant-radio-group {
     display: none;
 }
-
+/*요일 가운데 정렬*/
 .ant-fullcalendar-column-header-inner {
     text-align: center;
 }
-
-
+/*ant 폰트 사이즈 +굵게*/
 .ant-fullcalendar-value {
-    font-size: 1vh;
+    font-size: 1.2vh;
     font-weight: bold;
 }
-
+/*ant 날짜 텍스트 왼쪽 정렬*/
 .ant-fullcalendar-fullscreen .ant-fullcalendar-value {
-    width: auto;
     text-align: left;
-    background: transparent;
+}
+.ant-fullcalendar-calendar-body{
+    padding: 0;
 }
 
 /* Calendar, Date */
