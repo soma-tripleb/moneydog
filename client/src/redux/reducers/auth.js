@@ -27,6 +27,7 @@ export default function authentication(state = initialState, action) {
       return update(state, {
         login: {
           status: { $set: 'SUCCESS' },
+          nickname: { $set: action.nickname }
         },
       });
     default:

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class TotalAmount extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   getTotalAmount = () => {
     let sum = 0;
@@ -23,15 +20,15 @@ class TotalAmount extends Component {
 
   render() {
     return (
-      <div>
-        <div className="container w-100" id="inner-element">
-          <div className="row">
-            <div className="col">
-              <span className="total-amount-text">₩ {this.getTotalAmount()}</span>
-            </div>
+      <>
+        <div className="col amount-container">
+          <div className="component-title">총 결제 금액</div>
+          <div className="total-amount-text">
+            <span className="pricePredix"> 매월 </span>
+            <span className="price"> {this.getTotalAmount()}원 </span>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

@@ -16,7 +16,6 @@ class CalendarClass extends Component {
 
   showSubscibeImg = (subsAppInfo) =>{
     if (subsAppInfo.logoURI === '') {
-      console.log(subsAppInfo.color);
       return (<button className="calendar-subscriptions-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0]}</button>);
     } else {
       return (<img className="calendar-subscriptions-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);

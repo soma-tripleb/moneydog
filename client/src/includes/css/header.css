@@ -1,16 +1,55 @@
 header {
-    background: #f0f2f5;
+    /*background: #f0f2f5;*/
+    background-image: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/background.png);
 }
 
 .logout {
-    color: #007BFF;
+    color: #000;
 }
 
 .headerFont {
-    font-family: fantasy;
+    color: #000;
+    font-size: 7vh;
+    font-weight: bold;
+    padding: 0;
+}
+.nav-link{
+    color: #000;
 }
 
-.categoryFont {
+.active {
+    color: #42AEEC;
+}
+
+.subHeaderFont {
+    color: #000;
+    font-size: 3vh;
+    padding: 0;
+}
+
+.headerBold{
+    font-weight: bold;
+}
+
+.categoryFont{
+    margin: auto 0 auto 0;
+    padding: 0;
+}
+
+.categoryFont > ul{
+    float: right;
+}
+
+.categoryFont > ul > li > a {
+    font-weight: bold;
+    font-size: 2.5vh;
     font-family: sans-serif;
 }
 
+.nav-user {
+    text-decoration: underline;
+}
+
+.headerContainer{
+    padding: 2vh;
+}
