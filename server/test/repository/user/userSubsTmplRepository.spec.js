@@ -64,10 +64,6 @@ describe('User, SubscriptionTemplate', () => {
         ).then((result) => {
           UserSchema.User.findOne({ email: email })
             .then((result) => {
-              // result.subscription.map((subsInfo) => {
-              //   console.log(subsInfo);
-              // });
-
               done();
             })
             .catch((err) => {

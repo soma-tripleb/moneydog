@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink ,Link } from 'react-router-dom';
 
 import { connect as ReduxConn } from 'react-redux';
 import AuthActions from '../redux/actions/authAction';
@@ -16,30 +16,30 @@ class Head extends Component {
       return (
         <>
           <li className="nav-item">
-            <Link to="/user/subscribing" className="nav-link">Subscribing</Link>
+            <NavLink to="/user/dashboard" className="nav-link" >대쉬보드</NavLink>
           </li>
           <li className="nav-item">
-            <Link to="/user/subscribing-Info" className="nav-link">Subscribing Info</Link>
+            <NavLink to="/user/report" className="nav-link">리포트</NavLink>
           </li>
           <li className="nav-item">
-            <Link to="/user/dashboard" className="nav-link">Dashboard</Link>
+            <NavLink to="/user/subscribing" className="nav-link" >구독관리</NavLink>
           </li>
           <li className="nav-item">
-            <Link to="/user/report" className="nav-link">Report</Link>
+            <NavLink to="/user/info" className="nav-link"><span className="nav-user">{this.props.nickname}</span> 님</NavLink>
           </li>
-          <li className="nav-item logout">
-            <a onClick={this.logout} className="nav-link">Logout</a>
-          </li>
+          {/* <li className="nav-item logout">*/}
+          {/*  <a onClick={this.logout} className="nav-link">Logout</a>*/}
+          {/* </li>*/}
         </>
       );
     } else {
       return (
         <>
           <li className="nav-item">
-            <Link to="/signup" className="nav-link">Sign-up</Link>
+            <NavLink to="/signup" className="nav-link">Sign-up</NavLink>
           </li>
           <li className="nav-item">
-            <Link to="/signin" className="nav-link">Sign-in</Link>
+            <NavLink to="/signin" className="nav-link">Sign-in</NavLink>
           </li>
         </>
       );
@@ -50,14 +50,26 @@ class Head extends Component {
     return (
       <>
         <header>
-          <ul className="nav justify-content-center">
-            <li className="nav-item">
-              <Link to="/" className="navbar-brand nav-link headerFont"> MONEY DOG </Link>
-            </li>
-          </ul>
-          <ul className="nav justify-content-center categoryFont">
-            {this.isLogined()}
-          </ul>
+          <div className="container headerContainer">
+            <div className="row">
+              <div className="col-md-6">
+                <ul className="nav">
+                  <li className="nav-item">
+                    <Link to="/" className="navbar-brand nav-link headerFont"> MONEY DOG </Link>
+                  </li>
+                </ul>
+                <ul className="nav">
+                  <span className="subHeaderFont"> 경제적인 구독 전략 - </span>
+                  <span className="subHeaderFont headerBold"> &nbsp; 머니독 </span>
+                </ul>
+              </div>
+              <div className="col-md-6 categoryFont">
+                <ul className="nav">
+                  {this.isLogined()}
+                </ul>
+              </div>
+            </div>
+          </div>
         </header>
       </>
     );
@@ -66,6 +78,7 @@ class Head extends Component {
 
 const mapStateToProps = (state) => ({
   status: state.auth.login.status,
+  nickname: state.auth.login.nickname,
 });
 
 const mapDispatchToProps = (dispatch) => {

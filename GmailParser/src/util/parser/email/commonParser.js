@@ -1,6 +1,6 @@
-const DomParser = require('dom-parser');
-const cheerio = require('cheerio');
-const moment = require('moment');
+import DomParser from 'dom-parser';
+import cheerio from 'cheerio';
+import moment from 'moment';
 
 const base64ToUtf8 = (base64encoded) => {
   return Buffer.from(base64encoded, 'base64').toString('utf8');
@@ -58,12 +58,17 @@ const mailReceivedDateRegex = (receivedDate) => {
   return moment(regex.exec(receivedDate)[0]).format('YYYY-MM-DD');
 };
 
-module.exports = {
-  base64ToUtf8: base64ToUtf8,
-  stringToJsonObject: stringToJsonObject,
-  convertHtml: convertHtml,
-  getEmailId: getEmailId,
-  checkDomain: checkDomain,
-  getParser: getParser,
-  getReceivedDate: getReceivedDate,
+const replaceAll = (str, searchStr, replaceStr) => {
+  return str.split(searchStr).join(replaceStr);
+};
+
+export default {
+  base64ToUtf8,
+  stringToJsonObject,
+  convertHtml,
+  getEmailId,
+  checkDomain,
+  getParser,
+  getReceivedDate,
+  replaceAll,
 };
