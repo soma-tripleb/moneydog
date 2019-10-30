@@ -103,7 +103,7 @@ jobs:
       - run: cat .env
       - run: chmod 755 ./versioning.sh
       - run: sudo ./versioning.sh run
-      #      - run: npm run test
+      - run: npm run test
       - run: ls
       - run: sudo npm run build
       - slack/notify:
