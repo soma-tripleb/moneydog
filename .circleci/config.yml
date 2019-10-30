@@ -21,8 +21,6 @@ workflows:
                 - master
                 - dev
       - build-and-push-image:
-          requires:
-            - lint-and-test
           filters:
             branches:
               only:
