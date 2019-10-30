@@ -101,8 +101,7 @@ jobs:
       - run: cat .env
       - run: chmod 755 ./versioning.sh
       - run: sudo ./versioning.sh run
-      - run: npm run test
-      - run: ls
+#      - run: npm run test
       - run: sudo npm run build
       - slack/notify:
           message: " Lint Test Build 에 성공 했습니다. :smile:"
