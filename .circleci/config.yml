@@ -164,3 +164,134 @@ jobs:
           success_message: "ECR에 image가 잘 올라갔습니다"
           failure_message: "실패했습니다."
           webhook: $SLACK_WEBHOOK
+
+  deploy-service-update:
+    docker:
+      - image: << parameters.docker-image-for-job >>
+    parameters:
+      docker-image-for-job:
+        description: The docker image to be used for running this job on CircleCI.
+        type: string
+        default: 'circleci/python:3.7.1'
+      aws-access-key-id:
+        type: string
+        default: $AWS_ACCESS_KEY_ID
+      aws-secret-access-key:
+        type: string
+        default: $AWS_SECRET_ACCESS_KEY
+      aws-region:
+        default: $AWS_REGION
+      family:
+        default: $AWS_TASK_FAMILY
+        type: string
+      cluster-name:
+        default: $AWS_CLUSTER
+        type: string
+      service-name:
+        type: string
+        default: $AWS_SERVICE
+      deployment-controller:
+        description: The deployment controller to use for the service. Defaulted to ECS
+        type: enum
+        enum:
+          - ECS
+          - CODE_DEPLOY
+        default: ECS
+      codedeploy-application-name:
+        type: string
+        default: $AWS_CODEDEPLOY_NAME
+      codedeploy-deployment-group-name:
+        type: string
+        default: ''
+      codedeploy-load-balanced-container-name:
+        description: >
+          The name of the container to be load-balanced via AWS CodeDeploy.
+          Only effective when the deployment-controller parameter value is
+          "CODE_DEPLOY".
+        type: string
+        default: ''
+      codedeploy-load-balanced-container-port:
+        description: >
+          The port of the container to be load-balanced via AWS CodeDeploy.
+          Only effective when the deployment-controller parameter value is
+          "CODE_DEPLOY".
+        type: integer
+        default: 80
+      container-image-name-updates:
+        description: >
+          Use this to update the Docker image names and/or tag names of existing
+          containers that had been defined in the previous task definition.
+          Expected format:
+          container=<container-name>,image-and-tag=<image-name>:<tag-name>|image=<image-name>|tag=<tag-name>,container=...,image-and-tag|image|tag=...,
+          For each container, specify only either "image-and-tag" or "image" or
+          "tag".
+          If "image-and-tag" is specified, the container image will be updated to
+          the value of the name-value pair.
+          If "image" is specified, the image tag defined in the previous task
+          definition will be retained, if exists.
+          If "tag" is specified, the image name defined in the previous task
+          definition will be used.
+        type: string
+        default: ''
+      container-env-var-updates:
+        description: >
+          Use this to update or set the values of environment variables that will be
+          defined for the containers.
+          (Existing environment variables not included in this parameter will not be
+          removed)
+          Expected format:
+          container=<container-name>,name=<env-var-name>,value=<env-var-value>,container=...,name=...,value=...,
+          Values should not contain commas.
+        type: string
+        default: ''
+      verify-revision-is-deployed:
+        description: |
+          Runs the verify-revision-is-deployed Orb command to verify that
+          the revision has been deployed and is the only deployed revision
+          for the service. Note: enabling this may result in the build
+          being marked as failed if tasks for older revisions fail to be stopped
+          before the max number of polling attempts is reached.
+          Does not support ECS services that are of the Blue/Green Deployment type.
+        type: boolean
+        default: false
+      max-poll-attempts:
+        description: >
+          The maximum number of attempts to poll the deployment status before giving
+          up.
+          Only in use when verify-revision-is-deployed is set to true.
+        type: integer
+        default: 50
+      poll-interval:
+        description: |
+          The polling interval, in seconds.
+          Only in use when verify-revision-is-deployed is set to true.
+        type: integer
+        default: 20
+      fail-on-verification-timeout:
+        description: |
+          Whether to exit with an error if the verification of the deployment
+          status does not complete within the number of polling attempts.
+          Only in use when verify-revision-is-deployed is set to true.
+        type: boolean
+        default: true
+    steps:
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-access-key-id: << parameters.aws-access-key-id >>
+          aws-secret-access-key: << parameters.aws-secret-access-key >>
+          aws-region: << parameters.aws-region >>
+      - update-service:
+          family: << parameters.family >>
+          cluster-name: << parameters.cluster-name >>
+          service-name: << parameters.service-name >>
+          deployment-controller: << parameters.deployment-controller >>
+          codedeploy-application-name: << parameters.codedeploy-application-name >>
+          codedeploy-deployment-group-name: << parameters.codedeploy-deployment-group-name >>
+          codedeploy-load-balanced-container-name: << parameters.codedeploy-load-balanced-container-name >>
+          codedeploy-load-balanced-container-port: << parameters.codedeploy-load-balanced-container-port >>
+          container-image-name-updates: << parameters.container-image-name-updates >>
+          container-env-var-updates: << parameters.container-env-var-updates >>
+          verify-revision-is-deployed: << parameters.verify-revision-is-deployed >>
+          max-poll-attempts: << parameters.max-poll-attempts >>
+          poll-interval: << parameters.poll-interval >>
+          fail-on-verification-timeout: << parameters.fail-on-verification-timeout >>
