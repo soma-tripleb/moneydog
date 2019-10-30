@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class Item extends Component {
 
@@ -26,16 +27,22 @@ class Item extends Component {
 
     return (
       <>
-        <div className="container w-100" id="inner-element">
+        <div className="container w-100" className="subscribe-element item-border">
           <div className="row">
             <div className="col">
               {this.showSubscibeImg(this.props.data)}
             </div>
-            <div className="col">
-                  ₩ {this.numberWithCommas(price)}
+            <div className="col iten-bold">
+              {name}
             </div>
             <div className="col">
-              {paymentDateFormat}
+              엔터테인먼트
+            </div>
+            <div className="col iten-bold">
+                  월{this.numberWithCommas(price)}원
+            </div>
+            <div className="col">
+              매달 {moment(paymentDate, 'YYYY/MM/DD').date()}일
             </div>
           </div>
         </div>

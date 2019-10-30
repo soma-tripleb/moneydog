@@ -23,7 +23,7 @@ workflows:
       - build-and-push-image:
           requires:
             - lint-and-test
-          filters:
+          filtersc:
             branches:
               only:
                 - master
