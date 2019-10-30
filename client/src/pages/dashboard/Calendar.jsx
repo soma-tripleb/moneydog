@@ -1,17 +1,87 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 import { Calendar } from 'antd';
 import moment from 'moment';
 
+const staticday = ['일', '월', '화', '수', '목', '금', '토', '일'];
+const staticMonth = {
+  Jan: '1월',
+  Feb: '2월',
+  Mar: '3월',
+  Apr: '4월',
+  May: '5월',
+  Jun: '6월',
+  Jul: '7월',
+  Aug: '8월',
+  Sep: '9월',
+  Oct: '10월',
+  Nov: '11월',
+  Dec: '12월',
+};
+
 class CalendarClass extends Component {
+
   constructor(props) {
     super(props);
-
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate');
+    this.setDefaultValue();
+  }
+
+  setDefaultValue = () => {
+    const calendarNode = ReactDOM.findDOMNode(this);
+
+    if (calendarNode instanceof HTMLElement) {
+      const days = calendarNode.querySelectorAll('.ant-fullcalendar-column-header-inner');
+      days.forEach((item, index)=>{
+        item.innerHTML = staticday[index];
+      });
+
+      const dates = calendarNode.querySelectorAll('.ant-fullcalendar-value');
+      dates.forEach((item, index)=>{
+        if ( item.innerHTML[0] === '0') {
+          item.innerHTML = item.innerHTML[1];
+        }
+      });
+
+      const year = calendarNode.querySelectorAll('.ant-select-selection-selected-value');
+      year.forEach((item, index)=>{
+        if (staticMonth.hasOwnProperty(item.innerHTML)) {
+          item.innerHTML = staticMonth[item.innerHTML];
+        } else if (item.innerHTML > 1900 || item.innerHTML < 2100) {
+          item.innerHTML += '년';
+        }
+      });
+
+      const years = calendarNode.querySelectorAll('.ant-select-dropdown-menu-item');
+      years.forEach((item, index)=>{
+        if (staticMonth.hasOwnProperty(item.innerHTML)) {
+          item.innerHTML = staticMonth[item.innerHTML];
+        } else if (item.innerHTML > 1900 || item.innerHTML < 2100) {
+          item.innerHTML += '년';
+        }
+      });
+    }
+  };
+
   handleChange = (value) => {
     this.props.handleChange(value);
+  };
+
+  handleOnChange = (value) =>{
+    console.log('handleOnChange', value);
+    this.setDefaultValue();
+  };
+
+  handleOnPanelChange = (value) => {
+    console.log('handleOnPannelChange', value);
+    setTimeout(()=>{
+      this.setDefaultValue();
+    });
   };
 
   showSubscibeImg = (subsAppInfo) =>{
@@ -47,7 +117,6 @@ class CalendarClass extends Component {
         result = (
           <ul className="events">
             <li key={showCalendarSubscriptions.seq}>
-              {/*<img className="calendar-subscriptions-img" src={`${process.env.REACT_APP_IMAGE_URI}` + showCalendarSubscriptions.logoURI} alt='x' />*/}
               {this.showSubscibeImg(showCalendarSubscriptions)}
             </li>
           </ul>
@@ -57,7 +126,6 @@ class CalendarClass extends Component {
         result = (
           <ul className="events">
             <li key={showCalendarSubscriptions.seq}>
-              {/*<img className="calendar-subscriptions-img front" src={`${process.env.REACT_APP_IMAGE_URI}` + showCalendarSubscriptions.logoURI} alt='x' />*/}
               {this.showSubscibeImg(showCalendarSubscriptions)}
               <img className="calendar-subscriptions-img back" src={`${process.env.REACT_APP_IMAGE_URI}` + '/subscriptionLogo/something.png'} alt='x' />
             </li>
@@ -70,16 +138,19 @@ class CalendarClass extends Component {
   };
 
   render() {
+
     if (this.props.data == null)
       return null;
 
     return (
       <div>
         <Calendar
-          fullscreen={false}
+          // fullscreen={false}
           dateCellRender={this.dateCellRender}
           monthCellRender={this.monthCellRender}
           onSelect={this.handleChange}
+          // onChange={this.handleOnChange}
+          onPanelChange={this.handleOnPanelChange}
         />
       </div>
     );
