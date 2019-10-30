@@ -10,7 +10,7 @@ describe('auth controller test', () => {
 
   before( async ()=>{
     await request(app)
-      .post('/auth/signUp')
+      .post('/api/auth/signUp')
       .send({
         userInfo: {
           email: `admin@fkii.org`,
@@ -25,11 +25,11 @@ describe('auth controller test', () => {
     userRepository.deleteOne('admin@fkii.org');
   });
 
-  describe('POST /auth/signUp TEST CASE', () => {
+  describe('POST /api/auth/signUp TEST CASE', () => {
 
     it('userInfo 없이 회원가입을 시도하면 400 error 를 내보낸다.', (done) => {
       request(app)
-        .post('/auth/signUp')
+        .post('/api/auth/signUp')
         .expect('Content-Type', /json/)
         .expect(400)
         .expect((response)=>{
@@ -49,7 +49,7 @@ describe('auth controller test', () => {
 
     it('userInfo 중 nickname, key, password 가 없이 회원가입을 시도하면 없는 키를 알려준다.', (done) => {
       request(app)
-        .post('/auth/signUp')
+        .post('/api/auth/signUp')
         .send({
           userInfo: {
             email: 'admin@fkii.org',
@@ -74,7 +74,7 @@ describe('auth controller test', () => {
 
     it('userInfo의 password 가 8자리 ~ 20자리 사이인지 검사한다.', (done) => {
       request(app)
-        .post('/auth/signUp')
+        .post('/api/auth/signUp')
         .send({
           userInfo: {
             email: 'admin@fkii.org',
@@ -101,7 +101,7 @@ describe('auth controller test', () => {
 
     it('userInfo의 password 에 공백이 있는지 검사한다.', (done) => {
       request(app)
-        .post('/auth/signUp')
+        .post('/api/auth/signUp')
         .send({
           userInfo: {email: 'admin@fkii.org', password: '1234 5678', nickname: 'admin'}
         })
@@ -124,7 +124,7 @@ describe('auth controller test', () => {
 
     it('userInfo의 password 에 특수문자, 영문, 숫자가 포함 되어 있는지 확인한다.', (done) => {
       request(app)
-        .post('/auth/signUp')
+        .post('/api/auth/signUp')
         .send({
           userInfo: {email: 'admin@fkii.org', password: '123456789', nickname: 'admin'}
         })
@@ -147,7 +147,7 @@ describe('auth controller test', () => {
 
     it('회원 가입에 드디어 성공을 했다. token 을 받는지 확인한다.', (done) => {
       request(app)
-        .post('/auth/signUp')
+        .post('/api/auth/signUp')
         .send({
           userInfo: {email: 'tjddus1109@fkii.org', password: '!hello1234', nickname: 'admin'}
         })
@@ -167,7 +167,7 @@ describe('auth controller test', () => {
 
     it('같은 아이디로 회원가입을 시도하면 에러를 내보낸다.', (done) => {
       request(app)
-        .post('/auth/signUp')
+        .post('/api/auth/signUp')
         .send({
           userInfo: {email: 'admin@fkii.org', password: '!qwer1234', nickname: 'admin'}
         })
@@ -189,10 +189,10 @@ describe('auth controller test', () => {
     });
   });
 
-  describe('POST /auth/signIn TEST CASE', () => {
+  describe('POST /api/auth/signIn TEST CASE', () => {
     it('userInfo 없이 로그인 시도하면 400 error 를 내보낸다.', (done) => {
       request(app)
-        .post('/auth/signIn')
+        .post('/api/auth/signIn')
         .expect('Content-Type', /json/)
         .expect(400)
         .expect((response)=>{
@@ -214,7 +214,7 @@ describe('auth controller test', () => {
 
     it('userInfo에 email 또는 password 가 없다면 에러와 함꼐 알려준다.', (done) => {
       request(app)
-        .post('/auth/signIn')
+        .post('/api/auth/signIn')
         .send({
           userInfo: {
             email: 'admin@fkii.org',
@@ -241,7 +241,7 @@ describe('auth controller test', () => {
 
     it('DB에 아이디가 없다면 회원이 아님을 알려준다.', (done) => {
       request(app)
-        .post('/auth/signIn')
+        .post('/api/auth/signIn')
         .send({
           userInfo: {
             email: 'soma123@fkii.org',
@@ -269,7 +269,7 @@ describe('auth controller test', () => {
 
     it('비밀번호가 틀리다면 409 error 를 내보낸다.', (done) => {
       request(app)
-        .post('/auth/signIn')
+        .post('/api/auth/signIn')
         .send({
           userInfo: {
             email: 'admin@fkii.org',
@@ -297,7 +297,7 @@ describe('auth controller test', () => {
 
     it(' id admin@fkii.org 으로 로그인 성공 하는 테스트 token 을 반환 한다', (done) => {
       request(app)
-        .post('/auth/signIn')
+        .post('/api/auth/signIn')
         .send({
           userInfo: {
             email: 'admin@fkii.org',
@@ -308,7 +308,7 @@ describe('auth controller test', () => {
         .expect(200)
         .expect((response)=>{
           expect(response.body).has.all.keys([
-            'status', 'message', 'success', 'token'
+            'status', 'message', 'success', 'token', 'nickname'
           ]);
           expect(response.body.status).to.equal(200);
           expect(response.body.success).to.be.true;
