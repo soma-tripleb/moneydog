@@ -1,3 +1,5 @@
+import CommonParser from '../../util/parser/email/commonParser';
+
 class Gmail {
   constructor() {
     // metadata in 'headers'
@@ -9,6 +11,9 @@ class Gmail {
 
     // metadata in 'data'
     this.snippet = null;
+
+    // payload > body
+    this.body = null;
 
     // iframe in 'payload > parts'
     this.body1 = null;
@@ -41,12 +46,31 @@ class Gmail {
     this.snippet = snippet;
   }
 
+  setBody(body) {
+    if (!body) this.body = null;
+    else {
+      this.body = CommonParser.base64ToUtf8(body);
+    }
+  }
+
   setBody1(body1) {
-    this.body1 = body1;
+    if (!body1) this.body1 = null;
+    else {
+      const bodyDecode = CommonParser.base64ToUtf8(body1);
+      const bodyReplce = bodyDecode.replace(/\r\n/gi, '');
+
+      this.body1 = bodyReplce;
+    }
   }
 
   setBody2(body2) {
-    this.body2 = body2;
+    if (!body2) this.body2 = null;
+    else {
+      const bodyDecode = CommonParser.base64ToUtf8(body2);
+      const bodyReplce = bodyDecode.replace(/\r\n/gi, '');
+
+      this.body2 = bodyReplce;
+    }
   }
 }
 

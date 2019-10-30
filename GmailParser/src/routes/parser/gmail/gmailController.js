@@ -31,9 +31,14 @@ router.get('/messages/id', async (req, res) => {
 
 router.get('/messages', async (req, res) => {
   const useremail = req.query.useremail;
+  const from = (req.query.from === undefined) ? '' : req.query.from;
+  const hasTheWords = (req.query.hasTheWords === undefined) ? '' : req.query.hasTheWords;
+
+  const SearchQuery = new Query(from, hasTheWords);
+  const q = SearchQuery.queryMaker();
 
   try {
-    const result = await GmailService.userMessages(useremail);
+    const result = await GmailService.userMessages(useremail, q);
 
     res.send({
       result

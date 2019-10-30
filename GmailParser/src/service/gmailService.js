@@ -27,22 +27,21 @@ const userMessages = async (useremail, q) => {
     const messagesList = await Gmail.listMessages(useremail, q);
 
     const result = [];
+    if (messagesList.data.resultSizeEstimate !== 0) {
+      const promise = messagesList.data.messages.map(async (message) => {
+        const messageId = message.id;
+        const content = await Gmail.getMessages(useremail, messageId);
 
-    const promise = messagesList.data.messages.map(async (message) => {
+        result.push(content);
+      });
 
-      const messageId = message.id;
-
-      const content = await Gmail.getMessages(useremail, messageId);
-
-      result.push(content);
-    });
-
-    await Promise.all(promise);
+      await Promise.all(promise);
+    }
 
     return result;
 
   } catch (err) {
-    throw err;
+    throw new Error(`GET_USER_MESSAGES ` + err);
   }
 };
 
@@ -53,17 +52,21 @@ const messagesParse = async (useremail, q) => {
   try {
     messagesList = await userMessages(useremail, q);
   } catch (err) {
-    throw err;
+    throw new Error(`GET_GMAIL_MESSAGE_LIST_ERROR ` + err);
   }
 
   const result = [];
 
   const promise = messagesList.map((messages) => {
-    const GmailDTO = new Gmail();
+    try {
+      const GmailDTO = new Gmail();
 
-    const parsing = GmailParser.metadataParse(messages, GmailDTO);
+      const parsing = GmailParser.metadataParse(messages, GmailDTO);
 
-    result.push(parsing);
+      result.push(parsing);
+    } catch (err) {
+      throw new Error(`GMAIL_PARSER_ERROR ` + err);
+    }
   });
 
   await Promise.all(promise);
