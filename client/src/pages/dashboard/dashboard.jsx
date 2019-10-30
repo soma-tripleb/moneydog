@@ -48,7 +48,7 @@ class DashBoard extends Component {
       <>
         <div className="container">
 
-          <div className="align-self-center">
+          <div className="align-self-center dashboard-inner">
             <div className="row align-items-center TotalAmount">
               <div className="col-md-3 rightLine">
                 <TotalAmount data={subscription} />
@@ -66,7 +66,7 @@ class DashBoard extends Component {
             <div className="col-md-6 dashboard-inner">
               {/* 달력 - 월 */}
               <div className="calendar">
-                <span className="component-title"><u>월별 결제일 정보</u></span>
+                <span className="calendar-component-title"> 결제 스케줄 </span>
                 <Calendar date={selectedValue} handleChange={this.handleChange} data={subscription} />
               </div>
               <hr />
@@ -83,7 +83,6 @@ class DashBoard extends Component {
               {/*  <span className="component-title"><u>총 결제 금액 정보</u></span>*/}
               {/*  <TotalAmount data={subscription} />*/}
               {/* </div>*/}
-              <hr />
               <div className='categories'>
                 <span className="component-title"><u>구독 서비스 별 결제 정보</u></span>
                 <Categories data={subscription} />
