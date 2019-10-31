@@ -14,15 +14,13 @@ const wrapper = (asyncFn) => {
   });
 };
 
-router.get('/messages/id', async (req, res) => {
-  const useremail = req.query.useremail;
+router.get('/messages/id/:useremail', async (req, res) => {
+  const useremail = req.params.useremail;
 
   try {
     const result = await GmailService.userMessagesId(useremail);
 
-    res.send({
-      result,
-    });
+    res.json(result).end();
   } catch (err) {
     throw err;
   };
@@ -51,15 +49,12 @@ router.get('/messages', async (req, res) => {
 });
 
 router.get('/messages/parsing', wrapper(async (req, res) => {
-  // TODO, query 검증
   const useremail = req.query.useremail;
   const from = (req.query.from === undefined) ? '' : req.query.from;
   const hasTheWords = (req.query.hasTheWords === undefined) ? '' : req.query.hasTheWords;
 
   const SearchQuery = new Query(from, hasTheWords);
   const q = SearchQuery.queryMaker();
-
-  console.log(q);
 
   const result = await GmailService.messagesParse(useremail, q);
   const count = result.length;

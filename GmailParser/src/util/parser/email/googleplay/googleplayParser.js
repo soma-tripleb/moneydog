@@ -122,6 +122,18 @@ const GooglePlayReceiptParser = (() => {
       dto.setPeriodMonth(periodMonth);
 
       return dto;
+    },
+
+    textParse: (body) => {
+      // 보낸사람
+      // Date
+      // Subject
+      // To
+      // 주문 번호
+      // 주문 날짜
+      // 상품 가격
+      // 자동 갱신 날짜
+      // 합계
     }
   };
 })();
