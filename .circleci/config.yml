@@ -96,8 +96,6 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: npm install
-      - run: ls
-      - run: ls ./dist
       - run: npm run lint
       - run: echo -e $ENVFILE >> .env
       - run: cat .env
