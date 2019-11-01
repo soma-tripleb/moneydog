@@ -1,4 +1,3 @@
-import CommonParser from './commonParser';
 
 const GmailParser = (() => {
   return {

@@ -124,16 +124,34 @@ const GooglePlayReceiptParser = (() => {
       return dto;
     },
 
-    textParse: (body) => {
-      // 보낸사람
-      // Date
-      // Subject
-      // To
-      // 주문 번호
-      // 주문 날짜
-      // 상품 가격
-      // 자동 갱신 날짜
-      // 합계
+    // from:(google) 영수증 에 한함.
+    body1Parse: (body1) => {
+      const text = body1;
+
+      const renewalStartIdx = text.indexOf('자동 갱신 날짜');
+      const renewalLastIdx = text.indexOf('합계');
+      const priceStartIdx = text.indexOf('합계');
+      const priceLastIdx = text.indexOf('결제 방법');
+
+      try {
+        if (renewalStartIdx === -1) throw err;
+        if (renewalLastIdx === -1) throw err;
+        if (priceStartIdx === -1) throw err;
+        if (priceLastIdx === -1) throw err;
+      } catch (err) {
+        throw new Error('EXPIRED_PARSER_BODY1');
+      }
+
+      const renewalStr = text.substring(renewalStartIdx, renewalLastIdx);
+      const priceStr = text.substring(priceStartIdx, priceLastIdx);
+
+      const renewal = renewalStr.split(':')[1].trim();
+      const price = priceStr.split(':')[1].trim();
+
+      return {
+        renewal,
+        price
+      };
     }
   };
 })();
