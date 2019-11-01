@@ -189,7 +189,7 @@ jobs:
         default: $AWS_SECRET_ACCESS_KEY
       aws-region:
         default: $AWS_REGION
-        type: string
+        type: env_var_name
       family:
         default: $AWS_TASK_FAMILY
         type: string
