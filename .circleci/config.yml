@@ -21,9 +21,7 @@ workflows:
                 - master
                 - dev
       - build-and-push-image:
-          requires:
-            - lint-and-test
-          filtersc:
+          filters:
             branches:
               only:
                 - master
@@ -98,13 +96,14 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: npm install
+      - run: ls
+      - run: ls ./dist
       - run: npm run lint
       - run: echo -e $ENVFILE >> .env
       - run: cat .env
       - run: chmod 755 ./versioning.sh
       - run: sudo ./versioning.sh run
-      #      - run: npm run test
-      - run: ls
+#      - run: npm run test
       - run: sudo npm run build
       - slack/notify:
           message: " Lint Test Build 에 성공 했습니다. :smile:"
