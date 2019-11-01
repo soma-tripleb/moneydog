@@ -13,7 +13,7 @@ if [ ! -d $dir ]; then
     mkdir -m 755 $PWD/$dir
 fi
 
-curl "https://moneydog-build.s3.ap-northeast-2.amazonaws.com/build/version.txt" > ./dist/version.txt
+curl "https://moneydog.s3.ap-northeast-2.amazonaws.com/build/version.txt" > ./dist/version.txt
 
 # version.txt
 while read line
@@ -28,6 +28,7 @@ do
   sed -i -e 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
 
 done < $PWD/dist/version.txt
+
 echo -e "CURRENT_VERSION\t: $VERSION"
 echo -e "NEXT_VERSION\t: $NEXT_VERSION"
 
@@ -77,7 +78,7 @@ do
     next_version=${next:0:1}\.${next:1:1}\.${next:2}\.
 
     dev_path="\.\.\/app\.jsx"
-    prod_path="https:\/\/moneydog-build.s3.ap-northeast-2.amazonaws.com\/"
+    prod_path="https:\/\/moneydog.s3.ap-northeast-2.amazonaws.com\/build\/"
     prod_path=$prod_path$next_version
     prod_path=$prod_path"app.jsx"
 

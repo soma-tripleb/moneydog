@@ -21,8 +21,6 @@ workflows:
                 - master
                 - dev
       - build-and-push-image:
-          requires:
-            - lint-and-test
           filters:
             branches:
               only:
@@ -103,8 +101,7 @@ jobs:
       - run: cat .env
       - run: chmod 755 ./versioning.sh
       - run: sudo ./versioning.sh run
-      #      - run: npm run test
-      - run: ls
+#      - run: npm run test
       - run: sudo npm run build
       - slack/notify:
           message: " Lint Test Build 에 성공 했습니다. :smile:"
@@ -115,11 +112,11 @@ jobs:
           footer: "Money Dog"
       - aws-s3/sync:
           from: dist
-          to: 's3://moneydog-build'
+          to: 's3://moneydog/build'
           overwrite: true
       - aws-s3/copy:
           from: dist/
-          to: 's3://moneydog-build'
+          to: 's3://moneydog/build'
           arguments: '--dryrun'
       - when:
           condition: <<parameters.checkout>>
