@@ -28,6 +28,7 @@ do
   sed -i -e 's/'${VERSION}'/'${NEXT_VERSION}'/' "$PWD/dist/version.txt"
 
 done < $PWD/dist/version.txt
+
 echo -e "CURRENT_VERSION\t: $VERSION"
 echo -e "NEXT_VERSION\t: $NEXT_VERSION"
 

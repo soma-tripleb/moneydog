@@ -327,11 +327,12 @@ thead > tr{
     padding: 1.5vh;
 }
 
-.iten-bold{
+.item-bold{
     font-weight: bold;
-    font-size: 2vh;
 }
 
 .item-border{
     border-bottom: 1px solid black;
+    margin: 0;
+    vertical-align: center;
 }

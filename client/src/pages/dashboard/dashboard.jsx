@@ -79,7 +79,7 @@ class DashBoard extends Component {
             {/* 구독중인 서비스 list */}
             <div className="col-md-6 dashboard-inner">
               <div className='categories'>
-                <div className="categories-component-title item-border"> 10월 전체 구독 결제 정보 </div>
+                <div className="categories-component-title"> 10월 전체 구독 결제 정보 </div>
                 <Categories data={subscription} />
               </div>
             </div>

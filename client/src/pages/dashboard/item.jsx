@@ -27,22 +27,28 @@ class Item extends Component {
 
     return (
       <>
-        <div className="container w-100" className="subscribe-element item-border">
-          <div className="row">
+        <div className="row">
+          <div className="col-md-2 subscribe-element">
             <div className="col">
               {this.showSubscibeImg(this.props.data)}
             </div>
-            <div className="col iten-bold">
-              {name}
-            </div>
-            <div className="col">
-              엔터테인먼트
-            </div>
-            <div className="col iten-bold">
+          </div>
+          <div className="col subscribe-element item-border">
+            <div className="container w-100 ">
+              <div className="row">
+                <div className="col item-bold">
+                  {name}
+                </div>
+                <div className="col">
+                  엔터테인먼트
+                </div>
+                <div className="col item-bold">
                   월{this.numberWithCommas(price)}원
-            </div>
-            <div className="col">
-              매달 {moment(paymentDate, 'YYYY/MM/DD').date()}일
+                </div>
+                <div className="col">
+                  매달 {moment(paymentDate, 'YYYY/MM/DD').date()}일
+                </div>
+              </div>
             </div>
           </div>
         </div>
