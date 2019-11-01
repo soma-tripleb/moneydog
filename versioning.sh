@@ -78,7 +78,7 @@ do
     next_version=${next:0:1}\.${next:1:1}\.${next:2}\.
 
     dev_path="\.\.\/app\.jsx"
-    prod_path="https:\/\/moneydog-build.s3.ap-northeast-2.amazonaws.com\/"
+    prod_path="https:\/\/moneydog.s3.ap-northeast-2.amazonaws.com\/build\/"
     prod_path=$prod_path$next_version
     prod_path=$prod_path"app.jsx"
 
