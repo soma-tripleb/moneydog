@@ -27,6 +27,7 @@ workflows:
               only:
                 - master
                 - dev
+                - jy-issue-107
       - deploy-service-update:
           requires:
             - build-and-push-image
@@ -35,6 +36,7 @@ workflows:
               only:
                 - master
                 - dev
+                - jy-issue-107
 jobs:
   lint-and-test:
     executor: my-executor
