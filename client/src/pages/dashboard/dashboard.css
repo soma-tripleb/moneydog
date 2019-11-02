@@ -1,6 +1,7 @@
 /*dashboard */
 .dashboard-inner {
     padding: 1vh;
+    margin-bottom: 5vh;
 }
 
 .calendar {
@@ -31,6 +32,7 @@
     box-shadow: 0vh 0vh 10px 10px #f3f3f3;
     background: #ffffff;
     width: 100%;
+    height: 100%;
     border-radius: 2vh;
     overflow: auto;
 
@@ -132,7 +134,7 @@
     display: none;
 }
 .ant-fullcalendar-header{
-    padding: 0;
+    padding: 0 1vh 4vh 0;
 }
 /*요일 가운데 정렬*/
 .ant-fullcalendar-column-header-inner {
@@ -142,11 +144,10 @@
     font-weight: bold;
     font-size: 2.5vh;
     height: 0;
-    /*padding-top: 50%;*/
-    margin-top: 50%;
     padding-bottom: 50%;
 }
-/*ant 폰트 사이즈 +굵게*/
+
+    /*ant 폰트 사이즈 +굵게*/
 .ant-fullcalendar-value {
     font-size: 2vh;
 }
@@ -167,10 +168,21 @@
     color: black;
 }
 .ant-fullcalendar td{
-    border-right: 1px solid #000;
+    border-right: 1px solid #DDDDDD;
 }
+th.ant-fullcalendar-column-header{
+    border-right: 1px solid #DDDDDD;
+}
+
+.ant-fullcalendar-tbody {
+    outline: 1px solid #fff;
+}
+thead > tr{
+    outline: 1px solid #fff;
+}
+
 .ant-fullcalendar-fullscreen .ant-fullcalendar-column-header{
-    padding: 0;
+    padding: 2vh 0 0 0;
 }
 
 .ant-select-selection-selected-value{
@@ -300,4 +312,27 @@
     color: black;
     font-size: 3vh;
     left: 4vh;
+}
+.categories-component-title{
+    font-weight: bold;
+    color: black;
+    font-size: 3vh;
+    left: 4vh;
+    text-align: left;
+    padding-bottom: 4vh;
+}
+
+.subscribe-element{
+    text-align: center;
+    padding: 1.5vh;
+}
+
+.item-bold{
+    font-weight: bold;
+}
+
+.item-border{
+    border-bottom: 1px solid black;
+    margin: 0;
+    vertical-align: center;
 }

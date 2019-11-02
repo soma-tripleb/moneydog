@@ -25,13 +25,6 @@ class Categories extends Component {
 
     return (
       <div>
-        <PageHeader></PageHeader>
-        {/* <PageHeader
-          extra={[
-            <Button key="2" onClick={() => {this.sortByPrice(data);}}>가격 순</Button>,
-            <Button key="1" onClick={() => {this.sortByLeftDay(data);}}>남은 일</Button>,
-          ]}>
-        </PageHeader> */}
         <div>
           {this.showUserSubsList()}
         </div>
