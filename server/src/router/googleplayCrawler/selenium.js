@@ -1,21 +1,21 @@
 const webdriver = require('selenium-webdriver');
-const By = webdriver.By;
 const chrome = require('selenium-webdriver/chrome');
 const path = require('chromedriver').path;
+const {Builder, By, Key, until} = require('selenium-webdriver');
+const fs = require('fs');
 
-const service = new chrome.ServiceBuilder(path).build();
-chrome.setDefaultService(service);
+const getLogin = async () => {
+  const driver = await new Builder().forBrowser('chrome').build();
+  try {
+    await driver.get('https://play.google.com/store/account/orderhistory');
+    await driver.findElement(By.css('#identifierId')).sendKeys('testid');
+    await driver.findElement(By.css('#identifierNext')).click();
+    await driver.wait(until.elementLocated(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')));
+    await driver.findElement(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')).sendKeys('testpw');
+    await driver.findElement(By.id('#passwordNext')).click();
+  } catch (e) {
+    console.log(`error : ${e}`);
+  }
+}
 
-const drvier = new webdriver.Builder()
-  .withCapabilities(webdriver.Capabilities.chrome())
-  .build();
-
-drvier.get('https://play.google.com/store/account/orderhistory');
-drvier.findElement(By.css('#identifierId')).sendKeys('moneydogtest1');
-drvier.findElement(By.css('#identifierNext')).click();
-drvier.findElement(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')).sendKeys('moneydog1234');
-drvier.findElement(By.css('#passwordNext')).click();
-// email input #identifierId
-// next button #identifierNext
-// password #password > div.aCsJod.oJeWuf > div > div.Xb9hP > input
-// pwd next button #passwordNext
+getLogin();
