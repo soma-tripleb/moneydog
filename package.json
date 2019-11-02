@@ -24,6 +24,7 @@
     "babel-plugin-async-to-promises": "^1.0.5",
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
+    "chromedriver": "^78.0.1",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "css-loader": "^3.0.0",
