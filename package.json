@@ -59,6 +59,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
+    "selenium-webdriver": "^4.0.0-alpha.5",
     "style-loader": "^0.23.1",
     "url-loader": "^2.1.0",
     "winston": "^3.2.1",
