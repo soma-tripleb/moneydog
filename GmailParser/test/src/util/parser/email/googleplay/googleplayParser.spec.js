@@ -20,10 +20,6 @@ describe('googleplayParser를 만들기 위해서', () => {
     it('가지고 올 수 있는 데이터', () => {
       const indexing = str.split(`\r\n`);
 
-      // indexing.forEach((str, i) => {
-      //   console.log(i + ' ' + str);
-      // });
-
       const from = indexing[0];
       const date = indexing[1];
       const goods = indexing[14];
@@ -31,16 +27,12 @@ describe('googleplayParser를 만들기 위해서', () => {
       const total = indexing[17];
       const service = indexing[36];
 
-      const result = {
-        from,
-        date,
-        goods,
-        renewal,
-        total,
-        service
-      };
-
-      // console.log(result);
+      '보낸사람: Google Play <googleplay-noreply@google.com>'.should.be.exactly(from);
+      'Date: 2019년 8월 9일 (금) 오후 2:51'.should.be.exactly(date);
+      '1개월 이용권 (왓챠플레이) 매월 ₩7,900'.should.be.exactly(goods);
+      '월간 구독 ‐ 자동 갱신 날짜: 2019. 9. 9.'.should.be.exactly(renewal);
+      '합계: 매월 ₩7,900'.should.be.exactly(total);
+      '왓챠'.should.be.exactly(service);
     });
   });
 
@@ -64,44 +56,25 @@ describe('googleplayParser를 만들기 위해서', () => {
       const price = str.indexOf('합계');
       const end = str.indexOf('결제 방법');
 
-      const result1 = {
-        date,
-        from,
-        subject,
-        to,
-        orderNum,
-        orderDate,
-        promotion,
-        renewalDate,
-        price,
-        end
-      };
+      const fromResult = str.substring(from, date);
+      const dateResult = str.substring(date, subject);
+      const subjectResult = str.substring(subject, to);
+      const toResult = str.substring(to, orderNum);
+      const orderNumResult = str.substring(orderNum, orderDate);
+      const orderDateResult = str.substring(orderDate, promotion);
+      const promotionResult = str.substring(promotion, renewalDate);
+      const renewalDateResult = str.substring(renewalDate, price);
+      const priceResult = str.substring(price, end);
 
-      // console.log(result1);
-
-      const fromResult = str.substring(from, '\r\n');
-      const dateResult = str.substring(date, `\r\n`);
-      const subjectResult = str.substring(subject, `\r\n`);
-      const toResult = str.substring(to, `\r\n`);
-      const orderNumResult = str.substring(orderNum, `\r\n`);
-      const orderDateResult = str.substring(orderDate, `\r\n`);
-      const promotionResult = str.substring(promotion, `\r\n`);
-      const renewalDateResult = str.substring(renewalDate, `\r\n`);
-      const priceResult = str.substring(price, `\r\n`);
-
-      const result2 = {
-        fromResult,
-        dateResult,
-        subjectResult,
-        toResult,
-        orderNumResult,
-        orderDateResult,
-        promotionResult,
-        renewalDateResult,
-        priceResult
-      };
-
-      // console.log(result2);
+      '보낸사람: Google Play <googleplay-noreply@google.com>'.should.be.exactly(fromResult);
+      'Date: 2019년 8월 9일 (금) 오후 2:51'.should.be.exactly(dateResult);
+      'Subject: Google Play 주문 영수증(2019. 8. 9)'.should.be.exactly(subjectResult);
+      'To: <jimmyjaeyeon@gmail.com>[image: Google Play]<https://www.google.com/appserve/mkt/p/AFnwnKVacG8lBVQt00FkoINN5MqmbdnIIv8qFCDP4bo9C3a9JgigiaoTjRqkLsupyPJhUDH-XIR8BFOWQMJAUb18NyKthnMGi99Xm2OJ51V9mjGwxors5Q>감사합니다Google Play에서 왓챠의 구독권을 구매하셨습니다.* '.should.be.exactly(toResult);
+      '주문 번호: * GPA.3303-9400-7953-78210* '.should.be.exactly(orderNumResult);
+      '주문 날짜: * 2019. 8. 9 오후 2시 51분 28초'.should.be.exactly(orderDateResult);
+      '상품 가격1개월 이용권 (왓챠플레이) 매월 ₩7,900월간 구독 ‐ '.should.be.exactly(promotionResult);
+      '자동 갱신 날짜: 2019. 9. 9.'.should.be.exactly(renewalDateResult);
+      '합계: 매월 ₩7,900(VAT ₩0 포함)'.should.be.exactly(priceResult);
     });
 
     describe('`자동 갱신 날짜`, `합계` 문자열이 존재', () => {

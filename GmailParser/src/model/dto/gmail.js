@@ -58,9 +58,7 @@ class Gmail {
     else {
       const bodyDecode = CommonParser.base64ToUtf8(body1);
 
-      const bodyReplce = bodyDecode.replace(/\r\n/gi, '');
-
-      this.body1 = bodyReplce;
+      this.body1 = bodyDecode;
     }
   }
 
