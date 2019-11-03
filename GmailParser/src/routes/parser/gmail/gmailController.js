@@ -14,15 +14,13 @@ const wrapper = (asyncFn) => {
   });
 };
 
-router.get('/messages/id', async (req, res) => {
-  const useremail = req.query.useremail;
+router.get('/messages/id/:useremail', async (req, res) => {
+  const useremail = req.params.useremail;
 
   try {
     const result = await GmailService.userMessagesId(useremail);
 
-    res.send({
-      result,
-    });
+    res.json(result).end();
   } catch (err) {
     throw err;
   };
@@ -31,9 +29,14 @@ router.get('/messages/id', async (req, res) => {
 
 router.get('/messages', async (req, res) => {
   const useremail = req.query.useremail;
+  const from = (req.query.from === undefined) ? '' : req.query.from;
+  const hasTheWords = (req.query.hasTheWords === undefined) ? '' : req.query.hasTheWords;
+
+  const SearchQuery = new Query(from, hasTheWords);
+  const q = SearchQuery.queryMaker();
 
   try {
-    const result = await GmailService.userMessages(useremail);
+    const result = await GmailService.userMessages(useremail, q);
 
     res.send({
       result
@@ -46,15 +49,12 @@ router.get('/messages', async (req, res) => {
 });
 
 router.get('/messages/parsing', wrapper(async (req, res) => {
-  // TODO, query 검증
   const useremail = req.query.useremail;
   const from = (req.query.from === undefined) ? '' : req.query.from;
   const hasTheWords = (req.query.hasTheWords === undefined) ? '' : req.query.hasTheWords;
 
   const SearchQuery = new Query(from, hasTheWords);
   const q = SearchQuery.queryMaker();
-
-  console.log(q);
 
   const result = await GmailService.messagesParse(useremail, q);
   const count = result.length;
@@ -74,6 +74,17 @@ router.get('/messages/parsing', wrapper(async (req, res) => {
   };
 
   res.send(config);
+}));
+
+router.get('/messages/parsing/google/receipt/:useremail', wrapper(async (req, res) => {
+  const useremail = req.params.useremail;
+  const q = 'from:(김재연) 영수증';
+
+  const metadataList = await GmailService.messagesParse(useremail, q);
+
+  const result = await GmailService.divideByFrom(metadataList);
+
+  res.json(result).end();
 }));
 
 export default router;

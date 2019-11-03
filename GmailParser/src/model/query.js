@@ -16,7 +16,10 @@ class Query {
   }
 
   queryMaker() {
-    return 'from:(' + this.from + ')' + ' ' + this.hasTheWords;
+    const fromForm = (this.from) ? 'from:(' + this.from + ') ' : '';
+    const hasTheWords = (this.hasTheWords) ? this.hasTheWords : '';
+
+    return fromForm + hasTheWords;
   }
 }
 
