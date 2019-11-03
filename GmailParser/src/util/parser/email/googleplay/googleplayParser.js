@@ -90,7 +90,6 @@ const GooglePlayReceiptParser = (() => {
     },
 
     iframeParse: (dto, iframeBody) => {
-
       const body = iframeBody;
 
       let name = '';
@@ -125,7 +124,7 @@ const GooglePlayReceiptParser = (() => {
     },
 
     // from:(google) 영수증 에 한함.
-    body1Parse: (body1) => {
+    body1ParserOfIndex: (body1) => {
       const text = body1;
 
       const renewalStartIdx = text.indexOf('자동 갱신 날짜');
@@ -151,6 +150,54 @@ const GooglePlayReceiptParser = (() => {
       return {
         renewal,
         price
+      };
+    },
+
+    body1ParserOfSplit: (body1) => {
+      const text = body1;
+
+      const indexing = text.split(`\r\n`);
+
+      const renewal = indexing[20];
+      const total = indexing[24];
+      const service = indexing[52];
+
+      return {
+        renewal,
+        total,
+        service
+      };
+    },
+
+    body2ParserOfTag: (body2) => {
+      const htmlText = body2;
+
+      let name = '';
+      let price = '';
+      let date = '';
+      let renewal = '';
+      let periodMonth = '';
+
+      const dom = CommonParser.convertHtml(htmlText);
+
+      const $ = cheerio.load(dom);
+
+      try {
+        name = convertNameReg($(NAME_TAG).text().trim());
+        price = convertPriceReg($(PRICE_TAG).text());
+        date = convertDateReg($(DATE_TAG).text());
+        renewal = convertRenewalReg($(RENEWAL_TAG).text());
+        periodMonth = calPeriod(renewal, date);
+      } catch (err) {
+        throw new Error(`BODY2_PARSER_OF_TAG_ERROR ` + err);
+      }
+
+      return {
+        name,
+        price,
+        date,
+        renewal,
+        periodMonth
       };
     }
   };

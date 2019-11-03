@@ -3,7 +3,7 @@ import UserQuery from '../db/usersQuery';
 
 import Gmail from '../model/dto/gmail';
 import GmailParser from '../util/parser/email/gmailParser';
-
+import GooglePlayParser from '../util/parser/email/googleplay/googleplayParser';
 import GMAIL_SEARCH_QUERY from '../../resources/static/GmailSearchQuery.json';
 
 const userMessagesId = async (useremail) => {
@@ -74,8 +74,38 @@ const messagesParse = async (useremail, q) => {
   return result;
 };
 
+const divideByFrom = async (metadataList) => {
+  if (!Array.isArray(metadataList)) throw new Error('DIVIDEBYFROM_PARAM_TYPE_ERR');
+
+  const result = [];
+
+  const promise = metadataList.map((metadata) => {
+    const from = metadata.from;
+    const body1 = metadata.body1;
+    const body2 = metadata.body2;
+
+    try {
+      switch (from) {
+        case 'Google Play <googleplay-noreply@google.com>':
+          result.push(GooglePlayParser.body2ParserOfTag(body2));
+          break;
+        case '\"김재연\" <jimmyjaeyeon@gmail.com>':
+          result.push(GooglePlayParser.body1ParserOfIndex(body1));
+          break;
+      }
+    } catch (err) {
+      throw new Error(`DIVIDE_BY_FROM_ERROR ` + err);
+    }
+  });
+
+  await Promise.all(promise);
+
+  return result;
+};
+
 export default {
   userMessagesId,
   userMessages,
   messagesParse,
+  divideByFrom,
 };

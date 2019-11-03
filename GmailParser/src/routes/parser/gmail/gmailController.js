@@ -76,4 +76,15 @@ router.get('/messages/parsing', wrapper(async (req, res) => {
   res.send(config);
 }));
 
+router.get('/messages/parsing/google/receipt/:useremail', wrapper(async (req, res) => {
+  const useremail = req.params.useremail;
+  const q = 'from:(김재연) 영수증';
+
+  const metadataList = await GmailService.messagesParse(useremail, q);
+
+  const result = await GmailService.divideByFrom(metadataList);
+
+  res.json(result).end();
+}));
+
 export default router;

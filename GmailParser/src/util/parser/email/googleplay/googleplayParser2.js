@@ -4,7 +4,7 @@
  */
 const GooglePlayParser2 = (() => {
   return {
-    bodyParser: (body1) => {
+    body1Parser: (body1) => {
       const text = body1;
 
       const indexing = text.split(`\r\n`);

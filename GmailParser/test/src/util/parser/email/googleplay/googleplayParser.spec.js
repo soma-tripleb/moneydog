@@ -5,8 +5,8 @@ import GooglePlay from 'src/model/dto/googleplay';
 
 import GP_WATCHA_MESSAGES from 'test/resources/mock/email/googleplay/GP_WATCHA_MESSAGES';
 
-import GP_WATCHA_BODY1 from 'test/resources/mock/email/googleplay/GP_WATCHA_BODY1';
-import GP_WATCHA_BODY1_NO_ENTER from 'test/resources/mock/email/googleplay/GP_WATCHA_BODY1_NO_ENTER';
+import FWD_GP_WATCHA_BODY1 from 'test/resources/mock/email/googleplay/FWD_GP_WATCHA_BODY1';
+import FWD_GP_WATCHA_BODY1_NO_ENTER from 'test/resources/mock/email/googleplay/FWD_GP_WATCHA_BODY1_NO_ENTER';
 
 describe('googleplayParser를 만들기 위해서', () => {
   describe('개행을 포함 한 데이터', () => {
@@ -14,7 +14,7 @@ describe('googleplayParser를 만들기 위해서', () => {
     let str = '';
 
     beforeEach(() => {
-      str = GP_WATCHA_BODY1.data;
+      str = FWD_GP_WATCHA_BODY1.data;
     });
 
     it('가지고 올 수 있는 데이터', () => {
@@ -40,7 +40,7 @@ describe('googleplayParser를 만들기 위해서', () => {
     let str = '';
 
     beforeEach(() => {
-      str = GP_WATCHA_BODY1_NO_ENTER.data;
+      str = FWD_GP_WATCHA_BODY1_NO_ENTER.data;
     });
 
     it('가지고 올 수 있는 데이터', () => {
@@ -140,7 +140,7 @@ describe('googleplayParser는', () => {
 
     describe('body1 데이터를 문자열로 잘라서 파싱', () => {
       it('성공 시', () => {
-        const result = GooglePlayParser.body1Parse(GP_WATCHA_BODY1_NO_ENTER.data);
+        const result = GooglePlayParser.body1Parse(FWD_GP_WATCHA_BODY1_NO_ENTER.data);
 
         result.renewal.should.exactly('2019. 9. 9.');
         result.price.should.exactly('매월 ₩7,900(VAT ₩0 포함)');
