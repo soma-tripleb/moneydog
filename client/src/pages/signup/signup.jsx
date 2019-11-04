@@ -47,7 +47,6 @@ class SignUp extends Component {
     if (!this.checkedPasswordForm()) {
       return false;
     }
-
     // 모두 통과시 createUser
     // const response = await service.createUser(this.state);
     const result = await this.props.registerRequest(this.state.email, this.state.password, this.state.nickname);

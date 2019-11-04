@@ -39,8 +39,8 @@
     font-weight: lighter;
     font-size: 1vw;
     padding: 2vh;
-    /*height: 54.5%;*/
-    /*height: 70%;*/
+
+    text-align: left;
 }
 
 .TotalAmount {
@@ -186,7 +186,7 @@ thead > tr{
 }
 
 .ant-select-selection-selected-value{
-    font-size: 3vh;
+    font-size: 2vh;
     color: #000000;
 }
 .ant-select-arrow .ant-select-arrow-icon svg{
@@ -199,13 +199,16 @@ thead > tr{
 
 /* Calendar, Date */
 .calendar-subscriptions-img {
-    width: 50%;
+    height: 3vh;
+    width: 3vh;
+
     border-radius: 0.5vh;
     border: 1px lightgray solid;
 }
 
 .calendar-subscriptions-Btn {
-    width: 50%;
+    height: 3vh;
+    width: 3vh;
     border-radius: 0.5vh;
     border: 1px lightgray solid;
 }
@@ -313,18 +316,22 @@ thead > tr{
     font-size: 3vh;
     left: 4vh;
 }
+
 .categories-component-title{
     font-weight: bold;
     color: black;
     font-size: 3vh;
     left: 4vh;
     text-align: left;
-    padding-bottom: 4vh;
+    padding-left: 2vh;
 }
-
-.subscribe-element{
+.subscribe-img-element{
     text-align: center;
     padding: 1.5vh;
+}
+.subscribe-element{
+    text-align: center;
+    padding: 2vh;
 }
 
 .item-bold{
@@ -332,7 +339,7 @@ thead > tr{
 }
 
 .item-border{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #d8d8d8;
     margin: 0;
     vertical-align: center;
 }

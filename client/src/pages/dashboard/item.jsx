@@ -20,6 +20,7 @@ class Item extends Component {
     }
   };
 
+  show
 
   render() {
     const {logoURI, name, price, paymentDate} = this.props.data;
@@ -28,13 +29,13 @@ class Item extends Component {
     return (
       <>
         <div className="row">
-          <div className="col-md-2 subscribe-element">
+          <div className="col-md-2 subscribe-img-element">
             <div className="col">
               {this.showSubscibeImg(this.props.data)}
             </div>
           </div>
-          <div className="col subscribe-element item-border">
-            <div className="container w-100 ">
+          <div className="col subscribe-element item-border align-self-center">
+            <div className="container w-100 align-self-center">
               <div className="row">
                 <div className="col item-bold">
                   {name}
