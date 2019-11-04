@@ -10,6 +10,8 @@ import UserCustomSubscription from './userCustomSubscription';
 import SubsTmplService from './subscriptions.ajax';
 
 import './subscriptions.css';
+import AuthActions from '../../redux/actions/authAction';
+
 
 class Subscriptions extends Component {
   constructor(props) {
@@ -31,9 +33,15 @@ class Subscriptions extends Component {
     const { subscriptions } = this.props;
 
     const subsTmplResponse = await SubsTmplService.getList();
-    const subsTmplList = subsTmplResponse.data.message;
 
-    console.log(subsTmplList);
+    if (subsTmplResponse.status === 403 ) {
+      this.props.REDUX_AUTH_LOGOUT_REQUEST();
+      alert('세션 만료 다시 로그인 해주세요');
+      return;
+    }
+
+
+    const subsTmplList = subsTmplResponse.data.message;
 
     if (subscriptions.length !== 0) {
       subscriptions.map((subscription) => {
@@ -191,6 +199,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     REDUX_USER_SET_SUBSTMPL_LIST: (list) => {
       dispatch(UserActions.setUserSubsTmplList(list));
+    },
+    REDUX_AUTH_LOGOUT_REQUEST: () => {
+      dispatch(AuthActions.logoutRequest());
     },
   };
 };
