@@ -8,12 +8,12 @@ const getLogin = async () => {
   const driver = await new Builder().forBrowser('chrome').build();
   try {
     await driver.get('https://play.google.com/store/account/orderhistory');
-    await driver.findElement(By.css('#identifierId')).sendKeys('test');
+    await driver.findElement(By.css('#identifierId')).sendKeys('testid');
     await driver.findElement(By.css('#identifierNext')).click();
-    await driver.wait(until.elementLocated(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')), 1000).then((el) => el.sendKeys('testpwd'));
-    // await driver.findElement(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')).sendKeys('testpw');
-    // await driver.findElement(By.id('#passwordNext')).click();
-    await driver.wait(until.elementLocated(By.id('#passwordNext')), 1000).then((el) => el.click());
+    await driver.sleep(1000);
+    await driver.wait(until.elementLocated(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')), 10000).then((el) => el.sendKeys('testpw'));
+    await driver.sleep(300);
+    await driver.wait(until.elementLocated(By.css('#passwordNext')), 10000).click();
   } catch (e) {
     console.log(`error : ${e}`);
   }
