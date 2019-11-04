@@ -66,7 +66,14 @@ class SubscribingInfo extends Component {
     });
   };
 
-  handleSubmit = async (e) => {
+  previousHandleSubmit = (e) =>{
+    console.log('test');
+    e.preventDefault();
+
+    this.props.history.push('/user/subscribing');
+  };
+
+  nextHandleSubmit = async (e) => {
     e.preventDefault();
 
     const { userInputList } = this.state;
@@ -162,10 +169,12 @@ class SubscribingInfo extends Component {
           </div>
         </div>
 
-        <div className="container submit-container">
+        <div className="container subscription-title">
           <div className="row">
-            <div className="col">
-              <input type="submit" onClick={this.handleSubmit} value="NEXT" />
+            <div className="col-sm">
+              <button onClick={this.previousHandleSubmit} type="button" className="btn btn-outline-dark"> 이전 </button>
+
+              <button onClick={this.nextHandleSubmit} type="button" className="btn btn-outline-dark"> 다음 </button>
             </div>
           </div>
         </div>

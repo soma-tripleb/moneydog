@@ -15,7 +15,7 @@
 #user-info-elements {
   margin-bottom: 12px;
   background-color: whitesmoke;
-  box-shadow: 3px 3px 3px 3px lightgray; 
+  box-shadow: 3px 3px 3px 3px lightgray;
   text-align: center;
   border-radius: 3%;
   font-size: 2vw;
@@ -23,7 +23,9 @@
 
 .logo-img {
   height: 5vh;
+  width: 5vh;
   border-radius: 5px;
+
 }
 
 label {
