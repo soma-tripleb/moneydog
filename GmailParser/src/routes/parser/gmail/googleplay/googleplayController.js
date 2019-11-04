@@ -1,8 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import GooglePlayParser from '../../../../util/parser/email/googleplay/googleplayParser';
-import GooglePlay from '../../../../model/dto/googleplay';
+import GooglePlayService from '../../../../service/googleplayService';
 
 const wrapper = (asyncFn) => {
   return (async (req, res, next) => {
@@ -15,9 +14,9 @@ const wrapper = (asyncFn) => {
 };
 
 router.get('/receipt', wrapper(async (req, res) => {
-  const GooglePlayDTO = new GooglePlay();
+  const useremail = req.query.useremail;
 
-  const result = await GooglePlayParser.metadataParse('asd', GooglePlayDTO, GooglePlayParser.iframeParse);
+  const result = await GooglePlayService.parse(useremail);
 
   res.send(result);
 }));

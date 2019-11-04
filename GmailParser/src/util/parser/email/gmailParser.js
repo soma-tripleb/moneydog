@@ -1,4 +1,3 @@
-import CommonParser from './commonParser';
 
 const GmailParser = (() => {
   return {
@@ -12,6 +11,7 @@ const GmailParser = (() => {
       let to = null;
       let subject = null;
       let snippet = null;
+      let body = null;
       let body1 = null;
       let body2 = null;
 
@@ -42,14 +42,26 @@ const GmailParser = (() => {
 
       snippet = data.snippet;
 
-      const iframeBody1 = data.payload.parts[0].body.data;
-      const iframeBody2 = data.payload.parts[1].body.data;
+      if (data.payload.body.size > 0) {
+        body = data.payload.body.data;
+      }
 
-      const bodyDecoded1 = CommonParser.base64ToUtf8(iframeBody1);
-      const bodyDecoded2 = CommonParser.base64ToUtf8(iframeBody2);
+      if (typeof data.payload.parts !== 'undefined') {
+        const length = data.payload.parts.length;
 
-      body1 = bodyDecoded1.replace(/\r\n/gi, '');
-      body2 = bodyDecoded2.replace(/\r\n/gi, '');
+        for (let i = 0; i < length; i++) {
+          const bodyData = data.payload.parts[i].body.data;
+
+          switch (i) {
+            case 0:
+              body1 = bodyData;
+              break;
+            case 1:
+              body2 = bodyData;
+              break;
+          }
+        }
+      }
 
       dto.setMessageId(messageId);
       dto.setCreateAt(createAt);
@@ -57,6 +69,7 @@ const GmailParser = (() => {
       dto.setTo(to);
       dto.setSubject(subject);
       dto.setSnippet(snippet);
+      dto.setBody(body);
       dto.setBody1(body1);
       dto.setBody2(body2);
 
