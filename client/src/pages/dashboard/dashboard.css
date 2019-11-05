@@ -29,6 +29,7 @@
 }
 
 .categories {
+    text-align: right;
     box-shadow: 0vh 0vh 10px 10px #f3f3f3;
     background: #ffffff;
     width: 100%;
@@ -322,9 +323,8 @@ thead > tr{
     font-weight: bold;
     color: black;
     font-size: 3vh;
-    left: 4vh;
-    text-align: left;
-    padding-left: 2vh;
+    /*text-align: left;*/
+    /*padding-left: 2vh;*/
 }
 .subscribe-img-element{
     text-align: center;
