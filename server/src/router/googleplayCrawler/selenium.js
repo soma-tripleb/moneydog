@@ -7,11 +7,11 @@ const fs = require('fs');
 const getLogin = async () => {
   const driver = await new Builder().forBrowser('chrome').build();
   try {
-    await driver.get('https://play.google.com/store/account/orderhistory');
-    await driver.findElement(By.css('#identifierId')).sendKeys('moneydogtest1');
+    await driver.get('https://play.google.com/store/account/subscriptions');
+    await driver.findElement(By.css('#identifierId')).sendKeys('testpw');
     await driver.findElement(By.css('#identifierNext')).click();
     await driver.sleep(1000);
-    await driver.wait(until.elementLocated(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')), 10000).then((el) => el.sendKeys('moneydog1234'));
+    await driver.wait(until.elementLocated(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')), 10000).then((el) => el.sendKeys('test'));
     await driver.sleep(300);
     await driver.wait(until.elementLocated(By.css('#passwordNext')), 10000).click();
     return driver;
@@ -22,8 +22,11 @@ const getLogin = async () => {
 
 const getSubscriptionList = async () => {
   const driver = await getLogin();
-  const list = await driver.findElements(By.css('#fcxH9b > div.WpDbMd > c-wiz:nth-child(4) > div > c-wiz > table > tbody'));
-  console.log(JSON.stringify(list));
+  await driver.wait(until.elementLocated(By.css('#fcxH9b > div.WpDbMd > c-wiz:nth-child(4) > div > c-wiz > table > tbody')), 10000).then(() => console.log('render'));
+  const list = await driver.findElement(By.css('#fcxH9b > div.WpDbMd > c-wiz:nth-child(4) > div > c-wiz > table > tbody')).then((el) => el.findElements(By.className('hBukP')));
+  console.log(list.length);
+  console.log(list[0].getAttribute('innerHTML'));
 }
 
 getSubscriptionList();
+
