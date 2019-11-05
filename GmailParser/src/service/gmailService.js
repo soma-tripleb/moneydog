@@ -81,16 +81,14 @@ const divideByFrom = async (metadataList) => {
 
   const promise = metadataList.map((metadata) => {
     const from = metadata.from;
-    const body1 = metadata.body1;
-    const body2 = metadata.body2;
 
     try {
       switch (from) {
         case 'Google Play <googleplay-noreply@google.com>':
-          result.push(GooglePlayParser.body2ParserOfTag(body2));
+          result.push(GooglePlayParser.body1ParserOfIndex(metadata));
           break;
         case '\"김재연\" <jimmyjaeyeon@gmail.com>':
-          result.push(GooglePlayParser.body1ParserOfIndex(body1));
+          result.push(GooglePlayParser.body1ParserOfIndex(metadata));
           break;
       }
     } catch (err) {

@@ -93,7 +93,7 @@ describe('GmailService는', () => {
     });
   });
 
-  describe.only('포워딩 된 테스트용 데이터를 가지고,', () => {
+  describe('포워딩 된 테스트용 데이터를 가지고,', () => {
     describe('사용자의 Gmail 메시지에서 `메타 데이터`를 파싱 한다.', () => {
 
       const TEST_MESSAGES = FWD_GP_WATCHA_MESSAGES;

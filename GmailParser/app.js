@@ -1,5 +1,6 @@
 import '@babel/polyfill';
 
+import 'app-module-path/register';
 import createError from 'http-errors';
 import express from 'express';
 import path from 'path';
@@ -11,6 +12,7 @@ import oauthRouter from './src/routes/oauth/oauthController';
 import gmailRouter from './src/routes/parser/gmail/gmailController';
 import appleRouter from './src/routes/parser/gmail/apple/appleController';
 import googleplayRouter from './src/routes/parser/gmail/googleplay/googleplayController';
+import testdataRouter from 'src/routes/parser/testdata/testdataController';
 
 const app = express();
 const port = 3000;
@@ -26,6 +28,7 @@ app.use('/oauth', oauthRouter);
 app.use('/gmail', gmailRouter);
 app.use('/gmail/apple', appleRouter);
 app.use('/gmail/googleplay', googleplayRouter);
+app.use('/testdata', testdataRouter);
 
 app.listen(port, () => {
   console.log(`application is listening on port ${port}...`);
