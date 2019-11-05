@@ -1,23 +1,16 @@
 import React, {Component} from 'react';
 require('dotenv').config();
 
-class SubsApp extends Component {
+class userSubsApp extends Component {
 
   handleClick = () => {
     const {subsAppInfo, onDelete, onInsert} = this.props;
-    if (subsAppInfo.label === '-') {
-      onDelete(subsAppInfo.seq, subsAppInfo.logoURI, subsAppInfo.name);
-    } else {
-      onInsert(subsAppInfo.seq, subsAppInfo.logoURI, subsAppInfo.name);
-    }
+
+    // alert('구독중인 서비스를 취소 하시겠습니까?');
   };
 
   showSubscribeActionBtn = () => {
-    if (this.props.subsAppInfo.label === '-') {
-      return (<button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">-</button> );
-    } else {
-      return ( <button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">+</button>);
-    }
+    return <img onClick={this.handleClick} className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}/img/check.png`}/>;
   };
 
   showSubscibeImg = (subsAppInfo) =>{
@@ -50,4 +43,4 @@ class SubsApp extends Component {
   }
 }
 
-export default SubsApp;
+export default userSubsApp;

@@ -1,9 +1,12 @@
 /* subscriptionInfo */
 #user-info-container {
-  box-shadow: 10px 10px 10px 10px lightgray;
+  box-shadow: 0vh 0vh 10px 10px #f3f3f3;
+  border-radius: 2vh;
+  background-color: #ffffff;
+  width: 100%;
+
   max-height: 60vh;
   overflow: auto;
-  width: 100%;
 }
 
 .submit-container {
@@ -15,7 +18,7 @@
 #user-info-elements {
   margin-bottom: 12px;
   background-color: whitesmoke;
-  box-shadow: 3px 3px 3px 3px lightgray; 
+  box-shadow: 3px 3px 3px 3px lightgray;
   text-align: center;
   border-radius: 3%;
   font-size: 2vw;
@@ -23,7 +26,9 @@
 
 .logo-img {
   height: 5vh;
+  width: 5vh;
   border-radius: 5px;
+
 }
 
 label {
@@ -37,4 +42,8 @@ label {
 #label-text {
   font-weight: lighter;
   font-size: 1.5vw;
+}
+
+.btn-margin{
+  margin: 2vh;
 }

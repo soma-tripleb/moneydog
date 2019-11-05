@@ -8,6 +8,7 @@ import UserActions from '../../redux/actions/userAction';
 import SubsApp from './subsApp';
 import UserCustomSubscription from './userCustomSubscription';
 import SubsTmplService from './subscriptions.ajax';
+import UserSubsApp from './userSubsApp';
 
 import './subscriptions.css';
 import AuthActions from '../../redux/actions/authAction';
@@ -148,41 +149,57 @@ class Subscriptions extends Component {
     return list;
   };
 
+  SubscribingAppList = () => {
+    const list = this.props.subscriptions.map(
+      (content, i) => (
+        <UserSubsApp key={i+content.name} onDelete={this.deleteContant.bind(this)} subsAppInfo={
+          {
+            seq: content.seq,
+            logoURI: content.logoURI,
+            name: content.name,
+            color: content.color,
+          }
+        }/>
+      )
+    );
+    return list;
+  };
+
   render() {
     return (
       <>
         <div className="container main-container">
           <div className="row">
+            <div className="col subscription-title">
               Step 1. 구독중인 서비스를 추가 하세요
+            </div>
           </div>
 
           <div className="row">
             <div className="col-sm">
-
-              <div className="w-100" id="inner-container">
-                <p><u>Selecting App</u></p>
+              <div className="col" id="inner-container">
+                <p><u>구독 서비스 목록</u></p>
                 {this.makeStaticSubscribeApp()}
-                <p><u>새로운 서비스를 추가 할 수 있어요</u></p>
+                <p><u>목록에 없는 서비스를 추가 할 수 있어요</u></p>
                 <UserCustomSubscription onInsert={this.insertContact.bind(this)}/>
               </div>
             </div>
-
             <div className="col-sm">
 
-              <div className="w-100" id="inner-container">
-                <p><u>Selected App</u></p>
+              <div className="col" id="inner-container">
+                <p><u>구독 중인 서비스 목록</u></p>
+                {this.SubscribingAppList()}
+                <p><u>추가 되는 서비스 목록</u></p>
                 {this.makeSubscribingApp()}
               </div>
             </div>
           </div>
         </div>
 
-        <div className="container submit-container">
+        <div className="container subscription-title">
           <div className="row">
             <div className="col-sm">
-              <form onSubmit={this.handleSubmit}>
-                <input type="submit" value="NEXT"/>
-              </form>
+              <button onClick={this.handleSubmit} type="button" className="btn btn-outline-dark"> NEXT </button>
             </div>
           </div>
         </div>

@@ -22,34 +22,28 @@ class SubscribingInfo extends Component {
     super(props);
 
     this.state = {
-      userSubsList: [],
       userInputList: [],
+      userSubsList: [],
     };
+  };
+
+  // LifeCycle  :: constructor -> componentWillMount -> render -> componentDidMount
+  componentDidMount() {
+    this.getUserTempSubsList();
+    this.getUserSubsList();
   }
 
-  componentDidMount() {
-    const userSeletedList = this.props.USERS.tempSubscriptions;
-
-    if (userSeletedList.length)
-      this.getUserSubsList(userSeletedList);
-  };
-
+  // 제거 LifeCycle :: component 가 없어진다면 TempSubs를 모두 삭제 해준다.
   componentWillUnmount() {
     this.props.reduxDeleteTempSubscriptions();
-  };
+  }
 
-  getUserSubsList = (userSeletedList) => {
-    let tempSubsList = [];
-    let tempInputList = [];
-    const userSelectedListLength = userSeletedList.length;
+  // 유저가 선택한 list 를 price, paymentDate, channel 추가 해서 state 에 저장
+  getUserTempSubsList = () => {
+    const userSeletedList = this.props.USERS.tempSubscriptions;
+    const tempInputList = [];
 
-    // TEST
-    if (userSelectedListLength === 0) {
-      tempSubsList = TEST_USER_SELECTED_SUBS;
-      tempInputList = TEST_USER_SUBSTMPL_INFO_LIST;
-    } else {
-      tempSubsList = userSeletedList;
-
+    if (userSeletedList.length !== 0) {
       userSeletedList.map((Subscription) => {
         tempInputList.push({
           ...Subscription,
@@ -61,16 +55,33 @@ class SubscribingInfo extends Component {
     }
 
     this.setState({
-      userSubsList: update(this.state.userSubsList, { $push: tempSubsList }),
       userInputList: update(this.state.userInputList, { $push: tempInputList })
     });
   };
 
-  handleSubmit = async (e) => {
+  // 이미 구독한 정보를 state에 저장
+  getUserSubsList = () =>{
+    const userSubsList = this.props.USERS.subscriptions;
+
+    this.setState({
+      userSubsList: update(this.state.userInputList, { $push: userSubsList })
+    });
+  };
+
+  // 이전 버튼 :: 구독 관리 페이지로 넘어간다.
+  previousHandleSubmit = (e) =>{
+    console.log('test');
     e.preventDefault();
 
-    const { userInputList } = this.state;
-    const { reduxInsertUserSubscriptions , history} = this.props;
+    this.props.history.push('/user/subscribing');
+  };
+
+  // 완료버튼 :: 다음 버튼 정보가 모두 들어왔느지 확인 후 값을 수정 or 삭제 한다
+  nextHandleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { userInputList, userSubsList } = this.state;
+    const { reduxInsertUserSubscriptions, reduxUpdateUserSubscriptions, history} = this.props;
 
     userInputList.some((info) => {
       if (info.price === '') {
@@ -89,9 +100,9 @@ class SubscribingInfo extends Component {
       }
     });
 
-    console.log(this.props.USERS.subscriptions);
-    console.log(userInputList);
-    const result = await SubsTmplService.updateUserSubsInfo(userInputList);
+    reduxUpdateUserSubscriptions(userSubsList);
+    const updateResult = await SubsTmplService.updateUserSubsInfo(userSubsList);
+    const result = await SubsTmplService.insertUserSubsInfo(userInputList);
 
     if (result.data.status === 200) {
       await reduxInsertUserSubscriptions(userInputList);
@@ -100,6 +111,29 @@ class SubscribingInfo extends Component {
       console.log(result);
       alert('ERROR'); // TODO
     }
+  };
+
+  handleUserSubsChange = (name, element, userInput) => {
+    const inputList = this.state.userSubsList;
+
+    this.setState({
+      userSubsList: inputList.map((info) => {
+        if (info.name === name) {
+          switch (element) {
+            case 'price':
+              return ({ ...info, price: userInput });
+            case 'paymentDate':
+              return ({ ...info, paymentDate: userInput });
+            case 'channel':
+              return ({ ...info, channel: userInput });
+            default:
+              return info;
+          }
+        } else {
+          return info;
+        }
+      }),
+    });
   };
 
   handleUserInputChange = (name, element, userInput) => {
@@ -131,6 +165,46 @@ class SubscribingInfo extends Component {
     });
   };
 
+  // 삭제 버튼 눌르면 사용자의 이미 구독된 정보 삭제
+  deleteUserSubs = (serviceName) =>{
+    console.log(serviceName);
+
+    const {userSubsList} = this.state;
+
+    this.setState({
+      userSubsList: userSubsList.filter((info) => info.name !== serviceName),
+    });
+  };
+
+  // 삭제 버튼 눌르면 사용자가 추가 하려 했던 구독 정보 삭제
+  deleteUserInputSubs = (serviceName) =>{
+    console.log(serviceName);
+
+    const {userInputList} = this.state;
+
+    this.setState({
+      userInputList: userInputList.filter((info) => info.name !== serviceName),
+    });
+  };
+
+  SubscriptionInfo = () => {
+    const inputList = this.state.userSubsList;
+
+    const list = inputList.map(
+      (content, i) => (
+        <SubsTmpl
+          key={i}
+          info={content}
+          inputData={inputList[i]}
+          DeleteSubs={this.deleteUserSubs}
+          onUserInputChange={this.handleUserSubsChange}
+        >
+        </SubsTmpl>
+      )
+    );
+    return list;
+  };
+
   InputSubscriptionTemplateInfo = () => {
     const inputList = this.state.userInputList;
 
@@ -140,6 +214,7 @@ class SubscribingInfo extends Component {
           key={i}
           info={content}
           inputData={inputList[i]}
+          DeleteSubs={this.deleteUserInputSubs}
           onUserInputChange={this.handleUserInputChange}
         >
         </SubsTmpl>
@@ -148,11 +223,11 @@ class SubscribingInfo extends Component {
     return list;
   };
 
-  render() {
-    return (
-      <>
-        <div className="container">
-          <p>사용자 구독 서비스 정보 등록</p>
+  showSubsInputList = () =>{
+    if (this.state.userInputList.length !== 0) {
+      return (
+        <>
+          <p>구독을 추가 할 정보 등록</p>
           <div className="row">
             <div className="col">
               <form className="w-100 p-3" id="user-info-container">
@@ -160,12 +235,40 @@ class SubscribingInfo extends Component {
               </form>
             </div>
           </div>
-        </div>
+        </>
+      );
+    }
+  };
 
-        <div className="container submit-container">
+  render() {
+    return (
+      <>
+        <div className="container">
+          <div className="row">
+            <div className="col subscription-title">
+              Step 2. 서비스의 정보를 입력 해주세요.
+            </div>
+          </div>
+
+          <p>구독중인 서비스 정보 등록</p>
           <div className="row">
             <div className="col">
-              <input type="submit" onClick={this.handleSubmit} value="NEXT" />
+              <form className="w-100 p-3" id="user-info-container">
+                {this.SubscriptionInfo()}
+              </form>
+            </div>
+          </div>
+
+          {this.showSubsInputList()}
+        </div>
+
+
+        <div className="container subscription-title">
+          <div className="row">
+            <div className="col-sm">
+              <button onClick={this.previousHandleSubmit} type="button" className="btn btn-outline-dark btn-margin"> 이전 </button>
+
+              <button onClick={this.nextHandleSubmit} type="button" className="btn btn-outline-dark btn-margin"> 완료 </button>
             </div>
           </div>
         </div>
@@ -178,6 +281,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     reduxInsertUserSubscriptions: (userInputList) => {
       dispatch(userActions.insertUserSubscriptions(userInputList));
+    },
+    reduxUpdateUserSubscriptions: (userInputList) => {
+      dispatch(userActions.updateUserSubscriptions(userInputList));
     },
     reduxDeleteTempSubscriptions: () => {
       dispatch(userActions.deleteTempSubscriptions());

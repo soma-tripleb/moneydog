@@ -1,9 +1,12 @@
 /* container */
 #inner-container {
-  box-shadow: 10px 10px 10px 10px lightgray;
+  box-shadow: 0vh 0vh 10px 10px #f3f3f3;
+  border-radius: 2vh;
+  background-color: #ffffff;
+  width: 100%;
+
   height: 60vh;
   overflow: auto;
-  width: 100%;
   font-weight: lighter;
   font-size: 1vw;
 }
@@ -19,13 +22,21 @@
   width: 100%;
 }
 
+.subscription-title{
+  font-size: 3vh;
+  font-weight: bold;
+  padding: 2vh;
+}
+
 /* element */
 #inner-element {
-  margin-bottom: 2vh;
-  background-color: whitesmoke;
-  box-shadow: 3px 3px 3px 3px lightgray;
+  /*border-width: 2px;*/
+  /*border-style: solid;*/
+  border: 1px solid #f3f3f3;
+  /*background-color: whitesmoke;*/
+  /*box-shadow: 3px 3px 3px 3px lightgray;*/
   text-align: center;
-  border-radius: 3%;
+  /*border-radius: 3%;*/
   padding: 1.5vh;
 }
 
@@ -57,6 +68,8 @@
 .logo-img {
   height: 5vh;
   border-radius: 5px;
+  border: 1px solid #f3f3f3;
+  background: #ffffff;
 }
 
 .logo-Btn {
@@ -66,4 +79,9 @@
   font-family: monospace;
   border-radius: 5px;
   border: 0;
+}
+
+.serviceName {
+  font-weight: bold;
+  font-size: 2vh;
 }

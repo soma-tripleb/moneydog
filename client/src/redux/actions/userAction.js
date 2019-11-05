@@ -23,6 +23,15 @@ const insertUserSubscriptions = ( userSubscriptionList ) => (dispatch) => {
   );
 };
 
+const updateUserSubscriptions = ( userSubscriptionList ) => (dispatch) => {
+  dispatch(
+    {
+      type: ACTION_TYPE.UPDATE_SUBSCRIPTIONS,
+      userSubscriptionList,
+    }
+  );
+};
+
 const deleteTempSubscriptions = () => (dispatch) => {
   dispatch(
     {
@@ -63,5 +72,6 @@ export default {
   setUserSubsTmplList,
   getSubsInfo,
   insertUserSubscriptions,
+  updateUserSubscriptions,
   deleteTempSubscriptions
 };
