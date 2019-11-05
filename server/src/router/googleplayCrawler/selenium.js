@@ -24,10 +24,18 @@ const getSubscriptionList = async () => {
   const driver = await getLogin();
   await driver.wait(until.elementLocated(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > c-wiz > table > tbody')), 10000).then(() => console.log('render'));
   const list = await driver.findElement(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > c-wiz > table > tbody')).then((el) => el.findElements(By.className('bzdI0b')));
-  console.log(list.length);
-  const test = list[0];
-  test.getAttribute('innerHTML').then((html) => console.log(html));
+  const test = [];
+  await list.map((element) => test.push(serviceParsing(element)));
+  console.log(test);
+};
+
+const serviceParsing = async (element) => {
+  const result = {};
+  result.image = await element.findElement(By.className('T75of wRBX5e')).getAttribute('src');
+  // result.name = await element.findElement(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > c-wiz > table > tbody > tr:nth-child(1) > td.l7Glx.MmbEib > div.pTS2If > a')).getText();
+  result.price = await element.findElement(By.className('EQjZle kSHPSd')).getText();
+  result.renewal = await element.findElement(By.className('l7Glx M7PYhd')).getText();
+  return result;
 };
 
 getSubscriptionList();
-
