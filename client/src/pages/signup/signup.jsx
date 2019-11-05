@@ -149,11 +149,11 @@ class SignUp extends Component {
             <article className="card-body mx-auto">
               <h4 className="card-title mt-3 text-center">Sign Up</h4>
               <p className="text-center">Get started with your free account</p>
-              {/* <p>*/}
-              {/*  <button className="btn btn-block btn-google">*/}
-              {/*    <i className="fab fa-google" /> Login via google*/}
-              {/*  </button>*/}
-              {/* </p>*/}
+               {/*<p>*/}
+               {/* <button className="btn btn-block btn-google">*/}
+               {/*   <i className="fab fa-google" /> Login via google*/}
+               {/* </button>*/}
+               {/*</p>*/}
 
               {/* <p className="divider-text">*/}
               {/*  <span className="bg-light">OR</span>*/}
