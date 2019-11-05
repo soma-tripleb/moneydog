@@ -344,3 +344,7 @@ thead > tr{
     margin: 0;
     vertical-align: center;
 }
+
+.whitespaceImg{
+    width: 100%;
+}

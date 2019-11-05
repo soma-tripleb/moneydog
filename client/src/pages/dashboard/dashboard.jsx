@@ -107,8 +107,6 @@ class DashBoard extends Component {
                     <button onClick={this.showFullMode} type="button" className="btn btn-sm btn-outline-info"> 전체 정보 보기 </button>
                   </div>
                 </div>
-
-
                 <Categories data={subscription} date={this.convertDate()} isFullMode={this.state.isFullMode}/>
               </div>
             </div>

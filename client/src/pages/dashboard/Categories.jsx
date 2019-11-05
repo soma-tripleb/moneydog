@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 
 import Item from './item';
-import {PageHeader, Spin, Icon} from 'antd';
+import {Spin, Icon} from 'antd';
 import moment from 'moment';
 
 class Categories extends Component {
   state = {
     subscriptions: null,
+    componentCount: 0,
   };
 
   showUserSubsList = () =>{
     let list = null;
+
     if (this.props.isFullMode) {
       list = this.props.data.map(
         (data, index) => (
@@ -21,12 +23,39 @@ class Categories extends Component {
       list = this.props.data.map(
         (data, index) => {
           if (moment(data.paymentDate, 'YYYY/MM/DD').date() === this.props.date) {
-            return (<Item key={index} data={data}/>)
+            return (<Item key={index} data={data}/>);
           }
         }
       );
     }
+
     return list;
+  };
+
+  countComponentNumber = () =>{
+    let count = 0;
+
+    if (this.props.isFullMode) {
+      count = this.props.data.length;
+    } else {
+      this.props.data.map(
+        (data) => {
+          if (moment(data.paymentDate, 'YYYY/MM/DD').date() === this.props.date) {
+            count++;
+          }
+        }
+      );
+    }
+    return count;
+  };
+
+  showWhiteSpace = ()=>{
+    if (this.countComponentNumber() < 2) {
+      return (<img className="whitespaceImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/whitespace1.png`} alt=""/>);
+    }
+    else if (this.countComponentNumber() < 4) {
+      return (<img className="whitespaceImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/whitespace2.png`} alt=""/>);
+    }
   };
 
   render() {
@@ -34,6 +63,8 @@ class Categories extends Component {
       const icon = <Icon type="loading" style={{fontSize: 24}} spin />;
       return (<Spin indicator={icon} />);
     }
+
+    this.countComponentNumber();
 
     return (
       <div>
@@ -49,6 +80,7 @@ class Categories extends Component {
             </div>
           </div>
           {this.showUserSubsList()}
+          {this.showWhiteSpace()}
         </div>
       </div>
     );
