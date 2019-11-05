@@ -269,6 +269,7 @@ thead > tr{
 
 .list-logo-img {
     height: 5vh;
+    border: 1px solid #f3f3f3;
     border-radius: 5px;
 }
 

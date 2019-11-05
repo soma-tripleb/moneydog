@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import DatePickers from './DatePicker';
 
 import './subscribingInfo.css';
+import moment from 'moment';
 
 class SubsTmpl extends Component {
   constructor(props) {
@@ -21,16 +22,21 @@ class SubsTmpl extends Component {
 
   componentDidMount() {
     const subsName = this.props.info.name;
+    const subsPaymentDay = this.props.info.paymentDate;
+    const paymentDay = moment(subsPaymentDay, 'YYYY-MM-DD').date();
+
 
     this.setState({
       dateObject: {
         ...this.state.dateObject,
         dataId: subsName,
+        date: paymentDay,
       }
     });
   };
 
   handleChange = (e) => {
+    console.log('change');
     const dateObj = this.state.dateObject;
 
     if (e === undefined) {
@@ -74,6 +80,11 @@ class SubsTmpl extends Component {
     }
   };
 
+  deleteSubs = (e) =>{
+    e.preventDefault();
+    this.props.DeleteSubs(this.props.info.name);
+  };
+
   render() {
     const { info } = this.props;
     const inputData = this.props.inputData;
@@ -87,12 +98,12 @@ class SubsTmpl extends Component {
           <div className="row align-items-center">
 
             {/* 사진 */}
-            <div className="logo col-xs-6 col-sm-3">
+            <div className="logo col-sm-1">
               {this.showSubscibeImg(info)}
             </div>
 
             {/* 결제 금액 */}
-            <div className="price col-xs-6 col-sm-3">
+            <div className="price col-xs-3 col-sm-3">
               <div className="input-group input-group-sm">
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="inputGroup-sizing-sm">&#8361;</span>
@@ -112,7 +123,7 @@ class SubsTmpl extends Component {
 
             {/* 결제일 */}
             <div className="payment-date col-xs-6 col-sm-3">
-              <DatePickers onDatePickerChange={this.onDatePickerChange}/>
+              <DatePickers date={this.state.dateObject.date} onDatePickerChange={this.onDatePickerChange}/>
             </div>
 
             {/* 결제 채널 */}
@@ -142,6 +153,10 @@ class SubsTmpl extends Component {
                 />
                 <label className="form-check-label" id="label-text" htmlFor={siteId}>&nbsp;SITE</label>
               </div>
+            </div>
+
+            <div className="logo col-sm-2">
+              <button onClick={this.deleteSubs} type="button" className="btn btn-outline-danger"> 삭제 </button>
             </div>
 
           </div>

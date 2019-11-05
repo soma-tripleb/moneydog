@@ -1,9 +1,12 @@
 /* subscriptionInfo */
 #user-info-container {
-  box-shadow: 10px 10px 10px 10px lightgray;
+  box-shadow: 0vh 0vh 10px 10px #f3f3f3;
+  border-radius: 2vh;
+  background-color: #ffffff;
+  width: 100%;
+
   max-height: 60vh;
   overflow: auto;
-  width: 100%;
 }
 
 .submit-container {
@@ -39,4 +42,8 @@ label {
 #label-text {
   font-weight: lighter;
   font-size: 1.5vw;
+}
+
+.btn-margin{
+  margin: 2vh;
 }
