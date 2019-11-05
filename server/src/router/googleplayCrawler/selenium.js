@@ -3,6 +3,7 @@ const chrome = require('selenium-webdriver/chrome');
 const path = require('chromedriver').path;
 const {Builder, By, Key, until} = require('selenium-webdriver');
 const fs = require('fs');
+const cheerio = require('cheerio');
 
 const getLogin = async () => {
   const driver = await new Builder().forBrowser('chrome').build();
@@ -17,6 +18,7 @@ const getLogin = async () => {
     return driver;
   } catch (e) {
     console.log(`error : ${e}`);
+    console.log(`getLogin에서 에러`);
   }
 }
 
@@ -24,16 +26,16 @@ const getLogin = async () => {
 const getSubscriptionList = async () => {
   try {
     const driver = await getLogin();
-    await driver.sleep(1000).then(() => console.log(`1초동안 sleep`));
-    const list = await driver.wait(until.elementLocated(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > div.oOodye > table > tbody')), 10000).then((el) => {
-      return el.findElements(By.className('bzdI0b'));});
-    console.log(list);
-    driver.close();
+    await driver.sleep(1000);
+    const list = await driver.wait(until.elementsLocated(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > div.oOodye > table > tbody')), 10000);
+    const temp = driver.findElement(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > div.oOodye > table > tbody'));
+    // temp.getText().then((el) => console.log(el)).catch((err) => console.log(err));
+    const $ = cheerio.load('#fcxH9b > div.WpDbMd > c-wiz > div > div.oOodye > table > tbody');
+    console.log($.html());
   } catch (e) {
     console.log(`err : ${e}`);
-    driver.close();
+    console.log(`getList에서 에러`);
   }
 };
 
 getSubscriptionList();
-
