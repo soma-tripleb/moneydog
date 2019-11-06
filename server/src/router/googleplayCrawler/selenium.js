@@ -32,7 +32,9 @@ const getSubscriptionList = async () => {
 const serviceParsing = async (element) => {
   const result = {};
   result.image = await element.findElement(By.className('T75of wRBX5e')).getAttribute('src');
-  // result.name = await element.findElement(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > c-wiz > table > tbody > tr:nth-child(1) > td.l7Glx.MmbEib > div.pTS2If > a')).getText();
+  const list = await element.findElement(By.className('pTS2If')).findElement(By.css('a')).findElements(By.css('span'));
+  result.name = await list[0].getText();
+  result.plan = await list[1].getText();
   result.price = await element.findElement(By.className('EQjZle kSHPSd')).getText();
   result.renewal = await element.findElement(By.className('l7Glx M7PYhd')).getText();
   return result;
