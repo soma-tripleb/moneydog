@@ -1,7 +1,5 @@
-import cheerio from 'cheerio';
-import GOOGLEPLAY_WATCHA_RECEIPT from '../../../../../test/resources/mock/email/googleplay/googleplayWatchaReceipt.json';
-
 import CommonParser from '../commonParser';
+import cheerio from 'cheerio';
 
 const GooglePlayReceiptParser = (() => {
 
@@ -39,42 +37,53 @@ const GooglePlayReceiptParser = (() => {
 
   return {
     metadataParse: async (json, dto, callback) => {
-      // const data = json.data;
-      const data = GOOGLEPLAY_WATCHA_RECEIPT.data;
 
-      let id = null;
-      let snippet = null;
-      let subject = null;
+      const data = json.data;
+
+      let messageId = null;
+      let createAt = null;
       let from = null;
+      let to = null;
+      let subject = null;
+      let snippet = null;
       let bodyText = null;
-
-      id = data.id;
-      snippet = data.snippet;
 
       data.payload.headers.some((headers) => {
         const name = headers.name.toLowerCase();
 
         switch (name) {
+          case 'message-id':
+            messageId = headers.value;
+            break;
+          case 'date':
+            createAt = headers.value;
+            break;
           case 'from':
             from = headers.value;
+            break;
+          case 'to':
+            to = headers.value;
             break;
           case 'subject':
             subject = headers.value;
             break;
         }
 
-        if ((from !== null) && (subject !== null))
+        if ((messageId !== null) && (createAt !== null) && (from !== null) && (to !== null) && (subject !== null))
           return false;
       });
 
-      bodyText = CommonParser.base64ToUtf8(data.payload.parts[0].body.data);
+      snippet = data.snippet;
 
+      bodyText = CommonParser.base64ToUtf8(data.payload.parts[0].body.data);
       const iframeBody = data.payload.parts[1].body.data;
 
-      dto.setId(id);
-      dto.setSnippet(snippet);
-      dto.setSubject(subject);
+      dto.setMessageId(messageId);
+      dto.setCreateAt(createAt);
       dto.setFrom(from);
+      dto.setTo(to);
+      dto.setSubject(subject);
+      dto.setSnippet(snippet);
       dto.setBodyText(bodyText);
 
       return await callback(dto, iframeBody);
@@ -112,6 +121,84 @@ const GooglePlayReceiptParser = (() => {
       dto.setPeriodMonth(periodMonth);
 
       return dto;
+    },
+
+    // from:(google) 영수증 에 한함.
+    body1ParserOfIndex: (body1) => {
+      const text = body1;
+
+      const renewalStartIdx = text.indexOf('자동 갱신 날짜');
+      const renewalLastIdx = text.indexOf('합계');
+      const priceStartIdx = text.indexOf('합계');
+      const priceLastIdx = text.indexOf('결제 방법');
+
+      try {
+        if (renewalStartIdx === -1) throw err;
+        if (renewalLastIdx === -1) throw err;
+        if (priceStartIdx === -1) throw err;
+        if (priceLastIdx === -1) throw err;
+      } catch (err) {
+        throw new Error('EXPIRED_PARSER_BODY1');
+      }
+
+      const renewalStr = text.substring(renewalStartIdx, renewalLastIdx);
+      const priceStr = text.substring(priceStartIdx, priceLastIdx);
+
+      const renewal = renewalStr.split(':')[1].trim();
+      const price = priceStr.split(':')[1].trim();
+
+      return {
+        renewal,
+        price
+      };
+    },
+
+    body1ParserOfSplit: (body1) => {
+      const text = body1;
+
+      const indexing = text.split(`\r\n`);
+
+      const renewal = indexing[20];
+      const total = indexing[24];
+      const service = indexing[52];
+
+      return {
+        renewal,
+        total,
+        service
+      };
+    },
+
+    body2ParserOfTag: (body2) => {
+      const htmlText = body2;
+
+      let name = '';
+      let price = '';
+      let date = '';
+      let renewal = '';
+      let periodMonth = '';
+
+      const dom = CommonParser.convertHtml(htmlText);
+
+      const $ = cheerio.load(dom);
+
+      try {
+        name = convertNameReg($(NAME_TAG).text().trim());
+        price = convertPriceReg($(PRICE_TAG).text());
+        date = convertDateReg($(DATE_TAG).text());
+        renewal = convertRenewalReg($(RENEWAL_TAG).text());
+        periodMonth = calPeriod(renewal, date);
+      } catch (err) {
+        throw new Error(`BODY2_PARSER_OF_TAG_ERROR ` + err);
+      }
+
+      return {
+        name,
+        price,
+        date,
+        renewal,
+        periodMonth
+      };
     }
   };
 })();

@@ -8,11 +8,22 @@ const dateFormat = 'YYYY/MM/DD';
 
 const NOW = DateUtil.NOW();
 
+
 class DatePickers extends Component {
   constructor(props) {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  state = {
+    date: null,
+  };
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      date: nextProps.date,
+    });
   }
 
   // 두번째 파라미터가 원하는 순수 'date' 값 - ant.disign ('date picker')
@@ -21,11 +32,15 @@ class DatePickers extends Component {
   };
 
   render() {
+    if (this.state.date === null) {
+      return (<></>);
+    }
+
     return (
       <>
         <div>
           <DatePicker
-            defaultValue={moment(NOW, dateFormat)}
+            defaultValue={moment([moment().year(), moment().month(), this.state.date])}
             format={dateFormat}
             onChange={this.handleChange}
             style={{width: '100%'}}

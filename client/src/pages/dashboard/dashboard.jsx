@@ -18,11 +18,30 @@ class DashBoard extends Component {
   state = {
     subscription: null,
     selectedValue: new Date(),
-    staticSubscribeArr: []
+    staticSubscribeArr: [],
+    isFullMode: true,
+  };
+
+  redirectSubsInfo= (e) =>{
+    e.preventDefault();
+
+    this.props.history.push('/user/subscribing-info');
+  };
+
+  showFullMode = (e) =>{
+    e.preventDefault();
+
+    this.setState({
+      isFullMode: true
+    });
   };
 
   handleChange = (e) => {
-    this.setState({ selectedValue: e.format('YYYY-MM-DD') });
+    console.log('handleChange');
+    this.setState({
+      selectedValue: e.format('YYYY-MM-DD'),
+      isFullMode: false
+    });
   };
 
   convertDate = () => {
@@ -70,17 +89,27 @@ class DashBoard extends Component {
                 <Calendar date={selectedValue} handleChange={this.handleChange} data={subscription} />
               </div>
               {/* 달력 - 일 */}
-              {/*<div className="list">*/}
+              {/* <div className="list">*/}
               {/*  <span className="component-title"><u>일별 결제일 정보</u></span>*/}
               {/*  <List date={this.convertDate()} data={subscription} />*/}
-              {/*</div>*/}
+              {/* </div>*/}
             </div>
 
             {/* 구독중인 서비스 list */}
             <div className="col-md-6 dashboard-inner">
               <div className='categories'>
-                <div className="categories-component-title"> 10월 전체 구독 결제 정보 </div>
-                <Categories data={subscription} />
+                <div className="row">
+                  <div className="col-md-6">
+                    <span className="categories-component-title"> {new Date().getMonth() + 1}월 구독 결제 정보 </span>
+                  </div>
+                  <div className="col-md-6">
+                    <button onClick={this.redirectSubsInfo} type="button" className="btn btn-sm btn-outline-info"> 구독 정보 수정 하기 </button>
+                    <button onClick={this.showFullMode} type="button" className="btn btn-sm btn-outline-info"> 전체 정보 보기 </button>
+                  </div>
+                </div>
+
+
+                <Categories data={subscription} date={this.convertDate()} isFullMode={this.state.isFullMode}/>
               </div>
             </div>
 
