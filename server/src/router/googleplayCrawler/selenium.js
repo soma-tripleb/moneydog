@@ -2,13 +2,12 @@ const webdriver = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const path = require('chromedriver').path;
 const {Builder, By, Key, until} = require('selenium-webdriver');
-const fs = require('fs');
 
 const getLogin = async () => {
   const driver = await new Builder().forBrowser('chrome').build();
   try {
     await driver.get('https://play.google.com/store/account/subscriptions');
-    await driver.findElement(By.css('#identifierId')).sendKeys('et');
+    await driver.findElement(By.css('#identifierId')).sendKeys('te');
     await driver.findElement(By.css('#identifierNext')).click();
     await driver.sleep(1000);
     await driver.wait(until.elementLocated(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')), 10000).then((el) => el.sendKeys('te'));
@@ -21,18 +20,28 @@ const getLogin = async () => {
 };
 
 const getSubscriptionList = async () => {
-  const driver = await getLogin();
-  const userSubscription = [];
-  if (await hasSubscription(driver)) {
-    console.log(`구독서비스가 없다.`);
+  try {
+    const driver = await getLogin();
+    await driver.wait(until.elementLocated(By.className('zQTmif SSPGKf I3xX3c')), 10000).then(() => console.log(`class 로드되었습니다.`));
+    const userSubscription = [];
+    const hasSubscription = await checkHasSubscription(driver);
+    console.log(`checkHasSubscription result ${JSON.stringify(hasSubscription)}`);
+    if (!hasSubscription) {
+      console.log(`구독 리스트 없다`);
+      driver.quit();
+      return userSubscription;
+    }
+    await driver.wait(until.elementLocated(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > c-wiz > table > tbody')), 10000).then(() => console.log('render'));
+    const list = await driver.findElement(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > c-wiz > table > tbody')).then((el) => el.findElements(By.className('bzdI0b')));
+    console.log(`구독서비스가 있다`);
+    await list.map((element) => userSubscription.push(serviceParsing(element)));
+    console.log(userSubscription);
+    driver.quit();
     return userSubscription;
-  };
-  await driver.wait(until.elementLocated(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > c-wiz > table > tbody')), 10000).then(() => console.log('render'));
-  const list = await driver.findElement(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > c-wiz > table > tbody')).then((el) => el.findElements(By.className('bzdI0b')));
-  console.log(`구독서비스가 있다`);
-  await list.map((element) => userSubscription.push(serviceParsing(element)));
-  console.log(userSubscription);
-  return userSubscription;
+  } catch (e) {
+    console.log(`getSubscriptionList error : ${e}`);
+    driver.quit();
+  }
 };
 
 const serviceParsing = async (element) => {
@@ -49,9 +58,9 @@ const serviceParsing = async (element) => {
   return result;
 };
 
-const hasSubscription = async (driver) => {
-  const hasSubscription = await driver.findElement(By.className('a3BWBf')).catch(() => false);
-  return hasSubscription;
+const checkHasSubscription = async (driver) => {
+  await driver.findElement(By.className('a3BWBf')).catch(() => false);
+  return true;
 };
 
 const convertDateReg = (date) => {
@@ -81,8 +90,8 @@ const checkFree = (priceField) => {
   return false;
 };
 
-getSubscriptionList();
+const result = getSubscriptionList();
 
-const file = fs.readFileSync('./recovery.html', 'utf-8');
-const change = file.replace('/jimmyjaeyeon@gmail.com/gi', 'original@email.com');
-fs.writeFileSync('./recovery1.html', change);
+console.log(`user의 구독리스트 : ${result.then((result) => {
+  console.log(result);
+})} ${result.then((result) => console.log(result.length))}`);
