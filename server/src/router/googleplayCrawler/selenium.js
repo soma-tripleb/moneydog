@@ -7,10 +7,10 @@ const getLogin = async () => {
   const driver = await new Builder().forBrowser('chrome').build();
   try {
     await driver.get('https://play.google.com/store/account/subscriptions');
-    await driver.findElement(By.css('#identifierId')).sendKeys('te');
+    await driver.findElement(By.css('#identifierId')).sendKeys('testid');
     await driver.findElement(By.css('#identifierNext')).click();
     await driver.sleep(1000);
-    await driver.wait(until.elementLocated(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')), 10000).then((el) => el.sendKeys('te'));
+    await driver.wait(until.elementLocated(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')), 10000).then((el) => el.sendKeys('testpw'));
     await driver.sleep(300);
     await driver.wait(until.elementLocated(By.css('#passwordNext')), 10000).click();
     return driver;
@@ -27,7 +27,6 @@ const getSubscriptionList = async () => {
     const hasSubscription = await checkHasSubscription(driver);
     console.log(`checkHasSubscription result ${JSON.stringify(hasSubscription)}`);
     if (!hasSubscription) {
-      console.log(`구독 리스트 없다`);
       driver.quit();
       return userSubscription;
     }
@@ -36,11 +35,9 @@ const getSubscriptionList = async () => {
     console.log(`구독서비스가 있다`);
     await list.map((element) => userSubscription.push(serviceParsing(element)));
     console.log(userSubscription);
-    driver.quit();
     return userSubscription;
   } catch (e) {
     console.log(`getSubscriptionList error : ${e}`);
-    driver.quit();
   }
 };
 
@@ -92,6 +89,7 @@ const checkFree = (priceField) => {
 
 const result = getSubscriptionList();
 
-console.log(`user의 구독리스트 : ${result.then((result) => {
+result.then((result) => {
+  console.log(`구독서비스의 갯수 : ${result.length}`);
   console.log(result);
-})} ${result.then((result) => console.log(result.length))}`);
+});
