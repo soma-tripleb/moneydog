@@ -3,39 +3,39 @@ const chrome = require('selenium-webdriver/chrome');
 const path = require('chromedriver').path;
 const {Builder, By, Key, until} = require('selenium-webdriver');
 const fs = require('fs');
-const cheerio = require('cheerio');
 
 const getLogin = async () => {
   const driver = await new Builder().forBrowser('chrome').build();
   try {
-    await driver.get('https://play.google.com/store/account/orderhistory');
-    await driver.findElement(By.css('#identifierId')).sendKeys('test');
+    await driver.get('https://play.google.com/store/account/subscriptions');
+    await driver.findElement(By.css('#identifierId')).sendKeys('id');
     await driver.findElement(By.css('#identifierNext')).click();
     await driver.sleep(1000);
-    await driver.wait(until.elementLocated(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')), 10000).then((el) => el.sendKeys('test'));
-    await driver.sleep(1000);
+    await driver.wait(until.elementLocated(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')), 10000).then((el) => el.sendKeys('pw'));
+    await driver.sleep(300);
     await driver.wait(until.elementLocated(By.css('#passwordNext')), 10000).click();
     return driver;
   } catch (e) {
     console.log(`error : ${e}`);
-    console.log(`getLogin에서 에러`);
   }
 }
 
-// nodelist => table[0].childNodes
 const getSubscriptionList = async () => {
-  try {
-    const driver = await getLogin();
-    await driver.sleep(1000);
-    const list = await driver.wait(until.elementsLocated(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > div.oOodye > table > tbody')), 10000);
-    const temp = driver.findElement(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > div.oOodye > table > tbody'));
-    // temp.getText().then((el) => console.log(el)).catch((err) => console.log(err));
-    const $ = cheerio.load('#fcxH9b > div.WpDbMd > c-wiz > div > div.oOodye > table > tbody');
-    console.log($.html());
-  } catch (e) {
-    console.log(`err : ${e}`);
-    console.log(`getList에서 에러`);
-  }
+  const driver = await getLogin();
+  await driver.wait(until.elementLocated(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > c-wiz > table > tbody')), 10000).then(() => console.log('render'));
+  const list = await driver.findElement(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > c-wiz > table > tbody')).then((el) => el.findElements(By.className('bzdI0b')));
+  const test = [];
+  await list.map((element) => test.push(serviceParsing(element)));
+  console.log(test);
+};
+
+const serviceParsing = async (element) => {
+  const result = {};
+  result.image = await element.findElement(By.className('T75of wRBX5e')).getAttribute('src');
+  // result.name = await element.findElement(By.css('#fcxH9b > div.WpDbMd > c-wiz > div > c-wiz > table > tbody > tr:nth-child(1) > td.l7Glx.MmbEib > div.pTS2If > a')).getText();
+  result.price = await element.findElement(By.className('EQjZle kSHPSd')).getText();
+  result.renewal = await element.findElement(By.className('l7Glx M7PYhd')).getText();
+  return result;
 };
 
 getSubscriptionList();
