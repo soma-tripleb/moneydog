@@ -3,14 +3,14 @@ const chrome = require('selenium-webdriver/chrome');
 const path = require('chromedriver').path;
 const {Builder, By, Key, until} = require('selenium-webdriver');
 
-const getLogin = async () => {
+const getLogin = async (googleId, googlePassword) => {
   const driver = await new Builder().forBrowser('chrome').build();
   try {
     await driver.get('https://play.google.com/store/account/subscriptions');
-    await driver.findElement(By.css('#identifierId')).sendKeys('testid');
+    await driver.findElement(By.css('#identifierId')).sendKeys(googleId);
     await driver.findElement(By.css('#identifierNext')).click();
     await driver.sleep(1000);
-    await driver.wait(until.elementLocated(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')), 10000).then((el) => el.sendKeys('testpw'));
+    await driver.wait(until.elementLocated(By.css('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')), 10000).then((el) => el.sendKeys(googlePassword));
     await driver.sleep(300);
     await driver.wait(until.elementLocated(By.css('#passwordNext')), 10000).click();
     return driver;
@@ -19,9 +19,9 @@ const getLogin = async () => {
   }
 };
 
-const getSubscriptionList = async () => {
+const getSubscriptionList = async (googleId, googlePassword) => {
   try {
-    const driver = await getLogin();
+    const driver = await getLogin(googleId, googlePassword);
     await driver.wait(until.elementLocated(By.className('zQTmif SSPGKf I3xX3c')), 10000).then(() => console.log(`class 로드되었습니다.`));
     const userSubscription = [];
     const hasSubscription = await checkHasSubscription(driver);
@@ -87,9 +87,6 @@ const checkFree = (priceField) => {
   return false;
 };
 
-const result = getSubscriptionList();
-
-result.then((result) => {
-  console.log(`구독서비스의 갯수 : ${result.length}`);
-  console.log(result);
-});
+export default {
+  getSubscriptionList,
+};
