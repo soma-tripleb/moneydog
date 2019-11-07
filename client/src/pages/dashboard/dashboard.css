@@ -333,6 +333,7 @@ thead > tr {
     left: 6vh;
 }
 .categories-component-title-month{
+    letter-spacing: -3px;
     font-family: 'Montserrat-Medium';
     color: black;
     font-size: 4vh;
@@ -341,21 +342,32 @@ thead > tr {
     font-family: 'Spoqa Han Sans Bold';
     color: black;
     font-size: 2.5vh;
+    letter-spacing: -2px;
+    padding: 0;
+}
+.categories-row{
+    text-align: left;
 }
 
 .subscribe-img-element {
     text-align: center;
-    padding: 1.5vh;
+    padding: 0;
 }
 
 .subscribe-element {
     text-align: center;
-    padding: 2vh;
+    padding: 2vh 0 2vh 0;
+}
+.subscribe-element-padding {
+    padding: 1vh;
 }
 
 .item-bold {
+    color: black;
     font-weight: bold;
+    font-size: 2vh;
 }
+
 
 .item-border {
     border-bottom: 1px solid #d8d8d8;
@@ -365,4 +377,17 @@ thead > tr {
 
 .whitespaceImg {
     width: 100%;
+}
+
+.padding-zero{
+    padding: 0;
+}
+.padding-one{
+    padding: 0 0 0 1vh;
+}
+
+.textfamily{
+    font-size: 1.5vh;
+    font-family: 'Spoqa Han Sans Regular';
+    letter-spacing: -2px;
 }

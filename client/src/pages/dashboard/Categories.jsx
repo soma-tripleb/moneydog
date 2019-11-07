@@ -70,9 +70,9 @@ class Categories extends Component {
       <div>
         <div>
           <div className="row">
-            <div className="col-md-2 subscribe-element">
+            <div className="col-md-2 subscribe-element-padding">
             </div>
-            <div className="col subscribe-element item-border">
+            <div className="col subscribe-img-element item-border ">
               <div className="container w-100 ">
                 <div className="row">
                 </div>
