@@ -11,14 +11,16 @@ header {
     color: #000;
     font-size: 7vh;
     font-weight: bold;
-    padding: 0;
+    padding: 2vh 0 2vh 0;
 }
 .nav-link{
+    text-align: left;
+    font-family: 'Montserrat-Regular';
     color: #000;
 }
 
 .active {
-    color: #42AEEC;
+    color: #00BBF8;
 }
 
 .subHeaderFont {
@@ -41,15 +43,19 @@ header {
 }
 
 .categoryFont > ul > li > a {
-    font-weight: bold;
     font-size: 2.5vh;
-    font-family: sans-serif;
+    font-family: 'Spoqa Han Sans Bold';
 }
 
 .nav-user {
     text-decoration: underline;
+    font-family: 'Spoqa Han Sans Light';
 }
 
 .headerContainer{
     padding: 2vh;
+}
+
+.headeImg{
+    width: 80%;
 }

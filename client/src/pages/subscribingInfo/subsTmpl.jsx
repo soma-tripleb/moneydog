@@ -36,7 +36,6 @@ class SubsTmpl extends Component {
   };
 
   handleChange = (e) => {
-    console.log('change');
     const dateObj = this.state.dateObject;
 
     if (e === undefined) {

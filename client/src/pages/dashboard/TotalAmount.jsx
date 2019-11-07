@@ -22,10 +22,10 @@ class TotalAmount extends Component {
     return (
       <>
         <div className="col amount-container">
-          <div className="component-title">총 결제 금액</div>
+          <div className="component-title">총 &nbsp; 결제금액</div>
           <div className="total-amount-text">
             <span className="pricePredix"> 매월 </span>
-            <span className="price"> {this.getTotalAmount()}원 </span>
+            <span className="price"> {this.getTotalAmount()} 원 </span>
           </div>
         </div>
       </>

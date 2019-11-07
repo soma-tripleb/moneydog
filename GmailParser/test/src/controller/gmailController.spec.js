@@ -7,7 +7,6 @@ describe('GET /gmail/messages/id는', () => {
       .expect(200)
       .end((err, res) => {
         if (err) throw err;
-
         console.log(res.body);
         done();
       });

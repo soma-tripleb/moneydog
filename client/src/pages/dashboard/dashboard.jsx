@@ -99,10 +99,11 @@ class DashBoard extends Component {
             <div className="col-md-6 dashboard-inner">
               <div className='categories'>
                 <div className="row">
-                  <div className="col-md-6">
-                    <span className="categories-component-title"> {new Date().getMonth() + 1}월 구독 결제 정보 </span>
+                  <div className="col-sm-6 ">
+                    <span className="categories-component-title-month">{new Date().getMonth() + 1}</span>
+                    <span className="categories-component-title">월 구독 결제정보 </span>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-sm-6">
                     <button onClick={this.redirectSubsInfo} type="button" className="btn btn-sm btn-outline-info"> 구독 정보 수정 하기 </button>
                     <button onClick={this.showFullMode} type="button" className="btn btn-sm btn-outline-info"> 전체 정보 보기 </button>
                   </div>

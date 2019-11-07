@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink ,Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 import { connect as ReduxConn } from 'react-redux';
 import AuthActions from '../redux/actions/authAction';
@@ -52,17 +52,18 @@ class Head extends Component {
         <header>
           <div className="container headerContainer">
             <div className="row">
+              {/*<div className="col-md-6">*/}
+              {/*  <img className="headeImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/MDheader.png`}/>*/}
+              {/*</div>*/}
               <div className="col-md-6">
                 <ul className="nav">
                   <li className="nav-item">
-                    <Link to="/" className="navbar-brand nav-link headerFont"> MONEY DOG </Link>
+                    <Link to="/" className="navbar-brand nav-link headerFont">
+                      <img className="headeImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/MDheader.png`}/>
+                    </Link>
                   </li>
                 </ul>
-                <ul className="nav">
-                  <span className="subHeaderFont"> 경제적인 구독 전략 - </span>
-                  <span className="subHeaderFont headerBold"> &nbsp; 머니독 </span>
-                </ul>
-              </div>
+               </div>
               <div className="col-md-6 categoryFont">
                 <ul className="nav">
                   {this.isLogined()}

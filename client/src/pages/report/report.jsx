@@ -19,13 +19,28 @@ class Report extends Component {
           <div className="row">
             <div className="col-sm-8 report-container">
               <div className="col-sm page foldtl report-inner-container">
-                <h2>Report</h2>
-                <MontlyReport props={this.state} data={this.props.subscriptions}/>
-                <SubscriptionList data={this.props.subscriptions}/>
+
+                <div className="row report-padding">
+                  <div className="col-sm-2">
+                    <img className="report-logoImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/moneydog_black.png`} alt="Generic placeholder image"/>
+                  </div>
+                  <div className="col-sm align-self-center">
+                    <h2>MoneyDog Report</h2>
+                  </div>
+                </div>
+
+                <div className="report-padding">
+                  <SubscriptionList data={this.props.subscriptions}/>
+                </div>
+                <div className="report-padding">
+                  <MontlyReport props={this.state} data={this.props.subscriptions}/>
+                </div>
+
+
               </div>
               {/* <div className="col-sm-6 report-inner-container">*/}
-              {/*  <MontlyReport data={this.state}/>*/}
-              {/*  <SubscriptionList data={this.props.subscriptions}/>*/}
+              {/* <MontlyReport data={this.state}/>*/}
+              {/* <SubscriptionList data={this.props.subscriptions}/>*/}
               {/* </div>*/}
             </div>
           </div>

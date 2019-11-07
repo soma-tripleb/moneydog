@@ -51,7 +51,7 @@ class MontlyReport extends Component {
       <>
         <Row>
           <Col>
-            <div className="headerFont">
+            <div className="report-subtitle">
               {month}월 리포트
             </div>
             <Card>

@@ -1,8 +1,26 @@
 import React, {Component} from 'react';
+import moment from 'moment';
 
 class SubscriptionList extends Component {
   numberWithCommas = (number) => {
     return String(number).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  showSubsListTitle= () => {
+    return (
+      <div className="container w-100 report-inner-subsList" >
+        <div className="row subs-inner-item">
+          <div className="col">
+            상품명
+          </div>
+          <div className="col">
+             가격
+          </div>
+          <div className="col">
+            자동 갱신 날짜
+          </div>
+        </div>
+      </div>);
   };
 
   showSubsList = () => {
@@ -12,7 +30,7 @@ class SubscriptionList extends Component {
 
     const list = this.props.data.map(
       (content, i) => (
-        <div key={i} className="container w-100" id="inner-element">
+        <div key={i} className="container w-100 report-inner-subsList">
           <div className="row subs-inner-item">
             <div className="col">
               {content.name}
@@ -21,7 +39,7 @@ class SubscriptionList extends Component {
               ₩ {this.numberWithCommas(content.price)}
             </div>
             <div className="col">
-              {content.channel}
+              {moment(content.paymentDate).format('YYYY-MM-DD')}
             </div>
           </div>
         </div>)
@@ -32,7 +50,8 @@ class SubscriptionList extends Component {
   render() {
     return (
       <>
-        <div className="headerFont">구독 리스트</div>
+        <div className="report-subtitle">구독 리스트</div>
+        {this.showSubsListTitle()}
         {this.showSubsList()}
       </>
     );

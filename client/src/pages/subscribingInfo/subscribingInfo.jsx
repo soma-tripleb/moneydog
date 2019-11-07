@@ -70,7 +70,6 @@ class SubscribingInfo extends Component {
 
   // 이전 버튼 :: 구독 관리 페이지로 넘어간다.
   previousHandleSubmit = (e) =>{
-    console.log('test');
     e.preventDefault();
 
     this.props.history.push('/user/subscribing');
@@ -167,8 +166,6 @@ class SubscribingInfo extends Component {
 
   // 삭제 버튼 눌르면 사용자의 이미 구독된 정보 삭제
   deleteUserSubs = (serviceName) =>{
-    console.log(serviceName);
-
     const {userSubsList} = this.state;
 
     this.setState({
@@ -178,8 +175,6 @@ class SubscribingInfo extends Component {
 
   // 삭제 버튼 눌르면 사용자가 추가 하려 했던 구독 정보 삭제
   deleteUserInputSubs = (serviceName) =>{
-    console.log(serviceName);
-
     const {userInputList} = this.state;
 
     this.setState({
