@@ -15,7 +15,11 @@ const insertTestData = async (testdataForm) => {
     client = await mongoDB.client();
     const db = client.db(DB_ENV);
 
-    const findResult = await db.collection('testdata').findOne({ messageId: testdataForm.messageId });
+    const findResult = await db.collection('testdata').findOne(
+      {
+        messageId: testdataForm.messageId
+      }
+    );
 
     if (!findResult) {
       const data = testdataForm.GMAIL_JSON;
@@ -54,7 +58,11 @@ const getByQ = async (q) => {
     client = await mongoDB.client();
     const db = client.db(DB_ENV);
 
-    const findResult = await db.collection('testdata').findOne({ q: q });
+    const findResult = await db.collection('testdata').find(
+      {
+        q: q
+      }
+    ).toArray();
 
     result = findResult;
   } catch (err) {

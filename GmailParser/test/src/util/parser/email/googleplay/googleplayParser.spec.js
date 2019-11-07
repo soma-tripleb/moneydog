@@ -1,11 +1,13 @@
 import should from 'should';
 
-import GmailService from 'src/service/gmailService';
 import GmailParser from 'src/util/parser/email/gmailParser';
 import GooglePlayParser from 'src/util/parser/email/googleplay/googleplayParser';
 
+import TestDataQuery from 'src/db/testdataQuery';
+
 import GP_WATCHA_MESSAGES from 'test/resources/mock/email/googleplay/GP_WATCHA_MESSAGES';
 import FWD_GP_WATCHA_MESSAGES from 'test/resources/mock/email/googleplay/FWD_GP_WATCHA_MESSAGES';
+import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery.json';
 
 import Gmail from 'src/model/dto/gmail';
 
@@ -133,7 +135,7 @@ describe('googleplayParser를 만들기 위해서', () => {
   });
 });
 
-describe('googleplayParser는', () => {
+describe.skip('googleplayParser는', () => {
   describe('테스트 용 JSON 데이터로 테스트를 진행한다.', () => {
     describe('`FORWARDING`으로 자신에게 보낸 메일에서', () => {
 
@@ -218,5 +220,123 @@ describe('googleplayParser는', () => {
     const q = 'from:(googleplay) 영수증';
     let messagesList;
 
+  });
+});
+
+describe('googleplayParser는', () => {
+  describe('GooglePlay 에서 온 메일에 대해서', () => {
+
+    let googleplayQueries;
+    let trialQuery;
+    let subscriptionQuery;
+    let renewalQuery;
+
+    before(() => {
+      googleplayQueries = GMAIL_SEARCH_QUERY.q.googleplay;
+
+      trialQuery = googleplayQueries[0];
+      subscriptionQuery = googleplayQueries[1];
+      renewalQuery = googleplayQueries[2];
+    });
+
+    describe('Gmail 검색 쿼리를 가져온다.', () => {
+      it('성공 시', () => {
+        'from:(googleplay) 영수증, 무료'.should.be.equal(trialQuery);
+        'from:(googleplay) 영수증, 구독권'.should.be.equal(subscriptionQuery);
+        'from:(googleplay) 영수증, 갱신 -{구독권}'.should.be.equal(renewalQuery);
+      });
+    });
+
+    describe('검색 쿼리 별로 파싱 한다.', () => {
+
+      let trialReceiptList; // 'from:(googleplay) 영수증, 무료'
+      let subscribeReceiptList; // 'from:(googleplay) 영수증, 구독권'
+      let renewalReceiptList; // 'from:(googleplay) 영수증, 갱신 -{구독권}'
+      // ...
+
+      before(async () => {
+        trialReceiptList = await TestDataQuery.getByQ(trialQuery);
+        subscribeReceiptList = await TestDataQuery.getByQ(subscriptionQuery);
+        renewalReceiptList = await TestDataQuery.getByQ(renewalQuery);
+      });
+
+      describe('무료 평가판, `from:(googleplay) 영수증, 무료` 파싱', () => {
+        it('성공 시', () => {
+          trialReceiptList.map((receipt) => {
+            const GmailDTO = new Gmail();
+
+            const metadata = GmailParser.metadataParse(receipt, GmailDTO);
+
+            const parsingResult = GooglePlayParser.body1ParseOfTrial(metadata);
+
+            (parsingResult).should.be.an.Object();
+          });
+        });
+
+        it('실패 시', () => {
+          subscribeReceiptList.map((receipt) => {
+            const GmailDTO = new Gmail();
+
+            const metadata = GmailParser.metadataParse(receipt, GmailDTO);
+
+            should(() => {
+              GooglePlayParser.body1ParseOfTrial(metadata);
+            }).throw('EXPIRED_PARSER_BODY1_TRIAL');
+          });
+        });
+      });
+
+      describe('구독권 구매, `from:(googleplay) 영수증, 구독권` 파싱', () => {
+        it('성공 시', () => {
+          subscribeReceiptList.map((receipt) => {
+            const GmailDTO = new Gmail();
+
+            const metadata = GmailParser.metadataParse(receipt, GmailDTO);
+
+            const parsingResult = GooglePlayParser.body1ParserOfSubscribe(metadata);
+
+            (parsingResult).should.be.an.Object();
+          });
+        });
+
+        it('실패 시', () => {
+          renewalReceiptList.map((receipt) => {
+            const GmailDTO = new Gmail();
+
+            const metadata = GmailParser.metadataParse(receipt, GmailDTO);
+
+            should(() => {
+              GooglePlayParser.body1ParserOfSubscribe(metadata);
+            }).throw('EXPIRED_PARSER_BODY1_SUBSCRIBE');
+          });
+        })
+      });
+
+      describe('구독 갱신, `from:(googleplay) 영수증, 갱신 -{구독권}` 파싱', () => {
+        it('성공 시', () => {
+          renewalReceiptList.map((receipt) => {
+            const GmailDTO = new Gmail();
+
+            const metadata = GmailParser.metadataParse(receipt, GmailDTO);
+
+            const parsingResult = GooglePlayParser.body1ParseOfRenewal(metadata);
+
+            (parsingResult).should.be.an.Object();
+          });
+        });
+
+        it('실패 시', () => {
+          trialReceiptList.map((receipt) => {
+            const GmailDTO = new Gmail();
+
+            const metadata = GmailParser.metadataParse(receipt, GmailDTO);
+
+            should(() => {
+              GooglePlayParser.body1ParseOfRenewal(metadata);
+            }).throw('EXPIRED_PARSER_BODY1_RENEWAL');
+          });
+        });
+      });
+    });
   });
 });

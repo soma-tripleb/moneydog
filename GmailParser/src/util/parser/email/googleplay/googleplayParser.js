@@ -89,13 +89,8 @@ const GooglePlayParser = (() => {
       return await callback(dto, iframeBody);
     },
 
-    // '서비스 명', '상품 정보', '가격', '결제 일', '자동 갱신 날짜'
-
-    /*
-     * from:(googleplay) 영수증, 무료'
-     * '서비스 명', '상품 정보', '평가판 종료일', '평가판 이후 구독료'
-     */
-    body1ParseOfFree: (metadata) => {
+    // from:(googleplay) 영수증, 무료
+    body1ParseOfTrial: (metadata) => {
       const text = metadata.body1;
 
       // '서비스 명'
@@ -114,19 +109,6 @@ const GooglePlayParser = (() => {
       const originalPriceStartIdx = text.indexOf('자동으로 구독료');
       const originalPriceLastIdx = text.indexOf('가 청구됩니다.');
 
-      const result = {
-        serviceNameStartIdx,
-        serviceNameEndIdx,
-        productInfoStartIdx,
-        productInfoEndIdx,
-        endDateStartIdx,
-        endDateInfoEndIdx,
-        originalPriceStartIdx,
-        originalPriceLastIdx
-      };
-
-      console.log(result);
-
       try {
         if (serviceNameStartIdx === -1) throw err;
         if (serviceNameEndIdx === -1) throw err;
@@ -137,7 +119,7 @@ const GooglePlayParser = (() => {
         if (originalPriceStartIdx === -1) throw err;
         if (originalPriceLastIdx === -1) throw err;
       } catch (err) {
-        throw new Error('EXPIRED_PARSER_BODY1_FREE');
+        throw new Error('EXPIRED_PARSER_BODY1_TRIAL');
       }
 
       const serviceNameStr = text.substring(serviceNameStartIdx, serviceNameEndIdx);
@@ -153,8 +135,8 @@ const GooglePlayParser = (() => {
       };
     },
 
-    // from:(google) 영수증 에 한함.
-    body1ParserOfIndex: (metadata) => {
+    // from:(googleplay) 영수증, 구독권
+    body1ParserOfSubscribe: (metadata) => {
       const text = metadata.body1;
 
       // '서비스 명'
@@ -177,23 +159,6 @@ const GooglePlayParser = (() => {
       const renewalStartIdx = text.indexOf('자동 갱신 날짜');
       const renewalLastIdx = text.indexOf('합계');
 
-      const snippet = metadata.snippet;
-      const textIndex = {
-        snippet,
-        serviceNameStartIdx,
-        serviceNameEndIdx,
-        productInfoStartIdx,
-        productInfoEndIdx,
-        priceStartIdx,
-        priceLastIdx,
-        orderDateStartIdx,
-        orderDateEndIdx,
-        renewalStartIdx,
-        renewalLastIdx
-      };
-
-      // console.log(textIndex);
-
       try {
         if (serviceNameStartIdx === -1) throw err;
         if (serviceNameEndIdx === -1) throw err;
@@ -206,7 +171,7 @@ const GooglePlayParser = (() => {
         if (renewalStartIdx === -1) throw err;
         if (renewalLastIdx === -1) throw err;
       } catch (err) {
-        throw new Error('EXPIRED_PARSER_BODY1');
+        throw new Error('EXPIRED_PARSER_BODY1_SUBSCRIBE');
       }
 
       const serviceNameStr = text.substring(serviceNameStartIdx, serviceNameEndIdx);
@@ -221,6 +186,52 @@ const GooglePlayParser = (() => {
         priceStr,
         orderDateStr,
         renewalStr
+      };
+    },
+
+    // from:(googleplay) 영수증, 갱신 -{구독권}
+    body1ParseOfRenewal: (metadata) => {
+      const text = metadata.body1;
+
+      // '서비스 명'
+      const serviceNameStartIdx = text.indexOf('Google Play에서');
+      const serviceNameEndIdx = text.indexOf('의 구독이 갱신되었습니다.');
+
+      // '상품 정보'
+      const productInfoStartIdx = text.indexOf('상품 가격');
+      const productInfoEndIdx = text.indexOf('자동 갱신 날짜');
+
+      // '자동 갱신 날짜'
+      const renewalDateStartIdx = text.indexOf('자동 갱신 날짜');
+      const renewalDateEndIdx = text.indexOf('합계');
+
+      // '합계'
+      const priceStartIdx = text.indexOf('합계');
+      const priceEndIdx = text.indexOf('결제 방법');
+
+      try {
+        if (serviceNameStartIdx === -1) throw err;
+        if (serviceNameEndIdx === -1) throw err;
+        if (productInfoStartIdx === -1) throw err;
+        if (productInfoEndIdx === -1) throw err;
+        if (renewalDateStartIdx === -1) throw err;
+        if (renewalDateEndIdx === -1) throw err;
+        if (priceStartIdx === -1) throw err;
+        if (priceEndIdx === -1) throw err;
+      } catch (err) {
+        throw new Error('EXPIRED_PARSER_BODY1_RENEWAL');
+      }
+
+      const serviceNameStr = text.substring(serviceNameStartIdx, serviceNameEndIdx);
+      const productInfoStr = text.substring(productInfoStartIdx, productInfoEndIdx);
+      const renewalDate = text.substring(renewalDateStartIdx, renewalDateEndIdx);
+      const price = text.substring(priceStartIdx, priceEndIdx);
+
+      return {
+        serviceNameStr,
+        productInfoStr,
+        renewalDate,
+        price
       };
     },
 
