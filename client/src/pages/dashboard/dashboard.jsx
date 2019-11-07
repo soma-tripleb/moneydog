@@ -4,8 +4,8 @@ import TotalAmount from './TotalAmount';
 import DuePayment from './DuePayment';
 import Calendar from './Calendar';
 import Categories from './Categories';
-import List from './List';
 import moment from 'moment';
+import Commercial from './Commercial';
 
 import './dashboard.css';
 import { connect } from 'react-redux';
@@ -76,7 +76,7 @@ class DashBoard extends Component {
                 <DuePayment data={subscription}/>
               </div>
               <div className="col-md">
-                광고
+                <Commercial/>
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@ class DashBoard extends Component {
                 <div className="row categories-row">
                   <div className="col-sm-6  text-left align-self-center padding-zero">
                     <span className="categories-component-title-month">{new Date().getMonth() + 1}</span>
-                    <span className="categories-component-title">월 구독 결제정보 </span>
+                    <span className="categories-component-title">월&nbsp;구독&nbsp; 결제정보 </span>
                   </div>
                   <div className="col-sm-6 text-right align-self-center padding-zero">
                     <button onClick={this.redirectSubsInfo} type="button" className="btn btn-sm btn-outline-info"> 구독 정보 수정 하기 </button>

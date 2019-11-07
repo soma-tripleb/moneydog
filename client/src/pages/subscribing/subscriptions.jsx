@@ -188,7 +188,9 @@ class Subscriptions extends Component {
 
               <div className="col" id="inner-container">
                 <p><u>구독 중인 서비스 목록</u></p>
-                {this.SubscribingAppList()}
+                <div className="row">
+                  {this.SubscribingAppList()}
+                </div>
                 <p><u>추가 되는 서비스 목록</u></p>
                 {this.makeSubscribingApp()}
               </div>

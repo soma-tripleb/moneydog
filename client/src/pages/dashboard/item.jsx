@@ -14,7 +14,7 @@ class Item extends Component {
 
   showSubscibeImg = (subsAppInfo) =>{
     if (subsAppInfo.logoURI === '') {
-      return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0]}</button>);
+      return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0].toUpperCase()}</button>);
     } else {
       return (<img className="list-logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
     }
@@ -37,16 +37,16 @@ class Item extends Component {
           <div className="col subscribe-element item-border align-self-center">
             <div className="container w-100 align-self-center padding-zero">
               <div className="row textfamily">
-                <div className="col item-name text-left item-bold padding-one">
+                <div className="col item-name text-left item-bold padding-one align-self-center">
                   {name}
                 </div>
-                <div className="col padding-zero text-left">
+                <div className="col padding-zero text-left align-self-center">
                   엔터테인먼트
                 </div>
-                <div className="col-3 item-bold padding-zero text-right">
-                  월{this.numberWithCommas(price)}원
+                <div className="col-3 item-bold padding-zero text-right align-self-center">
+                  월 {this.numberWithCommas(price)}원
                 </div>
-                <div className="col-2 padding-zero text-right">
+                <div className="col-2 padding-zero text-right align-self-center">
                   매달 {moment(paymentDate, 'YYYY/MM/DD').date()}일
                 </div>
               </div>

@@ -76,7 +76,7 @@ class userCustomSubscription extends Component {
         <div key={idx} className="container w-100" id="inner-element">
           <div className="row">
             <div className="col">
-              <img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + '/img/moneydog_black.png'} alt="x" />
+              <img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + '/img/MDBlackIcon.png'} alt="x" />
             </div>
             <div className="col">
               <input type="text" className="form-control"

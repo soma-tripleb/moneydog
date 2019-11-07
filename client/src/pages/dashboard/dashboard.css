@@ -389,5 +389,21 @@ thead > tr {
 .textfamily{
     font-size: 1.5vh;
     font-family: 'Spoqa Han Sans Regular';
-    letter-spacing: -2px;
+    letter-spacing: -1px;
+}
+
+.commercial-img{
+    width: 100%;
+}
+
+.commercial-font{
+    font-family: 'Montserrat-Regular';
+    font-weight: bold;
+    color: black;
+    font-size: 2.5vh;
+}
+.commercial-time{
+    font-family: 'Spoqa Han Sans Regular';
+    color: black;
+    font-size: 2vh;
 }
