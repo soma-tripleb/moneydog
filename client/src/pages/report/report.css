@@ -93,13 +93,35 @@ p.card-text {
     border-bottom: 1px solid #d8d8d8;
 }
 .report-subtitle{
-    font-size: 5vh;
+    font-family: 'Spoqa Han Sans Bold';
+    font-size: 4vh;
     color: #000000;
     text-align: left;
-
+    padding-bottom: 1vh;
 }
 .report-inner-subsList{
+    font-family: 'Montserrat-Regular';
     border: 1px solid #d8d8d8;
     padding: 1.5vh;
     color: #000;
+    letter-spacing: -1px;
+}
+
+.report-title{
+    color: black;
+    font-size: 5vh;
+    font-family: 'Spoqa Han Sans Bold';
+}
+
+.report-subs-title{
+    font-family: 'Spoqa Han Sans Bold';
+}
+
+.report-month-text{
+    font-size: 5vh;
+}
+.montlyReport-subs-text{
+    color: black;
+    font-family: 'Montserrat-Regular';
+    padding: 3vh;
 }

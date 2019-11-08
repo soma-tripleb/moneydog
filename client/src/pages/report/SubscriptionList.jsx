@@ -8,15 +8,15 @@ class SubscriptionList extends Component {
 
   showSubsListTitle= () => {
     return (
-      <div className="container w-100 report-inner-subsList" >
+      <div className="container w-100 report-inner-subsList report-subs-title" >
         <div className="row subs-inner-item">
-          <div className="col">
+          <div className="col text-left">
             상품명
           </div>
-          <div className="col">
+          <div className="col text-left">
              가격
           </div>
-          <div className="col">
+          <div className="col text-left">
             자동 갱신 날짜
           </div>
         </div>
@@ -32,13 +32,13 @@ class SubscriptionList extends Component {
       (content, i) => (
         <div key={i} className="container w-100 report-inner-subsList">
           <div className="row subs-inner-item">
-            <div className="col">
+            <div className="col text-left item-bold">
               {content.name}
             </div>
-            <div className="col">
+            <div className="col text-left ">
               ₩ {this.numberWithCommas(content.price)}
             </div>
-            <div className="col">
+            <div className="col text-left ">
               {moment(content.paymentDate).format('YYYY-MM-DD')}
             </div>
           </div>

@@ -33,7 +33,8 @@ class Commercial extends Component {
     const S = Math.floor((gap - M * 60) % 60);
 
     this.setState({
-      timeRemaining: `${this.pad(H, 2)}:${this.pad(M, 2)}:${this.pad(S, 2)}`
+      // timeRemaining: `${this.pad(H, 2)}:${this.pad(M, 2)}:${this.pad(S, 2)}`
+      timeRemaining: `00:${this.pad(M, 2)}:${this.pad(S, 2)}`
     });
   };
 
