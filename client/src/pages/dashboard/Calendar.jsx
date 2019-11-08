@@ -28,7 +28,6 @@ class CalendarClass extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate');
     this.setDefaultValue();
   }
 
@@ -44,7 +43,7 @@ class CalendarClass extends Component {
       const dates = calendarNode.querySelectorAll('.ant-fullcalendar-value');
       dates.forEach((item, index)=>{
         if ( item.innerHTML[0] === '0') {
-          item.innerHTML = item.innerHTML[1];
+          item.innerHTML = '&nbsp;'+item.innerHTML[1]+'&nbsp;';
         }
       });
 
@@ -73,12 +72,10 @@ class CalendarClass extends Component {
   };
 
   handleOnChange = (value) =>{
-    console.log('handleOnChange', value);
     this.setDefaultValue();
   };
 
   handleOnPanelChange = (value) => {
-    console.log('handleOnPannelChange', value);
     setTimeout(()=>{
       this.setDefaultValue();
     });
@@ -86,7 +83,7 @@ class CalendarClass extends Component {
 
   showSubscibeImg = (subsAppInfo) =>{
     if (subsAppInfo.logoURI === '') {
-      return (<button className="calendar-subscriptions-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0]}</button>);
+      return (<button className="calendar-subscriptions-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0].toUpperCase()}</button>);
     } else {
       return (<img className="calendar-subscriptions-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
     }

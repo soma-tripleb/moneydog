@@ -11,7 +11,6 @@ router.get('/', (req, res) => {
       res.send(result);
     })
     .catch((e) => {
-      console.log(`/users에서 에러`);
       res.send(e);
     });
 });

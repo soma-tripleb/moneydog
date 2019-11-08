@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import {Carousel, IndexInfo, IndexSignUp} from './index';
+import IndexPage from './IndexPage';
 import './home.css';
 
 class Home extends Component {
@@ -9,7 +10,8 @@ class Home extends Component {
       <>
         <div className="container homwWrap">
 
-          <Carousel/>
+          {/*<Carousel/>*/}
+          <IndexPage/>
 
           <hr className="featurette-divider"/>
 

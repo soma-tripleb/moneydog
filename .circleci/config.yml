@@ -27,6 +27,7 @@ workflows:
               only:
                 - master
                 - dev
+                - sy-issue-106
 #                - jy-issue-107
 #      - deploy-service-update:
 #          requires:
@@ -121,14 +122,6 @@ jobs:
           title: "Lint-Test-Build 과정 에 성공 했습니다."
           webhook: $SLACK_WEBHOOK
           footer: "Money Dog"
-      - aws-s3/sync:
-          from: dist
-          to: 's3://moneydog/build'
-          overwrite: true
-      - aws-s3/copy:
-          from: dist/
-          to: 's3://moneydog/build'
-          arguments: '--dryrun'
       - when:
           condition: <<parameters.checkout>>
           steps:
@@ -167,6 +160,15 @@ jobs:
           account-url: <<parameters.account-url>>
           repo: <<parameters.repo>>
           tag: <<parameters.tag>>
+
+      - aws-s3/sync:
+          from: dist
+          to: 's3://moneydog/build'
+          overwrite: true
+      - aws-s3/copy:
+          from: dist/
+          to: 's3://moneydog/build'
+          arguments: '--dryrun'
       - slack/status:
           fail_only: true
           success_message: "ECR에 image가 잘 올라갔습니다"

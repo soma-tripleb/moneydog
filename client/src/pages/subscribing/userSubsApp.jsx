@@ -15,7 +15,7 @@ class userSubsApp extends Component {
 
   showSubscibeImg = (subsAppInfo) =>{
     if (subsAppInfo.logoURI === '') {
-      return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0]}</button>);
+      return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0].toUpperCase()}</button>);
     } else {
       return (<img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
     }
@@ -25,18 +25,8 @@ class userSubsApp extends Component {
     const {subsAppInfo} = this.props;
     return (
       <>
-        <div className="container" id="inner-element">
-          <div className="row">
-            <div className="col">
-              {this.showSubscibeImg(subsAppInfo)}
-            </div>
-            <div className="col serviceName">
-              {subsAppInfo.name}
-            </div>
-            <div className="col">
-              {this.showSubscribeActionBtn()}
-            </div>
-          </div>
+        <div className="col-1">
+          {this.showSubscibeImg(subsAppInfo)}
         </div>
       </>
     );

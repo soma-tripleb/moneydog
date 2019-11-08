@@ -4,8 +4,8 @@ import TotalAmount from './TotalAmount';
 import DuePayment from './DuePayment';
 import Calendar from './Calendar';
 import Categories from './Categories';
-import List from './List';
 import moment from 'moment';
+import Commercial from './Commercial';
 
 import './dashboard.css';
 import { connect } from 'react-redux';
@@ -76,7 +76,7 @@ class DashBoard extends Component {
                 <DuePayment data={subscription}/>
               </div>
               <div className="col-md">
-                광고
+                <Commercial/>
               </div>
             </div>
           </div>
@@ -98,17 +98,17 @@ class DashBoard extends Component {
             {/* 구독중인 서비스 list */}
             <div className="col-md-6 dashboard-inner">
               <div className='categories'>
-                <div className="row">
-                  <div className="col-md-6">
-                    <span className="categories-component-title"> {new Date().getMonth() + 1}월 구독 결제 정보 </span>
+                <div className="row categories-row">
+                  <div className="col-sm-6  text-left align-self-center padding-zero">
+                    <span className="categories-component-title-month">{new Date().getMonth() + 1}</span>
+                    <span className="categories-component-title">월&nbsp;구독&nbsp; 결제정보 </span>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-sm-6 text-right align-self-center padding-zero">
                     <button onClick={this.redirectSubsInfo} type="button" className="btn btn-sm btn-outline-info"> 구독 정보 수정 하기 </button>
+                    &nbsp;&nbsp;
                     <button onClick={this.showFullMode} type="button" className="btn btn-sm btn-outline-info"> 전체 정보 보기 </button>
                   </div>
                 </div>
-
-
                 <Categories data={subscription} date={this.convertDate()} isFullMode={this.state.isFullMode}/>
               </div>
             </div>

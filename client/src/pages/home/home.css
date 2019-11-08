@@ -4,7 +4,9 @@
 }
 
 .featurette-heading {
-    font-size: 1rem;
+    font-family: 'Spoqa Han Sans Bold';
+    font-size: 4vh;
+    color: black;
 }
 
 /*index*/
@@ -50,3 +52,50 @@
     text-align: center;
 }
 
+.IndexPage-img{
+    width: 7vh;
+}
+
+.IndexPage-serviceValue{
+    font-family: 'Spoqa Han Sans Regular';
+    color: black;
+    font-size: 2vh;
+    padding: 3vh 0 3vh 0 ;
+}
+
+.IndexPage-md{
+    font-family: 'Spoqa Han Sans Bold';
+    color: black;
+    font-size: 3vh;
+}
+.IndexPage-md-sub{
+    font-family: 'Spoqa Han Sans Regular';
+    color: black;
+    font-size: 2vh;
+}
+
+.IndexPage-inner {
+    height: 65vh;
+}
+
+.IndexPage-margin{
+    margin: auto;
+}
+
+.indexInfo-title{
+    font-family: 'Spoqa Han Sans Bold';
+    color: black;
+    font-size: 4vh;
+    padding: 3vh;
+}
+.indexInfo-text{
+    font-family: 'Spoqa Han Sans Regular';
+    color: black;
+    font-size: 2vh;
+}
+.btn-margin-10{
+    border-radius: 100px;
+}
+.nav-link{
+    text-align: center;
+}

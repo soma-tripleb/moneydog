@@ -1,28 +1,33 @@
 @font-face {
-    font-family: 'GOTHAN-ULTRAITALIC';
-    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/gotham-ultraitalic-webfont.woff) format('truetype');
+    font-family: 'Montserrat-Bold';
+    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/Montserrat-Bold.ttf) format('truetype');
 }
 
 @font-face {
-    font-family: 'GOTHAN-XLIGHT';
-    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/gotham-xlight-webfont.woff) format('truetype');
+    font-family: 'Montserrat-Light';
+    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/Montserrat-Light.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Montserrat-Medium';
+    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/Montserrat-Medium.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/Montserrat-Regular.ttf) format('truetype');
 }
 
 @font-face {
-    font-family: 'GOTHAN-ULTRA';
-    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/gotham-ultra-webfont.woff) format('truetype');
+    font-family: 'Spoqa Han Sans Bold';
+    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/Spoqa+Han+Sans+Bold.ttf) format('truetype');
 }
-
-/*html, body {*/
-/*    height: 100%;*/
-/*    width: 100%;*/
-/*    margin: 0;*/
-/*}*/
-
-/*body {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*}*/
+@font-face {
+    font-family: 'Spoqa Han Sans Regular';
+    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/Spoqa+Han+Sans+Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Spoqa Han Sans Light';
+    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/Spoqa+Han+Sans+Light.ttf) format('truetype');
+}
 
 #root {
     height: 100%;
@@ -40,7 +45,7 @@
     flex-direction: column;
 }
 
-@media (min-width:1320px) {
+@media (min-width: 1320px) {
     .container {
         max-width: 1300px;
     }

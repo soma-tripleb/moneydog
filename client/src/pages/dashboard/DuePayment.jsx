@@ -26,10 +26,10 @@ class DuePayment extends Component {
     return (
       <div>
         <div className="col amount-container">
-          <div className="component-title">납부 예정 금액</div>
+          <div className="component-title">납부 &nbsp; 예정금액</div>
           <div className="total-amount-text">
             <span className="pricePredix redColor"> 총 </span>
-            <span className="price redColor"> {this.getDuePaymentAmount()}원 </span>
+            <span className="price redColor"> {this.getDuePaymentAmount()} 원</span>
           </div>
         </div>
       </div>
