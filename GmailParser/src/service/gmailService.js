@@ -1,10 +1,10 @@
-import GmailApi from '../util/gmailApi';
-import UserQuery from '../db/usersQuery';
+import GmailApi from 'src/util/gmailApi';
+import UserQuery from 'src/db/userQuery';
 
-import Gmail from '../model/dto/gmail';
-import GmailParser from '../util/parser/email/gmailParser';
-import GooglePlayParser from '../util/parser/email/googleplay/googleplayParser';
-import GMAIL_SEARCH_QUERY from '../../resources/static/GmailSearchQuery.json';
+import Gmail from 'src/model/dto/gmail';
+import GmailParser from 'src/util/parser/email/gmailParser';
+import GooglePlayParser from 'src/util/parser/email/googleplay/googleplayParser';
+import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery';
 
 const userMessagesId = async (useremail) => {
   try {

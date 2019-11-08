@@ -1,15 +1,65 @@
+import should from 'should';
+
 import GmailParser from 'src/util/parser/email/gmailParser';
 import GooglePlayParser from 'src/util/parser/email/googleplay/googleplayParser';
 
 import GmailService from 'src/service/gmailService';
-
 import Gmail from 'src/model/dto/gmail';
+
+import GmailApi from 'src/util/gmailApi';
+import UserQuery from 'src/db/userQuery';
 
 import GP_WATCHA_MESSAGES from 'test/resources/mock/email/googleplay/GP_WATCHA_MESSAGES';
 import FWD_GP_WATCHA_MESSAGES from 'test/resources/mock/email/googleplay/FWD_GP_WATCHA_MESSAGES';
 
-describe.skip('GmailService는', () => {
-  describe('테스트용 데이터를 가지고', () => {
+describe('`GmailService`는', () => {
+
+  const testuser = 'moneydogtest1@gmail.com';
+  let refreshToken;
+
+  before(() => {
+    return UserQuery.getRefreshToken(testuser)
+      .then((result) => {
+        refreshToken = result;
+      });
+  });
+
+  describe('쿼리 검색 결과로 메일 ID 리스트를 가져온다.', () => {
+
+    const SUCCESS_QUERY = '';
+    const FAILURE_QUERY = 'pqkrdugndjsk';
+    let Gmail;
+
+    beforeEach(() => {
+      Gmail = new GmailApi(refreshToken);
+    });
+
+    it('성공 시', () => {
+      return Gmail.listMessages(testuser, SUCCESS_QUERY)
+        .then((result) => {
+          result.data.messages.should.be.not.empty();
+          result.data.resultSizeEstimate.should.be.not.equal(0);
+          result.status.should.be.equal(200);
+          result.statusText.should.be.equal('OK');
+
+          return result;
+        });
+    });
+
+    it('실패 시', () => {
+      return Gmail.listMessages(testuser, FAILURE_QUERY)
+        .then((result) => {
+          result.data.should.have.not.property('messages');
+          result.data.resultSizeEstimate.should.be.equal(0);
+          result.status.should.be.equal(200);
+          result.statusText.should.be.equal('OK');
+
+          return result;
+        });
+    });
+  });
+
+  describe.skip('테스트용 데이터를 가지고', () => {
     describe('사용자의 Gmail 메시지에서 `메타 데이터`를 파싱 한다.', () => {
 
       const TEST_MESSAGES = GP_WATCHA_MESSAGES;
@@ -93,7 +143,7 @@ describe.skip('GmailService는', () => {
     });
   });
 
-  describe('포워딩 된 테스트용 데이터를 가지고,', () => {
+  describe.skip('포워딩 된 테스트용 데이터를 가지고,', () => {
     describe('사용자의 Gmail 메시지에서 `메타 데이터`를 파싱 한다.', () => {
 
       const TEST_MESSAGES = FWD_GP_WATCHA_MESSAGES;
