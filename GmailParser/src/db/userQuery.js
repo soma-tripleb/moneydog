@@ -67,8 +67,10 @@ const insertRefreshToken = async (useremail, refreshToken) => {
 
 const getRefreshToken = async (useremail) => {
 
+  let client;
+
   try {
-    const client = await mongoDB.client();
+    client = await mongoDB.client();
     const db = client.db(DB_ENV);
 
     const result = await db.collection('users').findOne({ useremail: useremail });
@@ -77,8 +79,10 @@ const getRefreshToken = async (useremail) => {
 
   } catch (err) {
     throw err;
+  } finally {
+    client.close();
   }
-}
+};
 
 export default {
   getUser,

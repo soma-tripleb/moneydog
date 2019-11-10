@@ -8,11 +8,12 @@
   },
   "scripts": {
     "start": "NODE_ENV=gmail nodemon --exec babel-node app.js",
-    "test": "NODE_PATH=. NODE_ENV=gmail mocha --require @babel/register ./test/**/**.spec.js "
+    "test": "NODE_PATH=. NODE_ENV=gmail mocha --timeout 10000 --require @babel/register ./test/**/**.spec.js "
   },
   "author": "triple-b",
   "license": "ISC",
   "dependencies": {
+    "app-module-path": "^2.2.0",
     "cheerio": "^1.0.0-rc.3",
     "dom-parser": "^0.1.6",
     "dotenv": "^8.2.0",

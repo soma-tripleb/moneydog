@@ -32,6 +32,8 @@ router.get('/messages', async (req, res) => {
   const from = (req.query.from === undefined) ? '' : req.query.from;
   const hasTheWords = (req.query.hasTheWords === undefined) ? '' : req.query.hasTheWords;
 
+  if (useremail == undefined) res.send('사용자 이메일을 입력하세요');
+
   const SearchQuery = new Query(from, hasTheWords);
   const q = SearchQuery.queryMaker();
 
@@ -76,11 +78,12 @@ router.get('/messages/parsing', wrapper(async (req, res) => {
   res.send(config);
 }));
 
-router.get('/messages/parsing/google/receipt/:useremail', wrapper(async (req, res) => {
+router.get('/messages/parsing/:useremail', wrapper(async (req, res) => {
   const useremail = req.params.useremail;
-  const q = 'from:(김재연) 영수증';
 
-  const metadataList = await GmailService.messagesParse(useremail, q);
+  const q = ['from:(googleplay) 영수증'];
+
+  const metadataList = await GmailService.messagesParse(useremail, q[0]);
 
   const result = await GmailService.divideByFrom(metadataList);
 

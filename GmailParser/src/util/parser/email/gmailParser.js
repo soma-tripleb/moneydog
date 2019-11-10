@@ -1,3 +1,4 @@
+import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery.json';
 
 const GmailParser = (() => {
   return {
@@ -14,6 +15,8 @@ const GmailParser = (() => {
       let body = null;
       let body1 = null;
       let body2 = null;
+
+      console.log(data);
 
       data.payload.headers.some((headers) => {
         const name = headers.name.toLowerCase();
@@ -74,6 +77,10 @@ const GmailParser = (() => {
       dto.setBody2(body2);
 
       return dto;
+    },
+
+    querySelect: () => {
+      // GMAIL_SEARCH_QUERY
     }
   };
 })();
