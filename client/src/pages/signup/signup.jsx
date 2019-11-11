@@ -134,7 +134,7 @@ class SignUp extends Component {
 
     GoogleApi.authLogin()
       .then((result) => {
-        console.log(result);
+        console.log(result.data.data);
       })
       .catch((err) => {
         throw err;
@@ -144,22 +144,25 @@ class SignUp extends Component {
   onClickGoogleBtn = async () =>{
     const result = await axios({
       method: 'get',
-      // url: `http://localhost:3000/oauth`,
-      url: `localhost:3000/gmail/messages/id/moneydogtest1@gmail.com`,
+      // url: `http://localhost:3000/gmail/messages/id/moneydogtest1@gmail.com`,
+      url: `http://localhost:3000/oauth`,
       headers: {
-        'x-access-token': Cookies.get('token'),
-        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/json'
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+        'Access-Control-Allow-Origin': '*'
       },
       responseType: 'json',
     })
       .then((res)=>{
+        console.log(res.data.redirectURL);
+        window.location.href = `${res.data.redirectURL}`;
         return res;
       })
       .catch((err)=>{
         return err.response;
       });
 
-    console.log(result);
+
   };
 
   render() {

@@ -6,7 +6,7 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-const cors = require('cors');
+import cors from 'cors';
 
 import indexRouter from './src/routes/index';
 import oauthRouter from './src/routes/oauth/oauthController';

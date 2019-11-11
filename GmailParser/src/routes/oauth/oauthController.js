@@ -7,7 +7,12 @@ import OAuthService from '../../service/oauthService';
 router.get('/', (req, res) => {
   const OAuth2Client = new GoogleOAuth();
 
-  res.redirect(OAuth2Client.url());
+  res.json({
+    success: true,
+    redirect: true,
+    redirectURL: OAuth2Client.url(),
+  });
+  // res.redirect(OAuth2Client.url());
 });
 
 router.get('/certificate', async (req, res) => {

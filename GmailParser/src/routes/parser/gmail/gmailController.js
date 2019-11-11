@@ -23,7 +23,7 @@ router.get('/messages/id/:useremail', async (req, res) => {
     res.json(result).end();
   } catch (err) {
     throw err;
-  };
+  }
 
 });
 
@@ -46,7 +46,7 @@ router.get('/messages', async (req, res) => {
 
   } catch (err) {
     throw err;
-  };
+  }
 
 });
 
