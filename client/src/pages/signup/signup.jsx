@@ -6,6 +6,8 @@ import authActions from '../../redux/actions/authAction';
 import './signup.css';
 import Cookies from 'js-cookie';
 
+import axios from 'axios';
+
 class SignUp extends Component {
   state = {
     nickname: '',
@@ -139,6 +141,27 @@ class SignUp extends Component {
       });
   };
 
+  onClickGoogleBtn = async () =>{
+    const result = await axios({
+      method: 'get',
+      // url: `http://localhost:3000/oauth`,
+      url: `localhost:3000/gmail/messages/id/moneydogtest1@gmail.com`,
+      headers: {
+        'x-access-token': Cookies.get('token'),
+        'Content-Type': 'application/json'
+      },
+      responseType: 'json',
+    })
+      .then((res)=>{
+        return res;
+      })
+      .catch((err)=>{
+        return err.response;
+      });
+
+    console.log(result);
+  };
+
   render() {
     return (
       <>
@@ -149,15 +172,15 @@ class SignUp extends Component {
             <article className="card-body mx-auto">
               <h4 className="card-title mt-3 text-center">Sign Up</h4>
               <p className="text-center">Get started with your free account</p>
-               {/*<p>*/}
-               {/* <button className="btn btn-block btn-google">*/}
-               {/*   <i className="fab fa-google" /> Login via google*/}
-               {/* </button>*/}
-               {/*</p>*/}
+              <p>
+                <button className="btn btn-block btn-google" onClick={this.onClickGoogleBtn}>
+                  <i className="fab fa-google" /> 구글 로그인 하기
+                </button>
+              </p>
 
-              {/* <p className="divider-text">*/}
-              {/*  <span className="bg-light">OR</span>*/}
-              {/* </p>*/}
+              <p className="divider-text">
+                <span className="bg-light">OR</span>
+              </p>
 
               <form>
                 {/* Email input*/}
