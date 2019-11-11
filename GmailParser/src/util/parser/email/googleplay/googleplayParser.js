@@ -90,7 +90,7 @@ const GooglePlayParser = (() => {
     },
 
     // from:(googleplay) 영수증, 무료
-    body1ParseOfTrial: (metadata) => {
+    body1ParserOfTrial: (metadata) => {
       const text = metadata.body1;
 
       // '서비스 명'
@@ -190,7 +190,7 @@ const GooglePlayParser = (() => {
     },
 
     // from:(googleplay) 영수증, 갱신 -{구독권}
-    body1ParseOfRenewal: (metadata) => {
+    body1ParserOfRenewal: (metadata) => {
       const text = metadata.body1;
 
       // '서비스 명'

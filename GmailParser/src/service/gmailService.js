@@ -101,6 +101,9 @@ const divideByFrom = async (metadataList) => {
   return result;
 };
 
+const parsing = (useremail) => {
+  
+};
 export default {
   userMessagesId,
   userMessages,

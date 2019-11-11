@@ -16,8 +16,6 @@ const GmailParser = (() => {
       let body1 = null;
       let body2 = null;
 
-      console.log(data);
-
       data.payload.headers.some((headers) => {
         const name = headers.name.toLowerCase();
 
