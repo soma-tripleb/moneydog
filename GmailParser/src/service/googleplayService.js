@@ -5,6 +5,8 @@ import GmailService from './gmailService';
 
 import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery';
 
+import GooglePlay2 from 'src/model/dto/googleplay2';
+
 const GOOGLEPLAY_QUERY = (() => {
   return GMAIL_SEARCH_QUERY.q.googleplay;
 })();
@@ -59,7 +61,13 @@ const queryParsing = async (useremail) => {
         metadataParsingResultList.map((metadata) => {
           const parsingResult = GooglePlayParser.body1ParserOfTrial(metadata);
 
-          trialResult.push(parsingResult);
+          const GP = new GooglePlay2()
+            .setCategory('trial')
+            .setService(parsingResult.serviceNameStr)
+            .setPrice(parsingResult.originalPrice)
+            .setEndDate(parsingResult.endDateStr);
+
+          trialResult.push(GP);
         });
 
         googleplayMassages.set(category, trialResult);
