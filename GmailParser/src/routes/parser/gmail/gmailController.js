@@ -90,4 +90,12 @@ router.get('/messages/parsing/:useremail', wrapper(async (req, res) => {
   res.json(result).end();
 }));
 
+router.get('/parsing/:useremail', wrapper(async (req, res) => {
+  const useremail = req.params.useremail;
+
+  const parsing = await GmailService.parsing(useremail);
+
+  res.json(Object.fromEntries(parsing)).end();
+}));
+
 export default router;

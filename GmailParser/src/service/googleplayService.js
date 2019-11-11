@@ -1,9 +1,6 @@
 import GooglePlayParser from '../util/parser/email/googleplay/googleplayParser';
 import GooglePlay from '../model/dto/googleplay';
 
-import GmailParser from 'src/util/parser/email/gmailParser';
-import Gmail from 'src/model/dto/gmail';
-
 import GmailService from './gmailService';
 
 import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery';
@@ -92,7 +89,7 @@ const queryParsing = async (useremail) => {
     };
   }
 
-  console.log(googleplayMassages);
+  return googleplayMassages;
 };
 
 export default {
