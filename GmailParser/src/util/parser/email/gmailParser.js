@@ -1,5 +1,3 @@
-import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery.json';
-
 const GmailParser = (() => {
   return {
     metadataParse: (json, dto) => {
@@ -15,8 +13,6 @@ const GmailParser = (() => {
       let body = null;
       let body1 = null;
       let body2 = null;
-
-      console.log(data);
 
       data.payload.headers.some((headers) => {
         const name = headers.name.toLowerCase();
@@ -78,10 +74,6 @@ const GmailParser = (() => {
 
       return dto;
     },
-
-    querySelect: () => {
-      // GMAIL_SEARCH_QUERY
-    }
   };
 })();
 

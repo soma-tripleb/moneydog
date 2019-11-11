@@ -5,12 +5,14 @@ import GooglePlayParser from 'src/util/parser/email/googleplay/googleplayParser'
 import GmailParser from 'src/util/parser/email/gmailParser';
 import Gmail from 'src/model/dto/gmail';
 
+import GooglePlayService from 'src/service/googleplayService';
+
 import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery';
 
 describe('GmailParser는', () => {
   describe('Gmail 검색 쿼리 리스트를 순회 한다.(지금은 json 형태로 저장, 나중에는 DB에 저장)', () => {
 
-    describe.only('`googleplay`에서 온 메일에 대해서 테스트 한다.', () => {
+    describe('`googleplay`에서 온 메일에 대해서 테스트 한다.', () => {
 
       let GOOGLEPLAY_QUERYS;
       const googleplayQueryMap = new Map();
@@ -34,68 +36,63 @@ describe('GmailParser는', () => {
 
             const mail = await TestDataQuery.getByQ(query);
 
-            console.log(category, mail.length);
+            googleplayMailMap.set(category, mail);
           }
-
-          console.log(googleplayMailMap);
 
         });
       });
 
-      describe.skip('테스트 데이터를 쿼리에 맞게 파싱한다.', () => {
+      describe('테스트 데이터를 쿼리에 맞게 파싱한다.', () => {
         it('성공 시', async () => {
-          const result = [];
 
-          googleplayMailMap.forEach(async (value, key) => {
-            const metadataList = [];
+          const parsingResult = [];
 
-            try {
-              const list = await value;
-              list.forEach((mail) => {
-                const GmailDTO = new Gmail();
-                const data = mail.data;
+          googleplayMailMap.forEach((value, key) => {
+            switch (key) {
+              case 'trial':
+                value.some((testdata) => {
+                  const GmailDTO = new Gmail();
+                  const metadata = GmailParser.metadataParse(testdata, GmailDTO);
 
-                const metadata = GmailParser.metadataParse(data, GmailDTO);
+                  const result = GooglePlayParser.body1ParserOfTrial(metadata);
 
-                metadataList.push(metadata);
-              });
-            } catch (err) {
-              throw err;
+                  parsingResult.push(result);
+                });
+                break;
+              case 'subscription':
+                value.some((testdata) => {
+                  const GmailDTO = new Gmail();
+                  const metadata = GmailParser.metadataParse(testdata, GmailDTO);
+
+                  const result = GooglePlayParser.body1ParserOfSubscribe(metadata);
+
+                  parsingResult.push(result);
+                });
+                break;
+              case 'renewal':
+                value.some((testdata) => {
+                  const GmailDTO = new Gmail();
+                  const metadata = GmailParser.metadataParse(testdata, GmailDTO);
+
+                  const result = GooglePlayParser.body1ParserOfRenewal(metadata);
+
+                  parsingResult.push(result);
+                });
+                break;
             }
-
-            // switch (key) {
-            //   case 'trial':
-            //     try {
-            //       metadataList.forEach((metadata) => {
-            //         result.push(GooglePlayParser.body1ParseOfTrial(metadata));
-            //       });
-            //     } catch (err) {
-            //       throw err;
-            //     }
-            //     break;
-            //   case 'subscription':
-            //     try {
-            //       metadataList.forEach((metadata) => {
-            //         result.push(GooglePlayParser.body1ParserOfSubscribe(metadata));
-            //       });
-            //     } catch (err) {
-            //       throw err;
-            //     }
-            //     break;
-            //   case 'renewal':
-            //     try {
-            //       metadataList.forEach((metadata) => {
-            //         result.push(GooglePlayParser.body1ParseOfRenewal(metadata));
-            //       });
-            //     } catch (err) {
-            //       throw err;
-            //     }
-            //     break;
-            // }
           });
 
-          console.log(result);
+          console.log(parsingResult);
         });
+      });
+    });
+
+    describe.only('사용자의 이메일을 받아서 메일 파싱을 진행한다.', () => {
+
+      const useremail = 'moneydogtest1@gmail.com';
+
+      it('JSON 파일로 작성한 Gmail 쿼리 불러오기', () => {
+        GooglePlayService.queryParsing(useremail);
       });
     });
   });

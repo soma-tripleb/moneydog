@@ -4,6 +4,7 @@ import UserQuery from 'src/db/userQuery';
 import Gmail from 'src/model/dto/gmail';
 import GmailParser from 'src/util/parser/email/gmailParser';
 import GooglePlayParser from 'src/util/parser/email/googleplay/googleplayParser';
+import GooglePlayService from 'src/service/googleplayService';
 import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery';
 
 const userMessagesId = async (useremail) => {
@@ -101,9 +102,25 @@ const divideByFrom = async (metadataList) => {
   return result;
 };
 
+const parsing = async (useremail) => {
+  let result;
+  // GooglePlay
+  try {
+    result = await GooglePlayService.queryParsing(useremail);
+  } catch (err) {
+    throw err;
+  }
+  // Apple
+
+  // etc ... (ex, 'Netflix', 'YouTube', ...)
+
+  return result;
+};
+
 export default {
   userMessagesId,
   userMessages,
   messagesParse,
   divideByFrom,
+  parsing
 };
