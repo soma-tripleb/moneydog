@@ -125,13 +125,13 @@ const GooglePlayParser = (() => {
       const serviceNameStr = text.substring(serviceNameStartIdx, serviceNameEndIdx);
       const productInfoStr = text.substring(productInfoStartIdx, productInfoEndIdx);
       const endDateStr = text.substring(endDateStartIdx, endDateInfoEndIdx);
-      const originalPrice = text.substring(originalPriceStartIdx, originalPriceLastIdx);
+      const originalPriceStr = text.substring(originalPriceStartIdx, originalPriceLastIdx);
 
       return {
         serviceNameStr,
         productInfoStr,
         endDateStr,
-        originalPrice
+        originalPriceStr
       };
     },
 
@@ -225,13 +225,13 @@ const GooglePlayParser = (() => {
       const serviceNameStr = text.substring(serviceNameStartIdx, serviceNameEndIdx);
       const productInfoStr = text.substring(productInfoStartIdx, productInfoEndIdx);
       const renewalDate = text.substring(renewalDateStartIdx, renewalDateEndIdx);
-      const price = text.substring(priceStartIdx, priceEndIdx);
+      const priceStr = text.substring(priceStartIdx, priceEndIdx);
 
       return {
         serviceNameStr,
         productInfoStr,
-        renewalDate,
-        price
+        priceStr,
+        renewalDate
       };
     },
 

@@ -1,11 +1,10 @@
 import GooglePlayParser from '../util/parser/email/googleplay/googleplayParser';
-import GooglePlay from '../model/dto/googleplay';
 
 import GmailService from './gmailService';
 
 import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery';
 
-import GooglePlay2 from 'src/model/dto/googleplay2';
+import GooglePlayDTO from 'src/model/dto/googleplay';
 
 const GOOGLEPLAY_QUERY = (() => {
   return GMAIL_SEARCH_QUERY.q.googleplay;
@@ -61,13 +60,13 @@ const queryParsing = async (useremail) => {
         metadataParsingResultList.map((metadata) => {
           const parsingResult = GooglePlayParser.body1ParserOfTrial(metadata);
 
-          const GP = new GooglePlay2()
-            .setCategory('trial')
+          const GooglePlay = new GooglePlayDTO()
+            .setCategory(category)
             .setService(parsingResult.serviceNameStr)
-            .setPrice(parsingResult.originalPrice)
+            .setPrice(parsingResult.originalPriceStr)
             .setEndDate(parsingResult.endDateStr);
 
-          trialResult.push(GP);
+          trialResult.push(GooglePlay);
         });
 
         googleplayMassages.set(category, trialResult);
@@ -78,7 +77,13 @@ const queryParsing = async (useremail) => {
         metadataParsingResultList.map((metadata) => {
           const parsingResult = GooglePlayParser.body1ParserOfSubscribe(metadata);
 
-          subscriptionResult.push(parsingResult);
+          const GooglePlay = new GooglePlayDTO()
+            .setCategory(category)
+            .setService(parsingResult.serviceNameStr)
+            .setPrice(parsingResult.priceStr)
+            .setEndDate(parsingResult.renewalStr);
+
+          subscriptionResult.push(GooglePlay);
         });
 
         googleplayMassages.set(category, subscriptionResult);
@@ -89,7 +94,13 @@ const queryParsing = async (useremail) => {
         metadataParsingResultList.map((metadata) => {
           const parsingResult = GooglePlayParser.body1ParserOfRenewal(metadata);
 
-          renewalResult.push(parsingResult);
+          const GooglePlay = new GooglePlayDTO()
+            .setCategory(category)
+            .setService(parsingResult.serviceNameStr)
+            .setPrice(parsingResult.priceStr)
+            .setEndDate(parsingResult.renewalDate);
+
+          renewalResult.push(GooglePlay);
         });
 
         googleplayMassages.set(category, renewalResult);
