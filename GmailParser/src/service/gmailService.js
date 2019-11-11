@@ -102,8 +102,13 @@ const divideByFrom = async (metadataList) => {
 };
 
 const parsing = (useremail) => {
-  
+  // GooglePlay
+
+  // Apple
+
+  // etc ... (ex, 'Netflix', 'YouTube', ...)
 };
+
 export default {
   userMessagesId,
   userMessages,
