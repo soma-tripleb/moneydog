@@ -5,6 +5,8 @@ import GoogleOAuth from '../../util/googleOAuth';
 import OAuthService from '../../service/oauthService';
 
 router.get('/', (req, res) => {
+  console.log('google oauth');
+
   const OAuth2Client = new GoogleOAuth();
 
   res.redirect(OAuth2Client.url());
