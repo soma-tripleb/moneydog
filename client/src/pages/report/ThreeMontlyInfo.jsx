@@ -152,7 +152,7 @@ class ThreeMontlyInfo extends Component {
         <Row>
           <Col>
             <div className="report-subtitle">
-              3달간 사용량 비교
+              지난 3개월간 사용량 비교
             </div>
             <div className="row">
               <div className="col-4">

@@ -27,16 +27,16 @@ class MontlyReport extends Component {
   };
 
   showThisMonthData = (header, body) => {
-    return (<>
-      <div className="row justify-content-end">
-        <div className="col-3 text-right">
+    return (
+      <div className="col padding-zero">
+        <div className="montlyReport-subs-header">
           {header}
         </div>
-        <div className="col-3 text-right">
+        <div className="montlyReport-subs-body">
           {body}
         </div>
       </div>
-    </>
+
     );
   };
 
@@ -50,13 +50,13 @@ class MontlyReport extends Component {
       <>
         <Row>
           <Col>
-            <div className="report-subtitle">
-              <span className="report-month-text">{month}</span>월 리포트
-            </div>
-            <div className="col montlyReport-subs-text">
-              {this.showThisMonthData('총 구독 앱 수', `${this.props.data.length} 개`)}
-              {this.showThisMonthData('평균 구독 가격', '₩ '+this.averageSubsPrice(this.state.totalPrice, this.props.data.length) ) }
-              {this.showThisMonthData(`결제 총액`, `${currency} ${this.numberWithCommas(this.state.totalPrice)}`)}
+            {/* <div className="report-subtitle">*/}
+            {/*  <span className="report-month-text">{month}</span>월 리포트*/}
+            {/* </div>*/}
+            <div className="row montlyReport-subs-text">
+              {this.showThisMonthData('총 구독앱수', `${this.props.data.length} 개`)}
+              {this.showThisMonthData('평균 구독가격', this.averageSubsPrice(this.state.totalPrice, this.props.data.length)+'원' ) }
+              {this.showThisMonthData(`결제 총액`, `${currency} ${this.numberWithCommas(this.state.totalPrice)}원`)}
             </div>
           </Col>
         </Row>

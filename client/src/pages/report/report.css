@@ -3,32 +3,37 @@
 }
 
 .report-inner-container {
-    box-shadow: 10px 10px 10px 10px lightgray;
+    text-align: left;
+    box-shadow: 0vh 0vh 10px 10px #f3f3f3;
+    background: #ffffff;
+    border-radius: 2vh;
+    width: 100%;
+
     width: 100%;
     font-weight: lighter;
     font-size: 1vw;
 
-    padding: 2vh;
+    padding: 3vh;
     margin: 5vh auto 5vh auto;
 }
 
 
 /*!*페이지 종이 질감 그림자 생성*!*/
-.page {
-    background: #ffffff;
-}
+/*.page {*/
+/*    background: #ffffff;*/
+/*}*/
 
-.page h2 {
-    text-align: center;
-    padding: 0 0 0 10px;
-    font: 400 4vh 'Lilita One', Helvetica, sans-serif;
-}
+/*.page h2 {*/
+/*    text-align: center;*/
+/*    padding: 0 0 0 10px;*/
+/*    font: 400 4vh 'Lilita One', Helvetica, sans-serif;*/
+/*}*/
 
-.page p {
-    padding: 10px 20px;
-    font: 2vh Helvetica, sans-serif;
-    color: #f0f2f5;
-}
+/*.page p {*/
+/*    padding: 10px 20px;*/
+/*    font: 2vh Helvetica, sans-serif;*/
+/*    color: #f0f2f5;*/
+/*}*/
 
 /*.foldtl {*/
 /*    position: relative;*/
@@ -86,15 +91,14 @@ p.card-text {
 }
 
 .report-logoImg{
-    width: 8vh;
+    width: 4vh;
 }
 .report-padding{
-    padding: 3vh;
-    border-bottom: 1px solid #d8d8d8;
+    padding-top: 3vh;
 }
 .report-subtitle{
     font-family: 'Spoqa Han Sans Bold';
-    font-size: 4vh;
+    font-size: 2vh;
     color: #000000;
     text-align: left;
     padding-bottom: 1vh;
@@ -109,7 +113,7 @@ p.card-text {
 
 .report-title{
     color: black;
-    font-size: 5vh;
+    font-size: 3vh;
     font-family: 'Spoqa Han Sans Bold';
 }
 
@@ -121,7 +125,11 @@ p.card-text {
     font-size: 5vh;
 }
 .montlyReport-subs-text{
+    box-shadow: 0vh 0vh 10px 10px #f3f3f3;
+    background: #d8d8d8;
+    border-radius: 2vh;
+
     color: black;
     font-family: 'Montserrat-Regular';
-    padding: 3vh;
+    padding: 1vh;
 }

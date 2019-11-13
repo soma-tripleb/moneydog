@@ -22,11 +22,11 @@
 /* carousel */
 .carousel-inner {
     top: 0;
-    min-width: 100%;
+    min-width: 50%;
 }
 
 .carousel {
-    margin-bottom: 5vh;
+    margin-bottom: 3vh;
 }
 
 .d-block {
@@ -40,15 +40,17 @@
 
 /*카로셀 최대 크기 지정*/
 .carousel-inner {
-    height: 45vmax;
+    width: 5vh;
+    /*height: 50%;*/
     margin: 0 auto;
     text-align: center;
 }
 
 /*이미지들 카로셀 최대 크기로 지정*/
 .carousel-inner > .carousel-item {
-    height: max-content;
-    margin: 0 auto;
+    /*height: 50%;*/
+    /*margin: 0 auto;*/
+    padding: 3vh;
     text-align: center;
 }
 

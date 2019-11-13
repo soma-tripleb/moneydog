@@ -333,7 +333,7 @@ thead > tr {
     left: 6vh;
 }
 .categories-component-title-month{
-    letter-spacing: -3px;
+    letter-spacing: -4px;
     font-family: 'Montserrat-Medium';
     color: black;
     font-size: 4vh;
@@ -376,11 +376,13 @@ thead > tr {
 }
 
 .whitespaceImg {
+    padding-top: 3vh;
     width: 100%;
 }
 
 .padding-zero{
     padding: 0;
+    text-align: left;
 }
 .padding-one{
     padding: 0 0 0 1vh;
@@ -406,4 +408,19 @@ thead > tr {
     font-family: 'Spoqa Han Sans Regular';
     color: black;
     font-size: 2vh;
+}
+
+.categories-padding-right{
+    padding-right: 1vh;
+    padding-left: 1vh;
+}
+.dashboard-padding-1px{
+    padding-left: 1vh;
+}
+
+.montlyReport-subs-header{
+    font-size: 2vh;
+}
+.montlyReport-subs-body{
+    font-size: 3vh;
 }

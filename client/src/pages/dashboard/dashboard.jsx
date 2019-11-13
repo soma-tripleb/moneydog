@@ -99,7 +99,7 @@ class DashBoard extends Component {
             <div className="col-md-6 dashboard-inner">
               <div className='categories'>
                 <div className="row categories-row">
-                  <div className="col-sm-6  text-left align-self-center padding-zero">
+                  <div className="col-sm-6  text-left align-self-center dashboard-padding-1px">
                     <span className="categories-component-title-month">{new Date().getMonth() + 1}</span>
                     <span className="categories-component-title">월&nbsp;구독&nbsp; 결제정보 </span>
                   </div>
@@ -109,7 +109,7 @@ class DashBoard extends Component {
                     <button onClick={this.showFullMode} type="button" className="btn btn-sm btn-outline-info"> 전체 정보 보기 </button>
                   </div>
                 </div>
-                <Categories data={subscription} date={this.convertDate()} isFullMode={this.state.isFullMode}/>
+                <Categories data={subscription} isFullMode={this.state.isFullMode}/>
               </div>
             </div>
 
