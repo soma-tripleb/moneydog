@@ -14,9 +14,6 @@ header {
     padding: 2vh 0 2vh 0;
     text-align: left;
 }
-.active {
-    color: #00BBF8;
-}
 
 .subHeaderFont {
     color: #000;
@@ -58,4 +55,8 @@ header {
     text-align: left;
     font-family: 'Montserrat-Regular';
     color: #000;
+}
+
+.active {
+    color: #00BBF8;
 }

@@ -14,9 +14,11 @@ class SubsApp extends Component {
 
   showSubscribeActionBtn = () => {
     if (this.props.subsAppInfo.label === '-') {
-      return (<button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">-</button> );
+      // return (<button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">-</button> );
+      return ( <button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info">삭제</button>);
     } else {
-      return ( <button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">+</button>);
+      // return ( <button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">+</button>);
+      return ( <button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info">구독 추가</button>);
     }
   };
 
@@ -32,16 +34,23 @@ class SubsApp extends Component {
     const {subsAppInfo} = this.props;
     return (
       <>
-        <div className="container" id="inner-element">
+        <div className="container">
           <div className="row">
-            <div className="col">
+            <div className="col-2">
               {this.showSubscibeImg(subsAppInfo)}
             </div>
-            <div className="col serviceName">
-              {subsAppInfo.name}
-            </div>
             <div className="col">
-              {this.showSubscribeActionBtn()}
+              <div className="row bottom-border">
+                <div className="col serviceName text-left padding-zero">
+                  {subsAppInfo.name}
+                </div>
+                <div className="col service-sub-Name text-left padding-zero">
+              엔터테인먼트
+                </div>
+                <div className="col-3 padding-zero">
+                  {this.showSubscribeActionBtn()}
+                </div>
+              </div>
             </div>
           </div>
         </div>
