@@ -28,7 +28,11 @@ class GooglePlay {
 
   setEndDate(endDate) {
     const dateRegex = /(19|20)\d{2}. ([1-9]|1[012]). ([1-9]|[12][0-9]|3[0-1])./;
-    this.endDate = endDate.match(dateRegex)[0];
+    const dateStr = endDate.match(dateRegex)[0];
+    const deleteDotDate = dateStr.replace(/\./g, '');
+    const pushDashDate = deleteDotDate.replace(/ /g, '-');
+    this.endDate = pushDashDate;
+
     return this;
   }
 };

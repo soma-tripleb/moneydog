@@ -1,7 +1,6 @@
 import express from 'express';
 
 import GmailService from 'src/service/gmailService';
-import UserQuery from 'src/db/userQuery';
 
 const router = express.Router();
 
@@ -95,6 +94,17 @@ router.get('/parsing/:useremail', wrapper(async (req, res) => {
   const useremail = req.params.useremail;
 
   const parsing = await GmailService.parsing(useremail);
+
+  const listSubscription = [];
+
+  // TODO(park): 가장 최근의 구독이 무엇인지 알아내는 알고리즘 필요
+  for (const [key, value] of parsing) {
+    if (key == 'renewal') {
+      value.map((elem) => {
+        console.log(elem);
+      });
+    }
+  }
 
   res.json(Object.fromEntries(parsing)).end();
 }));

@@ -10,7 +10,7 @@ const getUser = async (useremail) => {
   const client = await mongoDB.client();
   const db = client.db(DB_ENV);
 
-  return db.collection('users').findOne({ useremail: useremail })
+  return db.collection('users').findOne({ email: useremail })
     .then((user) => {
       return user;
     })
@@ -30,7 +30,7 @@ const insertUser = async (userInfo) => {
     client = await mongoDB.client();
     db = client.db(DB_ENV);
 
-    const findUser = await db.collection('users').findOne({ useremail: userInfo.useremail });
+    const findUser = await db.collection('users').findOne({ email: userInfo.useremail });
 
     if (findUser.useremail === userInfo.useremail) throw new Error('이미 존재하는 사용자');
 
@@ -38,7 +38,7 @@ const insertUser = async (userInfo) => {
     if (err instanceof TypeError) {
       return db.collection('users').insertOne(
         {
-          useremail: userInfo.useremail,
+          email: userInfo.useremail,
           username: userInfo.username,
           refreshToken: userInfo.refreshToken,
         })
@@ -77,6 +77,7 @@ const getRefreshToken = async (useremail) => {
     result = await db.collection('users').findOne({ email: useremail });
 
   } catch (err) {
+    // TODO(park): 명시적인 에러 처리
     throw err;
   } finally {
     client.close();
