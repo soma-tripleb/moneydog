@@ -1,4 +1,4 @@
-import CommonParser from '../../util/parser/email/commonParser';
+import CommonParser from 'src/util/parser/email/commonParser';
 
 class Gmail {
   constructor() {

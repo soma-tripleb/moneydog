@@ -14,11 +14,13 @@ class Info extends Component {
   };
 
   responseGoogle = async (res) => {
-    console.log('google login');
+    if (typeof res.code == 'undefined') throw new Error('GOOGLE_OAUTH_CODE_NOT_FOUND');
+    else {
+      const result = await InfoService.sendGoogleOAuthCode(res);
 
-    const result = await InfoService.sendGoogleOAuthCode(res);
+      console.log(result);
+    }
 
-    console.log(result);
     // 페이지 이동
   }
 
@@ -38,8 +40,8 @@ class Info extends Component {
               <div className="col-6">
                 <GoogleLogin
                   clientId={`${process.env.GOOGLE_API_CLIENT_ID}`}
-                  buttonText="Login"
                   scope={`${process.env.GOOGLE_API_SCOPE}`}
+                  buttonText="Login"
                   accessType="offline"
                   responseType="code"
                   onSuccess={this.responseGoogle}

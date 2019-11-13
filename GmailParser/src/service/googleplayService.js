@@ -1,10 +1,8 @@
-import GooglePlayParser from '../util/parser/email/googleplay/googleplayParser';
+import GooglePlayParser from 'src/util/parser/email/googleplay/googleplayParser';
 
-import GmailService from './gmailService';
-
-import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery';
-
+import GmailService from 'src/service/gmailService';
 import GooglePlayDTO from 'src/model/dto/googleplay';
+import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery';
 
 const GOOGLEPLAY_QUERY = (() => {
   return GMAIL_SEARCH_QUERY.q.googleplay;
@@ -23,12 +21,12 @@ const parse = async (useremail) => {
   const parsingList = [];
 
   const promise = listMessagesJson.map(async (message) => {
-    const GooglePlayDTO = new GooglePlay();
+    const GooglePlay = new GooglePlayDTO();
 
     let result;
     try {
 
-      result = await GooglePlayParser.metadataParse(message, GooglePlayDTO, GooglePlayParser.iframeParse);
+      result = await GooglePlayParser.metadataParse(message, GooglePlay, GooglePlayParser.iframeParse);
 
     } catch (err) {
       throw new Error(`METADATA_PARSE ` + err);
@@ -113,5 +111,5 @@ const queryParsing = async (useremail) => {
 
 export default {
   parse,
-  queryParsing,
+  queryParsing
 };
