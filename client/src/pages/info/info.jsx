@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+import { GoogleLogin } from 'react-google-login';
+import InfoService from './info.ajax';
+import dotenv from 'dotenv';
+dotenv.config();
+
 import './info.css';
 import AuthActions from '../../redux/actions/authAction';
 import {connect as ReduxConn} from 'react-redux';
@@ -8,9 +13,16 @@ class Info extends Component {
   state = {
   };
 
-  redirectGoogle = () =>{
-    console.log('test');
-  };
+  responseGoogle = async (res) => {
+    if (typeof res.code == 'undefined') throw new Error('GOOGLE_OAUTH_CODE_NOT_FOUND');
+    else {
+      const result = await InfoService.sendGoogleOAuthCode(res);
+
+      console.log(result);
+    }
+
+    // 페이지 이동
+  }
 
   onClicklogout = () => {
     this.props.REDUX_AUTH_LOGOUT_REQUEST();
@@ -26,9 +38,16 @@ class Info extends Component {
                 구글 계정 연동 하기
               </div>
               <div className="col-6">
-                <button className="googleBtn">
-                  <img className="googleImg" onClick={this.redirectGoogle} src={`${process.env.REACT_APP_IMAGE_URI}/img/btn_google_signin_light_normal_web%402x.png`} alt="x"/>
-                </button>
+                <GoogleLogin
+                  clientId={`${process.env.GOOGLE_API_CLIENT_ID}`}
+                  scope={`${process.env.GOOGLE_API_SCOPE}`}
+                  buttonText="Login"
+                  accessType="offline"
+                  responseType="code"
+                  onSuccess={this.responseGoogle}
+                  onFailure={this.responseGoogle}
+                  cookiePolicy={'single_host_origin'}
+                />,
               </div>
             </div>
           </div>

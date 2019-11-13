@@ -1,4 +1,4 @@
-import CommonParser from '../commonParser';
+import CommonParser from 'src/util/parser/email/commonParser';
 import cheerio from 'cheerio';
 
 const GooglePlayParser = (() => {
@@ -135,6 +135,7 @@ const GooglePlayParser = (() => {
       };
     },
 
+
     // from:(googleplay) 영수증, 구독권
     body1ParserOfSubscribe: (metadata) => {
       const text = metadata.body1;
@@ -234,6 +235,7 @@ const GooglePlayParser = (() => {
         renewalDate
       };
     },
+
 
     body2ParserOfTag: (body2) => {
       const htmlText = body2;
