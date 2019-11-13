@@ -149,12 +149,12 @@ class ThreeMontlyInfo extends Component {
   render() {
     return (
       <>
-        <Row>
-          <Col>
+        <Row className="justify-content-md-center">
+          <Col className="padding-zero">
             <div className="report-subtitle">
               지난 3개월간 사용량 비교
             </div>
-            <div className="row">
+            <div className="row report-content">
               <div className="col-4">
                 <div>
                   {this.state.currentMonth-1}월

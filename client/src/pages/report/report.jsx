@@ -29,16 +29,15 @@ class Report extends Component {
       <>
         <div className="container main-container">
           <div className="row">
-            <div className="col-sm-8 report-container report-inner-container">
-              {/* <div className="row">*/}
-              <div className="col-sm ">
+            <div className="col-sm-6 report-container report-inner-container">
+              <div className="col-sm">
 
-                <div className="row">
-                  <div className="col-sm-2">
+                <div className="row justify-content-md-center">
+                  <div className="col-sm-1">
                     <img className="report-logoImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/MDBlackIcon.png`} alt="Generic placeholder image"/>
                   </div>
-                  <div className="col-sm align-self-center text-left">
-                    <div className="report-title">11월 머니독 리포트</div>
+                  <div className="col-sm-6 align-self-center text-left">
+                    <div className="report-title"> &nbsp;11월 머니독 리포트</div>
                   </div>
                 </div>
 
@@ -50,7 +49,7 @@ class Report extends Component {
                 </div>
 
                 <div className="report-padding">
-                  {/* <SubscriptionList data={this.props.subscriptions}/>*/}
+                  <div className="report-subtitle">11월 구독 리스트</div>
                   {this.showUserSubsList()}
                 </div>
 

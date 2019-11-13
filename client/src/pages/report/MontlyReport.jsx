@@ -49,14 +49,11 @@ class MontlyReport extends Component {
     return (
       <>
         <Row>
-          <Col>
-            {/* <div className="report-subtitle">*/}
-            {/*  <span className="report-month-text">{month}</span>월 리포트*/}
-            {/* </div>*/}
+          <Col className="padding-zero">
             <div className="row montlyReport-subs-text">
               {this.showThisMonthData('총 구독앱수', `${this.props.data.length} 개`)}
               {this.showThisMonthData('평균 구독가격', this.averageSubsPrice(this.state.totalPrice, this.props.data.length)+'원' ) }
-              {this.showThisMonthData(`결제 총액`, `${currency} ${this.numberWithCommas(this.state.totalPrice)}원`)}
+              {this.showThisMonthData(`결제 총액`, `${this.numberWithCommas(this.state.totalPrice)}원`)}
             </div>
           </Col>
         </Row>

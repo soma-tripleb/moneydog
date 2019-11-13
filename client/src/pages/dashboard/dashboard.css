@@ -419,8 +419,13 @@ thead > tr {
 }
 
 .montlyReport-subs-header{
+    font-family: 'Spoqa Han Sans Bold';
     font-size: 2vh;
 }
 .montlyReport-subs-body{
     font-size: 3vh;
+}
+
+.report-content{
+    font-family: 'Montserrat-Regular';
 }
