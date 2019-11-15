@@ -53,6 +53,7 @@
     "puppeteer": "^1.11.0",
     "react": "^16.8.6",
     "react-addons-update": "^15.6.2",
+    "react-bootstrap-select": "^0.14.0",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",

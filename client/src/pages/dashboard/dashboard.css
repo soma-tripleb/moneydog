@@ -429,3 +429,7 @@ thead > tr {
 .report-content{
     font-family: 'Montserrat-Regular';
 }
+
+.commercial-padding{
+    padding: 0 1vh 0 0;
+}

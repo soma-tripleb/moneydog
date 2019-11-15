@@ -38,14 +38,13 @@ class DatePickers extends Component {
 
     return (
       <>
-        <div>
-          <DatePicker
-            defaultValue={moment([moment().year(), moment().month(), this.state.date])}
-            format={dateFormat}
-            onChange={this.handleChange}
-            style={{width: '100%'}}
-          />
-        </div>
+        <DatePicker
+          className="verticle-middle"
+          defaultValue={moment([moment().year(), moment().month(), this.state.date])}
+          format={dateFormat}
+          onChange={this.handleChange}
+          style={{ width: '60%' }}
+        />
       </>
     );
   }

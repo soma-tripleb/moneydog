@@ -46,7 +46,7 @@ class Commercial extends Component {
   render() {
     return (
       <div>
-        <div className="row">
+        <div className="row commercial-padding">
           <div className="col-4 text-right align-self-center">
             <div className="commercial-font">
               오늘의 머니독

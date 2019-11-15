@@ -90,21 +90,23 @@
 
 .serviceName {
   font-family: "Spoqa Han Sans Bold";
-  font-size: 2vh;
+  font-size: 1.7vh;
   color: black;
 }
 .service-sub-Name{
   font-family: "Spoqa Han Sans Regular";
-  font-size: 1.7vh;
+  font-size: 1.4vh;
 }
 
 .subs-container{
   box-shadow: 0vh 0vh 10px 10px #f3f3f3;
   border-radius: 2vh;
-  background-color: #DDDDDD;
+  background-color: #EBEBEB;
 
   overflow: auto;
   font-weight: lighter;
+  padding: 1vh;
+  margin-bottom: 5vh;
 }
 
 .subs-container-inner{
@@ -129,6 +131,10 @@
 
 }
 .bottom-border{
-  padding: 1vh;
-  border-bottom: 1px solid #d8d8d8;
+  padding: 1.5vh;
+  border-bottom: 1px solid #f3f3f3;
+}
+.user-bottom-border{
+  padding: 1.5vh 1.5vh 1.5vh 0;
+  border-bottom: 1px solid #f3f3f3;
 }

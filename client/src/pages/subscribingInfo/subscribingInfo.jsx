@@ -222,14 +222,17 @@ class SubscribingInfo extends Component {
     if (this.state.userInputList.length !== 0) {
       return (
         <>
-          <p>구독을 추가 할 정보 등록</p>
           <div className="row">
-            <div className="col">
-              <form className="w-100 p-3" id="user-info-container">
-                {this.InputSubscriptionTemplateInfo()}
+            <div className="col subs-container-inner">
+              <form className="w-100 p-3 user-info-container">
+          <div className="subs-title">구독 추가 정보</div>
+          {/*    <form className="w-100 p-3" id="user-info-container">*/}
+          {this.InputSubscriptionTemplateInfo()}
+          {/* </form>*/}
               </form>
             </div>
           </div>
+
         </>
       );
     }
@@ -239,34 +242,41 @@ class SubscribingInfo extends Component {
     return (
       <>
         <div className="container">
-          <div className="row">
-            <div className="col subscription-title">
-              Step 2. 서비스의 정보를 입력 해주세요.
+          <div className="col text-center">
+            <span className="col subscription-step text-center">
+            Step 2
+            </span>
+            <div className="col subscription-title text-center">
+                세부 구독 정보
             </div>
           </div>
 
-          <p>구독중인 서비스 정보 등록</p>
-          <div className="row">
-            <div className="col">
-              <form className="w-100 p-3" id="user-info-container">
-                {this.SubscriptionInfo()}
-              </form>
+          <div className="col subs-container">
+
+            <div className="row">
+              <div className="col subs-container-inner">
+                <form className="w-100 p-3 user-info-container">
+                  <div className="subs-title">기존 구독 정보</div>
+                  {this.SubscriptionInfo()}
+                </form>
+              </div>
+            </div>
+            {/*<div className="row">*/}
+            {/*  <div className="col subs-container-inner">*/}
+            {/*    <form className="w-100 p-3 user-info-container">*/}
+                  {this.showSubsInputList()}
+            {/*    </form>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
+
+            <div className="row">
+              <div className="col-sm btn-padding">
+                <button onClick={this.nextHandleSubmit} type="button" className="btn btn-dark"> 완료 </button>
+              </div>
             </div>
           </div>
-
-          {this.showSubsInputList()}
         </div>
 
-
-        <div className="container subscription-title">
-          <div className="row">
-            <div className="col-sm">
-              <button onClick={this.previousHandleSubmit} type="button" className="btn btn-outline-dark btn-margin"> 이전 </button>
-
-              <button onClick={this.nextHandleSubmit} type="button" className="btn btn-outline-dark btn-margin"> 완료 </button>
-            </div>
-          </div>
-        </div>
       </>
     );
   }

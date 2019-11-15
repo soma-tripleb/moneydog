@@ -36,12 +36,12 @@ class SubsApp extends Component {
       <>
         <div className="container">
           <div className="row">
-            <div className="col-2">
+            <div className="col-2 align-self-center">
               {this.showSubscibeImg(subsAppInfo)}
             </div>
             <div className="col">
               <div className="row bottom-border">
-                <div className="col serviceName text-left padding-zero">
+                <div className="col-4 serviceName text-left padding-zero">
                   {subsAppInfo.name}
                 </div>
                 <div className="col service-sub-Name text-left padding-zero">
