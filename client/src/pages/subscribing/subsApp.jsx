@@ -15,10 +15,10 @@ class SubsApp extends Component {
   showSubscribeActionBtn = () => {
     if (this.props.subsAppInfo.label === '-') {
       // return (<button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">-</button> );
-      return ( <button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info">삭제</button>);
+      return ( <button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info btn-subscribing">삭제</button>);
     } else {
       // return ( <button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">+</button>);
-      return ( <button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info">구독 추가</button>);
+      return ( <button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info btn-subscribing">구독 추가</button>);
     }
   };
 

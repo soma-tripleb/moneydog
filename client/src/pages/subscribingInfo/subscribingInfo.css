@@ -73,7 +73,11 @@ form :not(.ant-input-group-wrapper) > .ant-input-group{
 .ant-input-group.ant-input-group-compact > .ant-calendar-picker:last-child .ant-input{
   border-left: 0px;
 }
-.btn-sm{
+.btn-subscribing{
+  width: 100%;
+  border-radius: 1vh;
+}
+.btn-delete{
   padding: 0.5vh 4vh 0.5vh 4vh;
   border-radius: 1vh;
 }

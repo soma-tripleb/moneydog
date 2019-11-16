@@ -96,7 +96,7 @@ class userCustomSubscription extends Component {
                     placeholder="카테고리"/>
                 </div>
                 <div className="col-3 padding-zero">
-                  <button onClick={() =>this.handleClick(idx)} type="button" className="btn btn-sm btn-outline-info">구독 추가</button>
+                  <button onClick={() =>this.handleClick(idx)} type="button" className="btn btn-sm btn-outline-info btn-subscribing">구독 추가</button>
                 </div>
               </div>
 

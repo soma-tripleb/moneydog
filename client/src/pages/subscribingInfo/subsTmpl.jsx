@@ -230,7 +230,7 @@ class SubsTmpl extends Component {
                 {/* </div>*/}
 
                 <div className="logo col padding-zero">
-                  <button onClick={() =>this.deleteSubs} type="button" className="btn btn-sm btn-outline-info">삭제</button>
+                  <button onClick={() =>this.deleteSubs} type="button" className="btn btn-outline-info btn-delete">삭제</button>
                 </div>
               </div>
             </div>
