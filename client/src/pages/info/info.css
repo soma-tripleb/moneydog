@@ -18,3 +18,18 @@
 .googleImg{
     width: 25vh;
 }
+.info-text{
+    color: black;
+    font-size: 3vh;
+    font-family: 'Spoqa Han Sans Bold';
+}
+.btn-end{
+    font-size: 3vh;
+    border-radius: 0.25rem;
+    width: 60%;
+    border: 1px solid #000;
+    margin: auto;
+}
+.info-inner{
+    padding: 3vh;
+}

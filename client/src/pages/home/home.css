@@ -6,15 +6,20 @@
 .featurette-heading {
     font-family: 'Spoqa Han Sans Bold';
     font-size: 4vh;
-    color: black;
+    color: #00A2FF;
 }
 
 /*index*/
 .index-wrap > .index-item {
-    padding: 5vh 5vh 5vh 5vh;
+    padding: 1vh
+}
+.index-item-inner{
+    border-radius: 2vh;
+    background-color: #ffffff;
+    padding: 9vh 0vh 9vh 0vh;
 }
 
-.index-item > img {
+.index-item > .index-item-inner > img {
     height: 20vh;
     border-radius: 5px;
 }
@@ -54,26 +59,18 @@
     text-align: center;
 }
 
-.IndexPage-img{
-    width: 7vh;
-}
 
 .IndexPage-serviceValue{
     font-family: 'Spoqa Han Sans Regular';
     color: black;
-    font-size: 2vh;
+    font-size: 3vh;
     padding: 3vh 0 3vh 0 ;
 }
 
-.IndexPage-md{
-    font-family: 'Spoqa Han Sans Bold';
-    color: black;
-    font-size: 3vh;
-}
 .IndexPage-md-sub{
-    font-family: 'Spoqa Han Sans Regular';
-    color: black;
-    font-size: 2vh;
+    font-family: 'Spoqa Han Sans bold';
+    color: #00A2FF;
+    font-size: 5vh;
 }
 
 .IndexPage-inner {
@@ -86,18 +83,28 @@
 
 .indexInfo-title{
     font-family: 'Spoqa Han Sans Bold';
-    color: black;
-    font-size: 4vh;
+    color: #00A2FF;
+    font-size: 3.5vh;
     padding: 3vh;
 }
 .indexInfo-text{
     font-family: 'Spoqa Han Sans Regular';
     color: black;
-    font-size: 2vh;
+    font-size: 2.3vh;
 }
 .btn-margin-10{
     border-radius: 100px;
 }
 .nav-link{
     text-align: center;
+}
+.IndexPage-img{
+    width: 100%;
+}
+.marketing{
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+.startBtn-padding{
+    padding: 5vh;
 }

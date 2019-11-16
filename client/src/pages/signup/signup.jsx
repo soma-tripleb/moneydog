@@ -223,7 +223,7 @@ class SignUp extends Component {
                 </div>
                 {/* 회원가입 버튼*/}
                 <div className="form-group">
-                  <button className="btn btn-primary btn-block"
+                  <button className="btn btn-dark btn-block"
                     onClick={this.signUpBtnClicked}> 계정 생성하기
                   </button>
                 </div>

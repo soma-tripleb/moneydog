@@ -83,7 +83,7 @@ class Signin extends Component {
                   </div>
                   {/* 회원가입 버튼*/}
                   <div className="form-group">
-                    <button type="submit" className="btn btn-success btn-block" onClick={this.signInBtnClicked}>
+                    <button type="submit" className="btn btn-dark btn-block" onClick={this.signInBtnClicked}>
                     로그인
                     </button>
                   </div>

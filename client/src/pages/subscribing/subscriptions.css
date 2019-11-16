@@ -122,6 +122,11 @@
   padding: 1vh 8vh 1vh 8vh;
   border-radius: 1.5vh;
 }
+.btn-start{
+  font-size: 3vh;
+  padding: 1.3vh 10vh 1.3vh 10vh;
+  border-radius: 2vh;
+}
 
 .subs-title{
   font-family: 'Spoqa Han Sans Bold';

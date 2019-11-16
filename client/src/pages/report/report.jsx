@@ -33,10 +33,10 @@ class Report extends Component {
               <div className="col-sm">
 
                 <div className="row justify-content-md-center">
-                  <div className="col-sm-1">
+                  <div className="col-sm-2">
                     <img className="report-logoImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/MDBlackIcon.png`} alt="Generic placeholder image"/>
                   </div>
-                  <div className="col-sm-7 align-self-center text-left">
+                  <div className="col-sm-10 align-self-center text-left">
                     <div className="report-title"> &nbsp;11월 머니독 리포트</div>
                   </div>
                 </div>

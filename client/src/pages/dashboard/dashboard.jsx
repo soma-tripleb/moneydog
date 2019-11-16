@@ -112,7 +112,7 @@ class DashBoard extends Component {
                 <Categories data={subscription} isFullMode={this.state.isFullMode}/>
               </div>
             </div>
-
+          <div className="btn-padding"/>
           </div>
         </div>
       </>
