@@ -18,6 +18,7 @@ import testdataRouter from 'src/routes/parser/testdata/testdataController';
 const app = express();
 const port = 3000;
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

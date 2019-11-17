@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+import { GoogleLogin } from 'react-google-login';
+import InfoService from './info.ajax';
+import dotenv from 'dotenv';
+dotenv.config();
+
 import './info.css';
 import AuthActions from '../../redux/actions/authAction';
 import {connect as ReduxConn} from 'react-redux';
@@ -9,6 +14,17 @@ import ThreeMontlyInfo from '../report/ThreeMontlyInfo';
 class Info extends Component {
   state = {
   };
+
+  responseGoogle = async (res) => {
+    if (typeof res.code == 'undefined') throw new Error('GOOGLE_OAUTH_CODE_NOT_FOUND');
+    else {
+      const result = await InfoService.sendGoogleOAuthCode(res);
+
+      console.log(result);
+    }
+
+    // 페이지 이동
+  }
 
   onClicklogout = () => {
     this.props.REDUX_AUTH_LOGOUT_REQUEST();
@@ -34,6 +50,18 @@ class Info extends Component {
                   </button>
                 </div>
               </div>
+              <div className="col-6">
+                <GoogleLogin
+                    clientId={`${process.env.GOOGLE_API_CLIENT_ID}`}
+                    scope={`${process.env.GOOGLE_API_SCOPE}`}
+                    buttonText="Login"
+                    accessType="offline"
+                    responseType="code"
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                />
+              </div>
 
               <div className="row info-inner">
                 <div className="col text-left  info-text">
@@ -46,11 +74,10 @@ class Info extends Component {
 
                 </div>
               </div>
-
             </div>
           </div>
-        </div>
 
+        </div>
       </>
     );
   }

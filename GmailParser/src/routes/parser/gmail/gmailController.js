@@ -1,8 +1,9 @@
 import express from 'express';
-const router = express.Router();
 
-import GmailService from '../../../service/gmailService';
-import Query from '../../../model/query';
+import GmailService from 'src/service/gmailService';
+import UserQuery from 'src/db/userQuery';
+
+const router = express.Router();
 
 const wrapper = (asyncFn) => {
   return (async (req, res, next) => {
@@ -23,7 +24,7 @@ router.get('/messages/id/:useremail', async (req, res) => {
     res.json(result).end();
   } catch (err) {
     throw err;
-  }
+  };
 
 });
 
@@ -46,7 +47,7 @@ router.get('/messages', async (req, res) => {
 
   } catch (err) {
     throw err;
-  }
+  };
 
 });
 
@@ -89,5 +90,26 @@ router.get('/messages/parsing/:useremail', wrapper(async (req, res) => {
 
   res.json(result).end();
 }));
+
+router.get('/parsing/:useremail', wrapper(async (req, res) => {
+  const useremail = req.params.useremail;
+
+  const parsing = await GmailService.parsing(useremail);
+
+  res.json(Object.fromEntries(parsing)).end();
+}));
+
+router.post('/parsing', wrapper(async (req, res) => {
+  const useremail = req.body.useremail;
+
+  console.log('Gmail Parsing');
+  console.log(useremail);
+
+  const parsing = await GmailService.parsing(useremail);
+  console.log(parsing);
+
+  res.json(Object.fromEntries(parsing)).end();
+}));
+
 
 export default router;
