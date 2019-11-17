@@ -155,7 +155,7 @@ class ThreeMontlyInfo extends Component {
               지난 3개월간 사용량 비교
             </div>
             <div className="row report-content">
-              <div className="col-4">
+              <div className="col-sm-4">
                 <div>
                   {this.state.currentMonth-1}월
                 </div>
@@ -163,7 +163,7 @@ class ThreeMontlyInfo extends Component {
                   <canvas id="myChart1"></canvas>
                 </div>
               </div>
-              <div className="col-4">
+              <div className="col-sm-4">
                 <div>
                   {this.state.currentMonth}월
                 </div>
@@ -171,7 +171,7 @@ class ThreeMontlyInfo extends Component {
                   <canvas id="myChart2"></canvas>
                 </div>
               </div>
-              <div className="col-4">
+              <div className="col-sm-4">
                 <div>
                   {this.state.currentMonth+1}월
                 </div>

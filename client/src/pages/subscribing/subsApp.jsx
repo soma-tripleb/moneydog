@@ -34,12 +34,12 @@ class SubsApp extends Component {
     const {subsAppInfo} = this.props;
     return (
       <>
-        <div className="container">
+        <div className="container phone-padding-zero">
           <div className="row">
             <div className="col-2 align-self-center">
               {this.showSubscibeImg(subsAppInfo)}
             </div>
-            <div className="col">
+            <div className="col phone-padding-zero">
               <div className="row bottom-border">
                 <div className="col-4 serviceName text-left padding-zero">
                   {subsAppInfo.name}

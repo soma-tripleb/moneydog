@@ -30,13 +30,14 @@ class Report extends Component {
         <div className="container main-container">
           <div className="row">
             <div className="col-sm-6 report-container report-inner-container">
-              <div className="col-sm">
+
+              <div className="col-sm phone-report-inner">
 
                 <div className="row justify-content-md-center">
-                  <div className="col-sm-2">
+                  <div className="col-2">
                     <img className="report-logoImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/MDBlackIcon.png`} alt="Generic placeholder image"/>
                   </div>
-                  <div className="col-sm-10 align-self-center text-left">
+                  <div className="col-10 align-self-center text-left">
                     <div className="report-title"> &nbsp;11월 머니독 리포트</div>
                   </div>
                 </div>
@@ -55,6 +56,7 @@ class Report extends Component {
 
 
               </div>
+
 
             </div>
           </div>

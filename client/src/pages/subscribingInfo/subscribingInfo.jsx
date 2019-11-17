@@ -136,6 +136,7 @@ class SubscribingInfo extends Component {
   };
 
   handleUserInputChange = (name, element, userInput) => {
+
     let inputList = '';
 
     // TEST
@@ -225,10 +226,10 @@ class SubscribingInfo extends Component {
           <div className="row">
             <div className="col subs-container-inner">
               <form className="w-100 p-3 user-info-container">
-          <div className="subs-title">구독 추가 정보</div>
-          {/*    <form className="w-100 p-3" id="user-info-container">*/}
-          {this.InputSubscriptionTemplateInfo()}
-          {/* </form>*/}
+                <div className="subs-title">구독 추가 정보</div>
+                {/*    <form className="w-100 p-3" id="user-info-container">*/}
+                {this.InputSubscriptionTemplateInfo()}
+                {/* </form>*/}
               </form>
             </div>
           </div>
@@ -261,13 +262,13 @@ class SubscribingInfo extends Component {
                 </form>
               </div>
             </div>
-            {/*<div className="row">*/}
+            {/* <div className="row">*/}
             {/*  <div className="col subs-container-inner">*/}
             {/*    <form className="w-100 p-3 user-info-container">*/}
-                  {this.showSubsInputList()}
+            {this.showSubsInputList()}
             {/*    </form>*/}
             {/*  </div>*/}
-            {/*</div>*/}
+            {/* </div>*/}
 
             <div className="row">
               <div className="col-sm btn-padding">

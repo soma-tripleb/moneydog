@@ -81,3 +81,6 @@ form :not(.ant-input-group-wrapper) > .ant-input-group{
   padding: 0.5vh 4vh 0.5vh 4vh;
   border-radius: 1vh;
 }
+.DatePicker{
+  width: 60%;
+}

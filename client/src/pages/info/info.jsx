@@ -10,10 +10,6 @@ class Info extends Component {
   state = {
   };
 
-  redirectGoogle = () =>{
-    console.log('test');
-  };
-
   onClicklogout = () => {
     this.props.REDUX_AUTH_LOGOUT_REQUEST();
   };

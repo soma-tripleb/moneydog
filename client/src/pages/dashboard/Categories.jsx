@@ -70,7 +70,7 @@ class Categories extends Component {
       <div>
         <div className="categories-padding-right">
           <div className="row ">
-            <div className="col-md-2 subscribe-element-padding">
+            <div className="col-2 subscribe-element-padding">
             </div>
             <div className="col subscribe-img-element item-border ">
               <div className="container w-100 ">

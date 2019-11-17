@@ -15,6 +15,11 @@ class Head extends Component {
     if (this.props.status === 'SUCCESS') {
       return (
         <>
+          <li className="nav-item phone-display">
+            <NavLink to="/" className="nav-link" >
+              <img className="report-logoImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/MDBlackIcon.png`} alt="Generic placeholder image"/>
+            </NavLink>
+          </li>
           <li className="nav-item">
             <NavLink to="/user/dashboard" className="nav-link" >대쉬보드</NavLink>
           </li>

@@ -174,7 +174,7 @@ class Subscriptions extends Component {
             <div className="row ">
 
               <div className="col-sm subs-container-inner">
-                <div className="col" id="inner-container">
+                <div className="col phone-padding-zero" id="inner-container">
                   <div className="subs-title">주요 구독 서비스</div>
                   {this.makeStaticSubscribeApp()}
                   <div className="subs-title">직접 추가 입력</div>

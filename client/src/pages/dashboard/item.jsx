@@ -29,8 +29,8 @@ class Item extends Component {
     return (
       <>
         <div className="row">
-          <div className="col-md-2 subscribe-img-element align-self-center padding-zero">
-            <div className="col padding-zero">
+          <div className="col-2 subscribe-img-element align-self-center padding-zero">
+            <div className="col-sm padding-zero">
               {this.showSubscibeImg(this.props.data)}
             </div>
           </div>

@@ -73,13 +73,13 @@ class userCustomSubscription extends Component {
     const customServiceList = customServiceArray.map(
       (Service, idx) => (
 
-        <div key={idx} className="container w-100">
+        <div key={idx} className="container w-100 phone-padding-zero">
           <div className="row">
 
             <div className="col-2 align-self-center">
               <img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + '/img/MDBlackIcon.png'} alt="x" />
             </div>
-            <div className="col">
+            <div className="col phone-padding-zero">
 
               <div className="row user-bottom-border">
                 <div className="col-4 serviceName text-left padding-zero">
@@ -92,7 +92,7 @@ class userCustomSubscription extends Component {
                 </div>
                 <div className="col service-sub-Name text-left ">
                   <input type="text" className="form-control"
-                    value={Service.serviceName}
+                    onChange={(e) => {}}
                     placeholder="카테고리"/>
                 </div>
                 <div className="col-3 padding-zero">
