@@ -68,9 +68,9 @@ class Categories extends Component {
 
     return (
       <div>
-        <div>
-          <div className="row">
-            <div className="col-md-2 subscribe-element-padding">
+        <div className="categories-padding-right">
+          <div className="row ">
+            <div className="col-2 subscribe-element-padding">
             </div>
             <div className="col subscribe-img-element item-border ">
               <div className="container w-100 ">
@@ -81,6 +81,7 @@ class Categories extends Component {
           </div>
           {this.showUserSubsList()}
           {this.showWhiteSpace()}
+
         </div>
       </div>
     );

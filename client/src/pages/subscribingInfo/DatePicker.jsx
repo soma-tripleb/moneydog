@@ -20,7 +20,7 @@ class DatePickers extends Component {
     date: null,
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       date: nextProps.date,
     });
@@ -38,14 +38,12 @@ class DatePickers extends Component {
 
     return (
       <>
-        <div>
-          <DatePicker
-            defaultValue={moment([moment().year(), moment().month(), this.state.date])}
-            format={dateFormat}
-            onChange={this.handleChange}
-            style={{width: '100%'}}
-          />
-        </div>
+        <DatePicker
+          className="verticle-middle DatePicker"
+          defaultValue={moment([moment().year(), moment().month(), this.state.date])}
+          format={dateFormat}
+          onChange={this.handleChange}
+        />
       </>
     );
   }

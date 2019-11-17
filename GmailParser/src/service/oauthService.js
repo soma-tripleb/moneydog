@@ -1,5 +1,5 @@
 import GoogleOAuth from '../util/googleOAuth';
-import UserQuery from 'src/db/userQuery';
+import UserQuery from '../../src/db/userQuery';
 
 const userRegister = async (code) => {
 

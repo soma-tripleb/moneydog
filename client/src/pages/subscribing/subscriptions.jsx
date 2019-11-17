@@ -13,6 +13,10 @@ import UserSubsApp from './userSubsApp';
 import './subscriptions.css';
 import AuthActions from '../../redux/actions/authAction';
 
+const colorPull = ['#fe7e79', '#ffd578', '#fffb77', '#d5fc78',
+  '#73fa78', '#71fcd6', '#70fefe', '#75D5fe',
+  '#7981ff', '#d782ff', '#ff83ff', '#fe8ad9'];
+
 
 class Subscriptions extends Component {
   constructor(props) {
@@ -21,6 +25,7 @@ class Subscriptions extends Component {
     this.state = {
       staticSubscribeArr: [],
       SubscribingArr: [],
+      randColorNum: Math.floor(Math.random() * 12),
     };
   }
 
@@ -75,7 +80,7 @@ class Subscriptions extends Component {
               'seq': seq,
               'logoURI': logoURI,
               'name': name,
-              'color': '#'+Math.round(Math.random() * 0xffffff).toString(16),
+              'color': colorPull[this.state.randColorNum%12],
             },
           ],
         },
@@ -95,6 +100,9 @@ class Subscriptions extends Component {
     }
 
     this.setState(newState);
+    this.setState({
+      randColorNum: this.state.randColorNum+1,
+    });
   };
 
   // SubscribeArr 에서 지우기
@@ -149,61 +157,54 @@ class Subscriptions extends Component {
     return list;
   };
 
-  SubscribingAppList = () => {
-    const list = this.props.subscriptions.map(
-      (content, i) => (
-        <UserSubsApp key={i+content.name} onDelete={this.deleteContant.bind(this)} subsAppInfo={
-          {
-            seq: content.seq,
-            logoURI: content.logoURI,
-            name: content.name,
-            color: content.color,
-          }
-        }/>
-      )
-    );
-    return list;
-  };
-
   render() {
     return (
       <>
         <div className="container main-container">
-          <div className="row">
-            <div className="col subscription-title">
-              Step 1. 구독중인 서비스를 추가 하세요
+          <div className="col text-center">
+            <span className="col subscription-step text-center">
+            Step 1
+            </span>
+            <div className="col subscription-title text-center">
+              구독중 서비스
             </div>
           </div>
 
-          <div className="row">
-            <div className="col-sm">
-              <div className="col" id="inner-container">
-                <p><u>구독 서비스 목록</u></p>
-                {this.makeStaticSubscribeApp()}
-                <p><u>목록에 없는 서비스를 추가 할 수 있어요</u></p>
-                <UserCustomSubscription onInsert={this.insertContact.bind(this)}/>
-              </div>
-            </div>
-            <div className="col-sm">
+          <div className="col subs-container">
+            <div className="row ">
 
-              <div className="col" id="inner-container">
-                <p><u>구독 중인 서비스 목록</u></p>
-                <div className="row">
-                  {this.SubscribingAppList()}
+              <div className="col-sm subs-container-inner">
+                <div className="col phone-padding-zero" id="inner-container">
+                  <div className="subs-title">주요 구독 서비스</div>
+                  {this.makeStaticSubscribeApp()}
+                  <div className="subs-title">직접 추가 입력</div>
+                  <UserCustomSubscription onInsert={this.insertContact.bind(this)}/>
                 </div>
-                <p><u>추가 되는 서비스 목록</u></p>
-                {this.makeSubscribingApp()}
+              </div>
+
+              <div className="col-sm-1 subs-container-inner align-self-center">
+                <img src={`${process.env.REACT_APP_IMAGE_URI}/img/arrow.png`} />
+              </div>
+
+              <div className="col-sm subs-container-inner">
+                <div className="col" id="inner-container">
+                  <div className="subs-title">현재 구독중인 서비스</div>
+                  {this.makeSubscribingApp()}
+                </div>
               </div>
             </div>
+            <div className="row ">
+              <div className="col-sm btn-padding">
+                <button onClick={this.handleSubmit} type="button" className="btn btn-dark"> 다음 </button>
+              </div>
+            </div>
+
           </div>
+
+
         </div>
 
         <div className="container subscription-title">
-          <div className="row">
-            <div className="col-sm">
-              <button onClick={this.handleSubmit} type="button" className="btn btn-outline-dark"> NEXT </button>
-            </div>
-          </div>
         </div>
       </>
     );

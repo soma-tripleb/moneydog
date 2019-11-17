@@ -82,7 +82,7 @@ class DashBoard extends Component {
           </div>
 
           <div className="row">
-            <div className="col-md-6 dashboard-inner">
+            <div className="col-sm-6 dashboard-inner">
               {/* 달력 - 월 */}
               <div className="calendar">
                 <span className="calendar-component-title"> 결제 스케줄 </span>
@@ -96,23 +96,23 @@ class DashBoard extends Component {
             </div>
 
             {/* 구독중인 서비스 list */}
-            <div className="col-md-6 dashboard-inner">
+            <div className="col-sm-6 dashboard-inner">
               <div className='categories'>
                 <div className="row categories-row">
-                  <div className="col-sm-6  text-left align-self-center padding-zero">
+                  <div className="col-6  text-left align-self-center dashboard-padding-1px">
                     <span className="categories-component-title-month">{new Date().getMonth() + 1}</span>
                     <span className="categories-component-title">월&nbsp;구독&nbsp; 결제정보 </span>
                   </div>
-                  <div className="col-sm-6 text-right align-self-center padding-zero">
-                    <button onClick={this.redirectSubsInfo} type="button" className="btn btn-sm btn-outline-info"> 구독 정보 수정 하기 </button>
+                  <div className="col-6 text-right align-self-center padding-zero">
+                    <button onClick={this.redirectSubsInfo} type="button" className="btn btn-sm btn-outline-info">  수정 하기 </button>
                     &nbsp;&nbsp;
-                    <button onClick={this.showFullMode} type="button" className="btn btn-sm btn-outline-info"> 전체 정보 보기 </button>
+                    <button onClick={this.showFullMode} type="button" className="btn btn-sm btn-outline-info"> 전체 보기 </button>
                   </div>
                 </div>
-                <Categories data={subscription} date={this.convertDate()} isFullMode={this.state.isFullMode}/>
+                <Categories data={subscription} isFullMode={this.state.isFullMode}/>
               </div>
             </div>
-
+            <div className="btn-padding"/>
           </div>
         </div>
       </>

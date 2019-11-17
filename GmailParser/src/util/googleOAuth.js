@@ -33,6 +33,6 @@ class GoogleOAuth {
   getProfile() {
     return google.oauth2('v2').userinfo.v2.me.get({ auth: this.oauth2Client });
   };
-};
+}
 
 export default GoogleOAuth;

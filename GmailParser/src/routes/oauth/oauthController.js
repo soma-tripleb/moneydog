@@ -9,7 +9,12 @@ router.get('/', (req, res) => {
 
   const OAuth2Client = new GoogleOAuth();
 
-  res.redirect(OAuth2Client.url());
+  res.json({
+    success: true,
+    redirect: true,
+    redirectURL: OAuth2Client.url(),
+  });
+  // res.redirect(OAuth2Client.url());
 });
 
 router.get('/certificate', async (req, res) => {
@@ -18,18 +23,20 @@ router.get('/certificate', async (req, res) => {
   try {
     const result = await OAuthService.userRegister(code);
 
-    res.send({
-      code: code,
-      messages: {
-        result
-      }
-    });
+    // res.send({
+    //   code: code,
+    //   messages: {
+    //     result
+    //   }
+    // });
+    res.redirect('http://localhost:8080');
 
   } catch (err) {
-    res.json({
-      message: err.message,
-      error: err,
-    });
+    res.redirect('http://localhost:8080/google');
+    // res.json({
+    //   message: err.message,
+    //   error: err,
+    // });
   }
 });
 

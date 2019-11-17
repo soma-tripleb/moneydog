@@ -27,7 +27,6 @@ workflows:
               only:
                 - master
                 - dev
-                - sy-issue-106
 #                - jy-issue-107
 #      - deploy-service-update:
 #          requires:

@@ -46,7 +46,7 @@ class Commercial extends Component {
   render() {
     return (
       <div>
-        <div className="row">
+        <div className="row commercial-padding">
           <div className="col-4 text-right align-self-center">
             <div className="commercial-font">
               오늘의 머니독
@@ -58,7 +58,7 @@ class Commercial extends Component {
               {this.state.timeRemaining} 남음
             </div>
           </div>
-          <div className="col-md">
+          <div className="col">
             <img className="commercial-img" src={`${process.env.REACT_APP_IMAGE_URI}/img/commercial.png`}/>
           </div>
         </div>

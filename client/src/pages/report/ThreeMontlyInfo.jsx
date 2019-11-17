@@ -149,13 +149,13 @@ class ThreeMontlyInfo extends Component {
   render() {
     return (
       <>
-        <Row>
-          <Col>
+        <Row className="justify-content-md-center">
+          <Col className="padding-zero">
             <div className="report-subtitle">
-              3달간 사용량 비교
+              지난 3개월간 사용량 비교
             </div>
-            <div className="row">
-              <div className="col-4">
+            <div className="row report-content">
+              <div className="col-sm-4">
                 <div>
                   {this.state.currentMonth-1}월
                 </div>
@@ -163,7 +163,7 @@ class ThreeMontlyInfo extends Component {
                   <canvas id="myChart1"></canvas>
                 </div>
               </div>
-              <div className="col-4">
+              <div className="col-sm-4">
                 <div>
                   {this.state.currentMonth}월
                 </div>
@@ -171,7 +171,7 @@ class ThreeMontlyInfo extends Component {
                   <canvas id="myChart2"></canvas>
                 </div>
               </div>
-              <div className="col-4">
+              <div className="col-sm-4">
                 <div>
                   {this.state.currentMonth+1}월
                 </div>

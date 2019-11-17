@@ -8,14 +8,15 @@ class Carousel extends Component {
           <ol className="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"/>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"/>
+            <li data-target="#carouselExampleIndicators" data-slide-to="0"/>
           </ol>
-          <div className="carousel-inner ">
+          <div className="carousel-inner">
             <div className="carousel-item active">
-              <img className="d-block w-50" src={`${process.env.REACT_APP_IMAGE_URI}/img/iphone1.png`}
+              <img className="d-block w-100" src={`${process.env.REACT_APP_IMAGE_URI}/img/iphone1.png`}
                 alt="First slide"/>
             </div>
             <div className="carousel-item">
-              <img className="d-block w-50" src={`${process.env.REACT_APP_IMAGE_URI}/img/iphone2.png`}
+              <img className="d-block w-100" src={`${process.env.REACT_APP_IMAGE_URI}/img/iphone2.png`}
                 alt="First slide"/>
             </div>
           </div>

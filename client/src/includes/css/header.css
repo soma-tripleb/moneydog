@@ -1,6 +1,6 @@
 header {
-    /*background: #f0f2f5;*/
-    background-image: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/background.png);
+    background-color: #f4f4f4;
+    /*background-image: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/background.png);*/
 }
 
 .logout {
@@ -12,15 +12,7 @@ header {
     font-size: 7vh;
     font-weight: bold;
     padding: 2vh 0 2vh 0;
-}
-.nav-link{
     text-align: left;
-    font-family: 'Montserrat-Regular';
-    color: #000;
-}
-
-.active {
-    color: #00BBF8;
 }
 
 .subHeaderFont {
@@ -57,5 +49,15 @@ header {
 }
 
 .headeImg{
-    width: 80%;
+    width: 70%;
 }
+.nav-link{
+    text-align: left;
+    font-family: 'Montserrat-Regular';
+    color: #000;
+}
+
+.active {
+    color: #00BBF8;
+}
+

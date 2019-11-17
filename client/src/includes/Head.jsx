@@ -15,6 +15,11 @@ class Head extends Component {
     if (this.props.status === 'SUCCESS') {
       return (
         <>
+          <li className="nav-item phone-display">
+            <NavLink to="/" className="nav-link" >
+              <img className="report-logoImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/MDBlackIcon.png`} alt="Generic placeholder image"/>
+            </NavLink>
+          </li>
           <li className="nav-item">
             <NavLink to="/user/dashboard" className="nav-link" >대쉬보드</NavLink>
           </li>
@@ -36,10 +41,10 @@ class Head extends Component {
       return (
         <>
           <li className="nav-item">
-            <NavLink to="/signup" className="nav-link">Sign-up</NavLink>
+            <NavLink to="/signup" className="nav-link">회원가입</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/signin" className="nav-link">Sign-in</NavLink>
+            <NavLink to="/signin" className="nav-link">로그인</NavLink>
           </li>
         </>
       );
@@ -58,7 +63,7 @@ class Head extends Component {
               <div className="col-md-6">
                 <ul className="nav">
                   <li className="nav-item">
-                    <Link to="/" className="navbar-brand nav-link headerFont">
+                    <Link to="/" className="navbar-brand  headerFont">
                       <img className="headeImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/MDheader.png`}/>
                     </Link>
                   </li>

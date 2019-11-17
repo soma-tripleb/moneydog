@@ -13,11 +13,11 @@ class Home extends Component {
           {/*<Carousel/>*/}
           <IndexPage/>
 
-          <hr className="featurette-divider"/>
+          {/*<hr className="featurette-divider"/>*/}
 
           <IndexInfo/>
 
-          <hr className="featurette-divider"/>
+          {/*<hr className="featurette-divider"/>*/}
 
           <IndexSignUp/>
 

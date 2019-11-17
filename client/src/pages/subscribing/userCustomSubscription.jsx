@@ -19,7 +19,7 @@ class userCustomSubscription extends Component {
       alert('서비스 이름을 입력해주세요');
       return;
     }
-    onInsert(btoa(serviceName), '', serviceName);
+    onInsert(btoa(unescape(encodeURIComponent(serviceName))), '', serviceName);
   };
 
   changeServiceName = (e, i) =>{
@@ -73,21 +73,33 @@ class userCustomSubscription extends Component {
     const customServiceList = customServiceArray.map(
       (Service, idx) => (
 
-        <div key={idx} className="container w-100" id="inner-element">
+        <div key={idx} className="container w-100 phone-padding-zero">
           <div className="row">
-            <div className="col">
+
+            <div className="col-2 align-self-center">
               <img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + '/img/MDBlackIcon.png'} alt="x" />
             </div>
-            <div className="col">
-              <input type="text" className="form-control"
-                value={Service.serviceName}
-                onChange={(e) => this.changeServiceName(e, idx)}
-                onFocus={() => this.focusInServiceName(idx)}
-                onBlur={() => this.focusOutServiceName(idx)}
-                placeholder="Service Name"/>
-            </div>
-            <div className="col">
-              <button onClick={() =>this.handleClick(idx)} type="button" className="btn btn-outline-secondary">+</button>
+            <div className="col phone-padding-zero">
+
+              <div className="row user-bottom-border">
+                <div className="col-4 serviceName text-left padding-zero">
+                  <input type="text" className="form-control"
+                    value={Service.serviceName}
+                    onChange={(e) => this.changeServiceName(e, idx)}
+                    onFocus={() => this.focusInServiceName(idx)}
+                    onBlur={() => this.focusOutServiceName(idx)}
+                    placeholder="서비스 명"/>
+                </div>
+                <div className="col service-sub-Name text-left ">
+                  <input type="text" className="form-control"
+                    onChange={(e) => {}}
+                    placeholder="카테고리"/>
+                </div>
+                <div className="col-3 padding-zero">
+                  <button onClick={() =>this.handleClick(idx)} type="button" className="btn btn-sm btn-outline-info btn-subscribing">구독 추가</button>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
