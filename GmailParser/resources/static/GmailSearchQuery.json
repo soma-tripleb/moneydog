@@ -1,6 +1,18 @@
 {
-  "FROM": {
-    "APPLE": "from:<no_reply@email.apple.com>",
-    "NETFLIX": "from:<info@mailer.netflix.com>"
+  "q": {
+    "googleplay": [
+      {
+        "category": "trial",
+        "query": "from:(googleplay) 영수증, 무료"
+      },
+      {
+        "category": "subscription",
+        "query": "from:(googleplay) 영수증, 구독권"
+      },
+      {
+        "category": "renewal",
+        "query": "from:(googleplay) 영수증, 갱신 -{구독권}"
+      }
+    ]
   }
 }

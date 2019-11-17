@@ -1,7 +1,35 @@
-/*.form-flex-container {*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    align-items: center;*/
-/*    padding: 1rem;*/
-/*    margin: 1rem;*/
-/*}*/
+.info {
+    text-align: left;
+    box-shadow: 0vh 0vh 10px 10px #f3f3f3;
+    background: #ffffff;
+    border-radius: 2vh;
+    overflow: auto;
+    width: 100%;
+
+    font-size: 1vw;
+    padding: 2vh;
+}
+
+.googleBtn{
+    background-color: #ffffff;
+    border: 0px;
+}
+
+.googleImg{
+    width: 25vh;
+}
+.info-text{
+    color: black;
+    font-size: 3vh;
+    font-family: 'Spoqa Han Sans Bold';
+}
+.btn-end{
+    font-size: 3vh;
+    border-radius: 0.25rem;
+    width: 60%;
+    border: 1px solid #000;
+    margin: auto;
+}
+.info-inner{
+    padding: 3vh;
+}

@@ -111,8 +111,6 @@ describe('구독 서비스 정보를 입력 받은 사용자 데이터', () => {
           }
         });
 
-        console.log(errList.length);
-
         done();
       });
     });

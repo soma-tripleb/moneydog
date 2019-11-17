@@ -34,6 +34,12 @@ export default function(state = initialState, action) {
         subscriptions: update(state.subscriptions, {$push: action.userSubscriptionList}),
       };
 
+    case ACTION_TYPE.UPDATE_SUBSCRIPTIONS:
+      return {
+        subscriptions: update(state.subscriptions, {$set: action.userSubscriptionList}),
+      };
+
+
     case ACTION_TYPE.DELETE_TEMP_SUBSCRIPTIONS:
       return {
         ...state,

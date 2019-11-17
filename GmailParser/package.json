@@ -7,13 +7,15 @@
     "test": "test"
   },
   "scripts": {
-    "start": "NODE_ENV=gmail nodemon --exec babel-node app.js",
-    "test": "mocha --require @babel/register ./test/**/**.spec.js "
+    "start": "NODE_ENV=dev nodemon --exec babel-node app.js",
+    "test": "NODE_PATH=. NODE_ENV=gmail mocha --timeout 10000 --require @babel/register ./test/**/**.spec.js "
   },
   "author": "triple-b",
   "license": "ISC",
   "dependencies": {
+    "app-module-path": "^2.2.0",
     "cheerio": "^1.0.0-rc.3",
+    "cors": "^2.8.5",
     "dom-parser": "^0.1.6",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -32,6 +34,8 @@
     "@babel/preset-stage-2": "^7.0.0",
     "@babel/register": "^7.6.2",
     "mocha": "^6.2.1",
-    "nodemon": "^1.19.3"
+    "nodemon": "^1.19.3",
+    "supertest": "^4.0.2",
+    "should": "^13.2.3"
   }
 }

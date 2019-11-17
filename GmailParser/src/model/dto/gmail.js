@@ -1,4 +1,6 @@
-class GmailForm {
+import CommonParser from 'src/util/parser/email/commonParser';
+
+class Gmail {
   constructor() {
     // metadata in 'headers'
     this.messageId = null;
@@ -9,6 +11,9 @@ class GmailForm {
 
     // metadata in 'data'
     this.snippet = null;
+
+    // payload > body
+    this.body = null;
 
     // iframe in 'payload > parts'
     this.body1 = null;
@@ -41,13 +46,31 @@ class GmailForm {
     this.snippet = snippet;
   }
 
-  setBody1(body) {
-    this.body1 = body;
+  setBody(body) {
+    if (!body) this.body = null;
+    else {
+      this.body = CommonParser.base64ToUtf8(body);
+    }
   }
 
-  setBody2(body) {
-    this.body2 = body;
+  setBody1(body1) {
+    if (!body1) this.body1 = null;
+    else {
+      const bodyDecode = CommonParser.base64ToUtf8(body1);
+      const bodyText = bodyDecode.replace(/\r\n/gi, '');
+
+      this.body1 = bodyText;
+    }
+  }
+
+  setBody2(body2) {
+    if (!body2) this.body2 = null;
+    else {
+      const bodyDecode = CommonParser.base64ToUtf8(body2);
+
+      this.body2 = bodyDecode;
+    }
   }
 }
 
-export default GmailForm;
+export default Gmail;

@@ -1,104 +1,99 @@
 import React, { Component } from 'react';
-import { Row, Col, Input, Layout, Form, DatePicker, TimePicker, Select, Button, Avatar } from 'antd';
 
-const { Header, Footer, Content } = Layout;
-const { Option } = Select;
+import { GoogleLogin } from 'react-google-login';
+import InfoService from './info.ajax';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 12 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 12 },
-  },
-};
-
-import 'antd/dist/antd.less';
+import './info.css';
+import AuthActions from '../../redux/actions/authAction';
+import {connect as ReduxConn} from 'react-redux';
+import MontlyReport from '../report/MontlyReport';
+import ThreeMontlyInfo from '../report/ThreeMontlyInfo';
 
 class Info extends Component {
   state = {
-    text: 'Info Page',
   };
 
-  componentDidMount() {
-    const script = document.createElement('script');
+  responseGoogle = async (res) => {
+    if (typeof res.code == 'undefined') throw new Error('GOOGLE_OAUTH_CODE_NOT_FOUND');
+    else {
+      const result = await InfoService.sendGoogleOAuthCode(res);
 
-    script.src = '//developers.kakao.com/sdk/js/kakao.min.js';
-    script.async = true;
+      console.log(result);
+    }
 
-    document.body.appendChild(script);
-    console.log(script);
+    // 페이지 이동
+  }
+
+  onClicklogout = () => {
+    this.props.REDUX_AUTH_LOGOUT_REQUEST();
   };
 
   render() {
     return (
       <>
-        <div>
-          <h1>{this.state.text}</h1>
-        </div>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" />
+        <div className="container main-container">
+          <div className="row">
+            <div className="col-sm-8 report-container report-inner-container align-self-center">
 
-        <Row>
-          <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-            <Layout>
-              <Header>
-                <h1 style={{ lineHeight: '64px', color: '#fff' }}></h1>
-              </Header>
+              <div className="row info-inner">
+                <div className="col text-left  info-text">
+                    구글 계정 연동 하기
+                </div>
+              </div>
+              <div className="row">
+                <div className="col align-self-center">
+                  <button className="btn btn-block btn-google btn-end" onClick={this.onClickGoogleBtn}>
+                    <i className="fab fa-google" /> 구글 로그인
+                  </button>
+                </div>
+              </div>
+              <div className="col-6">
+                <GoogleLogin
+                    clientId={`${process.env.GOOGLE_API_CLIENT_ID}`}
+                    scope={`${process.env.GOOGLE_API_SCOPE}`}
+                    buttonText="Login"
+                    accessType="offline"
+                    responseType="code"
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                />
+              </div>
 
-              <Content style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Avatar icon='user' shape='square' style={{
-                  width: 100,
-                  height: 100,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                }} />
-                <Input size='large' placeholder='Enter Price'
-                  style={{ width: '33%', margin: 'auto', marginTop: '1rem' }} />
-                <Form {...formItemLayout}>
-                  <div className='form-flex-container' style={{
-                    padding: '1rem',
-                    margin: '1rem',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                  }}>
-                    <Col span={12}>
-                      <Form.Item label='Name' />
-                      <Form.Item label='Description' />
-                      <Form.Item label='First bill' />
-                      <Form.Item label='Remind me' />
-                      <Form.Item label='Currency' />
-                    </Col>
-                    <Col span={12}>
-                      <Input placeholder="Enter name" id="name" />
-                      <Input placeholder="Enter description" id="warning" />
-                      <DatePicker style={{ width: '100%' }} />
-                      <Input placeholder="I'm the content" id="success" />
-                      <TimePicker style={{ width: '100%' }} />
-                      <Select defaultValue="1">
-                        <Option value="1">￦</Option>
-                        <Option value="2">$</Option>
-                      </Select>
-                    </Col>
-                  </div>
-                </Form>
-              </Content>
+              <div className="row info-inner">
+                <div className="col text-left  info-text">
+                    로그 아웃 하기
+                </div>
+              </div>
+              <div className="row">
+                <div className="col">
+                  <button onClick={this.onClicklogout} type="button" className="btn btn-end"> 나가기 </button>
 
-              <a id="kakao-login-btn">
-                <img id="kakao-login-btn" src="https://kauth.kakao.com/public/widget/login/kr/kr_02_medium.png" style={{ cursor: 'pointer' }} onMouseOver="this.src='https://kauth.kakao.com/public/widget/login/kr/kr_02_medium_press.png'" onMouseOut="this.src='https://kauth.kakao.com/public/widget/login/kr/kr_02_medium.png'" />
-              </a>
-
-              <Footer>
-                <Button type="primary" icon="plus" size='large'>Add</Button>
-              </Footer>
-            </Layout>
+                </div>
+              </div>
+            </div>
           </div>
-        </Row>
+
+        </div>
       </>
     );
   }
 }
 
-export default Info;
+const mapStateToProps = (state) => ({
+  // status: state.auth.login.status,
+  // nickname: state.auth.login.nickname,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    REDUX_AUTH_LOGOUT_REQUEST: () => {
+      dispatch(AuthActions.logoutRequest());
+    },
+  };
+};
+
+export default ReduxConn(mapStateToProps, mapDispatchToProps)(Info);

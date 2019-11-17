@@ -13,7 +13,14 @@ const getList = async () => {
       'Content-Type': 'application/json'
     },
     responseType: 'json',
-  });
+  })
+    .then((res)=>{
+      return res;
+    })
+    .catch((err)=>{
+      return err.response;
+    });
+
 };
 
 export default {

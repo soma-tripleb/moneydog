@@ -43,6 +43,7 @@ const registerRequest = (email, password, nickname) => async (dispatch) => {
   return axios
     .post(AJAX_URL, AJAX_DATA)
     .then((res) => {
+      dispatch(LOGIN_SUCCESS(nickname));
       return res;
     })
     .catch((err) => {

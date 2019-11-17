@@ -8,8 +8,15 @@ import UserActions from '../../redux/actions/userAction';
 import SubsApp from './subsApp';
 import UserCustomSubscription from './userCustomSubscription';
 import SubsTmplService from './subscriptions.ajax';
+import UserSubsApp from './userSubsApp';
 
 import './subscriptions.css';
+import AuthActions from '../../redux/actions/authAction';
+
+const colorPull = ['#fe7e79', '#ffd578', '#fffb77', '#d5fc78',
+  '#73fa78', '#71fcd6', '#70fefe', '#75D5fe',
+  '#7981ff', '#d782ff', '#ff83ff', '#fe8ad9'];
+
 
 class Subscriptions extends Component {
   constructor(props) {
@@ -18,6 +25,7 @@ class Subscriptions extends Component {
     this.state = {
       staticSubscribeArr: [],
       SubscribingArr: [],
+      randColorNum: Math.floor(Math.random() * 12),
     };
   }
 
@@ -31,9 +39,15 @@ class Subscriptions extends Component {
     const { subscriptions } = this.props;
 
     const subsTmplResponse = await SubsTmplService.getList();
-    const subsTmplList = subsTmplResponse.data.message;
 
-    console.log(subsTmplList);
+    if (subsTmplResponse.status === 403 ) {
+      this.props.REDUX_AUTH_LOGOUT_REQUEST();
+      alert('세션 만료 다시 로그인 해주세요');
+      return;
+    }
+
+
+    const subsTmplList = subsTmplResponse.data.message;
 
     if (subscriptions.length !== 0) {
       subscriptions.map((subscription) => {
@@ -66,7 +80,7 @@ class Subscriptions extends Component {
               'seq': seq,
               'logoURI': logoURI,
               'name': name,
-              'color': '#'+Math.round(Math.random() * 0xffffff).toString(16),
+              'color': colorPull[this.state.randColorNum%12],
             },
           ],
         },
@@ -86,6 +100,9 @@ class Subscriptions extends Component {
     }
 
     this.setState(newState);
+    this.setState({
+      randColorNum: this.state.randColorNum+1,
+    });
   };
 
   // SubscribeArr 에서 지우기
@@ -144,39 +161,50 @@ class Subscriptions extends Component {
     return (
       <>
         <div className="container main-container">
-          <div className="row">
-              Step 1. 구독중인 서비스를 추가 하세요
+          <div className="col text-center">
+            <span className="col subscription-step text-center">
+            Step 1
+            </span>
+            <div className="col subscription-title text-center">
+              구독중 서비스
+            </div>
           </div>
 
-          <div className="row">
-            <div className="col-sm">
+          <div className="col subs-container">
+            <div className="row ">
 
-              <div className="w-100" id="inner-container">
-                <p><u>Selecting App</u></p>
-                {this.makeStaticSubscribeApp()}
-                <p><u>새로운 서비스를 추가 할 수 있어요</u></p>
-                <UserCustomSubscription onInsert={this.insertContact.bind(this)}/>
+              <div className="col-sm subs-container-inner">
+                <div className="col phone-padding-zero" id="inner-container">
+                  <div className="subs-title">주요 구독 서비스</div>
+                  {this.makeStaticSubscribeApp()}
+                  <div className="subs-title">직접 추가 입력</div>
+                  <UserCustomSubscription onInsert={this.insertContact.bind(this)}/>
+                </div>
+              </div>
+
+              <div className="col-sm-1 subs-container-inner align-self-center">
+                <img src={`${process.env.REACT_APP_IMAGE_URI}/img/arrow.png`} />
+              </div>
+
+              <div className="col-sm subs-container-inner">
+                <div className="col" id="inner-container">
+                  <div className="subs-title">현재 구독중인 서비스</div>
+                  {this.makeSubscribingApp()}
+                </div>
+              </div>
+            </div>
+            <div className="row ">
+              <div className="col-sm btn-padding">
+                <button onClick={this.handleSubmit} type="button" className="btn btn-dark"> 다음 </button>
               </div>
             </div>
 
-            <div className="col-sm">
-
-              <div className="w-100" id="inner-container">
-                <p><u>Selected App</u></p>
-                {this.makeSubscribingApp()}
-              </div>
-            </div>
           </div>
+
+
         </div>
 
-        <div className="container submit-container">
-          <div className="row">
-            <div className="col-sm">
-              <form onSubmit={this.handleSubmit}>
-                <input type="submit" value="NEXT"/>
-              </form>
-            </div>
-          </div>
+        <div className="container subscription-title">
         </div>
       </>
     );
@@ -191,6 +219,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     REDUX_USER_SET_SUBSTMPL_LIST: (list) => {
       dispatch(UserActions.setUserSubsTmplList(list));
+    },
+    REDUX_AUTH_LOGOUT_REQUEST: () => {
+      dispatch(AuthActions.logoutRequest());
     },
   };
 };

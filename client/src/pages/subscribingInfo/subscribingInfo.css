@@ -1,9 +1,8 @@
 /* subscriptionInfo */
-#user-info-container {
-  box-shadow: 10px 10px 10px 10px lightgray;
-  max-height: 60vh;
-  overflow: auto;
-  width: 100%;
+.user-info-container {
+  border-radius: 2vh;
+  background-color: #fff;
+  padding: 5vh;
 }
 
 .submit-container {
@@ -12,29 +11,76 @@
 }
 
 /* subsTmpl */
-#user-info-elements {
-  margin-bottom: 12px;
-  background-color: whitesmoke;
-  box-shadow: 3px 3px 3px 3px lightgray; 
+.user-info-elements {
   text-align: center;
-  border-radius: 3%;
+  /*border-radius: 3%;*/
   font-size: 2vw;
 }
 
 .logo-img {
   height: 5vh;
+  width: 5vh;
   border-radius: 5px;
+
 }
 
 label {
   display: inline;
 }
 
-.logo, .price, .payment-date, .radio {
+.logo, .price , .radio {
   margin: 1vh 0 1vh 0;
 }
 
 #label-text {
   font-weight: lighter;
   font-size: 1.5vw;
+}
+
+.btn-margin{
+  margin: 2vh;
+}
+.top-border{
+  padding: 1vh;
+  border-top: 1px solid #f3f3f3;
+}
+
+/*.ant-select-selection{*/
+/*  box-shadow: 0 0 1px 1px #929292;*/
+/*}*/
+
+.verticle-middle{
+  vertical-align: middle;
+}
+
+.ant-select-selection__rendered{
+  float: right;
+}
+form :not(.ant-input-group-wrapper) > .ant-input-group{
+  top: 0px;
+}
+
+.ant-input[disabled]{
+  background-color: #fff;
+}
+.ant-input-group.ant-input-group-compact > *:not(:last-child){
+  border-right: 0px;
+}
+
+.ant-input-group.ant-input-group-compact > .ant-select > .ant-select-selection{
+  border-left: 0px;
+}
+.ant-input-group.ant-input-group-compact > .ant-calendar-picker:last-child .ant-input{
+  border-left: 0px;
+}
+.btn-subscribing{
+  width: 100%;
+  border-radius: 1vh;
+}
+.btn-delete{
+  padding: 0.5vh 4vh 0.5vh 4vh;
+  border-radius: 1vh;
+}
+.DatePicker{
+  width: 60%;
 }

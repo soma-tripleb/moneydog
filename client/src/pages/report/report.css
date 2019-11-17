@@ -1,74 +1,69 @@
-.report-container {
-    margin: auto;
-}
-.report-inner-container{
-    box-shadow: 10px 10px 10px 10px lightgray;
-    overflow: auto;
+/*.report-container {*/
+/*    margin: auto;*/
+/*}*/
+
+.report-inner-container {
+    text-align: left;
+    box-shadow: 0vh 0vh 10px 10px #f3f3f3;
+    background: #ffffff;
+    border-radius: 2vh;
+    width: 100%;
+
     width: 100%;
     font-weight: lighter;
     font-size: 1vw;
 
-    padding: 2vh;
-    margin: 5vh auto 5vh auto ;
+    padding: 5vh;
+    margin: 5vh auto 5vh auto;
 }
 
 
-/*페이지 종이 질감 그림자 생성*/
-.page {
-    background: #000;
+/*!*페이지 종이 질감 그림자 생성*!*/
+/*.page {*/
+/*    background: #ffffff;*/
+/*}*/
 
-    /* Optional Gradient */
-    background: -moz-linear-gradient(top,  #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* IE10+ */
-    background: linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
-}
+/*.page h2 {*/
+/*    text-align: center;*/
+/*    padding: 0 0 0 10px;*/
+/*    font: 400 4vh 'Lilita One', Helvetica, sans-serif;*/
+/*}*/
 
-.page h2 {
-    text-align: center;
-    padding: 0 0 0 10px;
-    font: 400 4vh 'Lilita One', Helvetica, sans-serif;
-}
+/*.page p {*/
+/*    padding: 10px 20px;*/
+/*    font: 2vh Helvetica, sans-serif;*/
+/*    color: #f0f2f5;*/
+/*}*/
 
-.page p {
-    padding: 10px 20px;
-    font: 2vh Helvetica, sans-serif;
-    color: #f0f2f5;
-}
-
-.foldtl {
-    position: relative;
-    -webkit-box-shadow: 10px 10px 5px rgba(100,100,100,0.8);
-    -moz-box-shadow: 10px 10px 5px rgba(100,100,100,0.8);
-    box-shadow: 10px 10px 5px rgba(100,100,100,0.8);
-}
-.foldtl:before {
-    content: "";
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 0px;
-    height: 0px;
-    border-bottom: 10vh solid #eee;
-    border-left: 10vh solid transparent;
-    -webkit-box-shadow: 7px 7px 7px rgba(0,0,0,0.3);
-    -moz-box-shadow: 7px 7px 7px rgba(0,0,0,0.3);
-    box-shadow: 7px 7px 7px rgba(0,0,0,0.3);
-}
-
-.foldtl:after {
-    content: "";
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 0px;
-    height: 0px;
-    border-top: 10vh solid #f0f2f5;
-    border-right: 10vh solid transparent;
-}
+/*.foldtl {*/
+/*    position: relative;*/
+/*    -webkit-box-shadow: 10px 10px 5px rgba(100,100,100,0.8);*/
+/*    -moz-box-shadow: 10px 10px 5px rgba(100,100,100,0.8);*/
+/*    box-shadow: 10px 10px 5px rgba(100,100,100,0.8);*/
+/*}*/
+/*.foldtl:before {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    top: 0%;*/
+/*    left: 0%;*/
+/*    width: 0px;*/
+/*    height: 0px;*/
+/*    border-bottom: 10vh solid #eee;*/
+/*    border-left: 10vh solid transparent;*/
+/*    -webkit-box-shadow: 7px 7px 7px rgba(0,0,0,0.3);*/
+/*    -moz-box-shadow: 7px 7px 7px rgba(0,0,0,0.3);*/
+/*    box-shadow: 7px 7px 7px rgba(0,0,0,0.3);*/
+/*}*/
+/*.foldtl:after {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    top: 0%;*/
+/*    left: 0%;*/
+/*    width: 0px;*/
+/*    height: 0px;*/
+/*    border-top: 10vh solid ;*/
+/*    border-right: 10vh solid transparent;*/
+/*}*/
 
 /*card*/
 div.card-body {
@@ -94,3 +89,48 @@ p.card-text {
 .subs-inner-item {
     font-size: 2vh;
 }
+
+.report-logoImg{
+    width: 5vh;
+}
+.report-padding{
+    padding-top: 5vh;
+}
+.report-subtitle{
+    font-family: 'Spoqa Han Sans Bold';
+    font-size: 2vh;
+    color: #000000;
+    text-align: center;
+    padding-bottom: 1vh;
+}
+.report-inner-subsList{
+    font-family: 'Montserrat-Regular';
+    border: 1px solid #d8d8d8;
+    padding: 1.5vh;
+    color: #000;
+    letter-spacing: -1px;
+}
+
+.report-title{
+    color: black;
+    font-size: 3vh;
+    font-family: 'Spoqa Han Sans Bold';
+}
+
+.report-subs-title{
+    font-family: 'Spoqa Han Sans Bold';
+}
+
+.report-month-text{
+    font-size: 5vh;
+}
+
+.montlyReport-subs-text{
+    background-color: #f4f4f4;
+    border-radius: 1vh;
+
+    color: black;
+    font-family: 'Montserrat-Regular';
+    padding: 3vh 0 3vh 0;
+}
+

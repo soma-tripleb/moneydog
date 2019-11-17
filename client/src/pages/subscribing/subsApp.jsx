@@ -14,16 +14,17 @@ class SubsApp extends Component {
 
   showSubscribeActionBtn = () => {
     if (this.props.subsAppInfo.label === '-') {
-      return (<button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">-</button> );
+      // return (<button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">-</button> );
+      return ( <button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info btn-subscribing">삭제</button>);
     } else {
-      return ( <button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">+</button>);
+      // return ( <button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">+</button>);
+      return ( <button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info btn-subscribing">구독 추가</button>);
     }
   };
 
   showSubscibeImg = (subsAppInfo) =>{
     if (subsAppInfo.logoURI === '') {
-      console.log(subsAppInfo.color);
-      return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0]}</button>);
+      return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0].toUpperCase()}</button>);
     } else {
       return (<img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
     }
@@ -33,16 +34,23 @@ class SubsApp extends Component {
     const {subsAppInfo} = this.props;
     return (
       <>
-        <div className="container w-100" id="inner-element">
+        <div className="container phone-padding-zero">
           <div className="row">
-            <div className="col">
+            <div className="col-2 align-self-center">
               {this.showSubscibeImg(subsAppInfo)}
             </div>
-            <div className="col">
-              {subsAppInfo.name}
-            </div>
-            <div className="col">
-              {this.showSubscribeActionBtn()}
+            <div className="col phone-padding-zero">
+              <div className="row bottom-border">
+                <div className="col-4 serviceName text-left padding-zero">
+                  {subsAppInfo.name}
+                </div>
+                <div className="col service-sub-Name text-left padding-zero">
+              엔터테인먼트
+                </div>
+                <div className="col-3 padding-zero">
+                  {this.showSubscribeActionBtn()}
+                </div>
+              </div>
             </div>
           </div>
         </div>

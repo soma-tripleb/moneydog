@@ -1,31 +1,49 @@
 /* container */
 #inner-container {
-  box-shadow: 10px 10px 10px 10px lightgray;
+  /*box-shadow: 0vh 0vh 10px 10px #f3f3f3;*/
+  border-radius: 2vh;
+  background-color: #ffffff;
+  /*width: 100%;*/
+
   height: 60vh;
   overflow: auto;
-  width: 100%;
-  font-weight: lighter;
   font-size: 1vw;
 }
 
 #inner-container-title {
   font-size: 2vw;
-  font-weight: lighter;
+  /*font-weight: lighter;*/
   padding-left: 20px;
 }
 
 #subs-inner-left-element, #subs-inner-right-element {
   border-radius: 5px;
-  width: 100%;
+  /*width: 100%;*/
+}
+
+.subscription-title{
+  color: #000;
+  font-size: 4vh;
+  font-weight: bold;
+  padding: 2vh;
+}
+.subscription-step{
+  color: #000;
+  font-weight: bold;
+  padding: 1.5vh;
+  border-bottom: 1px solid #000;
+  margin: auto;
 }
 
 /* element */
 #inner-element {
-  margin-bottom: 2vh;
-  background-color: whitesmoke;
-  box-shadow: 3px 3px 3px 3px lightgray;
+  /*border-width: 2px;*/
+  /*border-style: solid;*/
+  border: 1px solid #f3f3f3;
+  /*background-color: whitesmoke;*/
+  /*box-shadow: 3px 3px 3px 3px lightgray;*/
   text-align: center;
-  border-radius: 3%;
+  /*border-radius: 3%;*/
   padding: 1.5vh;
 }
 
@@ -57,6 +75,8 @@
 .logo-img {
   height: 5vh;
   border-radius: 5px;
+  border: 1px solid #f3f3f3;
+  background: #ffffff;
 }
 
 .logo-Btn {
@@ -66,4 +86,60 @@
   font-family: monospace;
   border-radius: 5px;
   border: 0;
+}
+
+.serviceName {
+  font-family: "Spoqa Han Sans Bold";
+  font-size: 1.7vh;
+  color: black;
+}
+.service-sub-Name{
+  font-family: "Spoqa Han Sans Regular";
+  font-size: 1.4vh;
+}
+
+.subs-container{
+  box-shadow: 0vh 0vh 10px 10px #f3f3f3;
+  border-radius: 2vh;
+  background-color: #EBEBEB;
+
+  overflow: auto;
+  font-weight: lighter;
+  padding: 1vh;
+  margin-bottom: 5vh;
+}
+
+.subs-container-inner{
+  padding: 2vh;
+}
+
+.btn-padding{
+  padding: 3vh;
+}
+
+.btn-dark{
+  background: black;
+  padding: 1vh 8vh 1vh 8vh;
+  border-radius: 1.5vh;
+}
+.btn-start{
+  font-size: 3vh;
+  padding: 1.3vh 10vh 1.3vh 10vh;
+  border-radius: 2vh;
+}
+
+.subs-title{
+  font-family: 'Spoqa Han Sans Bold';
+  color: #000;
+  font-size: 2vh;
+  padding: 2vh;
+
+}
+.bottom-border{
+  padding: 1.5vh;
+  border-bottom: 1px solid #f3f3f3;
+}
+.user-bottom-border{
+  padding: 1.5vh 1.5vh 1.5vh 0;
+  border-bottom: 1px solid #f3f3f3;
 }

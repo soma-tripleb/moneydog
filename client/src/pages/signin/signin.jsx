@@ -52,43 +52,46 @@ class Signin extends Component {
     return (
       <>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" />
-        <div className="container loginContainer">
+        <div className="row">
+          <div className="container loginContainer">
 
-          <div className="card bg-light">
-            <article className="card-body mx-auto">
-              <h4 className="card-title mt-3 text-center">Sign In</h4>
-              {/* <p className="divider-text">*/}
-              {/*  <span className="bg-light">REACT GOOGLE LOGIN</span>*/}
-              {/* </p>*/}
-              {/* <p className="divider-text">*/}
-              {/*  <span className="bg-light">OR</span>*/}
-              {/* </p>*/}
-              <form>
-                {/* Email input*/}
-                <div className="form-group input-group">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text"> <i className="fa fa-envelope" /> </span>
+            <div className="col-sm-8 report-inner-container">
+              <article className="card-body mx-auto">
+                <h4 className="card-title mt-3 text-center">로그인</h4>
+                {/* <p className="divider-text">*/}
+                {/*  <span className="bg-light">REACT GOOGLE LOGIN</span>*/}
+                {/* </p>*/}
+                {/* <p className="divider-text">*/}
+                {/*  <span className="bg-light">OR</span>*/}
+                {/* </p>*/}
+                <form>
+                  {/* Email input*/}
+                  <div className="form-group input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text"> <i className="fa fa-envelope" /> </span>
+                    </div>
+                    <input name="emailInfo" className="form-control" placeholder="이메일" type="email"
+                      value={this.state.email} onChange={this.onChangeEmail} />
                   </div>
-                  <input name="emailInfo" className="form-control" placeholder="Email address" type="email"
-                    value={this.state.email} onChange={this.onChangeEmail} />
-                </div>
-                {/* createPW input*/}
-                <div className="form-group input-group">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text"> <i className="fa fa-lock" /> </span>
+                  {/* createPW input*/}
+                  <div className="form-group input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text"> <i className="fa fa-lock" /> </span>
+                    </div>
+                    <input className="form-control" placeholder="비밀번호" type="password"
+                      value={this.state.password} onChange={this.onChangePassword} />
                   </div>
-                  <input className="form-control" placeholder="Create password" type="password"
-                    value={this.state.password} onChange={this.onChangePassword} />
-                </div>
-                {/* 회원가입 버튼*/}
-                <div className="form-group">
-                  <button type="submit" className="btn btn-success btn-block" onClick={this.signInBtnClicked}>
-                    Sign In
-                  </button>
-                </div>
-                <p className="text-center">Don't Have an account? <Link to="/signup" className="nav-link"> Create New Account </Link></p>
-              </form>
-            </article>
+                  {/* 회원가입 버튼*/}
+                  <div className="form-group">
+                    <button type="submit" className="btn btn-dark btn-block" onClick={this.signInBtnClicked}>
+                    로그인
+                    </button>
+                  </div>
+                  <p className="text-center">계정이 없으신가요 ? <Link to="/signup" className="nav-link"> 계정 생성 하기 </Link></p>
+                </form>
+
+              </article>
+            </div>
           </div>
         </div>
       </>

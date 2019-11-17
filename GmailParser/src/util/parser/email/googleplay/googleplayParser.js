@@ -1,9 +1,7 @@
+import CommonParser from 'src/util/parser/email/commonParser';
 import cheerio from 'cheerio';
-import GOOGLEPLAY_WATCHA_RECEIPT from '../../../../../test/resources/mock/email/googleplay/googleplayWatchaReceipt.json';
 
-import CommonParser from '../commonParser';
-
-const GooglePlayReceiptParser = (() => {
+const GooglePlayParser = (() => {
 
   const NAME_TAG = '#gamma > div > div:nth-child(2) > div > div:nth-child(6) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(1) > span > span';
 
@@ -39,49 +37,208 @@ const GooglePlayReceiptParser = (() => {
 
   return {
     metadataParse: async (json, dto, callback) => {
-      // const data = json.data;
-      const data = GOOGLEPLAY_WATCHA_RECEIPT.data;
 
-      let id = null;
-      let snippet = null;
-      let subject = null;
+      const data = json.data;
+
+      let messageId = null;
+      let createAt = null;
       let from = null;
+      let to = null;
+      let subject = null;
+      let snippet = null;
       let bodyText = null;
-
-      id = data.id;
-      snippet = data.snippet;
 
       data.payload.headers.some((headers) => {
         const name = headers.name.toLowerCase();
 
         switch (name) {
+          case 'message-id':
+            messageId = headers.value;
+            break;
+          case 'date':
+            createAt = headers.value;
+            break;
           case 'from':
             from = headers.value;
+            break;
+          case 'to':
+            to = headers.value;
             break;
           case 'subject':
             subject = headers.value;
             break;
         }
 
-        if ((from !== null) && (subject !== null))
+        if ((messageId !== null) && (createAt !== null) && (from !== null) && (to !== null) && (subject !== null))
           return false;
       });
 
-      bodyText = CommonParser.base64ToUtf8(data.payload.parts[0].body.data);
+      snippet = data.snippet;
 
+      bodyText = CommonParser.base64ToUtf8(data.payload.parts[0].body.data);
       const iframeBody = data.payload.parts[1].body.data;
 
-      dto.setId(id);
-      dto.setSnippet(snippet);
-      dto.setSubject(subject);
+      dto.setMessageId(messageId);
+      dto.setCreateAt(createAt);
       dto.setFrom(from);
+      dto.setTo(to);
+      dto.setSubject(subject);
+      dto.setSnippet(snippet);
       dto.setBodyText(bodyText);
 
       return await callback(dto, iframeBody);
     },
 
-    iframeParse: (dto, iframeBody) => {
-      const body = iframeBody;
+    // from:(googleplay) 영수증, 무료
+    body1ParserOfTrial: (metadata) => {
+      const text = metadata.body1;
+
+      // '서비스 명'
+      const serviceNameStartIdx = text.indexOf('Google Play에서');
+      const serviceNameEndIdx = text.indexOf('에 대한 무료 평가판');
+
+      // '상품 정보'
+      const productInfoStartIdx = text.indexOf('상품 가격');
+      const productInfoEndIdx = text.indexOf('합계');
+
+      // '평가판 종료일'
+      const endDateStartIdx = text.indexOf('평가판 기간이');
+      const endDateInfoEndIdx = text.indexOf('에 종료됩니다.');
+
+      // '평가판 이후 구독료'
+      const originalPriceStartIdx = text.indexOf('자동으로 구독료');
+      const originalPriceLastIdx = text.indexOf('가 청구됩니다.');
+
+      try {
+        if (serviceNameStartIdx === -1) throw err;
+        if (serviceNameEndIdx === -1) throw err;
+        if (productInfoStartIdx === -1) throw err;
+        if (productInfoEndIdx === -1) throw err;
+        if (endDateStartIdx === -1) throw err;
+        if (endDateInfoEndIdx === -1) throw err;
+        if (originalPriceStartIdx === -1) throw err;
+        if (originalPriceLastIdx === -1) throw err;
+      } catch (err) {
+        throw new Error('EXPIRED_PARSER_BODY1_TRIAL');
+      }
+
+      const serviceNameStr = text.substring(serviceNameStartIdx, serviceNameEndIdx);
+      const productInfoStr = text.substring(productInfoStartIdx, productInfoEndIdx);
+      const endDateStr = text.substring(endDateStartIdx, endDateInfoEndIdx);
+      const originalPriceStr = text.substring(originalPriceStartIdx, originalPriceLastIdx);
+
+      return {
+        serviceNameStr,
+        productInfoStr,
+        endDateStr,
+        originalPriceStr
+      };
+    },
+
+
+    // from:(googleplay) 영수증, 구독권
+    body1ParserOfSubscribe: (metadata) => {
+      const text = metadata.body1;
+
+      // '서비스 명'
+      const serviceNameStartIdx = text.indexOf('Google Play에서');
+      const serviceNameEndIdx = text.indexOf('의 구독권을 구매하셨습니다.');
+
+      // '상품 정보'
+      const productInfoStartIdx = text.indexOf('상품 가격');
+      const productInfoEndIdx = text.indexOf('자동 갱신 날짜');
+
+      // '가격'
+      const priceStartIdx = text.indexOf('합계');
+      const priceLastIdx = text.indexOf('결제 방법');
+
+      // '결제 일'
+      const orderDateStartIdx = text.indexOf('주문 날짜');
+      const orderDateEndIdx = text.indexOf('상품 가격');
+
+      // '자동 갱신 날짜'
+      const renewalStartIdx = text.indexOf('자동 갱신 날짜');
+      const renewalLastIdx = text.indexOf('합계');
+
+      try {
+        if (serviceNameStartIdx === -1) throw err;
+        if (serviceNameEndIdx === -1) throw err;
+        if (productInfoStartIdx === -1) throw err;
+        if (productInfoEndIdx === -1) throw err;
+        if (priceStartIdx === -1) throw err;
+        if (priceLastIdx === -1) throw err;
+        if (orderDateStartIdx === -1) throw err;
+        if (orderDateEndIdx === -1) throw err;
+        if (renewalStartIdx === -1) throw err;
+        if (renewalLastIdx === -1) throw err;
+      } catch (err) {
+        throw new Error('EXPIRED_PARSER_BODY1_SUBSCRIBE');
+      }
+
+      const serviceNameStr = text.substring(serviceNameStartIdx, serviceNameEndIdx);
+      const productInfoStr = text.substring(productInfoStartIdx, productInfoEndIdx);
+      const priceStr = text.substring(priceStartIdx, priceLastIdx);
+      const orderDateStr = text.substring(orderDateStartIdx, orderDateEndIdx);
+      const renewalStr = text.substring(renewalStartIdx, renewalLastIdx);
+
+      return {
+        serviceNameStr,
+        productInfoStr,
+        priceStr,
+        orderDateStr,
+        renewalStr
+      };
+    },
+
+    // from:(googleplay) 영수증, 갱신 -{구독권}
+    body1ParserOfRenewal: (metadata) => {
+      const text = metadata.body1;
+
+      // '서비스 명'
+      const serviceNameStartIdx = text.indexOf('Google Play에서');
+      const serviceNameEndIdx = text.indexOf('의 구독이 갱신되었습니다.');
+
+      // '상품 정보'
+      const productInfoStartIdx = text.indexOf('상품 가격');
+      const productInfoEndIdx = text.indexOf('자동 갱신 날짜');
+
+      // '자동 갱신 날짜'
+      const renewalDateStartIdx = text.indexOf('자동 갱신 날짜');
+      const renewalDateEndIdx = text.indexOf('합계');
+
+      // '합계'
+      const priceStartIdx = text.indexOf('합계');
+      const priceEndIdx = text.indexOf('결제 방법');
+
+      try {
+        if (serviceNameStartIdx === -1) throw err;
+        if (serviceNameEndIdx === -1) throw err;
+        if (productInfoStartIdx === -1) throw err;
+        if (productInfoEndIdx === -1) throw err;
+        if (renewalDateStartIdx === -1) throw err;
+        if (renewalDateEndIdx === -1) throw err;
+        if (priceStartIdx === -1) throw err;
+        if (priceEndIdx === -1) throw err;
+      } catch (err) {
+        throw new Error('EXPIRED_PARSER_BODY1_RENEWAL');
+      }
+
+      const serviceNameStr = text.substring(serviceNameStartIdx, serviceNameEndIdx);
+      const productInfoStr = text.substring(productInfoStartIdx, productInfoEndIdx);
+      const renewalDate = text.substring(renewalDateStartIdx, renewalDateEndIdx);
+      const priceStr = text.substring(priceStartIdx, priceEndIdx);
+
+      return {
+        serviceNameStr,
+        productInfoStr,
+        priceStr,
+        renewalDate
+      };
+    },
+
+
+    body2ParserOfTag: (body2) => {
+      const htmlText = body2;
 
       let name = '';
       let price = '';
@@ -89,31 +246,29 @@ const GooglePlayReceiptParser = (() => {
       let renewal = '';
       let periodMonth = '';
 
-      const bodyDecoded = CommonParser.base64ToUtf8(body);
-
-      const dom = CommonParser.convertHtml(bodyDecoded);
+      const dom = CommonParser.convertHtml(htmlText);
 
       const $ = cheerio.load(dom);
 
-      name = convertNameReg($(NAME_TAG).text().trim());
+      try {
+        name = convertNameReg($(NAME_TAG).text().trim());
+        price = convertPriceReg($(PRICE_TAG).text());
+        date = convertDateReg($(DATE_TAG).text());
+        renewal = convertRenewalReg($(RENEWAL_TAG).text());
+        periodMonth = calPeriod(renewal, date);
+      } catch (err) {
+        throw new Error(`BODY2_PARSER_OF_TAG_ERROR ` + err);
+      }
 
-      price = convertPriceReg($(PRICE_TAG).text());
-
-      date = convertDateReg($(DATE_TAG).text());
-
-      renewal = convertRenewalReg($(RENEWAL_TAG).text());
-
-      periodMonth = calPeriod(renewal, date);
-
-      dto.setName(name);
-      dto.setPrice(price);
-      dto.setDate(date);
-      dto.setRenewal(renewal);
-      dto.setPeriodMonth(periodMonth);
-
-      return dto;
+      return {
+        name,
+        price,
+        date,
+        renewal,
+        periodMonth
+      };
     }
   };
 })();
 
-export default GooglePlayReceiptParser;
+export default GooglePlayParser;

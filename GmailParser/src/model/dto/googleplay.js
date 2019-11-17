@@ -1,60 +1,36 @@
 class GooglePlay {
+
   constructor() {
-    this.id = null;
-    this.snippet = null;
-    this.subject = null;
-    this.from = null;
-    this.bodyText = null;
-
-    // body
-    this.name = null;
-    this.price = null;
-    this.date = null;
-    this.renewal = null;
-    this.periodMonth = null;
-
-    Object.preventExtensions(this);
+    this.category = '';
+    this.service = '';
+    this.price = '';
+    this.endDate = '';
   }
 
-  setId(id) {
-    this.id = id;
+  setCategory(category) {
+    this.category = category;
+    return this;
   }
 
-  setSnippet(snippet) {
-    this.snippet = snippet;
-  }
-
-  setSubject(subject) {
-    this.subject = subject;
-  }
-
-  setFrom(from) {
-    this.from = from;
-  }
-
-  setBodyText(bodyText) {
-    this.bodyText = bodyText.replace(/\r\n/gi, '');
-  }
-
-  setName(name) {
-    this.name = name;
+  setService(service) {
+    this.service = service.replace('Google Play에서 ', '');
+    return this;
   }
 
   setPrice(price) {
-    this.price = price;
+    if (price.indexOf('합계: ') == -1) { // '-1' 이면 해당 문자열이 없는 것
+      this.price = price;
+    } else {
+      this.price = price.replace('합계: ', '');
+    }
+    return this;
   }
 
-  setDate(date) {
-    this.date = date;
+  setEndDate(endDate) {
+    const dateRegex = /(19|20)\d{2}. ([1-9]|1[012]). ([1-9]|[12][0-9]|3[0-1])./;
+    this.endDate = endDate.match(dateRegex)[0];
+    return this;
   }
-
-  setRenewal(renewal) {
-    this.renewal = renewal;
-  }
-
-  setPeriodMonth(periodMonth) {
-    this.periodMonth = periodMonth;
-  }
-}
+};
 
 export default GooglePlay;

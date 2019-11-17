@@ -1,6 +1,6 @@
 header {
-    /*background: #f0f2f5;*/
-    background-image: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/background.png);
+    background-color: #f4f4f4;
+    /*background-image: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/background.png);*/
 }
 
 .logout {
@@ -11,14 +11,8 @@ header {
     color: #000;
     font-size: 7vh;
     font-weight: bold;
-    padding: 0;
-}
-.nav-link{
-    color: #000;
-}
-
-.active {
-    color: #42AEEC;
+    padding: 2vh 0 2vh 0;
+    text-align: left;
 }
 
 .subHeaderFont {
@@ -41,15 +35,29 @@ header {
 }
 
 .categoryFont > ul > li > a {
-    font-weight: bold;
     font-size: 2.5vh;
-    font-family: sans-serif;
+    font-family: 'Spoqa Han Sans Bold';
 }
 
 .nav-user {
     text-decoration: underline;
+    font-family: 'Spoqa Han Sans Light';
 }
 
 .headerContainer{
     padding: 2vh;
 }
+
+.headeImg{
+    width: 70%;
+}
+.nav-link{
+    text-align: left;
+    font-family: 'Montserrat-Regular';
+    color: #000;
+}
+
+.active {
+    color: #00BBF8;
+}
+

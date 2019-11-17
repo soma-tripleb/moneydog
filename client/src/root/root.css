@@ -1,28 +1,40 @@
 @font-face {
-    font-family: 'GOTHAN-ULTRAITALIC';
-    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/gotham-ultraitalic-webfont.woff) format('truetype');
+    font-family: 'Montserrat-Bold';
+    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/Montserrat-Bold.ttf) format('truetype');
 }
 
 @font-face {
-    font-family: 'GOTHAN-XLIGHT';
-    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/gotham-xlight-webfont.woff) format('truetype');
+    font-family: 'Montserrat-Light';
+    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/Montserrat-Light.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Montserrat-Medium';
+    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/Montserrat-Medium.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/Montserrat-Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Spoqa Han Sans Regular';
+    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/Spoqa+Han+Sans+Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Spoqa Han Sans Light';
+    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/Spoqa+Han+Sans+Light+2.ttf) format('truetype');
 }
 
 @font-face {
-    font-family: 'GOTHAN-ULTRA';
-    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/gotham-ultra-webfont.woff) format('truetype');
+    font-family: 'Spoqa Han Sans Bold';
+    src: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/font/Spoqa+Han+Sans+Bold.ttf) format('truetype');
 }
 
-/*html, body {*/
-/*    height: 100%;*/
-/*    width: 100%;*/
-/*    margin: 0;*/
-/*}*/
-
-/*body {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*}*/
+.phone-display{
+    display: none;
+}
+.web-display{
+    display: block;
+}
 
 #root {
     height: 100%;
@@ -31,7 +43,8 @@
 
 #root > div {
     height: 100%;
-    background-image: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/background.png);
+    /*background-image: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/background.png);*/
+    background-color: #f4f4f4;
 }
 
 .layout {
@@ -40,8 +53,132 @@
     flex-direction: column;
 }
 
-@media (min-width:1320px) {
+@media (min-width: 1320px) {
     .container {
         max-width: 1300px;
     }
+}
+
+@media (max-width: 576px) {
+    /*홈*/
+    .headerFont{
+        padding: 0;
+    }
+    .categoryFont > ul > li > a{
+        padding: 0.3rem 0.5rem;
+    }
+    .IndexPage-md-sub{
+        font-size: 3.5vh;
+    }
+    .IndexPage-serviceValue{
+        font-size: 2vh;
+    }
+    .IndexPage-inner{
+        height: auto;
+    }
+    .index-item-inner{
+        padding: 5vh 0;
+    }
+    .marketing{
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+    .featurette-heading{
+        font-size: 2.3vh;
+    }
+
+    /*회원 가입*/
+    .registerContainer {
+        padding: 2vh;
+    }
+    .report-inner-container{
+        padding: 4vh 0;
+    }
+    .loginContainer{
+        padding: 2vh;
+    }
+
+    /*dashboard*/
+    .amount-container{
+        border-right:0px;
+        margin: 2vh 0;
+    }
+    .dashboard-inner{
+        padding: 1vh;
+    }
+    .TotalAmount{
+        padding: 0 0 2vh 0;
+    }
+    .commercial-font{
+        font-size: 2vh;
+    }
+    .commercial-time{
+        font-size: 1.5vh;
+    }
+    .ant-fullcalendar-value{
+        font-size: 1px;
+    }
+    .calendar{
+        padding: 2vh 0.5vh;
+    }
+    .ant-fullcalendar-fullscreen .ant-fullcalendar-value{
+        top: 0;
+    }
+    .ant-fullcalendar-fullscreen .ant-fullcalendar-content{
+        top: 2vh;
+        left: 0.2vh;
+    }
+    .calendar-subscriptions-img{
+        width: 2.7vh;
+        height: 2.7vh;
+    }
+    .ant-fullcalendar-fullscreen .ant-fullcalendar-date{
+        height: 40px;
+    }
+    .ant-fullcalendar-fullscreen .ant-fullcalendar-date{
+        margin: 0;
+    }
+    .ant-fullcalendar-cell{
+        padding: 0.3vh 0.1vh;
+    }
+    .categories{
+        padding: 1vh;
+    }
+    .categories-component-title-month{
+        font-size: 3vh;
+    }
+    .categories-component-title{
+        font-size: 2vh;
+    }
+    .btn-sm, .btn-group-sm > .btn{
+        font-size: 0.3rem;
+    }
+    .phone-report-inner{
+        padding: 2vh;
+    }
+    .phone-padding-zero{
+        padding: 0;
+    }
+    .form-control {
+        font-size: 0.3rem;
+    }
+    .phone-display{
+        display: block;
+    }
+    .web-display{
+        display: none;
+    }
+    .DatePicker{
+        width: 100%;
+    }
+    .categoryFont{
+        background: #ffffff;
+        border-top: 1px solid #000000;
+        position:fixed;
+        width:100%;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+    }
+
 }

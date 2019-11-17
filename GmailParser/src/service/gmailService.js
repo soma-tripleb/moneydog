@@ -1,10 +1,11 @@
-import GmailApi from '../util/gmailApi';
-import UserQuery from '../db/usersQuery';
+import GmailApi from 'src/util/gmailApi';
+import UserQuery from 'src/db/userQuery';
 
-import Gmail from '../model/dto/gmail';
-import GmailParser from '../util/parser/email/gmailParser';
-
-import GMAIL_SEARCH_QUERY from '../../resources/static/GmailSearchQuery.json';
+import Gmail from 'src/model/dto/gmail';
+import GmailParser from 'src/util/parser/email/gmailParser';
+import GooglePlayParser from 'src/util/parser/email/googleplay/googleplayParser';
+import GooglePlayService from 'src/service/googleplayService';
+import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery';
 
 const userMessagesId = async (useremail) => {
   try {
@@ -27,22 +28,21 @@ const userMessages = async (useremail, q) => {
     const messagesList = await Gmail.listMessages(useremail, q);
 
     const result = [];
+    if (messagesList.data.resultSizeEstimate !== 0) {
+      const promise = messagesList.data.messages.map(async (message) => {
+        const messageId = message.id;
+        const content = await Gmail.getMessages(useremail, messageId);
 
-    const promise = messagesList.data.messages.map(async (message) => {
+        result.push(content);
+      });
 
-      const messageId = message.id;
-
-      const content = await Gmail.getMessages(useremail, messageId);
-
-      result.push(content);
-    });
-
-    await Promise.all(promise);
+      await Promise.all(promise);
+    }
 
     return result;
 
   } catch (err) {
-    throw err;
+    throw new Error(`GET_USER_MESSAGES ` + err);
   }
 };
 
@@ -53,20 +53,66 @@ const messagesParse = async (useremail, q) => {
   try {
     messagesList = await userMessages(useremail, q);
   } catch (err) {
-    throw err;
+    throw new Error(`GET_GMAIL_MESSAGE_LIST_ERROR ` + err);
   }
 
   const result = [];
 
   const promise = messagesList.map((messages) => {
-    const GmailDTO = new Gmail();
+    try {
+      const GmailDTO = new Gmail();
 
-    const parsing = GmailParser.metadataParse(messages, GmailDTO);
+      const parsing = GmailParser.metadataParse(messages, GmailDTO);
 
-    result.push(parsing);
+      result.push(parsing);
+    } catch (err) {
+      throw new Error(`GMAIL_PARSER_ERROR ` + err);
+    }
   });
 
   await Promise.all(promise);
+
+  return result;
+};
+
+const divideByFrom = async (metadataList) => {
+  if (!Array.isArray(metadataList)) throw new Error('DIVIDEBYFROM_PARAM_TYPE_ERR');
+
+  const result = [];
+
+  const promise = metadataList.map((metadata) => {
+    const from = metadata.from;
+
+    try {
+      switch (from) {
+        case 'Google Play <googleplay-noreply@google.com>':
+          result.push(GooglePlayParser.body1ParserOfIndex(metadata));
+          break;
+        case '\"김재연\" <jimmyjaeyeon@gmail.com>':
+          result.push(GooglePlayParser.body1ParserOfIndex(metadata));
+          break;
+      }
+    } catch (err) {
+      throw new Error(`DIVIDE_BY_FROM_ERROR ` + err);
+    }
+  });
+
+  await Promise.all(promise);
+
+  return result;
+};
+
+const parsing = async (useremail) => {
+  let result;
+  // GooglePlay
+  try {
+    result = await GooglePlayService.queryParsing(useremail);
+  } catch (err) {
+    throw err;
+  }
+  // Apple
+
+  // etc ... (ex, 'Netflix', 'YouTube', ...)
 
   return result;
 };
@@ -75,4 +121,6 @@ export default {
   userMessagesId,
   userMessages,
   messagesParse,
+  divideByFrom,
+  parsing
 };

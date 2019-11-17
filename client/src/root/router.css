@@ -1,3 +1,4 @@
 .router {
-    background-image: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/background.png);
+    /*background-image: url(https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/background.png);*/
+    background-color: #f4f4f4;
 }

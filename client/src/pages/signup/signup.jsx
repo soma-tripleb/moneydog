@@ -6,6 +6,8 @@ import authActions from '../../redux/actions/authAction';
 import './signup.css';
 import Cookies from 'js-cookie';
 
+import axios from 'axios';
+
 class SignUp extends Component {
   state = {
     nickname: '',
@@ -47,7 +49,6 @@ class SignUp extends Component {
     if (!this.checkedPasswordForm()) {
       return false;
     }
-
     // 모두 통과시 createUser
     // const response = await service.createUser(this.state);
     const result = await this.props.registerRequest(this.state.email, this.state.password, this.state.nickname);
@@ -133,11 +134,35 @@ class SignUp extends Component {
 
     GoogleApi.authLogin()
       .then((result) => {
-        console.log(result);
+        console.log(result.data.data);
       })
       .catch((err) => {
         throw err;
       });
+  };
+
+  onClickGoogleBtn = async () =>{
+    const result = await axios({
+      method: 'get',
+      // url: `http://localhost:3000/gmail/messages/id/moneydogtest1@gmail.com`,
+      url: `http://localhost:3000/oauth`,
+      headers: {
+        // 'Content-Type': 'application/json'
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+        'Access-Control-Allow-Origin': '*'
+      },
+      responseType: 'json',
+    })
+      .then((res)=>{
+        console.log(res.data.redirectURL);
+        window.location.href = `${res.data.redirectURL}`;
+        return res;
+      })
+      .catch((err)=>{
+        return err.response;
+      });
+
+
   };
 
   render() {
@@ -146,19 +171,19 @@ class SignUp extends Component {
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" />
         <div className="container registerContainer">
 
-          <div className="card bg-light">
+          <div className="col-sm-8 report-inner-container">
             <article className="card-body mx-auto">
-              <h4 className="card-title mt-3 text-center">Sign Up</h4>
-              <p className="text-center">Get started with your free account</p>
-              {/* <p>*/}
-              {/*  <button className="btn btn-block btn-google">*/}
-              {/*    <i className="fab fa-google" /> Login via google*/}
-              {/*  </button>*/}
-              {/* </p>*/}
+              <h4 className="card-title mt-3 text-center">회원가입</h4>
+              <p className="text-center">회원 가입 없이 서비스를 시작하세요.</p>
+              <p>
+                <button className="btn btn-block btn-google" onClick={this.onClickGoogleBtn}>
+                  <i className="fab fa-google" /> 구글 로그인 하기
+                </button>
+              </p>
 
-              {/* <p className="divider-text">*/}
-              {/*  <span className="bg-light">OR</span>*/}
-              {/* </p>*/}
+              <p className="divider-text">
+                <span className="bg-light">OR</span>
+              </p>
 
               <form>
                 {/* Email input*/}
@@ -166,7 +191,7 @@ class SignUp extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text"> <i className="fa fa-envelope" /> </span>
                   </div>
-                  <input name="emailInfo" className="form-control" placeholder="Email address" type="email"
+                  <input name="emailInfo" className="form-control" placeholder="이메일" type="email"
                     value={this.state.email} onChange={this.onChangeEmail} />
                 </div>
                 {/* fullname input*/}
@@ -174,7 +199,7 @@ class SignUp extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text"> <i className="fa fa-user" /> </span>
                   </div>
-                  <input name="" className="form-control" placeholder="Nick name" type="text"
+                  <input name="" className="form-control" placeholder="닉네임" type="text"
                     value={this.state.nickname} onChange={this.onChangeNickName} />
                 </div>
                 {/* createPW input*/}
@@ -182,7 +207,7 @@ class SignUp extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text"> <i className="fa fa-lock" /> </span>
                   </div>
-                  <input className="form-control" placeholder="Create password" type="password"
+                  <input className="form-control" placeholder="비밀번호" type="password"
                     value={this.state.password} onChange={this.onChangePassword} />
                 </div>
                 {/* checkPW input*/}
@@ -190,7 +215,7 @@ class SignUp extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text"> <i className="fa fa-lock" /> </span>
                   </div>
-                  <input className="form-control" placeholder="Repeat password" type="password"
+                  <input className="form-control" placeholder="비밀번호 확인" type="password"
                     value={this.state.passwordCheck} onChange={this.onChangePasswordCheck} />
                 </div>
                 <div>
@@ -198,11 +223,11 @@ class SignUp extends Component {
                 </div>
                 {/* 회원가입 버튼*/}
                 <div className="form-group">
-                  <button className="btn btn-primary btn-block"
-                    onClick={this.signUpBtnClicked}> Create Account
+                  <button className="btn btn-dark btn-block"
+                    onClick={this.signUpBtnClicked}> 계정 생성하기
                   </button>
                 </div>
-                <p className="text-center">Have an account? <Link to="/signin" className="nav-link"> Log In </Link></p>
+                <p className="text-center">이미 계정을 가지고 있나요? <Link to="/signin" className="nav-link"> 로그인 하러 가기 </Link></p>
               </form>
             </article>
           </div>
