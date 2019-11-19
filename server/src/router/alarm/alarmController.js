@@ -31,8 +31,6 @@ router.post('/', (req, res) => {
     }
   });
 
-  console.log(userEmail);
-
   const mailOptions = {
     from: `noreply@moneydog.io`, // 발송 메일 주소 (위에서 작성한 gmail 계정 아이디)
     to: userEmail, // 수신 메일 주소
@@ -52,7 +50,7 @@ router.post('/', (req, res) => {
     }
   });
 
-  res.send(userEmail);
+  res.send('success');
 });
 
 export default router;

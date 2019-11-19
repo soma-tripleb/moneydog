@@ -26,8 +26,10 @@ class Info extends Component {
     // 페이지 이동
   };
 
-  sendmail = () =>{
-    const result = InfoService.sendmailFormReport(this.props.userSubscriptions);
+  sendmail = async () =>{
+    const result = await InfoService.sendmailFormReport(this.props.userSubscriptions);
+
+    alert('메일을 성공적으로 보냈습니다.');
 
   };
 
