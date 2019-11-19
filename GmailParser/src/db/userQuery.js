@@ -2,6 +2,8 @@ import mongoDB from '../config/mongo/db';
 import dotenv from 'dotenv';
 dotenv.config();
 
+import should from 'should';
+
 const DB_ENV = (() => {
   return (process.env.NODE_ENV === undefined) ? 'test' : process.env.NODE_ENV;
 })();
@@ -86,9 +88,41 @@ const getRefreshToken = async (useremail) => {
   return result.refreshToken;
 };
 
+const insertSubscriptions = async (useremail, listSubscription) => {
+
+  let client;
+  let result;
+
+  try {
+    client = await mongoDB.client();
+    const db = client.db(DB_ENV);
+
+    result = await db.collection('users').updateMany(
+      { email: useremail },
+      { $push: { subscription: { $each: listSubscription } } }
+    );
+
+    const confirmForm = {
+      n: result.result.n,
+      nModified: result.result.nModified,
+      ok: result.result.ok
+    };
+
+    result = confirmForm;
+
+  } catch (err) {
+    throw err;
+  } finally {
+    client.close();
+  }
+
+  return result;
+};
+
 export default {
   getUser,
   insertUser,
   insertRefreshToken,
   getRefreshToken,
+  insertSubscriptions,
 };

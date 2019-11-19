@@ -18,11 +18,19 @@ class GooglePlay {
   }
 
   setPrice(price) {
-    if (price.indexOf('합계: ') == -1) { // '-1' 이면 해당 문자열이 없는 것
-      this.price = price;
+    const priceArr = price.split('(');
+
+    const onlyNumberRegex = /[^0-9]/g; // 숫자만
+
+    const price0 = priceArr[0].replace(onlyNumberRegex, '');
+    const price1 = priceArr[1].replace(onlyNumberRegex, '');
+
+    if (price0 == '') {
+      this.price = price1;
     } else {
-      this.price = price.replace('합계: ', '');
+      this.price = price0;
     }
+
     return this;
   }
 

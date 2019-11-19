@@ -1,8 +1,28 @@
 import express from 'express';
 
+import axios from 'axios';
+
 import GmailService from 'src/service/gmailService';
+import SubscriptionDAO from 'src/model/dao/subscription';
+import UserQuery from 'src/db/UserQuery';
 
 const router = express.Router();
+
+// TODO(park): Move to 'db' or 'static'
+const SERVER_BASE_URL = 'http://localhost:5000/api';
+const SERVER_URL = '/google/worker/listener';
+
+const gmailParsingResponse = (result) => {
+  console.log('Gmail Parsing End');
+  axios({
+    method: 'post',
+    baseURL: 'http://localhost:5000/api',
+    url: '/google/worker/listener',
+    data: {
+      result: result
+    }
+  });
+};
 
 const wrapper = (asyncFn) => {
   return (async (req, res, next) => {
@@ -95,30 +115,45 @@ router.get('/parsing/:useremail', wrapper(async (req, res) => {
 
   const parsing = await GmailService.parsing(useremail);
 
-  const listSubscription = [];
-
-  // TODO(park): 가장 최근의 구독이 무엇인지 알아내는 알고리즘 필요
-  for (const [key, value] of parsing) {
-    if (key == 'renewal') {
-      value.map((elem) => {
-        console.log(elem);
-      });
-    }
-  }
-
   res.json(Object.fromEntries(parsing)).end();
 }));
 
 router.post('/parsing', wrapper(async (req, res) => {
   const useremail = req.body.useremail;
 
-  console.log('Gmail Parsing');
-  console.log(useremail);
+  console.log('Gmail Parsing Start ', useremail);
 
   const parsing = await GmailService.parsing(useremail);
-  console.log(parsing);
 
-  res.json(Object.fromEntries(parsing)).end();
+  const listSubscription = [];
+
+  // TODO(park): 가장 최근의 구독이 무엇인지 알아내는 알고리즘 필요
+  for (const [key, value] of parsing) {
+    if (key == 'renewal') {
+      value.map((elem) => {
+        const category = elem.category;
+        const name = elem.service;
+        const price = elem.price;
+        const paymentDate = elem.endDate;
+
+        const Subscription = new SubscriptionDAO('', '', name, '', price, paymentDate, 'in-app');
+
+        listSubscription.push(Subscription);
+      });
+    }
+  }
+
+  // TODO(park): 파싱으로 추가한 구독 서비스 삭제 가능하게 'seq' 넣어 줘야 함
+  const insertResult = await UserQuery.insertSubscriptions(useremail, listSubscription);
+
+  const result = {
+    useremail,
+    insertResult
+  };
+
+  gmailParsingResponse(result);
+
+  res.json(result).end();
 }));
 
 

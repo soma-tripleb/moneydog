@@ -4,6 +4,8 @@ import GmailService from 'src/service/gmailService';
 import GooglePlayDTO from 'src/model/dto/googleplay';
 import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery';
 
+import UserQuery from 'src/db/UserQuery';
+
 const GOOGLEPLAY_QUERY = (() => {
   return GMAIL_SEARCH_QUERY.q.googleplay;
 })();
@@ -107,6 +109,22 @@ const queryParsing = async (useremail) => {
   }
 
   return googleplayMassages;
+};
+
+const newSubscribe = async (useremail, listParsingSubscribe) => {
+
+  const result;
+  const listOldSubscribe;
+
+  try {
+    const userInfo = UserQuery.getUser(useremail);
+
+    listOldSubscribe = userInfo.subscription;
+  } catch (err) {
+    throw new Error('GOOGLEPLAY_SERVICE_NEWSUBSCRIBE_GET_USER ', err);
+  }
+
+  // TODO(park): 각 리스트 돌면서 겹치는 것 제거하기
 };
 
 export default {
