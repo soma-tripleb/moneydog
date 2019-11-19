@@ -18,6 +18,24 @@ const sendGoogleOAuthCode = async (code) => {
   });
 };
 
-export default {
-  sendGoogleOAuthCode,
+const sendmailFormReport = (userSubscriptions) => {
+
+  return axios({
+    method: 'post',
+    url: `${SERVER_URL}/alarm`,
+
+    headers: {
+      'x-access-token': Cookies.get('token'),
+      'Content-Type': 'application/json'
+    },
+    data: {
+      userSubscriptions: userSubscriptions,
+    },
+    responseType: 'json',
+  });
 };
+
+export default {
+  sendGoogleOAuthCode, sendmailFormReport
+};
+

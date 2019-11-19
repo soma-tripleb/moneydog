@@ -35,6 +35,7 @@ import authRouter from './src/router/auth/authentiController';
 import userRouter from './src/router/user/userController';
 import subsInfoRouter from './src/router/subscriptiionInfo/subsInfoController';
 import subsTmplRouter from './src/router/subscriptionTemplate/subsTmplController';
+import alarmRouter from './src/router/alarm/alarmController';
 import oAuth2Router from './src/router/auth/google/oAuth2Controller';
 
 if (process.env.NODE_ENV !== 'test') {
@@ -43,10 +44,12 @@ if (process.env.NODE_ENV !== 'test') {
 app.use('/', indexRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/google', oAuth2Router);
+app.use('/api/alarm', alarmRouter);
 app.use(authCheck);
 app.use('/api/users', userRouter);
 app.use('/api/subs-info', subsInfoRouter);
 app.use('/api/subs-tmpl', subsTmplRouter);
+
 
 // error logger
 app.use(errorLogger);
