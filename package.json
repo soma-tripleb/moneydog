@@ -50,6 +50,7 @@
     "mongoose": "^5.6.0",
     "mongoose-plugin-autoinc": "^1.1.9",
     "morgan": "~1.9.1",
+    "nodemailer": "^6.3.1",
     "popper.js": "^1.15.0",
     "puppeteer": "^1.11.0",
     "react": "^16.8.6",

@@ -18,13 +18,20 @@ class Info extends Component {
   responseGoogle = async (res) => {
     if (typeof res.code == 'undefined') throw new Error('GOOGLE_OAUTH_CODE_NOT_FOUND');
     else {
-      const result = await InfoService.sendGoogleOAuthCode(res);
+      const result = await InfoService.sendGoogleOAuthCode();
 
       console.log(result);
     }
 
     // 페이지 이동
-  }
+  };
+
+  sendmail = async () =>{
+    const result = await InfoService.sendmailFormReport(this.props.userSubscriptions);
+
+    alert('메일을 성공적으로 보냈습니다.');
+
+  };
 
   onClicklogout = () => {
     this.props.REDUX_AUTH_LOGOUT_REQUEST();
@@ -52,15 +59,27 @@ class Info extends Component {
               </div>
               <div className="col-6">
                 <GoogleLogin
-                    clientId={`${process.env.GOOGLE_API_CLIENT_ID}`}
-                    scope={`${process.env.GOOGLE_API_SCOPE}`}
-                    buttonText="Login"
-                    accessType="offline"
-                    responseType="code"
-                    onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
-                    cookiePolicy={'single_host_origin'}
+                  clientId={`${process.env.GOOGLE_API_CLIENT_ID}`}
+                  scope={`${process.env.GOOGLE_API_SCOPE}`}
+                  buttonText="Login"
+                  accessType="offline"
+                  responseType="code"
+                  onSuccess={this.responseGoogle}
+                  onFailure={this.responseGoogle}
+                  cookiePolicy={'single_host_origin'}
                 />
+              </div>
+
+              <div className="row info-inner">
+                <div className="col text-left  info-text">
+                  리포트 메일 보내기
+                </div>
+              </div>
+              <div className="row">
+                <div className="col">
+                  <button onClick={this.sendmail} type="button" className="btn btn-end"> 보내기 </button>
+
+                </div>
               </div>
 
               <div className="row info-inner">
@@ -84,8 +103,9 @@ class Info extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  // status: state.auth.login.status,
-  // nickname: state.auth.login.nickname,
+  status: state.auth.login.status,
+  nickname: state.auth.login.nickname,
+  userSubscriptions: state.users.subscriptions,
 });
 
 const mapDispatchToProps = (dispatch) => {
