@@ -6,13 +6,14 @@ import axios from 'axios';
 import { google } from 'googleapis';
 import OAuth2Repository from 'src/router/auth/google/oAuth2Repository';
 
-// Move to 'db' or 'static'
+// TODO(park): Move to 'db' or 'static'
 const WORKER_BASE_URL = 'http://localhost:3000';
 const WORKER_URL = '/gmail/parsing';
 
 const router = express.Router();
 
 const gmailParsingJob = (useremail) => {
+  console.log('Google OAuth 인증 End');
   axios({
     method: 'post',
     baseURL: WORKER_BASE_URL,
@@ -24,6 +25,7 @@ const gmailParsingJob = (useremail) => {
 };
 
 router.post('/oauth', async (req, res) => {
+  console.log('Google OAuth 인증 Start');
 
   let code;
 
@@ -69,7 +71,16 @@ router.post('/oauth', async (req, res) => {
   } catch (err) {
     throw err;
   }
+});
 
+router.post('/worker/listener', (req, res) => {
+  // const useremail = req.body.useremail;
+  // const parsingResult = req.body.insertResult;
+
+  console.log(req.body);
+  // if (parsingResult.n == 1 && parsingResult.nModified && parsingResult.ok == 1) {
+  // };
+  console.log(useremail, ' Parsing success');
 });
 
 export default router;

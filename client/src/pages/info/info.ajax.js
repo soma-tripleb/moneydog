@@ -6,7 +6,7 @@ const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
 
 const sendGoogleOAuthCode = async (code) => {
 
-  return await axios({
+  const result = await axios({
     method: 'post',
     url: `${SERVER_URL}/google/oauth`,
     headers: {
@@ -16,6 +16,8 @@ const sendGoogleOAuthCode = async (code) => {
     data: code,
     responseType: 'json',
   });
+
+  return result;
 };
 
 const sendmailFormReport = (userSubscriptions) => {
