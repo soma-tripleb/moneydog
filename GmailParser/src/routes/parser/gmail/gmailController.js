@@ -129,6 +129,32 @@ router.post('/parsing', wrapper(async (req, res) => {
 
   // TODO(park): 가장 최근의 구독이 무엇인지 알아내는 알고리즘 필요
   for (const [key, value] of parsing) {
+    if (key == 'trial') {
+      value.map((elem) => {
+        const category = elem.category;
+        const name = elem.service;
+        const price = elem.price;
+        const paymentDate = elem.endDate;
+
+        const Subscription = new SubscriptionDAO('', '', name, '', price, paymentDate, 'in-app');
+
+        listSubscription.push(Subscription);
+      });
+    }
+
+    if (key == 'subscription') {
+      value.map((elem) => {
+        const category = elem.category;
+        const name = elem.service;
+        const price = elem.price;
+        const paymentDate = elem.endDate;
+
+        const Subscription = new SubscriptionDAO('', '', name, '', price, paymentDate, 'in-app');
+
+        listSubscription.push(Subscription);
+      });
+    }
+
     if (key == 'renewal') {
       value.map((elem) => {
         const category = elem.category;
@@ -143,7 +169,8 @@ router.post('/parsing', wrapper(async (req, res) => {
     }
   }
 
-  // TODO(park): 파싱으로 추가한 구독 서비스 삭제 가능하게 'seq' 넣어 줘야 함
+  console.log(listSubscription);
+
   const insertResult = await UserQuery.insertSubscriptions(useremail, listSubscription);
 
   const result = {

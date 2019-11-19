@@ -111,23 +111,44 @@ const queryParsing = async (useremail) => {
   return googleplayMassages;
 };
 
-const newSubscribe = async (useremail, listParsingSubscribe) => {
+const newSubscription = async (useremail, listParsingSubscribe) => {
 
-  const result;
-  const listOldSubscribe;
+  const result = [];
+  const subscriptionNameSet = new Set();
+  let listStoredSubscribe;
 
   try {
-    const userInfo = UserQuery.getUser(useremail);
+    const userInfo = await UserQuery.getUser(useremail);
 
-    listOldSubscribe = userInfo.subscription;
+    listStoredSubscribe = userInfo.subscription;
   } catch (err) {
     throw new Error('GOOGLEPLAY_SERVICE_NEWSUBSCRIBE_GET_USER ', err);
   }
 
-  // TODO(park): 각 리스트 돌면서 겹치는 것 제거하기
+  if (listStoredSubscribe.length != 0) {
+    listStoredSubscribe.some((subscription) => {
+      if (subscriptionNameSet.has(subscription.name)) {
+        return false;
+      } else {
+        subscriptionNameSet.add(subscription.name);
+      }
+    });
+  }
+
+  if (listParsingSubscribe.lengh != 0) {
+    listParsingSubscribe.some((subscription) => {
+      if (subscriptionNameSet.has(subscription.service)) {
+        return false;
+      } else {
+        result.push(subscription);
+      }
+    });
+  };
+  return result;
 };
 
 export default {
   parse,
-  queryParsing
+  queryParsing,
+  newSubscription
 };
