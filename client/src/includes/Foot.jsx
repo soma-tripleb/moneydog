@@ -35,9 +35,6 @@ class Foot extends Component {
                     <div className="col-sm footer-pad">
                       공지 사항
                     </div>
-                    <div className="col-sm footer-pad">
-                      개인 정보 취급 방침
-                    </div>
                   </div>
                 </div>
                 <div className="col">
