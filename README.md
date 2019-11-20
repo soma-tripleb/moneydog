@@ -1,4 +1,5 @@
 <img src="https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/MDheader.png" width="50%"/>
+
 ---
 
 
@@ -47,3 +48,24 @@ SNS 계정을 통한 가입방법과 개인 계정을 만들어 접속하는 것
 사용자가 리다이렉션 되는 구글 로그인시 자동으로 구글 이메일 영수증 목록을 스캔 합니다. 서비스는 자동으로 사용자의 구독 리스트를 추가 해줍니다.
 
 <img src="https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/subsManage4.png"/>
+
+# 시스템 구성도
+
+### Service Architecture
+사용자가 서비스를 사용하는 내부 아키텩쳐
+<img src="https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/serviceArctecture.png"/>
+
+사용 기술 : ReactJS / NodeJS / MongoDB / GoogleAPI
+
+### Google Mail Sacn Process
+Google Mail 영수증이 크롤링 되어서 데이터베이스에 저장 되는 과정
+<img src="https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/googleSacn.png"/>
+
+사용 기술 : Gmail API / Crawling / RegExp / String parsing / Google OAuth
+
+### CI/CD & Deploy Process
+moneydog 서비스가 Git circle CI 를 통해 빌드 및 배포 되는 과정
+<img src="https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/deployProcess.png"/>
+
+사용 기술 : AWS S3 / AWS ECS / AWS ECR / AWS CloudWatch / Circle CI / Slack  
+
