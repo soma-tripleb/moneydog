@@ -50,6 +50,9 @@ SNS 계정을 통한 가입방법과 개인 계정을 만들어 접속하는 것
 <img src="https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/subsManage4.png"/>
 
 # 시스템 구성도
+### Site Map
+사용자가 머니독 서비스를 사용하는 순서도
+<img src="https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/subsManage5.png"/>
 
 ### Service Architecture
 사용자가 서비스를 사용하는 내부 아키텩쳐
