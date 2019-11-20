@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import update from 'react-addons-update';
+import SubsApp from './subsApp';
 
 class userCustomSubscription extends Component {
 
@@ -46,7 +47,7 @@ class userCustomSubscription extends Component {
     this.setState({
       customServiceArray: update(
         customServiceArray, {
-          $push: [{serviceName: ''}]
+          $set: [{serviceName: ''}]
         }
       )
     });
@@ -66,6 +67,25 @@ class userCustomSubscription extends Component {
     });
   };
 
+  showCustomUserService = () =>{
+    const customServiceList = this.props.subsList.map((service, i)=>{
+      if (service.hasOwnProperty('color')) {
+        console.log(service.color);
+        return (
+          <SubsApp key={i+service.name} onDelete={()=>{console.log();}} subsAppInfo={
+            {
+              seq: service.seq,
+              logoURI: service.logoURI,
+              name: service.name,
+              color: service.color,
+              label: '+',
+            }
+          }/>
+        );
+      }
+    });
+    return customServiceList;
+  };
   showCustomService = () =>{
 
     const {customServiceArray} = this.state;
@@ -111,6 +131,7 @@ class userCustomSubscription extends Component {
   render() {
     return (
       <>
+        {this.showCustomUserService()}
         {this.showCustomService()}
       </>
     );

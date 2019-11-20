@@ -17,7 +17,6 @@ const colorPull = ['#fe7e79', '#ffd578', '#fffb77', '#d5fc78',
   '#73fa78', '#71fcd6', '#70fefe', '#75D5fe',
   '#7981ff', '#d782ff', '#ff83ff', '#fe8ad9'];
 
-
 class Subscriptions extends Component {
   constructor(props) {
     super(props);
@@ -45,7 +44,6 @@ class Subscriptions extends Component {
       alert('세션 만료 다시 로그인 해주세요');
       return;
     }
-
 
     const subsTmplList = subsTmplResponse.data.message;
 
@@ -123,21 +121,51 @@ class Subscriptions extends Component {
 
   makeStaticSubscribeApp = () => {
     const list = this.state.staticSubscribeArr.map(
-      (content, i) => (
-        <SubsApp
-          key={i + content.name}
-          onInsert={this.insertContact.bind(this)}
-          subsAppInfo={
-            {
-              seq: content.seq,
-              logoURI: content.logoURI,
-              name: content.name,
-              label: '+',
-            }
-          } />
-      )
+      (content, i) => {
+
+        if (this.checkAddSubs(content)) {
+          return (
+            <SubsApp
+              key={i + content.name}
+              onInsert={this.insertContact.bind(this)}
+              subsAppInfo={
+                {
+                  seq: content.seq,
+                  logoURI: content.logoURI,
+                  name: content.name,
+                  label: 'addedSubs',
+                }
+              } />
+          );
+        } else {
+          return (
+            <SubsApp
+              key={i + content.name}
+              onInsert={this.insertContact.bind(this)}
+              subsAppInfo={
+                {
+                  seq: content.seq,
+                  logoURI: content.logoURI,
+                  name: content.name,
+                  label: '+',
+                }
+              } />
+          );
+        }
+      }
     );
     return list;
+  };
+
+  checkAddSubs = (staticSubs) =>{
+    let flag = false;
+    this.state.SubscribingArr.forEach(
+      (content, i) => {
+        if (content.name === staticSubs.name)
+          flag = true;
+      }
+    );
+    return flag;
   };
 
   makeSubscribingApp = () => {
@@ -178,7 +206,7 @@ class Subscriptions extends Component {
                   <div className="subs-title">주요 구독 서비스</div>
                   {this.makeStaticSubscribeApp()}
                   <div className="subs-title">직접 추가 입력</div>
-                  <UserCustomSubscription onInsert={this.insertContact.bind(this)}/>
+                  <UserCustomSubscription subsList={this.state.SubscribingArr} onInsert={this.insertContact.bind(this)}/>
                 </div>
               </div>
 
@@ -200,8 +228,6 @@ class Subscriptions extends Component {
             </div>
 
           </div>
-
-
         </div>
 
         <div className="container subscription-title">

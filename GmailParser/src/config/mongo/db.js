@@ -39,7 +39,7 @@ const client = async () => {
   const DB_URL = PREFIX.concat(POSTFIX);
 
   const client = await MongoClient.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
-
+  // TODO(park): NODE 실행 환경에 따라서 어떤 DB 에 매칭 되었는지 확인하기
   return client;
 };
 

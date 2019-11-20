@@ -11,7 +11,6 @@ import cors from 'cors';
 import indexRouter from './src/routes/index';
 import oauthRouter from './src/routes/oauth/oauthController';
 import gmailRouter from './src/routes/parser/gmail/gmailController';
-import appleRouter from './src/routes/parser/gmail/apple/appleController';
 import googleplayRouter from './src/routes/parser/gmail/googleplay/googleplayController';
 import testdataRouter from 'src/routes/parser/testdata/testdataController';
 
@@ -29,7 +28,6 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/oauth', oauthRouter);
 app.use('/gmail', gmailRouter);
-app.use('/gmail/apple', appleRouter);
 app.use('/gmail/googleplay', googleplayRouter);
 app.use('/testdata', testdataRouter);
 

@@ -1,6 +1,6 @@
 import UserSchema from '../../schemas/user';
 
-const findAll = () => {
+const findAll = async () => {
   return UserSchema.User.find()
     .then((result) => {
       return { status: 201, success: true, message: result };
@@ -10,7 +10,7 @@ const findAll = () => {
     });
 };
 
-const findOne = (email) => {
+const findOne = async (email) => {
   return UserSchema.User.findOne({ email: email })
     .then((result) => {
       return { status: 201, success: true, message: result };
@@ -34,7 +34,7 @@ const saveOne = async (user) => {
     });
 };
 
-const deleteOne = (email) => {
+const deleteOne = async (email) => {
   return UserSchema.User.deleteOne({ email: email })
     .then((result) => {
       return { status: 201, success: true, message: { object: email, result } };
@@ -48,7 +48,8 @@ const deleteAllUser = () => {
   return UserSchema.User.deleteMany({});
 };
 
-const update = (email, subsInfoList) => {
+// TODO(park): update query test
+const update = async (email, subsInfoList) => {
   return UserSchema.User.update(
     { email: email },
     { $push: { subscription: subsInfoList } },
