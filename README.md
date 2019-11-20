@@ -1,4 +1,4 @@
-![Money Dog Logo](https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/MDheader.png)
+<img src="https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/MDheader.png" width="50%"/>
 ---
 
 
@@ -36,9 +36,14 @@ SNS 계정을 통한 가입방법과 개인 계정을 만들어 접속하는 것
 ### 구독 서비스 정보 보기
 등록한 구독 서비스를 한눈에 관리 할 수 있는 페이지 입니다. 구독서비스의 전체적인 가격과 세세한 정보들 및 사용자의 구독 히스토리를 관리 할 수 있습니다.
 
-
 <img src="https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/subsManage2.png"/>
 
-### 알림 보내기
+### 알림 보내기 
+리포트 페이지를 정기적으로 또는 버튼 클릭시 사용자의 메일로 보내드립니다.
+ 
+<img src="https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/subsManage3.png"/>
 
 ### 스캔하기
+사용자가 리다이렉션 되는 구글 로그인시 자동으로 구글 이메일 영수증 목록을 스캔 합니다. 서비스는 자동으로 사용자의 구독 리스트를 추가 해줍니다.
+
+<img src="https://moneydog.s3.ap-northeast-2.amazonaws.com/resource/img/subsManage4.png"/>
