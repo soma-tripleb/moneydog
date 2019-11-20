@@ -1,17 +1,38 @@
 import React, { Component } from 'react';
+import counterUp from 'counterup2';
 
 class TotalAmount extends Component {
 
-  getTotalAmount = () => {
+  state ={
+    sum: 0,
+  };
+
+  componentWillReceiveProps(nextProps) {
+    this.getTotalAmount(nextProps.data);
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    counterUp(document.querySelector('.counter'), {
+      duration: 1000,
+      delay: 16
+    });
+  }
+
+  getTotalAmount = (subsList) => {
     let sum = 0;
 
-    if (this.props.data !== null) {
-      this.props.data.map((subscription) => {
+    if (subsList !== null) {
+      subsList.map((subscription) => {
         sum += Number(subscription.price);
       });
     }
 
-    return this.numberWithCommas(sum);
+    console.log(sum);
+
+    this.setState({
+      sum: sum,
+    });
+    // return this.numberWithCommas(sum);
   };
 
   numberWithCommas = (number) => {
@@ -25,7 +46,9 @@ class TotalAmount extends Component {
           <div className="component-title">총 &nbsp; 결제금액</div>
           <div className="total-amount-text">
             <span className="pricePredix"> 매월 </span>
-            <span className="price"> {this.getTotalAmount()} 원 </span>
+            <span className="price">
+              <span className="counter">{this.numberWithCommas(this.state.sum)}</span> 원
+            </span>
           </div>
         </div>
       </>

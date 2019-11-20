@@ -363,6 +363,7 @@ thead > tr {
 }
 
 .item-bold {
+    margin: auto;
     color: black;
     font-weight: bold;
     font-size: 2vh;
@@ -427,6 +428,7 @@ thead > tr {
 }
 
 .report-content{
+    margin: 1vh;
     font-family: 'Montserrat-Regular';
 }
 

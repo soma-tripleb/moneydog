@@ -22,7 +22,7 @@ class Categories extends Component {
     } else {
       list = this.props.data.map(
         (data, index) => {
-          if (moment(data.paymentDate, 'YYYY/MM/DD').date() === this.props.date) {
+          if (moment(data.paymentDate, 'YYYY/MM/DD').date() === moment(this.props.date, 'YYYY-MM-DD').date()) {
             return (<Item key={index} data={data}/>);
           }
         }

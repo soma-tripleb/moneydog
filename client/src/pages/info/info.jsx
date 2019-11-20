@@ -53,18 +53,18 @@ class Info extends Component {
                   </button>
                 </div>
               </div>
-              <div className="col-6">
-                <GoogleLogin
-                  clientId={`${process.env.GOOGLE_API_CLIENT_ID}`}
-                  scope={`${process.env.GOOGLE_API_SCOPE}`}
-                  buttonText="Login"
-                  accessType="offline"
-                  responseType="code"
-                  onSuccess={this.responseGoogle}
-                  onFailure={this.responseGoogle}
-                  cookiePolicy={'single_host_origin'}
-                />
-              </div>
+              {/*<div className="col-6">*/}
+              {/*  <GoogleLogin*/}
+              {/*    clientId={`${process.env.GOOGLE_API_CLIENT_ID}`}*/}
+              {/*    scope={`${process.env.GOOGLE_API_SCOPE}`}*/}
+              {/*    buttonText="Login"*/}
+              {/*    accessType="offline"*/}
+              {/*    responseType="code"*/}
+              {/*    onSuccess={this.responseGoogle}*/}
+              {/*    onFailure={this.responseGoogle}*/}
+              {/*    cookiePolicy={'single_host_origin'}*/}
+              {/*  />*/}
+              {/*</div>*/}
 
               <div className="row info-inner">
                 <div className="col text-left  info-text">
