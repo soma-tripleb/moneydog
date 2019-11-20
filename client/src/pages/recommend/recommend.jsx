@@ -11,7 +11,7 @@ class Recommend extends Component {
     return (
       <>
         <div className="container">
-          {/*<div className="row">*/}
+          {/* <div className="row">*/}
 
           {/*  /!* 구독중인 서비스 list *!/*/}
           {/*  <div className="col-md-6">*/}
@@ -245,7 +245,7 @@ class Recommend extends Component {
 
           {/*  </div>*/}
 
-          {/*</div>*/}
+          {/* </div>*/}
 
         </div>
       </>

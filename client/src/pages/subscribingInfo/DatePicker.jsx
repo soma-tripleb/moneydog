@@ -20,6 +20,7 @@ class DatePickers extends Component {
     date: null,
   };
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       date: nextProps.date,
