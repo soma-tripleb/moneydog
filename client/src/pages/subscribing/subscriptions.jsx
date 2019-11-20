@@ -17,7 +17,6 @@ const colorPull = ['#fe7e79', '#ffd578', '#fffb77', '#d5fc78',
   '#73fa78', '#71fcd6', '#70fefe', '#75D5fe',
   '#7981ff', '#d782ff', '#ff83ff', '#fe8ad9'];
 
-
 class Subscriptions extends Component {
   constructor(props) {
     super(props);
@@ -207,7 +206,7 @@ class Subscriptions extends Component {
                   <div className="subs-title">주요 구독 서비스</div>
                   {this.makeStaticSubscribeApp()}
                   <div className="subs-title">직접 추가 입력</div>
-                  <UserCustomSubscription onInsert={this.insertContact.bind(this)}/>
+                  <UserCustomSubscription subsList={this.state.SubscribingArr} onInsert={this.insertContact.bind(this)}/>
                 </div>
               </div>
 
@@ -229,8 +228,6 @@ class Subscriptions extends Component {
             </div>
 
           </div>
-
-
         </div>
 
         <div className="container subscription-title">

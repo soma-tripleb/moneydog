@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import update from 'react-addons-update';
+import SubsApp from "./subsApp";
 
 class userCustomSubscription extends Component {
 
@@ -69,6 +70,22 @@ class userCustomSubscription extends Component {
   showCustomService = () =>{
 
     const {customServiceArray} = this.state;
+
+    this.props.subsList.map((service,idx)=>{
+      if(service.hasOwnProperty('color')){
+        // return (
+        //     <SubsApp key={i+service.name} onDelete={this.deleteContant.bind(this)} subsAppInfo={
+        //       {
+        //         seq: service.seq,
+        //         logoURI: service.logoURI,
+        //         name: service.name,
+        //         color: service.color,
+        //         label: '-',
+        //       }
+        //     }/>
+        // )
+      }
+    });
 
     const customServiceList = customServiceArray.map(
       (Service, idx) => (
