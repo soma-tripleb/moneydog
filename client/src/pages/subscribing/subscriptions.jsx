@@ -46,7 +46,6 @@ class Subscriptions extends Component {
       return;
     }
 
-
     const subsTmplList = subsTmplResponse.data.message;
 
     if (subscriptions.length !== 0) {
@@ -123,21 +122,51 @@ class Subscriptions extends Component {
 
   makeStaticSubscribeApp = () => {
     const list = this.state.staticSubscribeArr.map(
-      (content, i) => (
-        <SubsApp
-          key={i + content.name}
-          onInsert={this.insertContact.bind(this)}
-          subsAppInfo={
-            {
-              seq: content.seq,
-              logoURI: content.logoURI,
-              name: content.name,
-              label: '+',
-            }
-          } />
-      )
+      (content, i) => {
+
+        if (this.checkAddSubs(content)) {
+          return (
+            <SubsApp
+              key={i + content.name}
+              onInsert={this.insertContact.bind(this)}
+              subsAppInfo={
+                {
+                  seq: content.seq,
+                  logoURI: content.logoURI,
+                  name: content.name,
+                  label: 'addedSubs',
+                }
+              } />
+          );
+        } else {
+          return (
+            <SubsApp
+              key={i + content.name}
+              onInsert={this.insertContact.bind(this)}
+              subsAppInfo={
+                {
+                  seq: content.seq,
+                  logoURI: content.logoURI,
+                  name: content.name,
+                  label: '+',
+                }
+              } />
+          );
+        }
+      }
     );
     return list;
+  };
+
+  checkAddSubs = (staticSubs) =>{
+    let flag = false;
+    this.state.SubscribingArr.forEach(
+      (content, i) => {
+        if (content.name === staticSubs.name)
+          flag = true;
+      }
+    );
+    return flag;
   };
 
   makeSubscribingApp = () => {
