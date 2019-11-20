@@ -1,9 +1,29 @@
 import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
+
+import axios from 'axios';
 
 import GmailService from 'src/service/gmailService';
-import UserQuery from 'src/db/userQuery';
+import SubscriptionDAO from 'src/model/dao/subscription';
+import UserQuery from 'src/db/UserQuery';
 
 const router = express.Router();
+
+const SERVER_BASE_URL = `${process.env.SERVER_BASE_URL}`;
+const RESOURCE_URI = `${process.env.RESOURCE_URI}`;
+
+const gmailParsingResponse = (result) => {
+  console.log('Gmail Parsing End');
+  axios({
+    method: 'post',
+    baseURL: SERVER_BASE_URL,
+    url: RESOURCE_URI,
+    data: {
+      result: result
+    }
+  });
+};
 
 const wrapper = (asyncFn) => {
   return (async (req, res, next) => {
@@ -102,13 +122,66 @@ router.get('/parsing/:useremail', wrapper(async (req, res) => {
 router.post('/parsing', wrapper(async (req, res) => {
   const useremail = req.body.useremail;
 
-  console.log('Gmail Parsing');
-  console.log(useremail);
+  console.log('Gmail Parsing Start ', useremail);
 
   const parsing = await GmailService.parsing(useremail);
-  console.log(parsing);
 
-  res.json(Object.fromEntries(parsing)).end();
+  const listSubscription = [];
+
+  // TODO(park): 가장 최근의 구독이 무엇인지 알아내는 알고리즘 필요
+  for (const [key, value] of parsing) {
+    if (key == 'trial') {
+      value.map((elem) => {
+        const category = elem.category;
+        const name = elem.service;
+        const price = elem.price;
+        const paymentDate = elem.endDate;
+
+        const Subscription = new SubscriptionDAO('', '', name, '', price, paymentDate, 'in-app');
+
+        listSubscription.push(Subscription);
+      });
+    }
+
+    if (key == 'subscription') {
+      value.map((elem) => {
+        const category = elem.category;
+        const name = elem.service;
+        const price = elem.price;
+        const paymentDate = elem.endDate;
+
+        const Subscription = new SubscriptionDAO('', '', name, '', price, paymentDate, 'in-app');
+
+        listSubscription.push(Subscription);
+      });
+    }
+
+    if (key == 'renewal') {
+      value.map((elem) => {
+        const category = elem.category;
+        const name = elem.service;
+        const price = elem.price;
+        const paymentDate = elem.endDate;
+
+        const Subscription = new SubscriptionDAO('', '', name, '', price, paymentDate, 'in-app');
+
+        listSubscription.push(Subscription);
+      });
+    }
+  }
+
+  console.log(listSubscription);
+
+  const insertResult = await UserQuery.insertSubscriptions(useremail, listSubscription);
+
+  const result = {
+    useremail,
+    insertResult
+  };
+
+  gmailParsingResponse(result);
+
+  res.json(result).end();
 }));
 
 

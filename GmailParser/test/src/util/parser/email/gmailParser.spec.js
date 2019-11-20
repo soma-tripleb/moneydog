@@ -87,7 +87,7 @@ describe('GmailParser는', () => {
       });
     });
 
-    describe.only('사용자의 이메일을 받아서 메일 파싱을 진행한다.', () => {
+    describe('사용자의 이메일을 받아서 메일 파싱을 진행한다.', () => {
 
       const useremail = 'moneydogtest1@gmail.com';
 

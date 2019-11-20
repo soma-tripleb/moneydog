@@ -3,19 +3,21 @@ import crypto from 'crypto';
 dotenv.config();
 
 import AuthRepository from './authRepository';
-import {checkedPasswordForm} from '../../../../public/userInfoCheck';
-import {createJWT, checkJWT} from '../../security/jwtAuthenticationToken';
+import { checkedPasswordForm } from '../../../../public/userInfoCheck';
+import { createJWT, checkJWT } from '../../security/jwtAuthenticationToken';
 
 const register = async (userInfo) => {
-  // pw check
+
+  // TODO(jeong): pw check
   const pwCheckResult = checkedPasswordForm(userInfo.password);
   if (typeof pwCheckResult === 'string') {
-    return {status: 400, success: false, message: pwCheckResult};
+    return { status: 400, success: false, message: pwCheckResult };
   }
-  // user id check
+
+  // TODO(jeong): user id check
   const user = await AuthRepository.getUserByEmail(userInfo.email);
   if (user !== null) {
-    return {status: 400, success: false, message: '이미 존재하는 아이디 입니다.'};
+    return { status: 400, success: false, message: '이미 존재하는 아이디 입니다.' };
   }
 
 
@@ -27,11 +29,11 @@ const register = async (userInfo) => {
   userInfo.role = 'BASIC';
 
   const result = await AuthRepository.createUser(userInfo);
-  if (result.status === 400 ) {
+  if (result.status === 400) {
     return result;
   } else {
     const jwt = createJWT(userInfo.email);
-    return {status: 201, success: true, message: '회원가입에 성공했습니다.', token: jwt};
+    return { status: 201, success: true, message: '회원가입에 성공했습니다.', token: jwt };
   }
 };
 
@@ -39,7 +41,7 @@ const login = async (userInfo) => {
   const user = await AuthRepository.getUserByEmail(userInfo.email);
 
   if (user === null) {
-    return {status: 400, success: false, message: '없는 아이디 입니다.'};
+    return { status: 400, success: false, message: '없는 아이디 입니다.' };
   }
 
   const salt = user.salt;
@@ -50,13 +52,13 @@ const login = async (userInfo) => {
 
   if (user.password === hashPassword) {
     const jwt = createJWT(user.email);
-    return {status: 200, success: true, message: '로그인에 성공 했습니다.', nickname: user.nickname, token: jwt};
+    return { status: 200, success: true, message: '로그인에 성공 했습니다.', nickname: user.nickname, token: jwt };
   } else if (user.password !== hashPassword) {
-    return {status: 409, success: false, message: '비밀번호가 틀렸습니다.'};
+    return { status: 409, success: false, message: '비밀번호가 틀렸습니다.' };
   }
 };
 
-const sessionCheck = async (userInfo) =>{
+const sessionCheck = async (userInfo) => {
   return checkJWT(userInfo.jwt);
 };
 
@@ -67,10 +69,10 @@ const checkParam = (param) => {
   return true;
 };
 
-const hasProperty = (res, param, key) =>{
+const hasProperty = (res, param, key) => {
   if (!param.hasOwnProperty(key)) {
     console.log(`key가 없을때. ${key}`);
-    res.status(400).json({status: 400, success: false, message: `${key} key 가 없습니다.`});
+    res.status(400).json({ status: 400, success: false, message: `${key} key 가 없습니다.` });
   }
 };
 
