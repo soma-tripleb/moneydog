@@ -8,3 +8,4 @@ export {default as Subscribing} from './subscribing/subscriptions';
 export {default as SubscribingInfo} from './subscribingInfo/subscribingInfo';
 export {default as Dashboard} from './dashboard/dashboard';
 export {default as Report} from './report/report';
+export {default as Spinner} from './util/spinner';
