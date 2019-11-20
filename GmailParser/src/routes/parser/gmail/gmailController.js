@@ -1,4 +1,6 @@
 import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
 
 import axios from 'axios';
 
@@ -8,16 +10,15 @@ import UserQuery from 'src/db/UserQuery';
 
 const router = express.Router();
 
-// TODO(park): Move to 'db' or 'static'
-const SERVER_BASE_URL = 'http://localhost:5000/api';
-const SERVER_URL = '/google/worker/listener';
+const SERVER_BASE_URL = `${process.env.SERVER_BASE_URL}`;
+const RESOURCE_URI = `${process.env.RESOURCE_URI}`;
 
 const gmailParsingResponse = (result) => {
   console.log('Gmail Parsing End');
   axios({
     method: 'post',
-    baseURL: 'http://localhost:5000/api',
-    url: '/google/worker/listener',
+    baseURL: SERVER_BASE_URL,
+    url: RESOURCE_URI,
     data: {
       result: result
     }

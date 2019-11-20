@@ -6,9 +6,8 @@ import axios from 'axios';
 import { google } from 'googleapis';
 import OAuth2Repository from 'src/router/auth/google/oAuth2Repository';
 
-// TODO(park): Move to 'db' or 'static'
-const WORKER_BASE_URL = 'http://localhost:3000';
-const WORKER_URL = '/gmail/parsing';
+const WORKER_BASE_URL = `${process.env.WORKER_BASE_URL}`;
+const RESOURCE_URI = `${process.env.RESOURCE_URI}`;
 
 const router = express.Router();
 
@@ -17,7 +16,7 @@ const gmailParsingJob = (useremail) => {
   axios({
     method: 'post',
     baseURL: WORKER_BASE_URL,
-    url: WORKER_URL,
+    url: RESOURCE_URI,
     data: {
       useremail: useremail
     }
