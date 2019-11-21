@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import GmailService from '../../../../src/service/gmailService';
 import SubscriptionDAO from '../../../../src/model/dao/subscription';
-import UserQuery from '../../../../src/db/UserQuery';
+import UserQuery from '../../../../src/db/userQuery';
 
 const router = express.Router();
 
