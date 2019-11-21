@@ -19,7 +19,7 @@ class Info extends Component {
 
     if (typeof res.code == 'undefined') throw new Error('GOOGLE_OAUTH_CODE_NOT_FOUND');
     else {
-      await InfoService.sendGoogleOAuthCode();
+      await InfoService.sendGoogleOAuthCode(res.code);
     }
   };
 
@@ -46,25 +46,26 @@ class Info extends Component {
                     구글 계정 연동 하기
                 </div>
               </div>
+
               <div className="row">
                 <div className="col align-self-center">
-                  <button className="btn btn-block btn-google btn-end" onClick={this.onClickGoogleBtn}>
-                    <i className="fab fa-google" /> 구글 로그인
-                  </button>
+                  <GoogleLogin
+                    clientId={`${process.env.GOOGLE_API_CLIENT_ID}`}
+                    scope={`${process.env.GOOGLE_API_SCOPE}`}
+                    buttonText="OAuth with Google"
+                    accessType="offline"
+                    responseType="code"
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                    render={(renderProps) => (
+                      <button className="btn btn-block btn-google btn-end" onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                        <i className="fab fa-google" /> 구글 로그인
+                      </button>
+                    )}
+                  />
                 </div>
               </div>
-              {/*<div className="col-6">*/}
-              {/*  <GoogleLogin*/}
-              {/*    clientId={`${process.env.GOOGLE_API_CLIENT_ID}`}*/}
-              {/*    scope={`${process.env.GOOGLE_API_SCOPE}`}*/}
-              {/*    buttonText="Login"*/}
-              {/*    accessType="offline"*/}
-              {/*    responseType="code"*/}
-              {/*    onSuccess={this.responseGoogle}*/}
-              {/*    onFailure={this.responseGoogle}*/}
-              {/*    cookiePolicy={'single_host_origin'}*/}
-              {/*  />*/}
-              {/*</div>*/}
 
               <div className="row info-inner">
                 <div className="col text-left  info-text">

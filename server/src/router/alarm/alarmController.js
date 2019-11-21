@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
   const mailOptions = {
     from: `noreply@moneydog.io`, // 발송 메일 주소 (위에서 작성한 gmail 계정 아이디)
     to: userEmail, // 수신 메일 주소
-    subject: 'MoneyDog Report', // 제목
+    subject: `[MoneyDog - 지능형 구독 전략 서비스] 머니 고객님의 ${new Date().getMonth()+1}월 영수증이 도착했습니다.`, // 제목
     html: CreateHtml.createHtml(new Date().getMonth()+1, userSubscriptions)
   };
 
