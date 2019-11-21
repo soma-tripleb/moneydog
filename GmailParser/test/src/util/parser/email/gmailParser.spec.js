@@ -1,13 +1,13 @@
 import should from 'should';
 
-import TestDataQuery from 'src/db/testdataQuery';
-import GooglePlayParser from 'src/util/parser/email/googleplay/googleplayParser';
-import GmailParser from 'src/util/parser/email/gmailParser';
-import Gmail from 'src/model/dto/gmail';
+import TestDataQuery from '/src/db/testdataQuery';
+import GooglePlayParser from '/src/util/parser/email/googleplay/googleplayParser';
+import GmailParser from '/src/util/parser/email/gmailParser';
+import Gmail from '/src/model/dto/gmail';
 
-import GooglePlayService from 'src/service/googleplayService';
+import GooglePlayService from '/src/service/googleplayService';
 
-import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery';
+import GMAIL_SEARCH_QUERY from '/resources/static/GmailSearchQuery';
 
 describe('GmailParser는', () => {
   describe('Gmail 검색 쿼리 리스트를 순회 한다.(지금은 json 형태로 저장, 나중에는 DB에 저장)', () => {

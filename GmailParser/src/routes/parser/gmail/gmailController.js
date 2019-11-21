@@ -1,6 +1,6 @@
 import express from 'express';
 
-import GmailService from 'src/service/gmailService';
+import GmailService from '/src/service/gmailService';
 import UserQuery from 'src/db/userQuery';
 
 const router = express.Router();

@@ -1,8 +1,8 @@
-import GooglePlayParser from 'src/util/parser/email/googleplay/googleplayParser';
+import GooglePlayParser from '/src/util/parser/email/googleplay/googleplayParser';
 
-import GmailService from 'src/service/gmailService';
-import GooglePlayDTO from 'src/model/dto/googleplay';
-import GMAIL_SEARCH_QUERY from 'resources/static/GmailSearchQuery';
+import GmailService from '/src/service/gmailService';
+import GooglePlayDTO from '/src/model/dto/googleplay';
+import GMAIL_SEARCH_QUERY from '/resources/static/GmailSearchQuery';
 
 const GOOGLEPLAY_QUERY = (() => {
   return GMAIL_SEARCH_QUERY.q.googleplay;
