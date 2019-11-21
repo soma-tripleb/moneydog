@@ -28,6 +28,8 @@ router.post('/oauth', async (req, res) => {
 
   let code;
 
+  console.log("zz",req.body.code);
+
   if (typeof req.body.code != 'undefined') {
     code = req.body.code;
   } else res.send('not found').end();

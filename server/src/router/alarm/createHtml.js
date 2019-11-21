@@ -12,7 +12,7 @@ const createHtml = (month, userSubscriptions) => {
     totalPrice += Number(element.price);
   });
 
-  const averagePrice = totalPrice / subscount;
+  const averagePrice = Math.round((totalPrice / subscount) /10 )*10;
 
   const ReportHtml = `
 <html lang="ko"

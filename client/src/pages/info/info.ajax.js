@@ -13,7 +13,7 @@ const sendGoogleOAuthCode = async (code) => {
       'x-access-token': Cookies.get('token'),
       'Content-Type': 'application/json'
     },
-    data: code,
+    data: {code: code},
     responseType: 'json',
   });
 
