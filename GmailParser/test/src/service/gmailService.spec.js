@@ -1,16 +1,16 @@
 import should from 'should';
 
-import GmailParser from 'src/util/parser/email/gmailParser';
-import GooglePlayParser from 'src/util/parser/email/googleplay/googleplayParser';
+import GmailParser from '../../../src/util/parser/email/gmailParser';
+import GooglePlayParser from '../../../src/util/parser/email/googleplay/googleplayParser';
 
-import GmailService from 'src/service/gmailService';
-import Gmail from 'src/model/dto/gmail';
+import GmailService from '../../../src/service/gmailService';
+import Gmail from '../../../src/model/dto/gmail';
 
-import GmailApi from 'src/util/gmailApi';
-import UserQuery from 'src/db/userQuery';
+import GmailApi from '../../../src/util/gmailApi';
+import UserQuery from '../../../src/db/userQuery';
 
-import GP_WATCHA_MESSAGES from 'test/resources/mock/email/googleplay/GP_WATCHA_MESSAGES';
-import FWD_GP_WATCHA_MESSAGES from 'test/resources/mock/email/googleplay/FWD_GP_WATCHA_MESSAGES';
+import GP_WATCHA_MESSAGES from '../../../test/resources/mock/email/googleplay/GP_WATCHA_MESSAGES';
+import FWD_GP_WATCHA_MESSAGES from '../../../test/resources/mock/email/googleplay/FWD_GP_WATCHA_MESSAGES';
 
 describe('`GmailService`는', () => {
 

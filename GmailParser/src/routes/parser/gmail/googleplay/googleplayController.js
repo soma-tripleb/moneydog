@@ -1,9 +1,9 @@
 import express from 'express';
 const router = express.Router();
 
-import GmailService from 'src/service/gmailService';
-import GooglePlayParser from 'src/util/parser/email/googleplay/googlePlayParser';
-import GooglePlayService from 'src/service/googleplayService';
+import GmailService from '../../../../../src/service/gmailService';
+import GooglePlayParser from '../../../../../src/util/parser/email/googleplay/googlePlayParser';
+import GooglePlayService from '../../../../../src/service/googleplayService';
 
 const wrapper = (asyncFn) => {
   return (async (req, res, next) => {

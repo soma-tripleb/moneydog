@@ -4,9 +4,9 @@ dotenv.config();
 
 import axios from 'axios';
 
-import GmailService from '/src/service/gmailService';
-import SubscriptionDAO from '/src/model/dao/subscription';
-import UserQuery from '/src/db/UserQuery';
+import GmailService from '../../../../src/service/gmailService';
+import SubscriptionDAO from '../../../../src/model/dao/subscription';
+import UserQuery from '../../../../src/db/UserQuery';
 
 const router = express.Router();
 

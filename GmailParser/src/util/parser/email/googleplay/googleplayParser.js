@@ -1,4 +1,4 @@
-import CommonParser from 'src/util/parser/email/commonParser';
+import CommonParser from '../../../../../src/util/parser/email/commonParser';
 import cheerio from 'cheerio';
 
 const GooglePlayParser = (() => {

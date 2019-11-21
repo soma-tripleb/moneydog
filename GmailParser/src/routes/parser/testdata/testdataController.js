@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import TestDataQuery from '/src/db/testdataQuery';
+import TestDataQuery from '../../../../src/db/testdataQuery';
 
 const checkBody = (req, res, next) => {
   if (!req.body.q) throw new Error('검색 키워드를 입력하세요.');
