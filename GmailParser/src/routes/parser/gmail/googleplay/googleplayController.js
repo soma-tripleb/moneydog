@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 import GmailService from '../../../../../src/service/gmailService';
-import GooglePlayParser from '../../../../../src/util/parser/email/googleplay/googlePlayParser';
+import GooglePlayParser from '../../../../util/parser/email/googleplay/googleplayParser';
 import GooglePlayService from '../../../../../src/service/googleplayService';
 
 const wrapper = (asyncFn) => {
