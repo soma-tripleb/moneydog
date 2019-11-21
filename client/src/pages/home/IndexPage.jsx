@@ -26,7 +26,7 @@ class IndexPage extends Component {
           </div>
           <div className="col-sm IndexPage-inner align-self-center">
             <img className="IndexPage-img" src={`${process.env.REACT_APP_IMAGE_URI}/img/imac.png`}/>
-            {/*<Carousel/>*/}
+            {/* <Carousel/>*/}
           </div>
         </div>
       </>

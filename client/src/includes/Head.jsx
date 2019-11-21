@@ -57,9 +57,9 @@ class Head extends Component {
         <header>
           <div className="container headerContainer">
             <div className="row">
-              {/*<div className="col-md-6">*/}
+              {/* <div className="col-md-6">*/}
               {/*  <img className="headeImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/MDheader.png`}/>*/}
-              {/*</div>*/}
+              {/* </div>*/}
               <div className="col-md-6">
                 <ul className="nav">
                   <li className="nav-item">
@@ -68,7 +68,7 @@ class Head extends Component {
                     </Link>
                   </li>
                 </ul>
-               </div>
+              </div>
               <div className="col-md-6 categoryFont">
                 <ul className="nav">
                   {this.isLogined()}

@@ -1,4 +1,4 @@
-import mongoDB from 'src/config/mongo/db';
+import mongoDB from '/src/config/mongo/db';
 import dotenv from 'dotenv';
 dotenv.config();
 

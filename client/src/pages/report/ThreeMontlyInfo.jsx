@@ -42,7 +42,7 @@ class ThreeMontlyInfo extends Component {
         },
         tooltips: {
           callbacks: {
-            label: tooltipItem => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
+            label: (tooltipItem) => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
             title: () => null,
           }
         },
@@ -86,7 +86,7 @@ class ThreeMontlyInfo extends Component {
         },
         tooltips: {
           callbacks: {
-            label: tooltipItem => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
+            label: (tooltipItem) => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
             title: () => null,
           }
         },
@@ -130,7 +130,7 @@ class ThreeMontlyInfo extends Component {
         },
         tooltips: {
           callbacks: {
-            label: tooltipItem => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
+            label: (tooltipItem) => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
             title: () => null,
           }
         },

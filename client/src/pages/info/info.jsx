@@ -46,7 +46,6 @@ class Info extends Component {
                     구글 계정 연동 하기
                 </div>
               </div>
-
               <div className="row">
                 <div className="col align-self-center">
                   <GoogleLogin
