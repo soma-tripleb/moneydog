@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-describe.only('google oauth는', () => {
+describe('google oauth는', () => {
   describe('google login 으로 받은 `code`를 통해서 refresh_token 받기', () => {
 
     const code = '4/tAEXxui3nWaCOYHXUvM4NO2z6RDg4d3cQZi8hyDFxx6hTnCtmVHlbQ2uP3kBR8Wdnhm2vbb7THfPQuzyiQAv_vg';

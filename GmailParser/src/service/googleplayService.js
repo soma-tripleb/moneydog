@@ -4,6 +4,8 @@ import GmailService from '/src/service/gmailService';
 import GooglePlayDTO from '/src/model/dto/googleplay';
 import GMAIL_SEARCH_QUERY from '/resources/static/GmailSearchQuery';
 
+import UserQuery from 'src/db/UserQuery';
+
 const GOOGLEPLAY_QUERY = (() => {
   return GMAIL_SEARCH_QUERY.q.googleplay;
 })();
@@ -109,7 +111,44 @@ const queryParsing = async (useremail) => {
   return googleplayMassages;
 };
 
+const newSubscription = async (useremail, listParsingSubscribe) => {
+
+  const result = [];
+  const subscriptionNameSet = new Set();
+  let listStoredSubscribe;
+
+  try {
+    const userInfo = await UserQuery.getUser(useremail);
+
+    listStoredSubscribe = userInfo.subscription;
+  } catch (err) {
+    throw new Error('GOOGLEPLAY_SERVICE_NEWSUBSCRIBE_GET_USER ', err);
+  }
+
+  if (listStoredSubscribe.length != 0) {
+    listStoredSubscribe.some((subscription) => {
+      if (subscriptionNameSet.has(subscription.name)) {
+        return false;
+      } else {
+        subscriptionNameSet.add(subscription.name);
+      }
+    });
+  }
+
+  if (listParsingSubscribe.lengh != 0) {
+    listParsingSubscribe.some((subscription) => {
+      if (subscriptionNameSet.has(subscription.service)) {
+        return false;
+      } else {
+        result.push(subscription);
+      }
+    });
+  };
+  return result;
+};
+
 export default {
   parse,
-  queryParsing
+  queryParsing,
+  newSubscription
 };

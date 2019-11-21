@@ -10,14 +10,14 @@ class Home extends Component {
       <>
         <div className="container homwWrap">
 
-          {/*<Carousel/>*/}
+          {/* <Carousel/>*/}
           <IndexPage/>
 
-          {/*<hr className="featurette-divider"/>*/}
+          {/* <hr className="featurette-divider"/>*/}
 
           <IndexInfo/>
 
-          {/*<hr className="featurette-divider"/>*/}
+          {/* <hr className="featurette-divider"/>*/}
 
           <IndexSignUp/>
 

@@ -102,17 +102,41 @@ const divideByFrom = async (metadataList) => {
   return result;
 };
 
+/**
+ * @param {*} useremail
+ * @return 'Map'
+ */
 const parsing = async (useremail) => {
-  let result;
+
+  const result = new Map();
+  let parseResult;
+
   // GooglePlay
   try {
-    result = await GooglePlayService.queryParsing(useremail);
+    parseResult = await GooglePlayService.queryParsing(useremail);
   } catch (err) {
     throw err;
   }
+
   // Apple
 
   // etc ... (ex, 'Netflix', 'YouTube', ...)
+
+  const listTrial = parseResult.get('trial');
+  const listSubscription = parseResult.get('subscription');
+  const listRenewal = parseResult.get('renewal');
+
+  try {
+    const trial = await GooglePlayService.newSubscription(useremail, listTrial);
+    const subscription = await GooglePlayService.newSubscription(useremail, listSubscription);
+    const renewal = await GooglePlayService.newSubscription(useremail, listRenewal);
+
+    result.set('trial', trial);
+    result.set('subscription', subscription);
+    result.set('renewal', renewal);
+  } catch (err) {
+    throw err;
+  }
 
   return result;
 };

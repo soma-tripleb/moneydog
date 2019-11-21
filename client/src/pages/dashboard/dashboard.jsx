@@ -37,7 +37,7 @@ class DashBoard extends Component {
   };
 
   handleChange = (e) => {
-    console.log('handleChange');
+    console.log(e.format('YYYY-MM-DD'));
     this.setState({
       selectedValue: e.format('YYYY-MM-DD'),
       isFullMode: false
@@ -109,7 +109,7 @@ class DashBoard extends Component {
                     <button onClick={this.showFullMode} type="button" className="btn btn-sm btn-outline-info"> 전체 보기 </button>
                   </div>
                 </div>
-                <Categories data={subscription} isFullMode={this.state.isFullMode}/>
+                <Categories data={subscription} date={selectedValue} isFullMode={this.state.isFullMode}/>
               </div>
             </div>
             <div className="btn-padding"/>

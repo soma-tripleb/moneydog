@@ -42,7 +42,7 @@ class ThreeMontlyInfo extends Component {
         },
         tooltips: {
           callbacks: {
-            label: tooltipItem => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
+            label: (tooltipItem) => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
             title: () => null,
           }
         },
@@ -86,7 +86,7 @@ class ThreeMontlyInfo extends Component {
         },
         tooltips: {
           callbacks: {
-            label: tooltipItem => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
+            label: (tooltipItem) => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
             title: () => null,
           }
         },
@@ -130,7 +130,7 @@ class ThreeMontlyInfo extends Component {
         },
         tooltips: {
           callbacks: {
-            label: tooltipItem => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
+            label: (tooltipItem) => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
             title: () => null,
           }
         },
@@ -156,7 +156,7 @@ class ThreeMontlyInfo extends Component {
             </div>
             <div className="row report-content">
               <div className="col-sm-4">
-                <div>
+                <div className="pricePredix">
                   {this.state.currentMonth-1}월
                 </div>
                 <div>
@@ -164,7 +164,7 @@ class ThreeMontlyInfo extends Component {
                 </div>
               </div>
               <div className="col-sm-4">
-                <div>
+                <div className="pricePredix">
                   {this.state.currentMonth}월
                 </div>
                 <div>
@@ -172,7 +172,7 @@ class ThreeMontlyInfo extends Component {
                 </div>
               </div>
               <div className="col-sm-4">
-                <div>
+                <div className="pricePredix">
                   {this.state.currentMonth+1}월
                 </div>
                 <div>

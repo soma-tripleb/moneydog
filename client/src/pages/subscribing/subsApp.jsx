@@ -16,6 +16,9 @@ class SubsApp extends Component {
     if (this.props.subsAppInfo.label === '-') {
       // return (<button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">-</button> );
       return ( <button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info btn-subscribing">삭제</button>);
+    } else if (this.props.subsAppInfo.label === 'addedSubs') {
+      // return ( <button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">+</button>);
+      return ( <button onClick={this.handleClick} type="button" className="btn btn-sm btn-info btn-subscribing">구독 추가</button>);
     } else {
       // return ( <button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">+</button>);
       return ( <button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info btn-subscribing">구독 추가</button>);

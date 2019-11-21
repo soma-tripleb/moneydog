@@ -4,7 +4,7 @@ const run = async () => {
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    Promise.all([page.goto('https://play.google.com/store/account/orderhistory'), page.waitFor('body')])
+    Promise.all([page.goto('https://play.google.com/store/account/orderhistory'), page.waitFor('body')]);
     await login(page, 'test', 'testpw');
     await browser.close();
     console.log('browser close');

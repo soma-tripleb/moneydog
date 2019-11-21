@@ -8,29 +8,25 @@ dotenv.config();
 import './info.css';
 import AuthActions from '../../redux/actions/authAction';
 import {connect as ReduxConn} from 'react-redux';
-import MontlyReport from '../report/MontlyReport';
-import ThreeMontlyInfo from '../report/ThreeMontlyInfo';
 
 class Info extends Component {
-  state = {
-  };
+  constructor(props) {
+    super(props);
+  }
 
   responseGoogle = async (res) => {
+    this.props.history.push('/spinner');
+
     if (typeof res.code == 'undefined') throw new Error('GOOGLE_OAUTH_CODE_NOT_FOUND');
     else {
-      const result = await InfoService.sendGoogleOAuthCode();
-
-      console.log(result);
+      await InfoService.sendGoogleOAuthCode();
     }
-
-    // 페이지 이동
   };
 
   sendmail = async () =>{
-    const result = await InfoService.sendmailFormReport(this.props.userSubscriptions);
+    await InfoService.sendmailFormReport(this.props.userSubscriptions);
 
     alert('메일을 성공적으로 보냈습니다.');
-
   };
 
   onClicklogout = () => {
@@ -57,18 +53,18 @@ class Info extends Component {
                   </button>
                 </div>
               </div>
-              <div className="col-6">
-                <GoogleLogin
-                  clientId={`${process.env.GOOGLE_API_CLIENT_ID}`}
-                  scope={`${process.env.GOOGLE_API_SCOPE}`}
-                  buttonText="Login"
-                  accessType="offline"
-                  responseType="code"
-                  onSuccess={this.responseGoogle}
-                  onFailure={this.responseGoogle}
-                  cookiePolicy={'single_host_origin'}
-                />
-              </div>
+              {/* <div className="col-6">*/}
+              {/*  <GoogleLogin*/}
+              {/*    clientId={`${process.env.GOOGLE_API_CLIENT_ID}`}*/}
+              {/*    scope={`${process.env.GOOGLE_API_SCOPE}`}*/}
+              {/*    buttonText="Login"*/}
+              {/*    accessType="offline"*/}
+              {/*    responseType="code"*/}
+              {/*    onSuccess={this.responseGoogle}*/}
+              {/*    onFailure={this.responseGoogle}*/}
+              {/*    cookiePolicy={'single_host_origin'}*/}
+              {/*  />*/}
+              {/* </div>*/}
 
               <div className="row info-inner">
                 <div className="col text-left  info-text">
