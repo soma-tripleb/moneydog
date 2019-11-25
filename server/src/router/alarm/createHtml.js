@@ -1,5 +1,9 @@
 import moment from 'moment';
 
+const numberWithCommas = (number) => {
+  return String(number).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
 const createHtml = (month, userSubscriptions) => {
 
   const subscriptionList = createsubscriptionList(userSubscriptions);
@@ -41,7 +45,7 @@ const createHtml = (month, userSubscriptions) => {
                 <div class="row"
                      style="box-sizing: border-box;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;margin-right: 0;margin-left: 0;">
                     <div class="col-sm-6 report-container report-inner-container"
-                         style="box-sizing: border-box;position: relative;width: 100%;padding-right: 15px;padding-left: 15px;-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;text-align: center;box-shadow: 0vh 0vh 10px 10px #f3f3f3;background: #ffffff;border-radius: 2vh;font-weight: lighter;font-size: 1vw;padding: 5vh;margin: 5vh auto 5vh auto;">
+                         style="box-sizing: border-box;position: relative;width: 100%;padding-right: 15px;padding-left: 15px;-ms-flex: 0 0 50%;flex: 0 0 50%;text-align: center;box-shadow: 0vh 0vh 10px 10px #f3f3f3;background: #ffffff;border-radius: 2vh;font-weight: lighter;font-size: 1vw;padding: 5vh;margin: 5vh auto 5vh auto;">
                         <div class="col-sm phone-report-inner"
                              style="box-sizing: border-box;position: relative;width: 100%;padding-right: 15px;padding-left: 15px;">
                             <div class="row justify-content-md-center"
@@ -85,7 +89,7 @@ const createHtml = (month, userSubscriptions) => {
                                                     평균 구독가격
                                                 </div>
                                                 <div class="montlyReport-subs-body"
-                                                     style="box-sizing: border-box;font-size: 3vh;">${averagePrice}원
+                                                     style="box-sizing: border-box;font-size: 3vh;">${numberWithCommas(averagePrice)}원
                                                 </div>
                                             </div>
                                             <div class="col padding-zero"
@@ -95,7 +99,7 @@ const createHtml = (month, userSubscriptions) => {
                                                     결제 총액
                                                 </div>
                                                 <div class="montlyReport-subs-body"
-                                                     style="box-sizing: border-box;font-size: 3vh;">${totalPrice}원
+                                                     style="box-sizing: border-box;font-size: 3vh;">${numberWithCommas(totalPrice)}원
                                                 </div>
                                             </div>
                                         </div>
@@ -223,7 +227,7 @@ style="box-sizing: border-box;position: relative;width: 100%;padding-right: 15px
     <div class="col-sm padding-zero"
 style="box-sizing: border-box;position: relative;width: 100%;padding-right: 15px;padding-left: 15px;padding: 0;text-align: left;">
     <button class="logo-Btn"
-                                                    style="background: rgb(213, 252, 120);box-sizing: border-box;border-radius: 5px;margin: 0;font-family: monospace;font-size: 3vh;line-height: inherit;overflow: visible;text-transform: none;-webkit-appearance: button;touch-action: manipulation;color: inherit;height: 5vh;width: 5vh;border: 0;">
+                                                    style="background: rgb(0, 0, 0);color: #fff;box-sizing: border-box;border-radius: 5px;margin: 0;font-family: monospace;font-size: 3vh;line-height: inherit;overflow: visible;text-transform: none;-webkit-appearance: button;touch-action: manipulation;color: #fff;height: 5vh;width: 5vh;border: 0;">
                                                 ${element.name[0]}
                                             </button>
     </div>

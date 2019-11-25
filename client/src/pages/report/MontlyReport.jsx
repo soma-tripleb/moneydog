@@ -64,6 +64,9 @@ class MontlyReport extends Component {
   };
 
   averageSubsPrice = (totalPay, subsAmount) =>{
+    if(subsAmount === 0){
+      return totalPay;
+    }
     return this.numberWithCommas(Math.ceil(Number(totalPay) / Number(subsAmount)));
   };
 
