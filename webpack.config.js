@@ -1,8 +1,10 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const outputDir = 'dist';
 
 module.exports = {
-  name: 'moneydog-root',
   mode: 'development',
   node: {fs: 'empty'},
   devtool: 'eval',
@@ -16,12 +18,18 @@ module.exports = {
     port: 8080,
   },
 
-  entry: {
-    app: ['./client/src/index'],
+  entry: './client/src/index.jsx',
+  output: {
+    path: path.join(__dirname, outputDir),
+    filename: 'app.jsx',
+    publicPath: '/'
   },
 
   plugins: [
     new Dotenv(),
+    new HtmlWebpackPlugin({
+      template: './public/index.html'
+    })
   ],
 
   module: {
@@ -79,10 +87,5 @@ module.exports = {
         },
       },
     ],
-  },
-
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'app.jsx'
   },
 };
