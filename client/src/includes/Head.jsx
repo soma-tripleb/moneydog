@@ -5,6 +5,7 @@ import { connect as ReduxConn } from 'react-redux';
 import AuthActions from '../redux/actions/authAction';
 
 import './css/header.css';
+import MDBlackIcon from 'image/MDBlackIcon.png';
 
 class Head extends Component {
   logout = () => {
@@ -17,7 +18,7 @@ class Head extends Component {
         <>
           <li className="nav-item phone-display">
             <NavLink to="/" className="nav-link" >
-              <img className="report-logoImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/MDBlackIcon.png`} alt="Generic placeholder image"/>
+              <img className="report-logoImg" src={`${MDBlackIcon}`} alt="Generic placeholder image"/>
             </NavLink>
           </li>
           <li className="nav-item">
