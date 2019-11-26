@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import subsManage from 'image/subsManage.png';
+
 class IndexInfo extends Component {
   render() {
     return (
@@ -11,7 +13,7 @@ class IndexInfo extends Component {
 
             <div className="col-lg-4 index-item">
               <div className="index-item-inner">
-                <img src={`${process.env.REACT_APP_IMAGE_URI}/img/subsManage.png`}/>
+                <img src={`${subsManage}`}/>
                 <div className="indexInfo-title">구독 관리</div>
                 <div className="indexInfo-text">
                   <div>어떤 앱들을 내가 구독하고 있는지 </div>
