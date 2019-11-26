@@ -5,8 +5,12 @@ import { connect as ReduxConn } from 'react-redux';
 import AuthActions from '../redux/actions/authAction';
 
 import './css/header.css';
+<<<<<<< HEAD
 import MDBlackIcon from 'image/logo/MDBlackIcon.png';
 import MDheader from 'image/header/MDheader.png';
+=======
+import MDBlackIcon from 'image/MDBlackIcon.png';
+>>>>>>> #81, image / path alias
 
 class Head extends Component {
   logout = () => {
