@@ -46,7 +46,7 @@ class Report extends Component {
                   <MontlyReport props={this.state} data={this.props.subscriptions}/>
                 </div>
                 <div className="report-padding">
-                  <ThreeMontlyInfo/>
+                  <ThreeMontlyInfo data={this.props.subscriptions}/>
                 </div>
 
                 <div className="report-padding">

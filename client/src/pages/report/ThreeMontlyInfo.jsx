@@ -22,7 +22,7 @@ class ThreeMontlyInfo extends Component {
         labels: ['어플 수', '평균가격', '총액'],
         datasets: [{
           label: '# of Votes',
-          data: [2, 0.9, 2.5],
+          data: [0, 0, 0],
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -66,7 +66,7 @@ class ThreeMontlyInfo extends Component {
         labels: ['어플 수', '평균가격', '총액'],
         datasets: [{
           label: '# of Votes',
-          data: [1, 0.9, 1.1],
+          data: [0, 0, 0],
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -104,13 +104,20 @@ class ThreeMontlyInfo extends Component {
 
   drawChart3 =()=>{
     const ctx = document.getElementById('myChart3').getContext('2d');
+    let data;
+    if (this.props.data.length === 0) {
+      data = [0, 0, 0];
+    } else {
+      data = [this.props.data.length, 1.79, 17.9];
+    }
+
     const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: ['어플 수', '평균가격', '총액'],
         datasets: [{
           label: '# of Votes',
-          data: [3, 0.9, 2.9],
+          data: data,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',

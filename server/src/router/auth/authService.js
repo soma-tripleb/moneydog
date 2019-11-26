@@ -3,7 +3,7 @@ import crypto from 'crypto';
 dotenv.config();
 
 import AuthRepository from './authRepository';
-import { checkedPasswordForm } from '../../../../public/userInfoCheck';
+import checkedPasswordForm from '../../util/certification/userInfoCheck';
 import { createJWT, checkJWT } from '../../security/jwtAuthenticationToken';
 
 const register = async (userInfo) => {

@@ -17,6 +17,9 @@ import {customLogger, errorLogger, stream} from './src/config/winston';
 const app = express();
 dotenv.config();
 
+// client
+app.use(express.static('dist'));
+
 // DB Config
 mongoConnect();
 
