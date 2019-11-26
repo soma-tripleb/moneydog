@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev-server": "nodemon --exec babel-node ./server/bin/www",
-    "dev-client": "NODE_ENV=development webpack-dev-server --hot --host 0.0.0.0",
-    "dev-parser": "nodemon --exec babel-node ./GmailParser/bin/www",
+    "start": "babel-node ./server/bin/www",
     "build": "webpack-cli",
+    "server": "nodemon --exec babel-node ./server/bin/www",
+    "client": "NODE_ENV=development webpack-dev-server --hot --host 0.0.0.0",
+    "worker": "nodemon --exec babel-node ./GmailParser/bin/www",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "NODE_ENV=test mocha --require @babel/register --timeout 12000 --exit server/test/*",
     "lint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js server/ client/",
-    "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit",
-    "spec-test": "cross-env NODE_ENV=test mocha --require @babel/register --timeout 120000 --recursive ./**/subsTmplService.spec.js"
+    "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit"
   },
   "author": "tripleB",
   "license": "MIT",
@@ -25,6 +26,7 @@
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
     "chromedriver": "^78.0.1",
+    "concurrently": "^5.0.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "counterup2": "^1.0.4",
