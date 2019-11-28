@@ -7,8 +7,8 @@ import 'winston-mongodb';
 import dotenv from 'dotenv';
 dotenv.config();
 
-
 const logDir = './server/logs';
+
 if (!fs.existsSync(logDir)) {
   fs.mkdirSync(logDir);
 }
