@@ -37,6 +37,8 @@
     "mocha": "^6.2.1",
     "nodemon": "^1.19.3",
     "supertest": "^4.0.2",
-    "should": "^13.2.3"
+    "should": "^13.2.3",
+    "swagger-jsdoc": "^3.4.0",
+    "swagger-ui-express": "^4.1.2"
   }
 }
