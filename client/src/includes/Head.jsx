@@ -6,11 +6,16 @@ import AuthActions from '../redux/actions/authAction';
 
 import './css/header.css';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import MDBlackIcon from 'image/logo/MDBlackIcon.png';
 import MDheader from 'image/header/MDheader.png';
 =======
 import MDBlackIcon from 'image/MDBlackIcon.png';
 >>>>>>> #81, image / path alias
+=======
+import MDBlackIcon from 'image/logo/MDBlackIcon.png';
+import MDheader from 'image/header/MDheader.png';
+>>>>>>> #81, image 경로 변경
 
 class Head extends Component {
   logout = () => {

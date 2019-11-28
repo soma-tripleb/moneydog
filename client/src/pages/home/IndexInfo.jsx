@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 
-import subsManage from 'image/subsManage.png';
+import subsManage from 'image/home/subsManage.png';
+import report from 'image/home/report.png';
+import smart from 'image/home/smart.png';
 
 class IndexInfo extends Component {
   render() {
