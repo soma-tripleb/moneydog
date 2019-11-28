@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import commercial from 'image/dashboard/commercial.png';
+
 class Commercial extends Component {
 
   state = {
@@ -59,7 +61,7 @@ class Commercial extends Component {
             </div>
           </div>
           <div className="col">
-            <img className="commercial-img" src={`${process.env.REACT_APP_IMAGE_URI}/img/commercial.png`}/>
+            <img className="commercial-img" src={`${commercial}`}/>
           </div>
         </div>
       </div>
