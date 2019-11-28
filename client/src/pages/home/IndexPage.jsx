@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Carousel from './Carousel';
 
+import imac from 'image/home/imac.png';
+
 class IndexPage extends Component {
 
 
@@ -25,7 +27,7 @@ class IndexPage extends Component {
             </div>
           </div>
           <div className="col-sm IndexPage-inner align-self-center">
-            <img className="IndexPage-img" src={`${process.env.REACT_APP_IMAGE_URI}/img/imac.png`}/>
+            <img className="IndexPage-img" src={`${imac}`}/>
             {/* <Carousel/>*/}
           </div>
         </div>
