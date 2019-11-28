@@ -5,7 +5,8 @@ import { connect as ReduxConn } from 'react-redux';
 import AuthActions from '../redux/actions/authAction';
 
 import './css/header.css';
-import MDBlackIcon from 'image/MDBlackIcon.png';
+import MDBlackIcon from 'image/logo/MDBlackIcon.png';
+import MDheader from 'image/header/MDheader.png';
 
 class Head extends Component {
   logout = () => {
@@ -65,7 +66,7 @@ class Head extends Component {
                 <ul className="nav">
                   <li className="nav-item">
                     <Link to="/" className="navbar-brand  headerFont">
-                      <img className="headeImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/MDheader.png`}/>
+                      <img className="headeImg" src={`${MDheader}`}/>
                     </Link>
                   </li>
                 </ul>
