@@ -7,6 +7,8 @@ import MontlyReport from './MontlyReport';
 import ThreeMontlyInfo from './ThreeMontlyInfo';
 import Item from '../dashboard/item';
 
+import MDBlackIcon from 'image/logo/MDBlackIcon.png';
+
 class Report extends Component {
 
   state = {
@@ -35,7 +37,7 @@ class Report extends Component {
 
                 <div className="row justify-content-md-center">
                   <div className="col-2">
-                    <img className="report-logoImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/MDBlackIcon.png`} alt="Generic placeholder image"/>
+                    <img className="report-logoImg" src={`${MDBlackIcon}`} alt="Generic placeholder image"/>
                   </div>
                   <div className="col-10 align-self-center text-left">
                     <div className="report-title"> &nbsp;11월 머니독 리포트</div>

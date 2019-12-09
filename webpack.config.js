@@ -1,6 +1,7 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const outputDir = 'dist';
 
@@ -10,6 +11,14 @@ module.exports = {
   devtool: 'eval',
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      root: path.resolve(__dirname, 'client/src/root/'),
+      image: path.resolve(__dirname, 'public/static/image'),
+    },
+    modules: [
+      path.join(__dirname, 'client'),
+      'node_modules'
+    ]
   },
 
   devServer: {
@@ -27,6 +36,7 @@ module.exports = {
 
   plugins: [
     new Dotenv(),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html'
     })

@@ -13,6 +13,8 @@ import UserSubsApp from './userSubsApp';
 import './subscriptions.css';
 import AuthActions from '../../redux/actions/authAction';
 
+import arrow from 'image/subscription/arrow.png';
+
 const colorPull = ['#fe7e79', '#ffd578', '#fffb77', '#d5fc78',
   '#73fa78', '#71fcd6', '#70fefe', '#75D5fe',
   '#7981ff', '#d782ff', '#ff83ff', '#fe8ad9'];
@@ -211,7 +213,7 @@ class Subscriptions extends Component {
               </div>
 
               <div className="col-sm-1 subs-container-inner align-self-center">
-                <img src={`${process.env.REACT_APP_IMAGE_URI}/img/arrow.png`} />
+                <img src={`${arrow}`} />
               </div>
 
               <div className="col-sm subs-container-inner">

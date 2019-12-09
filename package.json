@@ -7,7 +7,7 @@
     "start": "babel-node ./server/bin/www",
     "build": "webpack-cli",
     "server": "nodemon --exec babel-node ./server/bin/www",
-    "client": "NODE_ENV=development webpack-dev-server --hot --host 0.0.0.0",
+    "client": "webpack-dev-server --open",
     "worker": "nodemon --exec babel-node ./GmailParser/bin/www",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "NODE_ENV=test mocha --require @babel/register --timeout 12000 --exit server/test/*",

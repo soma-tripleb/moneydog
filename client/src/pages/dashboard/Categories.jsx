@@ -4,6 +4,9 @@ import Item from './item';
 import {Spin, Icon} from 'antd';
 import moment from 'moment';
 
+import whitespace1 from 'image/dashboard/whitespace1.png';
+import whitespace2 from 'image/dashboard/whitespace2.png';
+
 class Categories extends Component {
   state = {
     subscriptions: null,
@@ -51,10 +54,10 @@ class Categories extends Component {
 
   showWhiteSpace = ()=>{
     if (this.countComponentNumber() < 2) {
-      return (<img className="whitespaceImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/whitespace1.png`} alt=""/>);
+      return (<img className="whitespaceImg" src={`${whitespace1}`} alt=""/>);
     }
     else if (this.countComponentNumber() < 4) {
-      return (<img className="whitespaceImg" src={`${process.env.REACT_APP_IMAGE_URI}/img/whitespace2.png`} alt=""/>);
+      return (<img className="whitespaceImg" src={`${whitespace2}`} alt=""/>);
     }
   };
 

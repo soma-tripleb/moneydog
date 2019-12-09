@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 
+import subsManage from 'image/home/subsManage.png';
+import report from 'image/home/report.png';
+import smart from 'image/home/smart.png';
+
 class IndexInfo extends Component {
   render() {
     return (
@@ -11,7 +15,7 @@ class IndexInfo extends Component {
 
             <div className="col-lg-4 index-item">
               <div className="index-item-inner">
-                <img src={`${process.env.REACT_APP_IMAGE_URI}/img/subsManage.png`}/>
+                <img src={`${subsManage}`}/>
                 <div className="indexInfo-title">구독 관리</div>
                 <div className="indexInfo-text">
                   <div>어떤 앱들을 내가 구독하고 있는지 </div>
@@ -23,7 +27,7 @@ class IndexInfo extends Component {
 
             <div className="col-lg-4 index-item">
               <div className="index-item-inner">
-                <img src={`${process.env.REACT_APP_IMAGE_URI}/img/report.png`}/>
+                <img src={`${report}`}/>
                 <div className="indexInfo-title">리포트</div>
                 <div className="indexInfo-text">
                   <div>사용자에게 리포트를 보내 드립니다. </div>
@@ -35,7 +39,7 @@ class IndexInfo extends Component {
 
             <div className="col-lg-4 index-item">
               <div className="index-item-inner">
-                <img src={`${process.env.REACT_APP_IMAGE_URI}/img/smart.png`}/>
+                <img src={`${smart}`}/>
                 <div className="indexInfo-title">스마트 소비</div>
                 <div className="indexInfo-text">
                   <div>경제적인 구독전략을 제시해 줍니다. </div>
