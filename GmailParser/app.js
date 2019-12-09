@@ -8,6 +8,10 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
 
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+import swaggerOption from './swagger.config';
+
 import indexRouter from './src/routes/index';
 import oauthRouter from './src/routes/oauth/oauthController';
 import gmailRouter from './src/routes/parser/gmail/gmailController';
@@ -16,6 +20,7 @@ import testdataRouter from 'src/routes/parser/testdata/testdataController';
 
 const app = express();
 const port = 3000;
+const swaggerSpec = swaggerJSDoc(swaggerOption);
 
 app.use(cors());
 app.use(logger('dev'));
@@ -23,7 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/', indexRouter);
 app.use('/oauth', oauthRouter);
