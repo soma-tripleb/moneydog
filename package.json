@@ -11,8 +11,7 @@
     "worker": "nodemon --exec babel-node ./GmailParser/bin/www",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "NODE_ENV=test mocha --require @babel/register --timeout 12000 --exit server/test/*",
-    "lint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js server/ client/",
-    "edit": "swagger_swagger_fileName=./swagger.yaml swagger project edit"
+    "lint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js server/ client/"
   },
   "author": "tripleB",
   "license": "MIT",

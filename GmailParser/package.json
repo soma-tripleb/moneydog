@@ -24,7 +24,8 @@
     "mongodb": "^3.3.3",
     "mongodb-memory-server": "^5.2.8",
     "nodemailer": "^6.3.1",
-    "pm2": "^4.0.1"
+    "pm2": "^4.0.1",
+    "swagger-editor": "^3.7.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
