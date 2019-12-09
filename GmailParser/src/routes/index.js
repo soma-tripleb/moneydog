@@ -1,8 +1,8 @@
 /**
  * @swagger
  * tags:
- *   name: User
- *   description: 사용자 정보 가져오기
+ *   name: Index
+ *   description: Gmail Parser 
  */
 
 import express from 'express';
