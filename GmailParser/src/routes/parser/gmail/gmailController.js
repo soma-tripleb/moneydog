@@ -1,3 +1,10 @@
+/**
+ * @swagger
+ * tags:
+ *   name: GmailParser
+ *   description: 사용자의 Gmail 을 파싱하여, 구독 서비스 정보를 스캔한다. 
+ */
+
 import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -119,6 +126,23 @@ router.get('/parsing/:useremail', wrapper(async (req, res) => {
   res.json(Object.fromEntries(parsing)).end();
 }));
 
+/**
+ * @swagger
+ * /parsing:
+ *   post:
+ *     tags:
+ *     - "GmailParser"
+ *     summary: "'Google Play Store' 이메일 파싱"
+ *     description: "Google Play Store 에서 온 메일에 대한 구독 서비스 정보를 스캔한다."
+ *     produces:
+ *     - "application/json"
+ *     parameters:
+ *     - in: "body"
+ *       name: "useremail"
+ *     responses:
+ *       200:
+ *         description: 성공
+ */
 router.post('/parsing', wrapper(async (req, res) => {
   const useremail = req.body.useremail;
 
