@@ -23,7 +23,7 @@ const router = express.Router();
  *         type: string
  *         enum: [cjung, gglee, etc..]
  *         description: |
- *          사용자 아이디 전달
+ *          Hello Gmail Parser
  *     responses:
  *       200:
  *         description: 성공
