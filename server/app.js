@@ -12,7 +12,7 @@ import {mongoConnect} from './src/config/mongoDB';
 import {customLogger, errorLogger, stream} from './src/config/winston';
 
 // Error tracking
-// Sentry.init({dsn: 'https://566bd809b9a0464e8e690a199ab83396@sentry.io/1553162'});
+Sentry.init({dsn: 'https://566bd809b9a0464e8e690a199ab83396@sentry.io/1553162'});
 
 const app = express();
 dotenv.config();
