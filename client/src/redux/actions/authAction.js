@@ -3,10 +3,8 @@ import Cookies from 'js-cookie';
 
 import {AUTH_LOGIN_TRY, AUTH_LOGIN_SUCCESS, AUTH_LOGOUT, USER_INITIALLIZE} from './actionType';
 
-const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
-
 const loginRequest = (email, password) => async (dispatch) => {
-  const AJAX_URL = `${SERVER_URL}/auth/signIn`;
+  const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/auth/signIn`;
   const AJAX_DATA = {
     userInfo: {
       email: email,
@@ -29,7 +27,7 @@ const loginRequest = (email, password) => async (dispatch) => {
 };
 
 const registerRequest = (email, password, nickname) => async (dispatch) => {
-  const AJAX_URL = `${SERVER_URL}/auth/signUp`;
+  const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/auth/signUp`;
   const AJAX_DATA = {
     userInfo: {
       email: email,

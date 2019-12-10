@@ -18,6 +18,6 @@ const checkedPasswordForm = (password) => {
   return true;
 };
 
-export {
+export default {
   checkedPasswordForm,
 };

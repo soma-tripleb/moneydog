@@ -3,13 +3,13 @@ import crypto from 'crypto';
 dotenv.config();
 
 import AuthRepository from './authRepository';
-import checkedPasswordForm from '../../util/certification/userInfoCheck';
+import UserInfoCheck from '../../util/certification/userInfoCheck';
 import { createJWT, checkJWT } from '../../security/jwtAuthenticationToken';
 
 const register = async (userInfo) => {
 
   // TODO(jeong): pw check
-  const pwCheckResult = checkedPasswordForm(userInfo.password);
+  const pwCheckResult = UserInfoCheck.checkedPasswordForm(userInfo.password);
   if (typeof pwCheckResult === 'string') {
     return { status: 400, success: false, message: pwCheckResult };
   }
@@ -19,7 +19,6 @@ const register = async (userInfo) => {
   if (user !== null) {
     return { status: 400, success: false, message: '이미 존재하는 아이디 입니다.' };
   }
-
 
   userInfo.salt = (Math.round((new Date().valueOf() * Math.random())) + '');
   userInfo.password = crypto
