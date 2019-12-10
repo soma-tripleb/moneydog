@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-
+import { configs } from '../../configs';
 import {AUTH_LOGIN_TRY, AUTH_LOGIN_SUCCESS, AUTH_LOGOUT, USER_INITIALLIZE} from './actionType';
 
 const loginRequest = (email, password) => async (dispatch) => {
@@ -27,7 +27,13 @@ const loginRequest = (email, password) => async (dispatch) => {
 };
 
 const registerRequest = (email, password, nickname) => async (dispatch) => {
-  const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/auth/signUp`;
+  // const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/auth/signUp`;
+  console.log('${process.env.REACT_APP_NODE_API_URL} ' + `${process.env.REACT_APP_NODE_API_URL}/auth/signUp`);
+  console.log('${configs.API_URL} ' + `${configs.API_URL}/auth/signUp`);
+  console.log('process.env.REACT_APP_NODE_API_URL ' + process.env.REACT_APP_NODE_API_URL);
+  console.log('configs.API_URL ' + configs.API_URL);
+
+  const AJAX_URL = `${configs.API_URL}/auth/signUp`;
   const AJAX_DATA = {
     userInfo: {
       email: email,
