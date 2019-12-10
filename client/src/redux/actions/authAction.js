@@ -27,7 +27,8 @@ const loginRequest = (email, password) => async (dispatch) => {
 };
 
 const registerRequest = (email, password, nickname) => async (dispatch) => {
-  const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/auth/signUp`;
+  // const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/auth/signUp`;
+  const AJAX_URL = `https://moneydog-heroku.herokuapp.com/api/auth/signUp`;
   const AJAX_DATA = {
     userInfo: {
       email: email,
