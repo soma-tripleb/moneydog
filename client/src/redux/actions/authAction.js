@@ -37,7 +37,7 @@ const loginRequest = (email, password) => async (dispatch) => {
 
 const registerRequest = (email, password, nickname) => async (dispatch) => {
   // const AJAX_URL = `${process.env.REACT_APP_NODE_API_URL}/auth/signUp`;
-  console.log('config test func ' + configTest());
+  console.log('config test func ' + configTest);
   console.log('configs.API_URL ' + configs.API_URL);
 
   const AJAX_URL = `${configs.API_URL}/auth/signUp`;
