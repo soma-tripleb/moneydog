@@ -8,7 +8,7 @@ const configTest = (() => {
   console.log('${configs.API_URL} ' + `${configs.API_URL}/auth/signUp`);
   console.log('process.env.REACT_APP_NODE_API_URL ' + process.env.REACT_APP_NODE_API_URL);
   console.log('configs.API_URL ' + configs.API_URL);
-
+  console.log('API_URL: ', process.env.API_URL);
   return process.env.REACT_APP_NODE_API_URL;
 })();
 
