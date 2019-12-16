@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import update from 'react-addons-update';
 
-import {connect as ReduxConn} from 'react-redux';
+import { connect as ReduxConn } from 'react-redux';
 import UserActions from '../../redux/actions/userAction';
 
 import SubsApp from './subsApp';
@@ -41,7 +41,7 @@ class Subscriptions extends Component {
 
     const subsTmplResponse = await SubsTmplService.getList();
 
-    if (subsTmplResponse.status === 403 ) {
+    if (subsTmplResponse.status === 403) {
       this.props.REDUX_AUTH_LOGOUT_REQUEST();
       alert('세션 만료 다시 로그인 해주세요');
       return;
@@ -58,6 +58,10 @@ class Subscriptions extends Component {
       });
     }
 
+    subsTmplList.map((subs) => {
+      subs.color = colorPull[Math.floor(Math.random() * 12) % 12];
+    });
+
     this.setState({
       staticSubscribeArr: subsTmplList,
     });
@@ -66,9 +70,11 @@ class Subscriptions extends Component {
   // staticSubscribeArr 에서 SubscribingArr 로 옮기기
   insertContact = (seq, logoURI, name) => {
     let flag = false;
-    this.state.SubscribingArr.map((content) =>{
+
+    this.state.SubscribingArr.map((content) => {
       if (content.seq === seq) flag = true;
     });
+
     if (flag) return;
 
     let newState;
@@ -80,7 +86,7 @@ class Subscriptions extends Component {
               'seq': seq,
               'logoURI': logoURI,
               'name': name,
-              'color': colorPull[this.state.randColorNum%12],
+              'color': colorPull[this.state.randColorNum % 12],
             },
           ],
         },
@@ -101,13 +107,13 @@ class Subscriptions extends Component {
 
     this.setState(newState);
     this.setState({
-      randColorNum: this.state.randColorNum+1,
+      randColorNum: this.state.randColorNum + 1,
     });
   };
 
   // SubscribeArr 에서 지우기
   deleteContant = (number) => {
-    const {SubscribingArr} = this.state;
+    const { SubscribingArr } = this.state;
     this.setState({
       SubscribingArr: SubscribingArr.filter((info) => info.seq !== number),
     });
@@ -125,6 +131,9 @@ class Subscriptions extends Component {
     const list = this.state.staticSubscribeArr.map(
       (content, i) => {
 
+        // todo
+        console.log(content);
+
         if (this.checkAddSubs(content)) {
           return (
             <SubsApp
@@ -136,6 +145,7 @@ class Subscriptions extends Component {
                   logoURI: content.logoURI,
                   name: content.name,
                   label: 'addedSubs',
+                  color: content.color,
                 }
               } />
           );
@@ -150,17 +160,20 @@ class Subscriptions extends Component {
                   logoURI: content.logoURI,
                   name: content.name,
                   label: '+',
+                  color: content.color,
                 }
               } />
           );
         }
       }
     );
+
     return list;
   };
 
-  checkAddSubs = (staticSubs) =>{
+  checkAddSubs = (staticSubs) => {
     let flag = false;
+
     this.state.SubscribingArr.forEach(
       (content, i) => {
         if (content.name === staticSubs.name)
@@ -173,7 +186,7 @@ class Subscriptions extends Component {
   makeSubscribingApp = () => {
     const list = this.state.SubscribingArr.map(
       (content, i) => (
-        <SubsApp key={i+content.name} onDelete={this.deleteContant.bind(this)} subsAppInfo={
+        <SubsApp key={i + content.name} onDelete={this.deleteContant.bind(this)} subsAppInfo={
           {
             seq: content.seq,
             logoURI: content.logoURI,
@@ -181,9 +194,10 @@ class Subscriptions extends Component {
             color: content.color,
             label: '-',
           }
-        }/>
+        } />
       )
     );
+
     return list;
   };
 
@@ -193,7 +207,7 @@ class Subscriptions extends Component {
         <div className="container main-container">
           <div className="col text-center">
             <span className="col subscription-step text-center">
-            Step 1
+              Step 1
             </span>
             <div className="col subscription-title text-center">
               구독중 서비스
@@ -208,7 +222,7 @@ class Subscriptions extends Component {
                   <div className="subs-title">주요 구독 서비스</div>
                   {this.makeStaticSubscribeApp()}
                   <div className="subs-title">직접 추가 입력</div>
-                  <UserCustomSubscription subsList={this.state.SubscribingArr} onInsert={this.insertContact.bind(this)}/>
+                  <UserCustomSubscription subsList={this.state.SubscribingArr} onInsert={this.insertContact.bind(this)} />
                 </div>
               </div>
 
@@ -255,4 +269,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default ReduxConn(mapStateToProps, mapDispatchToProps)(Subscriptions);
-

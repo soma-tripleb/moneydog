@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import update from 'react-addons-update';
 import SubsApp from './subsApp';
 
+import MDBlackIcon from 'image/logo/MDBlackIcon.png';
+
 class userCustomSubscription extends Component {
 
   state = {
@@ -97,7 +99,7 @@ class userCustomSubscription extends Component {
           <div className="row">
 
             <div className="col-2 align-self-center">
-              <img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + '/img/MDBlackIcon.png'} alt="x" />
+              <img className="logo-img" src={`${MDBlackIcon}`} alt="x" />
             </div>
             <div className="col phone-padding-zero">
 
