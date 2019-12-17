@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 require('dotenv').config();
 
 class SubsApp extends Component {
 
   handleClick = () => {
-    const {subsAppInfo, onDelete, onInsert} = this.props;
+    const { subsAppInfo, onDelete, onInsert } = this.props;
     if (subsAppInfo.label === '-') {
       onDelete(subsAppInfo.seq, subsAppInfo.logoURI, subsAppInfo.name);
     } else {
@@ -15,27 +15,30 @@ class SubsApp extends Component {
   showSubscribeActionBtn = () => {
     if (this.props.subsAppInfo.label === '-') {
       // return (<button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">-</button> );
-      return ( <button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info btn-subscribing">삭제</button>);
+      return (<button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info btn-subscribing">삭제</button>);
     } else if (this.props.subsAppInfo.label === 'addedSubs') {
       // return ( <button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">+</button>);
-      return ( <button onClick={this.handleClick} type="button" className="btn btn-sm btn-info btn-subscribing">구독 추가</button>);
+      return (<button onClick={this.handleClick} type="button" className="btn btn-sm btn-info btn-subscribing">구독 추가</button>);
     } else {
       // return ( <button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">+</button>);
-      return ( <button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info btn-subscribing">구독 추가</button>);
+      return (<button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info btn-subscribing">구독 추가</button>);
     }
   };
 
-  showSubscibeImg = (subsAppInfo) =>{
+  showSubscibeImg = (subsAppInfo) => {
+    return (<button className="logo-Btn" style={{ 'background': subsAppInfo.color }}>{subsAppInfo.name[0].toUpperCase()}</button>);
+
+    /* 구독 서비스 이미지를 표현 방식
     if (subsAppInfo.logoURI === '') {
       return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0].toUpperCase()}</button>);
     } else {
-      // return (<img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
-      return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0].toUpperCase()}</button>);
+      return (<img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
     }
+    */
   };
 
   render() {
-    const {subsAppInfo} = this.props;
+    const { subsAppInfo } = this.props;
     return (
       <>
         <div className="container phone-padding-zero">
@@ -49,7 +52,7 @@ class SubsApp extends Component {
                   {subsAppInfo.name}
                 </div>
                 <div className="col service-sub-Name text-left padding-zero">
-              엔터테인먼트
+                  엔터테인먼트
                 </div>
                 <div className="col-3 padding-zero">
                   {this.showSubscribeActionBtn()}

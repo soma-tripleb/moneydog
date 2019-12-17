@@ -41,7 +41,7 @@ class Info extends Component {
           <div className="row">
             <div className="col-sm-8 report-container report-inner-container align-self-center">
 
-              <div className="row info-inner">
+              {/* <div className="row info-inner">
                 <div className="col text-left  info-text">
                     구글 계정 연동 하기
                 </div>
@@ -76,7 +76,7 @@ class Info extends Component {
                   <button onClick={this.sendmail} type="button" className="btn btn-end"> 보내기 </button>
 
                 </div>
-              </div>
+              </div> */}
 
               <div className="row info-inner">
                 <div className="col text-left  info-text">

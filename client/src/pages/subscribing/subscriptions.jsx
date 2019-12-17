@@ -77,7 +77,22 @@ class Subscriptions extends Component {
 
     if (flag) return;
 
+    const newState = update(this.state, {
+      SubscribingArr: {
+        $push: [
+          {
+            'seq': seq,
+            'logoURI': logoURI,
+            'name': name,
+            'color': colorPull[this.state.randColorNum % 12],
+          },
+        ],
+      },
+    });
+
+    /*
     let newState;
+
     if (logoURI === '') {
       newState = update(this.state, {
         SubscribingArr: {
@@ -104,8 +119,10 @@ class Subscriptions extends Component {
         },
       });
     }
+    */
 
     this.setState(newState);
+
     this.setState({
       randColorNum: this.state.randColorNum + 1,
     });
@@ -114,6 +131,7 @@ class Subscriptions extends Component {
   // SubscribeArr 에서 지우기
   deleteContant = (number) => {
     const { SubscribingArr } = this.state;
+
     this.setState({
       SubscribingArr: SubscribingArr.filter((info) => info.seq !== number),
     });
@@ -130,9 +148,6 @@ class Subscriptions extends Component {
   makeStaticSubscribeApp = () => {
     const list = this.state.staticSubscribeArr.map(
       (content, i) => {
-
-        // todo
-        console.log(content);
 
         if (this.checkAddSubs(content)) {
           return (

@@ -86,11 +86,15 @@ class SubsTmpl extends Component {
   };
 
   showSubscibeImg = (subsAppInfo) =>{
+    return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0].toUpperCase()}</button>);
+
+    /*
     if (subsAppInfo.logoURI === '') {
       return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0].toUpperCase()}</button>);
     } else {
       return (<img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
     }
+    */
   };
 
   deleteSubs = (e) =>{

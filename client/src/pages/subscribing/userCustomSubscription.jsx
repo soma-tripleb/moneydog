@@ -22,6 +22,7 @@ class userCustomSubscription extends Component {
       alert('서비스 이름을 입력해주세요');
       return;
     }
+
     onInsert(btoa(unescape(encodeURIComponent(serviceName))), '', serviceName);
   };
 
@@ -88,6 +89,7 @@ class userCustomSubscription extends Component {
     });
     return customServiceList;
   };
+
   showCustomService = () =>{
 
     const {customServiceArray} = this.state;
@@ -127,13 +129,14 @@ class userCustomSubscription extends Component {
         </div>
       )
     );
+
     return customServiceList;
   };
 
   render() {
     return (
       <>
-        {this.showCustomUserService()}
+        {/* {this.showCustomUserService()} */}
         {this.showCustomService()}
       </>
     );
