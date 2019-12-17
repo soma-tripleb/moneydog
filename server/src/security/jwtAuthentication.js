@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 dotenv.config();
 
-const secretCode = `${process.env.JWT_SECRET}`;
+const secretCode = 'kayatoast';
 
 const JWTAuthentication = (req, res, next) => {
   const token = (req.header('x-access-token') || req.query.token);

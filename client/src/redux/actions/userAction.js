@@ -3,7 +3,7 @@ import axios from 'axios';
 import * as ACTION_TYPE from './actionType';
 import Cookies from 'js-cookie';
 
-const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
+const SERVER_URL = 'https://moneydogs.herokuapp.com/api';
 
 const setUserSubsTmplList = (list) => (dispatch) => {
   dispatch(

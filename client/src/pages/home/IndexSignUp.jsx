@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class IndexSignUp extends Component {
   render() {
@@ -18,10 +18,6 @@ class IndexSignUp extends Component {
                 <button onClick={this.previousHandleSubmit} type="button" className="btn btn-dark btn-start"> 시작하기 </button>
               </Link>
             </div>
-            {/* <div className="col-md-5 order-md-1">*/}
-            {/*  <img className="featurette-image img-fluid mx-auto" src={`${process.env.REACT_APP_IMAGE_URI}/img/iphone3.png`}*/}
-            {/*    alt="Generic placeholder image"/>*/}
-            {/* </div>*/}
           </div>
         </div>
 

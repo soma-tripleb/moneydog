@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Select, Icon, Input} from 'antd';
+import { Select, Icon, Input } from 'antd';
 const { Option } = Select;
 const InputGroup = Input.Group;
 
@@ -85,19 +85,11 @@ class SubsTmpl extends Component {
     });
   };
 
-  showSubscibeImg = (subsAppInfo) =>{
-    return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0].toUpperCase()}</button>);
-
-    /*
-    if (subsAppInfo.logoURI === '') {
-      return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0].toUpperCase()}</button>);
-    } else {
-      return (<img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
-    }
-    */
+  showSubscibeImg = (subsAppInfo) => {
+    return (<button className="logo-Btn" style={{ 'background': subsAppInfo.color }}>{subsAppInfo.name[0].toUpperCase()}</button>);
   };
 
-  deleteSubs = (e) =>{
+  deleteSubs = (e) => {
     e.preventDefault();
     this.props.DeleteSubs(this.props.info.name);
   };
@@ -163,7 +155,7 @@ class SubsTmpl extends Component {
                     <div className="col-sm-3 text-right padding-zero">
                       <InputGroup compact>
                         <Input id="price" className="text-left" style={{ width: '50%' }} defaultValue={inputData.price} placeholder="0"
-                          onChange={this.handleChange}/>
+                          onChange={this.handleChange} />
                         <Select defaultValue="won" style={{ width: '30%' }} className="select-box text-right"
                           suffixIcon={<Icon type="caret-down" />}>
                           <Option value="won">원</Option>
@@ -176,15 +168,15 @@ class SubsTmpl extends Component {
                     {/* 달력*/}
                     <div className="col-sm-4  padding-zero">
                       <InputGroup compact>
-                        <Input style={{ width: '25%' }} defaultValue="결제일" disabled={true}/>
-                        <DatePickers date={this.state.dateObject.date} onDatePickerChange={this.onDatePickerChange}/>
+                        <Input style={{ width: '25%' }} defaultValue="결제일" disabled={true} />
+                        <DatePickers date={this.state.dateObject.date} onDatePickerChange={this.onDatePickerChange} />
                       </InputGroup>
                     </div>
 
                     {/* 결제 채널*/}
                     <div className="col-sm-3 text-left padding-zero">
                       <InputGroup compact>
-                        <Input style={{ width: '40%' }} defaultValue="결제방식" disabled={true}/>
+                        <Input style={{ width: '40%' }} defaultValue="결제방식" disabled={true} />
                         <Select defaultValue={info.channel} className="select-box"
                           id="channel"
                           suffixIcon={<Icon type="caret-down" />}
@@ -278,7 +270,7 @@ class SubsTmpl extends Component {
                     <div className="col service-sub-Name text-left padding-zero">
                       <InputGroup compact>
                         <Input id="price" className="text-left" style={{ width: '70%' }} defaultValue={inputData.price} placeholder="0"
-                          onChange={this.handleChange}/>
+                          onChange={this.handleChange} />
                         <Select defaultValue="won" style={{ width: '30%' }} className="select-box text-right"
                           suffixIcon={<Icon type="caret-down" />}>
                           <Option value="won">원</Option>
@@ -297,7 +289,7 @@ class SubsTmpl extends Component {
                     </div>
                     {/* 카테고리*/}
                     <div className="col service-sub-Name text-left padding-zero">
-                      <DatePickers date={this.state.dateObject.date} onDatePickerChange={this.onDatePickerChange}/>
+                      <DatePickers date={this.state.dateObject.date} onDatePickerChange={this.onDatePickerChange} />
                     </div>
                   </div>
                 </div>

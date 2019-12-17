@@ -2,12 +2,12 @@ import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const DB_SCHEMA = process.env.DB_SCHEMA;
-const DB_USER = process.env.DB_USER;
-const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_SCHEMA = 'mongodb+srv://';
+const DB_USER = 'admin';
+const DB_PASSWORD = 'moneydog1234';
 
 const PRODUCTION_URL = process.env.PROD_DB_URL;
-const DEVELOPMENT_URL = process.env.DEV_DB_URL;
+const DEVELOPMENT_URL = 'moneydog-test-p9fsb.mongodb.net/dev?retryWrites=true&w=majority';
 const TEST_URL = process.env.TEST_DB_URL;
 const GMAIL_URL = process.env.GMAIL_URL;
 

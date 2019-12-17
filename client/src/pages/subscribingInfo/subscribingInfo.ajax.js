@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 require('dotenv').config();
 
-const SERVER_URL = `${process.env.REACT_APP_NODE_API_URL}`;
+const SERVER_URL = 'https://moneydogs.herokuapp.com/api';
 
 const insertUserSubsInfo = async (userInputList) => {
   return await axios({

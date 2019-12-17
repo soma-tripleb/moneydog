@@ -14,27 +14,16 @@ class SubsApp extends Component {
 
   showSubscribeActionBtn = () => {
     if (this.props.subsAppInfo.label === '-') {
-      // return (<button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">-</button> );
       return (<button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info btn-subscribing">삭제</button>);
     } else if (this.props.subsAppInfo.label === 'addedSubs') {
-      // return ( <button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">+</button>);
       return (<button onClick={this.handleClick} type="button" className="btn btn-sm btn-info btn-subscribing">구독 추가</button>);
     } else {
-      // return ( <button onClick={this.handleClick} type="button" className="btn btn-outline-secondary">+</button>);
       return (<button onClick={this.handleClick} type="button" className="btn btn-sm btn-outline-info btn-subscribing">구독 추가</button>);
     }
   };
 
   showSubscibeImg = (subsAppInfo) => {
     return (<button className="logo-Btn" style={{ 'background': subsAppInfo.color }}>{subsAppInfo.name[0].toUpperCase()}</button>);
-
-    /* 구독 서비스 이미지를 표현 방식
-    if (subsAppInfo.logoURI === '') {
-      return (<button className="logo-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0].toUpperCase()}</button>);
-    } else {
-      return (<img className="logo-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
-    }
-    */
   };
 
   render() {

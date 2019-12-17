@@ -83,14 +83,6 @@ class CalendarClass extends Component {
 
   showSubscibeImg = (subsAppInfo) =>{
     return (<button className="calendar-subscriptions-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0].toUpperCase()}</button>);
-
-    /*
-    if (subsAppInfo.logoURI === '') {
-      return (<button className="calendar-subscriptions-Btn" style={{'background': subsAppInfo.color}}>{subsAppInfo.name[0].toUpperCase()}</button>);
-    } else {
-      return (<img className="calendar-subscriptions-img" src={`${process.env.REACT_APP_IMAGE_URI}` + subsAppInfo.logoURI} alt="x" />);
-    }
-    */
   };
 
   dateCellRender = (value) => {
@@ -128,7 +120,6 @@ class CalendarClass extends Component {
           <ul className="events">
             <li key={showCalendarSubscriptions.seq}>
               {this.showSubscibeImg(showCalendarSubscriptions)}
-              {/* <img className="calendar-subscriptions-img back" src={`${process.env.REACT_APP_IMAGE_URI}` + '/subscriptionLogo/something.png'} alt='x' /> */}
               <button className="calendar-subscriptions-Btn" style={{'background': 'white'}}>..</button>
             </li>
           </ul>
@@ -147,11 +138,9 @@ class CalendarClass extends Component {
     return (
       <div>
         <Calendar
-          // fullscreen={false}
           dateCellRender={this.dateCellRender}
           monthCellRender={this.monthCellRender}
           onSelect={this.handleChange}
-          // onChange={this.handleOnChange}
           onPanelChange={this.handleOnPanelChange}
         />
       </div>

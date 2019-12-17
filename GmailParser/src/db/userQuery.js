@@ -2,8 +2,6 @@ import mongoDB from '../config/mongo/db';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import should from 'should';
-
 const DB_ENV = (() => {
   return (process.env.NODE_ENV === undefined) ? 'test' : process.env.NODE_ENV;
 })();
